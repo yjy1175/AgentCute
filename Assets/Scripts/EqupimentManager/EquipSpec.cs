@@ -6,22 +6,27 @@ namespace YJY
     public abstract class EquipSpec
     {
         #region varialbe
-        protected abstract string typeName
+        public abstract string type
         {
             get;
             set;
         }
-        protected abstract string equipName
+        public abstract string typeName
         {
             get;
             set;
         }
-        protected abstract string equipDesc
+        public abstract string equipName
         {
             get;
             set;
         }
-        protected abstract int equipRank
+        public abstract string equipDesc
+        {
+            get;
+            set;
+        }
+        public abstract int equipRank
         {
             get;
             set;

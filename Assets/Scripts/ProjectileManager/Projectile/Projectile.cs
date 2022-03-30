@@ -7,22 +7,12 @@ namespace YJY
     public abstract class Projectile : MonoBehaviour
     {
         #region variable
-        protected abstract float moveSpeed
+        public abstract ProjectileSpec spec
         {
             get;
             set;
         }
-        protected abstract float damage
-        {
-            get;
-            set;
-        }
-        protected abstract Vector3 target
-        {
-            get;
-            set;
-        }
-        protected abstract int count
+        public abstract Vector3 target
         {
             get;
             set;
@@ -30,6 +20,7 @@ namespace YJY
         #endregion
 
         #region method
+        protected abstract void setInit();
         protected abstract void destroySelf();
         protected abstract void launchProjectile();
         #endregion

@@ -4,38 +4,36 @@ using UnityEngine;
 
 namespace YJY
 {
-    public class Launch : Projectile
-    {
+    public class Chase : Projectile
+{
         #region variable
-        protected override float moveSpeed
-        {
-            get { return moveSpeed; }
-            set { moveSpeed = value; }
+        public override ProjectileSpec spec 
+        { 
+            get { return spec; }
+            set { spec = value; }
         }
-        protected override float damage
-        {
-            get { return damage; }
-            set { damage = value; }
-        }
-        protected override Vector3 target
+        public override Vector3 target 
         {
             get { return target; }
             set { target = value; }
         }
-        protected override int count
-        {
-            get { return count; }
-            set { count = value; }
-        }
         #endregion
+        #region method
+        protected override void setInit()
+        {
+            // 발사체 데이터 파싱 후 값 대입
+            ProjectileSpec newSpec = new ProjectileSpec();
+            // spec 데이터 추출
+            spec = newSpec;
+
+        }
         protected override void destroySelf()
         {
             /*생성후 파괴되는 매서드*/
         }
-
         protected override void launchProjectile()
         {
-            /*발사 매서드*/
+            /*추적 매서드*/
         }
         // Start is called before the first frame update
         void Start()
@@ -47,5 +45,7 @@ namespace YJY
         {
             launchProjectile();
         }
+        #endregion
     }
 }
+

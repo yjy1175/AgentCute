@@ -7,7 +7,14 @@ namespace YJY
     {
         // Start is called before the first frame update
         #region varialbe
-        [SerializeField] private CostumeSpec spec;
+        private CostumeSpec spec;
+        private bool isLocked;
+        #endregion
+        #region method
+        public void setInit()
+        {
+            // 코스튬 데이터 추출
+        }
         #endregion
     }
 }
