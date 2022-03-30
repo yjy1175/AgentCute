@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace YJY
 {
     public class EquipmentManager : MonoBehaviour
@@ -8,10 +9,10 @@ namespace YJY
         // Start is called before the first frame update
         #region variable
         // key : 장비 분류(0: 무기, 1: 코스튬...) , value : <key : typename, value : 해당장비 오브젝트 
-        [SerializeField] private Dictionary<int, Dictionary<string, GameObject>> equipments = new Dictionary<int, Dictionary<string, GameObject>>();
-        [SerializeField] private Dictionary<int, GameObject> userCurrentEquip = new Dictionary<int, GameObject>();
+        public PBL.IntStringGameObject equipments;
+        public PBL.IntGameObject userCurrentEquip;
         // key : 몬스터 분류 , value : 해당 몬스터 장비 오브젝트
-        [SerializeField] private Dictionary<int, GameObject> monsterCurrentEquip = new Dictionary<int, GameObject>();
+        public PBL.IntGameObject monsterCurrentEquip;
         #endregion
         void Start()
         {
