@@ -7,8 +7,13 @@ namespace YJY
     {
         // Start is called before the first frame update
         #region varialbe
-        private CostumeSpec spec;
+        public CostumeSpec spec = new CostumeSpec();
         private bool isLocked;
+        public bool IsLocked
+        {
+            get { return isLocked; }
+            set { isLocked = value; }
+        }
         #endregion
         #region method
         public void setInit()

@@ -10,6 +10,6 @@ namespace PBL
     [System.Serializable]
     public class IntStringGameObject : SerializableDictionary<int, StringGameObject> { }
     [System.Serializable]
-    public class StringIntGameObject : SerializableDictionary<int, IntGameObject> { }
+    public class StringIntGameObject : SerializableDictionary<string, IntGameObject> { }
 }
 
