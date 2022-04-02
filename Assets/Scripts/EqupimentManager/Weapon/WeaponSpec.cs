@@ -4,36 +4,52 @@ using UnityEngine;
 
 namespace YJY
 {
+    [System.Serializable]
     public class WeaponSpec : EquipSpec
     {
         #region variable
         // 엑셀 속성 타입, 타입이름, 장비이름, 장비설명, 장비등급, 데미지....
-        public override string type
+        [SerializeField]
+        private string type;
+        public override string Type
         {
             get { return type; }
             set { type = value; }
         }
-        public override string typeName
+
+        [SerializeField]
+        private string typeName;
+        public override string TypeName
         {
             get { return typeName; }
             set { typeName = value; }
         }
-        public override string equipName
+
+        [SerializeField]
+        private string equipName;
+        public override string EquipName
         {
             get { return equipName; }
             set { equipName = value; }
         }
-        public override string equipDesc
+
+        [SerializeField]
+        private string equipDesc;
+        public override string EquipDesc
         {
             get { return equipDesc; }
             set { equipDesc = value; }
         }
-        public override int equipRank
+
+        [SerializeField]
+        private int equipRank;
+        public override int EquipRank
         {
             get { return equipRank; }
             set { equipRank = value; }
         }
 
+        [SerializeField]
         private float weaponDamage;
         public float WeaponDamage
         {
@@ -41,6 +57,7 @@ namespace YJY
             set { weaponDamage = value; }
         }
 
+        [SerializeField]
         private float weaponAttackSpeed;
         public float WeaponAttackSpeed
         {
@@ -48,6 +65,7 @@ namespace YJY
             set { weaponAttackSpeed = value; }
         }
 
+        [SerializeField]
         private int weaponAttackRange;
         public int WeaponAttackRange
         {
@@ -55,6 +73,7 @@ namespace YJY
             set { weaponAttackRange = value; }
         }
 
+        [SerializeField]
         private string attackProjectile;
         public string AttackProjectile
         {
@@ -62,13 +81,15 @@ namespace YJY
             set { attackProjectile = value; }
         }
 
+        [SerializeField]
         private List<Skill> generalSkillList = new List<Skill>();
+        [SerializeField]
         private List<Skill> ultimateSkillList = new List<Skill>();
         #endregion
         #region method
-        public Skill getGeneralSkill(int index)
+        public List<Skill> getGeneralSkill()
         {
-            return generalSkillList[index];
+            return generalSkillList;
         }
         public void addGeneralSkill(string _projectileType, int _coolTime, int _coefficient, bool _isLocked)
         {
@@ -80,9 +101,9 @@ namespace YJY
 
             generalSkillList.Add(newSkill);
         }
-        public Skill getUltimateSkill(int index)
+        public List<Skill> getUltimateSkill()
         {
-            return ultimateSkillList[index];
+            return ultimateSkillList;
         }
         public void addUltimateSkill(string _projectileType, int _coolTime, int _coefficient, bool _isLocked)
         {

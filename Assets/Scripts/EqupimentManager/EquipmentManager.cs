@@ -16,29 +16,42 @@ namespace YJY
         #endregion
         void Start()
         {
-            initAllEquips();
+            //initAllEquips();
+            //loadUserEquip();
+#if DEBUG_TEST
+            for(int i = 0; i < equipments.Count; i++)
+            {
+                foreach(GameObject item in equipments[i].Values)
+                {
+                    Instantiate(item, transform);
+                }
+            }
+#endif
         }
         #region method
         // 모든 장비류 오브젝트 데이터 파싱 후 값 저장하는 함수
         public void initAllEquips()
         {
+            
             // Weapon
+            // csv파일을 읽어서 리스트형식으로 저장
             List<Dictionary<string, object>> weaponData = PBL.CSVReader.Read("CSVFile\\Weapon");
             for(int i = 0; i < weaponData.Count; i++)
             {
                 Dictionary<string, GameObject> weapons = equipments[0];
+                // 한줄씩 불러와서 오브젝트 대입
                 foreach(GameObject item in weapons.Values)
                 {
                     Weapon newWeapon = item.GetComponent<Weapon>();
-                    newWeapon.spec.type = weaponData[i]["WeaponType"].ToString();
-                    newWeapon.spec.typeName = weaponData[i]["WeaponTypeName"].ToString();
-                    newWeapon.spec.equipName = weaponData[i]["WeaponName"].ToString();
-                    newWeapon.spec.equipDesc = weaponData[i]["WeaponDesc"].ToString();
-                    newWeapon.spec.equipRank = int.Parse(weaponData[i]["WeaponRank"].ToString());
-                    newWeapon.spec.WeaponDamage = float.Parse(weaponData[i]["WeaponDamage"].ToString());
-                    newWeapon.spec.WeaponAttackSpeed = float.Parse(weaponData[i]["WeaponAttackSpeed"].ToString());
-                    newWeapon.spec.WeaponAttackRange = int.Parse(weaponData[i]["WeaponAttackRange"].ToString());
-                    newWeapon.spec.AttackProjectile = weaponData[i]["AttackProjectile"].ToString();
+                    newWeapon.Spec.Type = weaponData[i]["WeaponType"].ToString();
+                    newWeapon.Spec.TypeName = weaponData[i]["WeaponTypeName"].ToString();
+                    newWeapon.Spec.EquipName = weaponData[i]["WeaponName"].ToString();
+                    newWeapon.Spec.EquipDesc = weaponData[i]["WeaponDesc"].ToString();
+                    newWeapon.Spec.EquipRank = int.Parse(weaponData[i]["WeaponRank"].ToString());
+                    newWeapon.Spec.WeaponDamage = float.Parse(weaponData[i]["WeaponDamage"].ToString());
+                    newWeapon.Spec.WeaponAttackSpeed = float.Parse(weaponData[i]["WeaponAttackSpeed"].ToString());
+                    newWeapon.Spec.WeaponAttackRange = int.Parse(weaponData[i]["WeaponAttackRange"].ToString());
+                    newWeapon.Spec.AttackProjectile = weaponData[i]["AttackProjectile"].ToString();
 
                     string[] projectiles = weaponData[i]["GeneralSkillProjectile"].ToString().Split('/');
                     string[] coolTimes = weaponData[i]["GeneralSkillCoolTime"].ToString().Split('/');
@@ -46,7 +59,7 @@ namespace YJY
 
                     for(int j = 0; j < projectiles.Length; j++)
                     {
-                        newWeapon.spec.addGeneralSkill(
+                        newWeapon.Spec.addGeneralSkill(
                             projectiles[i], 
                             int.Parse(coolTimes[i]), 
                             int.Parse(coefficients[i]), 
@@ -59,12 +72,15 @@ namespace YJY
 
                     for (int j = 0; j < projectiles.Length; j++)
                     {
-                        newWeapon.spec.addUltimateSkill(
+                        newWeapon.Spec.addUltimateSkill(
                             projectiles[i],
                             int.Parse(coolTimes[i]),
                             int.Parse(coefficients[i]),
                             j == 0 ? true : false);
                     }
+                    // 각 무기별 기본 스킬 세팅
+                    newWeapon.changeSkill(newWeapon.Spec.getGeneralSkill()[0].ProjectileType, 0);
+                    newWeapon.changeSkill(newWeapon.Spec.getUltimateSkill()[0].ProjectileType, 1);
                 }
             }
             // Costume
@@ -75,10 +91,10 @@ namespace YJY
                 foreach(GameObject item in costumes.Values)
                 {
                     Costume newCostume = item.GetComponent<Costume>();
-                    newCostume.spec.typeName = costumeData[i]["CostumeTypeName "].ToString();
-                    newCostume.spec.equipName = costumeData[i]["CostumeName "].ToString();
-                    newCostume.spec.equipDesc = costumeData[i]["CostumeDesc "].ToString();
-                    newCostume.spec.equipRank = int.Parse(costumeData[i]["CostumeRank "].ToString());
+                    newCostume.Spec.TypeName = costumeData[i]["CostumeTypeName "].ToString();
+                    newCostume.Spec.EquipName = costumeData[i]["CostumeName "].ToString();
+                    newCostume.Spec.EquipDesc = costumeData[i]["CostumeDesc "].ToString();
+                    newCostume.Spec.EquipRank = int.Parse(costumeData[i]["CostumeRank "].ToString());
                     newCostume.IsLocked = false;
                 }
             }
@@ -100,6 +116,10 @@ namespace YJY
         {
 
         }
-        #endregion
+        private void loadUserEquip()
+        {
+            // 유저의 데이터 로드 후 적용
+        }
+#endregion
     }
 }

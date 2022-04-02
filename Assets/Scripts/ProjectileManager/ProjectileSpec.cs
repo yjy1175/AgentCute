@@ -3,35 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace YJY
 {
+    [System.Serializable]
     public class ProjectileSpec : EquipSpec
     {
         #region variable
-        public override string type 
+        [SerializeField]
+        private string type;
+        public override string Type 
         { 
             get { return type; }
             set { type = value; }
         }
-        public override string typeName
+
+        [SerializeField]
+        private string typeName;
+        public override string TypeName
         {
             get { return typeName; }
             set { typeName = value; }
         }
-        public override string equipName 
+
+        [SerializeField]
+        private string equipName;
+        public override string EquipName 
         {
             get { return equipName; }
             set { equipName = value; }
         }
-        public override string equipDesc 
+
+        [SerializeField]
+        private string equipDesc;
+        public override string EquipDesc 
         {
             get { return equipDesc; }
             set { equipDesc = value; }
         }
-        public override int equipRank 
+
+        [SerializeField]
+        private int equipRank;
+        public override int EquipRank 
         {
             get { return equipRank; }
             set { equipRank = value; }
         }
 
+        [SerializeField]
         private float projectileDamage;
         public float ProjectileDamage
         {
@@ -39,6 +55,7 @@ namespace YJY
             set { projectileDamage = value; }
         }
 
+        [SerializeField]
         private float speed;
         public float Speed
         {
@@ -46,6 +63,7 @@ namespace YJY
             set { speed = value; }
         }
 
+        [SerializeField]
         private int count;
         public int Count
         {
@@ -53,6 +71,7 @@ namespace YJY
             set { count = value; }
         }
 
+        [SerializeField]
         private int angle;
         public int Angle
         {
@@ -60,13 +79,15 @@ namespace YJY
             set { angle = value; }
         }
 
-        private int spawnTime;
-        public int SpawnTime
+        [SerializeField]
+        private float spawnTime;
+        public float SpawnTime
         {
             get { return spawnTime; }
             set { spawnTime = value; }
         }
 
+        [SerializeField]
         private int maxPassCount;
         public int MaxPassCount
         {

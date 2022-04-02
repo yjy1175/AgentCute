@@ -4,30 +4,45 @@ using UnityEngine;
 
 namespace YJY
 {
+    [System.Serializable]
     public class CostumeSpec : EquipSpec
     {
         #region varialbe
-        public override string type
+        [SerializeField]
+        private string type;
+        public override string Type
         {
             get { return type; }
             set { type = value; }
         }
-        public override string typeName
+
+        [SerializeField]
+        private string typeName;
+        public override string TypeName
         {
             get { return typeName; }
             set { typeName = value; }
         }
-        public override string equipName
+
+        [SerializeField]
+        private string equipName;
+        public override string EquipName
         {
             get { return equipName; }
             set { equipName = value; }
         }
-        public override string equipDesc
+
+        [SerializeField]
+        private string equipDesc;
+        public override string EquipDesc
         {
             get { return equipDesc; }
             set { equipDesc = value; }
         }
-        public override int equipRank
+
+        [SerializeField]
+        private int equipRank;
+        public override int EquipRank
         {
             get { return equipRank; }
             set { equipRank = value; }

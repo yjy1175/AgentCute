@@ -7,29 +7,28 @@ namespace YJY
     public class Chase : Projectile
 {
         #region variable
-        public override ProjectileSpec spec 
-        { 
+        [SerializeField]
+        private ProjectileSpec spec = new ProjectileSpec();
+        public override ProjectileSpec Spec
+        {
             get { return spec; }
             set { spec = value; }
         }
-        public override Vector3 target 
+
+        [SerializeField]
+        private Vector3 target;
+        public override Vector3 Target
         {
             get { return target; }
             set { target = value; }
         }
         #endregion
         #region method
-        protected override void setInit()
-        {
-            // 발사체 데이터 파싱 후 값 대입
-            ProjectileSpec newSpec = new ProjectileSpec();
-            // spec 데이터 추출
-            spec = newSpec;
-
-        }
         protected override void destroySelf()
         {
             /*생성후 파괴되는 매서드*/
+            if(Target == null)
+                Destroy(gameObject, Spec.SpawnTime);
         }
         protected override void launchProjectile()
         {
