@@ -1,3 +1,3 @@
 ProjectileType,ProjectileTypeName,ProjectileName,ProjectileNameE,ProjectileDesc,ProjectileSpeed,ProjectileCount,ProjectileAngle,ProjectileSpawnTime,ProjectileMaxPassCount,ProjectileCoolTime,ProjectileCoolTimeType
-s0,스폰형,소드 기본 공격,Sword Assault,소드의 기본형 자동 공격,0,1,0,0.1,-1,2,1
-s1,스폰형,연속 베기,Double Cut,2번 연속으로 빠르게 벱니다.,0,1,0,0.2,-1,5,1
+s0,스폰형,연속 베기,Double Cut,2번 연속 근접공격을 합니다.,0,1,0,0.1,-1,2,1
+l0,발사형,검기,Exalted Sword,검기를 날립니다.,8,1,0,3,-1,5,1

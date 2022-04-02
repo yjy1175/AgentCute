@@ -356,10 +356,14 @@ MonoBehaviour:
   allProjectiles:
     m_keys:
     - s
+    - l
     m_values:
     - m_keys: 00000000
       m_values:
       - {fileID: 2848564584446117037, guid: 4e279746b3af2684a9f5f2aead761b74, type: 3}
+    - m_keys: 00000000
+      m_values:
+      - {fileID: 2470407411153610826, guid: f49173df717f7674c9a8cabd34baa206, type: 3}
 --- !u!4 &1652999332
 Transform:
   m_ObjectHideFlags: 0

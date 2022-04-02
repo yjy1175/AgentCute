@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace YJY
-{
     public class Spawn : Projectile
     {
         #region variable
@@ -44,4 +42,3 @@ namespace YJY
         }
         #endregion
     }
-}

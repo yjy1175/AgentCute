@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEditor;
 using System.Reflection;
 using System;
-[CustomPropertyDrawer(typeof(PBL.IntGameObject))]
-[CustomPropertyDrawer(typeof(PBL.StringGameObject))]
-[CustomPropertyDrawer(typeof(PBL.IntStringGameObject))]
-[CustomPropertyDrawer(typeof(PBL.StringIntGameObject))]
+[CustomPropertyDrawer(typeof(IntGameObject))]
+[CustomPropertyDrawer(typeof(StringGameObject))]
+[CustomPropertyDrawer(typeof(IntStringGameObject))]
+[CustomPropertyDrawer(typeof(StringIntGameObject))]
 public class SerializableDictionaryPropertyDrawer : PropertyDrawer
 {
 	const string KeysFieldName = "m_keys";
