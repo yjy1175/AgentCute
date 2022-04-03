@@ -8,18 +8,28 @@ public class ProjectileManager : MonoBehaviour
     #region variable
     // key : s, c, l, r(타입 첫글자) value :  <key : 0~(타입 다음글자), value = 발사체 오브젝트>
     public StringIntGameObject allProjectiles;
+
+    //private float time = 3;
+    //private float tTime;
     #endregion
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         initAllProjectiles();
+    }
+    private void Update()
+    {
 #if DEBUG
-        //foreach (string key0 in allProjectiles.Keys)
+        //tTime += Time.deltaTime;
+        //if(time < tTime)
         //{
-        //    for (int i = 0; i < allProjectiles[key0].Count; i++)
+        //    tTime = 0;
+        //    foreach (string key0 in allProjectiles.Keys)
         //    {
-        //        Instantiate(allProjectiles[key0][i], transform.position, Quaternion.identity, transform.root);
-        //        Debug.Log("발사체 생성");
+        //        for (int i = 0; i < allProjectiles[key0].Count; i++)
+        //        {
+        //            Instantiate(allProjectiles[key0][i], transform.position, Quaternion.identity, transform.root);
+        //            Debug.Log("발사체 생성");
+        //        }
         //    }
         //}
 #endif
@@ -29,35 +39,18 @@ public class ProjectileManager : MonoBehaviour
         // 모든 발사체 오브젝트 초기화
         List<Dictionary<string, object>> projectilesData = CSVReader.Read("CSVFile\\Projectile");
         int i = 0;
-        dynamic item;
+        Projectile item;
         foreach (string key0 in allProjectiles.Keys)
         {
             for (int j = 0; j < allProjectiles[key0].Count; j++)
             {
-                switch (key0)
-                {
-                    case "s":
-                        item = allProjectiles[key0][j].GetComponent<Spawn>();
-                        dataParser(item, ref projectilesData, i + j);
-                        break;
-                    case "c":
-                        item = allProjectiles[key0][j].GetComponent<Chase>();
-                        dataParser(item, ref projectilesData, i + j);
-                        break;
-                    case "l":
-                        item = allProjectiles[key0][j].GetComponent<Launch>();
-                        dataParser(item, ref projectilesData, i + j);
-                        break;
-                    case "r":
-                        item = allProjectiles[key0][j].GetComponent<Radia>();
-                        dataParser(item, ref projectilesData, i + j);
-                        break;
-                }
+                item = allProjectiles[key0][j].GetComponent<Projectile>();
+                dataParser(item, ref projectilesData, i + j);
             }
             i += allProjectiles[key0].Count;
         }
     }
-    private void dataParser(dynamic item, ref List<Dictionary<string, object>> projectilesData, int index)
+    private void dataParser(Projectile item, ref List<Dictionary<string, object>> projectilesData, int index)
     {
         item.Spec.Type = projectilesData[index]["ProjectileType"].ToString();
         item.Spec.TypeName = projectilesData[index]["ProjectileTypeName"].ToString();

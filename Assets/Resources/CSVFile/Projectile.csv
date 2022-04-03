@@ -1,3 +1,2 @@
 ProjectileType,ProjectileTypeName,ProjectileName,ProjectileNameE,ProjectileDesc,ProjectileSpeed,ProjectileCount,ProjectileAngle,ProjectileSpawnTime,ProjectileMaxPassCount,ProjectileCoolTime,ProjectileCoolTimeType
-s0,스폰형,연속 베기,Double Cut,2번 연속 근접공격을 합니다.,0,1,0,0.1,-1,2,1
 l0,발사형,검기,Exalted Sword,검기를 날립니다.,8,1,0,3,-1,5,1

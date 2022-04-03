@@ -20,6 +20,8 @@ public abstract class Projectile : MonoBehaviour
     #region method
     protected abstract void destroySelf();
     protected abstract void launchProjectile();
+    public abstract void setEnable(Vector3 _target, Vector3 _player);
+    public abstract void setDisable();
     #endregion
 }
 

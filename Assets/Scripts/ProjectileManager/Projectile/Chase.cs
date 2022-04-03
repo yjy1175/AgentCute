@@ -42,6 +42,16 @@ public class Chase : Projectile
     {
         launchProjectile();
     }
+
+    public override void setEnable(Vector3 _target, Vector3 _player)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void setDisable()
+    {
+        throw new System.NotImplementedException();
+    }
     #endregion
 }
 
