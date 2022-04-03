@@ -36,6 +36,19 @@ public class ObjectPoolManager : SingleToneMaker<ObjectPoolManager>
         }
     }
 
+    public bool ObjectPoolEmptyCheck(string name)
+    {
+        if (dictTable.ContainsKey(name).Equals(false))
+        {
+            Debug.Log("잘못된" + name + "이 들어왔습니다");
+            return false;
+        }
+        else
+        {
+            return dictTable[name].IsNull();
+        }
+    }
+
     public GameObject EnableGameObject(string name)
     {
         GameObject obj = null;

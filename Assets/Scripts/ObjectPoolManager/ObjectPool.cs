@@ -22,6 +22,8 @@ public class ObjectPool
         Allocate(initCount);
     }
 
+    //TO-DO 현재 오브젝트풀이 생성되면 ObjectPoolSet이라는 빈 오브젝트에 넣고 있는데 이것을 어떻게 관리할지에 대해 고민이 필요
+
     /*
      * 오브젝트풀의 개수를 cnt개수만큼늘려준다.
      */
@@ -36,7 +38,11 @@ public class ObjectPool
         }
 
     }
-
+    
+    public bool IsNull()
+    {
+        return objectPool.Count == 0 ? true : false;       
+    }
     /*
      *  오브젝트풀에 들어있는 GameObject를 내본다.
      */
@@ -48,6 +54,11 @@ public class ObjectPool
             Debug.Log(objectFactory.name+"를 Enable할수 없습니다.");
             return null;
         }
+        /*
+         * TO-DO: 
+         * 우리게임에서는 자동으로 늘어나야할 오브젝이있을까? 몬스터의 경우 자동으로 늘어나게해야하나? 추가 메서드가 필요할까
+         * 
+         */
         else if (objectPool.Count <= 0 && overAllocateCount > 0)
         {
             Debug.Log("오브젝트 전부 사용 " + overAllocateCount + "개를 추가합니다");
