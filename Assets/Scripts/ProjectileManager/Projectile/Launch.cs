@@ -40,11 +40,10 @@ public class Launch : Projectile
         }
     }
     // 발사 방향에 따라 발사체를 회전시키는 함수
-    public float setAngle()
+    public float setAngle(Vector3 dir)
     {
         // 오일러각(0~360)
-        return  Quaternion.FromToRotation(
-            new Vector3(1, 0, 0), target.normalized).eulerAngles.z;
+        return Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
     }
     // 비활성화
     public override void setDisable()
@@ -57,13 +56,14 @@ public class Launch : Projectile
     // 활성화
     /*
      * _target : 터치패드 입력방향 벡터 or 근거리 몬스터의 위치 벡터
-     * _player : 현재 player의 위치 벡터
+     * _player : 현재 player의 위치 벡터(발사체의 시작위치)
      */
-    public override void setEnable(Vector3 _target, Vector3 _player)
+    public override void setEnable(Vector3 _target, Vector3 _player, float _angle)
     {
+        transform.localScale = new Vector3(AddScaleCoefficient, AddScaleCoefficient, AddScaleCoefficient);
         transform.position = _player;
         target = _target;
-        angle = setAngle();
+        angle = setAngle(target - _player) + _angle;
         transform.Rotate(0, 0, angle);
         gameObject.SetActive(true);
         isActive = true;
@@ -71,9 +71,7 @@ public class Launch : Projectile
     void Start()
     {
 #if DEBUG
-        //target = new Vector3(50, -10, 0);
 #endif
-        setDisable();
     }
     void Update()
     {

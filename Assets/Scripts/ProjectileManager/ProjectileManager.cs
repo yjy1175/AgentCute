@@ -9,8 +9,6 @@ public class ProjectileManager : MonoBehaviour
     // key : s, c, l, r(타입 첫글자) value :  <key : 0~(타입 다음글자), value = 발사체 오브젝트>
     public StringIntGameObject allProjectiles;
 
-    //private float time = 3;
-    //private float tTime;
     #endregion
     private void Start()
     {
@@ -19,19 +17,6 @@ public class ProjectileManager : MonoBehaviour
     private void Update()
     {
 #if DEBUG
-        //tTime += Time.deltaTime;
-        //if(time < tTime)
-        //{
-        //    tTime = 0;
-        //    foreach (string key0 in allProjectiles.Keys)
-        //    {
-        //        for (int i = 0; i < allProjectiles[key0].Count; i++)
-        //        {
-        //            Instantiate(allProjectiles[key0][i], transform.position, Quaternion.identity, transform.root);
-        //            Debug.Log("발사체 생성");
-        //        }
-        //    }
-        //}
 #endif
     }
     public void initAllProjectiles()
@@ -62,6 +47,32 @@ public class ProjectileManager : MonoBehaviour
         item.Spec.Angle = int.Parse(projectilesData[index]["ProjectileAngle"].ToString());
         item.Spec.SpawnTime = float.Parse(projectilesData[index]["ProjectileSpawnTime"].ToString());
         item.Spec.MaxPassCount = int.Parse(projectilesData[index]["ProjectileMaxPassCount"].ToString());
+    }
+
+    /*
+     * 레벨업에 따른 발사체 추가시 필요한 api입니다.
+     * 전체적으로 모든 발사체를 추가시킬때 필요
+     * _num : 추가시킬 발사체 개수입니다. 
+     */
+    public void AddProjectilesCount(int _num)
+    {
+        if (_num < 0)
+            if (Projectile.AddProjectilesCount <= 0)
+                _num = 0;
+        Projectile.AddProjectilesCount += _num;
+    }
+
+    /*
+ * 레벨업에 따른 발사체 범위 증가시 필요한 api입니다.
+ * 전체적으로 모든 발사체의 범위를 증가 시킬때 필요
+ * _coefficient : 범위 증가 수치 입니다.
+ */
+    public void AddProjectilesScale(float _coefficient)
+    {
+        if (_coefficient < 0)
+            if (Projectile.AddScaleCoefficient <= 1)
+                _coefficient = 0;
+        Projectile.AddScaleCoefficient += _coefficient;
     }
 }
 

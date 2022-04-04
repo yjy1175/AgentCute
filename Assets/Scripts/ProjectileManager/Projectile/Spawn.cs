@@ -41,7 +41,7 @@ using UnityEngine;
             launchProjectile();
         }
 
-    public override void setEnable(Vector3 _target, Vector3 _player)
+    public override void setEnable(Vector3 _target, Vector3 _player, float _angle)
     {
         throw new System.NotImplementedException();
     }

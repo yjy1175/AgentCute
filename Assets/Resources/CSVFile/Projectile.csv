@@ -1,2 +1,2 @@
 ProjectileType,ProjectileTypeName,ProjectileName,ProjectileNameE,ProjectileDesc,ProjectileSpeed,ProjectileCount,ProjectileAngle,ProjectileSpawnTime,ProjectileMaxPassCount,ProjectileCoolTime,ProjectileCoolTimeType
-l0,발사형,검기,Exalted Sword,검기를 날립니다.,8,1,0,3,-1,5,1
+l0,발사형,검기,Exalted Sword,검기를 날립니다.,8,3,20,3,-1,5,1

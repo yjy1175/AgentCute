@@ -5,6 +5,18 @@ using UnityEngine;
 public abstract class Projectile : MonoBehaviour
 {
     #region variable
+    private static int addProjectilesCount;
+    public static int AddProjectilesCount
+    {
+        get { return addProjectilesCount; }
+        set { addProjectilesCount = value; }
+    }
+    private static float addScaleCoefficient = 1f;
+    public static float AddScaleCoefficient
+    {
+        get { return addScaleCoefficient; }
+        set { addScaleCoefficient = value; }
+    }
     public abstract ProjectileSpec Spec
     {
         get;
@@ -20,7 +32,7 @@ public abstract class Projectile : MonoBehaviour
     #region method
     protected abstract void destroySelf();
     protected abstract void launchProjectile();
-    public abstract void setEnable(Vector3 _target, Vector3 _player);
+    public abstract void setEnable(Vector3 _target, Vector3 _player, float _angle);
     public abstract void setDisable();
     #endregion
 }

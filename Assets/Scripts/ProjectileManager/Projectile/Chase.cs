@@ -26,7 +26,7 @@ public class Chase : Projectile
     {
         /*생성후 파괴되는 매서드*/
         if (Target == null)
-            Destroy(gameObject, Spec.SpawnTime);
+            setDisable();
     }
     protected override void launchProjectile()
     {
@@ -43,7 +43,7 @@ public class Chase : Projectile
         launchProjectile();
     }
 
-    public override void setEnable(Vector3 _target, Vector3 _player)
+    public override void setEnable(Vector3 _target, Vector3 _player, float _angle)
     {
         throw new System.NotImplementedException();
     }
