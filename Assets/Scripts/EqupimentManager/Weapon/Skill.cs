@@ -5,6 +5,18 @@ using UnityEngine;
 public class Skill : MonoBehaviour
 {
     #region variable
+    private string skillName;
+    public string SkillName
+    {
+        get { return skillName; }
+        set { skillName = value; }
+    }
+    private string skillDesc;
+    public string SkillDesc
+    {
+        get { return skillDesc; }
+        set { skillDesc = value; }
+    }
     private string projectileType;
     public string ProjectileType
     {
@@ -28,6 +40,11 @@ public class Skill : MonoBehaviour
     {
         get { return isLocked; }
         set { isLocked = value; }
+    }
+    public enum SkillType
+    {
+        GENERAL,
+        ULTIMATE
     }
     #endregion
 }

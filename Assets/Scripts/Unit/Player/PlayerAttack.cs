@@ -12,7 +12,7 @@ public class PlayerAttack : IAttack
         TileDict = new Dictionary<string, GameObject>();
 
         //setTileDict(mWeapone.name, mWeapone);
-        ObjectPoolManager.Instance.CreateDictTable(mAutoAttack, 10, 0); //TO-DO 무기생성 Create를 여기서하는건 옳지않음. PlayerManager에서 무기종류가 확실히 정해지면 거기서 Create하는걸로 수정
+        ObjectPoolManager.Instance.CreateDictTable(mAutoAttack, 10, 10); //TO-DO 무기생성 Create를 여기서하는건 옳지않음. PlayerManager에서 무기종류가 확실히 정해지면 거기서 Create하는걸로 수정
         mAutoAttackSpeed = mAutoAttack.GetComponent<Projectile>().Spec.SpawnTime; //TO-DO 임시로 넣어놓음. 실제 공속은 무엇?
         mAutoAttackCheckTime = mAutoAttackSpeed;
     }

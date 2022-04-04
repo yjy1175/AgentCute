@@ -30,21 +30,21 @@ public class Weapon : MonoBehaviour
     }
     #endregion
     #region method
-    public void changeSkill(string _projectileType, int type)
+    public void changeSkill(string _skillName, Skill.SkillType _type)
     {
-        Skill newSkill = type == 0 ?
-            Spec.getGeneralSkill().Find(item => item.ProjectileType == _projectileType) :
-            Spec.getUltimateSkill().Find(item => item.ProjectileType == _projectileType);
+        Skill newSkill = _type == Skill.SkillType.GENERAL ?
+            Spec.getGeneralSkill().Find(item => item.SkillName == _skillName) :
+            Spec.getUltimateSkill().Find(item => item.SkillName == _skillName);
         // 해당 스킬이 해금이 되어있는지 확인
         if (newSkill.IsLocked)
         {
             // 장착 스킬 변경 type 0 - 일반 스킬 1 - 궁극기 스킬
-            switch (type)
+            switch (_type)
             {
-                case 0:
+                case Skill.SkillType.GENERAL:
                     currentGeneralSkill = newSkill;
                     break;
-                case 1:
+                case Skill.SkillType.ULTIMATE:
                     currentUltimateSkill = newSkill;
                     break;
             }

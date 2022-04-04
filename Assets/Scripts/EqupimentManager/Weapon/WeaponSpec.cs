@@ -90,29 +90,29 @@ public class WeaponSpec : EquipSpec
     {
         return generalSkillList;
     }
-    public void addGeneralSkill(string _projectileType, int _coolTime, int _coefficient, bool _isLocked)
+    public void addSkillList(string _skillName, string _skillDesc, string _projectileType, int _coolTime, int _coefficient, bool _isLocked, Skill.SkillType _type)
     {
         Skill newSkill = new Skill();
+        newSkill.SkillName = _skillName;
+        newSkill.SkillDesc = _skillDesc;
         newSkill.ProjectileType = _projectileType;
         newSkill.CoolTime = _coolTime;
         newSkill.Coefficient = _coefficient;
         newSkill.IsLocked = _isLocked;
 
-        generalSkillList.Add(newSkill);
+        switch (_type) 
+        {
+            case Skill.SkillType.GENERAL:
+                generalSkillList.Add(newSkill);
+                break;
+            case Skill.SkillType.ULTIMATE:
+                ultimateSkillList.Add(newSkill);
+                break;
+        }
     }
     public List<Skill> getUltimateSkill()
     {
         return ultimateSkillList;
-    }
-    public void addUltimateSkill(string _projectileType, int _coolTime, int _coefficient, bool _isLocked)
-    {
-        Skill newSkill = new Skill();
-        newSkill.ProjectileType = _projectileType;
-        newSkill.CoolTime = _coolTime;
-        newSkill.Coefficient = _coefficient;
-        newSkill.IsLocked = _isLocked;
-
-        ultimateSkillList.Add(newSkill);
     }
     #endregion
 }

@@ -48,7 +48,7 @@ public class Launch : Projectile
     // 비활성화
     public override void setDisable()
     {
-        transform.Rotate(0, 0, -angle);
+        transform.Rotate(0, 0, 0);
         gameObject.SetActive(false);
         isActive = false;
     }
