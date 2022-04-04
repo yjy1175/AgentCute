@@ -27,7 +27,7 @@ public class MonsterMove : IMove
 
     void MovingPattern1()
     {
-        GameObject target = GameObject.Find("PlayerObject");
+        GameObject target = GameObject.Find("UnitRoot");
         if (target != null)
         {
 
