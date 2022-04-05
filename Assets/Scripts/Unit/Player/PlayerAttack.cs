@@ -47,7 +47,7 @@ public class PlayerAttack : IAttack
     {
         Vector3 temp = new Vector3(1, 1, 0);//TO-DO 플레이어 방향에 따라 나갈수있도록 value 제공해주는 api만들기
         GameObject obj = ObjectPoolManager.Instance.EnableGameObject(mAutoAttack.name);
-        Debug.Log(MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position));
+        //Debug.Log(MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position));
         obj.GetComponent<Projectile>().setEnable(MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position)
                 , firePosition.transform.position, 0);
         yield return new WaitForSeconds(mAutoAttackSpeed);

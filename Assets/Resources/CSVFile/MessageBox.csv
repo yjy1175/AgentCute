@@ -1,0 +1,3 @@
+MB_Name,MB_Color,MB_MoveSpeed,MB_AlphaSpeed,MB_DestroyTime,MB_FontSize
+UserDamage,0/0/0/1,2,3,3,100
+MonsterDamage,255/0/0/1,2,3,3,100

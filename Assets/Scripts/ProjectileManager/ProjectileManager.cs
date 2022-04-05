@@ -74,5 +74,21 @@ public class ProjectileManager : MonoBehaviour
                 _coefficient = 0;
         Projectile.AddScaleCoefficient += _coefficient;
     }
+
+
+    // 임시 테스트용 입니다. 추후 삭제
+    public void createUserDamageBox()
+    {
+        int damage = UnityEngine.Random.Range(10, 100);
+        MessageBoxManager.Instance.createMessageBox(
+            MessageBoxManager.BoxType.UserDamage, damage.ToString(), new Vector3(0, 0, 0));
+    }
+    // 임시 테스트용 입니다. 추후 삭제
+    public void createMonsterDamageBox()
+    {
+        int damage = UnityEngine.Random.Range(10, 100);
+        MessageBoxManager.Instance.createMessageBox(
+            MessageBoxManager.BoxType.MonsterDamage, damage.ToString(), new Vector3(0, 0, 0));
+    }
 }
 
