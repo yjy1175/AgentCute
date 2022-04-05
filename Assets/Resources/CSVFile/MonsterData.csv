@@ -1,8 +1,8 @@
 ID,MonsterSpawnMap,MonsterInName,MonsterSize,MonsterName,MonsterGrade,MonsterHp,MonsterPhysicalDefense,MonsterMagicDefense,MonsterSpeed,CloseAttackPower,CloseAttackRange,StandoffAttackPower,StandoffAttackRange,CloseAttackAnimation,StandoffAttackAnimation,HitAnimation,MonsterAI,ChaseAnimation,DeathAnimation,MonsterExp,MonsterDrop1,MonsterDrop2,MonsterDrop3
-1,Field,Goblin_Worker,1,°íºí¸° ÀÏ²Û,Normal,15,0,0,1,1,1,0,-1,null,null,Goblin Worker Hit.anim,null,Goblin Worker Walk.anim,Goblin Worker Die.anim,1,null,null,null
-2,Field,Goblin_Bomber,1,°íºí¸° ÆøÅºº´,Normal,30,0,0,2,1,1,0,-1,null,null,Goblin Bomber Hit.anim,null,Goblin Bomber Walk.anim,Goblin Bomber Die.anim,2,null,null,null
-3,Field,Goblin_Shaman,1,°íºí¸° »ş¸Õ,Normal,45,0,0,1,1,1,0,-1,null,null,Goblin Shaman Hit.anim,null,Goblin Shaman Walk.anim,Goblin Shaman Die.anim,2,null,null,null
-4,Field,Goblin_Assassin,1,°íºí¸° ¾î½Ø½Å,Normal,60,0,0,3,1,1,0,-1,null,null,Goblin Assassin Hit.anim,null,Goblin Assassin Walk.anim,Goblin Assassin Die.anim,3,null,null,null
-5,Field,Giant_Slime_1,3,ÀÚÀÌ¾ğÆ® ½½¶óÀÓ_1,Boss,"4,000",0,0,2,3,1,0,-1,null,null,¹ÌÀÛ¾÷,Giant_Slime_1_AI,¹ÌÀÛ¾÷,¹ÌÀÛ¾÷,10,null,null,null
-6,Field,Giant_Slime_2,3,ÀÚÀÌ¾ğÆ® ½½¶óÀÓ_2,Boss,"6,000",0,0,2,4,1,0,-1,null,null,¹ÌÀÛ¾÷,Giant_Slime_2_AI,¹ÌÀÛ¾÷,¹ÌÀÛ¾÷,15,null,null,null
-7,Field,Giant_Slime_3,3,ÀÚÀÌ¾ğÆ® ½½¶óÀÓ_3,Boss,"8,000",0,0,2,5,1,0,-1,null,null,¹ÌÀÛ¾÷,Giant_Slime_3_AI,¹ÌÀÛ¾÷,¹ÌÀÛ¾÷,20,null,null,null
+1,Field,Goblin_Worker,1,ê³ ë¸”ë¦° ì¼ê¾¼,Normal,15,0,0,1,1,1,0,-1,null,null,Goblin Worker Hit.anim,null,Goblin Worker Walk.anim,Goblin Worker Die.anim,1,null,null,null
+2,Field,Goblin_Bomber,1,ê³ ë¸”ë¦° í­íƒ„ë³‘,Normal,30,0,0,2,1,1,0,-1,null,null,Goblin Bomber Hit.anim,null,Goblin Bomber Walk.anim,Goblin Bomber Die.anim,2,null,null,null
+3,Field,Goblin_Shaman,1,ê³ ë¸”ë¦° ìƒ¤ë¨¼,Normal,45,0,0,1,1,1,0,-1,null,null,Goblin Shaman Hit.anim,null,Goblin Shaman Walk.anim,Goblin Shaman Die.anim,2,null,null,null
+4,Field,Goblin_Assassin,1,ê³ ë¸”ë¦° ì–´ìŒ”ì‹ ,Normal,60,0,0,3,1,1,0,-1,null,null,Goblin Assassin Hit.anim,null,Goblin Assassin Walk.anim,Goblin Assassin Die.anim,3,null,null,null
+5,Field,Giant_Slime_1,3,ìì´ì–¸íŠ¸ ìŠ¬ë¼ì„_1,Boss,"4,000",0,0,2,2,1,0,-1,null,null,Giant Slime Hit.anim,Giant_Slime_1_AI,Giant Slime Walk.anim,Giant Slime Die.anim,10,null,null,null
+6,Field,Giant_Slime_2,3,ìì´ì–¸íŠ¸ ìŠ¬ë¼ì„_2,Boss,"6,000",0,0,2,3,1,0,-1,null,null,Giant Slime Hit.anim,Giant_Slime_2_AI,Giant Slime Walk.anim,Giant Slime Die.anim,15,null,null,null
+7,Field,Giant_Slime_3,3,ìì´ì–¸íŠ¸ ìŠ¬ë¼ì„_3,Boss,"8,000",0,0,2,3,1,0,-1,null,null,Giant Slime Hit.anim,Giant_Slime_3_AI,Giant Slime Walk.anim,Giant Slime Die.anim,20,null,null,null

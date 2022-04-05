@@ -32,7 +32,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
     void Awake()
     {
-        initAllSpawnData();
+        InitAllSpawnData();
         /*
          * TO-DO: 
          * 1. spawn point는 Awake에서 오브젝트를 찾아 읽어오는 방식
@@ -50,12 +50,20 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         {
             ObjectPoolManager.Instance.CreateDictTable(TempMonster[i], 5, 5);
         }
+
+        MonsterManager.MonsterData a;
     }
 
     // Update is called once per frame
     void Update()
     {
+        SpawnMonster();
 
+
+    }
+
+    private void SpawnMonster()
+    {
         for (int i = 0; i < dataSet.Count; i++)
         {
             SpawnData temp = dataSet[i];
@@ -63,12 +71,14 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             {
                 for (int j = 0; j < dataSet[i].spawnNumber; j++)
                 {
-                    GameObject enemy = ObjectPoolManager.Instance.EnableGameObject(dataSet[i].spawnMonster);
-                    if (enemy != null)
+                    GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSet[i].spawnMonster);
+                    setMonsterData(ref monster);
+                    if (monster != null)
                     {
+                        Debug.Log(monster.name);
                         int index = UnityEngine.Random.Range(0, spawnPoints.Length);
-                        enemy.transform.position = spawnPoints[index].position;
-                        enemy.SetActive(true);
+                        monster.transform.position = spawnPoints[index].position;
+                        monster.SetActive(true);
                     }
                 }
                 temp.currentTime = 0;
@@ -82,7 +92,19 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         }
     }
 
-    private void initAllSpawnData()
+    /*
+     * TO-DO : 현재는 MonsterManager에서 data를 가져와 복사하는 정도로만 해놨음. 이후 난이도에 따라 값변화가 필요
+     */
+    private void setMonsterData(ref GameObject monster)
+    {
+        /*
+         *  TO-Do : 값 가져오는 형태는 아래와 같은 방식으로 진행할 예정. 구조가 변할수 있기때문에 일단 당장 필요한 hp만 짜놓음.
+         */
+        MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(monster.name);
+        monster.GetComponent<MonsterStatus>().HP = md.monsterHp;
+    }
+
+    private void InitAllSpawnData()
     {
         dataSet = new List<SpawnData>();
         List<Dictionary<string, object>> spawnData = CSVReader.Read("CSVFile\\SpawnData");

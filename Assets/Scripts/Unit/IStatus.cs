@@ -4,10 +4,10 @@ using UnityEngine;
 
 public abstract class IStatus : MonoBehaviour
 {
-    protected int mHp;
-    protected int mSpeed;
-    protected int mPhysicalDefense;
-    protected int mMonsterMagicDefense;
+    public int mHp;
+    public int mSpeed;
+    public int mPhysicalDefense;
+    public int mMagicDefense;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public abstract class IStatus : MonoBehaviour
         
     }
 
-    public int propHp
+    public int HP
     {
         get { return mHp; }
         set { mHp = value; }

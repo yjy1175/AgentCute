@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class MonsterStatus : IStatus
 {
-    protected string mSpawnMap;
-    protected string mInName;
-    protected string mName;
-    protected MonsterType Monster_Grade;
-    protected int mAttackPower;
-    protected float mAttackRange;
-    protected int mStandoffAttackPower;
-    protected float mStandoffAttackRange;
-
-    /*
-     * Close_Attack_Animation
-     * Standoff_Attack_Animation
-     * Hit_Animation
-     */
+    public int mId;
+    public string mSpawnMap;
+    public string mMonsterInName;
+    public int mMonsterSize;
+    public string mMmonsterName;
+    public string mMmonsterGrade;
+    public int mCloseAttackPower;
+    public int mCloseAttackRange;
+    public int mStandoffAttackPower;
+    public int mStandoffAttackRange;
+    //public int MonsterAI;
+    public int monsterExp;
 
     public enum MonsterType
     {

@@ -14,6 +14,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
         public int monsterSize;
         public string monsterName;
         public string monsterGrade;
+        public int monsterHp;
         public int monsterPhysicalDefense;
         public int monsterMagicDefense;
         public int monsterSpeed;
@@ -28,7 +29,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
         //public int MonsterDrop2;
         //public int MonsterDrop3;
     }
-    public List<MonsterData> dataSet;
+    public Dictionary<string, MonsterData> dataSet;
     private void Awake()
     {
         InitAllSpawnData();
@@ -68,6 +69,21 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
         return dir;
     }
 
+
+    /*
+     * 몬스터 string을 str로 넣어주면 몬스터 data를 return 해준다.
+     */
+    
+    public MonsterData GetMonsterData(string str)
+    {
+        /*
+         * TO-DO 없는 key값에 대한 예외처리 필요
+         * */
+        return dataSet[str];
+    }
+
+
+
     /*
      * 현재 맵에 따른 몬스터 List를 return 해준다. 
      */
@@ -83,36 +99,37 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
      */
     private void InitAllSpawnData()
     {
-        dataSet = new List<MonsterData>();
-        List<Dictionary<string, object>> spawnData = CSVReader.Read("CSVFile\\MonsterData");
-        for (int idx = 0; idx < spawnData.Count; idx++)
+        dataSet = new Dictionary<string, MonsterData>();
+        List<Dictionary<string, object>> monsterDataCsv = CSVReader.Read("CSVFile\\MonsterData");
+        for (int idx = 0; idx < monsterDataCsv.Count; idx++)
         {
-
+            string key;
             MonsterData md = new MonsterData();
-            md.id = (int)spawnData[idx]["ID"];
-            md.monsterSpawnMap = spawnData[idx]["MonsterSpawnMap"].ToString();
-            md.monsterInName = spawnData[idx]["MonsterInName"].ToString();
-            md.monsterSize = (int)spawnData[idx]["MonsterSize"];
-            md.monsterName = spawnData[idx]["MonsterName"].ToString();
-            md.monsterGrade = spawnData[idx]["MonsterGrade"].ToString();
-            md.monsterPhysicalDefense = (int)spawnData[idx]["MonsterPhysicalDefense"];
-            md.monsterMagicDefense = (int)spawnData[idx]["MonsterMagicDefense"];
-            md.monsterSpeed = (int)spawnData[idx]["MonsterSpeed"];
-            md.closeAttackPower = (int)spawnData[idx]["CloseAttackPower"];
-            md.closeAttackRange = (int)spawnData[idx]["CloseAttackRange"];
-            md.standoffAttackPower = (int)spawnData[idx]["StandoffAttackPower"];
-            md.standoffAttackRange = (int)spawnData[idx]["StandoffAttackRange"];
-            md.monsterExp = (int)spawnData[idx]["MonsterExp"];
-            //ds.CloseAttackAnimation = (int)spawnData[idx]["CloseAttackAnimation"];
-            //ds.StandoffAttackAnimation = (int)spawnData[idx]["StandoffAttackAnimation"];
-            //ds.HitAnimation = (int)spawnData[idx]["HitAnimation"];
-            //ds.MonsterAI = (int)spawnData[idx]["MonsterAI"];
-            //ds.spawnStartTime_2 = (int)spawnData[idx]["ChaseAnimation"];
-            //ds.spawnStartTime_2 = (int)spawnData[idx]["DeathAnimation"];
-            //ds.MonsterDrop1 = (int)spawnData[idx]["MonsterDrop1"];
-            //ds.MonsterDrop2 = (int)spawnData[idx]["MonsterDrop2"];
-            //ds.MonsterDrop3 = (int)spawnData[idx]["MonsterDrop3"];
-            dataSet.Add(md);
+            md.id = int.Parse(monsterDataCsv[idx]["ID"].ToString());
+            md.monsterSpawnMap = monsterDataCsv[idx]["MonsterSpawnMap"].ToString();
+            key = monsterDataCsv[idx]["MonsterInName"].ToString();
+            md.monsterSize = int.Parse(monsterDataCsv[idx]["MonsterSize"].ToString());
+            md.monsterName = monsterDataCsv[idx]["MonsterName"].ToString();
+            md.monsterGrade = monsterDataCsv[idx]["MonsterGrade"].ToString();
+            md.monsterHp = int.Parse(monsterDataCsv[idx]["MonsterHp"].ToString());
+            md.monsterPhysicalDefense = int.Parse(monsterDataCsv[idx]["MonsterPhysicalDefense"].ToString());
+            md.monsterMagicDefense = int.Parse(monsterDataCsv[idx]["MonsterMagicDefense"].ToString());
+            md.monsterSpeed = int.Parse(monsterDataCsv[idx]["MonsterSpeed"].ToString());
+            md.closeAttackPower = int.Parse(monsterDataCsv[idx]["CloseAttackPower"].ToString());
+            md.closeAttackRange = int.Parse(monsterDataCsv[idx]["CloseAttackRange"].ToString());
+            md.standoffAttackPower = int.Parse(monsterDataCsv[idx]["StandoffAttackPower"].ToString());
+            md.standoffAttackRange = int.Parse(monsterDataCsv[idx]["StandoffAttackRange"].ToString());
+            md.monsterExp = int.Parse(monsterDataCsv[idx]["MonsterExp"].ToString());
+            //ds.CloseAttackAnimation = (int)monsterDataCsv[idx]["CloseAttackAnimation"];
+            //ds.StandoffAttackAnimation = (int)monsterDataCsv[idx]["StandoffAttackAnimation"];
+            //ds.HitAnimation = (int)monsterDataCsv[idx]["HitAnimation"];
+            //ds.MonsterAI = (int)monsterDataCsv[idx]["MonsterAI"];
+            //ds.spawnStartTime_2 = (int)monsterDataCsv[idx]["ChaseAnimation"];
+            //ds.spawnStartTime_2 = (int)monsterDataCsv[idx]["DeathAnimation"];
+            //ds.MonsterDrop1 = (int)monsterDataCsv[idx]["MonsterDrop1"];
+            //ds.MonsterDrop2 = (int)monsterDataCsv[idx]["MonsterDrop2"];
+            //ds.MonsterDrop3 = (int)monsterDataCsv[idx]["MonsterDrop3"];
+            dataSet[key] = md;
         }
     }
 
