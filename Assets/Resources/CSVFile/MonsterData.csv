@@ -1,0 +1,8 @@
+ID,MonsterSpawnMap,MonsterInName,MonsterSize,MonsterName,MonsterGrade,MonsterHp,MonsterPhysicalDefense,MonsterMagicDefense,MonsterSpeed,CloseAttackPower,CloseAttackRange,StandoffAttackPower,StandoffAttackRange,CloseAttackAnimation,StandoffAttackAnimation,HitAnimation,MonsterAI,ChaseAnimation,DeathAnimation,MonsterExp,MonsterDrop1,MonsterDrop2,MonsterDrop3
+1,Field,Goblin_Worker,1,고블린 일꾼,Normal,15,0,0,1,1,1,0,-1,null,null,Goblin Worker Hit.anim,null,Goblin Worker Walk.anim,Goblin Worker Die.anim,1,null,null,null
+2,Field,Goblin_Bomber,1,고블린 폭탄병,Normal,30,0,0,2,1,1,0,-1,null,null,Goblin Bomber Hit.anim,null,Goblin Bomber Walk.anim,Goblin Bomber Die.anim,2,null,null,null
+3,Field,Goblin_Shaman,1,고블린 샤먼,Normal,45,0,0,1,1,1,0,-1,null,null,Goblin Shaman Hit.anim,null,Goblin Shaman Walk.anim,Goblin Shaman Die.anim,2,null,null,null
+4,Field,Goblin_Assassin,1,고블린 어쌔신,Normal,60,0,0,3,1,1,0,-1,null,null,Goblin Assassin Hit.anim,null,Goblin Assassin Walk.anim,Goblin Assassin Die.anim,3,null,null,null
+5,Field,Giant_Slime_1,3,자이언트 슬라임_1,Boss,"4,000",0,0,2,3,1,0,-1,null,null,미작업,Giant_Slime_1_AI,미작업,미작업,10,null,null,null
+6,Field,Giant_Slime_2,3,자이언트 슬라임_2,Boss,"6,000",0,0,2,4,1,0,-1,null,null,미작업,Giant_Slime_2_AI,미작업,미작업,15,null,null,null
+7,Field,Giant_Slime_3,3,자이언트 슬라임_3,Boss,"8,000",0,0,2,5,1,0,-1,null,null,미작업,Giant_Slime_3_AI,미작업,미작업,20,null,null,null
