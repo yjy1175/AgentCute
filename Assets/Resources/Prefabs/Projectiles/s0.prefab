@@ -116,17 +116,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spec:
-    type: 
+    type: s0
     typeName: 
     equipName: 
     equipDesc: 
     equipRank: 0
-    projectileDamage: 0
+    projectileDamage: 1.25
     speed: 0
-    count: 0
+    count: 1
     angle: 0
-    spawnTime: 0
-    maxPassCount: 0
+    spawnTime: 1
+    maxPassCount: -1
   target: {x: 0, y: 0, z: 0}
   isActive: 0
   angle: 0

@@ -73,9 +73,9 @@ public class PlayerAttack : IAttack
     //PlayerManager에서 무기종류가 확실히 정해지면 거기서 Create하는걸로 수정
     private void createObjectPool()
     {
-        foreach(Skill key in TileDict.Keys)
+        foreach (Skill key in TileDict.Keys)
         {
-            for(int i = 0; i <  TileDict[key].Count; i++)
+            for (int i = 0; i < TileDict[key].Count; i++)
             {
                 ObjectPoolManager.Instance.CreateDictTable(TileDict[key][i].gameObject, 10, 10);
             }
@@ -100,12 +100,20 @@ public class PlayerAttack : IAttack
     {
         Vector3 temp = new Vector3(1, 1, 0);//TO-DO 플레이어 방향에 따라 나갈수있도록 value 제공해주는 api만들기
         GameObject obj = ObjectPoolManager.Instance.EnableGameObject(_name);
+        setProjectileData(ref obj);
         obj.GetComponent<Projectile>().setEnable(MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position)
                 , firePosition.transform.position, _angle);
         yield return new WaitForSeconds(mAutoAttackSpeed);
         obj.GetComponent<Projectile>().setDisable();
         ObjectPoolManager.Instance.DisableGameObject(obj);
     }
+
+    private void setProjectileData(ref GameObject obj)
+    {
+        obj.GetComponent<Projectile>().Damage = 50;
+        obj.gameObject.tag = "PlayerProjectile";
+    }
+
 
     public void clickGeneralSkillBtn()
     {
@@ -129,7 +137,7 @@ public class PlayerAttack : IAttack
             _btn.gameObject.SetActive(true);
         }
         // 무한 클릭(시간으로 관리)
-        else if(count == -1)
+        else if (count == -1)
         {
             // Todo : 쿨타임동안에는 무한발사가 가능한 스킬의 경우 
         }
@@ -137,7 +145,7 @@ public class PlayerAttack : IAttack
         else
         {
             // 마지막 클릭일 경우
-            if(count - 1 == _skill.CurrentUseCount)
+            if (count - 1 == _skill.CurrentUseCount)
             {
                 _skill.CurrentCoolTimeIndex++;
                 launchSkill(_skill);
@@ -160,7 +168,7 @@ public class PlayerAttack : IAttack
     private void launchSkill(Skill _skill)
     {
         int count = _skill.Spec.SkillCount;
-        if(count == 1)
+        if (count == 1)
         {
             int launchCount = TileDict[_skill][0].Spec.Count + Projectile.AddProjectilesCount;
             int angle = TileDict[_skill][0].Spec.Angle;

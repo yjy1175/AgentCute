@@ -34,7 +34,7 @@ public class MonsterAttack : IAttack
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.name.Equals("PlayerObject"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             if (mAutoAttackCheckTime.Equals(0f))
             {

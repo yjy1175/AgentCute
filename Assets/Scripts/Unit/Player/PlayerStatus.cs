@@ -23,7 +23,7 @@ public class PlayerStatus : IStatus
         /*
          * TO-DO : HP가 달경우는 Delegate를 통해 나중에 만들어질 UIManager로 보내서 체력상태를 보낼예정
          */
-         
+        hpUI.text = "User HP : " + mHp;
 
     }
 
@@ -40,16 +40,5 @@ public class PlayerStatus : IStatus
     void OnCollisionExit2D(Collision2D collision)
     {
         
-    }
-
-    public override int Hp
-    {
-        /*
-         *  TO-DO :player Attack에서 있어서 동기화가 되는지 확인필요
-         */
-        set {
-            mHp = Mathf.Max(0, value);
-            hpUI.text = "User HP : " + mHp;
-        }
     }
 }

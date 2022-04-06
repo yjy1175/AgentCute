@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Projectile : MonoBehaviour
 {
+
+
     #region variable
     private static int addProjectilesCount;
     public static int AddProjectilesCount
@@ -12,6 +14,13 @@ public abstract class Projectile : MonoBehaviour
         set { addProjectilesCount = value; }
     }
     private static float addScaleCoefficient = 1f;
+
+    protected int damage;
+    public virtual int Damage
+    {
+        get { return damage; }
+        set { damage = value;}
+    }
     public static float AddScaleCoefficient
     {
         get { return addScaleCoefficient; }
@@ -28,6 +37,17 @@ public abstract class Projectile : MonoBehaviour
         set;
     }
     #endregion
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (gameObject.CompareTag("PlayerProjectile") &&  collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<IStatus>().Hp -= damage;
+            ObjectPoolManager.Instance.DisableGameObject(gameObject);
+        }
+    }
+
+
 
     #region method
     protected abstract void destroySelf();

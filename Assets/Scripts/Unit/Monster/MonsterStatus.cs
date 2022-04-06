@@ -31,4 +31,16 @@ public class MonsterStatus : IStatus
         
     }
 
+    public override int Hp
+    {
+        get { return mHp; }
+        set
+        {
+            mHp = Mathf.Max(0, value);
+            if(mHp == 0)
+            {
+                ObjectPoolManager.Instance.DisableGameObject(gameObject);
+            }
+        }
+    }
 }
