@@ -52,6 +52,7 @@ public abstract class Projectile : MonoBehaviour
         {
             collision.gameObject.GetComponent<IStatus>().Hp -= damage;
             ObjectPoolManager.Instance.DisableGameObject(gameObject);
+            MessageBoxManager.Instance.createMessageBox(MessageBoxManager.BoxType.MonsterDamage, damage.ToString(), collision.gameObject.transform.position);
         }
     }
 
