@@ -7,11 +7,16 @@ public class EquipmentManager : MonoBehaviour
 {
     // Start is called before the first frame update
     #region variable
+    
     // key : 장비 분류(0: 무기, 1: 코스튬...) , value : <key : typename, value : 해당장비 오브젝트 
-    public StringGameObject weapons;
-    public StringGameObject costumes;
-    public StringGameObject userCurrentWeapon;
-    public StringGameObject userCurrentCostume;
+    [SerializeField]
+    private StringGameObject weapons;
+    [SerializeField]
+    private StringGameObject costumes;
+    [SerializeField]
+    private Weapon userCurrentWeapon;
+    [SerializeField]
+    private Costume userCurrentCostume;
     // key : 몬스터 분류 , value : 해당 몬스터 장비 오브젝트
     public StringGameObject monsterCurrentEquip;
     #endregion
@@ -90,6 +95,10 @@ public class EquipmentManager : MonoBehaviour
     private void loadUserEquip()
     {
         // 유저의 데이터 로드 후 적용
+    }
+    public float getCurrentDamage()
+    {
+        return userCurrentWeapon.Spec.WeaponDamage;
     }
     #endregion
 }

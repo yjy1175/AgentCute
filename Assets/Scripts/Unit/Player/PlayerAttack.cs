@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerAttack : IAttack
 {
-    public GameObject mAutoAttack;
     public Button GBtn;
     public Button UBtn;
     // Start is called before the first frame update
@@ -101,11 +100,98 @@ public class PlayerAttack : IAttack
     {
         Vector3 temp = new Vector3(1, 1, 0);//TO-DO 플레이어 방향에 따라 나갈수있도록 value 제공해주는 api만들기
         GameObject obj = ObjectPoolManager.Instance.EnableGameObject(_name);
-        Debug.Log(MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position));
         obj.GetComponent<Projectile>().setEnable(MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position)
                 , firePosition.transform.position, _angle);
         yield return new WaitForSeconds(mAutoAttackSpeed);
         obj.GetComponent<Projectile>().setDisable();
         ObjectPoolManager.Instance.DisableGameObject(obj);
+    }
+
+    public void clickGeneralSkillBtn()
+    {
+        GBtn.gameObject.SetActive(false);
+        StartCoroutine(useSkill(GBtn, SkillManager.Instance.CurrentGeneralSkill));
+    }
+    public void clickUltimateSkillBtn()
+    {
+        UBtn.gameObject.SetActive(false);
+        StartCoroutine(useSkill(UBtn, SkillManager.Instance.CurrentUltimateSkill));
+    }
+
+    IEnumerator useSkill(Button _btn, Skill _skill)
+    {
+        int count = _skill.Spec.SkillClickCount;
+        // 한번 클릭
+        if (count == 1)
+        {
+            launchSkill(_skill);
+            yield return new WaitForSeconds(_skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex]);
+            _btn.gameObject.SetActive(true);
+        }
+        // 무한 클릭(시간으로 관리)
+        else if(count == -1)
+        {
+            // Todo : 쿨타임동안에는 무한발사가 가능한 스킬의 경우 
+        }
+        // 클릭횟수가 정해져 있는 경우
+        else
+        {
+            // 마지막 클릭일 경우
+            if(count - 1 == _skill.CurrentUseCount)
+            {
+                _skill.CurrentCoolTimeIndex++;
+                launchSkill(_skill);
+                yield return new WaitForSeconds(_skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex]);
+                _skill.CurrentCoolTimeIndex = 0;
+                _btn.gameObject.SetActive(true);
+            }
+            else
+            {
+                _skill.CurrentUseCount++;
+                launchSkill(_skill);
+                yield return new WaitForSeconds(_skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex]);
+                _btn.gameObject.SetActive(true);
+            }
+        }
+    }
+
+
+    // 우선 발사체가 한개인 경우만 구현
+    private void launchSkill(Skill _skill)
+    {
+        int count = _skill.Spec.SkillCount;
+        if(count == 1)
+        {
+            int launchCount = TileDict[_skill][0].Spec.Count + Projectile.AddProjectilesCount;
+            int angle = TileDict[_skill][0].Spec.Angle;
+            for (int j = 0; j < launchCount; j++)
+            {
+                StartCoroutine(
+                    AutoAttackCorutines(
+                        (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * j),
+                        TileDict[_skill][0].gameObject.name));
+            }
+        }
+        else
+        {
+            StartCoroutine(multiLuanch(_skill, count));
+        }
+    }
+
+    IEnumerator multiLuanch(Skill _skill, int _count)
+    {
+        for (int i = 0; i < _count; i++)
+        {
+            int launchCount = TileDict[_skill][0].Spec.Count + Projectile.AddProjectilesCount;
+            int angle = TileDict[_skill][0].Spec.Angle;
+            for (int j = 0; j < launchCount; j++)
+            {
+                StartCoroutine(
+                    AutoAttackCorutines(
+                        (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * j),
+                        TileDict[_skill][0].gameObject.name));
+            }
+            yield return new WaitForSeconds(0.4f);
+        }
     }
 }

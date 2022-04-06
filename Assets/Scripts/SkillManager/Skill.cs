@@ -5,6 +5,7 @@ using UnityEngine;
 public class Skill : MonoBehaviour
 {
     #region variables
+
     [SerializeField]
     private SkillSpec spec = new SkillSpec();
     public SkillSpec Spec
@@ -12,7 +13,18 @@ public class Skill : MonoBehaviour
         get { return spec; }
         set { spec = value; }
     }
-
+    private int currentUseCount = 0;
+    public int CurrentUseCount
+    {
+        get { return currentUseCount; }
+        set { currentUseCount = value; }
+    }
+    private int currentCoolTimeIndex = 0;
+    public int CurrentCoolTimeIndex
+    {
+        get { return currentCoolTimeIndex; }
+        set { currentCoolTimeIndex = value; }
+    }
     #endregion
 
     #region method
