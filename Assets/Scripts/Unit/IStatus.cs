@@ -32,4 +32,10 @@ public abstract class IStatus : MonoBehaviour
         }
     }
 
+    public virtual int Speed
+    {
+        get { return Speed; }
+        set { mSpeed = value; }
+    }
+
 }
