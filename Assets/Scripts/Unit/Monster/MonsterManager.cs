@@ -55,6 +55,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
         Vector3 dir = new Vector3(0, 0, 0);
         GameObject[] AllEnemy = GameObject.FindGameObjectsWithTag("Enemy");
         float diff = 99999999;
+
         foreach (GameObject enemy in AllEnemy)
         {
             float tempDiff = Mathf.Abs(enemy.transform.position.x - Pos.x) + Mathf.Abs(enemy.transform.position.y - Pos.y);
@@ -68,6 +69,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
         }
         return dir;
     }
+
 
 
     /*

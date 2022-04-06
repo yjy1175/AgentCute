@@ -691,9 +691,13 @@ MonoBehaviour:
   - {fileID: 174243398}
   - {fileID: 1431315576}
   TempMonster:
-  - {fileID: 457530098817530477, guid: 68db515ca0809a846965db412017bbec, type: 3}
-  - {fileID: 6224973903393849877, guid: aebed229b22a7944abe97af1ff7adfaa, type: 3}
-  - {fileID: 1597572883569682438, guid: bfdea34cbc89e9b4b8f1bd73f59da2df, type: 3}
+  - {fileID: 2402880713698910942, guid: b316127afaa0c364fa4f3f512bcaac63, type: 3}
+  - {fileID: 607600207061063460, guid: 174bd7a6abf8b884da3c9a878c759f22, type: 3}
+  - {fileID: 8665364517176831368, guid: a5ed992fd16a1354aa0a971fd172b9f8, type: 3}
+  - {fileID: 2699543621885345178, guid: 2ff0628649be73740ba7187ca97cabc5, type: 3}
+  - {fileID: 1109854676447758817, guid: 8a1ca9527a11da94bb3d13fa9163aff8, type: 3}
+  - {fileID: 2446323715619086419, guid: fb8228e16213124489dba4d54a63219f, type: 3}
+  - {fileID: 6925351037122389809, guid: 8948370812fc04a45bf54be0b64a514b, type: 3}
 --- !u!1 &174243397
 GameObject:
   m_ObjectHideFlags: 0

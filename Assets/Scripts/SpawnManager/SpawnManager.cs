@@ -50,8 +50,6 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         {
             ObjectPoolManager.Instance.CreateDictTable(TempMonster[i], 5, 5);
         }
-
-        MonsterManager.MonsterData a;
     }
 
     // Update is called once per frame
