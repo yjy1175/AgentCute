@@ -38,16 +38,22 @@ public abstract class Projectile : MonoBehaviour
     }
     #endregion
 
-    void OnCollisionEnter2D(Collision2D collision)
+    //void OnTrrigerEnter2D(Collider2D collision)
+    //{
+    //    if (gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Enemy"))
+    //    {
+    //        collision.gameObject.GetComponent<IStatus>().Hp -= damage;
+    //        ObjectPoolManager.Instance.DisableGameObject(gameObject);
+    //    }
+    //}
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (gameObject.CompareTag("PlayerProjectile") &&  collision.gameObject.CompareTag("Enemy"))
+        if (gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<IStatus>().Hp -= damage;
             ObjectPoolManager.Instance.DisableGameObject(gameObject);
         }
     }
-
-
 
     #region method
     protected abstract void destroySelf();
