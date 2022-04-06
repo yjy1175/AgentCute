@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class PlayerMove : IMove
 {
+
+    private Rigidbody2D rigidbody2D;
+
+    void Awake()
+    {
+        rigidbody2D = GameObject.Find("PlayerObject").GetComponent<Rigidbody2D>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +31,14 @@ public class PlayerMove : IMove
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
+        
+        //TO-DO : 이동방식은 어떻게 이루어지게?
         mDir.Set(h, v, 0);
-        transform.position += mDir * mSpeed * Time.deltaTime;
+        //transform.position += mDir * mSpeed * Time.deltaTime;
+
+        rigidbody2D.velocity = mDir * mSpeed;
+
+
 
         //TO-DO : 유저의 움직임에 따라 카메라도 따라다니도록 수정 필요
         Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);

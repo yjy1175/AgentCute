@@ -75,7 +75,6 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                     setMonsterData(ref monster);
                     if (monster != null)
                     {
-                        Debug.Log(monster.name);
                         int index = UnityEngine.Random.Range(0, spawnPoints.Length);
                         monster.transform.position = spawnPoints[index].position;
                         monster.SetActive(true);
@@ -98,10 +97,11 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     private void setMonsterData(ref GameObject monster)
     {
         /*
-         *  TO-Do : 값 가져오는 형태는 아래와 같은 방식으로 진행할 예정. 구조가 변할수 있기때문에 일단 당장 필요한 hp만 짜놓음.
+         *  TO-Do : 값 가져오는 형태는 아래와 같은 방식으로 진행할 예정. 구조가 변할수 있기때문에 일단 당장 필요한 hp,attack만 짜놓음.
          */
         MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(monster.name);
-        monster.GetComponent<MonsterStatus>().HP = md.monsterHp;
+        monster.GetComponent<MonsterStatus>().Hp = md.monsterHp;
+        monster.GetComponent<MonsterAttack>().CloseAttackPower = md.closeAttackPower;
     }
 
     private void InitAllSpawnData()

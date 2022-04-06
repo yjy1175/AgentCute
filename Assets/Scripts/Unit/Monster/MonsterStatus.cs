@@ -10,13 +10,10 @@ public class MonsterStatus : IStatus
     public int mMonsterSize;
     public string mMmonsterName;
     public string mMmonsterGrade;
-    public int mCloseAttackPower;
-    public int mCloseAttackRange;
-    public int mStandoffAttackPower;
-    public int mStandoffAttackRange;
     //public int MonsterAI;
     public int monsterExp;
 
+     
     public enum MonsterType
     {
         Normal,
@@ -33,4 +30,5 @@ public class MonsterStatus : IStatus
     {
         
     }
+
 }

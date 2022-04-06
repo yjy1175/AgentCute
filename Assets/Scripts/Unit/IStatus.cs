@@ -21,10 +21,15 @@ public abstract class IStatus : MonoBehaviour
         
     }
 
-    public int HP
+    public virtual int Hp
     {
+        /*
+         *  TO-DO :player Attack에서 있어서 동기화가 되는지 확인필요
+         */
         get { return mHp; }
-        set { mHp = value; }
+        set {
+            mHp = Mathf.Max(0, value);
+        }
     }
 
 }
