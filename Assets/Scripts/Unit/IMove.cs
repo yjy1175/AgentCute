@@ -20,7 +20,7 @@ public abstract class IMove : MonoBehaviour
 
 
     protected virtual void UpdateMove() { }
-    protected float propSpeed
+    public float Speed
     {
         get { return mSpeed; }
         set { mSpeed = value; }

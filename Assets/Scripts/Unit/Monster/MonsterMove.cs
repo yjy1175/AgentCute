@@ -10,7 +10,6 @@ public class MonsterMove : IMove
         /*
          * TO-DO : MonsterManager로부터 읽어오도록 수정 필요
         */
-        mSpeed = 1f;
     }
 
     // Update is called once per frame

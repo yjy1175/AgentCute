@@ -23,7 +23,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
      * TO-DO Spawn_Map은 Enum으로 해서 관리 뭐뭐나올지 모르니 일단 skip
      */
 
-    public List<SpawnData> dataSet;
+    public List<SpawnData> dataSetNormal;
+    public List<SpawnData> dataSetBoss;
     private float currentTime = 0f;
 
     public Transform[] spawnPoints;
@@ -50,26 +51,25 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         {
             ObjectPoolManager.Instance.CreateDictTable(TempMonster[i], 5, 5);
         }
+        spawnBossMonster();
     }
 
     // Update is called once per frame
     void Update()
     {
-        SpawnMonster();
-
-
+        SpawnNormalMonster();
     }
 
-    private void SpawnMonster()
+    private void SpawnNormalMonster()
     {
-        for (int i = 0; i < dataSet.Count; i++)
+        for (int i = 0; i < dataSetNormal.Count; i++)
         {
-            SpawnData temp = dataSet[i];
-            if (dataSet[i].realStartSpawnTime < currentTime && dataSet[i].currentTime > dataSet[i].spawnTime)
+            SpawnData temp = dataSetNormal[i];
+            if (dataSetNormal[i].realStartSpawnTime < currentTime && dataSetNormal[i].currentTime > dataSetNormal[i].spawnTime)
             {
-                for (int j = 0; j < dataSet[i].spawnNumber; j++)
+                for (int j = 0; j < dataSetNormal[i].spawnNumber; j++)
                 {
-                    GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSet[i].spawnMonster);
+                    GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetNormal[i].spawnMonster);
                     setMonsterData(ref monster);
                     if (monster != null)
                     {
@@ -85,7 +85,15 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
              */
             currentTime += Time.deltaTime;
             temp.currentTime += Time.deltaTime;
-            dataSet[i] = temp;
+            dataSetNormal[i] = temp;
+        }
+    }
+
+    private void spawnBossMonster()
+    {
+        for (int i = 0; i < dataSetBoss.Count; i++)
+        {
+            StartCoroutine(spawnBoss(i));
         }
     }
 
@@ -100,11 +108,13 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(monster.name);
         monster.GetComponent<MonsterStatus>().Hp = md.monsterHp;
         monster.GetComponent<MonsterAttack>().CloseAttackPower = md.closeAttackPower;
+        monster.GetComponent<MonsterMove>().Speed = md.monsterSpeed;
     }
 
     private void InitAllSpawnData()
     {
-        dataSet = new List<SpawnData>();
+        dataSetNormal = new List<SpawnData>();
+        dataSetBoss = new List<SpawnData>();
         List<Dictionary<string, object>> spawnData = CSVReader.Read("CSVFile\\SpawnData");
         for (int idx = 0; idx < spawnData.Count; idx++)
         {
@@ -120,9 +130,28 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             ds.realStartSpawnTime = UnityEngine.Random.Range(ds.spawnStartTime_1, ds.spawnStartTime_2);
             ds.spawnTime = (int)spawnData[idx]["Spawn_Time"];
             ds.currentTime = 0f;
-            dataSet.Add(ds);
+            if (ds.spawnTime == 0)
+            {
+                dataSetBoss.Add(ds);
+            }
+            else
+            {
+                dataSetNormal.Add(ds);
+            }
         }
     }
 
 
+    IEnumerator spawnBoss(int i)
+    {
+        yield return new WaitForSeconds(dataSetBoss[i].realStartSpawnTime);
+        GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetBoss[i].spawnMonster);
+        setMonsterData(ref monster);
+        if (monster != null)
+        {
+            int index = UnityEngine.Random.Range(0, spawnPoints.Length);
+            monster.transform.position = spawnPoints[index].position;
+            monster.SetActive(true);
+        }
+    }
 }

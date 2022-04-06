@@ -29,7 +29,9 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
         //public int MonsterDrop2;
         //public int MonsterDrop3;
     }
-    public Dictionary<string, MonsterData> dataSet;
+
+    private Dictionary<string, MonsterData> dataSet;
+
     private void Awake()
     {
         InitAllSpawnData();
@@ -83,8 +85,6 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
          * */
         return dataSet[str];
     }
-
-
 
     /*
      * 현재 맵에 따른 몬스터 List를 return 해준다. 
