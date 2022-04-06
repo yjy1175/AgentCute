@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileManager : MonoBehaviour
+public class ProjectileManager : SingleToneMaker<ProjectileManager>
 {
     #region variable
     // key : s, c, l, r(타입 첫글자) value :  <key : 0~(타입 다음글자), value = 발사체 오브젝트>
-    public StringIntGameObject allProjectiles;
+    public StringGameObject allProjectiles;
 
     #endregion
     private void Start()
@@ -16,39 +16,32 @@ public class ProjectileManager : MonoBehaviour
     }
     private void Update()
     {
-#if DEBUG
-#endif
+
     }
     public void initAllProjectiles()
     {
+        // Projectiles 프리펩을 불러온다
+        GameObject[] projectilesList = Resources.LoadAll<GameObject>("Prefabs\\Projectiles");
+        // Dic에 저장해둔다.
+        foreach (GameObject projectile in projectilesList)
+        {
+            allProjectiles.Add(projectile.name, projectile);
+        }
         // 모든 발사체 오브젝트 초기화
         List<Dictionary<string, object>> projectilesData = CSVReader.Read("CSVFile\\Projectile");
-        int i = 0;
         Projectile item;
-        foreach (string key0 in allProjectiles.Keys)
+        for(int i = 0; i < projectilesList.Length; i++)
         {
-            for (int j = 0; j < allProjectiles[key0].Count; j++)
-            {
-                item = allProjectiles[key0][j].GetComponent<Projectile>();
-                dataParser(item, ref projectilesData, i + j);
-            }
-            i += allProjectiles[key0].Count;
+            item = allProjectiles[projectilesData[i]["ProjectileType"].ToString()].GetComponent<Projectile>();
+            item.Spec.Type = projectilesData[i]["ProjectileType"].ToString();
+            item.Spec.Speed = float.Parse(projectilesData[i]["ProjectileSpeed"].ToString());
+            item.Spec.ProjectileDamage = float.Parse(projectilesData[i]["ProjectileDamage"].ToString());
+            item.Spec.Count = int.Parse(projectilesData[i]["ProjectileCount"].ToString());
+            item.Spec.Angle = int.Parse(projectilesData[i]["ProjectileAngle"].ToString());
+            item.Spec.SpawnTime = float.Parse(projectilesData[i]["ProjectileSpawnTime"].ToString());
+            item.Spec.MaxPassCount = int.Parse(projectilesData[i]["ProjectileMaxPassCount"].ToString());
         }
     }
-    private void dataParser(Projectile item, ref List<Dictionary<string, object>> projectilesData, int index)
-    {
-        item.Spec.Type = projectilesData[index]["ProjectileType"].ToString();
-        item.Spec.TypeName = projectilesData[index]["ProjectileTypeName"].ToString();
-        item.Spec.EquipName = projectilesData[index]["ProjectileName"].ToString();
-        item.Spec.EquipDesc = projectilesData[index]["ProjectileDesc"].ToString();
-        // item.Spec.EquipRank = int.Parse(projectilesData[index]["ProjectileRank"].ToString());
-        item.Spec.Speed = float.Parse(projectilesData[index]["ProjectileSpeed"].ToString());
-        item.Spec.Count = int.Parse(projectilesData[index]["ProjectileCount"].ToString());
-        item.Spec.Angle = int.Parse(projectilesData[index]["ProjectileAngle"].ToString());
-        item.Spec.SpawnTime = float.Parse(projectilesData[index]["ProjectileSpawnTime"].ToString());
-        item.Spec.MaxPassCount = int.Parse(projectilesData[index]["ProjectileMaxPassCount"].ToString());
-    }
-
     /*
      * 레벨업에 따른 발사체 추가시 필요한 api입니다.
      * 전체적으로 모든 발사체를 추가시킬때 필요

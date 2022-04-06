@@ -26,7 +26,7 @@ public class WeaponSpec : EquipSpec
 
     [SerializeField]
     private string equipName;
-    public override string EquipName
+    public override string Name
     {
         get { return equipName; }
         set { equipName = value; }
@@ -34,7 +34,7 @@ public class WeaponSpec : EquipSpec
 
     [SerializeField]
     private string equipDesc;
-    public override string EquipDesc
+    public override string Desc
     {
         get { return equipDesc; }
         set { equipDesc = value; }
@@ -42,7 +42,7 @@ public class WeaponSpec : EquipSpec
 
     [SerializeField]
     private int equipRank;
-    public override int EquipRank
+    public override int Rank
     {
         get { return equipRank; }
         set { equipRank = value; }
@@ -73,47 +73,14 @@ public class WeaponSpec : EquipSpec
     }
 
     [SerializeField]
-    private string attackProjectile;
-    public string AttackProjectile
+    private float weaponAddSpeed;
+    public float WeaponAddSpeed
     {
-        get { return attackProjectile; }
-        set { attackProjectile = value; }
+        get { return weaponAddSpeed; }
+        set { weaponAddSpeed = value; }
     }
-
-    [SerializeField]
-    private List<Skill> generalSkillList = new List<Skill>();
-    [SerializeField]
-    private List<Skill> ultimateSkillList = new List<Skill>();
     #endregion
     #region method
-    public List<Skill> getGeneralSkill()
-    {
-        return generalSkillList;
-    }
-    public void addSkillList(string _skillName, string _skillDesc, string _projectileType, int _coolTime, int _coefficient, bool _isLocked, Skill.SkillType _type)
-    {
-        Skill newSkill = new Skill();
-        newSkill.SkillName = _skillName;
-        newSkill.SkillDesc = _skillDesc;
-        newSkill.ProjectileType = _projectileType;
-        newSkill.CoolTime = _coolTime;
-        newSkill.Coefficient = _coefficient;
-        newSkill.IsLocked = _isLocked;
-
-        switch (_type) 
-        {
-            case Skill.SkillType.GENERAL:
-                generalSkillList.Add(newSkill);
-                break;
-            case Skill.SkillType.ULTIMATE:
-                ultimateSkillList.Add(newSkill);
-                break;
-        }
-    }
-    public List<Skill> getUltimateSkill()
-    {
-        return ultimateSkillList;
-    }
     #endregion
 }
 

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class IAttack : MonoBehaviour
 {
-    //TO-Do value가 Projectile로 변경 
-    protected Dictionary<string, GameObject> TileDict;
+    //TO-Do value가 List<Projectile>로 변경 
+    protected SkillDic TileDict;
     public GameObject firePosition;
 
     protected float mAutoAttackSpeed;
@@ -24,9 +24,9 @@ public class IAttack : MonoBehaviour
     }
 
       
-    public void setTileDict(string str, GameObject obj)
+    public void setTileDict(Skill _skill, List<Projectile> _projectiles)
     {
-        TileDict.Add(str, obj);
+        TileDict.Add(_skill, _projectiles);
     }
 
     //TO-DO property 문법 set시 value가 Dictionanry일경우 어떻게 넣는지 확인하고 가능하면 set함수 교체

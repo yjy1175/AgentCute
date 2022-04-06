@@ -5,6 +5,7 @@ using UnityEditor;
 using System.Reflection;
 using System;
 [CustomPropertyDrawer(typeof(IntGameObject))]
+[CustomPropertyDrawer(typeof(SkillDic))]
 [CustomPropertyDrawer(typeof(StringGameObject))]
 [CustomPropertyDrawer(typeof(IntStringGameObject))]
 [CustomPropertyDrawer(typeof(StringIntGameObject))]

@@ -1,0 +1,6 @@
+WeaponType,WeaponTypeName,WeaponName,WeaponDesc,WeaponATK,WeaponSPD
+bg00,보우건,견습용 보우건,견습용 보우건,5,0
+bg01,보우건,견고한 보우건,견고한 보우건,10,0
+bg02,보우건,사일런서,사일런서,18,0
+bg03,보우건,데쓰쉐도우,데쓰쉐도우,24,0
+bg04,보우건,알바레스트,알바레스트,30,0.15

@@ -24,7 +24,7 @@ public class ProjectileSpec : EquipSpec
 
     [SerializeField]
     private string equipName;
-    public override string EquipName
+    public override string Name
     {
         get { return equipName; }
         set { equipName = value; }
@@ -32,7 +32,7 @@ public class ProjectileSpec : EquipSpec
 
     [SerializeField]
     private string equipDesc;
-    public override string EquipDesc
+    public override string Desc
     {
         get { return equipDesc; }
         set { equipDesc = value; }
@@ -40,7 +40,7 @@ public class ProjectileSpec : EquipSpec
 
     [SerializeField]
     private int equipRank;
-    public override int EquipRank
+    public override int Rank
     {
         get { return equipRank; }
         set { equipRank = value; }

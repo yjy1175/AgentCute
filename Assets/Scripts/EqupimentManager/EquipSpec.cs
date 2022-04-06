@@ -15,17 +15,17 @@ public abstract class EquipSpec
         get;
         set;
     }
-    public abstract string EquipName
+    public abstract string Name
     {
         get;
         set;
     }
-    public abstract string EquipDesc
+    public abstract string Desc
     {
         get;
         set;
     }
-    public abstract int EquipRank
+    public abstract int Rank
     {
         get;
         set;
