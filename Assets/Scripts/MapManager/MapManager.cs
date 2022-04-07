@@ -9,6 +9,7 @@ public class MapManager : SingleToneMaker<MapManager>
     private Vector3 nowPos;
     private int baseY = 19;
     private int baseX = 25;
+    bool isChange = false;
     #endregion
 
     #region method
@@ -22,6 +23,7 @@ public class MapManager : SingleToneMaker<MapManager>
     void Update()
     {
         moveMap();
+        Debug.Log(nowPos);
     }
 
     private void initMapList()
@@ -41,8 +43,8 @@ public class MapManager : SingleToneMaker<MapManager>
             int y = int.Parse(pos[0]);
             int x = int.Parse(pos[1]);
             tileMapList[y, x] = map;
-            Debug.Log("(" + y + "," + x + ") : " + tileMapList[y, x].name);
         }
+        isChange = false;
     }
 
     // 플레이어의 위치에 따라 맵을 이동시켜줍니다.
@@ -55,91 +57,92 @@ public class MapManager : SingleToneMaker<MapManager>
         float changeY = playerPos.y - nowPos.y;
         float changeX = playerPos.x - nowPos.x;
         // 맵이동이 있었는지 판별
-        bool isChange = true;
-        // 상
-        if (changeY >= baseY)
+        if (!isChange)
         {
-            moveTileMap(2, 0, 3, 0);
-            moveTileMap(2, 1, 3, 0);
-            moveTileMap(2, 2, 3, 0);
-            nowPos.y += baseY;
-            tileMapList[2, 0].name = "TilemapSet/" + 0 + "," + 0;
-            tileMapList[2, 1].name = "TilemapSet/" + 0 + "," + 1;
-            tileMapList[2, 2].name = "TilemapSet/" + 0 + "," + 2;
-            tileMapList[1, 0].name = "TilemapSet/" + 2 + "," + 0;
-            tileMapList[1, 1].name = "TilemapSet/" + 2 + "," + 1;
-            tileMapList[1, 2].name = "TilemapSet/" + 2 + "," + 2;
-            tileMapList[0, 0].name = "TilemapSet/" + 1 + "," + 0;
-            tileMapList[0, 1].name = "TilemapSet/" + 1 + "," + 1;
-            tileMapList[0, 2].name = "TilemapSet/" + 1 + "," + 2;
+            // 상
+            if (changeY >= baseY)
+            {
+                isChange = true;
+                moveTileMap(2, 0, 3, 0);
+                moveTileMap(2, 1, 3, 0);
+                moveTileMap(2, 2, 3, 0);
+                nowPos.y += baseY;
+                tileMapList[2, 0].name = "TilemapSet/" + 0 + "," + 0;
+                tileMapList[2, 1].name = "TilemapSet/" + 0 + "," + 1;
+                tileMapList[2, 2].name = "TilemapSet/" + 0 + "," + 2;
+                tileMapList[1, 0].name = "TilemapSet/" + 2 + "," + 0;
+                tileMapList[1, 1].name = "TilemapSet/" + 2 + "," + 1;
+                tileMapList[1, 2].name = "TilemapSet/" + 2 + "," + 2;
+                tileMapList[0, 0].name = "TilemapSet/" + 1 + "," + 0;
+                tileMapList[0, 1].name = "TilemapSet/" + 1 + "," + 1;
+                tileMapList[0, 2].name = "TilemapSet/" + 1 + "," + 2;
+            }
+            // 하
+            else if (changeY <= -baseY)
+            {
+                isChange = true;
+                moveTileMap(0, 0, -3, 0);
+                moveTileMap(0, 1, -3, 0);
+                moveTileMap(0, 2, -3, 0);
+                nowPos.y -= baseY;
+                tileMapList[0, 0].name = "TilemapSet/" + 2 + "," + 0;
+                tileMapList[0, 1].name = "TilemapSet/" + 2 + "," + 1;
+                tileMapList[0, 2].name = "TilemapSet/" + 2 + "," + 2;
+                tileMapList[1, 0].name = "TilemapSet/" + 0 + "," + 0;
+                tileMapList[1, 1].name = "TilemapSet/" + 0 + "," + 1;
+                tileMapList[1, 2].name = "TilemapSet/" + 0 + "," + 2;
+                tileMapList[2, 0].name = "TilemapSet/" + 1 + "," + 0;
+                tileMapList[2, 1].name = "TilemapSet/" + 1 + "," + 1;
+                tileMapList[2, 2].name = "TilemapSet/" + 1 + "," + 2;
+            }
+            // 좌
+            else if (changeX <= -baseX)
+            {
+                isChange = true;
+                moveTileMap(0, 2, 0, -3);
+                moveTileMap(1, 2, 0, -3);
+                moveTileMap(2, 2, 0, -3);
+                nowPos.x -= baseX;
+                tileMapList[0, 2].name = "TilemapSet/" + 0 + "," + 0;
+                tileMapList[1, 2].name = "TilemapSet/" + 1 + "," + 0;
+                tileMapList[2, 2].name = "TilemapSet/" + 2 + "," + 0;
+                tileMapList[0, 1].name = "TilemapSet/" + 0 + "," + 2;
+                tileMapList[1, 1].name = "TilemapSet/" + 1 + "," + 2;
+                tileMapList[2, 1].name = "TilemapSet/" + 2 + "," + 2;
+                tileMapList[0, 0].name = "TilemapSet/" + 0 + "," + 1;
+                tileMapList[1, 0].name = "TilemapSet/" + 1 + "," + 1;
+                tileMapList[2, 0].name = "TilemapSet/" + 2 + "," + 1;
+            }
+            // 우
+            else if (changeX >= baseX)
+            {
+                isChange = true;
+                moveTileMap(0, 0, 0, 3);
+                moveTileMap(1, 0, 0, 3);
+                moveTileMap(2, 0, 0, 3);
+                nowPos.x += baseX;
+                tileMapList[0, 0].name = "TilemapSet/" + 0 + "," + 2;
+                tileMapList[1, 0].name = "TilemapSet/" + 1 + "," + 2;
+                tileMapList[2, 0].name = "TilemapSet/" + 2 + "," + 2;
+                tileMapList[0, 1].name = "TilemapSet/" + 0 + "," + 0;
+                tileMapList[1, 1].name = "TilemapSet/" + 1 + "," + 0;
+                tileMapList[2, 1].name = "TilemapSet/" + 2 + "," + 0;
+                tileMapList[0, 2].name = "TilemapSet/" + 0 + "," + 1;
+                tileMapList[1, 2].name = "TilemapSet/" + 1 + "," + 1;
+                tileMapList[2, 2].name = "TilemapSet/" + 2 + "," + 1;
+            }
         }
-        // 하
-        else if (changeY <= -baseY)
-        {
-            moveTileMap(0, 0, -3, 0);
-            moveTileMap(0, 1, -3, 0);
-            moveTileMap(0, 2, -3, 0);
-            nowPos.y -= baseY;
-            tileMapList[0, 0].name = "TilemapSet/" + 2 + "," + 0;
-            tileMapList[1, 1].name = "TilemapSet/" + 2 + "," + 1;
-            tileMapList[2, 2].name = "TilemapSet/" + 2 + "," + 2;
-            tileMapList[1, 0].name = "TilemapSet/" + 0 + "," + 0;
-            tileMapList[1, 1].name = "TilemapSet/" + 0 + "," + 1;
-            tileMapList[1, 2].name = "TilemapSet/" + 0 + "," + 2;
-            tileMapList[2, 0].name = "TilemapSet/" + 1 + "," + 0;
-            tileMapList[2, 1].name = "TilemapSet/" + 1 + "," + 1;
-            tileMapList[2, 2].name = "TilemapSet/" + 1 + "," + 2;
-        }
-        // 좌
-        else if (changeX <= -baseX)
-        {
-            moveTileMap(0, 2, 0, -3);
-            moveTileMap(1, 2, 0, -3);
-            moveTileMap(2, 2, 0, -3);
-            nowPos.x -= baseX;
-            tileMapList[0, 2].name = "TilemapSet/" + 0 + "," + 0;
-            tileMapList[1, 2].name = "TilemapSet/" + 1 + "," + 0;
-            tileMapList[2, 2].name = "TilemapSet/" + 2 + "," + 0;
-            tileMapList[0, 1].name = "TilemapSet/" + 0 + "," + 2;
-            tileMapList[1, 1].name = "TilemapSet/" + 1 + "," + 2;
-            tileMapList[2, 1].name = "TilemapSet/" + 2 + "," + 2;
-            tileMapList[0, 0].name = "TilemapSet/" + 0 + "," + 1;
-            tileMapList[1, 0].name = "TilemapSet/" + 1 + "," + 1;
-            tileMapList[2, 0].name = "TilemapSet/" + 2 + "," + 1;
-        }
-        // 우
-        else if (changeX >= baseX)
-        {
-            moveTileMap(0, 0, 0, 3);
-            moveTileMap(1, 0, 0, 3);
-            moveTileMap(2, 0, 0, 3);
-            nowPos.x += baseX;
-            tileMapList[0, 0].name = "TilemapSet/" + 0 + "," + 2;
-            tileMapList[1, 0].name = "TilemapSet/" + 1 + "," + 2;
-            tileMapList[2, 0].name = "TilemapSet/" + 2 + "," + 2;
-            tileMapList[0, 1].name = "TilemapSet/" + 0 + "," + 0;
-            tileMapList[1, 1].name = "TilemapSet/" + 0 + "," + 0;
-            tileMapList[2, 1].name = "TilemapSet/" + 0 + "," + 0;
-            tileMapList[0, 2].name = "TilemapSet/" + 1 + "," + 1;
-            tileMapList[1, 2].name = "TilemapSet/" + 1 + "," + 1;
-            tileMapList[2, 2].name = "TilemapSet/" + 1 + "," + 1;
-        }
-        else
-        {
-            isChange = false;
-        }
-
         // 만약 변화가 있었다면 타일 배열을 초기화 해준다.
         if (isChange)
         {
             initMapList();
-            isChange = true;
         }
     }
 
     private void moveTileMap(int _y, int _x, int cy, int cx)
     {
-        tileMapList[_y, _x].position = tileMapList[_y, _x].position + new Vector3(baseX * cx, baseY * cy, 0);
+        Transform moveTilemap = tileMapList[_y, _x];
+        moveTilemap.position = moveTilemap.position + new Vector3(baseX * cx, baseY * cy, 0);
     }
     #endregion
 }

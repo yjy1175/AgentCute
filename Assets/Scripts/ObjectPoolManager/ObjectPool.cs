@@ -61,7 +61,7 @@ public class ObjectPool
          */
         else if (objectPool.Count <= 0 && overAllocateCount > 0)
         {
-            Debug.Log("오브젝트 전부 사용 " + overAllocateCount + "개를 추가합니다");
+            //Debug.Log("오브젝트 전부 사용 " + overAllocateCount + "개를 추가합니다");
             Allocate(overAllocateCount);
         }
 
