@@ -11,7 +11,7 @@ public class MessageBoxManager : SingleToneMaker<MessageBoxManager>
 
     public enum BoxType
     {
-        UserDamage,
+        PlayerDamage,
         MonsterDamage,
         AlertMessage
     }

@@ -38,10 +38,8 @@ public class MonsterAttack : IAttack
         {
             if (mAutoAttackCheckTime.Equals(0f))
             {
-                collision.gameObject.GetComponent<PlayerStatus>().Hp -= mCloseAttackPower;
+                collision.gameObject.GetComponent<PlayerStatus>().DamageHp = mCloseAttackPower;
                 mAutoAttackCheckTime = mAutoAttackSpeed;
-
-                MessageBoxManager.Instance.createMessageBox(MessageBoxManager.BoxType.UserDamage, mCloseAttackPower.ToString(), collision.gameObject.transform.position);
             }
         }
     }

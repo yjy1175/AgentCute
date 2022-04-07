@@ -55,7 +55,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
     public Vector3 GetNearestMonsterPos(Vector3 Pos)
     {
         Vector3 dir = new Vector3(0, 0, 0);
-        GameObject[] AllEnemy = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] AllEnemy = GameObject.FindGameObjectsWithTag("Monster");
         float diff = 99999999;
 
         foreach (GameObject enemy in AllEnemy)

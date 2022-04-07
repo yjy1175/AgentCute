@@ -24,6 +24,12 @@ public class PlayerStatus : IStatus
          * TO-DO : HP가 달경우는 Delegate를 통해 나중에 만들어질 UIManager로 보내서 체력상태를 보낼예정
          */
         hpUI.text = "User HP : " + mHp;
+        
+        if (Input.GetKey(KeyCode.Z))
+        {
+            StartCoroutine(InvincibilityCorutine(3f));
+        }
+        
 
     }
 
@@ -41,4 +47,6 @@ public class PlayerStatus : IStatus
     {
         
     }
+
+    
 }

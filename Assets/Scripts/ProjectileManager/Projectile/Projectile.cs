@@ -64,7 +64,7 @@ public abstract class Projectile : MonoBehaviour
     //}
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Enemy"))
+        if (gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Monster"))
         {
             // 包烹 备泅
             // -1 : 公茄 包烹
@@ -79,8 +79,7 @@ public abstract class Projectile : MonoBehaviour
                     ObjectPoolManager.Instance.DisableGameObject(gameObject);
                 }
             }
-            collision.gameObject.GetComponent<IStatus>().Hp -= damage;
-            MessageBoxManager.Instance.createMessageBox(MessageBoxManager.BoxType.MonsterDamage, damage.ToString(), collision.gameObject.transform.position);
+            collision.gameObject.GetComponent<IStatus>().DamageHp = damage;
         }
     }
 

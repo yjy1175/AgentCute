@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3843587081734455017}
   m_Layer: 6
   m_Name: GiantSlime3
-  m_TagString: Enemy
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

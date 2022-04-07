@@ -28,19 +28,11 @@ public class MonsterStatus : IStatus
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public override int Hp
-    {
-        get { return mHp; }
-        set
+        //TO-DO 위치를 바꿔야함 의존성을 없애기 위해 IStatus에서 DamageHp를 수정을했는데 Player는 ObjectPool이 없기때문에 그쪽에 Disable코드를 넣을수 없음
+        //어디서 disable 시킬지는 고민이 필요
+        if (mHp == 0)
         {
-            mHp = Mathf.Max(0, value);
-            if(mHp == 0)
-            {
-                ObjectPoolManager.Instance.DisableGameObject(gameObject);
-            }
+            ObjectPoolManager.Instance.DisableGameObject(gameObject);
         }
     }
 }
