@@ -56,15 +56,13 @@ public class Spawn : Projectile
         transform.position = _player + Vector3.right;
         target = _target;
         angle = setAngle(target - _player) + _angle;
-        transform.Rotate(0, 0, angle);
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         gameObject.SetActive(true);
         isActive = true;
     }
 
     public override void setDisable()
     {
-        transform.Rotate(0, 0, -angle);
-        gameObject.SetActive(false);
         isActive = false;
     }
     #endregion

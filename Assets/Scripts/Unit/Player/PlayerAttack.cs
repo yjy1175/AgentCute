@@ -16,7 +16,7 @@ public class PlayerAttack : IAttack
         getProjectiles();
         // 각 발사체의 오브젝트 풀 생성
         createObjectPool();
-        mAutoAttackSpeed = 1f; //TO-DO 임시로 넣어놓음. 실제 공속은 무엇?
+        mAutoAttackSpeed = 0.5f; //TO-DO 임시로 넣어놓음. 실제 공속은 무엇?
         mAutoAttackCheckTime = mAutoAttackSpeed;
     }
     // Update is called once per frame
@@ -100,12 +100,16 @@ public class PlayerAttack : IAttack
     {
         Vector3 temp = new Vector3(1, 1, 0);//TO-DO 플레이어 방향에 따라 나갈수있도록 value 제공해주는 api만들기
         GameObject obj = ObjectPoolManager.Instance.EnableGameObject(_name);
+        float keepTime = obj.GetComponent<Projectile>().Spec.SpawnTime;
         setProjectileData(ref obj);
         obj.GetComponent<Projectile>().setEnable(MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position)
                 , firePosition.transform.position, _angle);
-        yield return new WaitForSeconds(mAutoAttackSpeed);
-        obj.GetComponent<Projectile>().setDisable();
-        ObjectPoolManager.Instance.DisableGameObject(obj);
+        yield return new WaitForSeconds(keepTime);
+        if (obj.activeInHierarchy)
+        {
+            obj.GetComponent<Projectile>().setDisable();
+            ObjectPoolManager.Instance.DisableGameObject(obj);
+        }
     }
 
     private void setProjectileData(ref GameObject obj)

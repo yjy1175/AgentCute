@@ -64,15 +64,12 @@ public class Chase : Projectile
         transform.localScale = new Vector3(AddScaleCoefficient, AddScaleCoefficient, AddScaleCoefficient);
         transform.position = _player + ranDir();
         target = _target;
-        transform.Rotate(0, 0, angle);
         gameObject.SetActive(true);
         isActive = true;
     }
 
     public override void setDisable()
     {
-        transform.Rotate(0, 0, 0);
-        gameObject.SetActive(false);
         isActive = false;
     }
 

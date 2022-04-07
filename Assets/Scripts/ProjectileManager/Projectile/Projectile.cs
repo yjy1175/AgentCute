@@ -51,6 +51,7 @@ public abstract class Projectile : MonoBehaviour
         if (gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<IStatus>().Hp -= damage;
+            setDisable();
             ObjectPoolManager.Instance.DisableGameObject(gameObject);
             MessageBoxManager.Instance.createMessageBox(MessageBoxManager.BoxType.MonsterDamage, damage.ToString(), collision.gameObject.transform.position);
         }

@@ -13,13 +13,15 @@ public class Skill : MonoBehaviour
         get { return spec; }
         set { spec = value; }
     }
-    private int currentUseCount = 0;
+    [SerializeField]
+    private int currentUseCount;
     public int CurrentUseCount
     {
         get { return currentUseCount; }
         set { currentUseCount = value; }
     }
-    private int currentCoolTimeIndex = 0;
+    [SerializeField]
+    private int currentCoolTimeIndex;
     public int CurrentCoolTimeIndex
     {
         get { return currentCoolTimeIndex; }
@@ -31,7 +33,7 @@ public class Skill : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

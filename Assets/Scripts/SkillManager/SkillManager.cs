@@ -75,6 +75,8 @@ public class SkillManager : SingleToneMaker<SkillManager>
             item.Spec.getSkillCoolTime().Clear();
             for (int j = 0; j < cooltimes.Length; j++)
                 item.Spec.addSkillCoolTime(int.Parse(cooltimes[j]));
+            item.CurrentUseCount = 0;
+            item.CurrentCoolTimeIndex = 0;
         }
     }
     #endregion
