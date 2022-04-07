@@ -1169,7 +1169,7 @@ MonoBehaviour:
   costumes:
     m_keys: []
     m_values: []
-  userCurrentWeapon: {fileID: 0}
+  userCurrentWeapon: {fileID: 9093593723960678284, guid: 0f811a0ba10381a43be6659e3d8d4b5e, type: 3}
   userCurrentCostume: {fileID: 0}
   monsterCurrentEquip:
     m_keys: []

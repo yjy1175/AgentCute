@@ -7,6 +7,8 @@ public class PlayerAttack : IAttack
 {
     public Button GBtn;
     public Button UBtn;
+
+    private GameObject firstProjectile;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +47,7 @@ public class PlayerAttack : IAttack
                             (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * i), 
                             TileDict[SkillManager.Instance.CurrentBaseSkill][0].gameObject.name,
                             targetPos, 
-                            firePos));
+                            firePos, false));
                 }
             }
             mAutoAttackCheckTime = 0f;
@@ -92,10 +94,11 @@ public class PlayerAttack : IAttack
     * _angle : 추가 각도 설정입니다.
     * _name : 해당 발사체오브젝트의 name입니다.
     */
-    IEnumerator LaunchCorutines(float _angle, string _name, Vector3 _targetPos, Vector3 _firePos)
+    IEnumerator  LaunchCorutines(float _angle, string _name, Vector3 _targetPos, Vector3 _firePos, bool _notSingle)
     {
         Vector3 temp = new Vector3(1, 1, 0);//TO-DO 플레이어 방향에 따라 나갈수있도록 value 제공해주는 api만들기
         GameObject obj = ObjectPoolManager.Instance.EnableGameObject(_name);
+        if (_notSingle) firstProjectile = obj;
         float keepTime = obj.GetComponent<Projectile>().Spec.SpawnTime;
         setProjectileData(ref obj);
         obj.GetComponent<Projectile>().setEnable(_targetPos, _firePos, _angle);
@@ -113,7 +116,8 @@ public class PlayerAttack : IAttack
 
     private void setProjectileData(ref GameObject obj)
     {
-        obj.GetComponent<Projectile>().Damage = 50;
+        obj.GetComponent<Projectile>().Damage = 
+            (int)((50 + EquipmentManager.Instance.getCurrentDamage()) * obj.GetComponent<Projectile>().Spec.ProjectileDamage);
         obj.gameObject.tag = "PlayerProjectile";
     }
 
@@ -172,28 +176,41 @@ public class PlayerAttack : IAttack
     private void launchSkill(Skill _skill)
     {
         int count = _skill.Spec.SkillCount;
+        int projectileCount = TileDict[_skill].Count;
         Vector3 targetPos = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
         Vector3 firePos = firePosition.transform.position;
-        // 한번 발사일 경우
-        if (count == 1)
+        // 발사체가 한개인 경우
+        if(projectileCount <= 1)
         {
-            int launchCount = TileDict[_skill][0].Spec.Count + Projectile.AddProjectilesCount;
-            int angle = TileDict[_skill][0].Spec.Angle;
-            for (int j = 0; j < launchCount; j++)
+            // 한번 발사일 경우
+            if (count == 1)
             {
-                StartCoroutine(
-                    LaunchCorutines(
-                        (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * j),
-                        TileDict[_skill][0].gameObject.name,
-                        targetPos,
-                        firePos
-                        ));
+                int launchCount = TileDict[_skill][0].Spec.Count + Projectile.AddProjectilesCount;
+                int angle = TileDict[_skill][0].Spec.Angle;
+                for (int j = 0; j < launchCount; j++)
+                {
+                    StartCoroutine(
+                        LaunchCorutines(
+                            (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * j),
+                            TileDict[_skill][0].gameObject.name,
+                            targetPos,
+                            firePos, false
+                            ));
+                }
+            }
+            // 중복 발사일 경우
+            else
+            {
+                StartCoroutine(multiLuanch(_skill, count, targetPos, firePos));
             }
         }
-        // 중복 발사일 경우
+        // 발사체가 2개 이상인경우
+        // 1. 첫번째 발사체가 나가고 그자리에서 스폰
+        // 2. 나갈때 발사체가 2개 이상인 경우
         else
         {
-            StartCoroutine(multiLuanch(_skill, count, targetPos, firePos));
+            // 1. 첫번째 발사체가 나가고 그자리에서 스폰
+            StartCoroutine(notSingleProjectileLaunch(_skill, targetPos, firePos));
         }
     }
 
@@ -210,10 +227,42 @@ public class PlayerAttack : IAttack
                         (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * j),
                         TileDict[_skill][0].gameObject.name,
                         _target,
-                        _fire
+                        _fire, false
                         ));
             }
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.4f); // 추후에 여러번 발사일 경우 해당 데이터값 입력
+        }
+    }
+
+    // 하드 코딩 상태(발사체 2가지만 구현)
+    IEnumerator notSingleProjectileLaunch(Skill _skill, Vector3 _target, Vector3 _fire)
+    {
+        int launchCount;
+        int angle;
+        launchCount = TileDict[_skill][0].Spec.Count + Projectile.AddProjectilesCount;
+        angle = TileDict[_skill][0].Spec.Angle;
+        for (int j = 0; j < launchCount; j++)
+        {
+            StartCoroutine(
+                LaunchCorutines(
+                    (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * j),
+                    TileDict[_skill][0].gameObject.name,
+                    _target,
+                    _fire, true
+                    ));
+        }
+        yield return new WaitWhile(() => firstProjectile.activeInHierarchy);
+        launchCount = TileDict[_skill][1].Spec.Count + Projectile.AddProjectilesCount;
+        angle = TileDict[_skill][1].Spec.Angle;
+        for (int j = 0; j < launchCount; j++)
+        {
+            StartCoroutine(
+                LaunchCorutines(
+                    (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * j),
+                    TileDict[_skill][1].gameObject.name,
+                    _target,
+                    firstProjectile.GetComponent<Projectile>().MyPos, false
+                    ));
         }
     }
 }

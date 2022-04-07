@@ -71,6 +71,7 @@ public class Chase : Projectile
     public override void setDisable()
     {
         isActive = false;
+        myPos = transform.position;
     }
 
     private Vector3 ranDir()

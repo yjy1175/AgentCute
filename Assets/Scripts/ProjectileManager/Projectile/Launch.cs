@@ -49,6 +49,7 @@ public class Launch : Projectile
     public override void setDisable()
     {
         isActive = false;
+        myPos = transform.position;
     }
 
     // È°¼ºÈ­

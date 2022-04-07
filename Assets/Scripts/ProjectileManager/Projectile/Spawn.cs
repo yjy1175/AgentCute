@@ -53,7 +53,7 @@ public class Spawn : Projectile
     public override void setEnable(Vector3 _target, Vector3 _player, float _angle)
     {
         transform.localScale = new Vector3(AddScaleCoefficient, AddScaleCoefficient, AddScaleCoefficient);
-        transform.position = _player + Vector3.right;
+        transform.position = _player + (_target - _player).normalized;
         target = _target;
         angle = setAngle(target - _player) + _angle;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class EquipmentManager : MonoBehaviour
+public class EquipmentManager : SingleToneMaker<EquipmentManager>
 {
     // Start is called before the first frame update
     #region variable
@@ -51,7 +51,7 @@ public class EquipmentManager : MonoBehaviour
                     item.Spec.Name = weaponData[i]["WeaponName"].ToString();
                     item.Spec.Desc = weaponData[i]["WeaponDesc"].ToString();
                     //item.Spec.EquipRank = int.Parse(weaponData[i]["WeaponRank"].ToString());
-                    item.Spec.WeaponDamage = float.Parse(weaponData[i]["WeaponATK"].ToString());
+                    item.Spec.WeaponDamage = int.Parse(weaponData[i]["WeaponATK"].ToString());
                     //item.Spec.WeaponAttackSpeed = float.Parse(weaponData[i]["WeaponAttackSpeed"].ToString());
                     //item.Spec.WeaponAttackRange = int.Parse(weaponData[i]["WeaponAttackRange"].ToString());
                     item.Spec.WeaponAddSpeed = float.Parse(weaponData[i]["WeaponSPD"].ToString());
@@ -96,7 +96,7 @@ public class EquipmentManager : MonoBehaviour
     {
         // 유저의 데이터 로드 후 적용
     }
-    public float getCurrentDamage()
+    public int getCurrentDamage()
     {
         return userCurrentWeapon.Spec.WeaponDamage;
     }

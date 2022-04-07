@@ -49,8 +49,8 @@ public class WeaponSpec : EquipSpec
     }
 
     [SerializeField]
-    private float weaponDamage;
-    public float WeaponDamage
+    private int weaponDamage;
+    public int WeaponDamage
     {
         get { return weaponDamage; }
         set { weaponDamage = value; }
