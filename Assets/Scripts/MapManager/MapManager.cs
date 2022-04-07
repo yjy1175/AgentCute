@@ -5,11 +5,12 @@ using UnityEngine;
 public class MapManager : SingleToneMaker<MapManager>
 {
     #region variables
+    // 추후에 타일맵 클래스 생성 예정(데이터셋과 함께)
     private Transform[,] tileMapList = new Transform[3, 3];
     private Vector3 nowPos;
     private int baseY = 19;
     private int baseX = 25;
-    bool isChange = false;
+    private bool isChange = false;
     #endregion
 
     #region method
@@ -23,7 +24,6 @@ public class MapManager : SingleToneMaker<MapManager>
     void Update()
     {
         moveMap();
-        Debug.Log(nowPos);
     }
 
     private void initMapList()
@@ -132,17 +132,22 @@ public class MapManager : SingleToneMaker<MapManager>
                 tileMapList[2, 2].name = "TilemapSet/" + 2 + "," + 1;
             }
         }
-        // 만약 변화가 있었다면 타일 배열을 초기화 해준다.
+        // 맵이동이 있었다면 타일 배열을 초기화 해준다.
         if (isChange)
         {
             initMapList();
         }
     }
-
+    /*
+     * 타일맵을 월드 좌표계에서 옮겨주는 함수
+     * _y : 타일맵리스트의 y좌표
+     * _x : 타일맵리스트의 x좌표
+     * cy : 좌표계에서 옮길 y좌표의 계수
+     * cx : 좌표계에서 옮길 x좌표의 계수
+     */
     private void moveTileMap(int _y, int _x, int cy, int cx)
     {
-        Transform moveTilemap = tileMapList[_y, _x];
-        moveTilemap.position = moveTilemap.position + new Vector3(baseX * cx, baseY * cy, 0);
+        tileMapList[_y, _x].position = tileMapList[_y, _x].position + new Vector3(baseX * cx, baseY * cy, 0);
     }
     #endregion
 }
