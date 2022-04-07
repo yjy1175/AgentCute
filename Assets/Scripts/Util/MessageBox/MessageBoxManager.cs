@@ -78,9 +78,7 @@ public class MessageBoxManager : SingleToneMaker<MessageBoxManager>
     {
         GameObject messageBox = ObjectPoolManager.Instance.EnableGameObject(_typeName);
         messageBox.GetComponent<MessageBox>().setEnable(_desc, _pos);
-        Debug.Log(messageBox.GetComponent<MessageBox>().DestroyTime);
         yield return new WaitForSeconds(messageBox.GetComponent<MessageBox>().DestroyTime);
-        Debug.Log(messageBox.GetComponent<MessageBox>().DestroyTime);
         messageBox.GetComponent<MessageBox>().setDisable();
         ObjectPoolManager.Instance.DisableGameObject(messageBox);
     }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3567157219493239809
+--- !u!1 &3729247319081134541
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3567157219493239814}
-  - component: {fileID: 3567157219493239815}
-  - component: {fileID: 3567157219493239808}
-  - component: {fileID: 726290770248114887}
+  - component: {fileID: 3729247319081134538}
+  - component: {fileID: 3729247319081134539}
+  - component: {fileID: 3729247319081134540}
+  - component: {fileID: 600572635570329355}
   m_Layer: 0
-  m_Name: MonsterDamage
+  m_Name: BossWarning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3567157219493239814
+--- !u!4 &3729247319081134538
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3567157219493239809}
+  m_GameObject: {fileID: 3729247319081134541}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
@@ -33,13 +33,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &3567157219493239815
+--- !u!23 &3729247319081134539
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3567157219493239809}
+  m_GameObject: {fileID: 3729247319081134541}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -74,14 +74,14 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!102 &3567157219493239808
+--- !u!102 &3729247319081134540
 TextMesh:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3567157219493239809}
+  m_GameObject: {fileID: 3729247319081134541}
   m_Text: 
   m_OffsetZ: 0
   m_CharacterSize: 1
@@ -89,29 +89,29 @@ TextMesh:
   m_Anchor: 3
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 70
+  m_FontSize: 120
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 3e53c1bee5e5e43219f0342dc04f5be0, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
---- !u!114 &726290770248114887
+    rgba: 4294902015
+--- !u!114 &600572635570329355
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3567157219493239809}
+  m_GameObject: {fileID: 3729247319081134541}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10896fc56cd2a3b49ab453d62e3bf753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textCom: {fileID: 3567157219493239808}
-  alpha: {r: 255, g: 255, b: 255, a: 1}
+  textCom: {fileID: 3729247319081134540}
+  alpha: {r: 220, g: 0, b: 98, a: 1}
   moveSpeed: 2
-  alphaSpeed: 3
-  destroyTime: 3
-  fontSize: 70
+  alphaSpeed: 1
+  destroyTime: 1
+  fontSize: 120
   isStart: 0

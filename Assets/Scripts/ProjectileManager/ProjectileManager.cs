@@ -67,5 +67,17 @@ public class ProjectileManager : SingleToneMaker<ProjectileManager>
                 _coefficient = 0;
         Projectile.AddScaleCoefficient += _coefficient;
     }
+    /*
+    * 레벨업에 따른 발사체 관통 마리수 추가 api입니다
+    * 전체적으로 모든 발사체의 관통 마리수를 추가 시켜줍니다.
+    * _passCount : 관통 마리수 추가 수치입니다.
+    */
+    public void AddPassCount(int _passCount)
+    {
+        if (_passCount < 0)
+            if (Projectile.AddPassCount <= 0)
+                _passCount = 0;
+        Projectile.AddPassCount += _passCount;
+    }
 }
 

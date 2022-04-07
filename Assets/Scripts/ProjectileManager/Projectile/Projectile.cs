@@ -7,6 +7,14 @@ public abstract class Projectile : MonoBehaviour
 
 
     #region variable
+    // 추가 관통 마리수
+    private static int addPassCount;
+    public static int AddPassCount
+    {
+        get { return addPassCount; }
+        set { addPassCount = value; }
+    }
+    // 추가 발사체 개수
     private static int addProjectilesCount;
     public static int AddProjectilesCount
     {
@@ -14,18 +22,20 @@ public abstract class Projectile : MonoBehaviour
         set { addProjectilesCount = value; }
     }
     private static float addScaleCoefficient = 1f;
-
+    public static float AddScaleCoefficient
+    {
+        get { return addScaleCoefficient; }
+        set { addScaleCoefficient = value; }
+    }
     protected int damage;
     public virtual int Damage
     {
         get { return damage; }
         set { damage = value;}
     }
-    public static float AddScaleCoefficient
-    {
-        get { return addScaleCoefficient; }
-        set { addScaleCoefficient = value; }
-    }
+    [SerializeField]
+    protected int currentPassCount;
+
     public abstract ProjectileSpec Spec
     {
         get;
@@ -50,9 +60,20 @@ public abstract class Projectile : MonoBehaviour
     {
         if (gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Enemy"))
         {
+            // 관통 구현
+            // -1 : 무한 관통
+            if(Spec.MaxPassCount != -1)
+            {
+                currentPassCount++;
+                // 현재 관통한 마리수가 정해진 수치보다 같거나 커지면 disable
+                if (currentPassCount >= (Spec.MaxPassCount + addPassCount) - 1)
+                {
+                    currentPassCount = 0;
+                    setDisable();
+                    ObjectPoolManager.Instance.DisableGameObject(gameObject);
+                }
+            }
             collision.gameObject.GetComponent<IStatus>().Hp -= damage;
-            setDisable();
-            ObjectPoolManager.Instance.DisableGameObject(gameObject);
             MessageBoxManager.Instance.createMessageBox(MessageBoxManager.BoxType.MonsterDamage, damage.ToString(), collision.gameObject.transform.position);
         }
     }

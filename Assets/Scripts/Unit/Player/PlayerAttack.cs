@@ -16,7 +16,7 @@ public class PlayerAttack : IAttack
         getProjectiles();
         // 각 발사체의 오브젝트 풀 생성
         createObjectPool();
-        mAutoAttackSpeed = 0.5f; //TO-DO 임시로 넣어놓음. 실제 공속은 무엇?
+        mAutoAttackSpeed = 0.8f; //TO-DO 임시로 넣어놓음. 실제 공속은 무엇?
         mAutoAttackCheckTime = mAutoAttackSpeed;
     }
     // Update is called once per frame
@@ -38,8 +38,14 @@ public class PlayerAttack : IAttack
                 int angle = TileDict[SkillManager.Instance.CurrentBaseSkill][0].Spec.Angle;
                 for (int i = 0; i < launchCount; i++)
                 {
+                    Vector3 targetPos = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
+                    Vector3 firePos = firePosition.transform.position;
                     StartCoroutine(
-                        AutoAttackCorutines((launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * i), TileDict[SkillManager.Instance.CurrentBaseSkill][0].gameObject.name));
+                        LaunchCorutines(
+                            (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * i), 
+                            TileDict[SkillManager.Instance.CurrentBaseSkill][0].gameObject.name,
+                            targetPos, 
+                            firePos));
                 }
             }
             mAutoAttackCheckTime = 0f;
@@ -82,29 +88,22 @@ public class PlayerAttack : IAttack
         }
     }
 
-    //IEnumerator AutoAttackCorutines()
-    //{
-    //    Vector3 temp = new Vector3(1, 1, 0);//TO-DO 플레이어 방향에 따라 나갈수있도록 value 제공해주는 api만들기
-    //    GameObject obj = ObjectPoolManager.Instance.EnableGameObject(mAutoAttack.name);
-    //    //Debug.Log(MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position));
-    //    obj.GetComponent<Projectile>().setEnable(MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position)
-    //            , firePosition.transform.position, 0);
-    //    yield return new WaitForSeconds(mAutoAttackSpeed);
-    //    obj.GetComponent<Projectile>().setDisable();
-    //    ObjectPoolManager.Instance.DisableGameObject(obj);
-    //}
     /*
     * _angle : 추가 각도 설정입니다.
+    * _name : 해당 발사체오브젝트의 name입니다.
     */
-    IEnumerator AutoAttackCorutines(float _angle, string _name)
+    IEnumerator LaunchCorutines(float _angle, string _name, Vector3 _targetPos, Vector3 _firePos)
     {
         Vector3 temp = new Vector3(1, 1, 0);//TO-DO 플레이어 방향에 따라 나갈수있도록 value 제공해주는 api만들기
         GameObject obj = ObjectPoolManager.Instance.EnableGameObject(_name);
         float keepTime = obj.GetComponent<Projectile>().Spec.SpawnTime;
         setProjectileData(ref obj);
-        obj.GetComponent<Projectile>().setEnable(MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position)
-                , firePosition.transform.position, _angle);
+        obj.GetComponent<Projectile>().setEnable(_targetPos, _firePos, _angle);
         yield return new WaitForSeconds(keepTime);
+        // 간헐적 disable문제때문에 해당 오브젝트의 Active가 true일 시만 disable되게 했습니다
+        // 스폰시간이 다되기 전 발사체가 몬스터와 부딪힐 때 disable이 한번 호출되는데 혹시나 다른 객체로
+        // 접근해서 disable해서 간헐적 문제가 발생할 수 있을거라 추측해서 조건문 걸었습니다.
+        // 추후에 다른곳에서의 문제가 발견되면 삭제할 예정
         if (obj.activeInHierarchy)
         {
             obj.GetComponent<Projectile>().setDisable();
@@ -155,6 +154,7 @@ public class PlayerAttack : IAttack
                 launchSkill(_skill);
                 yield return new WaitForSeconds(_skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex]);
                 _skill.CurrentCoolTimeIndex = 0;
+                _skill.CurrentUseCount = 0;
                 _btn.gameObject.SetActive(true);
             }
             else
@@ -172,6 +172,9 @@ public class PlayerAttack : IAttack
     private void launchSkill(Skill _skill)
     {
         int count = _skill.Spec.SkillCount;
+        Vector3 targetPos = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
+        Vector3 firePos = firePosition.transform.position;
+        // 한번 발사일 경우
         if (count == 1)
         {
             int launchCount = TileDict[_skill][0].Spec.Count + Projectile.AddProjectilesCount;
@@ -179,18 +182,22 @@ public class PlayerAttack : IAttack
             for (int j = 0; j < launchCount; j++)
             {
                 StartCoroutine(
-                    AutoAttackCorutines(
+                    LaunchCorutines(
                         (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * j),
-                        TileDict[_skill][0].gameObject.name));
+                        TileDict[_skill][0].gameObject.name,
+                        targetPos,
+                        firePos
+                        ));
             }
         }
+        // 중복 발사일 경우
         else
         {
-            StartCoroutine(multiLuanch(_skill, count));
+            StartCoroutine(multiLuanch(_skill, count, targetPos, firePos));
         }
     }
 
-    IEnumerator multiLuanch(Skill _skill, int _count)
+    IEnumerator multiLuanch(Skill _skill, int _count, Vector3 _target, Vector3 _fire)
     {
         for (int i = 0; i < _count; i++)
         {
@@ -199,9 +206,12 @@ public class PlayerAttack : IAttack
             for (int j = 0; j < launchCount; j++)
             {
                 StartCoroutine(
-                    AutoAttackCorutines(
+                    LaunchCorutines(
                         (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * j),
-                        TileDict[_skill][0].gameObject.name));
+                        TileDict[_skill][0].gameObject.name,
+                        _target,
+                        _fire
+                        ));
             }
             yield return new WaitForSeconds(0.4f);
         }

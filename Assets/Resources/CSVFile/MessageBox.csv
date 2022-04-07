@@ -1,3 +1,7 @@
-MB_Name,MB_Color,MB_MoveSpeed,MB_AlphaSpeed,MB_DestroyTime,MB_FontSize
-UserDamage,0/0/0/1,2,3,3,100
-MonsterDamage,255/0/0/1,2,3,3,100
+MB_Name,MB_Color,MB_MoveSpeed,MB_AlphaSpeed,MB_DestroyTime,MB_FontSize,MB_Count
+UserDamage,212/0/0/1,2,3,3,70,1
+MonsterDamage,255/255/255/1,2,3,3,70,1
+CriticalDamage,255/150/0/1,2,3,3,70,1
+UserCoin,255/210/82/1,2,2,2,70,1
+UserHpPotion,191/255/0/1,2,2,2,70,1
+BossWarning,220/0/98/1,2,1,1,120,3

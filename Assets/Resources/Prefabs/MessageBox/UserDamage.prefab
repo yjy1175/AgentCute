@@ -89,13 +89,13 @@ TextMesh:
   m_Anchor: 3
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 100
+  m_FontSize: 70
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: 3e53c1bee5e5e43219f0342dc04f5be0, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4278190335
 --- !u!114 &-1250901502584532665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,9 +109,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textCom: {fileID: 6140302652923686784}
-  alpha: {r: 0, g: 0, b: 0, a: 1}
+  alpha: {r: 212, g: 0, b: 0, a: 1}
   moveSpeed: 2
   alphaSpeed: 3
   destroyTime: 3
-  fontSize: 100
+  fontSize: 70
   isStart: 0
