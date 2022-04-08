@@ -14,9 +14,9 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
     [SerializeField]
     private StringGameObject costumes;
     [SerializeField]
-    private Weapon userCurrentWeapon;
+    private Weapon playerCurrentWeapon;
     [SerializeField]
-    private Costume userCurrentCostume;
+    private Costume playerCurrentCostume;
     // key : 몬스터 분류 , value : 해당 몬스터 장비 오브젝트
     public StringGameObject monsterCurrentEquip;
     #endregion
@@ -88,9 +88,22 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
     // 착용중인 장비를 교체해주는 함수
     // name : 바꿀 장비의 typeName
     // type : 0 무기, 1 코스튬
-    public void changeEquip(string name, int type)
+    public void changeEquip(string name)
     {
-
+        // Todo : playerCurrentWeapon의 게임오브젝트 해당 게임오브젝트로 변경
+        Weapon cWeapon = weapons[name].GetComponent<Weapon>();
+        // 해금이 되어있다면
+        if (cWeapon.IsLocked)
+        {
+            playerCurrentWeapon = cWeapon;
+            SpriteRenderer playerSprite = PlayerManager.Instance.getPlayerWeaponSprite();
+            playerSprite.sprite = cWeapon.GetComponent<SpriteRenderer>().sprite;
+        }
+        // 해금이 안되어있다면
+        else
+        {
+            // 경고문구 출력
+        }
     }
     private void loadUserEquip()
     {
@@ -98,7 +111,7 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
     }
     public int getCurrentDamage()
     {
-        return userCurrentWeapon.Spec.WeaponDamage;
+        return playerCurrentWeapon.Spec.WeaponDamage;
     }
     #endregion
 }

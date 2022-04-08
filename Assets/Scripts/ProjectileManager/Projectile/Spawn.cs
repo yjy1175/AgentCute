@@ -28,7 +28,6 @@ public class Spawn : Projectile
     protected override void destroySelf()
     {
         /*생성후 파괴되는 매서드*/
-        Destroy(gameObject, spec.SpawnTime);
     }
     protected override void launchProjectile()
     {

@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1329192650511960062}
   m_Layer: 0
   m_Name: l1
-  m_TagString: Untagged
+  m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,6 +179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14b65e6de511d64cbe36470db494f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPassCount: 0
+  myPos: {x: 0, y: 0, z: 0}
   spec:
     type: l1
     typeName: 

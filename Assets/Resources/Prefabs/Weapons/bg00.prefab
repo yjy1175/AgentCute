@@ -96,13 +96,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spec:
-    type: 
-    typeName: 
-    equipName: 
-    equipDesc: 
+    type: bg00
+    typeName: "\uBCF4\uC6B0\uAC74"
+    equipName: "\uACAC\uC2B5\uC6A9 \uBCF4\uC6B0\uAC74"
+    equipDesc: "\uACAC\uC2B5\uC6A9 \uBCF4\uC6B0\uAC74"
     equipRank: 0
-    weaponDamage: 0
+    weaponDamage: 5
     weaponAttackSpeed: 0
     weaponAttackRange: 0
     weaponAddSpeed: 0
-  isLocked: 0
+  isLocked: 1

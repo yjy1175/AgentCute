@@ -29,7 +29,6 @@ public class Launch : Projectile
     protected override void destroySelf()
     {
         /*생성후 파괴되는 매서드*/
-        Destroy(gameObject, Spec.SpawnTime);
     }
     protected override void launchProjectile()
     {
@@ -59,13 +58,16 @@ public class Launch : Projectile
      */
     public override void setEnable(Vector3 _target, Vector3 _player, float _angle)
     {
-        transform.localScale = new Vector3(AddScaleCoefficient, AddScaleCoefficient, AddScaleCoefficient);
-        transform.position = _player;
-        target = _target;
-        angle = setAngle(target - _player) + _angle;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        gameObject.SetActive(true);
-        isActive = true;
+        if(_target != Vector3.zero)
+        {
+            transform.localScale = new Vector3(AddScaleCoefficient, AddScaleCoefficient, AddScaleCoefficient);
+            transform.position = _player;
+            target = _target;
+            angle = setAngle(target - _player) + _angle;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            gameObject.SetActive(true);
+            isActive = true;
+        }
     }
     void Start()
     {

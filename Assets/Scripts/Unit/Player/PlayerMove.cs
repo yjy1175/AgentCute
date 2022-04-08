@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class PlayerMove : IMove
 {
-
-    private Rigidbody2D rigidbody2D;
-
+    private Animator mAnim;
     void Awake()
     {
-        rigidbody2D = GameObject.Find("PlayerObject").GetComponent<Rigidbody2D>();
+        mAnim = transform.GetChild(0).GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -33,12 +31,27 @@ public class PlayerMove : IMove
 
         
         //TO-DO : 이동방식은 어떻게 이루어지게?
-        mDir.Set(h, v, 0);
-        //transform.position += mDir * mSpeed * Time.deltaTime;
+        // 좌우 반전
+        if(h < 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (h > 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        // 변화량이 있으면 애니메이션 재생
+        if(h != 0 || v != 0)
+        {
+            mAnim.SetBool("isRun", true);
+        }
+        else
+        {
+            mAnim.SetBool("isRun", false);
+        }
 
-        rigidbody2D.velocity = mDir * mSpeed;
-
-
+        mDir = new Vector3(h, v, 0);
+        transform.Translate(mDir.normalized * mSpeed * Time.deltaTime);
 
         //TO-DO : 유저의 움직임에 따라 카메라도 따라다니도록 수정 필요
         //Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);

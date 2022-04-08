@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5196334481947805603}
   m_Layer: 8
   m_Name: l0
-  m_TagString: Untagged
+  m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14b65e6de511d64cbe36470db494f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPassCount: 0
+  myPos: {x: 0, y: 0, z: 0}
   spec:
     type: l0
     typeName: 
@@ -105,7 +107,7 @@ MonoBehaviour:
     projectileDamage: 1
     speed: 11
     count: 1
-    angle: 0
+    angle: 10
     spawnTime: 0.8
     maxPassCount: 1
   target: {x: 0, y: 0, z: 0}
@@ -128,7 +130,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.03125, y: 2.03125}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.65, y: 0.65}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

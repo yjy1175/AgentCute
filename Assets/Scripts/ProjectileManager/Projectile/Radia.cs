@@ -25,7 +25,6 @@ public class Radia : Projectile
     protected override void destroySelf()
     {
         /*생성후 파괴되는 매서드*/
-        Destroy(gameObject, Spec.SpawnTime);
     }
     protected override void launchProjectile()
     {
