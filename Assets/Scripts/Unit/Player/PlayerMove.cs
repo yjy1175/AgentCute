@@ -39,9 +39,13 @@ public class PlayerMove : IMove
         if (mMoveable)
         {
             //TO-DO : 핸드폰 키입력으로 변환 필요
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
-
+            float h = VertualJoyStick.Instance.GetHorizontalValue();
+            float v = VertualJoyStick.Instance.GetVerticalValue();
+            if(h == 0 && v == 0)
+            {
+                h = Input.GetAxis("Horizontal");
+                v = Input.GetAxis("Vertical");
+            }
 
             //TO-DO : 이동방식은 어떻게 이루어지게?
             // 좌우 반전
