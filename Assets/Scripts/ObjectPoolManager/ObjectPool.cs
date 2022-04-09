@@ -10,7 +10,7 @@ using UnityEngine;
  */
 public class ObjectPool
 {
-    private List<GameObject> objectPool;
+    private Queue<GameObject> objectPool;
     private GameObject objectFactory;
     private int overAllocateCount; //해당 변수가 0이아니면, 풀이 부족하면 overAllocateCount만큼 objectPool증가
 
@@ -18,7 +18,7 @@ public class ObjectPool
     {
         this.objectFactory = objectFactory;
         this.overAllocateCount = overAllocateCount;
-        objectPool = new List<GameObject>();
+        objectPool = new Queue<GameObject>();
         Allocate(initCount);
     }
 
@@ -34,7 +34,7 @@ public class ObjectPool
             GameObject obj = GameObject.Instantiate(objectFactory, GameObject.Find("ObjectPoolSet").transform);
             obj.name = objectFactory.name;
             obj.gameObject.SetActive(false);
-            objectPool.Add(obj);
+            objectPool.Enqueue(obj);
         }
 
     }
@@ -65,14 +65,22 @@ public class ObjectPool
             Allocate(overAllocateCount);
         }
 
-        GameObject retObj = objectPool[0];
-        objectPool.Remove(retObj);
+        GameObject retObj = objectPool.Dequeue();
+        //objectPool.Remove(retObj);
 
         return retObj;
     }
     public void DisableObject(GameObject obj)
     {
-        obj.gameObject.SetActive(false);
-        objectPool.Add(obj);
+        if (obj.activeInHierarchy)
+        {
+            objectPool.Enqueue(obj);
+            obj.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("중복 호출 : " + obj.name);
+        }
+
     }
 }

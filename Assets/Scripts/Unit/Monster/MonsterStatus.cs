@@ -32,6 +32,7 @@ public class MonsterStatus : IStatus
         //어디서 disable 시킬지는 고민이 필요
         if (mHp == 0)
         {
+            SpawnManager.currentKillMosterCount++;
             ObjectPoolManager.Instance.DisableGameObject(gameObject);
         }
     }

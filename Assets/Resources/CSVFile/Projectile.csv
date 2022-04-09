@@ -1,7 +1,7 @@
 ProjectileType,ProjectileSpeed,ProjectileDamage,ProjectileCount,ProjectileAngle,ProjectileSpawnTime,ProjectileMaxPassCount
-l0,11,1,1,10,0.8,1
-l1,11,0.8,3,15,0.8,1
-l2,11,1,1,0,0.8,1
+l0,11,1,1,10,0.8,0
+l1,11,0.8,3,15,0.8,0
+l2,11,1,1,0,0.8,0
 s0,0,1.25,1,0,1,-1
 s1,0,1.5,1,0,1,-1
 l4,21,12,1,10,0.5,-1

@@ -8,6 +8,7 @@ public abstract class Projectile : MonoBehaviour
 
     #region variable
     // 추가 관통 마리수
+    [SerializeField]
     private static int addPassCount;
     public static int AddPassCount
     {
@@ -15,18 +16,22 @@ public abstract class Projectile : MonoBehaviour
         set { addPassCount = value; }
     }
     // 추가 발사체 개수
+    [SerializeField]
     private static int addProjectilesCount;
     public static int AddProjectilesCount
     {
         get { return addProjectilesCount; }
         set { addProjectilesCount = value; }
     }
+    // 추가 발사체 범위
+    [SerializeField]
     private static float addScaleCoefficient = 1f;
     public static float AddScaleCoefficient
     {
         get { return addScaleCoefficient; }
         set { addScaleCoefficient = value; }
     }
+    [SerializeField]
     protected int damage;
     public virtual int Damage
     {
@@ -35,6 +40,11 @@ public abstract class Projectile : MonoBehaviour
     }
     [SerializeField]
     protected int currentPassCount;
+    public int CurrentPassCount
+    {
+        get { return currentPassCount; }
+        set { currentPassCount = value; }
+    }
     [SerializeField]
     protected Vector3 myPos;
     public Vector3 MyPos
@@ -71,10 +81,9 @@ public abstract class Projectile : MonoBehaviour
             if(Spec.MaxPassCount != -1)
             {
                 currentPassCount++;
-                // 현재 관통한 마리수가 정해진 수치보다 같거나 커지면 disable
-                if (currentPassCount >= (Spec.MaxPassCount + addPassCount) - 1)
+                // 현재 관통한 마리수가 정해진 수치보다 커지면 disable
+                if (currentPassCount > (Spec.MaxPassCount + addPassCount))
                 {
-                    currentPassCount = 0;
                     setDisable();
                     ObjectPoolManager.Instance.DisableGameObject(gameObject);
                 }

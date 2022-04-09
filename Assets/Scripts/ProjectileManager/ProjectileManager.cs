@@ -78,6 +78,7 @@ public class ProjectileManager : SingleToneMaker<ProjectileManager>
             if (Projectile.AddPassCount <= 0)
                 _passCount = 0;
         Projectile.AddPassCount += _passCount;
+        Debug.Log("현재 관통 수 : " + Projectile.AddPassCount);
     }
 }
 

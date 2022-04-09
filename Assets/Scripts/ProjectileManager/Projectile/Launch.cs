@@ -60,6 +60,7 @@ public class Launch : Projectile
     {
         if(_target != Vector3.zero)
         {
+            Debug.Log(currentPassCount);
             transform.localScale = new Vector3(AddScaleCoefficient, AddScaleCoefficient, AddScaleCoefficient);
             transform.position = _player;
             target = _target;

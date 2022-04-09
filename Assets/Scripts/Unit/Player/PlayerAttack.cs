@@ -18,7 +18,7 @@ public class PlayerAttack : IAttack
         getProjectiles();
         // 각 발사체의 오브젝트 풀 생성
         createObjectPool();
-        mAutoAttackSpeed = 0.1f; //TO-DO 임시로 넣어놓음. 실제 공속은 무엇?
+        mAutoAttackSpeed = 1f; //TO-DO 임시로 넣어놓음. 실제 공속은 무엇?
         mAutoAttackCheckTime = mAutoAttackSpeed;
     }
 
@@ -90,13 +90,28 @@ public class PlayerAttack : IAttack
     {
         GBtn.gameObject.SetActive(false);
         StartCoroutine(useSkill(GBtn, SkillManager.Instance.CurrentGeneralSkill));
+        StartCoroutine(activeAnimation());
     }
     public void clickUltimateSkillBtn()
     {
         UBtn.gameObject.SetActive(false);
         StartCoroutine(useSkill(UBtn, SkillManager.Instance.CurrentUltimateSkill));
+        StartCoroutine(activeAnimation());
     }
-
+    /*
+     * 스킬로 공격 시 애니메이션 재생
+     * 공격 애니메이션 재생시 움직임 불가(변수로 제어)
+     * Todo : PlayerManager쪽으로 애니메이션 코드 옮기기
+     */
+    IEnumerator activeAnimation()
+    {
+        GetComponent<PlayerMove>().MMoveable = false;
+        GetComponent<PlayerMove>().MAnim.SetFloat("AttackState", 0f);
+        GetComponent<PlayerMove>().MAnim.SetFloat("NormalState", 0.5f);
+        GetComponent<PlayerMove>().MAnim.SetTrigger("Attack");
+        yield return new WaitForSeconds(1f); // Todo : 추후에 스킬 데이터에서 대기시간을 받아 입력 
+        GetComponent<PlayerMove>().MMoveable = true;
+    }
 
     IEnumerator useSkill(Button _btn, Skill _skill)
     {
@@ -212,6 +227,7 @@ public class PlayerAttack : IAttack
         if (_notSingle) firstProjectile = obj;
         float keepTime = obj.GetComponent<Projectile>().Spec.SpawnTime;
         setProjectileData(ref obj);
+        obj.GetComponent<Projectile>().CurrentPassCount = 0;
         obj.GetComponent<Projectile>().setEnable(_targetPos, _firePos, _angle);
         yield return new WaitForSeconds(keepTime);
         // 간헐적 disable문제때문에 해당 오브젝트의 Active가 true일 시만 disable되게 했습니다

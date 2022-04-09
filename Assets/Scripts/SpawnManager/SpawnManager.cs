@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 
 public class SpawnManager : SingleToneMaker<SpawnManager>
@@ -31,6 +31,19 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
     public GameObject[] TempMonster;
 
+    /*
+     *  임시로 스폰매니저에 변수 생성 Todo : 추후에 잡은 몬스터의 수는 플레이어 매니저나
+     *  나중에 게임매니저에서 관리
+     */
+    // 전체 몬스터의 수
+    public Text allMonsterText;
+    public static int allMonsterCount;
+    // 필드에 소환된 몬스터의 수
+    public Text currentAllMonsterText;
+    // 현재 잡은 몬스터의 수
+    public Text currentKillMonsterText;
+    public static int currentKillMosterCount;
+
     void Awake()
     {
         InitAllSpawnData();
@@ -58,6 +71,9 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     void Update()
     {
         SpawnNormalMonster();
+        allMonsterText.text = "전체 : " + allMonsterCount.ToString() + " 마리";
+        currentKillMonsterText.text = "킬 : " + currentKillMosterCount.ToString() + " 마리";
+        currentAllMonsterText.text = "필드 : " + (allMonsterCount - currentKillMosterCount).ToString() +" 마리";
     }
 
     private void SpawnNormalMonster()
@@ -76,6 +92,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                         int index = UnityEngine.Random.Range(0, spawnPoints.Length);
                         monster.transform.position = spawnPoints[index].position;
                         monster.SetActive(true);
+                        // 스폰된 몬스터의 수 증가
+                        allMonsterCount++;
                     }
                 }
                 temp.currentTime = 0;

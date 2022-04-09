@@ -8,6 +8,7 @@ public class IAttack : MonoBehaviour
     protected SkillDic TileDict;
     public GameObject firePosition;
 
+    [SerializeField]
     protected float mAutoAttackSpeed;
     protected float mAutoAttackCheckTime;
 
