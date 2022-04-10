@@ -44,6 +44,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     public Text currentKillMonsterText;
     public static int currentKillMosterCount;
 
+    private const int SPAWN_MINUT = 60;
+
     void Awake()
     {
         InitAllSpawnData();
@@ -90,6 +92,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                     setMonsterData(ref monster);
                     if (monster != null)
                     {
+                        //TO-DO : monster가 생기는 event를 유저가 구독하여 hp register는 Player에서 구독하도록 변경이 필요.
+                        monster.GetComponent<MonsterEventHandler>().registerHpObserver(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().registerMonsterHp);
                         monster.transform.position = spawnPoints[spawnZone[j]].position;
                         monster.SetActive(true);
                         // 스폰된 몬스터의 수 증가
@@ -139,20 +143,20 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
             SpawnData ds = new SpawnData();
             ds.Id = (int)spawnData[idx]["ID"];
-            ds.spawnMonster = spawnData[idx]["Spawn_Monster"].ToString();
-            ds.spawnMap = spawnData[idx]["Spawn_Map"].ToString();
-            ds.spawnOrder = (int)spawnData[idx]["Spawn_Order"];
-            ds.spawnNumber = (int)spawnData[idx]["Spawn_Number"];
-            ds.spawnStartTime_1 = (int)spawnData[idx]["Spawn_StartTime_1"];
-            ds.spawnStartTime_2 = (int)spawnData[idx]["Spawn_StartTime_2"];
-            ds.realStartSpawnTime = UnityEngine.Random.Range(ds.spawnStartTime_1, ds.spawnStartTime_2);
-            ds.spawnTime = (int)spawnData[idx]["Spawn_Time"];
+            ds.spawnMonster = spawnData[idx]["SpawnMonster"].ToString();
+            ds.spawnMap = spawnData[idx]["SpawnMap"].ToString();
+            ds.spawnOrder = (int)spawnData[idx]["SpawnOrder"];
+            ds.spawnNumber = (int)spawnData[idx]["SpawnNumber"];
+            ds.spawnStartTime_1 = (int)spawnData[idx]["SpawnStartTime1"];
+            ds.spawnStartTime_2 = (int)spawnData[idx]["SpawnStartTime2"];
+            ds.realStartSpawnTime = UnityEngine.Random.Range(ds.spawnStartTime_1 * SPAWN_MINUT, ds.spawnStartTime_2 * SPAWN_MINUT);
+            ds.spawnTime = (int)spawnData[idx]["SpawnTime"];
             ds.currentTime = 0f;
-            if (ds.spawnTime == 0)
+            if (MonsterManager.Instance.GetMonsterData(ds.spawnMonster).monsterGrade ==  MonsterManager.MonsterGrade.Boss)
             {
                 dataSetBoss.Add(ds);
             }
-            else
+            else if(MonsterManager.Instance.GetMonsterData(ds.spawnMonster).monsterGrade == MonsterManager.MonsterGrade.Normal)
             {
                 dataSetNormal.Add(ds);
             }
@@ -179,6 +183,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         setMonsterData(ref monster);
         if (monster != null)
         {
+            monster.GetComponent<MonsterEventHandler>().registerHpObserver(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().registerMonsterHp);
             int index = UnityEngine.Random.Range(0, spawnPoints.Length);
             monster.transform.position = spawnPoints[index].position;
             monster.SetActive(true);

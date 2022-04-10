@@ -67,16 +67,6 @@ public abstract class Projectile : MonoBehaviour
     }
     #endregion
 
-
-    private void OnEnable()
-    {
-        isActive = true;
-    }
-    private void OnDisable()
-    {
-        isActive = false;
-    }
-
     //void OnTrrigerEnter2D(Collider2D collision)
     //{
     //    if (gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Enemy"))

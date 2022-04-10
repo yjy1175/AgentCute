@@ -39,12 +39,14 @@ public abstract class IStatus : MonoBehaviour
          */
         get { return mHp; }
         set
-        {
+        { 
             if (mIsInvincibility)
                 value = 0;
+            mHp = Mathf.Max(0, mHp - value);
+            gameObject.GetComponent<IEventHandler>().ChangeHp(mHp, gameObject);
             MessageBoxManager.BoxType bt = (MessageBoxManager.BoxType)Enum.Parse(typeof(MessageBoxManager.BoxType), gameObject.tag + "Damage");
             MessageBoxManager.Instance.createMessageBox(bt, value.ToString(), gameObject.transform.position);
-            mHp = Mathf.Max(0, mHp-value);
+            
         }
     }
 

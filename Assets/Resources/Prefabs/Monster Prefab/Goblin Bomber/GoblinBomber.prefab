@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 4315090279229072086}
   - component: {fileID: 90076430800431658}
   - component: {fileID: 6681025103669003979}
+  - component: {fileID: -1317039379629157109}
+  - component: {fileID: -2389219040940533519}
   m_Layer: 6
   m_Name: GoblinBomber
   m_TagString: Monster
@@ -176,7 +178,6 @@ MonoBehaviour:
   mMonsterInName: 
   mMonsterSize: 0
   mMmonsterName: 
-  mMmonsterGrade: 
   monsterExp: 0
 --- !u!61 &90076430800431658
 BoxCollider2D:
@@ -220,3 +221,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.4687006}
   serializedVersion: 2
   m_Radius: 0.031299412
+--- !u!114 &-1317039379629157109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607600207061063460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 863a001ce64236d4eb4a9f60b1093774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2389219040940533519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607600207061063460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 863a001ce64236d4eb4a9f60b1093774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

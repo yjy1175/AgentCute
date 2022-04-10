@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -1419706892184604970}
   - component: {fileID: -1337964839577201007}
   - component: {fileID: 1529050208413855314}
+  - component: {fileID: -7603956744392291738}
   m_Layer: 6
   m_Name: GoblinWorker
   m_TagString: Monster
@@ -155,7 +156,6 @@ MonoBehaviour:
   mMonsterInName: 
   mMonsterSize: 0
   mMmonsterName: 
-  mMmonsterGrade: 
   monsterExp: 0
 --- !u!61 &-1419706892184604970
 BoxCollider2D:
@@ -220,3 +220,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.44607577}
   serializedVersion: 2
   m_Radius: 0.053924233
+--- !u!114 &-7603956744392291738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2402880713698910942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 863a001ce64236d4eb4a9f60b1093774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

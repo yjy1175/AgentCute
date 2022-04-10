@@ -1,8 +1,8 @@
-ID,Spawn_Monster,Spawn_Map,Spawn_Order,Spawn_Number,Spawn_StartTime_1,Spawn_StartTime_2,Spawn_Time
-1,GoblinWorker,Field,1,5,0,0,1
-2,GoblinBomber,Field,2,4,60,120,1
-3,GoblinShaman,Field,3,3,180,300,1
-4,GoblinAssassin,Field,5,2,300,420,1
-5,GiantSlime1,Field,4,1,200,240,0
-6,GiantSlime2,Field,6,1,480,540,0
-7,GiantSlime3,Field,7,1,660,720,0
+ID,SpawnMonster,MonsterStep,SpawnMap,SpawnOrder,SpawnNumber,SpawnStartTime1,SpawnStartTime2,SpawnTime,BossLimitTime
+1,GoblinWorker,0,Field,1,6,0,0,2,-1
+2,GoblinBomber,0,Field,2,2,1,2,2,-1
+3,GoblinShaman,0,Field,3,2,3,5,3,-1
+4,GoblinAssassin,0,Field,5,1,5,7,3,-1
+5,GiantSlime1,1,Field,4,1,4,6,-1,3
+6,GiantSlime2,2,Field,6,1,8,9,-1,4
+7,GiantSlime3,3,Field,7,1,11,12,-1,3

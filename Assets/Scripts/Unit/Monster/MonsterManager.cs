@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MonsterManager : SingleToneMaker<MonsterManager>
 {
@@ -13,7 +14,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
         public string monsterInName;
         public int monsterSize;
         public string monsterName;
-        public string monsterGrade;
+        public MonsterGrade monsterGrade;
         public int monsterHp;
         public int monsterPhysicalDefense;
         public int monsterMagicDefense;
@@ -29,6 +30,12 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
         //public int MonsterDrop2;
         //public int MonsterDrop3;
     }
+    public enum MonsterGrade
+    {
+        Normal,
+        Boss
+    }
+
 
     private Dictionary<string, MonsterData> dataSet;
 
@@ -112,7 +119,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
             key = monsterDataCsv[idx]["MonsterInName"].ToString();
             md.monsterSize = int.Parse(monsterDataCsv[idx]["MonsterSize"].ToString());
             md.monsterName = monsterDataCsv[idx]["MonsterName"].ToString();
-            md.monsterGrade = monsterDataCsv[idx]["MonsterGrade"].ToString();
+            md.monsterGrade = (MonsterGrade)Enum.Parse(typeof(MonsterGrade), monsterDataCsv[idx]["MonsterGrade"].ToString());
             md.monsterHp = int.Parse(monsterDataCsv[idx]["MonsterHp"].ToString());
             md.monsterPhysicalDefense = int.Parse(monsterDataCsv[idx]["MonsterPhysicalDefense"].ToString());
             md.monsterMagicDefense = int.Parse(monsterDataCsv[idx]["MonsterMagicDefense"].ToString());
@@ -121,7 +128,6 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
             md.closeAttackRange = int.Parse(monsterDataCsv[idx]["CloseAttackRange"].ToString());
             md.standoffAttackPower = int.Parse(monsterDataCsv[idx]["StandoffAttackPower"].ToString());
             md.standoffAttackRange = int.Parse(monsterDataCsv[idx]["StandoffAttackRange"].ToString());
-            md.monsterExp = int.Parse(monsterDataCsv[idx]["MonsterExp"].ToString());
             //ds.CloseAttackAnimation = (int)monsterDataCsv[idx]["CloseAttackAnimation"];
             //ds.StandoffAttackAnimation = (int)monsterDataCsv[idx]["StandoffAttackAnimation"];
             //ds.HitAnimation = (int)monsterDataCsv[idx]["HitAnimation"];

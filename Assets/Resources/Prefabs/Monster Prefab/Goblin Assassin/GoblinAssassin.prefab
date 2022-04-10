@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7125375450886696210}
   - component: {fileID: 5726786512165195205}
   - component: {fileID: 6061098065872841446}
+  - component: {fileID: 6483381308084995283}
   m_Layer: 6
   m_Name: GoblinAssassin
   m_TagString: Monster
@@ -129,7 +130,6 @@ MonoBehaviour:
   mMonsterInName: 
   mMonsterSize: 0
   mMmonsterName: 
-  mMmonsterGrade: 
   monsterExp: 0
 --- !u!114 &3458935651873643830
 MonoBehaviour:
@@ -220,3 +220,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.4669395}
   serializedVersion: 2
   m_Radius: 0.03306049
+--- !u!114 &6483381308084995283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699543621885345178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 863a001ce64236d4eb4a9f60b1093774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

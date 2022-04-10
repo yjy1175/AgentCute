@@ -6,14 +6,19 @@ public class PlayerStatus : IStatus
 {
 
     public Text hpUI;
-
+    public Text mExpUI;
+    private int mPlayerExp;
+    private int mPlayerExpMax;
 
     // Start is called before the first frame update
     void Start()
     {
-        //TO-DO : 임시로 체력은 100으로 세팅. 기획 어케할지 확인 및 문의 필요
+        //TO-DO : 플레이어 스텟들 하드코딩. csv파일 받으면 수정필요.
         mHp = 100;
-        hpUI.text = "User HP : " + Hp;
+        mPlayerExp = 0;
+        mPlayerExpMax = 100;
+        hpUI.text = "Player HP : " + Hp;
+        mExpUI.text = "Player EXP : " + mPlayerExp + "/" + mPlayerExpMax;
     }
 
     // Update is called once per frame
@@ -33,6 +38,24 @@ public class PlayerStatus : IStatus
 
     }
 
+
+    public void registerMonsterHp(int _hp, GameObject _obj)
+    {
+        Debug.Log("registerMonsterHp");
+        if (_hp <= 0)
+        {
+            MonsterManager.MonsterGrade md = _obj.GetComponent<MonsterStatus>().MonsterGrade;
+            if(md == MonsterManager.MonsterGrade.Boss)
+            {
+                mPlayerExp += (int)(0.7 * mPlayerExpMax);
+            }
+            else if(md == MonsterManager.MonsterGrade.Normal)
+            {
+                mPlayerExp += 1;
+            }
+            mExpUI.text = "Player EXP : " + mPlayerExp + "/" + mPlayerExpMax;
+        }
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
 
