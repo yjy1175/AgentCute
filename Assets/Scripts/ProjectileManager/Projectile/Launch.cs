@@ -21,8 +21,6 @@ public class Launch : Projectile
         set { target = value; }
     }
     [SerializeField]
-    private bool isActive = false;
-    [SerializeField]
     private float angle = 0;
     #endregion
     #region method
@@ -60,7 +58,6 @@ public class Launch : Projectile
     {
         if(_target != Vector3.zero)
         {
-            Debug.Log(currentPassCount);
             transform.localScale = new Vector3(AddScaleCoefficient, AddScaleCoefficient, AddScaleCoefficient);
             transform.position = _player;
             target = _target;

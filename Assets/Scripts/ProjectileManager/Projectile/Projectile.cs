@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class Projectile : MonoBehaviour
 {
-
-
     #region variable
     // 추가 관통 마리수
     [SerializeField]
@@ -52,6 +50,11 @@ public abstract class Projectile : MonoBehaviour
         get { return myPos; }
     }
 
+    //실제 active상태인지 체크
+    [SerializeField]
+    protected bool isActive = false;
+
+
     public abstract ProjectileSpec Spec
     {
         get;
@@ -63,6 +66,16 @@ public abstract class Projectile : MonoBehaviour
         set;
     }
     #endregion
+
+
+    private void OnEnable()
+    {
+        isActive = true;
+    }
+    private void OnDisable()
+    {
+        isActive = false;
+    }
 
     //void OnTrrigerEnter2D(Collider2D collision)
     //{
@@ -78,17 +91,19 @@ public abstract class Projectile : MonoBehaviour
         {
             // 관통 구현
             // -1 : 무한 관통
-            if(Spec.MaxPassCount != -1)
-            {
-                currentPassCount++;
-                // 현재 관통한 마리수가 정해진 수치보다 커지면 disable
-                if (currentPassCount > (Spec.MaxPassCount + addPassCount))
+            if (isActive) {
+                if (Spec.MaxPassCount != -1)
                 {
-                    setDisable();
-                    ObjectPoolManager.Instance.DisableGameObject(gameObject);
+                    currentPassCount++;
+                    // 현재 관통한 마리수가 정해진 수치보다 커지면 disable
+                    if (currentPassCount > (Spec.MaxPassCount + addPassCount))
+                    {
+                        setDisable();
+                        ObjectPoolManager.Instance.DisableGameObject(gameObject);
+                    }
                 }
+                collision.gameObject.GetComponent<IStatus>().DamageHp = damage;
             }
-            collision.gameObject.GetComponent<IStatus>().DamageHp = damage;
         }
     }
 

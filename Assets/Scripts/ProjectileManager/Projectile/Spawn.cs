@@ -20,8 +20,6 @@ public class Spawn : Projectile
         set { target = value; }
     }
     [SerializeField]
-    private bool isActive = false;
-    [SerializeField]
     private float angle = 0;
     #endregion
     #region method
