@@ -83,14 +83,14 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             SpawnData temp = dataSetNormal[i];
             if (dataSetNormal[i].realStartSpawnTime < currentTime && dataSetNormal[i].currentTime > dataSetNormal[i].spawnTime)
             {
-                for (int j = 0; j < dataSetNormal[i].spawnNumber; j++)
+                List<int> spawnZone = RandSpawnList(dataSetNormal[i].spawnNumber);
+                for (int j = 0; j < spawnZone.Count; j++)
                 {
                     GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetNormal[i].spawnMonster);
                     setMonsterData(ref monster);
                     if (monster != null)
                     {
-                        int index = UnityEngine.Random.Range(0, spawnPoints.Length);
-                        monster.transform.position = spawnPoints[index].position;
+                        monster.transform.position = spawnPoints[spawnZone[j]].position;
                         monster.SetActive(true);
                         // 스폰된 몬스터의 수 증가
                         allMonsterCount++;
@@ -158,7 +158,19 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             }
         }
     }
-
+    private List<int> RandSpawnList(int cnt)
+    {
+        List<int> list = new List<int>();
+        while (list.Count < cnt)
+        {
+            int idx = UnityEngine.Random.Range(0, spawnPoints.Length);
+            if (!list.Contains(idx))
+            {
+                list.Add(idx);
+            }
+        }
+        return list;
+    }
 
     IEnumerator spawnBoss(int i)
     {
