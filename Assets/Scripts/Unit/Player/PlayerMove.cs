@@ -16,6 +16,8 @@ public class PlayerMove : IMove
         get { return mMoveable; }
         set { mMoveable = value; }
     }
+    [SerializeField]
+    private VertualJoyStick mJoyStick;
     void Awake()
     {
         mAnim = transform.GetChild(0).GetComponent<Animator>();
@@ -39,8 +41,8 @@ public class PlayerMove : IMove
         if (mMoveable)
         {
             //TO-DO : 핸드폰 키입력으로 변환 필요
-            float h = VertualJoyStick.Instance.GetHorizontalValue();
-            float v = VertualJoyStick.Instance.GetVerticalValue();
+            float h = mJoyStick.GetHorizontalValue();
+            float v = mJoyStick.GetVerticalValue();
             if(h == 0 && v == 0)
             {
                 h = Input.GetAxis("Horizontal");
@@ -70,7 +72,7 @@ public class PlayerMove : IMove
             }
 
             mDir = new Vector3(h, v, 0);
-            transform.Translate(mDir.normalized * mSpeed * Time.deltaTime);
+            transform.Translate(mDir * mSpeed * Time.deltaTime);
         }
         else
         {
@@ -78,5 +80,4 @@ public class PlayerMove : IMove
             mAnim.SetBool("Run", false);
         }
     }
-
 }

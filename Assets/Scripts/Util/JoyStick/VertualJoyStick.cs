@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class VertualJoyStick : SingleToneMaker<VertualJoyStick>, IDragHandler, IPointerDownHandler, IPointerUpHandler
+public class VertualJoyStick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     private Image bgImg;
     private Image controllerImg;

@@ -7,6 +7,7 @@ public class PlayerAttack : IAttack
 {
     public Button GBtn;
     public Button UBtn;
+    public VertualJoyStick Ujoystick;
 
     private GameObject firstProjectile;
 
@@ -78,6 +79,7 @@ public class PlayerAttack : IAttack
     // 발사체 데미지를 설정합니다.
     private void setProjectileData(ref GameObject obj)
     {
+        // 하드코딩된 부분은 플레이어 스텟의 공격력을 받아온다.
         obj.GetComponent<Projectile>().Damage = 
             (int)((50 + EquipmentManager.Instance.getCurrentDamage()) * obj.GetComponent<Projectile>().Spec.ProjectileDamage);
     }
@@ -123,11 +125,6 @@ public class PlayerAttack : IAttack
             yield return new WaitForSeconds(_skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex]);
             _btn.gameObject.SetActive(true);
         }
-        // 무한 클릭(시간으로 관리)
-        else if (count == -1)
-        {
-            // Todo : 쿨타임동안에는 무한발사가 가능한 스킬의 경우 
-        }
         // 클릭횟수가 정해져 있는 경우
         else
         {
@@ -150,12 +147,38 @@ public class PlayerAttack : IAttack
             }
         }
     }
+    // 시간내의 무한 발사인 경우
+    // 지속 시간, 타겟
+    IEnumerator InfiniteLaunch(Skill _skill)
+    {
+        // Todo : 무한발사 스킬 지속시간과 한발당 발사시간 데이터 받아오기
+        int count = (int)(80f / 0.2f); //  지속 시간 / 한발당 발사시간
+        Vector3 targetPos;
+        Vector3 firePos;
+        while (count != 0)
+        {
+            count--;
+            targetPos = new Vector3(Ujoystick.GetHorizontalValue(), Ujoystick.GetVerticalValue(), 0);
+            if(targetPos == Vector3.zero)
+                targetPos = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
+            firePos = firePosition.transform.position;
+            // 터치패드 방향 가져올 시 이미 정규화가 되어있는 상태라
+            // 일정량을 곱해줘야 제대로된 방향으로 나감
+            launchProjectile(_skill, 0, targetPos * 2f, firePos, false);
+            yield return new WaitForSeconds(0.2f); // 한발당 발사시간
+        }
+        Ujoystick.gameObject.SetActive(false);
+    }
     // 우선 발사체가 한개인 경우만 구현
     private void launchSkill(Skill _skill)
     {
         int count = _skill.Spec.SkillCount;
         int projectileCount = TileDict[_skill].Count;
+        // 터치패드의 입력 방향으로 발사
+        // 만약 터치패드의 입력이 없을 경우 근거리 몬스터로 발사
         Vector3 targetPos = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
+        if (Ujoystick.gameObject.activeInHierarchy)
+            targetPos = new Vector3(Ujoystick.GetHorizontalValue(), Ujoystick.GetVerticalValue(), 0);
         Vector3 firePos = firePosition.transform.position;
         // 발사체가 한개인 경우
         if(projectileCount <= 1)
@@ -164,6 +187,15 @@ public class PlayerAttack : IAttack
             if (count == 1)
             {
                 launchProjectile(_skill, 0, targetPos, firePos, false);
+            }
+            // 무한 발사(시간으로 관리)
+            else if (count == -1)
+            {
+                // Todo : 쿨타임동안에는 무한발사가 가능한 스킬의 경우 
+                // 궁극기 스킬 버튼이 터치패드로 변경
+                Ujoystick.gameObject.SetActive(true);
+                // 터치패드의 방향으로 해당 시간동안 발사
+                StartCoroutine(InfiniteLaunch(_skill));
             }
             // 중복 발사일 경우
             else

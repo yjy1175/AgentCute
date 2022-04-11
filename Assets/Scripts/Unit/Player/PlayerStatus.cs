@@ -28,13 +28,13 @@ public class PlayerStatus : IStatus
         /*
          * TO-DO : HP가 달경우는 Delegate를 통해 나중에 만들어질 UIManager로 보내서 체력상태를 보낼예정
          */
-        hpUI.text = "User HP : " + mHp;
-        
+        hpUI.text = "Player HP : " + mHp;
+
         if (Input.GetKey(KeyCode.Z))
         {
             StartCoroutine(InvincibilityCorutine(3f));
         }
-        
+
 
     }
 
@@ -45,11 +45,11 @@ public class PlayerStatus : IStatus
         if (_hp <= 0)
         {
             MonsterManager.MonsterGrade md = _obj.GetComponent<MonsterStatus>().MonsterGrade;
-            if(md == MonsterManager.MonsterGrade.Boss)
+            if (md == MonsterManager.MonsterGrade.Boss)
             {
                 mPlayerExp += (int)(0.7 * mPlayerExpMax);
             }
-            else if(md == MonsterManager.MonsterGrade.Normal)
+            else if (md == MonsterManager.MonsterGrade.Normal)
             {
                 mPlayerExp += 1;
             }
@@ -63,13 +63,11 @@ public class PlayerStatus : IStatus
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        
+
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        
-    }
 
-    
+    }
 }
