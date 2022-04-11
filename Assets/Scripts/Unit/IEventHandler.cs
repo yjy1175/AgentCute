@@ -11,6 +11,7 @@ public class IEventHandler : MonoBehaviour
 
     public virtual void registerHpObserver(HpObserver _obs)
     {
+        //HpObserverEvent는 null이여도 -연산에대해 에러가 발생하지 않음
         HpObserverEvent -= _obs;
         HpObserverEvent += _obs;
     }
@@ -21,7 +22,6 @@ public class IEventHandler : MonoBehaviour
 
     public virtual void ChangeHp(int _hp, GameObject _obj)
     {
-        Debug.Log("ChangeHp");
         HpObserverEvent?.Invoke(_hp, _obj);
     }
 

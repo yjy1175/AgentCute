@@ -24,8 +24,6 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
         public int standoffAttackPower;
         public int standoffAttackRange;
         //public int MonsterAI;
-        public int monsterExp;
-
         //public int MonsterDrop1;
         //public int MonsterDrop2;
         //public int MonsterDrop3;
@@ -37,6 +35,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
     }
 
 
+    [SerializeField]
     private Dictionary<string, MonsterData> dataSet;
 
     private void Awake()

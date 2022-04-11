@@ -49,13 +49,6 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     void Awake()
     {
         InitAllSpawnData();
-        /*
-         * TO-DO: 
-         * 1. spawn point는 Awake에서 오브젝트를 찾아 읽어오는 방식
-         * 2. MonsterManager로부터 몬스터 형태 받아오는 API 지금은 임시로 MonsterA에 오브젝트 넣어둠
-         * 3. 몬스터별 스폰은 어떻게 구성하는게 좋을지 고민이 필요. 규칙성 -> 기획분들에게 문의가 필요한부분 -> 일단은 그냥 구현
-         * 
-         * */
     }
 
     // Start is called before the first frame update
@@ -89,11 +82,9 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                 for (int j = 0; j < spawnZone.Count; j++)
                 {
                     GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetNormal[i].spawnMonster);
-                    setMonsterData(ref monster);
                     if (monster != null)
                     {
-                        //TO-DO : monster가 생기는 event를 유저가 구독하여 hp register는 Player에서 구독하도록 변경이 필요.
-                        monster.GetComponent<MonsterEventHandler>().registerHpObserver(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().registerMonsterHp);
+                        setMonsterData(ref monster);
                         monster.transform.position = spawnPoints[spawnZone[j]].position;
                         monster.SetActive(true);
                         // 스폰된 몬스터의 수 증가
@@ -124,13 +115,13 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
      */
     private void setMonsterData(ref GameObject monster)
     {
-        /*
-         *  TO-Do : 값 가져오는 형태는 아래와 같은 방식으로 진행할 예정. 구조가 변할수 있기때문에 일단 당장 필요한 hp,attack만 짜놓음.
-         */
         MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(monster.name);
         monster.GetComponent<MonsterStatus>().Hp = md.monsterHp;
+        monster.GetComponent<MonsterStatus>().Size = md.monsterSize;
         monster.GetComponent<MonsterAttack>().CloseAttackPower = md.closeAttackPower;
         monster.GetComponent<MonsterMove>().Speed = md.monsterSpeed;
+        //TO-DO : monster가 생기는 event를 유저가 구독하여 hp register는 Player에서 구독하도록 변경이 필요.
+        monster.GetComponent<MonsterEventHandler>().registerHpObserver(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().registerMonsterHp);
     }
 
     private void InitAllSpawnData()

@@ -9,7 +9,11 @@ public abstract class IStatus : MonoBehaviour
     public int mSpeed;
     public int mPhysicalDefense;
     public int mMagicDefense;
+    [SerializeField]
     private bool mIsInvincibility = false;
+    [SerializeField]
+    private int mSize;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +51,16 @@ public abstract class IStatus : MonoBehaviour
             MessageBoxManager.BoxType bt = (MessageBoxManager.BoxType)Enum.Parse(typeof(MessageBoxManager.BoxType), gameObject.tag + "Damage");
             MessageBoxManager.Instance.createMessageBox(bt, value.ToString(), gameObject.transform.position);
             
+        }
+    }
+
+    public virtual int Size
+    {
+        get { return mSize; }
+        set
+        {
+            mSize = value;
+            gameObject.transform.localScale = new Vector3(mSize, mSize, mSize);
         }
     }
 
