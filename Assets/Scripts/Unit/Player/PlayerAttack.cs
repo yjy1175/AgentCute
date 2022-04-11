@@ -164,7 +164,7 @@ public class PlayerAttack : IAttack
             firePos = firePosition.transform.position;
             // 터치패드 방향 가져올 시 이미 정규화가 되어있는 상태라
             // 일정량을 곱해줘야 제대로된 방향으로 나감
-            launchProjectile(_skill, 0, targetPos * 2f, firePos, false);
+            launchProjectile(_skill, 0, targetPos * 5f, firePos, false);
             yield return new WaitForSeconds(0.2f); // 한발당 발사시간
         }
         Ujoystick.gameObject.SetActive(false);
