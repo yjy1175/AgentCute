@@ -5,7 +5,8 @@ using System;
 
 public abstract class IStatus : MonoBehaviour
 {
-    public int mHp;
+    protected int mHp;
+    protected int mMaxHp;
     public int mSpeed;
     public int mPhysicalDefense;
     public int mMagicDefense;

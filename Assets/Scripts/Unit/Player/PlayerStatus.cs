@@ -5,20 +5,22 @@ using UnityEngine.UI;
 public class PlayerStatus : IStatus
 {
 
-    public Text hpUI;
-    public Text mExpUI;
     private int mPlayerExp;
     private int mPlayerExpMax;
 
+    private GameObject mHpBar;
+    private GameObject mExpBar;
     // Start is called before the first frame update
     void Start()
     {
         //TO-DO : 플레이어 스텟들 하드코딩. csv파일 받으면 수정필요.
         mHp = 100;
+        mMaxHp = 100;
         mPlayerExp = 0;
         mPlayerExpMax = 100;
-        hpUI.text = "Player HP : " + Hp;
-        mExpUI.text = "Player EXP : " + mPlayerExp + "/" + mPlayerExpMax;
+        mHpBar = GameObject.Find("HpBar");
+        mExpBar = GameObject.Find("ExpBar");
+
     }
 
     // Update is called once per frame
@@ -26,9 +28,14 @@ public class PlayerStatus : IStatus
     {
 
         /*
-         * TO-DO : HP가 달경우는 Delegate를 통해 나중에 만들어질 UIManager로 보내서 체력상태를 보낼예정
+         * TO-DO : UI관련 클래스 만들어 그곳에서 관리하도록 수정.EventHandler를 통해 값이 업데이트 될때마다 수정하도록 변경 필요
          */
-        hpUI.text = "Player HP : " + mHp;
+        mHpBar.transform.Find("Hp").GetComponent<Image>().fillAmount = ((float)mHp/ (float)mMaxHp);
+        mHpBar.transform.Find("HpText").GetComponent<Text>().text = mHp + "/" + mMaxHp;
+
+
+        mExpBar.transform.Find("Exp").GetComponent<Image>().fillAmount = ((float)mPlayerExp / (float)mPlayerExpMax);
+        mExpBar.transform.Find("ExpText").GetComponent<Text>().text = mPlayerExp + "/" + mPlayerExpMax;
 
         if (Input.GetKey(KeyCode.Z))
         {
@@ -53,7 +60,6 @@ public class PlayerStatus : IStatus
             {
                 mPlayerExp += 1;
             }
-            mExpUI.text = "Player EXP : " + mPlayerExp + "/" + mPlayerExpMax;
         }
     }
     void OnCollisionEnter2D(Collision2D collision)
