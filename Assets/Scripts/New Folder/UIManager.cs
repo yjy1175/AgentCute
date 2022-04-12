@@ -46,6 +46,9 @@ public class UIManager : SingleToneMaker<UIManager>
     }
 
     #region method
+    /*
+     *  Todo : 만들다보니 비슷한 기능들이여서 추후에 리팩토링필요
+     */
     public void ClickedGamePause()
     {
         // 일시정지 상태에서 클릭
