@@ -26,13 +26,6 @@ public class SkillManager : SingleToneMaker<SkillManager>
     {
         get { return currentUltimateSkill; }
     }
-
-    public enum SkillType
-    {
-        B,
-        G,
-        U
-    }
     #endregion
 
     #region method
