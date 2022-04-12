@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerStatus : IStatus
 {
-
+    [SerializeField]
     private int mPlayerExp;
+    [SerializeField]
     private int mPlayerExpMax;
-
+    [SerializeField]
+    private int mPlayerLevel;
     private GameObject mHpBar;
     private GameObject mExpBar;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +23,7 @@ public class PlayerStatus : IStatus
         mPlayerExpMax = 100;
         mHpBar = GameObject.Find("HpBar");
         mExpBar = GameObject.Find("ExpBar");
-
+        mPlayerLevel = 1;
     }
 
     // Update is called once per frame
@@ -30,12 +33,13 @@ public class PlayerStatus : IStatus
         /*
          * TO-DO : UI관련 클래스 만들어 그곳에서 관리하도록 수정.EventHandler를 통해 값이 업데이트 될때마다 수정하도록 변경 필요
          */
-        mHpBar.transform.Find("Hp").GetComponent<Image>().fillAmount = ((float)mHp/ (float)mMaxHp);
+        mHpBar.transform.Find("Hp").GetComponent<Image>().fillAmount = ((float)mHp / (float)mMaxHp);
         mHpBar.transform.Find("HpText").GetComponent<Text>().text = mHp + "/" + mMaxHp;
 
 
         mExpBar.transform.Find("Exp").GetComponent<Image>().fillAmount = ((float)mPlayerExp / (float)mPlayerExpMax);
         mExpBar.transform.Find("ExpText").GetComponent<Text>().text = mPlayerExp + "/" + mPlayerExpMax;
+
 
         if (Input.GetKey(KeyCode.Z))
         {
@@ -48,20 +52,32 @@ public class PlayerStatus : IStatus
 
     public void registerMonsterHp(int _hp, GameObject _obj)
     {
-        Debug.Log("registerMonsterHp");
         if (_hp <= 0)
         {
             MonsterManager.MonsterGrade md = _obj.GetComponent<MonsterStatus>().MonsterGrade;
-            if (md == MonsterManager.MonsterGrade.Boss)
-            {
-                mPlayerExp += (int)(0.7 * mPlayerExpMax);
-            }
-            else if (md == MonsterManager.MonsterGrade.Normal)
-            {
-                mPlayerExp += 1;
-            }
+            PlayerExp = GetMonsterExp(md);
         }
     }
+
+    public int PlayerExp
+    {
+        set{
+            mPlayerExp += value;
+            while (mPlayerExp >= mPlayerExpMax)
+            {
+                //TO-DO LevelUp effect는?
+                mPlayerExp -= mPlayerExpMax;
+                mPlayerLevel++;
+                gameObject.GetComponent<PlayerEventHandler>().ChangeLevel(mPlayerLevel);
+            }
+        }
+        get{
+            return mPlayerExp;
+        }
+    }
+
+
+
     void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -75,5 +91,21 @@ public class PlayerStatus : IStatus
     void OnCollisionExit2D(Collision2D collision)
     {
 
+    }
+
+    private int GetMonsterExp(MonsterManager.MonsterGrade _md)
+    {
+        if (_md == MonsterManager.MonsterGrade.Boss)
+        {
+            return (int)(0.7 * mPlayerExpMax);
+        }
+        else if (_md == MonsterManager.MonsterGrade.Normal)
+        {
+            return PlayerExp = 1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 }

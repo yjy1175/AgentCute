@@ -3877,7 +3877,7 @@ GameObject:
   - component: {fileID: 613809909}
   - component: {fileID: 613809908}
   m_Layer: 5
-  m_Name: Text
+  m_Name: LevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10736,7 +10736,7 @@ GameObject:
   - component: {fileID: 1730204599}
   - component: {fileID: 1730204598}
   m_Layer: 5
-  m_Name: Level
+  m_Name: LevelBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10759,7 +10759,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -368, y: 0}
+  m_AnchoredPosition: {x: -354, y: 1.5999985}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1730204598
@@ -12775,6 +12775,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 13954298564071381, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
   m_PrefabInstance: {fileID: 6637047451298985416}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6641142738334399014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6641142738334399005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a938b2eda292641b85aa121ed2e856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mLevelBar: {fileID: 0}
 --- !u!212 &6776406776483109450 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 148941431581781890, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
