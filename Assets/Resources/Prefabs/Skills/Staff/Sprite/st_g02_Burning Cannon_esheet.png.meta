@@ -1,0 +1,1640 @@
+fileFormatVersion: 2
+guid: ec5cd929d11d2454994c80d4e04b0b55
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_0
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 744
+        width: 49
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9669ec782b8be144ba1f37dadc7a5001
+      internalID: -204898019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 743
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4879b3fa6034a84e8d6b021ccb44b5e
+      internalID: 1056152153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_2
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 742
+        width: 48
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f661968610e0aee47bbe4659e87c6069
+      internalID: -1248740185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_3
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 759
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee2e0124d6dbbe1418c9df3553633a97
+      internalID: 629331475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_4
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 742
+        width: 47
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b583e891e07cb794183b8ff8523276e2
+      internalID: 1343468297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_5
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 741
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef62012c2c90d6d4d980259af382ef35
+      internalID: 1327475210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_6
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 743
+        width: 49
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe76f981e0297ae4cbbbaafc6c8939ad
+      internalID: -1790724297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_7
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 740
+        width: 48
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45256edf8f7937b40bbda6acae2ff435
+      internalID: -164892442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_8
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 741
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c21989215b33a76449c8025b6ebddc1c
+      internalID: 70794507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_9
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 644
+        width: 48
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8f3103c29ddcd94db2bb26506194bba
+      internalID: -350412614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_10
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 643
+        width: 48
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06f2664c5bcb1374c81d4c55c24ab81d
+      internalID: 1384059669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_11
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 642
+        width: 49
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09f07a059a13eb544bfd62bc94cfa7d1
+      internalID: 259142292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_12
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 642
+        width: 50
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 789bd3fcde3445c498917c1477dc9264
+      internalID: -1662334788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_13
+      rect:
+        serializedVersion: 2
+        x: 427
+        y: 641
+        width: 50
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 327c509a66faa9b44bba3fde8de6b679
+      internalID: -860612195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_14
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 641
+        width: 49
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9277927ed1e8c9a4b9260982bb6b711f
+      internalID: 166998252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_15
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 640
+        width: 50
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ad0ba4591fb56c4d894b8ee7e1ccd7c
+      internalID: 786879279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_16
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 660
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba9707a50080b1241b375df9fc478e8e
+      internalID: -1881180955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_17
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 544
+        width: 48
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e782aac828bb3d245903c44c88116217
+      internalID: -1626128635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_18
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 543
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0251ad5adf8682c49b6d200de5411983
+      internalID: -582267170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_19
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 542
+        width: 48
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4db6cab02cfe6d4694a2af53f21ab7c
+      internalID: 1098261300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_20
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 542
+        width: 49
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37c04ff0e23a9f94f849771f758251f5
+      internalID: 1783298421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_21
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 541
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b6127abb28c30c408dd4d4a5570a915
+      internalID: 1650123548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_22
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 541
+        width: 49
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 982e255a7e4de494c9bbc77e78b9477a
+      internalID: 685923321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_23
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 540
+        width: 50
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1303dd1228fce53419df27bbcd89eab5
+      internalID: 481947686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_24
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 560
+        width: 4
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaf3dada669d0374d979aa01c21470cc
+      internalID: 1252278821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_25
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 444
+        width: 47
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f40843004dc3d6a4ba5403d6cd59498b
+      internalID: -1744956004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_26
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 456
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f6ccf36d933bf84b8e942ecde53bd2a
+      internalID: 798879718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_27
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 443
+        width: 48
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72f74aceb48e8204daca5e262fc19c48
+      internalID: 469735243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_28
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 442
+        width: 50
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d49064c82bce394e93244ec5648bb24
+      internalID: -990862074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_29
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 442
+        width: 50
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aca73bc26f6daa4eb10d55c882e7a22
+      internalID: -284315854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_30
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 441
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08827fedfa954cf40a697b5c1493aa02
+      internalID: 1369289126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_31
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 443
+        width: 49
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2273230ad913e844af040f288047c65
+      internalID: 1523952575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_32
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 442
+        width: 49
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96f52ffbb00e7b8489f299c916bc5897
+      internalID: -1174164185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_33
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 444
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54a4be8273d88174a8311d97c8aa47d9
+      internalID: -1541367256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_34
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 441
+        width: 5
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f145e99750d83a14989cc8c909f28eb7
+      internalID: 1662914491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_35
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 344
+        width: 50
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b7e7afcded463d4ead84a28990bf2fd
+      internalID: -1556176760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_36
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 343
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa829e67b0fd2d441b7e25bf8cc58fee
+      internalID: -1607506020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_37
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 343
+        width: 48
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d0d928904178bf45b32afbc6c4d4524
+      internalID: -1001730718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_38
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 342
+        width: 50
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4aba47aeee791d94aa743a2fe1b32b88
+      internalID: -597383962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_39
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 342
+        width: 48
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 619c0f39b6f3f3c419f350c8c31b87f1
+      internalID: 1542456412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_40
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 341
+        width: 49
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4967b337bc8b9be469edddd0c35a673b
+      internalID: 2120326829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_41
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 341
+        width: 49
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5023491fc5e5ca2489a6d7c1483f9695
+      internalID: 180861801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_42
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 344
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce514e90ae13c684d871cb670c894226
+      internalID: 145028407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_43
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 244
+        width: 50
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c06d6042fb8d0e34a80f9130d3d476ea
+      internalID: 1637220052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_44
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 243
+        width: 48
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 984211701b500aa468f97a4d718044da
+      internalID: -1242569763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_45
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 246
+        width: 6
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a1f13fe0adef2e4ca462234c5b1cedc
+      internalID: -270873248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_46
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 243
+        width: 47
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 609abb876546d0049876242ab06280e8
+      internalID: -1206999946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_47
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 242
+        width: 50
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84a6ec17e4a2c8a48a707f02f190b49b
+      internalID: 1618891857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_48
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 241
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 014102c1b34e6cc49be217d5cf7f73a2
+      internalID: -896034270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_49
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 241
+        width: 48
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f7e85b653002c743aec7b0f49aa78da
+      internalID: -80335512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_50
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 241
+        width: 48
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df3bcd148b56d8c4a8ed6bef6b151f7c
+      internalID: -2065170931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_51
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 241
+        width: 49
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b53f6a5c1d88af34b936cc736c0f3e8d
+      internalID: 1530795855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_52
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 144
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fda54c1b6651b443808331bc94c3058
+      internalID: -629212816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_53
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 143
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b89938cdbbe14ab499925a65a950509f
+      internalID: 1439449091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_54
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 146
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e735cfe250d48d542afefd60470ba01e
+      internalID: -2097350635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_55
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 143
+        width: 47
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fc57d023088e5c4ea27ce3693e03935
+      internalID: -614318716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_56
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 142
+        width: 49
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 972772a10a3d15547b7a22c0ca4276b6
+      internalID: 1109308498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_57
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 141
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1bd0757c519bb743b2c4a4dd5d3a0a9
+      internalID: -1883907795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_58
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 141
+        width: 48
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3a8c2adf52fbc84e8a7ea6b9f90236c
+      internalID: -1018080081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_59
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 141
+        width: 47
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 353478a8b55c64849a47468f316cfc62
+      internalID: 1334017218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_60
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 141
+        width: 49
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0ed697b1b0e1c94e9bd39836eb9d5dd
+      internalID: 1979902099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_61
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 44
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 698269c9bfd361341b80c94c09d39585
+      internalID: -2128610240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_62
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 43
+        width: 50
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d07f8739611e57c41bc007a769131459
+      internalID: 1427727244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_63
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 43
+        width: 49
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d895d5c87dfe5e42b7ef5c443326357
+      internalID: 1164623110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_64
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 42
+        width: 49
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e63d9e697c3966e48a0551e4fe13109a
+      internalID: -903820066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_65
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 42
+        width: 49
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaa20906cbcd5c14fb81919b6f2c4171
+      internalID: 962982291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_66
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 41
+        width: 50
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 674eff40bfaa9b74386793f074adb3cb
+      internalID: -1324672739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_67
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 41
+        width: 50
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70dd702d76cdc304199fb483cec439a2
+      internalID: -1760730347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: st_g02_Burning Cannon_esheet_68
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 41
+        width: 49
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d055d43080137c48b2a6b85899c2d60
+      internalID: 355137744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      st_g02_Burning Cannon_esheet_20: 1783298421
+      st_g02_Burning Cannon_esheet_10: 1384059669
+      st_g02_Burning Cannon_esheet_53: 1439449091
+      st_g02_Burning Cannon_esheet_49: -80335512
+      st_g02_Burning Cannon_esheet_15: 786879279
+      st_g02_Burning Cannon_esheet_5: 1327475210
+      st_g02_Burning Cannon_esheet_12: -1662334788
+      st_g02_Burning Cannon_esheet_7: -164892442
+      st_g02_Burning Cannon_esheet_16: -1881180955
+      st_g02_Burning Cannon_esheet_8: 70794507
+      st_g02_Burning Cannon_esheet_40: 2120326829
+      st_g02_Burning Cannon_esheet_68: 355137744
+      st_g02_Burning Cannon_esheet_21: 1650123548
+      st_g02_Burning Cannon_esheet_31: 1523952575
+      st_g02_Burning Cannon_esheet_9: -350412614
+      st_g02_Burning Cannon_esheet_54: -2097350635
+      st_g02_Burning Cannon_esheet_57: -1883907795
+      st_g02_Burning Cannon_esheet_36: -1607506020
+      st_g02_Burning Cannon_esheet_4: 1343468297
+      st_g02_Burning Cannon_esheet_55: -614318716
+      st_g02_Burning Cannon_esheet_14: 166998252
+      st_g02_Burning Cannon_esheet_28: -990862074
+      st_g02_Burning Cannon_esheet_33: -1541367256
+      st_g02_Burning Cannon_esheet_63: 1164623110
+      st_g02_Burning Cannon_esheet_66: -1324672739
+      st_g02_Burning Cannon_esheet_65: 962982291
+      st_g02_Burning Cannon_esheet_30: 1369289126
+      st_g02_Burning Cannon_esheet_67: -1760730347
+      st_g02_Burning Cannon_esheet_2: -1248740185
+      st_g02_Burning Cannon_esheet_50: -2065170931
+      st_g02_Burning Cannon_esheet_22: 685923321
+      st_g02_Burning Cannon_esheet_0: -204898019
+      st_g02_Burning Cannon_esheet_42: 145028407
+      st_g02_Burning Cannon_esheet_59: 1334017218
+      st_g02_Burning Cannon_esheet_39: 1542456412
+      st_g02_Burning Cannon_esheet_43: 1637220052
+      st_g02_Burning Cannon_esheet_19: 1098261300
+      st_g02_Burning Cannon_esheet_6: -1790724297
+      st_g02_Burning Cannon_esheet_44: -1242569763
+      st_g02_Burning Cannon_esheet_51: 1530795855
+      st_g02_Burning Cannon_esheet_25: -1744956004
+      st_g02_Burning Cannon_esheet_41: 180861801
+      st_g02_Burning Cannon_esheet_11: 259142292
+      st_g02_Burning Cannon_esheet_38: -597383962
+      st_g02_Burning Cannon_esheet_52: -629212816
+      st_g02_Burning Cannon_esheet_24: 1252278821
+      st_g02_Burning Cannon_esheet_18: -582267170
+      st_g02_Burning Cannon_esheet_26: 798879718
+      st_g02_Burning Cannon_esheet_60: 1979902099
+      st_g02_Burning Cannon_esheet_45: -270873248
+      st_g02_Burning Cannon_esheet_48: -896034270
+      st_g02_Burning Cannon_esheet_46: -1206999946
+      st_g02_Burning Cannon_esheet_47: 1618891857
+      st_g02_Burning Cannon_esheet_27: 469735243
+      st_g02_Burning Cannon_esheet_29: -284315854
+      st_g02_Burning Cannon_esheet_23: 481947686
+      st_g02_Burning Cannon_esheet_56: 1109308498
+      st_g02_Burning Cannon_esheet_58: -1018080081
+      st_g02_Burning Cannon_esheet_3: 629331475
+      st_g02_Burning Cannon_esheet_13: -860612195
+      st_g02_Burning Cannon_esheet_1: 1056152153
+      st_g02_Burning Cannon_esheet_61: -2128610240
+      st_g02_Burning Cannon_esheet_64: -903820066
+      st_g02_Burning Cannon_esheet_32: -1174164185
+      st_g02_Burning Cannon_esheet_35: -1556176760
+      st_g02_Burning Cannon_esheet_62: 1427727244
+      st_g02_Burning Cannon_esheet_37: -1001730718
+      st_g02_Burning Cannon_esheet_34: 1662914491
+      st_g02_Burning Cannon_esheet_17: -1626128635
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -74,12 +74,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: fcc3f7f365c6cbf48a07c0cf800ad2db, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 710e6b49c472e6f4db866e5557026c32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5, y: 0.46875}
+  m_Size: {x: 3, y: 2.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 2365398024404964673}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0d84b2d60d56d8f479814591183c42ea, type: 2}
+  m_Controller: {fileID: 9100000, guid: f243976bb5902a64bbe205939feaf34b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -119,6 +119,7 @@ MonoBehaviour:
   damage: 0
   currentPassCount: 0
   myPos: {x: 0, y: 0, z: 0}
+  isActive: 0
   spec:
     type: s1
     typeName: 
@@ -129,10 +130,9 @@ MonoBehaviour:
     speed: 0
     count: 1
     angle: 0
-    spawnTime: 1
+    spawnTime: 0.25
     maxPassCount: -1
   target: {x: 0, y: 0, z: 0}
-  isActive: 0
   angle: 0
 --- !u!61 &-4765639334332668555
 BoxCollider2D:
@@ -152,7 +152,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 3, y: 2.64}
-    newSize: {x: 0.5, y: 0.46875}
+    newSize: {x: 3, y: 2.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
