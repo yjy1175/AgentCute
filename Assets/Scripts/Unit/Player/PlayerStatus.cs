@@ -101,7 +101,7 @@ public class PlayerStatus : IStatus
         }
         else if (_md == MonsterManager.MonsterGrade.Normal)
         {
-            return PlayerExp = 1;
+            return 1;
         }
         else
         {
