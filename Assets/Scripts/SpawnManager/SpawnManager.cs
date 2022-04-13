@@ -178,6 +178,16 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             int index = UnityEngine.Random.Range(0, spawnPoints.Length);
             monster.transform.position = spawnPoints[index].position;
             monster.SetActive(true);
+
+            //TO-DO : 보스 광폭화 설정. 일단은 하드코딩해놓은 상태.
+            //csv에서 읽어오소 해당 시간에 따라 광포하하도록 수정필요
+            //디버그모드를 위해 보스생성 룰 3개를위해 이부분 피쳐처리 및 수정 필요
+            yield return new WaitForSeconds(10);
+            if (monster.activeInHierarchy)
+            {
+                monster.GetComponent<MonsterMove>().Speed = 10f;
+                monster.GetComponent<MonsterAttack>().CloseAttackPower = 30;
+            }
         }
     }
 }

@@ -5,10 +5,13 @@ using System;
 
 public abstract class IStatus : MonoBehaviour
 {
+    [SerializeField]
     protected int mHp;
+    [SerializeField]
     protected int mDamaged;
+    [SerializeField]
     protected int mMaxHp;
-    public int mSpeed;
+
     public int mPhysicalDefense;
     public int mMagicDefense;
     [SerializeField]
@@ -76,13 +79,6 @@ public abstract class IStatus : MonoBehaviour
             mSize = value;
             gameObject.transform.localScale = new Vector3(mSize, mSize, mSize);
         }
-    }
-
-
-    public virtual int Speed
-    {
-        get { return Speed; }
-        set { mSpeed = value; }
     }
 
     protected IEnumerator InvincibilityCorutine(float time)

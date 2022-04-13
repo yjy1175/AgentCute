@@ -8,7 +8,7 @@ public class MonsterStatus : IStatus
     public int mId;
     public string mSpawnMap;
     public string mMonsterInName;
-    public string mMmonsterName;
+    public string mMonsterName;
     //public int MonsterAI;
     private MonsterManager.MonsterGrade mMonsterGrade;
 
