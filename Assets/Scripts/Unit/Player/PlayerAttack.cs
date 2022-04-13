@@ -8,6 +8,7 @@ public class PlayerAttack : IAttack
     public GameObject GBtn;
     public GameObject UBtn;
     public VertualJoyStick Ujoystick;
+    public VertualJoyStick Mjoystick;
 
     private GameObject firstProjectile;
 
@@ -160,7 +161,7 @@ public class PlayerAttack : IAttack
     IEnumerator InfiniteLaunch(Skill _skill)
     {
         // Todo : 무한발사 스킬 지속시간과 한발당 발사시간 데이터 받아오기
-        int count = (int)(8f / 0.2f); //  지속 시간 / 한발당 발사시간
+        int count = (int)(_skill.Spec.MSkillRunTime / 0.2f); //  지속 시간 / 한발당 발사시간
         Vector3 targetPos;
         Vector3 firePos;
         while (count != 0)
@@ -188,10 +189,12 @@ public class PlayerAttack : IAttack
         int count = _skill.Spec.SkillCount;
         int projectileCount = TileDict[_skill].Count;
         // 터치패드의 입력 방향으로 발사
+        // 터치패드 방향 가져올 시 이미 정규화가 되어있는 상태라
+        // 일정량을 곱해줘야 제대로된 방향으로 나감
         // 만약 터치패드의 입력이 없을 경우 근거리 몬스터로 발사
-        Vector3 targetPos = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
-        if (Ujoystick.gameObject.activeInHierarchy)
-            targetPos = new Vector3(Ujoystick.GetHorizontalValue(), Ujoystick.GetVerticalValue(), 0);
+        Vector3 targetPos = new Vector3(Mjoystick.GetHorizontalValue() * 5f, Mjoystick.GetVerticalValue() * 5f, 0);
+        if(targetPos == Vector3.zero)
+            targetPos = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
         Vector3 firePos = firePosition.transform.position;
         // 발사체가 한개인 경우
         if(projectileCount <= 1)
@@ -237,6 +240,7 @@ public class PlayerAttack : IAttack
     {
         int launchCount = TileDict[mSkill][mProjectileIndex].Spec.Count + Projectile.AddProjectilesCount;
         int angle = TileDict[mSkill][mProjectileIndex].Spec.Angle;
+        // 각도가 없을 경우 한발만 발사
         for (int i = 0; i < launchCount; i++)
         {
             StartCoroutine(
@@ -258,9 +262,27 @@ public class PlayerAttack : IAttack
     // 하드 코딩 상태(발사체 2가지만 구현)
     IEnumerator notSingleProjectileLaunch(Skill _skill, Vector3 _target, Vector3 _fire)
     {
-        launchProjectile(_skill, 0, _target, _fire, true);
-        yield return new WaitWhile(() => firstProjectile.activeInHierarchy);
-        launchProjectile(_skill, 1, _target, firstProjectile.GetComponent<Projectile>().MyPos, false);
+        for(int i = 0; i < TileDict[_skill].Count; i++)
+        {
+            if(i > 0)
+            {
+                if(i == TileDict[_skill].Count - 1)
+                {
+                    launchProjectile(_skill, i, _target, firstProjectile.GetComponent<Projectile>().MyPos, false);
+                }
+                else
+                {
+                    launchProjectile(_skill, i, _target, firstProjectile.GetComponent<Projectile>().MyPos, true);
+                }
+            }
+            else
+            {
+                launchProjectile(_skill, i, _target, _fire, true);
+            }
+            yield return new WaitWhile(() => firstProjectile.activeInHierarchy);
+        }
+
+        
     }
     /*
 * _angle : 추가 각도 설정입니다.

@@ -79,6 +79,14 @@ public class SkillSpec : EquipSpec
     }
 
     [SerializeField]
+    private float mSkillRunTime;
+    public float MSkillRunTime
+    {
+        get { return mSkillRunTime; }
+        set { mSkillRunTime = value; }
+    }
+
+    [SerializeField]
     private bool isLocked;
     public bool IsLocked
     {
@@ -89,7 +97,7 @@ public class SkillSpec : EquipSpec
     [SerializeField]
     private List<string> projectiles = new List<string>();
     [SerializeField]
-    private List<int> skillCoolTime = new List<int>();
+    private List<float> skillCoolTime = new List<float>();
     #endregion
     #region method
     public List<string> getProjectiles()
@@ -100,11 +108,11 @@ public class SkillSpec : EquipSpec
     {
         projectiles.Add(_projectile);
     }
-    public List<int> getSkillCoolTime()
+    public List<float> getSkillCoolTime()
     {
         return skillCoolTime;
     }
-    public void addSkillCoolTime(int _time)
+    public void addSkillCoolTime(float _time)
     {
         skillCoolTime.Add(_time);
     }

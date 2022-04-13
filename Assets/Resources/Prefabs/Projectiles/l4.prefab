@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5138079335722772721}
   - component: {fileID: 3874618121769679063}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7094466911294814938}
   - component: {fileID: 1377179630298712839}
   - component: {fileID: 2129261143019605784}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: l4
   m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
@@ -212,8 +212,8 @@ MonoBehaviour:
     projectileDamage: 12
     speed: 21
     count: 1
-    angle: 10
-    spawnTime: 0.5
+    angle: 0
+    spawnTime: 4
     maxPassCount: -1
   target: {x: 0, y: 0, z: 0}
   angle: 0
@@ -230,16 +230,16 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.031690598, y: 0.015845358}
+  m_Offset: {x: -0.0069913864, y: -0.016389668}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.5, y: 0.42}
+    oldSize: {x: 4.375, y: 0.525}
     newSize: {x: 0.8, y: 0.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7832267, y: 0.3501209}
+  m_Size: {x: 4.1872473, y: 0.28565085}
   m_EdgeRadius: 0

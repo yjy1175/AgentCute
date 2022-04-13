@@ -438,9 +438,9 @@ MonoBehaviour:
   skills:
     m_keys: []
     m_values: []
-  currentBaseSkill: {fileID: 8938593344461962476, guid: 7a93f0de3464dec469304e6d50f3c82c, type: 3}
-  currentGeneralSkill: {fileID: 3775658312372567908, guid: b6864ef9d0cf6ab48bc7f7066e5bb1a3, type: 3}
-  currentUltimateSkill: {fileID: 4869162091621873351, guid: 65c2a49fe32aa5248935d2729e75b839, type: 3}
+  currentBaseSkill: {fileID: 6721244397454480554, guid: 4b05ddf059a88bb4789934f1e067eaaa, type: 3}
+  currentGeneralSkill: {fileID: 4230841923007718763, guid: 8bc7ef88574491f4288ccbd07b485eee, type: 3}
+  currentUltimateSkill: {fileID: 3953628672338590063, guid: 25b646b04757d0248b4b554744750634, type: 3}
 --- !u!1001 &39182772
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12703,7 +12703,7 @@ PrefabInstance:
     - target: {fileID: 148941431581781890, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8849d323ac5f2c946acb0baf9673882d, type: 3}
+      objectReference: {fileID: 21300000, guid: 2129f9e950c62154399c343c60271e47, type: 3}
     - target: {fileID: 148941431581781890, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -12760,6 +12760,10 @@ PrefabInstance:
       propertyPath: UBtn
       value: 
       objectReference: {fileID: 497323090}
+    - target: {fileID: 6637047452066596387, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: Mjoystick
+      value: 
+      objectReference: {fileID: 1617255894}
     - target: {fileID: 6637047452066596387, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
       propertyPath: Ujoystick
       value: 

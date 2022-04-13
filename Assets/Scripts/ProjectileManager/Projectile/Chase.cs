@@ -21,8 +21,6 @@ public class Chase : Projectile
         set { target = value; }
     }
     [SerializeField]
-    private bool isActive = false;
-    [SerializeField]
     private float angle = 0;
     #endregion
     #region method
@@ -35,10 +33,10 @@ public class Chase : Projectile
         /*추적 매서드*/
         if (isActive)
         {
-            Vector3 dir = (target - transform.position).normalized;
-            angle = setAngle(dir);
-            Quaternion rotTarget = Quaternion.AngleAxis(angle, Vector3.forward);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotTarget, Time.deltaTime * spec.Speed);
+           Vector3 dir = (target - transform.position).normalized;
+            //angle = setAngle(dir);
+            //Quaternion rotTarget = Quaternion.AngleAxis(angle, Vector3.forward);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, rotTarget, Time.deltaTime * spec.Speed);
             transform.Translate(dir * Time.deltaTime * spec.Speed);
         }
     }

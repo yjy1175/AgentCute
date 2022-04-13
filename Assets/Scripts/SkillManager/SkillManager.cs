@@ -48,17 +48,17 @@ public class SkillManager : SingleToneMaker<SkillManager>
         Skill item;
         for (int i = 0; i < skillList.Length; i++)
         {
-            item = skills[skillsData[i]["SkillNameE"].ToString()].GetComponent<Skill>();
+            item = skills[skillsData[i]["SkillNameENG"].ToString()].GetComponent<Skill>();
             item.Spec.Type = skillsData[i]["SkillType"].ToString();
             item.Spec.TypeName = skillsData[i]["SkillTypeName"].ToString();
             item.Spec.SkillWeaponType = skillsData[i]["SkillWeaponType"].ToString();
-            item.Spec.Name = skillsData[i]["SkillNameE"].ToString();
+            item.Spec.Name = skillsData[i]["SkillName"].ToString();
             item.Spec.Desc = skillsData[i]["SkillDesc"].ToString();
             //item.Spec.Rank = int.Parse(skillsData[i]["ProjectileSpawnTime"].ToString());
             item.Spec.SkillCount = int.Parse(skillsData[i]["SkillCount"].ToString());
             item.Spec.SkillClickCount = int.Parse(skillsData[i]["SkillClickCount"].ToString());
             item.Spec.SkillCoolTimeType = skillsData[i]["SkillCoolTimeType"].ToString();
-
+            item.Spec.MSkillRunTime = float.Parse(skillsData[i]["SkillRunTime"].ToString());
             string[] projectiles = skillsData[i]["Projectiles"].ToString().Split('/');
             item.Spec.getProjectiles().Clear();
             for (int j = 0; j < projectiles.Length; j++)
@@ -67,7 +67,7 @@ public class SkillManager : SingleToneMaker<SkillManager>
             string[] cooltimes = skillsData[i]["SkillCoolTime"].ToString().Split('/');
             item.Spec.getSkillCoolTime().Clear();
             for (int j = 0; j < cooltimes.Length; j++)
-                item.Spec.addSkillCoolTime(int.Parse(cooltimes[j]));
+                item.Spec.addSkillCoolTime(float.Parse(cooltimes[j]));
             item.CurrentUseCount = 0;
             item.CurrentCoolTimeIndex = 0;
         }

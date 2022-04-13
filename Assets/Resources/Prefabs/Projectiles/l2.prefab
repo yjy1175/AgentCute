@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8753924247723715673}
   - component: {fileID: 1649141685043330214}
   - component: {fileID: 8808497532725100983}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: l2
   m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
@@ -110,8 +110,8 @@ MonoBehaviour:
     speed: 11
     count: 1
     angle: 0
-    spawnTime: 0.8
-    maxPassCount: 0
+    spawnTime: 4
+    maxPassCount: 1
   target: {x: 0, y: 0, z: 0}
   angle: 0
 --- !u!61 &8808497532725100983
@@ -131,7 +131,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.89, y: 0.88}
+    oldSize: {x: 1.0113636, y: 1}
     newSize: {x: 0.89, y: 0.88}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

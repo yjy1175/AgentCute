@@ -109,8 +109,8 @@ MonoBehaviour:
     projectileDamage: 0.7
     speed: 11
     count: 1
-    angle: 1
-    spawnTime: 0.8
+    angle: 0
+    spawnTime: 4
     maxPassCount: 1
   target: {x: 0, y: 0, z: 0}
   angle: 0
@@ -127,16 +127,16 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.030965716, y: 0.008445218}
+  m_Offset: {x: -0.017287195, y: 0.008445218}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8, y: 0.8}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.8, y: 0.8}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.76226896, y: 0.22177622}
+  m_Size: {x: 0.8587748, y: 0.22177622}
   m_EdgeRadius: 0

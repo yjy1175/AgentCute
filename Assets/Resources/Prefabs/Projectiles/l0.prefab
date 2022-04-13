@@ -109,9 +109,9 @@ MonoBehaviour:
     projectileDamage: 1
     speed: 11
     count: 1
-    angle: 10
-    spawnTime: 0.8
-    maxPassCount: 0
+    angle: 15
+    spawnTime: 4
+    maxPassCount: 1
   target: {x: 0, y: 0, z: 0}
   angle: 0
 --- !u!61 &5196334481947805603
