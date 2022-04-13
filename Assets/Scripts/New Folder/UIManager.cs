@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : SingleToneMaker<UIManager>
 {
@@ -16,6 +18,12 @@ public class UIManager : SingleToneMaker<UIManager>
     private GameObject mStatusPannel;
     [SerializeField]
     private GameObject mBackGroundPannel;
+    [SerializeField]
+    private Text mProjectileCountText;
+    [SerializeField]
+    private Text mProjectileScaleText;
+    [SerializeField]
+    private Text mPassCountText;
 
     [Header("옵션")]
     [SerializeField]
@@ -33,7 +41,17 @@ public class UIManager : SingleToneMaker<UIManager>
 
     [Header("능력치선택창")]
     [SerializeField]
-    private GameObject StatusSelectPannel;
+    private GameObject mStatusSelectPannel;
+    [SerializeField]
+    private Text mFirstSelectText;
+    [SerializeField]
+    private Text mSecondSelectText;
+    [SerializeField]
+    private Text mThirdSelectText;
+
+    [Header("게임오버")]
+    [SerializeField]
+    private GameObject mGameOverPannel;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -46,7 +64,9 @@ public class UIManager : SingleToneMaker<UIManager>
     // Update is called once per frame
     void Update()
     {
-
+        mProjectileCountText.text = "+" + Projectile.AddProjectilesCount.ToString() + "개";
+        mProjectileScaleText.text = "+" + (Projectile.AddScaleCoefficient - 1.0f).ToString() + "%";
+        mPassCountText.text = "+" + Projectile.AddPassCount.ToString() + "마리";
     }
 
     #region method
@@ -109,7 +129,54 @@ public class UIManager : SingleToneMaker<UIManager>
     }
     public void StatusSelectPannelOn()
     {
+        // 일시 정지
+        Time.timeScale = 0;
+        mPauseBtn.SetActive(false);
+        mBackGroundPannel.SetActive(true);
+        // TO-DO : 각 선택 섹션 별로 능력치 저장 후 랜덤하게 등장하게 구현
+        mFirstSelectText.text = "발사체 개수 증가 +1";
+        mSecondSelectText.text = "발사체 범위 증가 +10%";
+        mThirdSelectText.text = "몬스터 관통 수 증가 +1";
+        mStatusSelectPannel.SetActive(true);
+    }
+    public void ClickedSelectStatus(int _num)
+    {
+        // 추후에 PlayerStatus를 통하여 수치 조정
+        switch (_num)
+        {
+            case 0:
+                ProjectileManager.Instance.AddProjectilesCount(1);
+                break;
+            case 1:
+                ProjectileManager.Instance.AddProjectilesScale(0.1f);
+                break;
+            case 2:
+                ProjectileManager.Instance.AddPassCount(1);
+                break;
+        }
 
+        // 게임 재개
+        Time.timeScale = 1;
+        mPauseBtn.SetActive(true);
+        mBackGroundPannel.SetActive(false);
+        mStatusSelectPannel.SetActive(false);
+    }
+
+    public void GameOverPannelOn()
+    {
+        // 일시 정지
+        Time.timeScale = 0;
+        mPauseBtn.SetActive(false);
+        mBackGroundPannel.SetActive(true);
+
+        // 게임오버 패널 오픈
+        mGameOverPannel.SetActive(true);
+    }
+
+    public void ClickGameReload()
+    {
+        // 씬 리로드
+        SceneManager.LoadScene(0);
     }
     #endregion
 }

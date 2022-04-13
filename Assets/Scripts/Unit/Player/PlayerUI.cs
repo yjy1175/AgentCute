@@ -37,6 +37,10 @@ public class PlayerUI : IUI
     {
 
         mLevelBar.transform.Find("LevelText").GetComponent<Text>().text = "Lv." + _level;
+        // 레벨업 시 스텟선택창 팝업하는 API 호출
+        // TO-DO : UIManager에 이벤트 등록 하기
+        if(_level != 1)
+            UIManager.Instance.StatusSelectPannelOn();
     }
 
     private void RegisterExpObserver(int _exp)
@@ -53,6 +57,11 @@ public class PlayerUI : IUI
         int maxHp = gameObject.GetComponent<PlayerStatus>().MaxHP;
         mHpBar.transform.Find("Hp").GetComponent<Image>().fillAmount = ((float)hp / (float)maxHp);
         mHpBar.transform.Find("HpText").GetComponent<Text>().text = _hp.ToString();
+
+        // 플레이어 사망시 게임오버 UI 팝업 API호출
+        // TO-DO : UIManager에 이벤트 등록 하기
+        if (_hp <= 0)
+            UIManager.Instance.GameOverPannelOn();
     }
 
 }

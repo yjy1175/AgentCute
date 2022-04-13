@@ -13,7 +13,7 @@ public class PlayerStatus : IStatus
 
     [SerializeField]
     private int mPlayerLevel;
-    
+
 
 
     // Start is called before the first frame update
@@ -56,7 +56,8 @@ public class PlayerStatus : IStatus
 
     public int PlayerGetExp
     {
-        set{
+        set
+        {
             mPlayerGetExp = value;
             PlayerExp += mPlayerGetExp;
             while (PlayerExp >= PlayerMaxExp)
@@ -66,7 +67,8 @@ public class PlayerStatus : IStatus
                 PlayerLevel += 1;
             }
         }
-        get{
+        get
+        {
             return mPlayerExp;
         }
     }
@@ -75,7 +77,7 @@ public class PlayerStatus : IStatus
         set
         {
             mPlayerExp = value;
-            
+
         }
         get
         {

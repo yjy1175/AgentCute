@@ -92,7 +92,6 @@ public abstract class Projectile : MonoBehaviour
                         ObjectPoolManager.Instance.DisableGameObject(gameObject);
                     }
                 }
-                Debug.Log(name);
                 collision.gameObject.GetComponent<IStatus>().DamageHp = damage;
             }
         }
