@@ -68,6 +68,7 @@ public class PlayerStatus : IStatus
                 //TO-DO LevelUp effect는?
                 mPlayerExp -= mPlayerExpMax;
                 mPlayerLevel++;
+                // TO-DO 레벨업 시 능력업 창 뜨게 하기
                 gameObject.GetComponent<PlayerEventHandler>().ChangeLevel(mPlayerLevel);
             }
         }

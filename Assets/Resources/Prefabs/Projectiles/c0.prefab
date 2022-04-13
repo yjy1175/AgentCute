@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_Sprite: {fileID: -528433498531741845, guid: 10a3ca11d9dd74f4589415b7aed25bd6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -133,7 +133,6 @@ MonoBehaviour:
     spawnTime: 5
     maxPassCount: -1
   target: {x: 0, y: 0, z: 0}
-  isActive: 0
   angle: 0
 --- !u!61 &6696340406456846891
 BoxCollider2D:

@@ -9055,6 +9055,7 @@ MonoBehaviour:
   mExitBtn: {fileID: 1800073188}
   mIsGiveup: 0
   mGiveupPannel: {fileID: 1114509833}
+  StatusSelectPannel: {fileID: 0}
 --- !u!1 &1719810103
 GameObject:
   m_ObjectHideFlags: 0
@@ -11019,6 +11020,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1749633355}
     m_Modifications:
+    - target: {fileID: 1044260789990923749, guid: 4c7f26fd578e5bd40bfb27bc77b1dbaa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1169987679172857740, guid: 4c7f26fd578e5bd40bfb27bc77b1dbaa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1841343168025478680, guid: 4c7f26fd578e5bd40bfb27bc77b1dbaa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 2014325455177511283, guid: 4c7f26fd578e5bd40bfb27bc77b1dbaa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 4245373937352577943, guid: 4c7f26fd578e5bd40bfb27bc77b1dbaa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932801946111074230, guid: 4c7f26fd578e5bd40bfb27bc77b1dbaa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 7380654198429328304, guid: 4c7f26fd578e5bd40bfb27bc77b1dbaa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 7857269517568618052, guid: 4c7f26fd578e5bd40bfb27bc77b1dbaa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8116282165060799036, guid: 4c7f26fd578e5bd40bfb27bc77b1dbaa, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -11066,6 +11099,14 @@ PrefabInstance:
     - target: {fileID: 8655046521747516704, guid: 4c7f26fd578e5bd40bfb27bc77b1dbaa, type: 3}
       propertyPath: m_Name
       value: GreenMap
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655046521747516704, guid: 4c7f26fd578e5bd40bfb27bc77b1dbaa, type: 3}
+      propertyPath: m_TagString
+      value: Tilemap
+      objectReference: {fileID: 0}
+    - target: {fileID: 8859002390805077470, guid: 4c7f26fd578e5bd40bfb27bc77b1dbaa, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c7f26fd578e5bd40bfb27bc77b1dbaa, type: 3}

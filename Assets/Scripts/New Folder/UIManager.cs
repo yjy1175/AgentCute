@@ -30,6 +30,10 @@ public class UIManager : SingleToneMaker<UIManager>
     private bool mIsGiveup;
     [SerializeField]
     private GameObject mGiveupPannel;
+
+    [Header("능력치선택창")]
+    [SerializeField]
+    private GameObject StatusSelectPannel;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -102,6 +106,10 @@ public class UIManager : SingleToneMaker<UIManager>
             mGiveupPannel.SetActive(true);
         }
         mIsGiveup = !mIsGiveup;
+    }
+    public void StatusSelectPannelOn()
+    {
+
     }
     #endregion
 }
