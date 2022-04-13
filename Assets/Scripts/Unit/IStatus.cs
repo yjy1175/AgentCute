@@ -6,6 +6,7 @@ using System;
 public abstract class IStatus : MonoBehaviour
 {
     protected int mHp;
+    protected int mDamaged;
     protected int mMaxHp;
     public int mSpeed;
     public int mPhysicalDefense;
@@ -27,6 +28,16 @@ public abstract class IStatus : MonoBehaviour
         
     }
 
+
+    public virtual int MaxHP
+    {
+        get { return mMaxHp; }
+        set
+        {
+            mMaxHp = value;
+        }
+    }
+
     public virtual int Hp
     {
         /*
@@ -35,6 +46,7 @@ public abstract class IStatus : MonoBehaviour
         get { return mHp; }
         set {
             mHp = value;
+            gameObject.GetComponent<IEventHandler>().ChangeHp(mHp, gameObject);
         }
     }
     public virtual int DamageHp
@@ -42,12 +54,13 @@ public abstract class IStatus : MonoBehaviour
         /*
          *  TO-DO :player Attack에서 있어서 동기화가 되는지 확인필요
          */
-        get { return mHp; }
+        get { return mDamaged; }
         set
         { 
             if (mIsInvincibility)
                 value = 0;
-            mHp = Mathf.Max(0, mHp - value);
+            mDamaged = value;
+            mHp = Mathf.Max(0, mHp - mDamaged);
             gameObject.GetComponent<IEventHandler>().ChangeHp(mHp, gameObject);
             MessageBoxManager.BoxType bt = (MessageBoxManager.BoxType)Enum.Parse(typeof(MessageBoxManager.BoxType), gameObject.tag + "Damage");
             MessageBoxManager.Instance.createMessageBox(bt, value.ToString(), gameObject.transform.position);

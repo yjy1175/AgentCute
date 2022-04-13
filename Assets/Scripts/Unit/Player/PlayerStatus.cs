@@ -7,23 +7,24 @@ public class PlayerStatus : IStatus
     [SerializeField]
     private int mPlayerExp;
     [SerializeField]
-    private int mPlayerExpMax;
+    private int mPlayerMaxExp;
+    [SerializeField]
+    private int mPlayerGetExp;
+
     [SerializeField]
     private int mPlayerLevel;
-    private GameObject mHpBar;
-    private GameObject mExpBar;
     
+
+
     // Start is called before the first frame update
     void Start()
     {
         //TO-DO : 플레이어 스텟들 하드코딩. csv파일 받으면 수정필요.
-        mHp = 100;
+        Hp = 100;
         mMaxHp = 100;
-        mPlayerExp = 0;
-        mPlayerExpMax = 100;
-        mHpBar = GameObject.Find("HpBar");
-        mExpBar = GameObject.Find("ExpBar");
-        mPlayerLevel = 1;
+        PlayerExp = 0;
+        mPlayerMaxExp = 100;
+        PlayerLevel = 1;
     }
 
     // Update is called once per frame
@@ -33,12 +34,6 @@ public class PlayerStatus : IStatus
         /*
          * TO-DO : UI관련 클래스 만들어 그곳에서 관리하도록 수정.EventHandler를 통해 값이 업데이트 될때마다 수정하도록 변경 필요
          */
-        mHpBar.transform.Find("Hp").GetComponent<Image>().fillAmount = ((float)mHp / (float)mMaxHp);
-        mHpBar.transform.Find("HpText").GetComponent<Text>().text = mHp + "/" + mMaxHp;
-
-
-        mExpBar.transform.Find("Exp").GetComponent<Image>().fillAmount = ((float)mPlayerExp / (float)mPlayerExpMax);
-        mExpBar.transform.Find("ExpText").GetComponent<Text>().text = mPlayerExp + "/" + mPlayerExpMax;
 
 
         if (Input.GetKey(KeyCode.Z))
@@ -55,50 +50,71 @@ public class PlayerStatus : IStatus
         if (_hp <= 0)
         {
             MonsterManager.MonsterGrade md = _obj.GetComponent<MonsterStatus>().MonsterGrade;
-            PlayerExp = GetMonsterExp(md);
+            PlayerGetExp = GetMonsterExp(md);
         }
     }
 
-    public int PlayerExp
+    public int PlayerGetExp
     {
         set{
-            mPlayerExp += value;
-            while (mPlayerExp >= mPlayerExpMax)
+            mPlayerGetExp = value;
+            PlayerExp += mPlayerGetExp;
+            while (PlayerExp >= PlayerMaxExp)
             {
                 //TO-DO LevelUp effect는?
-                mPlayerExp -= mPlayerExpMax;
-                mPlayerLevel++;
-                // TO-DO 레벨업 시 능력업 창 뜨게 하기
-                gameObject.GetComponent<PlayerEventHandler>().ChangeLevel(mPlayerLevel);
+                PlayerExp -= PlayerMaxExp;
+                PlayerLevel += 1;
             }
         }
         get{
             return mPlayerExp;
         }
     }
-
-
-
-    void OnCollisionEnter2D(Collision2D collision)
+    public int PlayerMaxExp
     {
-
+        set
+        {
+            mPlayerExp = value;
+            
+        }
+        get
+        {
+            return mPlayerMaxExp;
+        }
+    }
+    public int PlayerExp
+    {
+        set
+        {
+            mPlayerExp = value;
+            gameObject.GetComponent<PlayerEventHandler>().ChangeExp(mPlayerExp);
+        }
+        get
+        {
+            return mPlayerExp;
+        }
     }
 
-    void OnCollisionStay2D(Collision2D collision)
+    public int PlayerLevel
     {
-
+        set
+        {
+            mPlayerLevel = value;
+            gameObject.GetComponent<PlayerEventHandler>().ChangeLevel(mPlayerLevel);
+        }
+        get
+        {
+            return mPlayerLevel;
+        }
     }
 
-    void OnCollisionExit2D(Collision2D collision)
-    {
 
-    }
 
     private int GetMonsterExp(MonsterManager.MonsterGrade _md)
     {
         if (_md == MonsterManager.MonsterGrade.Boss)
         {
-            return (int)(0.7 * mPlayerExpMax);
+            return (int)(0.7 * mPlayerMaxExp);
         }
         else if (_md == MonsterManager.MonsterGrade.Normal)
         {

@@ -5,9 +5,15 @@ using UnityEngine;
 public class PlayerEventHandler : IEventHandler
 {
     public delegate void LevelObserver(int _level);
+    public delegate void ExpObserver(int _exp);
+
     public event LevelObserver LevelObserverEvent;
+    public event ExpObserver ExpObserverEvent;
 
 
+
+
+    //Level EventHandler
     public virtual void registerLevelObserver(LevelObserver _obs)
     {
         //HpObserverEvent는 null이여도 -연산에대해 에러가 발생하지 않음
@@ -26,18 +32,23 @@ public class PlayerEventHandler : IEventHandler
 
 
 
-
-
-
-    // Start is called before the first frame update
-    void Start()
+    //Exp EventHandler
+    public virtual void registerExpObserver(ExpObserver _obs)
     {
-        
+        //HpObserverEvent는 null이여도 -연산에대해 에러가 발생하지 않음
+        ExpObserverEvent -= _obs;
+        ExpObserverEvent += _obs;
+    }
+    public virtual void UnRegisterExpObserver(ExpObserver _obs)
+    {
+        ExpObserverEvent -= _obs;
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void ChangeExp(int _exp)
     {
-        
+        ExpObserverEvent?.Invoke(_exp);
     }
+
+
+
 }
