@@ -22,8 +22,8 @@ public class PlayerStatus : IStatus
         //TO-DO : 플레이어 스텟들 하드코딩. csv파일 받으면 수정필요.
         Hp = 100;
         mMaxHp = 100;
-        PlayerExp = 0;
         mPlayerMaxExp = 100;
+        PlayerExp = 0;
         PlayerLevel = 1;
     }
 
