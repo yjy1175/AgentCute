@@ -99,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 1109854676447758817}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7f7984dffea97504cb6b2e9e425058df, type: 2}
+  m_Controller: {fileID: 9100000, guid: cabe6edee83520b4dbad23356077b2b9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -194,15 +194,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mHp: 0
-  mSpeed: 0
+  mDamaged: 0
+  mMaxHp: 0
   mPhysicalDefense: 0
   mMagicDefense: 0
+  mIsInvincibility: 0
+  mSize: 0
   mId: 0
   mSpawnMap: 
   mMonsterInName: 
-  mMonsterSize: 0
-  mMmonsterName: 
-  monsterExp: 0
+  mMonsterName: 
 --- !u!114 &358947715756549906
 MonoBehaviour:
   m_ObjectHideFlags: 0

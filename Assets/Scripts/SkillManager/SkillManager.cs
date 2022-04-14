@@ -9,22 +9,44 @@ public class SkillManager : SingleToneMaker<SkillManager>
     public StringGameObject skills;
 
     [SerializeField]
+    private Image mGeneralSkillImg;
+    [SerializeField]
+    private Image mUltimateSkillImg;
+    [SerializeField]
     private Skill currentBaseSkill;
     public Skill CurrentBaseSkill
     {
         get { return currentBaseSkill; }
+        set 
+        { 
+            currentBaseSkill = value;
+        }
     }
     [SerializeField]
     private Skill currentGeneralSkill;
     public Skill CurrentGeneralSkill
     {
         get { return currentGeneralSkill; }
+        set 
+        { 
+            currentGeneralSkill = value;
+            mGeneralSkillImg.sprite = ProjectileManager.
+                Instance.allProjectiles[currentGeneralSkill.Spec.getProjectiles()[0]].
+                GetComponent<SpriteRenderer>().sprite;
+        }
     }
     [SerializeField]
     private Skill currentUltimateSkill;
     public Skill CurrentUltimateSkill
     {
         get { return currentUltimateSkill; }
+        set 
+        { 
+            currentUltimateSkill = value;
+            mUltimateSkillImg.sprite = ProjectileManager.
+                Instance.allProjectiles[currentUltimateSkill.Spec.getProjectiles()[0]].
+                GetComponent<SpriteRenderer>().sprite;
+        }
     }
     #endregion
 
@@ -71,6 +93,48 @@ public class SkillManager : SingleToneMaker<SkillManager>
             item.CurrentUseCount = 0;
             item.CurrentCoolTimeIndex = 0;
         }
+    }
+
+    public List<GameObject> FindGeneralSkill(string _type)
+    {
+        List<GameObject> newList = new List<GameObject>();
+        foreach (string key in skills.Keys)
+        {
+            if (skills[key].GetComponent<Skill>().Spec.SkillWeaponType == _type)
+            {
+                if(skills[key].GetComponent<Skill>().Spec.Type == "G")
+                    newList.Add(skills[key]);
+            }
+        }
+        return newList;
+    }
+
+    public List<GameObject> FindUltimateSkill(string _type)
+    {
+        List<GameObject> newList = new List<GameObject>();
+        foreach (string key in skills.Keys)
+        {
+            if (skills[key].GetComponent<Skill>().Spec.SkillWeaponType == _type)
+            {
+                if (skills[key].GetComponent<Skill>().Spec.Type == "U")
+                    newList.Add(skills[key]);
+            }
+        }
+        return newList;
+    }
+
+    public GameObject FindBaseSkill(string _type)
+    {
+        GameObject newSkill = null;
+        foreach (string key in skills.Keys)
+        {
+            if (skills[key].GetComponent<Skill>().Spec.SkillWeaponType == _type)
+            {
+                if (skills[key].GetComponent<Skill>().Spec.Type == "B")
+                    newSkill = skills[key];
+            }
+        }
+        return newSkill;
     }
     #endregion
 }

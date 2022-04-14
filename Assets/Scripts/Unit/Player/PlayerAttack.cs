@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerAttack : IAttack
 {
@@ -14,21 +15,18 @@ public class PlayerAttack : IAttack
 
     private bool mGSkillUseable  = true;
     private bool mUSkillUseable = true;
+
+    public bool mIsGameStart = false;
     void Start()
     {
         // key : 스킬 게임오브젝트 value : 각 스킬의 발사체 오브젝트
         TileDict = new SkillDic();
-        // 스킬매니저를 통하여 해당 스킬의 발사체를 가져온다
-        getProjectiles();
-        // 각 발사체의 오브젝트 풀 생성
-        createObjectPool();
         mAutoAttackSpeed = 1f; //TO-DO 임시로 넣어놓음. 실제 공속은 무엇?
         mAutoAttackCheckTime = mAutoAttackSpeed;
     }
-
     void Update()
     {
-        if (mAutoAttackCheckTime > mAutoAttackSpeed)
+        if (mAutoAttackCheckTime > mAutoAttackSpeed && mIsGameStart)
         {
             // 자동공격 매서드
             {
@@ -44,12 +42,15 @@ public class PlayerAttack : IAttack
         mAutoAttackCheckTime += Time.deltaTime;
     }
 
-    private void getProjectiles()
+    public void getProjectiles()
     {
         // 스킬 매니저를 통해 현재 장착중인 스킬을 받아온다
+        TileDict.Clear();
         pushProjectile(SkillManager.Instance.CurrentBaseSkill);
         pushProjectile(SkillManager.Instance.CurrentGeneralSkill);
         pushProjectile(SkillManager.Instance.CurrentUltimateSkill);
+        createObjectPool();
+        mIsGameStart = true;
     }
 
     // 받아온 스킬의 발사체 리스트를 발사체매니저를 통해 받아온다
@@ -74,6 +75,7 @@ public class PlayerAttack : IAttack
         {
             for (int i = 0; i < TileDict[key].Count; i++)
             {
+                Debug.Log(TileDict[key][i].gameObject.name);
                 ObjectPoolManager.Instance.CreateDictTable(TileDict[key][i].gameObject, 10, 10);
             }
         }
@@ -281,8 +283,6 @@ public class PlayerAttack : IAttack
             }
             yield return new WaitWhile(() => firstProjectile.activeInHierarchy);
         }
-
-        
     }
     /*
 * _angle : 추가 각도 설정입니다.
@@ -315,10 +315,10 @@ public class PlayerAttack : IAttack
         while (lefttime > 0f)
         {
             lefttime -= Time.deltaTime;
-            _btn.transform.GetChild(0).GetComponent<Image>().fillAmount =( lefttime  / _cooltime);
+            _btn.transform.GetChild(1).GetComponent<Image>().fillAmount =( lefttime  / _cooltime);
             yield return new WaitForFixedUpdate();
         }
-        _btn.transform.GetChild(0).GetComponent<Image>().fillAmount = 0;
+        _btn.transform.GetChild(1).GetComponent<Image>().fillAmount = 0;
         switch (_type)
         {
             case "G":

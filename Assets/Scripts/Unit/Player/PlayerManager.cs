@@ -22,4 +22,9 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
     {
         return mWeaponSprite;
     }
+
+    public void SettingGameStart()
+    {
+        GameObject.Find("PlayerObject").GetComponent<PlayerAttack>().getProjectiles();
+    }
 }

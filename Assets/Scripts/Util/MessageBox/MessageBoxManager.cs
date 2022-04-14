@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MessageBoxManager : SingleToneMaker<MessageBoxManager>
 {
@@ -26,6 +27,7 @@ public class MessageBoxManager : SingleToneMaker<MessageBoxManager>
         // 오브젝트풀매니저를 통하여 메시지박스마다 오브젝트풀을 생성
         addObjectPool();
     }
+
     private void initAllMessageBoxData()
     {
         // MessageBox 프리펩을 불러온다

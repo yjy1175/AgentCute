@@ -55,6 +55,8 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                     //item.Spec.WeaponAttackSpeed = float.Parse(weaponData[i]["WeaponAttackSpeed"].ToString());
                     //item.Spec.WeaponAttackRange = int.Parse(weaponData[i]["WeaponAttackRange"].ToString());
                     item.Spec.WeaponAddSpeed = float.Parse(weaponData[i]["WeaponSPD"].ToString());
+
+                    item.IsLocked = true;
                 }
             }
         }
@@ -104,6 +106,19 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         {
             // 경고문구 출력
         }
+    }
+    public List<GameObject> FindWepaonList(string _type)
+    {
+        List<GameObject> newList = new List<GameObject>();
+        foreach(string key in weapons.Keys)
+        {
+            string type = weapons[key].GetComponent<Weapon>().Spec.Type.Substring(0, 2);
+            if (type == _type)
+            {
+                newList.Add(weapons[key]);
+            }
+        }
+        return newList;
     }
     private void loadUserEquip()
     {

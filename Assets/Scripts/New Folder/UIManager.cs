@@ -52,10 +52,38 @@ public class UIManager : SingleToneMaker<UIManager>
     [Header("게임오버")]
     [SerializeField]
     private GameObject mGameOverPannel;
+
+
+    [Header("테스트 로비")]
+    [SerializeField]
+    private GameObject mTestLobbyPannel;
+    [SerializeField]
+    private GameObject mBaseSkill;
+    [SerializeField]
+    private List<GameObject> mGeneralSkillBtn = new List<GameObject>();
+    [SerializeField]
+    private List<GameObject> mGeneralSkill = new List<GameObject>();
+    [SerializeField]
+    private List<GameObject> mUltimateSkillBtn = new List<GameObject>();
+    [SerializeField]
+    private List<GameObject> mUltimateSkill = new List<GameObject>();
+    [SerializeField]
+    private GameObject mSkillInfoPannel;
+    [SerializeField]
+    private Text mSkillInfoNameText;
+    [SerializeField]
+    private Text mSkillInfoTypeText;
+    [SerializeField]
+    private Text mSkillInfoCoolTimeText;
+    [SerializeField]
+    private Text mSkillInfoDescText;
+    private bool mIsGSkillSelect = false;
+    private bool mIsUSkillSelect = false;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
+        GamePause();
         mIsPause = false;
         mIsOption = false;
         mIsGiveup = false;
@@ -79,21 +107,17 @@ public class UIManager : SingleToneMaker<UIManager>
         if (mIsPause)
         {
             // 진행
-            Time.timeScale = 1;
+            GameRestart();
             mPausePannel.SetActive(false);
             mStatusPannel.SetActive(false);
-            mPauseBtn.SetActive(true);
-            mBackGroundPannel.SetActive(false);
         }
         // 진행중인 상태에서 클릭
         else
         {
             // 일시정지
-            Time.timeScale = 0;
+            GamePause();
             mPausePannel.SetActive(true);
             mStatusPannel.SetActive(true);
-            mPauseBtn.SetActive(false);
-            mBackGroundPannel.SetActive(true);
         }
         mIsPause = !mIsPause;
     }
@@ -130,9 +154,7 @@ public class UIManager : SingleToneMaker<UIManager>
     public void StatusSelectPannelOn()
     {
         // 일시 정지
-        Time.timeScale = 0;
-        mPauseBtn.SetActive(false);
-        mBackGroundPannel.SetActive(true);
+        GamePause();
         // TO-DO : 각 선택 섹션 별로 능력치 저장 후 랜덤하게 등장하게 구현
         mFirstSelectText.text = "발사체 개수 증가 +1";
         mSecondSelectText.text = "발사체 범위 증가 +10%";
@@ -156,27 +178,138 @@ public class UIManager : SingleToneMaker<UIManager>
         }
 
         // 게임 재개
-        Time.timeScale = 1;
-        mPauseBtn.SetActive(true);
-        mBackGroundPannel.SetActive(false);
+        GameRestart();
         mStatusSelectPannel.SetActive(false);
     }
-
     public void GameOverPannelOn()
     {
         // 일시 정지
-        Time.timeScale = 0;
-        mPauseBtn.SetActive(false);
-        mBackGroundPannel.SetActive(true);
+        GamePause();
 
         // 게임오버 패널 오픈
         mGameOverPannel.SetActive(true);
     }
-
     public void ClickGameReload()
     {
         // 씬 리로드
-        SceneManager.LoadScene(0);
+        // 현재 오류로 리로드 불가...
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // 우선 종료
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+         Application.Quit();
+#endif
+    }
+    private void GamePause()
+    {
+        Time.timeScale = 0;
+        mPauseBtn.SetActive(false);
+        mBackGroundPannel.SetActive(true);
+    }
+    private void GameRestart()
+    {
+        Time.timeScale = 1;
+        mPauseBtn.SetActive(true);
+        mBackGroundPannel.SetActive(false);
+    }
+    public void ClickWeaponSelect(string _type)
+    {
+        int ran = Random.Range(0, 5);
+        List<GameObject> newWeaponList = EquipmentManager.Instance.FindWepaonList(_type);
+        EquipmentManager.Instance.changeEquip(newWeaponList[ran].GetComponent<Weapon>().Spec.Type);
+        mBaseSkill = SkillManager.Instance.FindBaseSkill(_type);
+        mGeneralSkill = SkillManager.Instance.FindGeneralSkill(_type);
+        mUltimateSkill = SkillManager.Instance.FindUltimateSkill(_type);
+        for (int i = 0; i < mGeneralSkillBtn.Count; i++)
+        {
+            mGeneralSkillBtn[i].transform.GetChild(0).GetComponent<Image>().sprite =
+                ProjectileManager.
+                Instance.allProjectiles[mGeneralSkill[i].GetComponent<Skill>().Spec.getProjectiles()[0]].
+                GetComponent<SpriteRenderer>().sprite;
+        }
+        for (int i = 0; i < mUltimateSkillBtn.Count; i++)
+        {
+            mUltimateSkillBtn[i].transform.GetChild(0).GetComponent<Image>().sprite =
+                ProjectileManager.
+                Instance.allProjectiles[mUltimateSkill[i].GetComponent<Skill>().Spec.getProjectiles()[0]].
+                GetComponent<SpriteRenderer>().sprite;
+        }
+    }
+    public void OverSkillSelectBtn(string _type)
+    {
+        string type = _type.Substring(0, 1);
+        int num = int.Parse(_type.Substring(1, 1));
+        switch (type)
+        {
+            case "G":
+                SettingInfoPannel(mGeneralSkill, num);
+                break;
+            case "U":
+                SettingInfoPannel(mUltimateSkill, num);
+                break;
+        }
+    }
+    public void OutSKillSelectBtn()
+    {
+        mSkillInfoPannel.SetActive(false);
+    }
+    private void SettingInfoPannel(List<GameObject> _skillList, int _num)
+    {
+        if(_skillList.Count > 0)
+        {
+            mSkillInfoNameText.text = _skillList[_num].GetComponent<Skill>().Spec.Name;
+            mSkillInfoTypeText.text = _skillList[_num].GetComponent<Skill>().Spec.TypeName;
+            mSkillInfoCoolTimeText.text = "";
+            for (int i = 0; i < _skillList[_num].GetComponent<Skill>().Spec.getSkillCoolTime().Count; i++)
+            {
+                mSkillInfoCoolTimeText.text += "[" + _skillList[_num].GetComponent<Skill>().Spec.getSkillCoolTime()[i] + "초]";
+            }
+            mSkillInfoDescText.text = _skillList[_num].GetComponent<Skill>().Spec.Desc;
+
+            mSkillInfoPannel.SetActive(true);
+        }
+    }
+    public void ClickSkillSelectBtn(string _type)
+    {
+        string type = _type.Substring(0, 1);
+        int num = int.Parse(_type.Substring(1, 1));
+        switch (type)
+        {
+            case "G":
+                SkillManager.Instance.CurrentGeneralSkill = mGeneralSkill[num].GetComponent<Skill>();
+                for(int i = 0; i < mGeneralSkillBtn.Count; i++)
+                {
+                    if (i == num)
+                        mGeneralSkillBtn[i].transform.GetChild(1).gameObject.SetActive(true);
+                    else
+                        mGeneralSkillBtn[i].transform.GetChild(1).gameObject.SetActive(false);
+                }
+                mIsGSkillSelect = true;
+                break;
+            case "U":
+                SkillManager.Instance.CurrentUltimateSkill = mUltimateSkill[num].GetComponent<Skill>();
+                for (int i = 0; i < mUltimateSkill.Count; i++)
+                {
+                    if (i == num)
+                        mUltimateSkillBtn[i].transform.GetChild(1).gameObject.SetActive(true);
+                    else
+                        mUltimateSkillBtn[i].transform.GetChild(1).gameObject.SetActive(false);
+                }
+                mIsUSkillSelect = true;
+                break;
+        }
+    }
+    public void ClickGameStart()
+    {
+        if(mIsGSkillSelect && mIsUSkillSelect)
+        {
+            SkillManager.Instance.CurrentBaseSkill = mBaseSkill.GetComponent<Skill>();
+            // 플레이매니저에서 스타트 API호출
+            PlayerManager.Instance.SettingGameStart();
+            GameRestart();
+            mTestLobbyPannel.SetActive(false);
+        }
     }
     #endregion
 }

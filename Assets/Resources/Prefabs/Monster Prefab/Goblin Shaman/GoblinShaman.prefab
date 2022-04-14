@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 784515273462323900}
   - component: {fileID: 5050403516011992865}
   - component: {fileID: 639122019206292075}
+  - component: {fileID: -8297877870601922992}
   m_Layer: 6
   m_Name: GoblinShaman
   m_TagString: Monster
@@ -194,16 +195,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mHp: 0
-  mSpeed: 0
+  mDamaged: 0
+  mMaxHp: 0
   mPhysicalDefense: 0
   mMagicDefense: 0
+  mIsInvincibility: 0
+  mSize: 0
   mId: 0
   mSpawnMap: 
   mMonsterInName: 
-  mMonsterSize: 0
-  mMmonsterName: 
-  mMmonsterGrade: 
-  monsterExp: 0
+  mMonsterName: 
 --- !u!58 &639122019206292075
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -220,3 +221,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.4639422}
   serializedVersion: 2
   m_Radius: 0.0360578
+--- !u!114 &-8297877870601922992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8665364517176831368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 863a001ce64236d4eb4a9f60b1093774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
