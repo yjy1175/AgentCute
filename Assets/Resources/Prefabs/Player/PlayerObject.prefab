@@ -143,6 +143,8 @@ MonoBehaviour:
   GBtn: {fileID: 0}
   UBtn: {fileID: 0}
   Ujoystick: {fileID: 0}
+  Mjoystick: {fileID: 0}
+  mIsGameStart: 0
 --- !u!114 &6637047452066596388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,11 +170,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 099ce8da066460e4eb07367f28b892e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mSpeed: 0
+  mHp: 0
+  mDamaged: 0
+  mMaxHp: 0
   mPhysicalDefense: 0
   mMagicDefense: 0
   mIsInvincibility: 0
   mSize: 0
+  mPlayerExp: 0
+  mPlayerMaxExp: 0
+  mPlayerGetExp: 0
+  mPlayerLevel: 0
 --- !u!114 &6637047452066596409
 MonoBehaviour:
   m_ObjectHideFlags: 0

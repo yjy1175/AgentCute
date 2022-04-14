@@ -12,6 +12,8 @@ public class PlayerAttack : IAttack
     public VertualJoyStick Mjoystick;
 
     private GameObject firstProjectile;
+    private GameObject mChargingBar;
+
 
     private bool mGSkillUseable  = true;
     private bool mUSkillUseable = true;
@@ -21,6 +23,8 @@ public class PlayerAttack : IAttack
     {
         // key : 스킬 게임오브젝트 value : 각 스킬의 발사체 오브젝트
         TileDict = new SkillDic();
+        mChargingBar = GameObject.Find("ChargingBar").gameObject;
+        mChargingBar.SetActive(false);
         mAutoAttackSpeed = 1f; //TO-DO 임시로 넣어놓음. 실제 공속은 무엇?
         mAutoAttackCheckTime = mAutoAttackSpeed;
     }
@@ -177,6 +181,7 @@ public class PlayerAttack : IAttack
     {
         // Todo : 무한발사 스킬 지속시간과 한발당 발사시간 데이터 받아오기
         int count = (int)(_skill.Spec.MSkillRunTime / 0.2f); //  지속 시간 / 한발당 발사시간
+        StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime));
         Vector3 targetPos;
         Vector3 firePos;
         while (count != 0)
@@ -193,10 +198,9 @@ public class PlayerAttack : IAttack
         }
         Ujoystick.gameObject.SetActive(false);
         UBtn.SetActive(true);
-        // 궁극기 버튼만 구현 (추후에 일반스킬도 해야하면 다시 리팩토
+        // 궁극기 버튼만 구현 (추후에 일반스킬도 해야하면 다시 리팩토링)
         StopCoroutine(WaitForCoolTime(UBtn, _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex], _skill.Spec.Type));
-        StartCoroutine(
-                   WaitForCoolTime(UBtn, _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex], _skill.Spec.Type));
+        StartCoroutine(WaitForCoolTime(UBtn, _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex], _skill.Spec.Type));
     }
     // 우선 발사체가 한개인 경우만 구현
     private void launchSkill(Skill _skill)
@@ -341,5 +345,19 @@ public class PlayerAttack : IAttack
                 mUSkillUseable = true;
                 break;
         }
+    }
+
+    IEnumerator WaitForChargingTime(GameObject _bar, float _spawnTime)
+    {
+        _bar.SetActive(true);
+        float lefttime = _spawnTime;
+        while(lefttime > 0f)
+        {
+            lefttime -= Time.deltaTime;
+            _bar.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up);
+            _bar.transform.GetChild(0).GetComponent<Image>().fillAmount = (lefttime / _spawnTime);
+            yield return new WaitForFixedUpdate();
+        }
+        _bar.SetActive(false);
     }
 }
