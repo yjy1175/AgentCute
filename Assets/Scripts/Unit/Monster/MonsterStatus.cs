@@ -9,6 +9,8 @@ public class MonsterStatus : IStatus
     public string mSpawnMap;
     public string mMonsterInName;
     public string mMonsterName;
+    public bool mIsDieToKillCount = false;
+    public bool mIsDieToGetExp = false;
     //public int MonsterAI;
     private MonsterManager.MonsterGrade mMonsterGrade;
 

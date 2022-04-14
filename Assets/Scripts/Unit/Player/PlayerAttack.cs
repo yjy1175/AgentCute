@@ -99,7 +99,7 @@ public class PlayerAttack : IAttack
         {
             mGSkillUseable = false;
             useSkill(GBtn, SkillManager.Instance.CurrentGeneralSkill);
-            StartCoroutine(activeAnimation());
+            StartCoroutine(activeAnimation(SkillManager.Instance.CurrentUltimateSkill));
         }
     }
     public void clickUltimateSkillBtn()
@@ -108,7 +108,7 @@ public class PlayerAttack : IAttack
         {
             mUSkillUseable = false;
             useSkill(UBtn, SkillManager.Instance.CurrentUltimateSkill);
-            StartCoroutine(activeAnimation());
+            StartCoroutine(activeAnimation(SkillManager.Instance.CurrentUltimateSkill));
         }
     }
     /*
@@ -116,11 +116,24 @@ public class PlayerAttack : IAttack
      * 공격 애니메이션 재생시 움직임 불가(변수로 제어)
      * Todo : PlayerManager쪽으로 애니메이션 코드 옮기기
      */
-    IEnumerator activeAnimation()
+    IEnumerator activeAnimation(Skill _skill)
     {
+        float num = 0f;
+        switch (_skill.Spec.SkillWeaponType)
+        {
+            case "sp":
+                num = 0f;
+                break;
+            case "bg":
+                num = 0.5f;
+                break;
+            case "st":
+                num = 1f;
+                break;
+        }
         GetComponent<PlayerMove>().MMoveable = false;
         GetComponent<PlayerMove>().MAnim.SetFloat("AttackState", 0f);
-        GetComponent<PlayerMove>().MAnim.SetFloat("NormalState", 0.5f);
+        GetComponent<PlayerMove>().MAnim.SetFloat("NormalState", num);
         GetComponent<PlayerMove>().MAnim.SetTrigger("Attack");
         yield return new WaitForSeconds(1f); // Todo : 추후에 스킬 데이터에서 대기시간을 받아 입력 
         GetComponent<PlayerMove>().MMoveable = true;

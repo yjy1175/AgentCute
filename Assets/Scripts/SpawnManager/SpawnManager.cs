@@ -86,6 +86,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                     {
                         setMonsterData(ref monster);
                         monster.transform.position = spawnPoints[spawnZone[j]].position;
+                        monster.GetComponent<MonsterStatus>().mIsDieToKillCount = false;
+                        monster.GetComponent<MonsterStatus>().mIsDieToGetExp = false;
                         monster.SetActive(true);
                         // 스폰된 몬스터의 수 증가
                         allMonsterCount++;

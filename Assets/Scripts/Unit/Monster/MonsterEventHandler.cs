@@ -18,8 +18,9 @@ public class MonsterEventHandler : IEventHandler
 
     public override void ChangeHp(int _hp, GameObject _obj)
     {
-        if (_hp <= 0)
+        if (_hp <= 0 && !GetComponent<MonsterStatus>().mIsDieToKillCount)
         {
+            GetComponent<MonsterStatus>().mIsDieToKillCount = true;
             //TO-DO IEventHandler로 event화 시켜놓을것
             SpawnManager.currentKillMosterCount++;
             ObjectPoolManager.Instance.DisableGameObject(gameObject);
