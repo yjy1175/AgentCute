@@ -89,8 +89,9 @@ public class PlayerAttack : IAttack
     private void setProjectileData(ref GameObject obj)
     {
         // 하드코딩된 부분은 플레이어 스텟의 공격력을 받아온다.
+        int randomDamage = Random.Range(30, 50);
         obj.GetComponent<Projectile>().Damage = 
-            (int)((50 + EquipmentManager.Instance.getCurrentDamage()) * obj.GetComponent<Projectile>().Spec.ProjectileDamage);
+            (int)((randomDamage + EquipmentManager.Instance.getCurrentDamage()) * obj.GetComponent<Projectile>().Spec.ProjectileDamage);
     }
 
 
@@ -125,6 +126,7 @@ public class PlayerAttack : IAttack
         float num = 0f;
         switch (_skill.Spec.SkillWeaponType)
         {
+            case "sw":
             case "sp":
                 num = 0f;
                 break;
@@ -146,12 +148,38 @@ public class PlayerAttack : IAttack
     private void useSkill(GameObject _btn, Skill _skill)
     {
         int count = _skill.Spec.SkillClickCount;
+        // 스킬의 지속시간이 있는 경우
+        if (_skill.Spec.MSkillRunTime > 0)
+        {
+            int launchCount = _skill.Spec.SkillCount;
+            // 터치패드가 필요한 경우
+            if (launchCount == -1)
+            {
+                // Todo : 쿨타임동안에는 무한발사가 가능한 스킬의 경우 
+                // 궁극기 스킬 버튼이 터치패드로 변경
+                UBtn.SetActive(false);
+                Ujoystick.gameObject.SetActive(true);
+                // 터치패드의 방향으로 해당 시간동안 발사
+                StartCoroutine(InfiniteLaunch(_skill));
+            }
+            // 한번 클릭에 지속시간동안 발사되는 경우
+            else if (count == 1)
+            {
+                launchSkill(_skill);
+                StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime, _btn, _skill));
+            }
+            // 아닌 경우(익설티드 소드)
+            else
+            {
+
+            }
+        }
         // 한번 클릭
-        if (count == 1)
+        else if (count == 1)
         {
             launchSkill(_skill);
-           StartCoroutine(
-               WaitForCoolTime(_btn, _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex], _skill.Spec.Type));
+            StartCoroutine(
+                WaitForCoolTime(_btn, _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex], _skill.Spec.Type));
         }
         // 클릭횟수가 정해져 있는 경우
         else
@@ -181,7 +209,7 @@ public class PlayerAttack : IAttack
     {
         // Todo : 무한발사 스킬 지속시간과 한발당 발사시간 데이터 받아오기
         int count = (int)(_skill.Spec.MSkillRunTime / 0.2f); //  지속 시간 / 한발당 발사시간
-        StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime));
+        StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime, UBtn, _skill));
         Vector3 targetPos;
         Vector3 firePos;
         while (count != 0)
@@ -193,14 +221,20 @@ public class PlayerAttack : IAttack
             firePos = firePosition.transform.position;
             // 터치패드 방향 가져올 시 이미 정규화가 되어있는 상태라
             // 일정량을 곱해줘야 제대로된 방향으로 나감
-            launchProjectile(_skill, 0, targetPos * 5f, firePos, false);
+            if(TileDict[_skill].Count > 1)
+            {
+                int ranNum = Random.Range(0, TileDict[_skill].Count);
+                launchProjectile(_skill, ranNum, targetPos * 5f, firePos, false);
+            }
+            else
+            {
+                launchProjectile(_skill, 0, targetPos * 5f, firePos, false);
+            }
+
             yield return new WaitForSeconds(0.2f); // 한발당 발사시간
         }
         Ujoystick.gameObject.SetActive(false);
         UBtn.SetActive(true);
-        // 궁극기 버튼만 구현 (추후에 일반스킬도 해야하면 다시 리팩토링)
-        StopCoroutine(WaitForCoolTime(UBtn, _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex], _skill.Spec.Type));
-        StartCoroutine(WaitForCoolTime(UBtn, _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex], _skill.Spec.Type));
     }
     // 우선 발사체가 한개인 경우만 구현
     private void launchSkill(Skill _skill)
@@ -222,16 +256,6 @@ public class PlayerAttack : IAttack
             if (count == 1)
             {
                 launchProjectile(_skill, 0, targetPos, firePos, false);
-            }
-            // 무한 발사(시간으로 관리)
-            else if (count == -1)
-            {
-                // Todo : 쿨타임동안에는 무한발사가 가능한 스킬의 경우 
-                // 궁극기 스킬 버튼이 터치패드로 변경
-                UBtn.SetActive(false);
-                Ujoystick.gameObject.SetActive(true);
-                // 터치패드의 방향으로 해당 시간동안 발사
-                StartCoroutine(InfiniteLaunch(_skill));
             }
             // 중복 발사일 경우
             else
@@ -347,7 +371,7 @@ public class PlayerAttack : IAttack
         }
     }
 
-    IEnumerator WaitForChargingTime(GameObject _bar, float _spawnTime)
+    IEnumerator WaitForChargingTime(GameObject _bar, float _spawnTime, GameObject _btn, Skill _skill)
     {
         _bar.SetActive(true);
         float lefttime = _spawnTime;
@@ -359,5 +383,8 @@ public class PlayerAttack : IAttack
             yield return new WaitForFixedUpdate();
         }
         _bar.SetActive(false);
+        StartCoroutine(
+                   WaitForCoolTime(_btn, _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex], _skill.Spec.Type));
+
     }
 }
