@@ -14,6 +14,9 @@ public class PlayerStatus : IStatus
     [SerializeField]
     private int mPlayerLevel;
 
+    [SerializeField]
+    private Costume playerCurrentCostume;
+
 
 
     // Start is called before the first frame update
@@ -25,6 +28,7 @@ public class PlayerStatus : IStatus
         mPlayerMaxExp = 100;
         PlayerExp = 0;
         PlayerLevel = 1;
+        BaseDamage = Random.Range(30, 50);
     }
 
     // Update is called once per frame

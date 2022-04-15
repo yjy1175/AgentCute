@@ -5,12 +5,21 @@ using System;
 
 public abstract class IStatus : MonoBehaviour
 {
+    //현재 Hp
     [SerializeField]
     protected int mHp;
-    [SerializeField]
-    protected int mDamaged;
+
+    //최대 HP
     [SerializeField]
     protected int mMaxHp;
+
+    //직전에 입은 데미지
+    [SerializeField]
+    protected int mDamaged;
+
+
+    [SerializeField]
+    protected int mBaseDamage;
 
     public int mPhysicalDefense;
     public int mMagicDefense;
@@ -18,6 +27,9 @@ public abstract class IStatus : MonoBehaviour
     private bool mIsInvincibility = false;
     [SerializeField]
     private int mSize;
+
+    [SerializeField]
+    protected Weapon currentWeapon;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +43,18 @@ public abstract class IStatus : MonoBehaviour
         
     }
 
+
+    public Weapon PlayerCurrentWeapon
+    {
+        set
+        {
+            currentWeapon = value;
+        }
+        get
+        {
+            return currentWeapon;
+        }
+    }
 
     public virtual int MaxHP
     {
@@ -70,6 +94,15 @@ public abstract class IStatus : MonoBehaviour
         }
     }
 
+    public virtual int BaseDamage
+    {
+        get { return mBaseDamage; }
+        set
+        {
+            mBaseDamage = value;
+        }
+    }
+
     public virtual int Size
     {
         get { return mSize; }
@@ -85,6 +118,11 @@ public abstract class IStatus : MonoBehaviour
         mIsInvincibility = true;
         yield return new WaitForSeconds(time);
         mIsInvincibility = false;
+    }
+
+    public int getCurrentWeponeDamage()
+    {
+        return currentWeapon.Spec.WeaponDamage;
     }
 
 }

@@ -11,23 +11,13 @@ public class PlayerAttack : IAttack
     public VertualJoyStick Ujoystick;
     public VertualJoyStick Mjoystick;
 
-    private GameObject firstProjectile;
     private GameObject mChargingBar;
 
     [SerializeField]
     private Image mGeneralSkillImg;
     [SerializeField]
     private Image mUltimateSkillImg;
-    [SerializeField]
-    private Skill currentBaseSkill;
-    public Skill CurrentBaseSkill
-    {
-        get { return currentBaseSkill; }
-        set
-        {
-            currentBaseSkill = value;
-        }
-    }
+    
     [SerializeField]
     private Skill currentGeneralSkill;
     public Skill CurrentGeneralSkill
@@ -77,7 +67,6 @@ public class PlayerAttack : IAttack
     {
         if (mAutoAttackCheckTime > mAutoAttackSpeed && mIsGameStart)
         {
-            Debug.Log(CurrentBaseSkill.Spec.Name);
             // 자동공격 매서드
             {
                 launchProjectile(
@@ -129,15 +118,6 @@ public class PlayerAttack : IAttack
                 ObjectPoolManager.Instance.CreateDictTable(TileDict[key][i].gameObject, 10, 10);
             }
         }
-    }
-
-    // 발사체 데미지를 설정합니다.
-    private void setProjectileData(ref GameObject obj)
-    {
-        // 하드코딩된 부분은 플레이어 스텟의 공격력을 받아온다.
-        int randomDamage = Random.Range(30, 50);
-        obj.GetComponent<Projectile>().Damage = 
-            (int)((randomDamage + EquipmentManager.Instance.getCurrentDamage()) * obj.GetComponent<Projectile>().Spec.ProjectileDamage);
     }
 
 
@@ -366,30 +346,7 @@ public class PlayerAttack : IAttack
             yield return new WaitWhile(() => firstProjectile.activeInHierarchy);
         }
     }
-    /*
-* _angle : 추가 각도 설정입니다.
-* _name : 해당 발사체오브젝트의 name입니다.
-*/
-    IEnumerator LaunchCorutines(float _angle, string _name, Vector3 _targetPos, Vector3 _firePos, bool _notSingle)
-    {
-        Vector3 temp = new Vector3(1, 1, 0);//TO-DO 플레이어 방향에 따라 나갈수있도록 value 제공해주는 api만들기
-        GameObject obj = ObjectPoolManager.Instance.EnableGameObject(_name);
-        if (_notSingle) firstProjectile = obj;
-        float keepTime = obj.GetComponent<Projectile>().Spec.SpawnTime;
-        setProjectileData(ref obj);
-        obj.GetComponent<Projectile>().CurrentPassCount = 0;
-        obj.GetComponent<Projectile>().setEnable(_targetPos, _firePos, _angle);
-        yield return new WaitForSeconds(keepTime);
-        // 간헐적 disable문제때문에 해당 오브젝트의 Active가 true일 시만 disable되게 했습니다
-        // 스폰시간이 다되기 전 발사체가 몬스터와 부딪힐 때 disable이 한번 호출되는데 혹시나 다른 객체로
-        // 접근해서 disable해서 간헐적 문제가 발생할 수 있을거라 추측해서 조건문 걸었습니다.
-        // 추후에 다른곳에서의 문제가 발견되면 삭제할 예정
-        if (obj.activeInHierarchy)
-        {
-            obj.GetComponent<Projectile>().setDisable();
-            ObjectPoolManager.Instance.DisableGameObject(obj);
-        }
-    }
+
 
     IEnumerator WaitForCoolTime(GameObject _btn, float _cooltime, string _type)
     {

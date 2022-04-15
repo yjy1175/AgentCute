@@ -13,10 +13,8 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
     private StringGameObject weapons;
     [SerializeField]
     private StringGameObject costumes;
-    [SerializeField]
-    private Weapon playerCurrentWeapon;
-    [SerializeField]
-    private Costume playerCurrentCostume;
+
+    
     // key : 몬스터 분류 , value : 해당 몬스터 장비 오브젝트
     public StringGameObject monsterCurrentEquip;
     #endregion
@@ -97,7 +95,7 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         // 해금이 되어있다면
         if (cWeapon.IsLocked)
         {
-            playerCurrentWeapon = cWeapon;
+            GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().PlayerCurrentWeapon = cWeapon;
             SpriteRenderer playerSprite = PlayerManager.Instance.getPlayerWeaponSprite();
             playerSprite.sprite = cWeapon.GetComponent<SpriteRenderer>().sprite;
         }
@@ -123,10 +121,6 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
     private void loadUserEquip()
     {
         // 유저의 데이터 로드 후 적용
-    }
-    public int getCurrentDamage()
-    {
-        return playerCurrentWeapon.Spec.WeaponDamage;
     }
     #endregion
 }
