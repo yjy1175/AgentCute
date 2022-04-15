@@ -36,6 +36,7 @@ public class Spawn : Projectile
         ShortWide, // 3 - 짧은와이드형
         LongWide, // 4 - 긴와이드형
     }
+    [SerializeField]
     private VertualJoyStick mUJoySitick;
     private Vector3 mPlayer;
     private bool isChange;
@@ -52,7 +53,7 @@ public class Spawn : Projectile
         if (isActive && mSpawnType == SpawnType.LongWide)
         {
             mPlayer = GameObject.Find("fire").transform.position;
-            mUJoySitick = GameObject.Find("JoyStick").transform.Find("UltimateJoyStick").GetComponent<VertualJoyStick>();
+            mUJoySitick = GameObject.Find("Canvas").transform.Find("UltimateJoyStick").GetComponent<VertualJoyStick>();
             Vector3 newPos = new Vector3(mUJoySitick.GetHorizontalValue() * 5, mUJoySitick.GetVerticalValue() * 5, 0);
             if(newPos != Vector3.zero)
             {

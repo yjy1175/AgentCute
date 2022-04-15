@@ -3121,8 +3121,6 @@ MonoBehaviour:
   costumes:
     m_keys: []
     m_values: []
-  playerCurrentWeapon: {fileID: 0}
-  playerCurrentCostume: {fileID: 0}
   monsterCurrentEquip:
     m_keys: []
     m_values: []
@@ -16134,6 +16132,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2055621822}
   m_CullTransparentMesh: 1
+--- !u!212 &2110037911 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4011342965647650139, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+  m_PrefabInstance: {fileID: 6637047451298985416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2113241960
 GameObject:
   m_ObjectHideFlags: 0
@@ -16369,9 +16372,21 @@ PrefabInstance:
     - target: {fileID: 148941431581781890, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 2129f9e950c62154399c343c60271e47, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 148941431581781890, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
       propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 360630260721627007, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1138397759589537106, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416697908422846754, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3816155346244524986, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
@@ -16419,8 +16434,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4584972873254906429, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: _itemList.Array.data[0]
+      value: 
+      objectReference: {fileID: 2110037911}
+    - target: {fileID: 4584972873254906429, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
       propertyPath: _armorListString.Array.data[0]
       value: Ver121/5_Armor/Normal_Armor1.pnges/Packages/Ver121/5_Armor/Normal_Armor1.png
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176456506841197231, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: _horse
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5176456506841197231, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: _horseString
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551003344909924934, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5692988472833825513, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6386947638622914387, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c2fc0aafc4ba14749a6cc196ffeb52b8, type: 2}
+    - target: {fileID: 6462443302822012543, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6637047452066596387, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
       propertyPath: GBtn
@@ -16453,6 +16496,22 @@ PrefabInstance:
     - target: {fileID: 6637047452368900789, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6715476654445614535, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344103483763046547, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324583759943103628, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8949084805564217097, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
