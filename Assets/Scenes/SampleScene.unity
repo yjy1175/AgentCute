@@ -517,11 +517,6 @@ MonoBehaviour:
   skills:
     m_keys: []
     m_values: []
-  mGeneralSkillImg: {fileID: 743264209}
-  mUltimateSkillImg: {fileID: 1150252639}
-  currentBaseSkill: {fileID: 0}
-  currentGeneralSkill: {fileID: 0}
-  currentUltimateSkill: {fileID: 0}
 --- !u!1 &41855842
 GameObject:
   m_ObjectHideFlags: 0
@@ -16443,6 +16438,14 @@ PrefabInstance:
       propertyPath: Ujoystick
       value: 
       objectReference: {fileID: 1474026076}
+    - target: {fileID: 6637047452066596387, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: mGeneralSkillImg
+      value: 
+      objectReference: {fileID: 743264209}
+    - target: {fileID: 6637047452066596387, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
+      propertyPath: mUltimateSkillImg
+      value: 
+      objectReference: {fileID: 1150252639}
     - target: {fileID: 6637047452066596388, guid: 7df4ade52bf579b439dcec28136a1aba, type: 3}
       propertyPath: mJoyStick
       value: 
