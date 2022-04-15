@@ -14,6 +14,51 @@ public class PlayerAttack : IAttack
     private GameObject firstProjectile;
     private GameObject mChargingBar;
 
+    [SerializeField]
+    private Image mGeneralSkillImg;
+    [SerializeField]
+    private Image mUltimateSkillImg;
+    [SerializeField]
+    private Skill currentBaseSkill;
+    public Skill CurrentBaseSkill
+    {
+        get { return currentBaseSkill; }
+        set
+        {
+            currentBaseSkill = value;
+        }
+    }
+    [SerializeField]
+    private Skill currentGeneralSkill;
+    public Skill CurrentGeneralSkill
+    {
+        get { return currentGeneralSkill; }
+        set
+        {
+            currentGeneralSkill = value;
+            
+            mGeneralSkillImg.sprite = ProjectileManager.
+                Instance.allProjectiles[currentGeneralSkill.Spec.getProjectiles()[0]].
+                GetComponent<SpriteRenderer>().sprite;
+        }
+    }
+    [SerializeField]
+    private Skill currentUltimateSkill;
+    public Skill CurrentUltimateSkill
+    {
+        get { return currentUltimateSkill; }
+        set
+        {
+            currentUltimateSkill = value;
+            mUltimateSkillImg.sprite = ProjectileManager.
+                Instance.allProjectiles[currentUltimateSkill.Spec.getProjectiles()[0]].
+                GetComponent<SpriteRenderer>().sprite;
+        }
+    }
+
+
+
+
 
     private bool mGSkillUseable  = true;
     private bool mUSkillUseable = true;
@@ -32,10 +77,11 @@ public class PlayerAttack : IAttack
     {
         if (mAutoAttackCheckTime > mAutoAttackSpeed && mIsGameStart)
         {
+            Debug.Log(CurrentBaseSkill.Spec.Name);
             // 자동공격 매서드
             {
                 launchProjectile(
-                    SkillManager.Instance.CurrentBaseSkill,
+                    CurrentBaseSkill,
                     0,
                     MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position),
                     firePosition.transform.position,
@@ -50,9 +96,9 @@ public class PlayerAttack : IAttack
     {
         // 스킬 매니저를 통해 현재 장착중인 스킬을 받아온다
         TileDict.Clear();
-        pushProjectile(SkillManager.Instance.CurrentBaseSkill);
-        pushProjectile(SkillManager.Instance.CurrentGeneralSkill);
-        pushProjectile(SkillManager.Instance.CurrentUltimateSkill);
+        pushProjectile(CurrentBaseSkill);
+        pushProjectile(CurrentGeneralSkill);
+        pushProjectile(CurrentUltimateSkill);
         createObjectPool();
         mIsGameStart = true;
     }
@@ -103,8 +149,8 @@ public class PlayerAttack : IAttack
         if (mGSkillUseable)
         {
             mGSkillUseable = false;
-            useSkill(GBtn, SkillManager.Instance.CurrentGeneralSkill);
-            StartCoroutine(activeAnimation(SkillManager.Instance.CurrentUltimateSkill));
+            useSkill(GBtn, CurrentGeneralSkill);
+            StartCoroutine(activeAnimation(CurrentUltimateSkill));
         }
     }
     public void clickUltimateSkillBtn()
@@ -112,8 +158,8 @@ public class PlayerAttack : IAttack
         if (mUSkillUseable)
         {
             mUSkillUseable = false;
-            useSkill(UBtn, SkillManager.Instance.CurrentUltimateSkill);
-            StartCoroutine(activeAnimation(SkillManager.Instance.CurrentUltimateSkill));
+            useSkill(UBtn, CurrentUltimateSkill);
+            StartCoroutine(activeAnimation(CurrentUltimateSkill));
         }
     }
     /*

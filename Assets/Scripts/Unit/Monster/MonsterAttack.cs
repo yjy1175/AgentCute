@@ -43,17 +43,6 @@ public class MonsterAttack : IAttack
             }
         }
     }
-    //void OnCollisionStay2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Player"))
-    //    {
-    //        if (mAutoAttackCheckTime.Equals(0f))
-    //        {
-    //            collision.gameObject.GetComponent<PlayerStatus>().Hp -= mCloseAttackPower;
-    //            mAutoAttackCheckTime = mAutoAttackSpeed;
-    //        }
-    //    }
-    //}
 
     void OnCollisionExit2D(Collision2D collision)
     {

@@ -277,7 +277,7 @@ public class UIManager : SingleToneMaker<UIManager>
         switch (type)
         {
             case "G":
-                SkillManager.Instance.CurrentGeneralSkill = mGeneralSkill[num].GetComponent<Skill>();
+                GameObject.Find("PlayerObject").GetComponent<PlayerAttack>().CurrentGeneralSkill = mGeneralSkill[num].GetComponent<Skill>();
                 for(int i = 0; i < mGeneralSkillBtn.Count; i++)
                 {
                     if (i == num)
@@ -288,7 +288,7 @@ public class UIManager : SingleToneMaker<UIManager>
                 mIsGSkillSelect = true;
                 break;
             case "U":
-                SkillManager.Instance.CurrentUltimateSkill = mUltimateSkill[num].GetComponent<Skill>();
+                GameObject.Find("PlayerObject").GetComponent<PlayerAttack>().CurrentUltimateSkill = mUltimateSkill[num].GetComponent<Skill>();
                 for (int i = 0; i < mUltimateSkill.Count; i++)
                 {
                     if (i == num)
@@ -304,7 +304,7 @@ public class UIManager : SingleToneMaker<UIManager>
     {
         if(mIsGSkillSelect && mIsUSkillSelect)
         {
-            SkillManager.Instance.CurrentBaseSkill = mBaseSkill.GetComponent<Skill>();
+            GameObject.Find("PlayerObject").GetComponent<PlayerAttack>().CurrentBaseSkill = mBaseSkill.GetComponent<Skill>();
             // 플레이매니저에서 스타트 API호출
             PlayerManager.Instance.SettingGameStart();
             GameRestart();

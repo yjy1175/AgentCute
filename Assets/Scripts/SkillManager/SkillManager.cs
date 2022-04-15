@@ -8,46 +8,6 @@ public class SkillManager : SingleToneMaker<SkillManager>
     // skill들을 담을 dic
     public StringGameObject skills;
 
-    [SerializeField]
-    private Image mGeneralSkillImg;
-    [SerializeField]
-    private Image mUltimateSkillImg;
-    [SerializeField]
-    private Skill currentBaseSkill;
-    public Skill CurrentBaseSkill
-    {
-        get { return currentBaseSkill; }
-        set 
-        { 
-            currentBaseSkill = value;
-        }
-    }
-    [SerializeField]
-    private Skill currentGeneralSkill;
-    public Skill CurrentGeneralSkill
-    {
-        get { return currentGeneralSkill; }
-        set 
-        { 
-            currentGeneralSkill = value;
-            mGeneralSkillImg.sprite = ProjectileManager.
-                Instance.allProjectiles[currentGeneralSkill.Spec.getProjectiles()[0]].
-                GetComponent<SpriteRenderer>().sprite;
-        }
-    }
-    [SerializeField]
-    private Skill currentUltimateSkill;
-    public Skill CurrentUltimateSkill
-    {
-        get { return currentUltimateSkill; }
-        set 
-        { 
-            currentUltimateSkill = value;
-            mUltimateSkillImg.sprite = ProjectileManager.
-                Instance.allProjectiles[currentUltimateSkill.Spec.getProjectiles()[0]].
-                GetComponent<SpriteRenderer>().sprite;
-        }
-    }
     #endregion
 
     #region method
@@ -100,6 +60,7 @@ public class SkillManager : SingleToneMaker<SkillManager>
         List<GameObject> newList = new List<GameObject>();
         foreach (string key in skills.Keys)
         {
+            Debug.Log(key);
             if (skills[key].GetComponent<Skill>().Spec.SkillWeaponType == _type)
             {
                 if(skills[key].GetComponent<Skill>().Spec.Type == "G")
