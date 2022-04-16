@@ -6,23 +6,32 @@ public class Costume : MonoBehaviour
 {
     // Start is called before the first frame update
     #region varialbe
+    [SerializeField]
     private CostumeSpec spec = new CostumeSpec();
     public CostumeSpec Spec
     {
         get { return spec; }
         set { spec = value; }
     }
+    [SerializeField]
     private bool isLocked;
     public bool IsLocked
     {
         get { return isLocked; }
         set { isLocked = value; }
     }
+
+    [SerializeField]
+    private TypeSprite mSpriteList;
     #endregion
     #region method
-    public void setInit()
+    public EquipmentManager.CostumeSprite GetSpriteList(EquipmentManager.SpriteType _key)
     {
-        // 코스튬 데이터 추출
+        return mSpriteList[_key];
+    }
+    public void AddSpriteList(EquipmentManager.SpriteType _key, EquipmentManager.CostumeSprite _sprite)
+    {
+        mSpriteList.Add(_key, _sprite);
     }
     #endregion
 }

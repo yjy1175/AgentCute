@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEditor;
 using System.Reflection;
 using System;
+
+[CustomPropertyDrawer(typeof(TypeSprite))]
 [CustomPropertyDrawer(typeof(IntGameObject))]
 [CustomPropertyDrawer(typeof(SkillDic))]
 [CustomPropertyDrawer(typeof(StringGameObject))]

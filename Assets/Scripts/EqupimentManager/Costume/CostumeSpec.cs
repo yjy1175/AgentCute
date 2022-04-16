@@ -8,43 +8,59 @@ public class CostumeSpec : EquipSpec
 {
     #region varialbe
     [SerializeField]
-    private string type;
+    private string mType;
     public override string Type
     {
-        get { return type; }
-        set { type = value; }
+        get { return mType; }
+        set { mType = value; }
     }
 
     [SerializeField]
-    private string typeName;
+    private string mTypeName;
     public override string TypeName
     {
-        get { return typeName; }
-        set { typeName = value; }
+        get { return mTypeName; }
+        set { mTypeName = value; }
     }
 
     [SerializeField]
-    private string equipName;
+    private string mEquipName;
     public override string Name
     {
-        get { return equipName; }
-        set { equipName = value; }
+        get { return mEquipName; }
+        set { mEquipName = value; }
     }
 
     [SerializeField]
-    private string equipDesc;
+    private string mEquipDesc;
     public override string Desc
     {
-        get { return equipDesc; }
-        set { equipDesc = value; }
+        get { return mEquipDesc; }
+        set { mEquipDesc = value; }
     }
 
     [SerializeField]
-    private int equipRank;
+    private int mEquipRank;
     public override int Rank
     {
-        get { return equipRank; }
-        set { equipRank = value; }
+        get { return mEquipRank; }
+        set { mEquipRank = value; }
+    }
+
+    [SerializeField]
+    private int mCoustumeHp;
+    public int CoustumeHP
+    {
+        get { return mCoustumeHp; }
+        set { mCoustumeHp = value; }
+    }
+
+    [SerializeField]
+    private int mCoustumeSpeed;
+    public int CoustumeSpeed
+    {
+        get { return mCoustumeSpeed; }
+        set { mCoustumeSpeed = value; }
     }
     #endregion
 }

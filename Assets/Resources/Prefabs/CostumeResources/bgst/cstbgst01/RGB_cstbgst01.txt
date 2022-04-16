@@ -1,0 +1,6 @@
+File name :  R   G   B
+
+New_Helmet_09 : 123 164 205
+New_Cloth_05 : 88 88 131
+New_Armor_10 : 210 210 210
+New_Pant_02 : 88 88 130

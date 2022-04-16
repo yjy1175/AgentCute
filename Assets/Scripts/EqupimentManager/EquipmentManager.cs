@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 public class EquipmentManager : SingleToneMaker<EquipmentManager>
@@ -17,6 +18,33 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
     
     // key : 몬스터 분류 , value : 해당 몬스터 장비 오브젝트
     public StringGameObject monsterCurrentEquip;
+
+    public struct CostumeSprite
+    {
+        public CostumeSprite(Sprite _sprite, float _r, float _g, float _b)
+        {
+            sprite = _sprite;
+            r = _r;
+            g = _g;
+            b = _b;
+        }
+        public Sprite sprite;
+        public float r;
+        public float g;
+        public float b;
+    }
+
+    public enum SpriteType
+    {
+        CostumeHelmet,
+        CostumeCloth,
+        CostumeArmor,
+        CostumePant,
+        CostumeBack,
+        Exit,
+    }
+
+    private const string NULL = "null";
     #endregion
     void Start()
     {
@@ -60,30 +88,58 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         }
 
         // Costume
-        //{
-        //    
-        //    // Costumes 프리펩을 불러온다
-        //    GameObject[] costumesList = Resources.LoadAll<GameObject>("Prefabs\\Costumes");
-        //    // Dic에 저장해둔다.
-        //    foreach (GameObject costume in costumesList)
-        //    {
-        //        costumes.Add(costume.name, costume);
-        //    }
-        //    List<Dictionary<string, object>> costumeData = CSVReader.Read("CSVFile\\Costume");
-        //    Costume item;
-        //for (int i = 0; i < costumesList.Length; i++)
-        //    {
-        //        // 코스튬 정보 추출 및 추가
-        //        {
-        //            item = costumes[costumeData[i]["CostumeType"].ToString()].GetComponent<Costume>();
-        //            item.Spec.TypeName = costumeData[i]["CostumeTypeName "].ToString();
-        //            item.Spec.EquipName = costumeData[i]["CostumeName "].ToString();
-        //            item.Spec.EquipDesc = costumeData[i]["CostumeDesc "].ToString();
-        //            item.Spec.EquipRank = int.Parse(costumeData[i]["CostumeRank "].ToString());
-        //            item.IsLocked = false;
-        //        }
-        //    }
-        //}
+        {
+
+            // Costumes 프리펩을 불러온다
+            GameObject[] costumesList = Resources.LoadAll<GameObject>("Prefabs\\Costumes");
+            // Dic에 저장해둔다.
+            foreach (GameObject costume in costumesList)
+            {
+                costumes.Add(costume.name, costume);
+            }
+            List<Dictionary<string, object>> costumeData = CSVReader.Read("CSVFile\\Costume");
+            List<Dictionary<string, object>> costumeLoadData = CSVReader.Read("CSVFile\\CostumeLoad");
+            Costume item;
+            for (int i = 0; i < costumesList.Length; i++)
+            {
+                // 코스튬 정보 추출 및 추가
+                {
+                    item = costumes[costumeData[i]["CostumeLoad"].ToString()].GetComponent<Costume>();
+                    item.Spec.TypeName = costumeData[i]["CostumeTypeName"].ToString();
+                    item.Spec.Name = costumeData[i]["CostumeName"].ToString();
+                    item.Spec.Desc = costumeData[i]["CostumeDesc"].ToString();
+                    //item.Spec.Rank = int.Parse(costumeData[i]["CostumeRank "].ToString());
+                    item.Spec.CoustumeHP = int.Parse(costumeData[i]["CostumeHP"].ToString());
+                    item.Spec.CoustumeSpeed = int.Parse(costumeData[i]["CostumeSPD"].ToString());
+                    item.IsLocked = false;
+                }
+            }
+            for (int i = 0; i < costumesList.Length; i++)
+            {
+                // 코스튬 스프라이트 데이터 추출
+                {
+                    item = costumes[costumeLoadData[i]["CostumeLoadName"].ToString()].GetComponent<Costume>();
+                    string path = costumeLoadData[i]["CostumeLoadPath"].ToString();
+                    Sprite newSprite = null;
+                    string[] rgb = new string[3];
+                    // 각 스프라이트와 rgb정보를 저장
+                    for(SpriteType j = SpriteType.CostumeHelmet; j < SpriteType.Exit; j++)
+                    {
+                        if (costumeLoadData[i][j.ToString()].ToString() != NULL)
+                            newSprite = Resources.Load<Sprite>(path + costumeLoadData[i][j.ToString()].ToString());
+                        if (costumeLoadData[i][j.ToString() +"RGB"].ToString() != NULL)
+                            rgb = costumeLoadData[i][j.ToString() + "RGB"].ToString().Split('/');
+                        if(newSprite != null)
+                        {
+                            CostumeSprite CSprite = new CostumeSprite(
+                                newSprite, float.Parse(rgb[0]), float.Parse(rgb[1]), float.Parse(rgb[2]));
+                            item.AddSpriteList(j, CSprite);
+                        }
+                    }
+                }
+            }
+            
+        }
     }
     // 착용중인 장비를 교체해주는 함수
     // name : 바꿀 장비의 typeName
