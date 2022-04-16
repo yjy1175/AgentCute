@@ -178,23 +178,54 @@ public class PlayerAttack : IAttack
         if (_skill.Spec.MSkillRunTime > 0)
         {
             int launchCount = _skill.Spec.SkillCount;
-            // 지속 시간내에 일정량의 발사체가 발사되는 경우
-            if (launchCount == -1)
+            // (익설티드 소드)
+            if (launchCount > 1)
             {
-                // Todo : 쿨타임동안에는 무한발사가 가능한 스킬의 경우 
+                Vector3 targetPos = new Vector3(Mjoystick.GetHorizontalValue() * 5f, Mjoystick.GetVerticalValue() * 5f, 0);
+                if (targetPos == Vector3.zero)
+                    targetPos = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
+                Vector3 firePos = firePosition.transform.position;
+                // 마지막 클릭일 경우
+                if (count - 1 == _skill.CurrentUseCount)
+                {
+                    launchProjectile(_skill, 0, targetPos, firePos, false);
+                    launchProjectile(_skill, 2, targetPos, firePos, false);
+                    _skill.CurrentCoolTimeIndex++;
+                    _skill.CurrentUseCount = 0;
+                }
+                // 첫클릭 일 경우
+                else if(_skill.CurrentUseCount == 0)
+                {
+                    // 두번째부턴 지속시간동안 일반 쿨타임코루틴 실행
+                    launchProjectile(_skill, 0, targetPos, firePos, false);
+                    launchProjectile(_skill, 1, targetPos, firePos, false);
+                    StartCoroutine(WaitForCoolTime(_btn, _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex], _skill.Spec.Type));
+                    // 첫 검기 발사 후 지속시간 쿨타임 코루틴 실행
+                    _skill.CurrentCoolTimeIndex++;
+                    _skill.CurrentUseCount++;
+                    StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime, _btn, _skill));
+                }
+                // 중간일 경우
+                else
+                {
+                    _skill.CurrentUseCount++;
+                    launchProjectile(_skill, 0, targetPos, firePos, false);
+                    launchProjectile(_skill, 2, targetPos, firePos, false);
+                    StartCoroutine(WaitForCoolTime(_btn, _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex], _skill.Spec.Type));
+                }
+            }
+            // 지속 시간내에 일정량의 발사체가 발사되는 경우
+            else if (launchCount == -1)
+            {
+                // Todo : 쿨타임동안에는 무한발사가 가능한 스킬의 경우 (오버래피드, 아포칼립스)
                 // 터치패드의 방향으로 해당 시간동안 발사
                 StartCoroutine(InfiniteLaunch(_skill));
             }
             // 한번 클릭에 지속시간동안 발사되는 경우
-            else if (count == 1)
+            else
             {
                 launchSkill(_skill);
                 StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime, _btn, _skill));
-            }
-            // 아닌 경우(익설티드 소드)
-            else
-            {
-
             }
         }
         // 한번 클릭
@@ -371,9 +402,12 @@ public class PlayerAttack : IAttack
 
     IEnumerator WaitForChargingTime(GameObject _bar, float _spawnTime, GameObject _btn, Skill _skill)
     {
-        // 궁극기 스킬 버튼이 터치패드로 변경
-        UBtn.SetActive(false);
-        Ujoystick.gameObject.SetActive(true);
+        // 궁극기 스킬 버튼이 터치패드로 변경(스킬클릭이 한번이거나 무한인경우만)
+        if(_skill.Spec.SkillCount == 1 || _skill.Spec.SkillCount == -1)
+        {
+            UBtn.SetActive(false);
+            Ujoystick.gameObject.SetActive(true);
+        }
         _bar.SetActive(true);
         float lefttime = _spawnTime;
         while(lefttime > 0f)
@@ -383,11 +417,15 @@ public class PlayerAttack : IAttack
             _bar.transform.GetChild(0).GetComponent<Image>().fillAmount = (lefttime / _spawnTime);
             yield return new WaitForFixedUpdate();
         }
+        mUSkillUseable = false;
         _bar.SetActive(false);
         Ujoystick.gameObject.SetActive(false);
         UBtn.SetActive(true);
+        if (_skill.CurrentCoolTimeIndex == 1)
+            _skill.CurrentCoolTimeIndex++;
         StartCoroutine(
                    WaitForCoolTime(_btn, _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex], _skill.Spec.Type));
-
+        _skill.CurrentUseCount = 0;
+        _skill.CurrentCoolTimeIndex = 0;
     }
 }

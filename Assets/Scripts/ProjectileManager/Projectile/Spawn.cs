@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Spawn : Projectile
 {
@@ -22,24 +23,23 @@ public class Spawn : Projectile
     [SerializeField]
     private float angle = 0;
     [SerializeField]
-    private SpawnType mSpawnType;
-    public SpawnType MSpawnType
+    private string mSpawnType;
+    public string MSpawnType
     {
         get { return mSpawnType; }
         set { mSpawnType = value; }
     }
     public enum SpawnType
     {
-        General, // 0 - 일반형
-        SelfSpawn, // 1 - 자기주위 스폰형
-        RendomSpawn, // 2 - 랜덤스폰형
-        ShortWide, // 3 - 짧은와이드형
-        LongWide, // 4 - 긴와이드형
+        General, // 일반형
+        SelfSpawn, // 자기주위 스폰형
+        RandomSpawn, // 랜덤스폰형
+        ShortWide, // 짧은와이드형
+        LongWide, // 긴와이드형
     }
     [SerializeField]
     private VertualJoyStick mUJoySitick;
     private Vector3 mPlayer;
-    private bool isChange;
     #endregion
     #region method
     protected override void destroySelf()
@@ -50,7 +50,7 @@ public class Spawn : Projectile
     {
         /*스폰 매서드*/
         // 방향키에 따라 위치가 바뀌는 경우
-        if (isActive && mSpawnType == SpawnType.LongWide)
+        if (isActive && (SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType) == SpawnType.LongWide)
         {
             mPlayer = GameObject.Find("fire").transform.position;
             mUJoySitick = GameObject.Find("Canvas").transform.Find("UltimateJoyStick").GetComponent<VertualJoyStick>();
@@ -88,7 +88,7 @@ public class Spawn : Projectile
         target = _target;
         mPlayer = GameObject.Find("fire").transform.position;
         // 랜덤형인 경우
-        switch (mSpawnType)
+        switch ((SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType))
         {
             case SpawnType.General:
                 transform.position = mPlayer + (target - mPlayer).normalized;
@@ -98,9 +98,9 @@ public class Spawn : Projectile
             case SpawnType.SelfSpawn:
                 transform.position = mPlayer;
                 break;
-            case SpawnType.RendomSpawn:
-                float rH = Random.Range(-3, 4);
-                float rV = Random.Range(-3, 4);
+            case SpawnType.RandomSpawn:
+                float rH = UnityEngine.Random.Range(-3, 4);
+                float rV = UnityEngine.Random.Range(-3, 4);
                 Vector3 ranPos = new Vector3(rH, rV, 0);
                 transform.position = mPlayer + ranPos;
                 break;

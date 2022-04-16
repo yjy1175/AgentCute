@@ -30,7 +30,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6192777736625299568}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -116,6 +117,7 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   angle: 0
   mSpawnType: 0
+  mUJoySitick: {fileID: 0}
 --- !u!61 &4586061285308671864
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -129,7 +131,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.16885519, y: -0.011658311}
+  m_Offset: {x: -1.059793, y: -0.011658311}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -140,7 +142,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.9203405, y: 2.6967452}
+  m_Size: {x: 10.377637, y: 2.6967452}
   m_EdgeRadius: 0
 --- !u!95 &2517244106020655434
 Animator:
@@ -161,3 +163,65 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1001 &2745742147529253971
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1615462999090039054}
+    m_Modifications:
+    - target: {fileID: 8353050747041154080, guid: dd0c8972bafe3cc40b4a483295a970b7, type: 3}
+      propertyPath: m_Name
+      value: sp_u02_LordOfSpear_M2_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353050747041154083, guid: dd0c8972bafe3cc40b4a483295a970b7, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353050747041154083, guid: dd0c8972bafe3cc40b4a483295a970b7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353050747041154083, guid: dd0c8972bafe3cc40b4a483295a970b7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353050747041154083, guid: dd0c8972bafe3cc40b4a483295a970b7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353050747041154083, guid: dd0c8972bafe3cc40b4a483295a970b7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353050747041154083, guid: dd0c8972bafe3cc40b4a483295a970b7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353050747041154083, guid: dd0c8972bafe3cc40b4a483295a970b7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353050747041154083, guid: dd0c8972bafe3cc40b4a483295a970b7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353050747041154083, guid: dd0c8972bafe3cc40b4a483295a970b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353050747041154083, guid: dd0c8972bafe3cc40b4a483295a970b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353050747041154083, guid: dd0c8972bafe3cc40b4a483295a970b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dd0c8972bafe3cc40b4a483295a970b7, type: 3}
+--- !u!4 &6192777736625299568 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8353050747041154083, guid: dd0c8972bafe3cc40b4a483295a970b7, type: 3}
+  m_PrefabInstance: {fileID: 2745742147529253971}
+  m_PrefabAsset: {fileID: 0}

@@ -44,7 +44,7 @@ public class ProjectileManager : SingleToneMaker<ProjectileManager>
             // 스폰형인 경우 스폰 타입 지정
             if(item.Spec.Type[0] == 's')
             {
-                item.GetComponent<Spawn>().MSpawnType = (Spawn.SpawnType)int.Parse(projectilesData[i]["ProjectileSpawnType"].ToString());
+                item.GetComponent<Spawn>().MSpawnType = projectilesData[i]["ProjectileSpawnType"].ToString();
             }
         }
     }
