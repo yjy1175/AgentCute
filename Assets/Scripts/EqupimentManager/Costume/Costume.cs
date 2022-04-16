@@ -31,6 +31,8 @@ public class Costume : MonoBehaviour
     }
     public void AddSpriteList(EquipmentManager.SpriteType _key, EquipmentManager.CostumeSprite _sprite)
     {
+        if (mSpriteList.ContainsKey(_key))
+            mSpriteList.Remove(_key);
         mSpriteList.Add(_key, _sprite);
     }
     #endregion

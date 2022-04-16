@@ -99,7 +99,7 @@ public class PlayerAttack : IAttack
     public void DragSkillBtn(GameObject _btn)
     {
         VertualJoyStick dir = _btn.GetComponent<VertualJoyStick>();
-        mTarget = new Vector3(dir.GetHorizontalValue() * 5f, dir.GetVerticalValue() * 5f, 0);
+        mTarget = new Vector3(dir.GetHorizontalValue() + transform.position.x , dir.GetVerticalValue() + transform.position.y, 0);
     }
     public void clickGeneralSkillBtn()
     {
@@ -272,7 +272,9 @@ public class PlayerAttack : IAttack
         // 일정량을 곱해줘야 제대로된 방향으로 나감
         // 만약 터치패드의 입력이 없을 경우 근거리 몬스터로 발사
         if(mTarget == Vector3.zero)
+        {
             mTarget = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
+        }
         Vector3 firePos = firePosition.transform.position;
         // 발사체가 한개인 경우
         if(projectileCount <= 1)

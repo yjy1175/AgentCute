@@ -52,7 +52,7 @@ public class Spawn : Projectile
         // 방향키에 따라 위치가 바뀌는 경우
         if (isActive && (SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType) == SpawnType.LongWide)
         {
-            mPlayer = GameObject.Find("fire").transform.position;
+            mPlayer = GameObject.Find("PlayerObject").transform.position;
             mUJoySitick = GameObject.Find("Canvas").transform.Find("UltimateSkillJoyStick").GetComponent<VertualJoyStick>();
             Vector3 newPos = new Vector3(mUJoySitick.GetHorizontalValue() * 5, mUJoySitick.GetVerticalValue() * 5, 0);
             if(newPos != Vector3.zero)

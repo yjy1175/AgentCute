@@ -45,12 +45,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spec:
     mType: 
-    mTypeName: 
-    mEquipName: 
+    mTypeName: bgst
+    mEquipName: "\uB808\uB4DC\uBCA8\uBCB3"
     mEquipDesc: 
     mEquipRank: 0
-    mCoustumeHp: 0
-    mCoustumeSpeed: 0
+    mCoustumeHp: 11
+    mCoustumeSpeed: 10
   isLocked: 0
   mSpriteList:
     m_keys: 
+    m_values: []

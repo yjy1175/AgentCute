@@ -217,7 +217,7 @@ public class UIManager : SingleToneMaker<UIManager>
     {
         int ran = Random.Range(0, 5);
         List<GameObject> newWeaponList = EquipmentManager.Instance.FindWepaonList(_type);
-        EquipmentManager.Instance.changeEquip(newWeaponList[ran].GetComponent<Weapon>().Spec.Type);
+        EquipmentManager.Instance.ChangeWeapon(newWeaponList[ran].GetComponent<Weapon>().Spec.Type);
         mBaseSkill = SkillManager.Instance.FindBaseSkill(_type);
         mGeneralSkill = SkillManager.Instance.FindGeneralSkill(_type);
         mUltimateSkill = SkillManager.Instance.FindUltimateSkill(_type);

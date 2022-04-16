@@ -163,6 +163,7 @@ MonoBehaviour:
   mMonsterName: 
   mIsDieToKillCount: 0
   mIsDieToGetExp: 0
+  mMonsterGrade: 0
 --- !u!61 &-1419706892184604970
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -223,9 +224,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.44607577}
+  m_Offset: {x: 0, y: -0.33455682}
   serializedVersion: 2
-  m_Radius: 0.053924233
+  m_Radius: 0.16544318
 --- !u!114 &-7603956744392291738
 MonoBehaviour:
   m_ObjectHideFlags: 0

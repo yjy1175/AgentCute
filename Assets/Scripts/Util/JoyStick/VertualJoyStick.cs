@@ -9,6 +9,8 @@ public class VertualJoyStick : MonoBehaviour, IDragHandler, IPointerDownHandler,
     private Image bgImg;
     private Image controllerImg;
     private Vector3 inputVector;
+    [SerializeField]
+    private int type; // 좌측 패드 와 우측 패드 구분
     private void Start()
     {
         bgImg = GetComponent<Image>();
@@ -22,7 +24,7 @@ public class VertualJoyStick : MonoBehaviour, IDragHandler, IPointerDownHandler,
             pos.x = (pos.x / bgImg.rectTransform.sizeDelta.x);
             pos.y = (pos.y / bgImg.rectTransform.sizeDelta.y); ;
 
-            inputVector = new Vector3(pos.x * 2 - 1, pos.y * 2 - 1);
+            inputVector = new Vector3(pos.x * 2 + type, pos.y * 2 - 1);
             inputVector = (inputVector.magnitude > 1.0f) ? inputVector.normalized : inputVector;
 
             controllerImg.rectTransform.anchoredPosition = new Vector3(

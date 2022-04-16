@@ -19,21 +19,23 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
     // key : 몬스터 분류 , value : 해당 몬스터 장비 오브젝트
     public StringGameObject monsterCurrentEquip;
 
+    [Serializable]
     public struct CostumeSprite
     {
-        public CostumeSprite(Sprite _sprite, float _r, float _g, float _b)
+        public CostumeSprite(Texture2D _sprite, float _r, float _g, float _b)
         {
             sprite = _sprite;
             r = _r;
             g = _g;
             b = _b;
         }
-        public Sprite sprite;
+        public Texture2D sprite;
         public float r;
         public float g;
         public float b;
     }
 
+    [Serializable]
     public enum SpriteType
     {
         CostumeHelmet,
@@ -120,13 +122,13 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                 {
                     item = costumes[costumeLoadData[i]["CostumeLoadName"].ToString()].GetComponent<Costume>();
                     string path = costumeLoadData[i]["CostumeLoadPath"].ToString();
-                    Sprite newSprite = null;
+                    Texture2D newSprite = null;
                     string[] rgb = new string[3];
                     // 각 스프라이트와 rgb정보를 저장
                     for(SpriteType j = SpriteType.CostumeHelmet; j < SpriteType.Exit; j++)
                     {
                         if (costumeLoadData[i][j.ToString()].ToString() != NULL)
-                            newSprite = Resources.Load<Sprite>(path + costumeLoadData[i][j.ToString()].ToString());
+                            newSprite = Resources.Load<Texture2D>(path + costumeLoadData[i][j.ToString()].ToString());
                         if (costumeLoadData[i][j.ToString() +"RGB"].ToString() != NULL)
                             rgb = costumeLoadData[i][j.ToString() + "RGB"].ToString().Split('/');
                         if(newSprite != null)
@@ -135,6 +137,7 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                                 newSprite, float.Parse(rgb[0]), float.Parse(rgb[1]), float.Parse(rgb[2]));
                             item.AddSpriteList(j, CSprite);
                         }
+                        newSprite = null;
                     }
                 }
             }
@@ -144,10 +147,10 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
     // 착용중인 장비를 교체해주는 함수
     // name : 바꿀 장비의 typeName
     // type : 0 무기, 1 코스튬
-    public void changeEquip(string name)
+    public void ChangeWeapon(string _name)
     {
         // Todo : playerCurrentWeapon의 게임오브젝트 해당 게임오브젝트로 변경
-        Weapon cWeapon = weapons[name].GetComponent<Weapon>();
+        Weapon cWeapon = weapons[_name].GetComponent<Weapon>();
         // 해금이 되어있다면
         if (cWeapon.IsLocked)
         {
@@ -159,6 +162,14 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         else
         {
             // 경고문구 출력
+        }
+    }
+    public void ChangeCostume(string _name)
+    {
+        Costume cCostume = costumes[_name].GetComponent<Costume>();
+        if (cCostume.IsLocked)
+        {
+
         }
     }
     public List<GameObject> FindWepaonList(string _type)

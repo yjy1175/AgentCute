@@ -122,15 +122,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mHp: 0
-  mSpeed: 0
+  mMaxHp: 0
+  mDamaged: 0
+  mBaseDamage: 0
   mPhysicalDefense: 0
   mMagicDefense: 0
+  mIsInvincibility: 0
+  mSize: 0
+  currentWeapon: {fileID: 0}
   mId: 0
   mSpawnMap: 
   mMonsterInName: 
-  mMonsterSize: 0
-  mMmonsterName: 
-  monsterExp: 0
+  mMonsterName: 
+  mIsDieToKillCount: 0
+  mIsDieToGetExp: 0
+  mMonsterGrade: 0
 --- !u!114 &3458935651873643830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,6 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePosition: {fileID: 0}
   mAutoAttackSpeed: 0
+  currentBaseSkill: {fileID: 0}
 --- !u!114 &6082701552445378068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,9 +224,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.4669395}
+  m_Offset: {x: 0, y: -0.32921302}
   serializedVersion: 2
-  m_Radius: 0.03306049
+  m_Radius: 0.17078698
 --- !u!114 &6483381308084995283
 MonoBehaviour:
   m_ObjectHideFlags: 0
