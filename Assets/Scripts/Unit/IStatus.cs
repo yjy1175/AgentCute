@@ -122,7 +122,7 @@ public abstract class IStatus : MonoBehaviour
 
     public int getCurrentWeponeDamage()
     {
-        return currentWeapon.Spec.WeaponDamage;
+        return currentWeapon==null ?0:currentWeapon.Spec.WeaponDamage;
     }
 
 }

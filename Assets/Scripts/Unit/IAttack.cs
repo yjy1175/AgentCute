@@ -31,7 +31,7 @@ public class IAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // key : 스킬 게임오브젝트 value : 각 스킬의 발사체 오브젝트
     }
 
     // Update is called once per frame
@@ -46,21 +46,44 @@ public class IAttack : MonoBehaviour
         TileDict.Add(_skill, _projectiles);
     }
 
-    //TO-DO property 문법 set시 value가 Dictionanry일경우 어떻게 넣는지 확인하고 가능하면 set함수 교체
-    /*
-    public Dictionary<string, GameObject> propTileDict
+    // 받아온 스킬의 발사체 리스트를 발사체매니저를 통해 받아온다
+    //  <스킬, 발사체리스트> 타입의 Dic에 추가
+    protected void pushProjectile(Skill _skill)
     {
-        set
+        List<Projectile> newList = new List<Projectile>();
+        for (int i = 0; i < _skill.Spec.getProjectiles().Count; i++)
         {
-            Debug.Log("what value"+value);
-            //TO-Do C#
+            string projectile = _skill.Spec.getProjectiles()[i];
+            Projectile newProjectile = ProjectileManager.Instance.allProjectiles[projectile].GetComponent<Projectile>();
+            newList.Add(newProjectile);
         }
-        get {
-            return TileDict;
-        }
-
+        setTileDict(_skill, newList);
     }
+
+
+
+    // 실질적으로 발사 코루틴으르 호출하는 함수
+    /*
+    * 발사체의 개수 각도에 따른 원뿔형 발사 구현 입니다.(만약 각도가 없는 경우는 다른 타입으로 빼야됨)
+    * luanchCount = 발사체의 발사 개수 + (static 변수)전체적인 발사체의 발사 개수(레벨업으로 인한)
+     * angle = 발사될 발사체의 각도입니다.(즉 발사체끼리의 각도)
+    * luanchCount만큼 발사가 되고, 발사될때마다 각도만큼 벌려줍니다.(원뿔형)
     */
+    protected void launchProjectile(Skill mSkill, int mProjectileIndex, Vector3 mTargetPos, Vector3 mFirePos, bool mNotSingle)
+    {
+        int launchCount = TileDict[mSkill][mProjectileIndex].Spec.Count + Projectile.AddProjectilesCount;
+        int angle = TileDict[mSkill][mProjectileIndex].Spec.Angle;
+        // 각도가 없을 경우 한발만 발사
+        for (int i = 0; i < launchCount; i++)
+        {
+            StartCoroutine(
+                LaunchCorutines(
+                    (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * i),
+                    TileDict[mSkill][mProjectileIndex].gameObject.name,
+                    mTargetPos,
+                    mFirePos, mNotSingle));
+        }
+    }
 
     /*
     * _angle : 추가 각도 설정입니다.
@@ -88,6 +111,15 @@ public class IAttack : MonoBehaviour
     }
 
 
+    protected IEnumerator multiLuanch(Skill _skill, int _count, Vector3 _target, Vector3 _fire)
+    {
+        for (int i = 0; i < _count; i++)
+        {
+            launchProjectile(_skill, 0, _target, _fire, false);
+            yield return new WaitForSeconds(0.4f); // 추후에 여러번 발사일 경우 해당 데이터값 입력
+        }
+    }
+
     // 발사체 데미지를 설정합니다.
     private void setProjectileData(ref GameObject obj)
     {
@@ -95,6 +127,15 @@ public class IAttack : MonoBehaviour
             (int)((gameObject.GetComponent<IStatus>().BaseDamage + gameObject.GetComponent<IStatus>().getCurrentWeponeDamage()) * obj.GetComponent<Projectile>().Spec.ProjectileDamage);
     }
 
-
+    protected void createObjectPool()
+    {
+        foreach (Skill key in TileDict.Keys)
+        {
+            for (int i = 0; i < TileDict[key].Count; i++)
+            {
+                ObjectPoolManager.Instance.CreateDictTable(TileDict[key][i].gameObject, 10, 10);
+            }
+        }
+    }
 
 }

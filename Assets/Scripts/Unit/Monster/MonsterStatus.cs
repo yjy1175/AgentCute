@@ -12,6 +12,7 @@ public class MonsterStatus : IStatus
     public bool mIsDieToKillCount = false;
     public bool mIsDieToGetExp = false;
     //public int MonsterAI;
+    [SerializeField]
     private MonsterManager.MonsterGrade mMonsterGrade;
 
      

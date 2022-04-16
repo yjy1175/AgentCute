@@ -19,11 +19,32 @@ public class MonsterAttack : IAttack
     // Start is called before the first frame update
     void Start()
     {
+        /*
+         * TO-DO montser attack data set들어오면 구현완료할 예정 
+        if(gameObject.GetComponent<MonsterStatus>().MonsterGrade == MonsterManager.MonsterGrade.Boss) {
+            TileDict = new SkillDic();
+            CurrentBaseSkill = SkillManager.Instance.FindBaseSkill("ms").GetComponent<Skill>();
+            pushProjectile(CurrentBaseSkill);
+            createObjectPool();
+        }
+        */
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
+         * TO-DO montser attack data set들어오면 구현완료할 예정 
+        if (gameObject.GetComponent<MonsterStatus>().MonsterGrade == MonsterManager.MonsterGrade.Boss)
+        {
+            launchProjectile(
+                       CurrentBaseSkill,
+                       0,
+                       GameObject.Find("PlayerObject").transform.position,
+                       gameObject.transform.position,
+                       false);
+        }
+        */
         mAutoAttackCheckTime = Mathf.Max(mAutoAttackCheckTime - Time.deltaTime, 0);
     }
 

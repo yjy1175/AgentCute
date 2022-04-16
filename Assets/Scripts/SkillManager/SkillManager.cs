@@ -60,7 +60,6 @@ public class SkillManager : SingleToneMaker<SkillManager>
         List<GameObject> newList = new List<GameObject>();
         foreach (string key in skills.Keys)
         {
-            Debug.Log(key);
             if (skills[key].GetComponent<Skill>().Spec.SkillWeaponType == _type)
             {
                 if(skills[key].GetComponent<Skill>().Spec.Type == "G")
