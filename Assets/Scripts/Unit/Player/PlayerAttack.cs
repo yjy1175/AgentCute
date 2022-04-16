@@ -46,11 +46,12 @@ public class PlayerAttack : IAttack
         }
     }
 
+    [SerializeField]
+    private Vector3 mTarget;
 
-
-
-
+    [SerializeField]
     private bool mGSkillUseable  = true;
+    [SerializeField]
     private bool mUSkillUseable = true;
 
     public bool mIsGameStart = false;
@@ -95,6 +96,11 @@ public class PlayerAttack : IAttack
     /*
      * 스킬 클릭 시 호출됩니다.
      */
+    public void DragSkillBtn(GameObject _btn)
+    {
+        VertualJoyStick dir = _btn.GetComponent<VertualJoyStick>();
+        mTarget = new Vector3(dir.GetHorizontalValue() * 5f, dir.GetVerticalValue() * 5f, 0);
+    }
     public void clickGeneralSkillBtn()
     {
         if (mGSkillUseable)
@@ -152,15 +158,14 @@ public class PlayerAttack : IAttack
             // (익설티드 소드)
             if (launchCount > 1)
             {
-                Vector3 targetPos = new Vector3(Mjoystick.GetHorizontalValue() * 5f, Mjoystick.GetVerticalValue() * 5f, 0);
-                if (targetPos == Vector3.zero)
-                    targetPos = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
+                if (mTarget == Vector3.zero)
+                    mTarget = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
                 Vector3 firePos = firePosition.transform.position;
                 // 마지막 클릭일 경우
                 if (count - 1 == _skill.CurrentUseCount)
                 {
-                    launchProjectile(_skill, 0, targetPos, firePos, false);
-                    launchProjectile(_skill, 2, targetPos, firePos, false);
+                    launchProjectile(_skill, 0, mTarget, firePos, false);
+                    launchProjectile(_skill, 2, mTarget, firePos, false);
                     _skill.CurrentCoolTimeIndex++;
                     _skill.CurrentUseCount = 0;
                 }
@@ -168,8 +173,8 @@ public class PlayerAttack : IAttack
                 else if(_skill.CurrentUseCount == 0)
                 {
                     // 두번째부턴 지속시간동안 일반 쿨타임코루틴 실행
-                    launchProjectile(_skill, 0, targetPos, firePos, false);
-                    launchProjectile(_skill, 1, targetPos, firePos, false);
+                    launchProjectile(_skill, 0, mTarget, firePos, false);
+                    launchProjectile(_skill, 1, mTarget, firePos, false);
                     StartCoroutine(WaitForCoolTime(_btn, _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex], _skill.Spec.Type));
                     // 첫 검기 발사 후 지속시간 쿨타임 코루틴 실행
                     _skill.CurrentCoolTimeIndex++;
@@ -180,8 +185,8 @@ public class PlayerAttack : IAttack
                 else
                 {
                     _skill.CurrentUseCount++;
-                    launchProjectile(_skill, 0, targetPos, firePos, false);
-                    launchProjectile(_skill, 2, targetPos, firePos, false);
+                    launchProjectile(_skill, 0, mTarget, firePos, false);
+                    launchProjectile(_skill, 2, mTarget, firePos, false);
                     StartCoroutine(WaitForCoolTime(_btn, _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex], _skill.Spec.Type));
                 }
             }
@@ -235,25 +240,23 @@ public class PlayerAttack : IAttack
         // Todo : 무한발사 스킬 지속시간과 한발당 발사시간 데이터 받아오기
         int count = (int)(_skill.Spec.MSkillRunTime / 0.2f); //  지속 시간 / 한발당 발사시간
         StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime, UBtn, _skill));
-        Vector3 targetPos;
         Vector3 firePos;
         while (count != 0)
         {
             count--;
-            targetPos = new Vector3(Ujoystick.GetHorizontalValue(), Ujoystick.GetVerticalValue(), 0);
-            if(targetPos == Vector3.zero)
-                targetPos = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
+            if(mTarget == Vector3.zero)
+                mTarget = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
             firePos = firePosition.transform.position;
             // 터치패드 방향 가져올 시 이미 정규화가 되어있는 상태라
             // 일정량을 곱해줘야 제대로된 방향으로 나감
             if(TileDict[_skill].Count > 1)
             {
                 int ranNum = Random.Range(0, TileDict[_skill].Count);
-                launchProjectile(_skill, ranNum, targetPos * 5f, firePos, false);
+                launchProjectile(_skill, ranNum, mTarget * 5f, firePos, false);
             }
             else
             {
-                launchProjectile(_skill, 0, targetPos * 5f, firePos, false);
+                launchProjectile(_skill, 0, mTarget * 5f, firePos, false);
             }
 
             yield return new WaitForSeconds(0.2f); // 한발당 발사시간
@@ -268,9 +271,8 @@ public class PlayerAttack : IAttack
         // 터치패드 방향 가져올 시 이미 정규화가 되어있는 상태라
         // 일정량을 곱해줘야 제대로된 방향으로 나감
         // 만약 터치패드의 입력이 없을 경우 근거리 몬스터로 발사
-        Vector3 targetPos = new Vector3(Mjoystick.GetHorizontalValue() * 5f, Mjoystick.GetVerticalValue() * 5f, 0);
-        if(targetPos == Vector3.zero)
-            targetPos = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
+        if(mTarget == Vector3.zero)
+            mTarget = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
         Vector3 firePos = firePosition.transform.position;
         // 발사체가 한개인 경우
         if(projectileCount <= 1)
@@ -278,12 +280,12 @@ public class PlayerAttack : IAttack
             // 한번 발사일 경우
             if (count == 1)
             {
-                launchProjectile(_skill, 0, targetPos, firePos, false);
+                launchProjectile(_skill, 0, mTarget, firePos, false);
             }
             // 중복 발사일 경우
             else
             {
-                StartCoroutine(multiLuanch(_skill, count, targetPos, firePos));
+                StartCoroutine(multiLuanch(_skill, count, mTarget, firePos));
             }
         }
         // 발사체가 2개 이상인경우
@@ -292,7 +294,7 @@ public class PlayerAttack : IAttack
         else
         {
             // 1. 첫번째 발사체가 나가고 그자리에서 스폰
-            StartCoroutine(notSingleProjectileLaunch(_skill, targetPos, firePos));
+            StartCoroutine(notSingleProjectileLaunch(_skill, mTarget, firePos));
         }
     }
 
@@ -323,14 +325,24 @@ public class PlayerAttack : IAttack
 
     IEnumerator WaitForCoolTime(GameObject _btn, float _cooltime, string _type)
     {
+        // 방어 코드...
+        switch (_type)
+        {
+            case "G":
+                mGSkillUseable = false;
+                break;
+            case "U":
+                mUSkillUseable = false;
+                break;
+        }
         float lefttime = _cooltime;
         while (lefttime > 0f)
         {
             lefttime -= Time.deltaTime;
-            _btn.transform.GetChild(1).GetComponent<Image>().fillAmount =( lefttime  / _cooltime);
+            _btn.transform.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount =( lefttime  / _cooltime);
             yield return new WaitForFixedUpdate();
         }
-        _btn.transform.GetChild(1).GetComponent<Image>().fillAmount = 0;
+        _btn.transform.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount = 0;
         switch (_type)
         {
             case "G":
@@ -347,8 +359,8 @@ public class PlayerAttack : IAttack
         // 궁극기 스킬 버튼이 터치패드로 변경(스킬클릭이 한번이거나 무한인경우만)
         if(_skill.Spec.SkillCount == 1 || _skill.Spec.SkillCount == -1)
         {
-            UBtn.SetActive(false);
-            Ujoystick.gameObject.SetActive(true);
+            //UBtn.SetActive(false);
+            //Ujoystick.gameObject.SetActive(true);
         }
         _bar.SetActive(true);
         float lefttime = _spawnTime;
@@ -359,10 +371,11 @@ public class PlayerAttack : IAttack
             _bar.transform.GetChild(0).GetComponent<Image>().fillAmount = (lefttime / _spawnTime);
             yield return new WaitForFixedUpdate();
         }
+        // 방어 코드...
         mUSkillUseable = false;
         _bar.SetActive(false);
-        Ujoystick.gameObject.SetActive(false);
-        UBtn.SetActive(true);
+        //Ujoystick.gameObject.SetActive(false);
+        //UBtn.SetActive(true);
         if (_skill.CurrentCoolTimeIndex == 1)
             _skill.CurrentCoolTimeIndex++;
         StartCoroutine(

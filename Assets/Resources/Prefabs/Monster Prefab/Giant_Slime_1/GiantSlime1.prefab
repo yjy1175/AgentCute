@@ -142,7 +142,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.017070055, y: 0.4096803}
+  m_Offset: {x: -0.017070055, y: -0.5985168}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -153,7 +153,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5220399, y: 0.9416591}
+  m_Size: {x: 1.5220399, y: 0.791502}
   m_EdgeRadius: 0
 --- !u!114 &6121474204186256368
 MonoBehaviour:
@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePosition: {fileID: 0}
   mAutoAttackSpeed: 0
+  currentBaseSkill: {fileID: 0}
 --- !u!114 &4317411682674776900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,18 +195,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mHp: 0
-  mDamaged: 0
   mMaxHp: 0
+  mDamaged: 0
+  mBaseDamage: 0
   mPhysicalDefense: 0
   mMagicDefense: 0
   mIsInvincibility: 0
   mSize: 0
+  currentWeapon: {fileID: 0}
   mId: 0
   mSpawnMap: 
   mMonsterInName: 
   mMonsterName: 
   mIsDieToKillCount: 0
   mIsDieToGetExp: 0
+  mMonsterGrade: 0
 --- !u!114 &358947715756549906
 MonoBehaviour:
   m_ObjectHideFlags: 0

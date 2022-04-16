@@ -53,7 +53,7 @@ public class Spawn : Projectile
         if (isActive && (SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType) == SpawnType.LongWide)
         {
             mPlayer = GameObject.Find("fire").transform.position;
-            mUJoySitick = GameObject.Find("Canvas").transform.Find("UltimateJoyStick").GetComponent<VertualJoyStick>();
+            mUJoySitick = GameObject.Find("Canvas").transform.Find("UltimateSkillJoyStick").GetComponent<VertualJoyStick>();
             Vector3 newPos = new Vector3(mUJoySitick.GetHorizontalValue() * 5, mUJoySitick.GetVerticalValue() * 5, 0);
             if(newPos != Vector3.zero)
             {
