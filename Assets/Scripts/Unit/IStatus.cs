@@ -17,6 +17,9 @@ public abstract class IStatus : MonoBehaviour
     [SerializeField]
     protected int mDamaged;
 
+    //직전에 얻은 포션
+    [SerializeField]
+    protected int mPotionHp;
 
     [SerializeField]
     protected int mBaseDamage;
@@ -93,6 +96,18 @@ public abstract class IStatus : MonoBehaviour
             MessageBoxManager.Instance.createMessageBox(bt, value.ToString(), gameObject.transform.position);
         }
     }
+
+    public virtual int PotionHp
+    {
+        get { return mPotionHp; }
+        set
+        {
+            mPotionHp = value;
+            mHp = Mathf.Min(MaxHP, mHp + mPotionHp);
+            MessageBoxManager.Instance.createMessageBox(MessageBoxManager.BoxType.PlayerHpPotion, value.ToString(), gameObject.transform.position);
+        }
+    }
+
 
     public virtual int BaseDamage
     {

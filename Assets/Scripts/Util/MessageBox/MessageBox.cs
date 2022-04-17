@@ -24,7 +24,9 @@ public class MessageBox : MonoBehaviour
     public Color Alpha
     {
         get { return alpha; }
-        set { alpha = value; }
+        set {
+            alpha = value; 
+        }
     }
     // 텍스트의 움직임 속도
     [SerializeField]

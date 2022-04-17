@@ -41,12 +41,14 @@ public class MonsterDropItem : MonoBehaviour
             
             foreach (string itemStr in itemList)
             {
-                int num = int.Parse(itemStr);
-                randSum += ItemManager.Instance.GetItemData(num).dropRate;
+                int itemId = int.Parse(itemStr);
+                randSum += ItemManager.Instance.GetItemData(itemId).dropRate;
                 if (randNum <= randSum)
                 {
-                    GameObject itemObj = ObjectPoolManager.Instance.EnableGameObject(ItemManager.Instance.GetItemData(num).itemInName);
+                    GameObject itemObj = ObjectPoolManager.Instance.EnableGameObject(ItemManager.Instance.GetItemData(itemId).itemInName);
+                    setItemData(ref itemObj, itemId);
                     itemObj.transform.position = gameObject.transform.position;
+//                    itemObj.GetComponent<Item>.
                     itemObj.SetActive(true);
                     //그거에 맞는 객체 생성
                     break;
@@ -55,5 +57,14 @@ public class MonsterDropItem : MonoBehaviour
             }
 
         }
+    }
+
+    private void setItemData(ref GameObject _item, int _id)
+    {
+        _item.GetComponent<Item>().Hp = ItemManager.Instance.GetItemData(_id).hp;
+        _item.GetComponent<Item>().Gold = ItemManager.Instance.GetItemData(_id).gold;
+
+        float scale = ItemManager.Instance.GetItemData(_id).Scale;
+        _item.GetComponent<Transform>().localScale = new Vector3(scale, scale, scale);
     }
 }

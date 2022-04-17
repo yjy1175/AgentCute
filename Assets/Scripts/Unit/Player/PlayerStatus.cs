@@ -15,6 +15,10 @@ public class PlayerStatus : IStatus
     private int mPlayerLevel;
 
     [SerializeField]
+    private int mGold;
+
+
+    [SerializeField]
     private Costume mPlayerCurrentCostume;
     public Costume MPlayerCurrentCostume
     {
@@ -136,6 +140,18 @@ public class PlayerStatus : IStatus
         else
         {
             return 0;
+        }
+    }
+    public int Gold{
+        set
+        {
+            mGold = value;
+            Debug.Log("∞ÒµÂ ≥Î∆º " + mGold);
+            MessageBoxManager.Instance.createMessageBox(MessageBoxManager.BoxType.PlayerCoin, value.ToString(), gameObject.transform.position);
+        }
+        get
+        {
+            return mGold;
         }
     }
 }
