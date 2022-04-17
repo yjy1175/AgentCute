@@ -8,8 +8,11 @@ public class ItemManager : SingleToneMaker<ItemManager>
     public struct ItemData
     {
         public string itemInName;
-        public int value;
+        public int hp;
+        public int gold;
         public int dropRate;
+        public int damage;
+        public int Scale;
     }
     [SerializeField]
     private List<ItemData> dataSet;
@@ -24,10 +27,7 @@ public class ItemManager : SingleToneMaker<ItemManager>
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < ItemList.Length; i++)
-        {
-            ObjectPoolManager.Instance.CreateDictTable(ItemList[i], 3, 3);
-        }
+        createObjectPool();
     }
 
     // Update is called once per frame
@@ -54,17 +54,20 @@ public class ItemManager : SingleToneMaker<ItemManager>
             ItemData md = new ItemData();
             key = int.Parse(itemDataCsv[idx]["ID"].ToString());
             md.itemInName = itemDataCsv[idx]["ItemInName"].ToString();
-            md.value = int.Parse(itemDataCsv[idx]["Value"].ToString());
+            md.hp = int.Parse(itemDataCsv[idx]["Hp"].ToString());
+            md.damage = int.Parse(itemDataCsv[idx]["Damage"].ToString());
+            md.gold = int.Parse(itemDataCsv[idx]["Gold"].ToString());
             md.dropRate = int.Parse(itemDataCsv[idx]["Droprate"].ToString());
+            md.Scale = int.Parse(itemDataCsv[idx]["Scale"].ToString());
             dataSet.Add(md);
         }
     }
 
     private void createObjectPool()
     {
-        foreach(ItemData i in dataSet)
+        foreach (GameObject item in ItemList)
         {
-            //ObjectPoolManager.Instance.CreateDictTable(i.ItemInName, 5, 5);
+            ObjectPoolManager.Instance.CreateDictTable(item, 3, 3);
         }
     }
 }

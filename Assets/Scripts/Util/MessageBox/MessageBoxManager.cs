@@ -14,7 +14,10 @@ public class MessageBoxManager : SingleToneMaker<MessageBoxManager>
     {
         PlayerDamage,
         MonsterDamage,
-        AlertMessage
+        CriticalDamage,
+        PlayerCoin,
+        PlayerHpPotion,
+        BossWarning,
     }
     #endregion
     #region method
@@ -46,7 +49,7 @@ public class MessageBoxManager : SingleToneMaker<MessageBoxManager>
             MessageBox newMg = messageTypes[name].GetComponent<MessageBox>();
             string[] rgba = messageData[n]["MB_Color"].ToString().Split('/');
             newMg.Alpha = new Color(
-                float.Parse(rgba[0]), float.Parse(rgba[1]), float.Parse(rgba[2]), float.Parse(rgba[3]));
+                float.Parse(rgba[0])/255, float.Parse(rgba[1])/255, float.Parse(rgba[2])/255, float.Parse(rgba[3]));
             newMg.TextCom = newMg.GetComponent<TextMesh>();
             newMg.TextCom.color = newMg.Alpha;
             newMg.MoveSpeed = float.Parse(messageData[n]["MB_MoveSpeed"].ToString());
@@ -54,6 +57,7 @@ public class MessageBoxManager : SingleToneMaker<MessageBoxManager>
             newMg.DestroyTime = float.Parse(messageData[n]["MB_DestroyTime"].ToString());
             newMg.FontSize = int.Parse(messageData[n]["MB_FontSize"].ToString());
             newMg.TextCom.fontSize = newMg.FontSize;
+            //Debug.Log(name + newMg.Alpha);
         }
     }
 
