@@ -52,9 +52,9 @@ public class Spawn : Projectile
         // 방향키에 따라 위치가 바뀌는 경우
         if (isActive && (SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType) == SpawnType.LongWide)
         {
-            mPlayer = GameObject.Find("PlayerObject").transform.position;
+            mPlayer = GameObject.Find("fire").transform.position;
             mUJoySitick = GameObject.Find("Canvas").transform.Find("UltimateSkillJoyStick").GetComponent<VertualJoyStick>();
-            Vector3 newPos = new Vector3(mUJoySitick.GetHorizontalValue() * 5, mUJoySitick.GetVerticalValue() * 5, 0);
+            Vector3 newPos = new Vector3(mUJoySitick.GetHorizontalValue() + mPlayer.x, mUJoySitick.GetVerticalValue() + mPlayer.y, 0);
             if(newPos != Vector3.zero)
             {
                 angle = setAngle(newPos - mPlayer);
@@ -105,11 +105,13 @@ public class Spawn : Projectile
                 transform.position = mPlayer + ranPos;
                 break;
             case SpawnType.ShortWide:
-                transform.position = mPlayer + (target - mPlayer).normalized * (GetComponent<SpriteRenderer>().size.x);
+                // 추후에 정확한 계산공식 구해서 적용
+                transform.position = mPlayer + (target - mPlayer).normalized * (GetComponent<SpriteRenderer>().size.x * 0.6f);
                 angle = setAngle(target - mPlayer) + _angle;
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 break;
             case SpawnType.LongWide:
+                // 추후에 정확한 계산공식 구해서 적용
                 transform.position = mPlayer + (target - mPlayer).normalized * (GetComponent<SpriteRenderer>().size.x * 1.5f);
                 angle = setAngle(target - mPlayer) + _angle;
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);

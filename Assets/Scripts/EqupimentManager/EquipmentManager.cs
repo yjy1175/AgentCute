@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 
@@ -14,6 +15,10 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
     private StringGameObject weapons;
     [SerializeField]
     private StringGameObject costumes;
+    public StringGameObject Costumes
+    {
+        get { return costumes; }
+    }
 
     
     // key : 몬스터 분류 , value : 해당 몬스터 장비 오브젝트
@@ -22,14 +27,14 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
     [Serializable]
     public struct CostumeSprite
     {
-        public CostumeSprite(Texture2D _sprite, float _r, float _g, float _b)
+        public CostumeSprite(Sprite[] _sprite, float _r, float _g, float _b)
         {
             sprite = _sprite;
             r = _r;
             g = _g;
             b = _b;
         }
-        public Texture2D sprite;
+        public Sprite[] sprite;
         public float r;
         public float g;
         public float b;
@@ -38,11 +43,11 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
     [Serializable]
     public enum SpriteType
     {
-        CostumeHelmet,
-        CostumeCloth,
-        CostumeArmor,
-        CostumePant,
-        CostumeBack,
+        CostumeHelmet = 0,
+        CostumeCloth = 1,
+        CostumeArmor = 4,
+        CostumePant = 7,
+        CostumeBack = 9,
         Exit,
     }
 
@@ -113,7 +118,7 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                     //item.Spec.Rank = int.Parse(costumeData[i]["CostumeRank "].ToString());
                     item.Spec.CoustumeHP = int.Parse(costumeData[i]["CostumeHP"].ToString());
                     item.Spec.CoustumeSpeed = int.Parse(costumeData[i]["CostumeSPD"].ToString());
-                    item.IsLocked = false;
+                    item.IsLocked = true;
                 }
             }
             for (int i = 0; i < costumesList.Length; i++)
@@ -122,13 +127,13 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                 {
                     item = costumes[costumeLoadData[i]["CostumeLoadName"].ToString()].GetComponent<Costume>();
                     string path = costumeLoadData[i]["CostumeLoadPath"].ToString();
-                    Texture2D newSprite = null;
+                    Sprite[] newSprite = null;
                     string[] rgb = new string[3];
                     // 각 스프라이트와 rgb정보를 저장
-                    for(SpriteType j = SpriteType.CostumeHelmet; j < SpriteType.Exit; j++)
+                    for(SpriteType j = SpriteType.CostumeHelmet; j < SpriteType.Exit;)
                     {
                         if (costumeLoadData[i][j.ToString()].ToString() != NULL)
-                            newSprite = Resources.Load<Texture2D>(path + costumeLoadData[i][j.ToString()].ToString());
+                            newSprite = Resources.LoadAll<Sprite>(path + costumeLoadData[i][j.ToString()].ToString());
                         if (costumeLoadData[i][j.ToString() +"RGB"].ToString() != NULL)
                             rgb = costumeLoadData[i][j.ToString() + "RGB"].ToString().Split('/');
                         if(newSprite != null)
@@ -137,7 +142,26 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                                 newSprite, float.Parse(rgb[0]), float.Parse(rgb[1]), float.Parse(rgb[2]));
                             item.AddSpriteList(j, CSprite);
                         }
+                        switch ((int)j)
+                        {
+                            case 0:
+                                j++;
+                                break;
+                            case 1:
+                                j += 3;
+                                break;
+                            case 4:
+                                j += 3;
+                                break;
+                            case 7:
+                                j += 2;
+                                break;
+                            case 9:
+                                j++;
+                                break;
+                        }
                         newSprite = null;
+                        
                     }
                 }
             }
@@ -169,7 +193,69 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         Costume cCostume = costumes[_name].GetComponent<Costume>();
         if (cCostume.IsLocked)
         {
-
+            GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().MPlayerCurrentCostume = cCostume;
+            for (SpriteType i = SpriteType.CostumeHelmet; i < SpriteType.Exit;)
+            {
+                // 해당 코스튬 부위가 있으면
+                if (cCostume.GetSpriteDic().ContainsKey(i))
+                {
+                    CostumeSprite newCosutume = cCostume.GetSpriteList(i);
+                    if (i == SpriteType.CostumeCloth || i == SpriteType.CostumeArmor)
+                    {
+                        PlayerManager.Instance.GetPlayerCostumeSpriteRenderer((int)i).sprite = Array.Find(newCosutume.sprite, (Sprite s) => s.name == "Body");
+                        PlayerManager.Instance.GetPlayerCostumeSpriteRenderer((int)i++).color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        PlayerManager.Instance.GetPlayerCostumeSpriteRenderer((int)i).sprite = Array.Find(newCosutume.sprite, (Sprite s) => s.name == "Left");
+                        PlayerManager.Instance.GetPlayerCostumeSpriteRenderer((int)i++).color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        PlayerManager.Instance.GetPlayerCostumeSpriteRenderer((int)i).sprite = Array.Find(newCosutume.sprite, (Sprite s) => s.name == "Right");
+                        PlayerManager.Instance.GetPlayerCostumeSpriteRenderer((int)i++).color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        continue;
+                    }
+                    else if (i == SpriteType.CostumePant)
+                    {
+                        PlayerManager.Instance.GetPlayerCostumeSpriteRenderer((int)i).sprite = Array.Find(newCosutume.sprite, (Sprite s) => s.name == "Left");
+                        PlayerManager.Instance.GetPlayerCostumeSpriteRenderer((int)i++).color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        PlayerManager.Instance.GetPlayerCostumeSpriteRenderer((int)i).sprite = Array.Find(newCosutume.sprite, (Sprite s) => s.name == "Right");
+                        PlayerManager.Instance.GetPlayerCostumeSpriteRenderer((int)i++).color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        continue;
+                    }
+                    else
+                    {
+                        PlayerManager.Instance.GetPlayerCostumeSpriteRenderer((int)i).sprite = newCosutume.sprite[0];
+                        PlayerManager.Instance.GetPlayerCostumeSpriteRenderer((int)i++).color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        continue;
+                    }
+                }
+                // 해당 코스튬 부위가 없으면
+                else
+                {
+                    PlayerManager.Instance.GetPlayerCostumeSpriteRenderer((int)i).sprite = null;
+                    switch ((int)i)
+                    {
+                        case 0:
+                            i++;
+                            break;
+                        case 1:
+                            i += 3;
+                            break;
+                        case 4:
+                            i += 3;
+                            break;
+                        case 7:
+                            i += 2;
+                            break;
+                        case 9:
+                            i++;
+                            break;
+                    }
+                }
+            }
+            
         }
     }
     public List<GameObject> FindWepaonList(string _type)

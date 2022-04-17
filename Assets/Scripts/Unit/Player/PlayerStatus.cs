@@ -15,7 +15,13 @@ public class PlayerStatus : IStatus
     private int mPlayerLevel;
 
     [SerializeField]
-    private Costume playerCurrentCostume;
+    private Costume mPlayerCurrentCostume;
+    public Costume MPlayerCurrentCostume
+    {
+        get { return mPlayerCurrentCostume; }
+        // 스텟적용도 여기서?
+        set { mPlayerCurrentCostume = value; }
+    }
 
 
 

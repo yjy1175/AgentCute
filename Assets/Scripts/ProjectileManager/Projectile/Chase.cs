@@ -33,11 +33,18 @@ public class Chase : Projectile
         /*추적 매서드*/
         if (isActive)
         {
-           Vector3 dir = (target - transform.position).normalized;
+           Vector3 dir = target - transform.position;
+            Debug.Log(dir);
+            // 추적이 완료되었는데도 스폰시간이 남았다면 다시 추적
+            if (dir.sqrMagnitude <= new Vector3(1, 1, 0).sqrMagnitude)
+            {
+                dir = MonsterManager.Instance.GetNearestMonsterPos(transform.position) - transform.position;
+            }
+               
             //angle = setAngle(dir);
             //Quaternion rotTarget = Quaternion.AngleAxis(angle, Vector3.forward);
             //transform.rotation = Quaternion.Slerp(transform.rotation, rotTarget, Time.deltaTime * spec.Speed);
-            transform.Translate(dir * Time.deltaTime * spec.Speed);
+            transform.Translate(dir.normalized * Time.deltaTime * spec.Speed);
         }
     }
     // Start is called before the first frame update

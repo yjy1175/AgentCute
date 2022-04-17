@@ -25,6 +25,10 @@ public class Costume : MonoBehaviour
     private TypeSprite mSpriteList;
     #endregion
     #region method
+    public TypeSprite GetSpriteDic()
+    {
+        return mSpriteList;
+    }
     public EquipmentManager.CostumeSprite GetSpriteList(EquipmentManager.SpriteType _key)
     {
         return mSpriteList[_key];

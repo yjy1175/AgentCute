@@ -247,16 +247,14 @@ public class PlayerAttack : IAttack
             if(mTarget == Vector3.zero)
                 mTarget = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
             firePos = firePosition.transform.position;
-            // 터치패드 방향 가져올 시 이미 정규화가 되어있는 상태라
-            // 일정량을 곱해줘야 제대로된 방향으로 나감
             if(TileDict[_skill].Count > 1)
             {
                 int ranNum = Random.Range(0, TileDict[_skill].Count);
-                launchProjectile(_skill, ranNum, mTarget * 5f, firePos, false);
+                launchProjectile(_skill, ranNum, mTarget, firePos, false);
             }
             else
             {
-                launchProjectile(_skill, 0, mTarget * 5f, firePos, false);
+                launchProjectile(_skill, 0, mTarget, firePos, false);
             }
 
             yield return new WaitForSeconds(0.2f); // 한발당 발사시간
