@@ -40,7 +40,9 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
     public void SettingGameStart()
     {
         GameObject.Find("PlayerObject").GetComponent<PlayerAttack>().getProjectiles();
-        string weaponType = GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().PlayerCurrentWeapon.GetComponent<Weapon>().Spec.Type;
+        string weaponType = 
+            GameObject.Find("PlayerObject").GetComponent<PlayerStatus>()
+            .PlayerCurrentWeapon.GetComponent<Weapon>().Spec.Type;
         weaponType = weaponType.Substring(0, 2);
         string costumeName = "";
         float chance = 0.5f;

@@ -54,7 +54,10 @@ public class PlayerAttack : IAttack
     [SerializeField]
     private bool mUSkillUseable = true;
 
-    public bool mIsGameStart = false;
+    [SerializeField]
+    private bool mIsGameStart;
+
+    public Text mTestDebugText;
     void Start()
     {
         // key : 스킬 게임오브젝트 value : 각 스킬의 발사체 오브젝트
@@ -64,8 +67,10 @@ public class PlayerAttack : IAttack
         mAutoAttackSpeed = 1f; //TO-DO 임시로 넣어놓음. 실제 공속은 무엇?
         mAutoAttackCheckTime = mAutoAttackSpeed;
     }
-    void Update()
+    void FixedUpdate()
     {
+        mTestDebugText.text = "mAutoAttackCheckTime = " + mAutoAttackCheckTime.ToString() + "\n" 
+            + "mAutoAttackSpeed = " + mAutoAttackSpeed.ToString();
         if (mAutoAttackCheckTime > mAutoAttackSpeed && mIsGameStart)
         {
             // 자동공격 매서드
@@ -79,7 +84,7 @@ public class PlayerAttack : IAttack
             }
             mAutoAttackCheckTime = 0f;
         }
-        mAutoAttackCheckTime += Time.deltaTime;
+        mAutoAttackCheckTime += Time.fixedDeltaTime;
     }
 
     public void getProjectiles()
@@ -144,7 +149,7 @@ public class PlayerAttack : IAttack
         GetComponent<PlayerMove>().MAnim.SetFloat("AttackState", 0f);
         GetComponent<PlayerMove>().MAnim.SetFloat("NormalState", num);
         GetComponent<PlayerMove>().MAnim.SetTrigger("Attack");
-        yield return new WaitForSeconds(1f); // Todo : 추후에 스킬 데이터에서 대기시간을 받아 입력 
+        yield return new WaitForSeconds(0.2f); // Todo : 추후에 스킬 데이터에서 대기시간을 받아 입력 
         GetComponent<PlayerMove>().MMoveable = true;
     }
 
@@ -238,7 +243,8 @@ public class PlayerAttack : IAttack
     IEnumerator InfiniteLaunch(Skill _skill)
     {
         // Todo : 무한발사 스킬 지속시간과 한발당 발사시간 데이터 받아오기
-        int count = (int)(_skill.Spec.MSkillRunTime / 0.2f); //  지속 시간 / 한발당 발사시간
+        // 나중에 이런스킬류가 더 생기게되면 테이블이 필요해요...
+        int count = (int)(_skill.Spec.MSkillRunTime / 0.1f); //  지속 시간 / 한발당 발사시간
         StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime, UBtn, _skill));
         Vector3 firePos;
         while (count != 0)

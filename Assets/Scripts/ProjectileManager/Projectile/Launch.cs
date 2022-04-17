@@ -56,23 +56,20 @@ public class Launch : Projectile
      */
     public override void setEnable(Vector3 _target, Vector3 _player, float _angle)
     {
-        if(_target != Vector3.zero)
-        {
-            transform.localScale = new Vector3(AddScaleCoefficient, AddScaleCoefficient, AddScaleCoefficient);
-            transform.position = _player;
-            target = _target;
-            angle = setAngle(target - _player) + _angle;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            gameObject.SetActive(true);
-            isActive = true;
-        }
+         transform.localScale = new Vector3(AddScaleCoefficient, AddScaleCoefficient, AddScaleCoefficient);
+         transform.position = _player;
+         target = _target;
+         angle = setAngle(target - _player) + _angle;
+         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+         gameObject.SetActive(true);
+         isActive = true;
     }
     void Start()
     {
 #if DEBUG
 #endif
     }
-    void Update()
+    void FixedUpdate()
     {
         launchProjectile();
     }

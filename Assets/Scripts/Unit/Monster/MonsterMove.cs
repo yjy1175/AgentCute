@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MonsterMove : IMove
 {
+    private GameObject target;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,13 +26,19 @@ public class MonsterMove : IMove
 
     void MovingPattern1()
     {
-        GameObject target = GameObject.Find("UnitRoot");
+        target = GameObject.Find("UnitRoot");
         if (target != null)
         {
 
             mDir = target.transform.position - transform.position;
             mDir.Normalize();
         }
-        transform.position += mDir * mSpeed * Time.deltaTime;
+    }
+
+    private void FixedUpdate()
+    {
+        // 모든 물리연산은 FixedUpdate 에서
+        if(target != null)
+            transform.Translate(mDir * mSpeed * Time.deltaTime);
     }
 }

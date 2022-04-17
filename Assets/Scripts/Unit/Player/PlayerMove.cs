@@ -70,14 +70,19 @@ public class PlayerMove : IMove
                 mAnim.SetFloat("RunState", 0f);
                 mAnim.SetBool("Run", false);
             }
-
-            mDir = new Vector3(h, v, 0);
-            transform.Translate(mDir * mSpeed * Time.deltaTime);
+            mDir = new Vector3(h, v, 0).normalized;
         }
         else
         {
             mAnim.SetFloat("RunState", 0f);
             mAnim.SetBool("Run", false);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        // 모든 물리연산은 FixedUpdate에서
+        if(mMoveable)
+            transform.Translate(mDir * mSpeed * Time.fixedDeltaTime);
     }
 }

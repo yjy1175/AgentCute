@@ -36,7 +36,7 @@ public class Chase : Projectile
            Vector3 dir = target - transform.position;
             Debug.Log(dir);
             // 추적이 완료되었는데도 스폰시간이 남았다면 다시 추적
-            if (dir.sqrMagnitude <= new Vector3(1, 1, 0).sqrMagnitude)
+            if (dir.sqrMagnitude <= new Vector3(2, 2, 0).sqrMagnitude)
             {
                 dir = MonsterManager.Instance.GetNearestMonsterPos(transform.position) - transform.position;
             }
@@ -53,7 +53,7 @@ public class Chase : Projectile
 
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         launchProjectile();
     }

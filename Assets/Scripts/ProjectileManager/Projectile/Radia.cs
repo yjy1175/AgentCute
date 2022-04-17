@@ -36,7 +36,7 @@ public class Radia : Projectile
         destroySelf();
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         launchProjectile();
     }

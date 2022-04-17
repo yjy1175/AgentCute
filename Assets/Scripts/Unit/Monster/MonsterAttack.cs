@@ -31,7 +31,7 @@ public class MonsterAttack : IAttack
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         /*
          * TO-DO montser attack data set들어오면 구현완료할 예정 

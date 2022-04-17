@@ -86,7 +86,7 @@ public class Spawn : Projectile
     {
         transform.localScale = new Vector3(AddScaleCoefficient, AddScaleCoefficient, AddScaleCoefficient);
         target = _target;
-        mPlayer = GameObject.Find("fire").transform.position;
+        mPlayer = _player;
         // 랜덤형인 경우
         switch ((SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType))
         {

@@ -204,12 +204,14 @@ public class UIManager : SingleToneMaker<UIManager>
     private void GamePause()
     {
         Time.timeScale = 0;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
         mPauseBtn.SetActive(false);
         mBackGroundPannel.SetActive(true);
     }
     private void GameRestart()
     {
         Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
         mPauseBtn.SetActive(true);
         mBackGroundPannel.SetActive(false);
     }
