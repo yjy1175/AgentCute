@@ -95,7 +95,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: f1ba943411ffa37409f33174e74631dd, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 16815871
+    rgba: 4278228735
 --- !u!114 &1701347846308703076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textCom: {fileID: 3173135405198267811}
-  alpha: {r: 1, g: 0.5882353, b: 0, a: 0.003921569}
+  alpha: {r: 1, g: 0.5882353, b: 0, a: 1}
   moveSpeed: 2
   alphaSpeed: 3
   destroyTime: 3

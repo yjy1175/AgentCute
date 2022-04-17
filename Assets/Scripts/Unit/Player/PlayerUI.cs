@@ -10,15 +10,19 @@ public class PlayerUI : IUI
     private GameObject mHpBar;
     [SerializeField]
     private GameObject mExpBar;
+    [SerializeField]
+    private Text mGoldText;
 
     void Awake()
     {
         gameObject.GetComponent<PlayerEventHandler>().registerLevelObserver(RegisterLevelObserver);
         gameObject.GetComponent<PlayerEventHandler>().registerHpObserver(RegisterHpObserver);
         gameObject.GetComponent<PlayerEventHandler>().registerExpObserver(RegisterExpObserver);
+        gameObject.GetComponent<PlayerEventHandler>().registerGoldObserver(RegisterGoldObserver);
         mLevelBar = GameObject.Find("LevelBar");
         mHpBar = GameObject.Find("HpBar");
         mExpBar = GameObject.Find("ExpBar");
+        mGoldText = GameObject.Find("Gold").transform.GetChild(2).GetComponent<Text>();
     }
 
     // Start is called before the first frame update
@@ -32,7 +36,10 @@ public class PlayerUI : IUI
     {
         
     }
-
+    public void RegisterGoldObserver(int _gold)
+    {
+        mGoldText.text = _gold + " gold";
+    }
     private void RegisterLevelObserver(int _level)
     {
 

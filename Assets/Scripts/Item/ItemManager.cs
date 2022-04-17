@@ -55,7 +55,7 @@ public class ItemManager : SingleToneMaker<ItemManager>
             key = int.Parse(itemDataCsv[idx]["ID"].ToString());
             md.itemInName = itemDataCsv[idx]["ItemInName"].ToString();
             md.hp = int.Parse(itemDataCsv[idx]["Hp"].ToString());
-            md.damage = int.Parse(itemDataCsv[idx]["Damage"].ToString());
+           // md.damage = int.Parse(itemDataCsv[idx]["Damage"].ToString());
             md.gold = int.Parse(itemDataCsv[idx]["Gold"].ToString());
             md.dropRate = int.Parse(itemDataCsv[idx]["Droprate"].ToString());
             md.Scale = int.Parse(itemDataCsv[idx]["Scale"].ToString());

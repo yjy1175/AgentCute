@@ -6,10 +6,11 @@ public class PlayerEventHandler : IEventHandler
 {
     public delegate void LevelObserver(int _level);
     public delegate void ExpObserver(int _exp);
+    public delegate void GoldObserver(int _gold);
 
     public event LevelObserver LevelObserverEvent;
     public event ExpObserver ExpObserverEvent;
-
+    public event GoldObserver GoldObserverEvent;
 
 
 
@@ -49,6 +50,19 @@ public class PlayerEventHandler : IEventHandler
         ExpObserverEvent?.Invoke(_exp);
     }
 
-
+    //Gold EventHadeler
+    public virtual void registerGoldObserver(GoldObserver _obs)
+    {
+        GoldObserverEvent -= _obs;
+        GoldObserverEvent += _obs;
+    }
+    public virtual void UnRegisterGoldObserver(GoldObserver _obs)
+    {
+        GoldObserverEvent -= _obs;
+    }
+    public virtual void ChangeGold(int _gold)
+    {
+        GoldObserverEvent?.Invoke(_gold);
+    }
 
 }

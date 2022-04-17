@@ -147,7 +147,8 @@ public class PlayerStatus : IStatus
         {
             mGold = value;
             Debug.Log("∞ÒµÂ ≥Î∆º " + mGold);
-            MessageBoxManager.Instance.createMessageBox(MessageBoxManager.BoxType.PlayerCoin, value.ToString(), gameObject.transform.position);
+            MessageBoxManager.Instance.createMessageBox(MessageBoxManager.BoxType.PlayerCoin, value.ToString() + "gold", gameObject.transform.position);
+            gameObject.GetComponent<PlayerEventHandler>().ChangeGold(mGold);
         }
         get
         {

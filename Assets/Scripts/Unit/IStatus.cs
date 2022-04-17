@@ -104,7 +104,7 @@ public abstract class IStatus : MonoBehaviour
         {
             mPotionHp = value;
             mHp = Mathf.Min(MaxHP, mHp + mPotionHp);
-            MessageBoxManager.Instance.createMessageBox(MessageBoxManager.BoxType.PlayerHpPotion, value.ToString(), gameObject.transform.position);
+            MessageBoxManager.Instance.createMessageBox(MessageBoxManager.BoxType.PlayerHpPotion, "Hp +" + value.ToString(), gameObject.transform.position);
         }
     }
 
