@@ -54,6 +54,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     // Start is called before the first frame update
     void Start()
     {
+        //TO-DO 어디서 create 할지 정해야함.
         currentTime = 0f;
         for (int i = 0; i < TempMonster.Length; i++)
         {
@@ -112,15 +113,14 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         }
     }
 
-    /*
-     * TO-DO : 현재는 MonsterManager에서 data를 가져와 복사하는 정도로만 해놨음. 이후 난이도에 따라 값변화가 필요
-     */
+    
     private void setMonsterData(ref GameObject monster)
     {
         MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(monster.name);
         monster.GetComponent<MonsterStatus>().Hp = md.monsterHp;
         monster.GetComponent<MonsterStatus>().Size = md.monsterSize;
         monster.GetComponent<MonsterStatus>().MonsterGrade= md.monsterGrade;
+        monster.GetComponent<MonsterStatus>().MonsterInName = md.monsterInName;
         monster.GetComponent<MonsterAttack>().CloseAttackPower = md.closeAttackPower;
         monster.GetComponent<MonsterMove>().Speed = md.monsterSpeed;
         //TO-DO : monster가 생기는 event를 유저가 구독하여 hp register는 Player에서 구독하도록 변경이 필요.

@@ -7,8 +7,8 @@ public class MonsterStatus : IStatus
 {
     public int mId;
     public string mSpawnMap;
-    public string mMonsterInName;
-    public string mMonsterName;
+    [SerializeField]
+    private string mMonsterInName;
     public bool mIsDieToKillCount = false;
     public bool mIsDieToGetExp = false;
     //public int MonsterAI;
@@ -46,4 +46,13 @@ public class MonsterStatus : IStatus
             mMonsterGrade = value;
         }
     }
+    public string MonsterInName
+    {
+        get { return mMonsterInName;}
+        set
+        {
+            mMonsterInName = value;
+        }
+    }
+
 }

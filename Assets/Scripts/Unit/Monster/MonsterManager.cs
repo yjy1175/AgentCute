@@ -23,6 +23,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
         public int closeAttackRange;
         public int standoffAttackPower;
         public int standoffAttackRange;
+        public string dropItem;
         //public int MonsterAI;
         //public int MonsterDrop1;
         //public int MonsterDrop2;
@@ -113,9 +114,10 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
         {
             string key;
             MonsterData md = new MonsterData();
+            key = monsterDataCsv[idx]["MonsterInName"].ToString();
+
             md.id = int.Parse(monsterDataCsv[idx]["ID"].ToString());
             md.monsterSpawnMap = monsterDataCsv[idx]["MonsterSpawnMap"].ToString();
-            key = monsterDataCsv[idx]["MonsterInName"].ToString();
             md.monsterSize = int.Parse(monsterDataCsv[idx]["MonsterSize"].ToString());
             md.monsterName = monsterDataCsv[idx]["MonsterName"].ToString();
             md.monsterGrade = (MonsterGrade)Enum.Parse(typeof(MonsterGrade), monsterDataCsv[idx]["MonsterGrade"].ToString());
@@ -127,6 +129,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
             md.closeAttackRange = int.Parse(monsterDataCsv[idx]["CloseAttackRange"].ToString());
             md.standoffAttackPower = int.Parse(monsterDataCsv[idx]["StandoffAttackPower"].ToString());
             md.standoffAttackRange = int.Parse(monsterDataCsv[idx]["StandoffAttackRange"].ToString());
+            md.dropItem = monsterDataCsv[idx]["DropItem"].ToString();
             //ds.CloseAttackAnimation = (int)monsterDataCsv[idx]["CloseAttackAnimation"];
             //ds.StandoffAttackAnimation = (int)monsterDataCsv[idx]["StandoffAttackAnimation"];
             //ds.HitAnimation = (int)monsterDataCsv[idx]["HitAnimation"];
