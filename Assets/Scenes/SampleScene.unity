@@ -1856,6 +1856,7 @@ MonoBehaviour:
   - {fileID: 1109854676447758817, guid: 8a1ca9527a11da94bb3d13fa9163aff8, type: 3}
   - {fileID: 2446323715619086419, guid: fb8228e16213124489dba4d54a63219f, type: 3}
   - {fileID: 6925351037122389809, guid: 8948370812fc04a45bf54be0b64a514b, type: 3}
+  - {fileID: 3292808676570943718, guid: 01dad85a6f988554faa19d2e5dc00632, type: 3}
   allMonsterText: {fileID: 511439427}
   currentAllMonsterText: {fileID: 1562465413}
   currentKillMonsterText: {fileID: 225354738}
