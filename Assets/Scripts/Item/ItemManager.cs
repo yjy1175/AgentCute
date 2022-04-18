@@ -60,7 +60,6 @@ public class ItemManager : SingleToneMaker<ItemManager>
             md.dropRate = int.Parse(itemDataCsv[idx]["Droprate"].ToString());
             md.Scale = int.Parse(itemDataCsv[idx]["Scale"].ToString());
             dataSet.Add(md);
-            Debug.Log(md.gold);
         }
     }
 

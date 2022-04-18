@@ -76,14 +76,14 @@ public class Skill : MonoBehaviour
         
     }
 
-    public void BuffOn()
+    public void BuffOn(ESkillBuffType _type, float _value)
     {
-
+       
     }
 
     public void BuffOff()
     {
-
+        
     }
     #endregion
 }

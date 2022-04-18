@@ -58,9 +58,12 @@ public class SkillManager : SingleToneMaker<SkillManager>
             item.CurrentUseCount = 0;
             item.CurrentCoolTimeIndex = 0;
 
-            tmp = skillsData[i]["SkillBuff"].ToString().Split('/');
-            item.SkillBuffType = (Skill.ESkillBuffType)Enum.Parse(typeof(Skill.ESkillBuffType), tmp[0]);
-            item.SkillBuffValue = float.Parse(tmp[1]);
+            if(skillsData[i]["SkillBuff"].ToString() != "0")
+            {
+                tmp = skillsData[i]["SkillBuff"].ToString().Split('/');
+                item.SkillBuffType = (Skill.ESkillBuffType)Enum.Parse(typeof(Skill.ESkillBuffType), tmp[0]);
+                item.SkillBuffValue = float.Parse(tmp[1]);
+            }
         }
     }
 

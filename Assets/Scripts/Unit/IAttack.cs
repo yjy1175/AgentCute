@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class IAttack : MonoBehaviour
 {
-
+    // 예를 들어 한 스킬에 발사체 2개 이상인데
+    // 첫발사체가 disable된 position에서 enable
     protected GameObject firstProjectile;
 
 

@@ -95,6 +95,10 @@ public abstract class Projectile : MonoBehaviour
                 collision.gameObject.GetComponent<IStatus>().DamageHp = damage;
             }
         }
+        else if (gameObject.CompareTag("MonsterProjectile") && collision.gameObject.CompareTag("Player"))
+        {
+            // TO-DO : 플레이어가 발사체에 맞는 처리
+        }
     }
 
     #region method

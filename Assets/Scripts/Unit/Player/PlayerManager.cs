@@ -20,7 +20,7 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
 
     private void Awake()
     {
-        mPlayer = GameObject.Find("GameObhect");
+        mPlayer = GameObject.Find("PlayerObject");
         InitPlayerBaseStat();
     }
 

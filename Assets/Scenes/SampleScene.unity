@@ -10795,6 +10795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4eb14ec225ce214c93675e0e95f6482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mPlayer: {fileID: 0}
   mWeaponSprite: {fileID: 6776406776483109450}
   mCostumes:
   - {fileID: 17831083}
