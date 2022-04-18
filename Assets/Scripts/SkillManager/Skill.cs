@@ -27,6 +27,40 @@ public class Skill : MonoBehaviour
         get { return currentCoolTimeIndex; }
         set { currentCoolTimeIndex = value; }
     }
+    [SerializeField]
+    private float mSkillBuffValue;
+    public float SkillBuffValue
+    {
+        set
+        {
+            mSkillBuffValue = value;
+        }
+        get
+        {
+            return mSkillBuffValue;
+        }
+    }
+    [SerializeField]
+    private ESkillBuffType mSkillBuffType;
+    public ESkillBuffType SkillBuffType
+    {
+        set
+        {
+            mSkillBuffType = value;
+        }
+        get
+        {
+            return mSkillBuffType;
+        }
+    }
+    public enum ESkillBuffType
+    {
+        PlayerSPD,
+        PlayerPosition,
+        PlayerWeaponSprite
+    }
+
+    private float mOriginValue;
     #endregion
 
     #region method
@@ -40,6 +74,16 @@ public class Skill : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void BuffOn()
+    {
+
+    }
+
+    public void BuffOff()
+    {
+
     }
     #endregion
 }

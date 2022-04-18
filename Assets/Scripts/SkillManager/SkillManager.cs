@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using System;
 public class SkillManager : SingleToneMaker<SkillManager>
 {
     #region variables
     // skill들을 담을 dic
+    [SerializeField]
     public StringGameObject skills;
 
     #endregion
@@ -40,7 +41,11 @@ public class SkillManager : SingleToneMaker<SkillManager>
             item.Spec.SkillCount = int.Parse(skillsData[i]["SkillCount"].ToString());
             item.Spec.SkillClickCount = int.Parse(skillsData[i]["SkillClickCount"].ToString());
             item.Spec.SkillCoolTimeType = skillsData[i]["SkillCoolTimeType"].ToString();
-            item.Spec.MSkillRunTime = float.Parse(skillsData[i]["SkillRunTime"].ToString());
+            string[] tmp = skillsData[i]["SkillRunTime"].ToString().Split('/');
+            float[] skillRunTimeList = new float[2];
+            for (int k = 0; k < tmp.Length; k++)
+                skillRunTimeList[k] = float.Parse(tmp[k]);
+            item.Spec.MSkillRunTime = skillRunTimeList;
             string[] projectiles = skillsData[i]["Projectiles"].ToString().Split('/');
             item.Spec.getProjectiles().Clear();
             for (int j = 0; j < projectiles.Length; j++)
@@ -52,6 +57,10 @@ public class SkillManager : SingleToneMaker<SkillManager>
                 item.Spec.addSkillCoolTime(float.Parse(cooltimes[j]));
             item.CurrentUseCount = 0;
             item.CurrentCoolTimeIndex = 0;
+
+            tmp = skillsData[i]["SkillBuff"].ToString().Split('/');
+            item.SkillBuffType = (Skill.ESkillBuffType)Enum.Parse(typeof(Skill.ESkillBuffType), tmp[0]);
+            item.SkillBuffValue = float.Parse(tmp[1]);
         }
     }
 

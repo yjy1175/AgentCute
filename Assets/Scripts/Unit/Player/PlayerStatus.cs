@@ -16,7 +16,15 @@ public class PlayerStatus : IStatus
 
     [SerializeField]
     private int mGold;
+    [SerializeField]
+    private int mGainGold;
 
+    [SerializeField]
+    private float mPlayerCritChance;
+    [SerializeField]
+    private float mPlayerCritDamage;
+    [SerializeField]
+    private float mPlayerATKSPD;
 
     [SerializeField]
     private Costume mPlayerCurrentCostume;
@@ -33,12 +41,10 @@ public class PlayerStatus : IStatus
     void Start()
     {
         //TO-DO : 플레이어 스텟들 하드코딩. csv파일 받으면 수정필요.
-        Hp = 100;
-        mMaxHp = 100;
+        mMaxHp = mHp;
         mPlayerMaxExp = 100;
         PlayerExp = 0;
         PlayerLevel = 1;
-        BaseDamage = Random.Range(30, 50);
     }
 
     // Update is called once per frame
@@ -125,6 +131,41 @@ public class PlayerStatus : IStatus
         }
     }
 
+    public float PlayerCritChance
+    {
+        set
+        {
+            mPlayerCritChance = value;
+        }
+        get
+        {
+            return mPlayerCritChance;
+        }
+    }
+
+    public float PlayerCritDamage
+    {
+        set
+        {
+            mPlayerCritDamage = value;
+        }
+        get
+        {
+            return mPlayerCritDamage;
+        }
+    }
+
+    public float PlayerATKSPD
+    {
+        set
+        {
+            mPlayerATKSPD = value;
+        }
+        get
+        {
+            return mPlayerATKSPD;
+        }
+    }
 
 
     private int GetMonsterExp(MonsterManager.MonsterGrade _md)
@@ -146,9 +187,10 @@ public class PlayerStatus : IStatus
         set
         {
             mGold = value;
-            Debug.Log("골드 노티 " + mGold);
+            mGainGold += mGold;
             MessageBoxManager.Instance.createMessageBox(MessageBoxManager.BoxType.PlayerCoin, value.ToString() + "gold", gameObject.transform.position);
-            gameObject.GetComponent<PlayerEventHandler>().ChangeGold(mGold);
+            gameObject.GetComponent<PlayerEventHandler>().ChangeGold(mGainGold);
+            mGold = 0;
         }
         get
         {

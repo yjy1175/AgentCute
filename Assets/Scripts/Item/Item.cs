@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    [SerializeField]
     int mHp;
+    [SerializeField]
     int mDamage;
+    [SerializeField]
     int mExp;
+    [SerializeField]
     int mGold;
 
     // Start is called before the first frame update

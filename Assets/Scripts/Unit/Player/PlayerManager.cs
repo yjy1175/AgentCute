@@ -7,6 +7,8 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
 {
     // Start is called before the first frame update
     [SerializeField]
+    private GameObject mPlayer;
+    [SerializeField]
     private SpriteRenderer mWeaponSprite;
 
     // 플레이어의 스프라이트(코스튬)
@@ -16,9 +18,10 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
     [SerializeField]
     private Text mTestCostumeRankText;
 
-    void Start()
+    private void Awake()
     {
-
+        mPlayer = GameObject.Find("GameObhect");
+        InitPlayerBaseStat();
     }
 
     // Update is called once per frame
@@ -26,7 +29,19 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
     {
         
     }
-
+    private void InitPlayerBaseStat()
+    {
+        List<Dictionary<string, object>> playerBaseStatData = CSVReader.Read("CSVFile/PlayerBaseStat");
+        for(int i = 0; i < playerBaseStatData.Count; i++)
+        {
+            mPlayer.GetComponent<IStatus>().Hp = int.Parse(playerBaseStatData[i]["PlayerBaseHP"].ToString());
+            mPlayer.GetComponent<IStatus>().BaseDamage = int.Parse(playerBaseStatData[i]["PlayerBaseATK"].ToString());
+            mPlayer.GetComponent<IMove>().Speed = float.Parse(playerBaseStatData[i]["PlayerBaseSPD"].ToString());
+            mPlayer.GetComponent<PlayerStatus>().PlayerCritChance = float.Parse(playerBaseStatData[i]["PlayerBaseCritChance"].ToString());
+            mPlayer.GetComponent<PlayerStatus>().PlayerCritDamage = float.Parse(playerBaseStatData[i]["PlayerBaseCritDamage"].ToString());
+            mPlayer.GetComponent<PlayerStatus>().PlayerATKSPD = float.Parse(playerBaseStatData[i]["PlayerBaseATKSPD"].ToString());
+        }
+    }
     public SpriteRenderer getPlayerWeaponSprite()
     {
         return mWeaponSprite;
@@ -39,9 +54,9 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
 
     public void SettingGameStart()
     {
-        GameObject.Find("PlayerObject").GetComponent<PlayerAttack>().getProjectiles();
-        string weaponType = 
-            GameObject.Find("PlayerObject").GetComponent<PlayerStatus>()
+        mPlayer.GetComponent<PlayerAttack>().getProjectiles();
+        string weaponType =
+            mPlayer.GetComponent<PlayerStatus>()
             .PlayerCurrentWeapon.GetComponent<Weapon>().Spec.Type;
         weaponType = weaponType.Substring(0, 2);
         string costumeName = "";

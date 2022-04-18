@@ -64,7 +64,7 @@ public class PlayerAttack : IAttack
         TileDict = new SkillDic();
         mChargingBar = GameObject.Find("ChargingBar").gameObject;
         mChargingBar.SetActive(false);
-        mAutoAttackSpeed = 1f; //TO-DO 임시로 넣어놓음. 실제 공속은 무엇?
+        mAutoAttackSpeed = GetComponent<PlayerStatus>().PlayerATKSPD; //TO-DO 임시로 넣어놓음. 실제 공속은 무엇?
         mAutoAttackCheckTime = mAutoAttackSpeed;
     }
     void FixedUpdate()
@@ -157,7 +157,7 @@ public class PlayerAttack : IAttack
     {
         int count = _skill.Spec.SkillClickCount;
         // 스킬의 지속시간이 있는 경우
-        if (_skill.Spec.MSkillRunTime > 0)
+        if (_skill.Spec.MSkillRunTime[0] > 0)
         {
             int launchCount = _skill.Spec.SkillCount;
             // (익설티드 소드)
@@ -184,7 +184,7 @@ public class PlayerAttack : IAttack
                     // 첫 검기 발사 후 지속시간 쿨타임 코루틴 실행
                     _skill.CurrentCoolTimeIndex++;
                     _skill.CurrentUseCount++;
-                    StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime, _btn, _skill));
+                    StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime[0], _btn, _skill));
                 }
                 // 중간일 경우
                 else
@@ -206,7 +206,7 @@ public class PlayerAttack : IAttack
             else
             {
                 launchSkill(_skill);
-                StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime, _btn, _skill));
+                StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime[0], _btn, _skill));
             }
         }
         // 한번 클릭
@@ -244,8 +244,8 @@ public class PlayerAttack : IAttack
     {
         // Todo : 무한발사 스킬 지속시간과 한발당 발사시간 데이터 받아오기
         // 나중에 이런스킬류가 더 생기게되면 테이블이 필요해요...
-        int count = (int)(_skill.Spec.MSkillRunTime / 0.1f); //  지속 시간 / 한발당 발사시간
-        StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime, UBtn, _skill));
+        int count = (int)(_skill.Spec.MSkillRunTime[0] / _skill.Spec.MSkillRunTime[1]); //  지속 시간 / 한발당 발사시간
+        StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime[0], UBtn, _skill));
         Vector3 firePos;
         while (count != 0)
         {
