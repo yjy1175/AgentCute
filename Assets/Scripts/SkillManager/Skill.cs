@@ -55,12 +55,12 @@ public class Skill : MonoBehaviour
     }
     public enum ESkillBuffType
     {
+        None,
         PlayerSPD,
         PlayerPosition,
         PlayerWeaponSprite
     }
 
-    private float mOriginValue;
     #endregion
 
     #region method
@@ -76,14 +76,16 @@ public class Skill : MonoBehaviour
         
     }
 
-    public void BuffOn(ESkillBuffType _type, float _value)
+    public void BuffOn()
     {
-       
+        GameObject.Find("PlayerObject").GetComponent<PlayerStatus>()
+             .ChangeStatusForSkill(mSkillBuffType, mSkillBuffValue);
     }
 
     public void BuffOff()
     {
-        
+        GameObject.Find("PlayerObject").GetComponent<PlayerStatus>()
+     .ChangeStatusForSkillOff(mSkillBuffType, mSkillBuffValue);
     }
     #endregion
 }

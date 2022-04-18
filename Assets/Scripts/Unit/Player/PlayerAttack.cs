@@ -48,6 +48,10 @@ public class PlayerAttack : IAttack
 
     [SerializeField]
     private Vector3 mTarget;
+    public Vector3 Target
+    {
+        get { return mTarget; }
+    }
 
     [SerializeField]
     private bool mGSkillUseable  = true;
@@ -67,10 +71,13 @@ public class PlayerAttack : IAttack
         mAutoAttackSpeed = GetComponent<PlayerStatus>().PlayerATKSPD; //TO-DO 임시로 넣어놓음. 실제 공속은 무엇?
         mAutoAttackCheckTime = mAutoAttackSpeed;
     }
+    private void Update()
+    {
+        mTestDebugText.text = "공격력 = " + (GetComponent<IStatus>().BaseDamage + GetComponent<IStatus>().getCurrentWeponeDamage()).ToString() + "\n"
+            + "공격속도 = " + mAutoAttackSpeed.ToString() + "\n" + "이동속도 = " + (GetComponent<IStatus>().Speed * GetComponent<IStatus>().SpeedRate).ToString();
+    }
     void FixedUpdate()
     {
-        mTestDebugText.text = "mAutoAttackCheckTime = " + mAutoAttackCheckTime.ToString() + "\n" 
-            + "mAutoAttackSpeed = " + mAutoAttackSpeed.ToString();
         if (mAutoAttackCheckTime > mAutoAttackSpeed && mIsGameStart)
         {
             // 자동공격 매서드
@@ -112,7 +119,7 @@ public class PlayerAttack : IAttack
         {
             mGSkillUseable = false;
             useSkill(GBtn, CurrentGeneralSkill);
-            StartCoroutine(activeAnimation(CurrentUltimateSkill));
+            StartCoroutine(activeAnimation(CurrentGeneralSkill));
         }
     }
     public void clickUltimateSkillBtn()
@@ -145,7 +152,9 @@ public class PlayerAttack : IAttack
                 num = 1f;
                 break;
         }
-        GetComponent<PlayerMove>().MMoveable = false;
+        Debug.Log(_skill.gameObject.name);
+        if(_skill.gameObject.name != "Exalted Sword")
+            GetComponent<PlayerMove>().MMoveable = false;
         GetComponent<PlayerMove>().MAnim.SetFloat("AttackState", 0f);
         GetComponent<PlayerMove>().MAnim.SetFloat("NormalState", num);
         GetComponent<PlayerMove>().MAnim.SetTrigger("Attack");
@@ -155,6 +164,11 @@ public class PlayerAttack : IAttack
 
     private void useSkill(GameObject _btn, Skill _skill)
     {
+        // 해당 스킬의 버프능력이 있다면 실행
+        if (_skill.SkillBuffType != Skill.ESkillBuffType.None)
+        {
+            _skill.BuffOn();
+        }
         int count = _skill.Spec.SkillClickCount;
         // 스킬의 지속시간이 있는 경우
         if (_skill.Spec.MSkillRunTime[0] > 0)
@@ -263,8 +277,9 @@ public class PlayerAttack : IAttack
                 launchProjectile(_skill, 0, mTarget, firePos, false);
             }
 
-            yield return new WaitForSeconds(0.2f); // 한발당 발사시간
+            yield return new WaitForSeconds(_skill.Spec.MSkillRunTime[1]); // 한발당 발사시간
         }
+
     }
     // 우선 발사체가 한개인 경우만 구현
     private void launchSkill(Skill _skill)
@@ -331,19 +346,19 @@ public class PlayerAttack : IAttack
 
     IEnumerator WaitForCoolTime(GameObject _btn, float _cooltime, string _type)
     {
-        // 방어 코드...
-        switch (_type)
-        {
-            case "G":
-                mGSkillUseable = false;
-                break;
-            case "U":
-                mUSkillUseable = false;
-                break;
-        }
         float lefttime = _cooltime;
         while (lefttime > 0f)
         {
+            // 방어 코드...
+            switch (_type)
+            {
+                case "G":
+                    mGSkillUseable = false;
+                    break;
+                case "U":
+                    mUSkillUseable = false;
+                    break;
+            }
             lefttime -= Time.deltaTime;
             _btn.transform.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount =( lefttime  / _cooltime);
             yield return new WaitForFixedUpdate();
@@ -363,7 +378,7 @@ public class PlayerAttack : IAttack
     IEnumerator WaitForChargingTime(GameObject _bar, float _spawnTime, GameObject _btn, Skill _skill)
     {
         // 궁극기 스킬 버튼이 터치패드로 변경(스킬클릭이 한번이거나 무한인경우만)
-        if(_skill.Spec.SkillCount == 1 || _skill.Spec.SkillCount == -1)
+        if (_skill.Spec.SkillCount == 1 || _skill.Spec.SkillCount == -1)
         {
             //UBtn.SetActive(false);
             //Ujoystick.gameObject.SetActive(true);
@@ -376,6 +391,11 @@ public class PlayerAttack : IAttack
             _bar.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up);
             _bar.transform.GetChild(0).GetComponent<Image>().fillAmount = (lefttime / _spawnTime);
             yield return new WaitForFixedUpdate();
+        }
+        // 지속시간동안 유지되는 버프이면 여기서 off
+        if (_skill.SkillBuffType != Skill.ESkillBuffType.None)
+        {
+            _skill.BuffOff();
         }
         // 방어 코드...
         mUSkillUseable = false;

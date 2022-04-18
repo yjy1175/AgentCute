@@ -16,6 +16,7 @@ public class MonsterMove : IMove
     // Update is called once per frame
     void Update()
     {
+        mSpeed = GetComponent<MonsterStatus>().Speed;
         /*
          * TO-DO : 몬스터 무브가 다양해지면 MonsterMoveStrategy 클래스를 만들어
          *         Stragegy패턴을 적용해서 추가할것

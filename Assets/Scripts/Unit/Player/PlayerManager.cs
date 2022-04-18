@@ -36,7 +36,7 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         {
             mPlayer.GetComponent<IStatus>().Hp = int.Parse(playerBaseStatData[i]["PlayerBaseHP"].ToString());
             mPlayer.GetComponent<IStatus>().BaseDamage = int.Parse(playerBaseStatData[i]["PlayerBaseATK"].ToString());
-            mPlayer.GetComponent<IMove>().Speed = float.Parse(playerBaseStatData[i]["PlayerBaseSPD"].ToString());
+            mPlayer.GetComponent<PlayerStatus>().Speed = float.Parse(playerBaseStatData[i]["PlayerBaseSPD"].ToString());
             mPlayer.GetComponent<PlayerStatus>().PlayerCritChance = float.Parse(playerBaseStatData[i]["PlayerBaseCritChance"].ToString());
             mPlayer.GetComponent<PlayerStatus>().PlayerCritDamage = float.Parse(playerBaseStatData[i]["PlayerBaseCritDamage"].ToString());
             mPlayer.GetComponent<PlayerStatus>().PlayerATKSPD = float.Parse(playerBaseStatData[i]["PlayerBaseATKSPD"].ToString());

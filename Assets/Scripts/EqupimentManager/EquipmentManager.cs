@@ -116,8 +116,15 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                     item.Spec.Name = costumeData[i]["CostumeName"].ToString();
                     item.Spec.Desc = costumeData[i]["CostumeDesc"].ToString();
                     //item.Spec.Rank = int.Parse(costumeData[i]["CostumeRank "].ToString());
-                    item.Spec.CoustumeHP = int.Parse(costumeData[i]["CostumeHP"].ToString());
-                    item.Spec.CoustumeSpeed = int.Parse(costumeData[i]["CostumeSPD"].ToString());
+                    string[] tmp = costumeData[i]["CostumeStatBuff"].ToString().Split('/');
+                    for(int idx = 0; idx < tmp.Length; idx++)
+                    {
+                        // idx가 0이나 짝수인경우 key값
+                        if(idx == 0 || idx % 2 == 0)
+                        {
+                            item.SetBuffDic((Costume.CostumeBuffType)Enum.Parse(typeof(Costume.CostumeBuffType),tmp[idx]), int.Parse(tmp[++idx]));
+                        }
+                    }
                     item.IsLocked = true;
                 }
             }
@@ -178,9 +185,15 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         // 해금이 되어있다면
         if (cWeapon.IsLocked)
         {
+            if(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().PlayerCurrentWeapon != null)
+            {
+                GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().SpeedRate -=
+                GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().PlayerCurrentWeapon.Spec.WeaponAddSpeed;
+            }
             GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().PlayerCurrentWeapon = cWeapon;
             SpriteRenderer playerSprite = PlayerManager.Instance.getPlayerWeaponSprite();
             playerSprite.sprite = cWeapon.GetComponent<SpriteRenderer>().sprite;
+            GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().SpeedRate += cWeapon.Spec.WeaponAddSpeed;
         }
         // 해금이 안되어있다면
         else
@@ -255,7 +268,20 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                     }
                 }
             }
-            
+
+            // 스텟 적용
+            for(Costume.CostumeBuffType idx = Costume.CostumeBuffType.PlayerSPD; idx < Costume.CostumeBuffType.Exit; idx++)
+            {
+                GameObject.Find("PlayerObject").GetComponent<PlayerStatus>()
+                    .ChangeStatusForCostume(idx, cCostume);
+            }
+
+
+        }
+        // 해금 안되있을 경우
+        else
+        {
+
         }
     }
     public List<GameObject> FindWepaonList(string _type)

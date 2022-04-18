@@ -32,6 +32,7 @@ public class PlayerMove : IMove
     // Update is called once per frame
     void Update()
     {
+        mSpeed = GetComponent<PlayerStatus>().Speed * GetComponent<PlayerStatus>().SpeedRate;
         UpdateMove();
     }
 

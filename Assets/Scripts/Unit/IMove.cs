@@ -4,7 +4,9 @@ using UnityEngine;
 
 public abstract class IMove : MonoBehaviour
 {
+    [SerializeField]
     protected float mSpeed;
+    [SerializeField]
     protected Vector3 mDir;
     // Start is called before the first frame update
     void Start()

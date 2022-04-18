@@ -21,6 +21,34 @@ public abstract class IStatus : MonoBehaviour
     [SerializeField]
     protected int mPotionHp;
 
+    //Object 속도
+    [SerializeField]
+    private float mSpeedRate = 1f;
+    public float SpeedRate
+    {
+        set
+        {
+            mSpeedRate = value;
+        }
+        get 
+        { 
+            return mSpeedRate; 
+        }
+    }
+    [SerializeField]
+    protected float mSpeed;
+    public float Speed
+    {
+        set
+        {
+            mSpeed = value;
+        }
+        get
+        {
+            return mSpeed;
+        }
+    }
+
     [SerializeField]
     protected int mBaseDamage;
 
@@ -142,4 +170,51 @@ public abstract class IStatus : MonoBehaviour
         return currentWeapon==null ?0:currentWeapon.Spec.WeaponDamage;
     }
 
+    public void ChangeStatusForCostume(Costume.CostumeBuffType _key, Costume _item)
+    {
+        // 플레이어 체력 상승
+        if(_key == Costume.CostumeBuffType.PlayerHP)
+        {
+            Hp = Hp + _item.GetBuffValue(_key);
+            MaxHP = Hp;
+        }
+        // 플레이어 이속 상승
+        else if (_key == Costume.CostumeBuffType.PlayerSPD)
+        {
+            mSpeedRate += _item.GetBuffValue(_key);
+        }
+    }
+
+    public void ChangeStatusForSkill(Skill.ESkillBuffType _type, float value)
+    {
+        // 속도증가 버프
+        if (_type == Skill.ESkillBuffType.PlayerSPD)
+        {
+            mSpeedRate += value;
+        }
+        // 순간이동
+        else if (_type == Skill.ESkillBuffType.PlayerPosition)
+        {
+            Vector3 currentDir = GetComponent<PlayerAttack>().Target;
+            currentDir = (currentDir - transform.position) * value;
+            gameObject.transform.position = gameObject.transform.position + currentDir;
+        }
+        else if (_type == Skill.ESkillBuffType.PlayerWeaponSprite)
+        {
+            List<GameObject> wList =  EquipmentManager.Instance.FindWepaonList("sw");
+            PlayerManager.Instance.getPlayerWeaponSprite().sprite = wList[(int)value].GetComponent<SpriteRenderer>().sprite;
+        }
+    }
+    public void ChangeStatusForSkillOff(Skill.ESkillBuffType _type, float value)
+    {
+        if(_type == Skill.ESkillBuffType.PlayerSPD)
+        {
+            mSpeedRate -= value;
+        }
+        else if(_type == Skill.ESkillBuffType.PlayerWeaponSprite)
+        {
+            mSpeedRate -= currentWeapon.Spec.WeaponAddSpeed;
+            EquipmentManager.Instance.ChangeWeapon(currentWeapon.Spec.Type);
+        }
+    }
 }

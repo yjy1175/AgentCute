@@ -46,21 +46,5 @@ public class CostumeSpec : EquipSpec
         get { return mEquipRank; }
         set { mEquipRank = value; }
     }
-
-    [SerializeField]
-    private int mCoustumeHp;
-    public int CoustumeHP
-    {
-        get { return mCoustumeHp; }
-        set { mCoustumeHp = value; }
-    }
-
-    [SerializeField]
-    private int mCoustumeSpeed;
-    public int CoustumeSpeed
-    {
-        get { return mCoustumeSpeed; }
-        set { mCoustumeSpeed = value; }
-    }
-    #endregion
+#endregion
 }

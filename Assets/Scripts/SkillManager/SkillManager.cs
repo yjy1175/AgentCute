@@ -64,6 +64,11 @@ public class SkillManager : SingleToneMaker<SkillManager>
                 item.SkillBuffType = (Skill.ESkillBuffType)Enum.Parse(typeof(Skill.ESkillBuffType), tmp[0]);
                 item.SkillBuffValue = float.Parse(tmp[1]);
             }
+            else
+            {
+                item.SkillBuffType = Skill.ESkillBuffType.None;
+                item.SkillBuffValue = -1;
+            }
         }
     }
 

@@ -21,10 +21,38 @@ public class Costume : MonoBehaviour
         set { isLocked = value; }
     }
 
+    public enum CostumeBuffType
+    {
+        PlayerSPD,
+        PlayerHP,
+        Exit
+    }
+
+    [SerializeField]
+    private CstBuffTypeValue mBuffDic;
+
     [SerializeField]
     private TypeSprite mSpriteList;
     #endregion
     #region method
+    // 스텟버프 딕셔너리 관련 매서드
+    public CstBuffTypeValue GetBuffDic()
+    {
+        return mBuffDic;
+    }
+    public int GetBuffValue(CostumeBuffType _key)
+    {
+        return mBuffDic[_key];
+    }
+    public void SetBuffDic(CostumeBuffType _key, int value)
+    {
+        if (mBuffDic.ContainsKey(_key))
+            mBuffDic.Remove(_key);
+        mBuffDic.Add(_key, value);
+    }
+
+
+    // 스프라이트 딕셔너리 관련 매서드
     public TypeSprite GetSpriteDic()
     {
         return mSpriteList;
