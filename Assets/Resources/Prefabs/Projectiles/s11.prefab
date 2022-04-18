@@ -115,6 +115,7 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   angle: 0
   mSpawnType: 3
+  mUJoySitick: {fileID: 0}
 --- !u!61 &5741388054392179450
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -128,16 +129,16 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.79855144, y: 0.03314054}
+  m_Offset: {x: 0.0066005886, y: 0.0138168335}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.109375, y: 0.75}
+    oldSize: {x: 1.35, y: 0.48}
     newSize: {x: 3, y: 2.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.7761414, y: 1.0240233}
+  m_Size: {x: 1.3413596, y: 0.4185487}
   m_EdgeRadius: 0

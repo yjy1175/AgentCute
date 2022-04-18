@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2835937699530362215, guid: f91087f8aef74fa4bb6bc5c32ec80c71, type: 3}
+  m_Sprite: {fileID: 8705289964281128197, guid: f91087f8aef74fa4bb6bc5c32ec80c71, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,13 +96,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spec:
-    type: 
-    typeName: 
-    equipName: 
-    equipDesc: 
+    type: sp00
+    typeName: "\uC2A4\uD53C\uC5B4"
+    equipName: "\uC815\uC608\uBCD1\uC758 \uC2A4\uD53C\uC5B4"
+    equipDesc: "\uC815\uC608\uBCD1\uC5D0\uAC8C \uC9C0\uAE09\uB418\uB294 \uAE30\uBCF8
+      \uC2A4\uD53C\uC5B4"
     equipRank: 0
-    weaponDamage: 0
+    weaponDamage: 22
     weaponAttackSpeed: 0
     weaponAttackRange: 0
     weaponAddSpeed: 0
-  isLocked: 0
+  isLocked: 1
