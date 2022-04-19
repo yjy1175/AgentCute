@@ -8,6 +8,8 @@ TagManager:
   - PlayerProjectile
   - Tilemap
   - Monster
+  - MonsterProjectile
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - Monster
   - User
   - projectile
-  - 
+  - Item
   - 
   - 
   - 

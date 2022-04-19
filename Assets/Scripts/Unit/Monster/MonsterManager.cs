@@ -130,15 +130,6 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
             md.standoffAttackPower = int.Parse(monsterDataCsv[idx]["StandoffAttackPower"].ToString());
             md.standoffAttackRange = int.Parse(monsterDataCsv[idx]["StandoffAttackRange"].ToString());
             md.dropItem = monsterDataCsv[idx]["DropItem"].ToString();
-            //ds.CloseAttackAnimation = (int)monsterDataCsv[idx]["CloseAttackAnimation"];
-            //ds.StandoffAttackAnimation = (int)monsterDataCsv[idx]["StandoffAttackAnimation"];
-            //ds.HitAnimation = (int)monsterDataCsv[idx]["HitAnimation"];
-            //ds.MonsterAI = (int)monsterDataCsv[idx]["MonsterAI"];
-            //ds.spawnStartTime_2 = (int)monsterDataCsv[idx]["ChaseAnimation"];
-            //ds.spawnStartTime_2 = (int)monsterDataCsv[idx]["DeathAnimation"];
-            //ds.MonsterDrop1 = (int)monsterDataCsv[idx]["MonsterDrop1"];
-            //ds.MonsterDrop2 = (int)monsterDataCsv[idx]["MonsterDrop2"];
-            //ds.MonsterDrop3 = (int)monsterDataCsv[idx]["MonsterDrop3"];
             dataSet[key] = md;
         }
     }

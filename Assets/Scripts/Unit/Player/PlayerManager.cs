@@ -76,7 +76,6 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
                 {
                     chance *= 0.5f;
                 }
-                Debug.Log(cName);
             }
         }
         if(costumeName == "")

@@ -6,13 +6,37 @@ public class Item : MonoBehaviour
 {
     [SerializeField]
     int mHp;
+    public int Hp
+    {
+        set { mHp = value; }
+        get { return mHp; }
+    }
     [SerializeField]
     int mDamage;
+    public int Damage
+    {
+        set { mDamage = value; }
+        get { return mDamage; }
+    }
     [SerializeField]
     int mExp;
     [SerializeField]
     int mGold;
-
+    public int Gold
+    {
+        set { mGold = value; }
+        get { return mGold; }
+    }
+    [SerializeField]
+    float mScale;
+    public float Scale
+    {
+        set {
+            mScale = value;
+            gameObject.GetComponent<Transform>().localScale = new Vector3(mScale, mScale, mScale);
+        }
+        get { return mScale; }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -25,51 +49,6 @@ public class Item : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player") && gameObject.activeInHierarchy)
-        {
-            gameObject.SetActive(false);
-            ObjectPoolManager.Instance.DisableGameObject(gameObject);
-            if(Hp!=0)
-                collision.gameObject.GetComponent<PlayerStatus>().PotionHp = Hp;
-            if(Gold!=0)
-                collision.gameObject.GetComponent<PlayerStatus>().Gold += Gold;
-        }
-    }
 
-    public int Hp
-    {
-        set
-        {
-            mHp = value;
-            Debug.Log(gameObject.name + "¿¡ HpSet" + mHp);
-        }
-        get
-        {
-            return mHp;
-        }
-    }
-    public int Gold
-    {
-        set
-        {
-            mGold = value;
-        }
-        get
-        {
-            return mGold;
-        }
-    }
-    public int Damage
-    {
-        set
-        {
-            mDamage = value;
-        }
-        get
-        {
-            return mDamage;
-        }
-    }
+
 }

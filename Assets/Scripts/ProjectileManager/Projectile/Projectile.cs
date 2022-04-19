@@ -34,7 +34,7 @@ public abstract class Projectile : MonoBehaviour
     public virtual int Damage
     {
         get { return damage; }
-        set { damage = value;}
+        set { damage = value; }
     }
     [SerializeField]
     protected int currentPassCount;
@@ -67,21 +67,15 @@ public abstract class Projectile : MonoBehaviour
     }
     #endregion
 
-    //void OnTrrigerEnter2D(Collider2D collision)
-    //{
-    //    if (gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Enemy"))
-    //    {
-    //        collision.gameObject.GetComponent<IStatus>().Hp -= damage;
-    //        ObjectPoolManager.Instance.DisableGameObject(gameObject);
-    //    }
-    //}
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Monster"))
+        if ((gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Monster"))
+                || (gameObject.CompareTag("MonsterProjectile") && collision.gameObject.CompareTag("Player")))
         {
             // 관통 구현
             // -1 : 무한 관통
-            if (isActive) {
+            if (isActive)
+            {
                 if (Spec.MaxPassCount != -1)
                 {
                     currentPassCount++;
@@ -95,10 +89,6 @@ public abstract class Projectile : MonoBehaviour
                 collision.gameObject.GetComponent<IStatus>().DamageHp = damage;
             }
         }
-        //else if (gameObject.CompareTag("MonsterProjectile") && collision.gameObject.CompareTag("Player"))
-        //{
-        //    // TO-DO : 플레이어가 발사체에 맞는 처리
-        //}
     }
 
     #region method

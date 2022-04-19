@@ -8,11 +8,12 @@ public class ItemManager : SingleToneMaker<ItemManager>
     public struct ItemData
     {
         public string itemInName;
+        public int damage;
         public int hp;
         public int gold;
         public int dropRate;
-        public int damage;
         public int Scale;
+        public int time;
     }
     [SerializeField]
     private List<ItemData> dataSet;
@@ -51,15 +52,16 @@ public class ItemManager : SingleToneMaker<ItemManager>
         for (int idx = 0; idx < itemDataCsv.Count; idx++)
         {
             int key;
-            ItemData md = new ItemData();
+            ItemData data = new ItemData();
             key = int.Parse(itemDataCsv[idx]["ID"].ToString());
-            md.itemInName = itemDataCsv[idx]["ItemInName"].ToString();
-            md.hp = int.Parse(itemDataCsv[idx]["Hp"].ToString());
-           // md.damage = int.Parse(itemDataCsv[idx]["Damage"].ToString());
-            md.gold = int.Parse(itemDataCsv[idx]["Gold"].ToString());
-            md.dropRate = int.Parse(itemDataCsv[idx]["Droprate"].ToString());
-            md.Scale = int.Parse(itemDataCsv[idx]["Scale"].ToString());
-            dataSet.Add(md);
+            data.itemInName = itemDataCsv[idx]["ItemInName"].ToString();
+            data.damage = int.Parse(itemDataCsv[idx]["Damage"].ToString());
+            data.hp = int.Parse(itemDataCsv[idx]["Hp"].ToString());
+            // md.damage = int.Parse(itemDataCsv[idx]["Damage"].ToString());
+            data.gold = int.Parse(itemDataCsv[idx]["Gold"].ToString());
+            data.dropRate = int.Parse(itemDataCsv[idx]["Droprate"].ToString());
+            data.Scale = int.Parse(itemDataCsv[idx]["Scale"].ToString());
+            dataSet.Add(data);
         }
     }
 
@@ -69,5 +71,9 @@ public class ItemManager : SingleToneMaker<ItemManager>
         {
             ObjectPoolManager.Instance.CreateDictTable(item, 3, 3);
         }
+
+        //ÆøÅº¿¡ »ç¿ëµÉ objectpool»ý¼º
+        GameObject obj = Resources.Load<GameObject>("Prefabs\\Projectiles\\s99");
+        ObjectPoolManager.Instance.CreateDictTable(obj, 10, 10);
     }
 }
