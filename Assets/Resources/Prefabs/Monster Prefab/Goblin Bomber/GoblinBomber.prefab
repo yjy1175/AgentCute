@@ -15,10 +15,9 @@ GameObject:
   - component: {fileID: 1794076292855029933}
   - component: {fileID: 264092707083130277}
   - component: {fileID: 4315090279229072086}
-  - component: {fileID: 90076430800431658}
-  - component: {fileID: 6681025103669003979}
   - component: {fileID: -1317039379629157109}
   - component: {fileID: -2389219040940533519}
+  - component: {fileID: 8272875725871487116}
   m_Layer: 6
   m_Name: GoblinBomber
   m_TagString: Monster
@@ -176,6 +175,7 @@ MonoBehaviour:
   mMaxHp: 0
   mDamaged: 0
   mPotionHp: 0
+  mSpeedRate: 1
   mSpeed: 0
   mBaseDamage: 0
   mPhysicalDefense: 0
@@ -189,48 +189,6 @@ MonoBehaviour:
   mIsDieToKillCount: 0
   mIsDieToGetExp: 0
   mMonsterGrade: 0
---- !u!61 &90076430800431658
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 607600207061063460}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.014095858, y: -0.2512244}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.34119502, y: 0.43777937}
-  m_EdgeRadius: 0
---- !u!58 &6681025103669003979
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 607600207061063460}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.29842058}
-  serializedVersion: 2
-  m_Radius: 0.20157942
 --- !u!114 &-1317039379629157109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,3 +213,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863a001ce64236d4eb4a9f60b1093774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &8272875725871487116
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607600207061063460}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.012816459, y: -0.24900517}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.33720678, y: 0.43607658}
+  m_EdgeRadius: 0
