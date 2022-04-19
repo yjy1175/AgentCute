@@ -55,6 +55,7 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
     public void SettingGameStart()
     {
         mPlayer.GetComponent<PlayerAttack>().getProjectiles();
+        MapManager.Instance.RandomMapSelect();
         string weaponType =
             mPlayer.GetComponent<PlayerStatus>()
             .PlayerCurrentWeapon.GetComponent<Weapon>().Spec.Type;

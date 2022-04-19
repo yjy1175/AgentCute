@@ -59,7 +59,7 @@ public class MonsterAttack : IAttack
         {
             if (mAutoAttackCheckTime.Equals(0f))
             {
-                collision.gameObject.GetComponent<PlayerStatus>().DamageHp = mCloseAttackPower;
+                GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().DamageHp = mCloseAttackPower;
                 mAutoAttackCheckTime = mAutoAttackSpeed;
             }
         }
