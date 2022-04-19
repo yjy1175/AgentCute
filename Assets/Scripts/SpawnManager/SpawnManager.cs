@@ -99,7 +99,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                     // 우선은 안나오게 해놨습니다 재훈님이 따로 다른곳에서 나오게 수정 부탁드립니다.
                     else
                     {
-                        Debug.Log(spawnPos + " 가 장애물 지역이라 소환 안됨");
+                        //Debug.Log(spawnPos + " 가 장애물 지역이라 소환 안됨");
                     }
                 }
                 temp.currentTime = 0;

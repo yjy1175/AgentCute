@@ -34,7 +34,7 @@ public class Bomb : Item
         anim.SetTrigger(TRIGGER_BOMB);
         GameObject obj = ObjectPoolManager.Instance.EnableGameObject("s99");        
         obj.GetComponent<Transform>().localScale = new Vector3(Scale, Scale, Scale);
-        obj.GetComponent<Projectile>().Damage = 100;
+        obj.GetComponent<Projectile>().Damage = Damage;
         obj.GetComponent<Projectile>().setEnable(gameObject.transform.position, gameObject.transform.position, 0);
 
         yield return new WaitForSeconds(0.8f);

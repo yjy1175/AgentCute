@@ -70,8 +70,7 @@ public abstract class Projectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if ((gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Monster"))
-                || (gameObject.CompareTag("MonsterProjectile") && collision.gameObject.CompareTag("Player")))
-        {
+                || (gameObject.CompareTag("MonsterProjectile") && collision.gameObject.CompareTag("Player"))) { 
             // 包烹 备泅
             // -1 : 公茄 包烹
             if (isActive)
