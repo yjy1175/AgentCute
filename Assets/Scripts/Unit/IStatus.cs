@@ -197,7 +197,15 @@ public abstract class IStatus : MonoBehaviour
         {
             Vector3 currentDir = GetComponent<PlayerAttack>().Target;
             currentDir = (currentDir - transform.position) * value;
-            gameObject.transform.position = gameObject.transform.position + currentDir;
+            bool isAble = MapManager.Instance.SpawnalbePosition(
+                GameObject.Find("Grid").GetComponent<Grid>().WorldToCell(gameObject.transform.position + currentDir));
+            if (isAble)
+                gameObject.transform.position = gameObject.transform.position + currentDir;
+            else
+            {
+                ChangeStatusForSkill(_type, value - 1);
+            }
+                
         }
         else if (_type == Skill.ESkillBuffType.PlayerWeaponSprite)
         {

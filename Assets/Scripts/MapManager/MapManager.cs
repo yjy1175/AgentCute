@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class MapManager : SingleToneMaker<MapManager>
 {
@@ -8,11 +9,19 @@ public class MapManager : SingleToneMaker<MapManager>
     // 추후에 타일맵 클래스 생성 예정(데이터셋과 함께)
     [SerializeField]
     private StringGameObject maps;
+    [SerializeField]
     private Transform[,] tileMapList = new Transform[3, 3];
+    [SerializeField]
+    private MapType mCurrentMapType;
+    [SerializeField]
     private Vector3 nowPos;
+    [SerializeField]
     private int baseY;
+    [SerializeField]
     private int baseX;
+    [SerializeField]
     private bool mIsChange = false;
+    [SerializeField]
     private bool mIsUpdate = false;
 
     public enum MapType
@@ -67,13 +76,13 @@ public class MapManager : SingleToneMaker<MapManager>
      *  return 값으로 해당 맵의 이름을 반환해준다
      *  추후에 몬스터 스폰에서 api이용하시면 됩니다.
      */
-    public string RandomMapSelect()
+    public void RandomMapSelect()
     {
         // 맵번호를 랜덤으로 뽑고
         MapType ranNum = (MapType)Random.Range((int)MapType.Field, (int)MapType.Exit);
-        ranNum = MapType.Volcano;
+        mCurrentMapType = MapType.Field;
         // 해당 맵을 Dic에서 불러온후
-        GameObject newMap = maps[ranNum.ToString()];
+        GameObject newMap = maps[mCurrentMapType.ToString()];
         // Grid안에 생성해준다
         Instantiate(newMap, Vector3.zero, Quaternion.identity, GameObject.Find("Grid").transform);
         // 맵을 초기화 해준다.
@@ -90,7 +99,28 @@ public class MapManager : SingleToneMaker<MapManager>
         moveTileMap(2, 1, -1, 0);
         moveTileMap(2, 2, -1, 1);
         mIsUpdate = true;
-        return ranNum.ToString();
+    }
+    /*
+     * 해당 position에 object타일맵의 타일이 있는지 판단해주는 api입니다.
+     * _pos : 스폰할 위치
+     * return : true면 가능 false면 불가능
+     */
+    public bool SpawnalbePosition(Vector3Int _pos)
+    {
+        List<Tilemap> currentTilemap = new List<Tilemap>();
+        for(int i = 0; i < tileMapList.GetLength(0); i++)
+        {
+            for(int j = 0; j < tileMapList.GetLength(1); j++)
+            {
+                currentTilemap.Add(tileMapList[i, j].Find(mCurrentMapType.ToString() + "NoSpawnZone").GetComponent<Tilemap>());
+            }
+        }
+        foreach (Tilemap tile in currentTilemap)
+        {
+            if (tile.HasTile(_pos))
+                return false;
+        }
+        return true;
     }
     private void initMapList()
     {
@@ -105,8 +135,10 @@ public class MapManager : SingleToneMaker<MapManager>
                 continue;
             // 각 자식들의 위치를 파싱하여 해당 위치로 넣어준다.
             string[] pos = map.name.Split(',');
-            int y = int.Parse(pos[0]);
-            int x = int.Parse(pos[1]);
+            int y;
+            int x;
+            int.TryParse(pos[0], out y);
+            int.TryParse(pos[1], out x);
             tileMapList[y, x] = map;
         }
         mIsChange = false;

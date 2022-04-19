@@ -83,15 +83,23 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                 for (int j = 0; j < spawnZone.Count; j++)
                 {
                     GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetNormal[i].spawnMonster);
-                    if (monster != null)
+                    // 타일맵과 일치시키려면 스폰 포지션을 int화해야 합니다.
+                    
+                    Vector3Int spawnPos = GameObject.Find("Grid").GetComponent<Grid>().WorldToCell(spawnPoints[spawnZone[j]].position);
+                    if (monster != null && MapManager.Instance.SpawnalbePosition(spawnPos))
                     {
                         setMonsterData(ref monster);
-                        monster.transform.position = spawnPoints[spawnZone[j]].position;
+                        monster.transform.position = spawnPos;
                         monster.GetComponent<MonsterStatus>().mIsDieToKillCount = false;
                         monster.GetComponent<MonsterStatus>().mIsDieToGetExp = false;
                         monster.SetActive(true);
                         // 스폰된 몬스터의 수 증가
                         allMonsterCount++;
+                    }
+                    // 우선은 안나오게 해놨습니다 재훈님이 따로 다른곳에서 나오게 수정 부탁드립니다.
+                    else
+                    {
+                        Debug.Log(spawnPos + " 가 장애물 지역이라 소환 안됨");
                     }
                 }
                 temp.currentTime = 0;
