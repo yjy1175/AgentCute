@@ -124,8 +124,10 @@ public class IAttack : MonoBehaviour
     // 발사체 데미지를 설정합니다.
     private void setProjectileData(ref GameObject obj)
     {
+        // 우선 여기서 최소 최대뎀 하드코딩
+        float ran = Random.Range(0.5f, 1.2f);
         obj.GetComponent<Projectile>().Damage = 
-            (int)((gameObject.GetComponent<IStatus>().BaseDamage + gameObject.GetComponent<IStatus>().getCurrentWeponeDamage()) * obj.GetComponent<Projectile>().Spec.ProjectileDamage);
+            (int)((gameObject.GetComponent<IStatus>().BaseDamage + gameObject.GetComponent<IStatus>().getCurrentWeponeDamage() * ran) * obj.GetComponent<Projectile>().Spec.ProjectileDamage);
     }
 
     protected void createObjectPool()
