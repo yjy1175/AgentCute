@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3997309792019139475}
   - component: {fileID: 3997309792019139476}
   - component: {fileID: 931144645606913363}
+  - component: {fileID: 1128585570679952837}
   m_Layer: 0
   m_Name: PlayerHpPotion
   m_TagString: Untagged
@@ -115,3 +116,19 @@ MonoBehaviour:
   destroyTime: 2
   fontSize: 70
   isStart: 0
+--- !u!114 &1128585570679952837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3997309792019139477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec838fbf69c05d44a6ea08d9776ff03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pixelSize: 3
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  resolutionDependant: 1
+  doubleResolution: 1024

@@ -96,13 +96,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spec:
-    type: 
-    typeName: 
-    equipName: 
-    equipDesc: 
+    type: sw02
+    typeName: "\uC18C\uB4DC"
+    equipName: "\uB514\uBC14\uC6B0\uB7EC"
+    equipDesc: "\uB4E4\uACE0 \uC788\uC73C\uBA74 \uBB54\uAC00\uB97C \uB9C8\uAD6C \uBCA0\uACE0
+      \uC2F6\uC5B4\uC9C4\uB2E4.."
     equipRank: 0
-    weaponDamage: 0
+    weaponDamage: 34
     weaponAttackSpeed: 0
     weaponAttackRange: 0
     weaponAddSpeed: 0
-  isLocked: 0
+  isLocked: 1

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6140302652923686791}
   - component: {fileID: 6140302652923686784}
   - component: {fileID: -1250901502584532665}
+  - component: {fileID: 3469759383022055476}
   m_Layer: 0
   m_Name: PlayerDamage
   m_TagString: Untagged
@@ -115,3 +116,19 @@ MonoBehaviour:
   destroyTime: 3
   fontSize: 70
   isStart: 0
+--- !u!114 &3469759383022055476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140302652923686785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec838fbf69c05d44a6ea08d9776ff03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pixelSize: 3
+  outlineColor: {r: 0, g: 0, b: 0, a: 1}
+  resolutionDependant: 1
+  doubleResolution: 1024

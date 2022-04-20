@@ -97,17 +97,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spec:
-    type: sw04
+    type: sw05
     typeName: "\uC18C\uB4DC"
-    equipName: "\uB514\uBC14\uC778\uB8F0\uB7EC"
-    equipDesc: "\uB9CC\uC9C0\uB294 \uC21C\uAC04 \uBAA8\uB974\uB358 \uAC80\uC220\uC774
-      \uBA38\uB9AC \uC18D\uC5D0 \uB4E4\uC5B4\uC628\uB2E4\uB294 \uC2E0\uBE44\uD55C
-      \uD798\uC774 \uAE43\uB4E0 \uAC80."
+    equipName: "\uC775\uC124\uD2F0\uB4DC\uC18C\uB4DC"
+    equipDesc: Exalted Sword
     equipRank: 0
-    weaponDamage: 52
+    weaponDamage: 0
     weaponAttackSpeed: 0
     weaponAttackRange: 0
-    weaponAddSpeed: 0.2
+    weaponAddSpeed: 0
   isLocked: 1
 --- !u!95 &1142949236018789294
 Animator:

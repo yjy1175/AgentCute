@@ -98,10 +98,11 @@ MonoBehaviour:
   spec:
     type: bg00
     typeName: "\uBCF4\uC6B0\uAC74"
-    equipName: "\uACAC\uC2B5\uC6A9 \uBCF4\uC6B0\uAC74"
-    equipDesc: "\uACAC\uC2B5\uC6A9 \uBCF4\uC6B0\uAC74"
+    equipName: "\uC815\uC608\uBCD1\uC758 \uBCF4\uC6B0\uAC74"
+    equipDesc: "\uC815\uC608\uBCD1\uC5D0\uAC8C \uC9C0\uAE09\uB418\uB294 \uAE30\uBCF8
+      \uBCF4\uC6B0\uAC74"
     equipRank: 0
-    weaponDamage: 5
+    weaponDamage: 20
     weaponAttackSpeed: 0
     weaponAttackRange: 0
     weaponAddSpeed: 0

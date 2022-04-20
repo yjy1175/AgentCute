@@ -98,10 +98,10 @@ MonoBehaviour:
   spec:
     type: bg03
     typeName: "\uBCF4\uC6B0\uAC74"
-    equipName: "\uB370\uC4F0\uC250\uB3C4\uC6B0"
-    equipDesc: "\uB370\uC4F0\uC250\uB3C4\uC6B0"
+    equipName: "\uB370\uC4F0\uC100\uB3C4\uC6B0"
+    equipDesc: "\uC774\uB984\uC774 \uBB34\uC12D\uB2E4... \uC0DD\uAE34\uAC74 \uBA4B\uC9C0\uB2E4!"
     equipRank: 0
-    weaponDamage: 24
+    weaponDamage: 40
     weaponAttackSpeed: 0
     weaponAttackRange: 0
     weaponAddSpeed: 0
