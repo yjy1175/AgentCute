@@ -88,13 +88,10 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                 for (int j = 0; j < spawnZone.Count; j++)
                 {
                     GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetNormal[i].spawnMonster);
-                    // 타일맵과 일치시키려면 스폰 포지션을 int화해야 합니다.
-                    
-                    Vector3Int spawnPos = GameObject.Find("Grid").GetComponent<Grid>().WorldToCell(spawnPoints[spawnZone[j]].position);
-                    if (monster != null && MapManager.Instance.SpawnalbePosition(spawnPos))
+                    if (monster != null && spawnPoints[spawnZone[j]].GetComponent<SpawnZone>().Spawnable)
                     {
                         setMonsterData(ref monster);
-                        monster.transform.position = spawnPos;
+                        monster.transform.position = spawnPoints[spawnZone[j]].position;
                         monster.GetComponent<MonsterStatus>().mIsDieToKillCount = false;
                         monster.GetComponent<MonsterStatus>().mIsDieToGetExp = false;
                         monster.SetActive(true);

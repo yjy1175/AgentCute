@@ -3200,6 +3200,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1377481676975621531}
     m_Modifications:
+    - target: {fileID: 2980909914015993778, guid: a6ec36cf55350e14e938d7529eee1ab9, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5905073080410903199, guid: a6ec36cf55350e14e938d7529eee1ab9, type: 3}
       propertyPath: m_Name
       value: IceNoSpawnZone

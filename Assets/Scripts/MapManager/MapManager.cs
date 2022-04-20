@@ -102,23 +102,6 @@ public class MapManager : SingleToneMaker<MapManager>
      * _pos : 스폰할 위치
      * return : true면 가능 false면 불가능
      */
-    public bool SpawnalbePosition(Vector3Int _pos)
-    {
-        List<Tilemap> currentTilemap = new List<Tilemap>();
-        for(int i = 0; i < tileMapList.GetLength(0); i++)
-        {
-            for(int j = 0; j < tileMapList.GetLength(1); j++)
-            {
-                currentTilemap.Add(tileMapList[i, j].Find(mCurrentMapType.ToString() + "NoSpawnZone").GetComponent<Tilemap>());
-            }
-        }
-        foreach (Tilemap tile in currentTilemap)
-        {
-            if (tile.HasTile(_pos))
-                return false;
-        }
-        return true;
-    }
     private void initMapList()
     {
         // 상위 부모그룹 Grid를 불러온다

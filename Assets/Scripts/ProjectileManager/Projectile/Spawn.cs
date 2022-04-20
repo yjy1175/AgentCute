@@ -39,7 +39,14 @@ public class Spawn : Projectile
     }
     [SerializeField]
     private VertualJoyStick mUJoySitick;
+    [SerializeField]
     private Vector3 mPlayer;
+    [SerializeField]
+    private Vector3 newPos = Vector3.zero;
+    [SerializeField]
+    private Vector3 mJoyStickPos = Vector3.zero;
+    [SerializeField]
+    float scale;
     #endregion
     #region method
     protected override void destroySelf()
@@ -54,13 +61,17 @@ public class Spawn : Projectile
         {
             mPlayer = GameObject.Find("fire").transform.position;
             mUJoySitick = GameObject.Find("Canvas").transform.Find("UltimateSkillJoyStick").GetComponent<VertualJoyStick>();
-            Vector3 newPos = new Vector3(mUJoySitick.GetHorizontalValue() + mPlayer.x, mUJoySitick.GetVerticalValue() + mPlayer.y, 0);
-            if(newPos != Vector3.zero)
-            {
-                angle = setAngle(newPos - mPlayer);
-                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                transform.position = mPlayer + (newPos - mPlayer).normalized * (GetComponent<SpriteRenderer>().size.x * 1.5f);
-            }
+            Vector3 joystickPos = new Vector3(mUJoySitick.GetHorizontalValue(), mUJoySitick.GetVerticalValue(), 0);
+            // 터치패드 입력이 있을 경우
+            if (joystickPos != Vector3.zero)
+                mJoyStickPos = joystickPos;
+            // 터치패드 입력이 없을 경우
+            else
+                mJoyStickPos = mJoyStickPos == Vector3.zero ? Vector3.right : mJoyStickPos;
+            newPos = mJoyStickPos + mPlayer;
+            angle = setAngle(newPos - mPlayer);
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.position = mPlayer + (newPos - mPlayer).normalized * (GetComponent<SpriteRenderer>().size.x * (1.5f + scale));
         }
     }
     // Start is called before the first frame update
@@ -87,11 +98,12 @@ public class Spawn : Projectile
         transform.localScale = new Vector3(AddScaleCoefficient, AddScaleCoefficient, AddScaleCoefficient);
         target = _target;
         mPlayer = _player;
+        scale = AddScaleCoefficient - 1;
         // 랜덤형인 경우
         switch ((SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType))
         {
             case SpawnType.General:
-                transform.position = mPlayer + (target - mPlayer).normalized;
+                transform.position = mPlayer + (target - mPlayer).normalized * (GetComponent<SpriteRenderer>().size.x * (0.3f + scale));
                 angle = setAngle(target - mPlayer) + _angle;
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 break;
@@ -106,13 +118,7 @@ public class Spawn : Projectile
                 break;
             case SpawnType.ShortWide:
                 // 추후에 정확한 계산공식 구해서 적용
-                transform.position = mPlayer + (target - mPlayer).normalized * (GetComponent<SpriteRenderer>().size.x * 0.6f);
-                angle = setAngle(target - mPlayer) + _angle;
-                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                break;
-            case SpawnType.LongWide:
-                // 추후에 정확한 계산공식 구해서 적용
-                transform.position = mPlayer + (target - mPlayer).normalized * (GetComponent<SpriteRenderer>().size.x * 1.5f);
+                transform.position = mPlayer + (target - mPlayer).normalized * (GetComponent<SpriteRenderer>().size.x * (0.7f + scale));
                 angle = setAngle(target - mPlayer) + _angle;
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 break;
@@ -123,6 +129,8 @@ public class Spawn : Projectile
 
     public override void setDisable()
     {
+        mJoyStickPos = Vector3.zero;
+        newPos = Vector3.zero;
         isActive = false;
     }
     #endregion

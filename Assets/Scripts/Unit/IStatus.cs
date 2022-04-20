@@ -197,18 +197,19 @@ public abstract class IStatus : MonoBehaviour
         {
             Vector3 currentDir = GetComponent<PlayerAttack>().Target;
             currentDir = (currentDir - transform.position) * value;
-            bool isAble = MapManager.Instance.SpawnalbePosition(
-                GameObject.Find("Grid").GetComponent<Grid>().WorldToCell(gameObject.transform.position + currentDir));
-            if (isAble)
+            RaycastHit2D ray = Physics2D.Raycast(
+                new Vector2(transform.position.x + currentDir.x, transform.position.y + currentDir.y),
+                Vector3.zero, LayerMask.GetMask("Tilemap"));
+            // 벽이 없으면 순간이동
+            if(ray.collider == null)
             {
                 gameObject.transform.position = gameObject.transform.position + currentDir;
-                Debug.Log(gameObject.transform.position + currentDir);
             }
+            // 있으면 거리 줄이기
             else
             {
                 ChangeStatusForSkill(_type, value - 1);
-            }
-                
+            }  
         }
         else if (_type == Skill.ESkillBuffType.PlayerWeaponSprite)
         {

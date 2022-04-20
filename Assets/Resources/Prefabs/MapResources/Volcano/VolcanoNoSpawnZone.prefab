@@ -6901,11 +6901,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8654627367589646720, guid: 2aec41209bebddd48815babe416bd6de, type: 3}
       propertyPath: m_SortingOrder
-      value: 0
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 8654627367589646720, guid: 2aec41209bebddd48815babe416bd6de, type: 3}
       propertyPath: m_MaskInteraction
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aec41209bebddd48815babe416bd6de, type: 3}

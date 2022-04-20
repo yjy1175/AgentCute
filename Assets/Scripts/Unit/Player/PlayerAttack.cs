@@ -75,6 +75,9 @@ public class PlayerAttack : IAttack
     {
         mTestDebugText.text = "공격력 = " + (GetComponent<IStatus>().BaseDamage + GetComponent<IStatus>().getCurrentWeponeDamage()).ToString() + "\n"
             + "공격속도 = " + mAutoAttackSpeed.ToString() + "\n" + "이동속도 = " + (GetComponent<IStatus>().Speed * GetComponent<IStatus>().SpeedRate).ToString();
+
+        RemainSkillCount(GBtn, currentGeneralSkill, mGSkillUseable);
+        RemainSkillCount(UBtn, currentUltimateSkill, mUSkillUseable);
     }
     void FixedUpdate()
     {
@@ -94,6 +97,19 @@ public class PlayerAttack : IAttack
         mAutoAttackCheckTime += Time.fixedDeltaTime;
     }
 
+    private void RemainSkillCount(GameObject _btn, Skill _skill, bool _look)
+    {
+        if (_skill != null)
+        {
+            if (_skill.Spec.SkillClickCount > 1 && _skill.Spec.MSkillRunTime[0] == 0)
+            {
+                int count = _skill.Spec.SkillClickCount - _skill.CurrentUseCount;
+                if (!_look)
+                    count = 0;
+               _btn.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = count.ToString();
+            }
+        }
+    }
     public void getProjectiles()
     {
         // 스킬 매니저를 통해 현재 장착중인 스킬을 받아온다
