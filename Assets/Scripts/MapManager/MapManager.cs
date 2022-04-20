@@ -35,16 +35,13 @@ public class MapManager : SingleToneMaker<MapManager>
     #endregion
 
     #region method
-    private void Awake()
-    {
-        // 맵 데이터 파싱후 넣기
-        MapDataParse();
-    }
     void Start()
     {
         // 현재 플레이어 위치 세팅
         nowPos = Vector3.zero;
         // 선택된 맵 리스트 초기화
+        // 맵 데이터 파싱후 넣기
+        MapDataParse();
     }
     void Update()
     {
@@ -80,7 +77,7 @@ public class MapManager : SingleToneMaker<MapManager>
     {
         // 맵번호를 랜덤으로 뽑고
         MapType ranNum = (MapType)Random.Range((int)MapType.Field, (int)MapType.Exit);
-        mCurrentMapType = MapType.Field;
+        mCurrentMapType = ranNum;
         // 해당 맵을 Dic에서 불러온후
         GameObject newMap = maps[mCurrentMapType.ToString()];
         // Grid안에 생성해준다

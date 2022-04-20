@@ -18,7 +18,7 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
     [SerializeField]
     private Text mTestCostumeRankText;
 
-    private void Awake()
+   void Start()
     {
         mPlayer = GameObject.Find("PlayerObject");
         InitPlayerBaseStat();

@@ -192,14 +192,10 @@ public class UIManager : SingleToneMaker<UIManager>
     public void ClickGameReload()
     {
         // 씬 리로드
-        // 현재 오류로 리로드 불가...
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        // 우선 종료
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-         Application.Quit();
-#endif
+        // 정적 변수들 init
+        SpawnManager.Instance.init();
+        Projectile.init();
+        SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
     }
     private void GamePause()
     {
@@ -218,7 +214,7 @@ public class UIManager : SingleToneMaker<UIManager>
     public void ClickWeaponSelect(string _type)
     {
         int ran = Random.Range(0, 5);
-        List<GameObject> newWeaponList = EquipmentManager.Instance.FindWepaonList(_type);
+        List<GameObject> newWeaponList = GameObject.Find("EquipmentManager").GetComponent<EquipmentManager>().FindWepaonList(_type);
         EquipmentManager.Instance.ChangeWeapon(newWeaponList[ran].GetComponent<Weapon>().Spec.Type);
         mBaseSkill = SkillManager.Instance.FindBaseSkill(_type);
         mGeneralSkill = SkillManager.Instance.FindGeneralSkill(_type);

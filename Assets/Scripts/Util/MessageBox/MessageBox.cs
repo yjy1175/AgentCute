@@ -73,7 +73,7 @@ public class MessageBox : MonoBehaviour
     // 초기 생성 위치
     #endregion
     #region method
-    private void Update()
+    private void LateUpdate()
     {
         // isStart가 true가 되면 실행됩니다.
         if (isStart)
@@ -82,6 +82,7 @@ public class MessageBox : MonoBehaviour
 
             newAlpha.a = Mathf.Lerp(newAlpha.a, 0, alphaSpeed * Time.deltaTime);
             textCom.color = newAlpha;
+
         }
     }
     public void setEnable(string _msg, Vector3 _pos)

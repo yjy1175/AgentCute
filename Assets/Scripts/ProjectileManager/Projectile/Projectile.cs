@@ -66,7 +66,12 @@ public abstract class Projectile : MonoBehaviour
         set;
     }
     #endregion
-
+    public static void init()
+    {
+        addPassCount = 0;
+        addProjectilesCount = 0;
+        addScaleCoefficient = 1f;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if ((gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Monster"))

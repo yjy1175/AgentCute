@@ -181,7 +181,7 @@ public abstract class IStatus : MonoBehaviour
         // 플레이어 이속 상승
         else if (_key == Costume.CostumeBuffType.PlayerSPD)
         {
-            mSpeedRate += _item.GetBuffValue(_key);
+            mSpeedRate += _item.GetBuffValue(_key) / 100f;
         }
     }
 
@@ -200,7 +200,10 @@ public abstract class IStatus : MonoBehaviour
             bool isAble = MapManager.Instance.SpawnalbePosition(
                 GameObject.Find("Grid").GetComponent<Grid>().WorldToCell(gameObject.transform.position + currentDir));
             if (isAble)
+            {
                 gameObject.transform.position = gameObject.transform.position + currentDir;
+                Debug.Log(gameObject.transform.position + currentDir);
+            }
             else
             {
                 ChangeStatusForSkill(_type, value - 1);
@@ -221,7 +224,6 @@ public abstract class IStatus : MonoBehaviour
         }
         else if(_type == Skill.ESkillBuffType.PlayerWeaponSprite)
         {
-            mSpeedRate -= currentWeapon.Spec.WeaponAddSpeed;
             EquipmentManager.Instance.ChangeWeapon(currentWeapon.Spec.Type);
         }
     }

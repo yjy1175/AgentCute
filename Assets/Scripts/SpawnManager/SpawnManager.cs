@@ -37,15 +37,20 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
      */
     // 전체 몬스터의 수
     public Text allMonsterText;
-    public static int allMonsterCount;
+    public static int allMonsterCount = 0;
     // 필드에 소환된 몬스터의 수
     public Text currentAllMonsterText;
     // 현재 잡은 몬스터의 수
     public Text currentKillMonsterText;
-    public static int currentKillMosterCount;
+    public static int currentKillMosterCount = 0;
 
     private const int SPAWN_MINUT = 60;
 
+    public void init()
+    {
+        allMonsterCount = 0;
+        currentKillMosterCount = 0;
+    }
     void Awake()
     {
         InitAllSpawnData();

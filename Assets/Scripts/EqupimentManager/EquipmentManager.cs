@@ -69,6 +69,8 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
             // Dic에 저장해둔다.
             foreach (GameObject weapon in weaponsList)
             {
+                if (weapons.ContainsKey(weapon.name))
+                    weapons.Remove(weapon.name);
                 weapons.Add(weapon.name, weapon);
             }
             // csv파일을 읽어서 리스트형식으로 저장
@@ -289,6 +291,7 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         List<GameObject> newList = new List<GameObject>();
         foreach(string key in weapons.Keys)
         {
+            Debug.Log(key);
             string type = weapons[key].GetComponent<Weapon>().Spec.Type.Substring(0, 2);
             if (type == _type)
             {
