@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class IAttack : MonoBehaviour
 {
+
+    public enum SkillLaunchType
+    {
+        MULTISHOT,
+    }
+
+
     // 예를 들어 한 스킬에 발사체 2개 이상인데
     // 첫발사체가 disable된 position에서 enable
     protected GameObject firstProjectile;
@@ -117,7 +124,7 @@ public class IAttack : MonoBehaviour
         for (int i = 0; i < _count; i++)
         {
             launchProjectile(_skill, 0, _target, _fire, false);
-            yield return new WaitForSeconds(0.4f); // 추후에 여러번 발사일 경우 해당 데이터값 입력
+            yield return new WaitForSeconds(_skill.Spec.SkillCountTime);
         }
     }
 
@@ -141,4 +148,19 @@ public class IAttack : MonoBehaviour
         }
     }
 
+
+    protected void FireSkillLaunchType(SkillLaunchType _enum, Skill _skill, int _count, Vector3 _target, Vector3 _fire, bool _notSingle)
+    {
+        switch (_enum)
+        {
+            case SkillLaunchType.MULTISHOT:
+                StartCoroutine(multiLuanch(_skill, _count, _target, _fire));
+                break;
+
+            default:
+                Debug.Log("잘못된 Enum타입 " + _enum.ToString() + "이 들어왔습니다");
+                break;
+
+        }
+    }
 }

@@ -291,7 +291,7 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         List<GameObject> newList = new List<GameObject>();
         foreach(string key in weapons.Keys)
         {
-            Debug.Log(key);
+//            Debug.Log(key);
             string type = weapons[key].GetComponent<Weapon>().Spec.Type.Substring(0, 2);
             if (type == _type)
             {

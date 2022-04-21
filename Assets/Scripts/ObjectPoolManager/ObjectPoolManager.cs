@@ -60,6 +60,9 @@ public class ObjectPoolManager : SingleToneMaker<ObjectPoolManager>
         obj = dictTable[name].EnableObject();
         return obj;
     }
+
+    //setactive dsiable된 GameObject에 대해서만 objectPool에 반환
+    //Disable시 반드시 active false를 하고 호출할것
     public void DisableGameObject(GameObject obj)
     {
         if (dictTable.ContainsKey(obj.name).Equals(true))

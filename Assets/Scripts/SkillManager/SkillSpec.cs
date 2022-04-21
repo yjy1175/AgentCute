@@ -23,6 +23,14 @@ public class SkillSpec : EquipSpec
     }
 
     [SerializeField]
+    private string skillLaunchType;
+    public string SkillLaunchType
+    {
+        get { return skillLaunchType; }
+        set { skillLaunchType = value; }
+    }
+
+    [SerializeField]
     private string skillWeaponType;
     public string SkillWeaponType
     {
@@ -76,6 +84,14 @@ public class SkillSpec : EquipSpec
     {
         get { return skillCoolTimeType; }
         set { skillCoolTimeType = value; }
+    }
+
+    [SerializeField]
+    private float skillCountTime;
+    public float SkillCountTime
+    {
+        get { return skillCountTime; }
+        set { skillCountTime = value; }
     }
 
     [SerializeField]

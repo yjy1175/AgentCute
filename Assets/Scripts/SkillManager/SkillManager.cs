@@ -34,11 +34,13 @@ public class SkillManager : SingleToneMaker<SkillManager>
             item = skills[skillsData[i]["SkillNameENG"].ToString()].GetComponent<Skill>();
             item.Spec.Type = skillsData[i]["SkillType"].ToString();
             item.Spec.TypeName = skillsData[i]["SkillTypeName"].ToString();
+            item.Spec.SkillLaunchType = skillsData[i]["SkillLaunchType"].ToString();
             item.Spec.SkillWeaponType = skillsData[i]["SkillWeaponType"].ToString();
             item.Spec.Name = skillsData[i]["SkillName"].ToString();
             item.Spec.Desc = skillsData[i]["SkillDesc"].ToString();
             //item.Spec.Rank = int.Parse(skillsData[i]["ProjectileSpawnTime"].ToString());
             item.Spec.SkillCount = int.Parse(skillsData[i]["SkillCount"].ToString());
+            item.Spec.SkillCountTime = float.Parse(skillsData[i]["SkillCountTime"].ToString());
             item.Spec.SkillClickCount = int.Parse(skillsData[i]["SkillClickCount"].ToString());
             item.Spec.SkillCoolTimeType = skillsData[i]["SkillCoolTimeType"].ToString();
             string[] tmp = skillsData[i]["SkillRunTime"].ToString().Split('/');
@@ -69,6 +71,7 @@ public class SkillManager : SingleToneMaker<SkillManager>
                 item.SkillBuffType = Skill.ESkillBuffType.None;
                 item.SkillBuffValue = -1;
             }
+
         }
     }
 
@@ -113,5 +116,20 @@ public class SkillManager : SingleToneMaker<SkillManager>
         }
         return newSkill;
     }
+
+    public List<GameObject> FindMonsterSkill(string _type)
+    {
+        List<GameObject> newList = new List<GameObject>();
+        foreach (string key in skills.Keys)
+        {
+            if (skills[key].GetComponent<Skill>().Spec.SkillWeaponType == _type)
+            {
+                if (skills[key].GetComponent<Skill>().Spec.Type == "M")
+                    newList.Add(skills[key]);
+            }
+        }
+        return newList;
+    }
+
     #endregion
 }
