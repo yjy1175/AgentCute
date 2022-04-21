@@ -189,13 +189,13 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         {
             if(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().PlayerCurrentWeapon != null)
             {
-                GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().SpeedRate -=
+                GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().MoveSpeedRate -=
                 GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().PlayerCurrentWeapon.Spec.WeaponAddSpeed;
             }
             GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().PlayerCurrentWeapon = cWeapon;
             SpriteRenderer playerSprite = PlayerManager.Instance.getPlayerWeaponSprite();
             playerSprite.sprite = cWeapon.GetComponent<SpriteRenderer>().sprite;
-            GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().SpeedRate += cWeapon.Spec.WeaponAddSpeed;
+            GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().MoveSpeedRate += cWeapon.Spec.WeaponAddSpeed;
         }
         // 해금이 안되어있다면
         else

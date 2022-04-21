@@ -1,16 +1,18 @@
-CostumeTypeName,CostumeLoad,CostumeName,CostumeNameENG,CostumeNameJPN,CostumeDesc,CostumeStatBuff,CostumeDescENG,CostumeDescJPN
-base,cstbase,�������� ������,Combat Uniform,,,PlayerHP/1/PlayerSPD/0,,
-swsp,cstswsp01,�߰��� ����,Solid Armor,,,PlayerHP/5/PlayerSPD/0,,
-swsp,cstswsp02,�屳,Officer,,,PlayerHP/6/PlayerSPD/0,,
-swsp,cstswsp03,�屺,General,,,PlayerHP/8/PlayerSPD/0,,
-swsp,cstswsp04,��ɰ�,Commander,,,PlayerHP/10/PlayerSPD/0,,
-swsp,cstswsp05,�Ǵ�,Badest Guy,,,PlayerHP/11/PlayerSPD/10,,
-swsp,cstswsp06,�Ͱ���,Rich Boy,,,PlayerHP/13/PlayerSPD/15,,
-swsp,cstswsp07,��ٻ�Ʈ,Lavasat,,,PlayerHP/15/PlayerSPD/20,,
-bgst,cstbgst01,��ɲ�,Hunter,,,PlayerHP/4/PlayerSPD/0,,
-bgst,cstbgst02,������,Chestnut,,,PlayerHP/5/PlayerSPD/0,,
-bgst,cstbgst03,���� �κ�,Sunrise,,,PlayerHP/6/PlayerSPD/0,,
-bgst,cstbgst04,�濵,Pitch Shadow,,,PlayerHP/8/PlayerSPD/0,,
-bgst,cstbgst05,�� ���� ��ƿ,Man Of Steel,,,PlayerHP/10/PlayerSPD/5,,
-bgst,cstbgst06,���座��,Redvelvet,,,PlayerHP/11/PlayerSPD/10,,
-bgst,cstbgst07,����,Monarch,,,PlayerHP/12/PlayerSPD/15,,
+CostumeTypeName,CostumeLoad,CostumeName,CostumeNameENG,CostumeNameJPN,CostumeDesc,CostumeStatBuff
+base,cstbase,정예병의 전투복,Combat Uniform,,왕국 정예병에게 지급되는 전투복,PlayerHP/1/PlayerSPD/0
+swsp,cstswsp01,견고한 갑옷,Solid Armor,,견고하게 제작된 금속 갑옷,PlayerHP/5/PlayerSPD/0
+swsp,cstswsp02,장교,Officer,,왕국 정예 장교에게 지급되는 갑옷,PlayerHP/6/PlayerSPD/0
+swsp,cstswsp03,장군,General,,왕국 장군에게 지급되는 갑옷,PlayerHP/8/PlayerSPD/0
+swsp,cstswsp04,사령관,Commander,,내 말 한마디에 산이 없어지고 없던 강이 생기는 계급이 되었다...,PlayerHP/10/PlayerSPD/0
+swsp,cstswsp05,블루베리,Blueberry,,색깔 때문일까.. 갑옷에서 달콤한 냄새가 나는 것 같다...,PlayerHP/11/PlayerSPD/5
+swsp,cstswsp06,악당,Badest Guy,,입고 있으면 악당같지만 난 착하다. 으하하!,PlayerHP/12/PlayerSPD/10
+swsp,cstswsp07,귀공자,Rich Boy,,왕국 유명 가문에서 제작해준 고오오급진 갑옷..,PlayerHP/13/PlayerSPD/15
+swsp,cstswsp08,라바사트,Lavasat,,지옥의 문지기 라바사트의 단단한 피부로 만든 갑옷. 오묘한 힘이 솟는다.,PlayerHP/15/PlayerSPD/20
+bgst,cstbgst01,사냥꾼,Hunter,,가을사냥에 제격인 갑옷,PlayerHP/4/PlayerSPD/0
+bgst,cstbgst02,밤톨이,Chestnut,,귀여운 밤톨이같은 갑옷. 하지만 위장 능력은 뛰어나다.,PlayerHP/5/PlayerSPD/0
+bgst,cstbgst03,새벽 로브,Sunrise,,"새벽녘 이슬빛같은, 마법이 깃든 로브",PlayerHP/6/PlayerSPD/0
+bgst,cstbgst04,흑영,Pitch Shadow,,칠흑같은 외형의 가죽갑옷. 어둡고 은밀한 곳에서 적을 노린다.,PlayerHP/8/PlayerSPD/0
+bgst,cstbgst05,캠벨,Campbell,,캠벨처럼 맑은 보라색 빛의 로브.,PlayerHP/9/PlayerSPD/5
+bgst,cstbgst06,레드벨벳,Redvelvet,,어제 먹던 레드벨벳 케잌이 생각난다...,PlayerHP/11/PlayerSPD/10
+bgst,cstbgst07,군주,Monarch,,타락한 마법사가 입었던 사악해 보이는 갑옷... 하지만 내가 입으면 귀엽지.,PlayerHP/12/PlayerSPD/15
+common,cstcommon01,맨 오브 스틸,Man Of Steel,,철도 씹어먹을 수 있는 힘이 생기는 신기한 갑옷.,PlayerHP/30/PlayerSPD/45

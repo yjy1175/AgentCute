@@ -143,7 +143,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.3952197}
+  m_Offset: {x: 0, y: -0.60562074}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -154,7 +154,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5220399, y: 0.8827066}
+  m_Size: {x: 1.5220399, y: 0.7341102}
   m_EdgeRadius: 0
 --- !u!114 &6121474204186256368
 MonoBehaviour:
@@ -186,6 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mSpeed: 0
   mDir: {x: 0, y: 0, z: 0}
+  mMoveable: 1
 --- !u!114 &3749446533805847059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,16 +201,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mHp: 0
   mMaxHp: 0
+  mSize: 0
   mDamaged: 0
   mPotionHp: 0
-  mSpeedRate: 1
-  mSpeed: 0
+  mMoveSpeed: 0
+  mMoveSpeedRate: 1
+  mAddSpeed: 0
+  mAttackSpeed: 0
+  mAddAttackSpeed: 0
   mBaseDamage: 0
+  mAddAttackPoint: 0
+  mObjectDamage: 0
+  mCriticalChance: 0
+  mAddCriticalChance: 0
+  mCriticalDamage: 0
+  currentWeapon: {fileID: 0}
   mPhysicalDefense: 0
   mMagicDefense: 0
   mIsInvincibility: 0
-  mSize: 0
-  currentWeapon: {fileID: 0}
+  mAddMAttackCount: 0
+  mAddAttackRange: 0
+  mAddStiffTime: 0
+  mAddRAttackCount: 0
+  mAddProjectileCount: 0
+  mAddPassCount: 0
   mId: 0
   mSpawnMap: 
   mMonsterInName: 
@@ -252,7 +267,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8748719142119684920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.402, y: -0.638, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4663825505626145501}

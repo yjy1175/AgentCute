@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 842db6f08a2cf0a47a73f4fcd41f98c1
+guid: d2fc4ad7740e8bc479f9759dd63fbdf3
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -30,6 +30,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -172,6 +173,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Right: -1701842369826841683
+      Left: -6657482867516515422
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
