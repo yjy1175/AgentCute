@@ -56,7 +56,8 @@ public class Launch : Projectile
      */
     public override void setEnable(Vector3 _target, Vector3 _player, float _angle)
     {
-         transform.localScale = new Vector3(AddScaleCoefficient, AddScaleCoefficient, AddScaleCoefficient);
+        float scale = GameObject.Find("PlayerObject").GetComponent<IAttack>().ProjectileScale + 1f;
+         transform.localScale = new Vector3(scale, scale, scale);
          transform.position = _player;
          target = _target;
          angle = setAngle(target - _player) + _angle;

@@ -93,6 +93,22 @@ public class ProjectileSpec : EquipSpec
         get { return maxPassCount; }
         set { maxPassCount = value; }
     }
+
+    [SerializeField]
+    private float mStiffTime;
+    public float StiffTime
+    {
+        get { return mStiffTime; }
+        set { mStiffTime = value; }
+    }
+
+    [SerializeField]
+    private float mKnockback;
+    public float Knockback
+    {
+        get { return mKnockback; }
+        set { mKnockback = value; }
+    }
     #endregion
 }
 

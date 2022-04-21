@@ -65,7 +65,8 @@ public class Chase : Projectile
     }
     public override void setEnable(Vector3 _target, Vector3 _player, float _angle)
     {
-        transform.localScale = new Vector3(AddScaleCoefficient, AddScaleCoefficient, AddScaleCoefficient);
+        float scale = GameObject.Find("PlayerObject").GetComponent<IAttack>().ProjectileScale + 1f;
+        transform.localScale = new Vector3(scale, scale, scale);
         transform.position = _player + ranDir();
         target = _target;
         gameObject.SetActive(true);

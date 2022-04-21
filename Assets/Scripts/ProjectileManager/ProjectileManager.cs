@@ -40,9 +40,10 @@ public class ProjectileManager : SingleToneMaker<ProjectileManager>
             item.Spec.Angle = int.Parse(projectilesData[i]["ProjectileAngle"].ToString());
             item.Spec.SpawnTime = float.Parse(projectilesData[i]["ProjectileSpawnTime"].ToString());
             item.Spec.MaxPassCount = int.Parse(projectilesData[i]["ProjectileMaxPassCount"].ToString());
-
+            item.Spec.StiffTime = float.Parse(projectilesData[i]["ProjectileConferStiff"].ToString());
+            item.Spec.Knockback = float.Parse(projectilesData[i]["ProjectileConferKnockback"].ToString());
             // 스폰형인 경우 스폰 타입 지정
-            if(item.Spec.Type[0] == 's')
+            if (item.Spec.Type[0] == 's')
             {
                 item.GetComponent<Spawn>().MSpawnType = projectilesData[i]["ProjectileSpawnType"].ToString();
             }

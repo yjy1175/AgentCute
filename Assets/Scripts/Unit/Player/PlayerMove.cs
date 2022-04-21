@@ -10,29 +10,17 @@ public class PlayerMove : IMove
         get { return mAnim; }
         set { mAnim = value; }
     }
-    private bool mMoveable = true;
-    public bool MMoveable
-    {
-        get { return mMoveable; }
-        set { mMoveable = value; }
-    }
     [SerializeField]
     private VertualJoyStick mJoyStick;
     void Awake()
     {
         mAnim = transform.GetChild(0).GetComponent<Animator>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
+        mJoyStick = GameObject.Find("Canvas").transform.Find("JoyStick").GetComponent<VertualJoyStick>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        mSpeed = GetComponent<PlayerStatus>().Speed * GetComponent<PlayerStatus>().SpeedRate;
         UpdateMove();
     }
 

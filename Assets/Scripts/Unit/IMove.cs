@@ -6,25 +6,45 @@ public abstract class IMove : MonoBehaviour
 {
     [SerializeField]
     protected float mSpeed;
+    public float Speed
+    {
+        get { return mSpeed; }
+    }
     [SerializeField]
     protected Vector3 mDir;
+    [SerializeField]
+    protected bool mMoveable = true;
+    public bool MMoveable
+    {
+        get { return mMoveable; }
+        set { mMoveable = value; }
+    }
     // Start is called before the first frame update
     void Start()
     {
         mDir = new Vector3();
+        gameObject.GetComponent<IEventHandler>().registerMoveSpeedObserver(RegisterMoveSpeedObserver);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void RegisterMoveSpeedObserver(float _moveSpeed, GameObject obj)
     {
-        
+        mSpeed = _moveSpeed;
     }
-
-
     protected virtual void UpdateMove() { }
-    public float Speed
+
+    /*
+     * 이동시 경직이 걸리는 api입니다.
+     *  _time : 경직되는 시간입니다.
+     */
+    public IEnumerator StopStiffTime(float _time)
     {
-        get { return mSpeed; }
-        set { mSpeed = value; }
+        if(mMoveable)
+        {
+            mMoveable = false;
+            yield return new WaitForSeconds(_time);
+            mMoveable = true;
+        }
+        else
+            yield return null;
     }
 }

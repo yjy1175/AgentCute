@@ -32,6 +32,6 @@ public class SingleToneMaker<T> : MonoBehaviour where T : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("파괴되었음?");
+        Debug.Log("파괴되었음");
     }
 }

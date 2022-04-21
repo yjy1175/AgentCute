@@ -9,7 +9,41 @@ public class IAttack : MonoBehaviour
     {
         MULTISHOT,
     }
+    // 최종 데미지
+    [SerializeField]
+    private int mObjectDamage;
 
+    // 발사체 증가 수
+    [SerializeField]
+    private int mProjectileCount;
+
+    // 발사체 범위 증가량
+    [SerializeField]
+    private float mProjectileScale;
+    public float ProjectileScale
+    {
+        get { return mProjectileScale; }
+    }
+
+    // 기본 경직 시간 추가량
+    [SerializeField]
+    private float mStiffTime;
+    public float StiffTime
+    {
+        get { return mStiffTime; }
+    }
+
+    // 기본 공격 횟수
+    [SerializeField]
+    protected int mRAttackCount;
+
+    // 기본 공격 관통 수
+    [SerializeField]
+    private int mPassCount;
+    public int PassCount
+    {
+        get { return mPassCount; }
+    }
 
     // 예를 들어 한 스킬에 발사체 2개 이상인데
     // 첫발사체가 disable된 position에서 enable
@@ -37,9 +71,16 @@ public class IAttack : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+     protected virtual void Start()
     {
         // key : 스킬 게임오브젝트 value : 각 스킬의 발사체 오브젝트
+        gameObject.GetComponent<IEventHandler>().registerAttackSpeedObserver(RegisterAttackSpeedObserver);
+        gameObject.GetComponent<IEventHandler>().registerAttackPointObserver(RegisterAttackPointObserver);
+        gameObject.GetComponent<IEventHandler>().registerProjectileCountObserver(RegisterProjectileCountObserver);
+        gameObject.GetComponent<IEventHandler>().registerProjectileScaleObserver(RegisterProjectileScaleObserver);
+        gameObject.GetComponent<IEventHandler>().registerStiffTimeObserver(RegisterStiffTimeObserver);
+        gameObject.GetComponent<IEventHandler>().registerRAttackCountObserver(RegisterRAttackCountObserver);
+        gameObject.GetComponent<IEventHandler>().registerPassCountObserver(RegisterPassCountObserver);
     }
 
     // Update is called once per frame
@@ -48,7 +89,38 @@ public class IAttack : MonoBehaviour
 
     }
 
-      
+    private void RegisterAttackSpeedObserver(float _attackSpeed, GameObject _obj)
+    {
+        mAutoAttackSpeed = _attackSpeed;
+    }
+
+    private void RegisterAttackPointObserver(int _attackPoint, GameObject _obj)
+    {
+        mObjectDamage = _attackPoint;
+    }
+    private void RegisterProjectileCountObserver(int _count, GameObject _obj)
+    {
+        mProjectileCount = _count;
+    }
+    private void RegisterProjectileScaleObserver(float _scale, GameObject _obj)
+    {
+        mProjectileScale= _scale;
+        Debug.Log(mProjectileScale);
+    }
+    private void RegisterStiffTimeObserver(float _time, GameObject _obj)
+    {
+        mStiffTime = _time;
+    }
+    private void RegisterRAttackCountObserver(int _count, GameObject _obj)
+    {
+        mRAttackCount = _count;
+    }
+    private void RegisterPassCountObserver(int _count, GameObject _obj)
+    {
+        mPassCount = _count;
+    }
+
+
     public void setTileDict(Skill _skill, List<Projectile> _projectiles)
     {
         TileDict.Add(_skill, _projectiles);
@@ -79,7 +151,12 @@ public class IAttack : MonoBehaviour
     */
     protected void launchProjectile(Skill mSkill, int mProjectileIndex, Vector3 mTargetPos, Vector3 mFirePos, bool mNotSingle)
     {
-        int launchCount = TileDict[mSkill][mProjectileIndex].Spec.Count + Projectile.AddProjectilesCount;
+        // 기본공격만 개수 증가
+        int launchCount;
+        if (mSkill.Spec.Type == "B")
+            launchCount = TileDict[mSkill][mProjectileIndex].Spec.Count + mProjectileCount;
+        else
+            launchCount = TileDict[mSkill][mProjectileIndex].Spec.Count;
         int angle = TileDict[mSkill][mProjectileIndex].Spec.Angle;
         // 각도가 없을 경우 한발만 발사
         for (int i = 0; i < launchCount; i++)
@@ -131,10 +208,10 @@ public class IAttack : MonoBehaviour
     // 발사체 데미지를 설정합니다.
     private void setProjectileData(ref GameObject obj)
     {
-        // 우선 여기서 최소 최대뎀 하드코딩
-        float ran = Random.Range(0.5f, 1.2f);
+        // 발사체가 발사 될때 마다 데미지 설정하는 api호출
+        GetComponent<IStatus>().AttackPointSetting(gameObject);
         obj.GetComponent<Projectile>().Damage = 
-            (int)((gameObject.GetComponent<IStatus>().BaseDamage + gameObject.GetComponent<IStatus>().getCurrentWeponeDamage() * ran) * obj.GetComponent<Projectile>().Spec.ProjectileDamage);
+            (int)(mObjectDamage * obj.GetComponent<Projectile>().Spec.ProjectileDamage);
     }
 
     protected void createObjectPool()

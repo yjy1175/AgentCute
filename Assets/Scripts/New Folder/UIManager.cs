@@ -15,8 +15,6 @@ public class UIManager : SingleToneMaker<UIManager>
     [SerializeField]
     private GameObject mPausePannel;
     [SerializeField]
-    private GameObject mStatusPannel;
-    [SerializeField]
     private GameObject mBackGroundPannel;
     [SerializeField]
     private Text mProjectileCountText;
@@ -92,9 +90,7 @@ public class UIManager : SingleToneMaker<UIManager>
     // Update is called once per frame
     void Update()
     {
-        mProjectileCountText.text = "+" + Projectile.AddProjectilesCount.ToString() + "개";
-        mProjectileScaleText.text = "+" + (Projectile.AddScaleCoefficient - 1.0f).ToString() + "%";
-        mPassCountText.text = "+" + Projectile.AddPassCount.ToString() + "마리";
+        
     }
 
     #region method
@@ -109,7 +105,6 @@ public class UIManager : SingleToneMaker<UIManager>
             // 진행
             GameRestart();
             mPausePannel.SetActive(false);
-            mStatusPannel.SetActive(false);
         }
         // 진행중인 상태에서 클릭
         else
@@ -117,7 +112,6 @@ public class UIManager : SingleToneMaker<UIManager>
             // 일시정지
             GamePause();
             mPausePannel.SetActive(true);
-            mStatusPannel.SetActive(true);
         }
         mIsPause = !mIsPause;
     }
@@ -156,26 +150,14 @@ public class UIManager : SingleToneMaker<UIManager>
         // 일시 정지
         GamePause();
         // TO-DO : 각 선택 섹션 별로 능력치 저장 후 랜덤하게 등장하게 구현
-        mFirstSelectText.text = "발사체 개수 증가 +1";
-        mSecondSelectText.text = "발사체 범위 증가 +10%";
-        mThirdSelectText.text = "몬스터 관통 수 증가 +1";
+        mFirstSelectText.text = LevelUpStatusManager.Instance.SelectStatus(1);
+        mSecondSelectText.text = LevelUpStatusManager.Instance.SelectStatus(2);
+        mThirdSelectText.text = LevelUpStatusManager.Instance.SelectStatus(3);
         mStatusSelectPannel.SetActive(true);
     }
     public void ClickedSelectStatus(int _num)
     {
-        // 추후에 PlayerStatus를 통하여 수치 조정
-        switch (_num)
-        {
-            case 0:
-                ProjectileManager.Instance.AddProjectilesCount(1);
-                break;
-            case 1:
-                ProjectileManager.Instance.AddProjectilesScale(0.1f);
-                break;
-            case 2:
-                ProjectileManager.Instance.AddPassCount(1);
-                break;
-        }
+        LevelUpStatusManager.Instance.SelectToStat(_num);
 
         // 게임 재개
         GameRestart();
@@ -213,25 +195,33 @@ public class UIManager : SingleToneMaker<UIManager>
     }
     public void ClickWeaponSelect(string _type)
     {
+        mIsGSkillSelect = false;
+        mIsUSkillSelect = false;
+        for (int i = 0; i < mGeneralSkillBtn.Count; i++)
+        {
+            mGeneralSkillBtn[i].transform.GetChild(1).gameObject.SetActive(false);
+        }
+        for (int i = 0; i < mUltimateSkillBtn.Count; i++)
+        {
+            mUltimateSkillBtn[i].transform.GetChild(1).gameObject.SetActive(false);
+        }
         int ran = Random.Range(0, 5);
         List<GameObject> newWeaponList = GameObject.Find("EquipmentManager").GetComponent<EquipmentManager>().FindWepaonList(_type);
         EquipmentManager.Instance.ChangeWeapon(newWeaponList[ran].GetComponent<Weapon>().Spec.Type);
         mBaseSkill = SkillManager.Instance.FindBaseSkill(_type);
         mGeneralSkill = SkillManager.Instance.FindGeneralSkill(_type);
         mUltimateSkill = SkillManager.Instance.FindUltimateSkill(_type);
+
+        // 스킬아이콘 변경 되는 곳
         for (int i = 0; i < mGeneralSkillBtn.Count; i++)
         {
-            mGeneralSkillBtn[i].transform.GetChild(0).GetComponent<Image>().sprite =
-                ProjectileManager.
-                Instance.allProjectiles[mGeneralSkill[i].GetComponent<Skill>().Spec.getProjectiles()[0]].
-                GetComponent<SpriteRenderer>().sprite;
+            Sprite icon = Resources.Load<Sprite>("UI/SkillIcon/" + mGeneralSkill[i].GetComponent<Skill>().name);
+            mGeneralSkillBtn[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = icon;
         }
         for (int i = 0; i < mUltimateSkillBtn.Count; i++)
         {
-            mUltimateSkillBtn[i].transform.GetChild(0).GetComponent<Image>().sprite =
-                ProjectileManager.
-                Instance.allProjectiles[mUltimateSkill[i].GetComponent<Skill>().Spec.getProjectiles()[0]].
-                GetComponent<SpriteRenderer>().sprite;
+            Sprite icon = Resources.Load<Sprite>("UI/SkillIcon/" + mUltimateSkill[i].GetComponent<Skill>().name);
+            mUltimateSkillBtn[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = icon;
         }
     }
     public void OverSkillSelectBtn(string _type)

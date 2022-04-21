@@ -103,6 +103,14 @@ public class SkillSpec : EquipSpec
     }
 
     [SerializeField]
+    private float mSkilStopTime;
+    public float MSkilStopTime
+    {
+        get { return mSkilStopTime; }
+        set { mSkilStopTime = value; }
+    }
+
+    [SerializeField]
     private bool isLocked;
     public bool IsLocked
     {

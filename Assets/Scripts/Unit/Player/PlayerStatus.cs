@@ -20,13 +20,6 @@ public class PlayerStatus : IStatus
     private int mGainGold;
 
     [SerializeField]
-    private float mPlayerCritChance;
-    [SerializeField]
-    private float mPlayerCritDamage;
-    [SerializeField]
-    private float mPlayerATKSPD;
-
-    [SerializeField]
     private Costume mPlayerCurrentCostume;
     public Costume MPlayerCurrentCostume
     {
@@ -38,8 +31,9 @@ public class PlayerStatus : IStatus
 
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         //TO-DO : 플레이어 스텟들 하드코딩. csv파일 받으면 수정필요.
         mMaxHp = mHp;
         mPlayerMaxExp = 100;
@@ -56,10 +50,10 @@ public class PlayerStatus : IStatus
          */
 
 
-        if (Input.GetKey(KeyCode.Z))
-        {
-            StartCoroutine(InvincibilityCorutine(3f));
-        }
+        //if (Input.GetKey(KeyCode.Z))
+        //{
+        //    StartCoroutine(InvincibilityCorutine(3f));
+        //}
 
 
     }
@@ -130,43 +124,6 @@ public class PlayerStatus : IStatus
             return mPlayerLevel;
         }
     }
-
-    public float PlayerCritChance
-    {
-        set
-        {
-            mPlayerCritChance = value;
-        }
-        get
-        {
-            return mPlayerCritChance;
-        }
-    }
-
-    public float PlayerCritDamage
-    {
-        set
-        {
-            mPlayerCritDamage = value;
-        }
-        get
-        {
-            return mPlayerCritDamage;
-        }
-    }
-
-    public float PlayerATKSPD
-    {
-        set
-        {
-            mPlayerATKSPD = value;
-        }
-        get
-        {
-            return mPlayerATKSPD;
-        }
-    }
-
 
     private int GetMonsterExp(MonsterManager.MonsterGrade _md)
     {

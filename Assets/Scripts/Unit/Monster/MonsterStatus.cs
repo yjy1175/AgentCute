@@ -22,15 +22,10 @@ public class MonsterStatus : IStatus
         Boss
     };
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        BaseDamage = 0;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        base.Start();
+        BaseDamage = 2;
     }
 
     public virtual MonsterManager.MonsterGrade MonsterGrade

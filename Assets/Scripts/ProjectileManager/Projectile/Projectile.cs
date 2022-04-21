@@ -74,8 +74,7 @@ public abstract class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Monster"))
-                || (gameObject.CompareTag("MonsterProjectile") && collision.gameObject.CompareTag("Player"))) { 
+        if ((gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Monster"))) { 
             // 관통 구현
             // -1 : 무한 관통
             if (isActive)
@@ -84,7 +83,39 @@ public abstract class Projectile : MonoBehaviour
                 {
                     currentPassCount++;
                     // 현재 관통한 마리수가 정해진 수치보다 커지면 disable
-                    if (currentPassCount > (Spec.MaxPassCount + addPassCount))
+                    if (currentPassCount > (Spec.MaxPassCount + GameObject.Find("PlayerObject").GetComponent<IAttack>().PassCount))
+                    {
+                        setDisable();
+                        ObjectPoolManager.Instance.DisableGameObject(gameObject);
+                    }
+                }
+                collision.gameObject.GetComponent<IStatus>().DamageHp = damage;
+                // 경직 시간이 있으면
+                if(Spec.StiffTime + GameObject.Find("PlayerObject").GetComponent<IAttack>().StiffTime > 0)
+                {
+                    StartCoroutine(collision.gameObject.GetComponent<IMove>().StopStiffTime(Spec.StiffTime + GameObject.Find("PlayerObject").GetComponent<IAttack>().StiffTime));
+                }
+
+                // 넉백 수치가 있으면
+                if(Spec.Knockback > 0)
+                {
+                    // 프로젝타일의 진행방향으로 플레이어 콜라이더 * 수치만큼 이동
+                    collision.gameObject.transform.Translate(
+                        (transform.position - Target).normalized * 
+                        GameObject.Find("PlayerObject").GetComponent<BoxCollider2D>().size.x * 
+                        Spec.Knockback);
+                }
+            }
+        }
+        else if (gameObject.CompareTag("MonsterProjectile") && collision.gameObject.CompareTag("Player"))
+        {
+            if (isActive)
+            {
+                if (Spec.MaxPassCount != -1)
+                {
+                    currentPassCount++;
+                    // 현재 관통한 마리수가 정해진 수치보다 커지면 disable
+                    if (currentPassCount > (Spec.MaxPassCount))
                     {
                         setDisable();
                         ObjectPoolManager.Instance.DisableGameObject(gameObject);

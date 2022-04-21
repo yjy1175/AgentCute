@@ -16,7 +16,7 @@ public class MonsterMove : IMove
     // Update is called once per frame
     void Update()
     {
-        mSpeed = GetComponent<MonsterStatus>().Speed;
+        mSpeed = GetComponent<MonsterStatus>().MoveSpeed;
         /*
          * TO-DO : 몬스터 무브가 다양해지면 MonsterMoveStrategy 클래스를 만들어
          *         Stragegy패턴을 적용해서 추가할것
@@ -39,7 +39,7 @@ public class MonsterMove : IMove
     private void FixedUpdate()
     {
         // 모든 물리연산은 FixedUpdate 에서
-        if(target != null)
+        if(target != null && mMoveable)
             transform.Translate(mDir * mSpeed * Time.deltaTime);
     }
 }

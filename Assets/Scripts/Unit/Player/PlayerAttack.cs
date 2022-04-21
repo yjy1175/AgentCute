@@ -26,10 +26,8 @@ public class PlayerAttack : IAttack
         set
         {
             currentGeneralSkill = value;
-            
-            mGeneralSkillImg.sprite = ProjectileManager.
-                Instance.allProjectiles[currentGeneralSkill.Spec.getProjectiles()[0]].
-                GetComponent<SpriteRenderer>().sprite;
+
+            mGeneralSkillImg.sprite = Resources.Load<Sprite>("UI/SkillIcon/" + currentGeneralSkill.name);
         }
     }
     [SerializeField]
@@ -40,9 +38,7 @@ public class PlayerAttack : IAttack
         set
         {
             currentUltimateSkill = value;
-            mUltimateSkillImg.sprite = ProjectileManager.
-                Instance.allProjectiles[currentUltimateSkill.Spec.getProjectiles()[0]].
-                GetComponent<SpriteRenderer>().sprite;
+            mUltimateSkillImg.sprite = Resources.Load<Sprite>("UI/SkillIcon/" + currentUltimateSkill.name);
         }
     }
 
@@ -62,20 +58,17 @@ public class PlayerAttack : IAttack
     private bool mIsGameStart;
 
     public Text mTestDebugText;
-    void Start()
+    protected override void Start()
     {
         // key : 스킬 게임오브젝트 value : 각 스킬의 발사체 오브젝트
+        base.Start();
         TileDict = new SkillDic();
         mChargingBar = GameObject.Find("ChargingBar").gameObject;
         mChargingBar.SetActive(false);
-        mAutoAttackSpeed = GetComponent<PlayerStatus>().PlayerATKSPD; //TO-DO 임시로 넣어놓음. 실제 공속은 무엇?
         mAutoAttackCheckTime = mAutoAttackSpeed;
     }
     private void Update()
     {
-        mTestDebugText.text = "공격력 = " + (GetComponent<IStatus>().BaseDamage + GetComponent<IStatus>().getCurrentWeponeDamage()).ToString() + "\n"
-            + "공격속도 = " + mAutoAttackSpeed.ToString() + "\n" + "이동속도 = " + (GetComponent<IStatus>().Speed * GetComponent<IStatus>().SpeedRate).ToString();
-
         RemainSkillCount(GBtn, currentGeneralSkill, mGSkillUseable);
         RemainSkillCount(UBtn, currentUltimateSkill, mUSkillUseable);
     }
@@ -85,12 +78,23 @@ public class PlayerAttack : IAttack
         {
             // 자동공격 매서드
             {
-                launchProjectile(
-                    CurrentBaseSkill,
-                    0,
-                    MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position),
-                    firePosition.transform.position,
-                    false);
+                // 기본 공격 추가 발사 수 가 1이상인경우
+                if (mRAttackCount > 0)
+                {
+                    StartCoroutine(multiLuanch(
+                        CurrentBaseSkill,
+                        mRAttackCount + CurrentBaseSkill.Spec.SkillCount,
+                        MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position), firePosition.transform.position));
+                }
+                else
+                {
+                    launchProjectile(
+                        CurrentBaseSkill,
+                        0,
+                        MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position),
+                        firePosition.transform.position,
+                        false);
+                }
             }
             mAutoAttackCheckTime = 0f;
         }
@@ -174,7 +178,7 @@ public class PlayerAttack : IAttack
         GetComponent<PlayerMove>().MAnim.SetFloat("AttackState", 0f);
         GetComponent<PlayerMove>().MAnim.SetFloat("NormalState", num);
         GetComponent<PlayerMove>().MAnim.SetTrigger("Attack");
-        yield return new WaitForSeconds(0.2f); // Todo : 추후에 스킬 데이터에서 대기시간을 받아 입력 
+        yield return new WaitForSeconds(_skill.Spec.MSkilStopTime); // Todo : 추후에 스킬 데이터에서 대기시간을 받아 입력 
         GetComponent<PlayerMove>().MMoveable = true;
     }
 

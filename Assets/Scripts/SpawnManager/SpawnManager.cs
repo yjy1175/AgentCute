@@ -132,7 +132,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         monster.GetComponent<MonsterStatus>().MonsterGrade= md.monsterGrade;
         monster.GetComponent<MonsterStatus>().MonsterInName = md.monsterInName;
         monster.GetComponent<MonsterAttack>().CloseAttackPower = md.closeAttackPower;
-        monster.GetComponent<MonsterStatus>().Speed = md.monsterSpeed;
+        monster.GetComponent<MonsterStatus>().MoveSpeed = md.monsterSpeed;
         //TO-DO : monster가 생기는 event를 유저가 구독하여 hp register는 Player에서 구독하도록 변경이 필요.
         monster.GetComponent<MonsterEventHandler>().registerHpObserver(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().registerMonsterHp);
     }
@@ -199,7 +199,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             if (monster.activeInHierarchy)
             {
                 monster.GetComponent<SpriteRenderer>().color = Color.red;
-                monster.GetComponent<MonsterMove>().Speed = 10f;
+                //monster.GetComponent<MonsterMove>().Speed = 10f;
                 monster.GetComponent<MonsterAttack>().CloseAttackPower = 30;
             }
         }

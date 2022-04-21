@@ -36,10 +36,10 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         {
             mPlayer.GetComponent<IStatus>().Hp = int.Parse(playerBaseStatData[i]["PlayerBaseHP"].ToString());
             mPlayer.GetComponent<IStatus>().BaseDamage = int.Parse(playerBaseStatData[i]["PlayerBaseATK"].ToString());
-            mPlayer.GetComponent<PlayerStatus>().Speed = float.Parse(playerBaseStatData[i]["PlayerBaseSPD"].ToString());
-            mPlayer.GetComponent<PlayerStatus>().PlayerCritChance = float.Parse(playerBaseStatData[i]["PlayerBaseCritChance"].ToString());
-            mPlayer.GetComponent<PlayerStatus>().PlayerCritDamage = float.Parse(playerBaseStatData[i]["PlayerBaseCritDamage"].ToString());
-            mPlayer.GetComponent<PlayerStatus>().PlayerATKSPD = float.Parse(playerBaseStatData[i]["PlayerBaseATKSPD"].ToString());
+            mPlayer.GetComponent<IStatus>().MoveSpeed = float.Parse(playerBaseStatData[i]["PlayerBaseSPD"].ToString());
+            mPlayer.GetComponent<IStatus>().CriticalChance = float.Parse(playerBaseStatData[i]["PlayerBaseCritChance"].ToString());
+            mPlayer.GetComponent<IStatus>().CriticalDamage = float.Parse(playerBaseStatData[i]["PlayerBaseCritDamage"].ToString());
+            mPlayer.GetComponent<IStatus>().AttackSpeed = float.Parse(playerBaseStatData[i]["PlayerBaseATKSPD"].ToString());
         }
     }
     public SpriteRenderer getPlayerWeaponSprite()
@@ -80,14 +80,15 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         }
         if(costumeName == "")
         {
-            costumeName = "cstbase";
-            mTestCostumeRankText.text = Mathf.Round(chance * 10000f) * 0.01f + "%ÀÇ È®·ü·Î ±âº» ÄÚ½ºÆ¬ ´çÃ·!!";
+            costumeName = "cstcommon01";
+            mTestCostumeRankText.text = Mathf.Round(chance * 10000f) * 0.01f + "%ÀÇ È®·ü·Î ¸Ç¿Àºê½ºÆ¿ ´çÃ·!!";
         }
         else
         {
             mTestCostumeRankText.text = Mathf.Round(chance * 10000f) * 0.01f + "%ÀÇ È®·ü·Î " + costumeName.Substring(8, 1) + "´Ü°èÀÇ ÄÚ½ºÆ¬ ´çÃ·!!";
         }
         EquipmentManager.Instance.ChangeCostume(costumeName);
-        
+
+        LevelUpStatusManager.Instance.SetSlots(weaponType);
     }
 }
