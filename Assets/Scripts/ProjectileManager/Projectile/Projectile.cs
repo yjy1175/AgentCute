@@ -93,7 +93,8 @@ public abstract class Projectile : MonoBehaviour
                 // 경직 시간이 있으면
                 if(Spec.StiffTime + GameObject.Find("PlayerObject").GetComponent<IAttack>().StiffTime > 0)
                 {
-                    StartCoroutine(collision.gameObject.GetComponent<IMove>().StopStiffTime(Spec.StiffTime + GameObject.Find("PlayerObject").GetComponent<IAttack>().StiffTime));
+                    collision.gameObject.GetComponent<IMove>().StopStiffTime(
+                        Spec.StiffTime + GameObject.Find("PlayerObject").GetComponent<IAttack>().StiffTime);
                 }
 
                 // 넉백 수치가 있으면

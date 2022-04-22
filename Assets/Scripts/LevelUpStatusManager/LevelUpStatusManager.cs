@@ -182,7 +182,9 @@ public class LevelUpStatusManager : SingleToneMaker<LevelUpStatusManager>
             if (selectStat.mSelectCount == selectStat.mSelectMaxCount)
             {
                 // 우선 해당 스텟을 삭제
-                _list.RemoveAll((type) => type == selectStat.mType);
+                Slot1List.RemoveAll((type) => type == selectStat.mType);
+                Slot2List.RemoveAll((type) => type == selectStat.mType);
+                Slot3List.RemoveAll((type) => type == selectStat.mType);
             }
             else
             {

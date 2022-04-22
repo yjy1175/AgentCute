@@ -30,7 +30,7 @@ l12,8,4.5,SplitByNumb,3,-1,1,0,4,-1,0.5,0,null
 s14,0,10.8,SplitByNumb,6,-1,1,0,0.41,-1,0,0,ShortWide
 s15,0,10.5,SplitByTime,1,0.5,1,0,2.5,-1,0,2,LongWide
 s16,0,5,Normal,1,-1,1,0,0.25,-1,0,0,SelfSpawn
-s17,0,5,SplitByTime,1,0.5,1,0,4,-1,0.3,0,LongWide
+s17,0,5,SplitByTime,1,0.5,1,0,4,-1,0.5,0,LongWide
 l13,10,1,Normal,1,-1,8,45,3,0,0,0,null
 s99,0,1,Normal,1,-1,1,0,3,-1,0,0,General
 l14,10,1,Normal,0,-1,8,45,10,0,0,0,null

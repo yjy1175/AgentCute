@@ -14378,7 +14378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff60fb194e35fe346ab65858dab2965a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSpeed: 20
+  cameraSpeed: 6
   player: {fileID: 6641142738334399005}
 --- !u!1 &1607663578
 GameObject:
@@ -15474,7 +15474,6 @@ MonoBehaviour:
   mIsPause: 0
   mPauseBtn: {fileID: 1149711056}
   mPausePannel: {fileID: 1480012549}
-  mStatusPannel: {fileID: 486324573}
   mBackGroundPannel: {fileID: 299508378}
   mProjectileCountText: {fileID: 935456285}
   mProjectileScaleText: {fileID: 422096079}

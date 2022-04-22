@@ -32,19 +32,26 @@ public abstract class IMove : MonoBehaviour
     }
     protected virtual void UpdateMove() { }
 
+    public void StopStiffTime(float _time)
+    {
+        if (mMoveable && gameObject.activeInHierarchy)
+        {
+            StartCoroutine(CoStopStiffTime(_time));
+        }
+    }
     /*
      * 이동시 경직이 걸리는 api입니다.
      *  _time : 경직되는 시간입니다.
      */
-    public IEnumerator StopStiffTime(float _time)
+    public IEnumerator CoStopStiffTime(float _time)
     {
-        if(mMoveable)
+        if (mMoveable)
         {
             mMoveable = false;
             yield return new WaitForSeconds(_time);
             mMoveable = true;
         }
         else
-            yield return null;
+            mMoveable = true;
     }
 }

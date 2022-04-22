@@ -23,6 +23,7 @@ public class MonsterEventHandler : IEventHandler
             GetComponent<MonsterStatus>().mIsDieToKillCount = true;
             //TO-DO IEventHandler로 event화 시켜놓을것
             SpawnManager.currentKillMosterCount++;
+            GetComponent<MonsterMove>().MMoveable = true;
             ObjectPoolManager.Instance.DisableGameObject(gameObject);
         }
         
