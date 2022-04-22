@@ -14,7 +14,7 @@ public class MonsterDropItem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnEnable()
@@ -28,7 +28,7 @@ public class MonsterDropItem : MonoBehaviour
         if (_hp <= 0 && !mIsDropItem)
         {
             mIsDropItem = true;
-            string[] itemList = MonsterManager.Instance.GetMonsterData(gameObject.name).dropItem.Split('/');
+            string[] itemList = MonsterManager.Instance.GetMonsterData(gameObject.name).monsterDrop.Split('/');
             int rateTotalSum = 0;
             int randSum = 0;
             int randNum;
@@ -40,7 +40,7 @@ public class MonsterDropItem : MonoBehaviour
                 rateTotalSum += ItemManager.Instance.GetItemData(num).dropRate;
             }
             randNum = Random.Range(0, rateTotalSum);
-            
+
 
             //랜덤 sum에따른 아이템 active 
             foreach (string itemStr in itemList)
@@ -55,7 +55,7 @@ public class MonsterDropItem : MonoBehaviour
                     itemObj.SetActive(true);
                     break;
                 }
-                
+
             }
 
         }
@@ -66,6 +66,6 @@ public class MonsterDropItem : MonoBehaviour
         _item.GetComponent<Item>().Hp = ItemManager.Instance.GetItemData(_id).hp;
         _item.GetComponent<Item>().Gold = ItemManager.Instance.GetItemData(_id).gold;
         _item.GetComponent<Item>().Damage = ItemManager.Instance.GetItemData(_id).damage;
-        _item.GetComponent<Item>().Scale = ItemManager.Instance.GetItemData(_id).Scale;        
+        _item.GetComponent<Item>().Scale = ItemManager.Instance.GetItemData(_id).Scale;
     }
 }

@@ -16,3 +16,7 @@ public class StringIntGameObject : SerializableDictionary<string, IntGameObject>
 public class TypeSprite : SerializableDictionary<EquipmentManager.SpriteType, EquipmentManager.CostumeSprite> { }
 [System.Serializable]
 public class CstBuffTypeValue : SerializableDictionary<Costume.CostumeBuffType, int> { }
+
+[System.Serializable]
+public class MonsterDataSet : SerializableDictionary<string, MonsterManager.MonsterData> { }
+

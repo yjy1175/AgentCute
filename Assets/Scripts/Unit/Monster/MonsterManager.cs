@@ -5,12 +5,12 @@ using System;
 
 public class MonsterManager : SingleToneMaker<MonsterManager>
 {
- 
+
     //TO-DO : 어떤식으로 관리할지는 고민 class로 빼야 다른쪽에서도 객체 생성하기 용이할거로 보임 아님 
     public struct MonsterData
     {
         public int id;
-        public string monsterSpawnMap;
+        public MapManager.MapType monsterSpawnMap;
         public string monsterInName;
         public int monsterSize;
         public string monsterName;
@@ -19,25 +19,26 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
         public int monsterPhysicalDefense;
         public int monsterMagicDefense;
         public int monsterSpeed;
+        public int monsterAttackSpeed;
         public int closeAttackPower;
         public int closeAttackRange;
         public int standoffAttackPower;
         public int standoffAttackRange;
-        public string dropItem;
-        //public int MonsterAI;
-        //public int MonsterDrop1;
-        //public int MonsterDrop2;
-        //public int MonsterDrop3;
+        public List<int> skillAttackPower;
+        public List<float> skillAttackPowerRange;
+        public List<string> skillAttackAnimation;
+        public string monsterDrop;
     }
     public enum MonsterGrade
     {
         Normal,
+        Range,
         Boss
     }
 
 
     [SerializeField]
-    private Dictionary<string, MonsterData> dataSet;
+    private MonsterDataSet dataSet;
 
     private void Awake()
     {
@@ -47,13 +48,13 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+
     }
 
     /*
@@ -84,7 +85,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
     /*
      * 몬스터 string을 str로 넣어주면 몬스터 data를 return 해준다.
      */
-    
+
     public MonsterData GetMonsterData(string str)
     {
         /*
@@ -108,16 +109,19 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
      */
     private void InitAllSpawnData()
     {
-        dataSet = new Dictionary<string, MonsterData>();
+        dataSet = new MonsterDataSet();
         List<Dictionary<string, object>> monsterDataCsv = CSVReader.Read("CSVFile\\MonsterData");
         for (int idx = 0; idx < monsterDataCsv.Count; idx++)
         {
             string key;
             MonsterData md = new MonsterData();
+            md.skillAttackPower = new List<int>();
+            md.skillAttackPowerRange = new List<float>();
+            md.skillAttackAnimation = new List<string>();
             key = monsterDataCsv[idx]["MonsterInName"].ToString();
 
             md.id = int.Parse(monsterDataCsv[idx]["ID"].ToString());
-            md.monsterSpawnMap = monsterDataCsv[idx]["MonsterSpawnMap"].ToString();
+            md.monsterSpawnMap = (MapManager.MapType)Enum.Parse(typeof(MapManager.MapType), monsterDataCsv[idx]["MonsterSpawnMap"].ToString());
             md.monsterSize = int.Parse(monsterDataCsv[idx]["MonsterSize"].ToString());
             md.monsterName = monsterDataCsv[idx]["MonsterName"].ToString();
             md.monsterGrade = (MonsterGrade)Enum.Parse(typeof(MonsterGrade), monsterDataCsv[idx]["MonsterGrade"].ToString());
@@ -125,11 +129,32 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
             md.monsterPhysicalDefense = int.Parse(monsterDataCsv[idx]["MonsterPhysicalDefense"].ToString());
             md.monsterMagicDefense = int.Parse(monsterDataCsv[idx]["MonsterMagicDefense"].ToString());
             md.monsterSpeed = int.Parse(monsterDataCsv[idx]["MonsterSpeed"].ToString());
+            md.monsterAttackSpeed = int.Parse(monsterDataCsv[idx]["MonsterAttackSpeed"].ToString());
             md.closeAttackPower = int.Parse(monsterDataCsv[idx]["CloseAttackPower"].ToString());
             md.closeAttackRange = int.Parse(monsterDataCsv[idx]["CloseAttackRange"].ToString());
-            md.standoffAttackPower = int.Parse(monsterDataCsv[idx]["StandoffAttackPower"].ToString());
-            md.standoffAttackRange = int.Parse(monsterDataCsv[idx]["StandoffAttackRange"].ToString());
-            md.dropItem = monsterDataCsv[idx]["DropItem"].ToString();
+
+            //스킬1
+            md.skillAttackAnimation.Add(monsterDataCsv[idx]["SkillAttackAnimation1"].ToString());
+            md.skillAttackPower.Add(int.Parse(monsterDataCsv[idx]["SkillAttackPower1"].ToString()));
+            md.skillAttackPowerRange.Add(float.Parse(monsterDataCsv[idx]["SkillAttackPowerRange1"].ToString()));
+
+            //스킬2
+            md.skillAttackAnimation.Add(monsterDataCsv[idx]["SkillAttackAnimation2"].ToString());
+            md.skillAttackPower.Add(int.Parse(monsterDataCsv[idx]["SkillAttackPower2"].ToString()));
+            md.skillAttackPowerRange.Add(float.Parse(monsterDataCsv[idx]["SkillAttackPowerRange2"].ToString()));
+
+            //스킬3
+            md.skillAttackAnimation.Add(monsterDataCsv[idx]["SkillAttackAnimation3"].ToString());
+            md.skillAttackPower.Add(int.Parse(monsterDataCsv[idx]["SkillAttackPower3"].ToString()));
+            md.skillAttackPowerRange.Add(float.Parse(monsterDataCsv[idx]["SkillAttackPowerRange3"].ToString()));
+
+            //스킬4
+            md.skillAttackAnimation.Add(monsterDataCsv[idx]["SkillAttackAnimation4"].ToString());
+            md.skillAttackPower.Add(int.Parse(monsterDataCsv[idx]["SkillAttackPower4"].ToString()));
+            md.skillAttackPowerRange.Add(float.Parse(monsterDataCsv[idx]["SkillAttackPowerRange4"].ToString()));
+
+
+            md.monsterDrop = monsterDataCsv[idx]["MonsterDrop"].ToString();
             dataSet[key] = md;
         }
     }

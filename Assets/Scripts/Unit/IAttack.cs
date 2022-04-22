@@ -7,7 +7,10 @@ public class IAttack : MonoBehaviour
 
     public enum SkillLaunchType
     {
+        //멀티샷 공격
         MULTISHOT,
+        //projectile이 1가지일경우 
+        NORMAL
     }
     // 최종 데미지
     [SerializeField]
@@ -233,7 +236,9 @@ public class IAttack : MonoBehaviour
             case SkillLaunchType.MULTISHOT:
                 StartCoroutine(multiLuanch(_skill, _count, _target, _fire));
                 break;
-
+            case SkillLaunchType.NORMAL:
+                launchProjectile(_skill, 0, _target, _fire, false);
+                break;
             default:
                 Debug.Log("잘못된 Enum타입 " + _enum.ToString() + "이 들어왔습니다");
                 break;

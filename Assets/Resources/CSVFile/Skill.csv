@@ -25,5 +25,5 @@ U,궁극기,None,sp,드래고닉 버스트,Dragonic Burst,,"전방의 적들을 
 U,궁극기,None,sp,로드 오브 스피어,Lord Of Spear,,"주변을 빠르게 여러 번 베고, 지속 시간(4s) 동안 신성한 창을 소환하여 공격합니다.",s16/s17,1,0,1,S,55,4,0.2,0
 M,일반스킬,MULTISHOT,Slime,자이언트슬라임스킬1,GiantSlimeSkill1,,8방향으로 투사체를 3번 발사한다,l14,3,0.4,1,S,2,0,0,0
 M,일반스킬,MULTISHOT,Slime,자이언트슬라임스킬2,GiantSlimeSkill2,,3방향으로투사체를10번발사한다,l15,10,0.4,1,S,2,0,0,0
-M,일반스킬,None,Slime,자이언트슬라임스킬3,GiantSlimeSkill3,,위로점프후크게내려찍습니다.,null,1,0,1,S,2,0,0,0
-M,일반스킬,None,Slime,자이언트슬라임스킬4,GiantSlimeSkill4,,초록색 산성액을 내뱉어 공격합니다.,s19,1,0,1,S,2,0,0,0
+M,일반스킬,NORMAL,Slime,자이언트슬라임스킬3,GiantSlimeSkill3,,위로점프후크게내려찍습니다.,s98,1,0,1,S,2,0,0,0
+M,일반스킬,NORMAL,Slime,자이언트슬라임스킬4,GiantSlimeSkill4,,초록색 산성액을 내뱉어 공격합니다.,s19,1,0,1,S,2,0,0,0

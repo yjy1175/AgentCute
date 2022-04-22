@@ -1,9 +1,37 @@
-ID,MonsterSpawnMap,MonsterInName,MonsterSize,MonsterName,MonsterGrade,MonsterHp,MonsterPhysicalDefense,MonsterMagicDefense,MonsterSpeed,CloseAttackPower,CloseAttackRange,StandoffAttackPower,StandoffAttackRange,CloseAttackAnimation,StandoffAttackAnimation,HitAnimation,MonsterAI,ChaseAnimation,DeathAnimation,DropItem
-1,Field,GoblinWorker,1,고블린 일꾼,Normal,15,0,0,1,1,1,0,-1,null,null,Goblin Worker Hit.anim,null,Goblin Worker Walk.anim,Goblin Worker Die.anim,null
-2,Field,GoblinBomber,1,고블린 폭탄병,Normal,30,0,0,2,1,1,0,-1,null,null,Goblin Bomber Hit.anim,null,Goblin Bomber Walk.anim,Goblin Bomber Die.anim,null
-3,Field,GoblinShaman,1,고블린 샤먼,Normal,45,0,0,1,1,1,0,-1,null,null,Goblin Shaman Hit.anim,null,Goblin Shaman Walk.anim,Goblin Shaman Die.anim,null
-4,Field,GoblinAssassin,1,고블린 어쌔신,Normal,60,0,0,3,1,1,0,-1,null,null,Goblin Assassin Hit.anim,null,Goblin Assassin Walk.anim,Goblin Assassin Die.anim,null
-5,Field,GiantSlime1,3,자이언트 슬라임_1,Boss,"4,000",0,0,2,2,1,0,-1,null,null,Giant Slime Hit.anim,Giant_Slime_1_AI,Giant Slime Walk.anim,Giant Slime Die.anim,null
-6,Field,GiantSlime2,3,자이언트 슬라임_2,Boss,"6,000",0,0,2,3,1,0,-1,null,null,Giant Slime Hit.anim,Giant_Slime_2_AI,Giant Slime Walk.anim,Giant Slime Die.anim,null
-7,Field,GiantSlime3,3,자이언트 슬라임_3,Boss,"8,000",0,0,2,3,1,0,-1,null,null,Giant Slime Hit.anim,Giant_Slime_3_AI,Giant Slime Walk.anim,Giant Slime Die.anim,null
-8,Field,Mimic,1,미믹,Normal,50,0,0,2,1,1,0,-1,null,null,null,null,Mimic Chase.anim,Mimic Die.anim,"0/1/2/3/4"
+ID,MonsterSpawnMap,MonsterInName,MonsterSize,MonsterName,MonsterGrade,MonsterHp,MonsterPhysicalDefense,MonsterMagicDefense,MonsterSpeed,MonsterAttackSpeed,CloseAttackPower,CloseAttackRange,SkillAttackPower1,SkillAttackPowerRange1,SkillAttackAnimation1,SkillAttackPower2,SkillAttackPowerRange2,SkillAttackAnimation2,SkillAttackPower3,SkillAttackPowerRange3,SkillAttackAnimation3,SkillAttackPower4,SkillAttackPowerRange4,SkillAttackAnimation4,CloseAttackAnimation,HitAnimation,MonsterAI,ChaseAnimation,DeathAnimation,MonsterDrop
+0,Field,GoblinWorker,1,고블린 일꾼,Normal,20,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,Goblin Worker Hit.anim,null,Goblin Worker Walk.anim,Goblin Worker Die.anim,null
+1,Field,GoblinBomber,1,고블린 폭탄병,Range,30,0,0,1,1,1,1,2,5,GoblinBomberAttack.anim,0,0,-1,0,0,-1,0,0,-1,null,Goblin Bomber Hit.anim,null,Goblin Bomber Walk.anim,Goblin Bomber Die.anim,null
+2,Field,GoblinShaman,1,고블린 샤먼,Normal,40,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,Goblin Shaman Hit.anim,null,Goblin Shama Walk.anim,Goblin Shaman Die.anim,null
+3,Field,GoblinAssassin,1,고블린 어쌔신,Normal,60,0,0,3,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,Goblin Assassin Hit.anim,null,Goblin Assassin Walk.anim,Goblin Assassin Die.anim,null
+4,Field,GiantSlime1,2,자이언트 슬라임 1,Boss,"2,000",0,0,2,1,2,1,1,5,GiantSlimeMotionA.anim,1,5,GiantSlimeMotionA.anim,3,2,GiantSlimeMotionB.anim,3,5,GiantSlimeMotionA.anim,null,Giant Slime Hit.anim,GiantSlime1AI,Giant Slime Walk.anim,Giant Slime Die.anim,null
+5,Field,GiantSlime2,2,자이언트 슬라임 2,Boss,"3,000",0,0,2,1,3,1,2,5,GiantSlimeMotionA.anim,2,5,GiantSlimeMotionA.anim,4,2,GiantSlimeMotionB.anim,4,5,GiantSlimeMotionA.anim,null,Giant Slime Hit.anim,GiantSlime2AI,Giant Slime Walk.anim,Giant Slime Die.anim,null
+6,Field,GiantSlime3,2,자이언트 슬라임 3,Boss,"4,000",0,0,2,1,3,1,3,5,GiantSlimeMotionA.anim,3,5,GiantSlimeMotionA.anim,5,2,GiantSlimeMotionB.anim,5,5,GiantSlimeMotionA.anim,null,Giant Slime Hit.anim,GiantSlime3AI,Giant Slime Walk.anim,Giant Slime Die.anim,null
+7,Field,Mimic,1,미믹,Normal,50,0,0,2,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,null,null,Mimic Walk.anim,Mimic Die.anim,0/1/2/3/4
+8,Field,FieldDragon,2,필드드래곤,Boss,"50,000",0,0,2,1,8,2,4,5,FieldDragonMotionA.anim,4,5,FieldDragonMotionA.anim,8,7,FieldDragonMotionB.anim,6,5,FieldDragonMotionC.anim,null,FieldDragonHit.anim,FieldDragonAI,FieldDragonWalk.anim,FieldDragonDie.anim,null
+9,Ice,IceElemental,1,얼음원소,Normal,20,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,IceElementalHit.anim,null,IceElementalWalk.anim,IceElementalDie.anim,null
+10,Ice,Penguin,1,펭귄,Normal,30,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,PenguinHit.anim,null,PenguinWalk.anim,PenguinDie.anim,null
+11,Ice,JackaPole,1,순록토끼,Normal,50,0,0,2,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,JackPoleHit.anim,null,JackPoleWalk.anim,JackPoleDie.anim,null
+12,Ice,FariyDragon,1,요정용,Range,100,0,0,1,1,1,1,2,0,FairyDragonAttack.anim,0,0,-1,0,0,-1,0,0,-1,null,FairyDragonHit.anim,null,FariyDragonWalk.anim,FairyDragonDie.anim,null
+13,Ice,Yeti1,2,예티1,Boss,"2,500",0,0,2,1,2,1,2,5,YetiMotionA.anim,3,5,YetiMotionA.anim,3,2,YetiMotionA.anim,2,5,YetiMotionB.anim,null,YetiHit.anim,YetiAI,YetiWlak.anim,YetiDie.anim,null
+14,Ice,Yeti2,2,예티2,Boss,"3,500",0,0,2,1,3,1,3,5,YetiMotionA.anim,4,5,YetiMotionA.anim,4,2,YetiMotionA.anim,3,5,YetiMotionB.anim,null,YetiHit.anim,YetiAI,YetiWlak.anim,YetiDie.anim,null
+15,Ice,Yeti3,2,예티3,Boss,"4,500",0,0,2,1,3,1,4,5,YetiMotionA.anim,5,5,YetiMotionA.anim,5,2,YetiMotionA.anim,4,5,YetiMotionB.anim,null,YetiHit.anim,YetiAI,YetiWlak.anim,YetiDie.anim,null
+16,Ice,Mimic,1,미믹,Normal,50,0,0,2,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,null,null,Mimic Walk.anim,Mimic Die.anim,0/1/2/3/4
+17,Ice,IceDragon,2,아이스드래곤,Boss,"50,000",0,0,2,1,8,2,4,5,IceDragonMotionA.anim,4,5,IceDragonMotionA.anim,8,7,IceDragonMotionB.anim,6,5,IceDragonMotionB.anim,null,IceDragonHit.anim,IceDragonAI,IceDragonWalk.anim,IceDragonDie.anim,null
+18,Volcano,FireElemental,1,화염원소,Normal,20,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,FireElementalHit.anim,null,FireElementalWalk.anim,FireElementalDie.anim,null
+19,Volcano,Imp,1,임프,Range,30,0,0,1,1,1,1,1,0,-1,0,0,-1,0,0,-1,0,0,-1,null,ImpHit.anim,null,ImpWalk.anim,ImpDie.anim,null
+20,Volcano,Boar,1,보어,Normal,60,0,0,2,1,2,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,BoarHit.anim,null,BoarWalk.anim,BoarDie.anim,null
+21,Volcano,Demon,1,데몬,Range,80,0,0,1,1,1,1,2,0,-1,0,0,-1,0,0,-1,0,0,-1,null,DemonHit.anim,null,DemonWalk.anim,DemonDie.anim,null
+22,Volcano,Ifrit1,2,이프리트1,Boss,"2,800",0,0,2,1,2,1,1,5,IfritMotionA.anim,3,5,IfritMotionA.anim,2,5,IfritMotionA.anim,3,2,IfritMotionB.anim,null,IfritHit.anim,IfritAI,IfritWalk.anim,IfritDie.anim,null
+23,Volcano,Ifrit2,2,이프리트2,Boss,"3,800",0,0,2,1,3,1,2,5,IfritMotionA.anim,4,5,IfritMotionA.anim,3,5,IfritMotionA.anim,4,2,IfritMotionB.anim,null,IfritHit.anim,IfritAI,IfritWalk.anim,IfritDie.anim,null
+24,Volcano,Ifrit3,2,이프리트3,Boss,"4,800",0,0,2,1,3,1,3,5,IfritMotionA.anim,5,5,IfritMotionA.anim,4,5,IfritMotionA.anim,5,2,IfritMotionB.anim,null,IfritHit.anim,IfritAI,IfritWalk.anim,IfritDie.anim,null
+25,Volcano,FireDragon,2,화염드래곤,Boss,"50,000",0,0,2,1,8,2,4,5,FireDragonMotionA.anim,4,5,FireDragonMotionA.anim,8,5,FireDragonMotionA.anim,6,2,FireDragonMotionB.anim,null,IfritHit.anim,IfritAI,IfritWalk.anim,IfritDie.anim,null
+26,Volcano,Mimic,1,미믹,Normal,50,0,0,2,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,null,null,Mimic Walk.anim,Mimic Die.anim,0/1/2/3/4
+27,Dungeon,Bat,1,박쥐,Normal,20,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,BatHit.anim,null,BatWalk.anim,BatDie.anim,null
+28,Dungeon,SkeletalWarrior,1,해골전사,Normal,30,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,SkeletalWarriorHit.anim,null,SkeletalWarriorWalk.anim,SkeletalWarriorDie.anim,null
+29,Dungeon,Gargoyle,3,가고일,Range,50,0,0,1,1,1,1,2,0,,0,0,,0,0,,0,0,0,null,GargoyleHit.anim,null,GargoyleWalk.anim,GargoyleDie.anim,null
+30,Dungeon,Ghoul,1,구울,Normal,60,0,0,1,1,2,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,GhoulHit.anim,null,GhoulWalk.anim,GhoulDie.anim,null
+31,Dungeon,Wendigo1,2,웬디고1,Boss,"2,400",0,0,2,1,-1,1,0,0,0,0,0,0,0,0,0,0,0,0,null,WendigoHit.anim,WendigoAI,WendigoWalk.anim,WendigoDie.anim,null
+32,Dungeon,Wendigo2,2,웬디고2,Boss,"3,400",0,0,2,1,-1,1,0,0,0,0,0,0,0,0,0,0,0,0,null,WendigoHit.anim,WendigoAI,WendigoWalk.anim,WendigoDie.anim,null
+33,Dungeon,Wendigo3,2,웬디고3,Boss,"4,400",0,1,2,1,-1,1,0,0,0,0,0,0,0,0,0,0,0,0,null,WendigoHit.anim,WendigoAI,WendigoWalk.anim,WendigoDie.anim,null
+34,Dungeon,DarkDragon,2,다크드래곤,Boss,"50,000",0,0,2,1,-1,1,4,0,DarkDragonMotionA.anim,4,0,DarkDragonMotionA.anim,8,0,DarkDragonMotionA.anim,6,0,DarkDragonMotionB.anim,null,DarkDragonHit.anim,DarkDragonAI,DarkDragonWalk.anim,DarkDragonDie.anim,null
+35,Dungeon,Mimic,1,미믹,Normal,50,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,null,null,Mimic Walk.anim,Mimic Die.anim,0/1/2/3/4
