@@ -60,35 +60,6 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
             mPlayer.GetComponent<PlayerStatus>()
             .PlayerCurrentWeapon.GetComponent<Weapon>().Spec.Type;
         weaponType = weaponType.Substring(0, 2);
-        string costumeName = "";
-        float chance = 0.5f;
-        foreach(string cName in EquipmentManager.Instance.Costumes.Keys)
-        {
-            if (cName.Replace("cst", "").Contains(weaponType))
-            {
-                int random = Random.Range(0, 100);
-                if( random < 50)
-                {
-                    costumeName = cName;
-                    break;
-                }
-                else
-                {
-                    chance *= 0.5f;
-                }
-            }
-        }
-        if(costumeName == "")
-        {
-            costumeName = "cstcommon01";
-            mTestCostumeRankText.text = Mathf.Round(chance * 10000f) * 0.01f + "%ÀÇ È®·ü·Î ¸Ç¿Àºê½ºÆ¿ ´çÃ·!!";
-        }
-        else
-        {
-            mTestCostumeRankText.text = Mathf.Round(chance * 10000f) * 0.01f + "%ÀÇ È®·ü·Î " + costumeName.Substring(8, 1) + "´Ü°èÀÇ ÄÚ½ºÆ¬ ´çÃ·!!";
-        }
-        EquipmentManager.Instance.ChangeCostume(costumeName);
-
         LevelUpStatusManager.Instance.SetSlots(weaponType);
     }
 }

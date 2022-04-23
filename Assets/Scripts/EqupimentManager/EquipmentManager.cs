@@ -300,6 +300,19 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         }
         return newList;
     }
+    public List<GameObject> FindCostumeList(string _type)
+    {
+        List<GameObject> newList = new List<GameObject>();
+        foreach(string key in costumes.Keys)
+        {
+            string tmp = key.Substring(3);
+            if (tmp.Contains(_type))
+            {
+                newList.Add(costumes[key]);
+            }
+        }
+        return newList;
+    }
     private void loadUserEquip()
     {
         // 유저의 데이터 로드 후 적용

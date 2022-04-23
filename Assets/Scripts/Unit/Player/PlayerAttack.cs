@@ -172,7 +172,6 @@ public class PlayerAttack : IAttack
                 num = 1f;
                 break;
         }
-        Debug.Log(_skill.gameObject.name);
         if(_skill.gameObject.name != "Exalted Sword")
             GetComponent<PlayerMove>().MMoveable = false;
         GetComponent<PlayerMove>().MAnim.SetFloat("AttackState", 0f);
