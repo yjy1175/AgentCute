@@ -20,13 +20,13 @@ public abstract class IMove : MonoBehaviour
         set { mMoveable = value; }
     }
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         mDir = new Vector3();
         gameObject.GetComponent<IEventHandler>().registerMoveSpeedObserver(RegisterMoveSpeedObserver);
     }
 
-    private void RegisterMoveSpeedObserver(float _moveSpeed, GameObject obj)
+    private void RegisterMoveSpeedObserver(float _moveSpeed, GameObject _obj)
     {
         mSpeed = _moveSpeed;
     }

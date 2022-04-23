@@ -6,17 +6,15 @@ public class MonsterMove : IMove
 {
     private GameObject target;
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        /*
-         * TO-DO : MonsterManager로부터 읽어오도록 수정 필요
-        */
+        base.Start();
+        mSpeed = gameObject.GetComponent<IStatus>().MoveSpeed;
     }
 
     // Update is called once per frame
     void Update()
-    {
-        mSpeed = GetComponent<MonsterStatus>().MoveSpeed;
+    { 
         /*
          * TO-DO : 몬스터 무브가 다양해지면 MonsterMoveStrategy 클래스를 만들어
          *         Stragegy패턴을 적용해서 추가할것
@@ -30,6 +28,8 @@ public class MonsterMove : IMove
         target = GameObject.Find("UnitRoot");
         if (target != null)
         {
+            
+           
 
             mDir = target.transform.position - transform.position;
             mDir.Normalize();
@@ -39,7 +39,18 @@ public class MonsterMove : IMove
     private void FixedUpdate()
     {
         // 모든 물리연산은 FixedUpdate 에서
-        if(target != null && mMoveable)
+        if(target != null && mMoveable) { 
             transform.Translate(mDir * mSpeed * Time.deltaTime);
+            int size = gameObject.GetComponent<IStatus>().Size;
+            if(gameObject.transform.position.x < GameObject.Find("PlayerObject").transform.position.x)
+            {
+                gameObject.transform.localScale = new Vector3(size, size, size);
+            }
+            else
+            {
+                gameObject.transform.localScale = new Vector3(-1*size, size, size);
+            }
+        }
     }
+
 }

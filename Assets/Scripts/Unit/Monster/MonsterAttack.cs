@@ -13,6 +13,8 @@ public class MonsterAttack : IAttack
     private float tempTime = 0f;
     private float tempTileMax = 2f;
 
+    private bool mIsUsingSkill;
+
     [SerializeField]
     private List<GameObject> mMonsterSkill = new List<GameObject>();
 
@@ -26,6 +28,8 @@ public class MonsterAttack : IAttack
     // Start is called before the first frame update
     void Start()
     {
+        mIsUsingSkill = false;
+
         if (gameObject.GetComponent<MonsterStatus>().MonsterGrade == MonsterManager.MonsterGrade.Boss)
         {
             firePosition = transform.Find("FirePosition").gameObject;
@@ -44,14 +48,15 @@ public class MonsterAttack : IAttack
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (tempTime.Equals(0f)) {
+        if (!mIsUsingSkill && tempTime.Equals(0f)) {
             if (gameObject.GetComponent<MonsterStatus>().MonsterGrade == MonsterManager.MonsterGrade.Boss)
             {
                 //몬스터 스킬 랜덤선택 => 거리비교를 통해 사용해야할 스킨 번호를 메서드로 리턴
                 MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(gameObject.name);
                 //모션 TRIGGER를 호출 -> MonsterStatus의 모션명을 받아서 사용 
+
                 //스킬 사용
-                int skillNum = GetSkillNumber(md);
+                int skillNum = 3;//GetSkillNumber(md);
                 if (skillNum != -1) { 
                     Debug.Log("랜덤스킬 넘버: "+ skillNum);
                     Skill skill = mMonsterSkill[skillNum].GetComponent<Skill>();
@@ -59,6 +64,8 @@ public class MonsterAttack : IAttack
                     int count = skill.Spec.SkillCount;
                     FireSkillLaunchType(skillLaunchType, skill, count,
                             GameObject.Find("PlayerObject").transform.position, firePosition.transform.position, false);
+                    StartCoroutine(SkillStopTime(skill.Spec.SkilStopTime, skillNum));
+                    
                 }
             }
             tempTime = tempTileMax;
@@ -96,6 +103,18 @@ public class MonsterAttack : IAttack
         return skillNumber.Count == 0 ? -1 : skillNumber[UnityEngine.Random.Range(0, skillNumber.Count)];
     }
 
+
+    private IEnumerator SkillStopTime(float _time, int _skillNum)
+    {
+        gameObject.GetComponent<IStatus>().MoveSpeed = 0;
+        transform.GetComponent<Animator>().SetTrigger(MonsterManager.Instance.GetMonsterData(gameObject.name).skillAttackAnimation[_skillNum]);
+        Debug.Log("trigger 명 : " + (MonsterManager.Instance.GetMonsterData(gameObject.name).skillAttackAnimation[_skillNum]));
+        mIsUsingSkill = true;
+        yield return new WaitForSeconds(_time);
+        transform.GetComponent<Animator>().SetTrigger("Walk");
+        gameObject.GetComponent<IStatus>().MoveSpeed = 1;
+        mIsUsingSkill = false;
+    }
 
 
 

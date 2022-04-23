@@ -16,7 +16,7 @@ public class ProjectileManager : SingleToneMaker<ProjectileManager>
     }
     private void Update()
     {
-
+        
     }
     public void initAllProjectiles()
     {

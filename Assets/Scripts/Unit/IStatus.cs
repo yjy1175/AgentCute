@@ -303,6 +303,20 @@ public abstract class IStatus : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private bool mIsLaunch;
+    public bool IsLaunch
+    {
+        get
+        {
+            return mIsLaunch;
+        }
+        set
+        {
+            mIsLaunch = value;
+            GetComponent<IEventHandler>().ChangeIsLaunch(mIsLaunch, gameObject);
+        }
+    }
 
     public int mPhysicalDefense;
     public int mMagicDefense;

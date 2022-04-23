@@ -46,6 +46,10 @@ public class IEventHandler : MonoBehaviour
     public delegate void PassCountObserver(int _count, GameObject _obg);
     public event PassCountObserver PassCountObserverEvent;
 
+    //발사체 발사중인지 확인(LaunchCorutines 실행중이면 true, 끝나면 false)
+    public delegate void IsLaunchObserver(bool _state, GameObject _obg);
+    public event IsLaunchObserver IsLaunchObserverEvent;
+
     // HP
     public virtual void registerHpObserver(HpObserver _obs)
     {
@@ -177,10 +181,27 @@ public class IEventHandler : MonoBehaviour
     {
         PassCountObserverEvent -= _obs;
     }
+
     public virtual void ChangePassCount(int _count, GameObject _obj)
     {
         PassCountObserverEvent?.Invoke(_count, _obj);
     }
+
+    // IsLaunch
+    public virtual void registerIsLaunchObserver(IsLaunchObserver _obs)
+    {
+        IsLaunchObserverEvent -= _obs;
+        IsLaunchObserverEvent += _obs;
+    }
+    public virtual void UnregisterIsLaunchObserver(IsLaunchObserver _obs)
+    {
+        IsLaunchObserverEvent -= _obs;
+    }
+    public virtual void ChangeIsLaunch(bool _state, GameObject _obj)
+    {
+        IsLaunchObserverEvent?.Invoke(_state, _obj);
+    }
+
     // Start is called before the first frame update
     void Start()
     {

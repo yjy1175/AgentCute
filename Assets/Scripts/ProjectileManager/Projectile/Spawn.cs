@@ -36,6 +36,7 @@ public class Spawn : Projectile
         RandomSpawn, // 랜덤스폰형
         ShortWide, // 짧은와이드형
         LongWide, // 긴와이드형
+        ReverseSpawn, //목표 오브젝트에 따라 뒤집어지짐
     }
     [SerializeField]
     private VertualJoyStick mUJoySitick;
@@ -122,6 +123,18 @@ public class Spawn : Projectile
                 transform.position = mPlayer + (target - mPlayer).normalized * (GetComponent<SpriteRenderer>().size.x * (0.7f + scale));
                 angle = setAngle(target - mPlayer) + _angle;
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                break;
+            case SpawnType.ReverseSpawn:
+                transform.position = mPlayer;
+                float size = gameObject.transform.localScale.x;
+                if (gameObject.transform.position.x < GameObject.Find("PlayerObject").transform.position.x)
+                {
+                    gameObject.transform.localScale = new Vector3(size, size, size);
+                }
+                else
+                {
+                    gameObject.transform.localScale = new Vector3(-1 * size, size, size);
+                }
                 break;
         }
         gameObject.SetActive(true);
