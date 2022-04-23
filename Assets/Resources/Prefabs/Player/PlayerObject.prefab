@@ -1129,7 +1129,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_Sprite: {fileID: -227387616865308203, guid: e2579aadb18ab4cf1b2461fb9e0f0cdf, type: 3}
-  m_Color: {r: 0.32851785, g: 0.7843143, b: 0.21834075, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2782,7 +2782,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 19
-  m_Sprite: {fileID: 21300000, guid: 971aec37aac33ee4882d0d39a6a8e52b, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2790,7 +2790,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1042313528552470579
@@ -3213,7 +3213,7 @@ SpriteRenderer:
   m_Size: {x: 0.125, y: 0.21875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1797014862705190308
@@ -3331,12 +3331,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: 155977ad994fa904ba1685c9c8e257f2, type: 3}
-  m_Color: {r: 0.98823535, g: 0.6901961, b: 0.52156866, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 1fe3251aad350ee4d90950cc7a5a566c, type: 3}
+  m_Color: {r: 0.3018868, g: 0.29915848, b: 0.2976148, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.6875, y: 0.46875}
+  m_Size: {x: 0.3125, y: 0.09375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4204,15 +4204,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: 95983791be93b5c4985b9de925b6dc3f, type: 3}
-  m_Color: {r: 0.9888871, g: 0.68955517, b: 0.52289623, a: 1}
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &4524055517374122696
@@ -5007,6 +5007,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6d1b68b79684c4c89adcf1161ec526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mObjectDamage: 0
+  mProjectileCount: 0
+  mProjectileScale: 0
+  mStiffTime: 0
+  mRAttackCount: 0
+  mPassCount: 0
   firePosition: {fileID: 847723663213583497}
   mAutoAttackSpeed: 0
   currentBaseSkill: {fileID: 0}
@@ -5037,6 +5043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mSpeed: 0
   mDir: {x: 0, y: 0, z: 0}
+  mMoveable: 1
   mJoyStick: {fileID: 0}
 --- !u!114 &847723663689881705
 MonoBehaviour:
@@ -5052,25 +5059,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mHp: 0
   mMaxHp: 0
+  mSize: 0
   mDamaged: 0
   mPotionHp: 0
-  mSpeedRate: 1
-  mSpeed: 0
+  mMoveSpeed: 0
+  mMoveSpeedRate: 1
+  mAddSpeed: 0
+  mAttackSpeed: 0
+  mAddAttackSpeed: 0
   mBaseDamage: 0
+  currentWeapon: {fileID: 0}
+  mAddAttackPoint: 0
+  mObjectDamage: 0
+  mCriticalChance: 0
+  mAddCriticalChance: 0
+  mCriticalDamage: 0
+  mAddProjectileCount: 0
+  mAddAttackRange: 0
+  mAddStiffTime: 0
+  mAddRAttackCount: 0
+  mAddPassCount: 0
   mPhysicalDefense: 0
   mMagicDefense: 0
   mIsInvincibility: 0
-  mSize: 0
-  currentWeapon: {fileID: 0}
   mPlayerExp: 0
   mPlayerMaxExp: 0
   mPlayerGetExp: 0
   mPlayerLevel: 0
   mGold: 0
   mGainGold: 0
-  mPlayerCritChance: 0
-  mPlayerCritDamage: 0
-  mPlayerATKSPD: 0
   mPlayerCurrentCostume: {fileID: 0}
 --- !u!114 &847723663689881717
 MonoBehaviour:
@@ -5292,7 +5309,7 @@ SpriteRenderer:
   m_Size: {x: 0.125, y: 0.21875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &6689146833683934132
@@ -5781,7 +5798,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 7
   m_Sprite: {fileID: -227387616865308203, guid: e2579aadb18ab4cf1b2461fb9e0f0cdf, type: 3}
-  m_Color: {r: 0.32851785, g: 0.7843143, b: 0.21834075, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

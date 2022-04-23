@@ -1,5 +1,5 @@
 CostumeLoadName,CostumeLoadPath,CostumeHelmet,CostumeHelmetRGB,CostumeCloth,CostumeClothRGB,CostumeArmor,CostumeArmorRGB,CostumePant,CostumePantRGB,CostumeBack,CostumeBackRGB
-cstbase,Prefabs/CostumesResources/base/cstbase/,New_Helmet_10,180/255/118,Normal_Cloth1,180/180/180,null,null,Foot_1,10/10/10,null,null
+cstbgstswsp01,Prefabs/CostumesResources/bgstswsp/cstbgstswsp01/,New_Helmet_10,180/255/118,Normal_Cloth1,180/180/180,null,null,Foot_1,10/10/10,null,null
 cstswsp01,Prefabs/CostumesResources/swsp/cstswsp01/,Normal_Helmet2,210/210/210,New_Cloth_06,82/82/122,Armor_2,210/210/210,New_Pant_01,210/210/210,Back_3,210/210/210
 cstswsp02,Prefabs/CostumesResources/swsp/cstswsp02/,Normal_Helmet1,210/210/210,New_Cloth_06,210/210/210,Normal_Armor1,158/158/180,New_Pant_01,210/210/210,Back_3,210/210/210
 cstswsp03,Prefabs/CostumesResources/swsp/cstswsp03/,Helmet_6,210/210/210,New_Cloth_06,86/86/129,Armor_3,210/210/210,New_Pant_04,210/210/210,Back_3,141/211/241
@@ -15,4 +15,4 @@ cstbgst04,Prefabs/CostumesResources/bgst/cstbgst04/,New_Helmet_10,80/188/128,New
 cstbgst05,Prefabs/CostumesResources/bgst/cstbgst05/,New_Helmet_10,170/85/213,Cloth_1,169/42/211,New_Armor_12,210/210/210,Foot_3,166/0/207,null,null
 cstbgst06,Prefabs/CostumesResources/bgst/cstbgst06/,New_Helmet_10,201/0/8,Cloth_2,255/255/255,New_Armor_12,210/210/210,Foot_1,210/210/210,Back_3,172/0/88
 cstbgst07,Prefabs/CostumesResources/bgst/cstbgst07/,Helmet_4,210/210/210,Cloth_2,48/51/51,Armor_8,210/210/210,Foot_1,210/210/210,Back_1,188/188/188
-cstcommon01,Prefabs/CostumesResources/common/cstcommon01/,null,null,Cloth_11,45/45/218,New_Armor_02,240/10/10,New_Pant_07,219/45/0,Back_1,255/210/210
+cstbgstswsp02,Prefabs/CostumesResources/bgstswsp/cstbgstswsp02/,null,null,Cloth_11,45/45/218,New_Armor_02,240/10/10,New_Pant_07,219/45/0,Back_1,255/210/210
