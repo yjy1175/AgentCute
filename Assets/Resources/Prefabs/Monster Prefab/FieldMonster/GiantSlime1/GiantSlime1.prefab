@@ -168,12 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe2bb2b71af77746ac31995884155c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mObjectDamage: 0
-  mProjectileCount: 0
-  mProjectileScale: 0
-  mStiffTime: 0
-  mRAttackCount: 0
-  mPassCount: 0
   firePosition: {fileID: 0}
   mAutoAttackSpeed: 0
   currentBaseSkill: {fileID: 0}
@@ -216,21 +210,21 @@ MonoBehaviour:
   mAttackSpeed: 0
   mAddAttackSpeed: 0
   mBaseDamage: 0
-  currentWeapon: {fileID: 0}
   mAddAttackPoint: 0
   mObjectDamage: 0
   mCriticalChance: 0
   mAddCriticalChance: 0
   mCriticalDamage: 0
-  mAddProjectileCount: 0
-  mAddAttackRange: 0
-  mAddStiffTime: 0
-  mAddRAttackCount: 0
-  mAddPassCount: 0
-  mIsLaunch: 0
+  currentWeapon: {fileID: 0}
   mPhysicalDefense: 0
   mMagicDefense: 0
   mIsInvincibility: 0
+  mAddMAttackCount: 0
+  mAddAttackRange: 0
+  mAddStiffTime: 0
+  mAddRAttackCount: 0
+  mAddProjectileCount: 0
+  mAddPassCount: 0
   mId: 0
   mSpawnMap: 
   mMonsterInName: 
@@ -273,7 +267,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8748719142119684920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.53, y: -0.75, z: 0}
+  m_LocalPosition: {x: 0.402, y: -0.638, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4663825505626145501}

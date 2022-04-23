@@ -94,7 +94,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.01817733, y: -0.0036355183}
@@ -127,18 +127,16 @@ MonoBehaviour:
   myPos: {x: 0, y: 0, z: 0}
   isActive: 0
   spec:
-    type: l14
+    type: 
     typeName: 
     equipName: 
     equipDesc: 
     equipRank: 0
-    projectileDamage: 1
-    speed: 10
-    count: 8
-    angle: 45
-    spawnTime: 10
+    projectileDamage: 0
+    speed: 0
+    count: 0
+    angle: 0
+    spawnTime: 0
     maxPassCount: 0
-    mStiffTime: 0
-    mKnockback: 0
   target: {x: 0, y: 0, z: 0}
   angle: 0
