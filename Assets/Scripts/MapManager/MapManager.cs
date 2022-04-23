@@ -76,11 +76,7 @@ public class MapManager : SingleToneMaker<MapManager>
     public void RandomMapSelect()
     {
         // 맵번호를 랜덤으로 뽑고
-        MapType ranNum = MapType.Ice;
-        while (ranNum == MapType.Ice)
-        {
-            ranNum = (MapType)Random.Range((int)MapType.Field, (int)MapType.Exit);
-        }
+        MapType  ranNum = (MapType)Random.Range((int)MapType.Field, (int)MapType.Exit);
         mCurrentMapType = ranNum;
         // 해당 맵을 Dic에서 불러온후
         GameObject newMap = maps[mCurrentMapType.ToString()];

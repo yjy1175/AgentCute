@@ -1,5 +1,5 @@
 CostumeTypeName,CostumeLoad,CostumeName,CostumeNameENG,CostumeNameJPN,CostumeDesc,CostumeStatBuff
-base,cstbase,정예병의 전투복,Combat Uniform,,왕국 정예병에게 지급되는 전투복,PlayerHP/1/PlayerSPD/0
+bgstswsp,cstbgstswsp01,정예병의 전투복,Combat Uniform,,왕국 정예병에게 지급되는 전투복,PlayerHP/1/PlayerSPD/0
 swsp,cstswsp01,견고한 갑옷,Solid Armor,,견고하게 제작된 금속 갑옷,PlayerHP/5/PlayerSPD/0
 swsp,cstswsp02,장교,Officer,,왕국 정예 장교에게 지급되는 갑옷,PlayerHP/6/PlayerSPD/0
 swsp,cstswsp03,장군,General,,왕국 장군에게 지급되는 갑옷,PlayerHP/8/PlayerSPD/0
@@ -15,4 +15,4 @@ bgst,cstbgst04,흑영,Pitch Shadow,,칠흑같은 외형의 가죽갑옷. 어둡�
 bgst,cstbgst05,캠벨,Campbell,,캠벨처럼 맑은 보라색 빛의 로브.,PlayerHP/9/PlayerSPD/5
 bgst,cstbgst06,레드벨벳,Redvelvet,,어제 먹던 레드벨벳 케잌이 생각난다...,PlayerHP/11/PlayerSPD/10
 bgst,cstbgst07,군주,Monarch,,타락한 마법사가 입었던 사악해 보이는 갑옷... 하지만 내가 입으면 귀엽지.,PlayerHP/12/PlayerSPD/15
-common,cstcommon01,맨 오브 스틸,Man Of Steel,,철도 씹어먹을 수 있는 힘이 생기는 신기한 갑옷.,PlayerHP/30/PlayerSPD/45
+bgstswsp,cstbgstswsp02,맨 오브 스틸,Man Of Steel,,철도 씹어먹을 수 있는 힘이 생기는 신기한 갑옷.,PlayerHP/30/PlayerSPD/45
