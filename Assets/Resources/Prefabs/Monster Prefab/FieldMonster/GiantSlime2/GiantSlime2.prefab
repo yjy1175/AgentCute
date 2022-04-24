@@ -122,17 +122,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mHp: 0
   mMaxHp: 0
+  mSize: 0
+  mIsDamage: 0
   mDamaged: 0
+  mPotionHp: 0
+  mMoveSpeed: 0
+  mMoveSpeedRate: 1
+  mAddSpeed: 0
+  mAttackSpeed: 0
+  mAddAttackSpeed: 0
   mBaseDamage: 0
+  currentWeapon: {fileID: 0}
+  mAddAttackPoint: 0
+  mObjectDamage: 0
+  mCriticalChance: 0
+  mAddCriticalChance: 0
+  mCriticalDamage: 0
+  mAddProjectileCount: 0
+  mAddAttackRange: 0
+  mAddStiffTime: 0
+  mAddRAttackCount: 0
+  mAddPassCount: 0
+  mIsLaunch: 0
   mPhysicalDefense: 0
   mMagicDefense: 0
   mIsInvincibility: 0
-  mSize: 0
-  currentWeapon: {fileID: 0}
   mId: 0
   mSpawnMap: 
   mMonsterInName: 
-  mMonsterName: 
   mIsDieToKillCount: 0
   mIsDieToGetExp: 0
   mMonsterGrade: 0
@@ -148,9 +165,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe2bb2b71af77746ac31995884155c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mObjectDamage: 0
+  mProjectileCount: 0
+  mProjectileScale: 0
+  mStiffTime: 0
+  mRAttackCount: 0
+  mPassCount: 0
   firePosition: {fileID: 0}
   mAutoAttackSpeed: 0
   currentBaseSkill: {fileID: 0}
+  mMonsterSkill: []
 --- !u!114 &6544102513045617534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +187,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36b7a69a644e10e44bede6d5bf121164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mSpeed: 0
+  mDir: {x: 0, y: 0, z: 0}
+  mMoveable: 1
 --- !u!50 &1016602598567436317
 Rigidbody2D:
   serializedVersion: 4

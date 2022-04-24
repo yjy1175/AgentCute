@@ -421,6 +421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e97a6e15d7f24418f44c7353a5b72b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataSet:
+    m_keys: []
 --- !u!1 &33408322
 GameObject:
   m_ObjectHideFlags: 0
@@ -20461,6 +20463,10 @@ PrefabInstance:
     - target: {fileID: 847723663689881704, guid: b5e053128a28021468d1c656a44116ec, type: 3}
       propertyPath: mJoyStick
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 847723663689881705, guid: b5e053128a28021468d1c656a44116ec, type: 3}
+      propertyPath: mIsDamage
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 847723663689881706, guid: b5e053128a28021468d1c656a44116ec, type: 3}
       propertyPath: m_Radius

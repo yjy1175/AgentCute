@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1878088880242174962}
   - component: {fileID: 3305123581494349911}
   - component: {fileID: -8969772381112520995}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: l13
-  m_TagString: Untagged
+  m_TagString: MonsterProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97211065985346574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.427, y: 0.028501136, z: -0.06190802}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -94,7 +94,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.01817733, y: -0.0036355183}
@@ -127,16 +127,18 @@ MonoBehaviour:
   myPos: {x: 0, y: 0, z: 0}
   isActive: 0
   spec:
-    type: 
+    type: l13
     typeName: 
     equipName: 
     equipDesc: 
     equipRank: 0
-    projectileDamage: 0
-    speed: 0
-    count: 0
-    angle: 0
-    spawnTime: 0
+    projectileDamage: 1
+    speed: 10
+    count: 8
+    angle: 45
+    spawnTime: 3
     maxPassCount: 0
+    mStiffTime: 0
+    mKnockback: 0
   target: {x: 0, y: 0, z: 0}
   angle: 0

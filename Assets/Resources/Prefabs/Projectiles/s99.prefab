@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6119683416678645935}
   - component: {fileID: 2979339552359837621}
   - component: {fileID: -2429756551331196597}
-  m_Layer: 10
+  m_Layer: 6
   m_Name: s99
   m_TagString: MonsterProjectile
   m_Icon: {fileID: 0}
@@ -158,7 +158,13 @@ MonoBehaviour:
     angle: 0
     spawnTime: 3
     maxPassCount: -1
+    mStiffTime: 0
+    mKnockback: 0
   target: {x: 0, y: 0, z: 0}
   angle: 0
   mSpawnType: General
   mUJoySitick: {fileID: 0}
+  mPlayer: {x: 0, y: 0, z: 0}
+  newPos: {x: 0, y: 0, z: 0}
+  mJoyStickPos: {x: 0, y: 0, z: 0}
+  scale: 0
