@@ -19,27 +19,6 @@ public class LevelUpStatusManager : SingleToneMaker<LevelUpStatusManager>
         AutoLaunchThrough,
         RecoverHP
     }
-    [Serializable]
-    public struct Stat
-    {
-        public StatType mType;
-        public List<string> mWeaponTypes;
-        public string mDesc;
-        public string mDescEng;
-        public List<int> mStatInSlot;
-        public List<int> mStatChance;
-        public float mStatIncrease;
-        public float mStatMax;
-        public List<StatType> mStatMaxAssign;
-        public string mStatUnit;
-        public int mSelectCount;
-        public int mSelectMaxCount;
-
-        public void PlusSelectCount()
-        {
-            mSelectCount++;
-        }
-    }
     [SerializeField]
     private List<Stat> AllStatList = new List<Stat>();
 
@@ -76,41 +55,44 @@ public class LevelUpStatusManager : SingleToneMaker<LevelUpStatusManager>
         {
             Stat newStat = new Stat();
             string[] tmp;
-            newStat.mType = (StatType)Enum.Parse(typeof(StatType), statusData[i]["StatType"].ToString());
+            newStat.Type = (StatType)Enum.Parse(typeof(StatType), statusData[i]["StatType"].ToString());
 
             tmp = statusData[i]["StatWeaponType"].ToString().Split('/');
-            newStat.mWeaponTypes = new List<string>();
+            newStat.WeaponTypes = new List<string>();
             for (int j = 0; j < tmp.Length; j++)
-                newStat.mWeaponTypes.Add(tmp[j]);
+                newStat.WeaponTypes.Add(tmp[j]);
             tmp = null;
 
-            newStat.mDesc = statusData[i]["StatDesc"].ToString();
-            newStat.mDescEng = statusData[i]["StatDescENG"].ToString();
+            newStat.Desc = statusData[i]["StatDesc"].ToString();
+            newStat.DescEng = statusData[i]["StatDescENG"].ToString();
 
             tmp = statusData[i]["StatInSlot"].ToString().Split('/');
-            newStat.mStatInSlot = new List<int>();
+            newStat.StatInSlot = new List<int>();
             for (int j = 0; j < tmp.Length; j++)
-                newStat.mStatInSlot.Add(int.Parse(tmp[j]));
+                newStat.StatInSlot.Add(int.Parse(tmp[j]));
             tmp = null;
 
             tmp = statusData[i]["StatChance"].ToString().Split('/');
-            newStat.mStatChance = new List<int>();
+            newStat.StatChance = new List<int>();
             for (int j = 0; j < tmp.Length; j++)
-                newStat.mStatChance.Add(int.Parse(tmp[j]));
+                newStat.StatChance.Add(int.Parse(tmp[j]));
             tmp = null;
 
-            newStat.mStatIncrease = float.Parse(statusData[i]["StatIncrease"].ToString());
-            newStat.mStatMax = float.Parse(statusData[i]["StatMax"].ToString());
+            newStat.StatIncrease = float.Parse(statusData[i]["StatIncrease"].ToString());
+            if (float.Parse(statusData[i]["StatMax"].ToString()) < 0)
+                newStat.StatMax = int.MaxValue;
+            else
+                newStat.StatMax = float.Parse(statusData[i]["StatMax"].ToString());
 
             tmp = statusData[i]["StatMaxAssign"].ToString().Split('/');
-            newStat.mStatMaxAssign = new List<StatType>();
+            newStat.StatMaxAssign = new List<StatType>();
             for (int j = 0; j < tmp.Length; j++)
-                newStat.mStatMaxAssign.Add((StatType)Enum.Parse(typeof(StatType), tmp[j]));
+                newStat.StatMaxAssign.Add((StatType)Enum.Parse(typeof(StatType), tmp[j]));
             tmp = null;
 
-            newStat.mStatUnit = statusData[i]["StatUnit"].ToString();
-            newStat.mSelectCount = 0;
-            newStat.mSelectMaxCount = (int)(newStat.mStatMax / newStat.mStatIncrease);
+            newStat.StatUnit = statusData[i]["StatUnit"].ToString();
+            newStat.SelectCount = 0;
+            newStat.SelectMaxCount = (int)(newStat.StatMax / newStat.StatIncrease);
             AllStatList.Add(newStat);
         }
     }
@@ -122,26 +104,26 @@ public class LevelUpStatusManager : SingleToneMaker<LevelUpStatusManager>
         //string wpType = _currentWeapon.Spec.Type.Substring(0,2);
         for(int i = 0; i < AllStatList.Count; i++)
         {
-            for(int j = 0; j < AllStatList[i].mWeaponTypes.Count; j++)
+            for(int j = 0; j < AllStatList[i].WeaponTypes.Count; j++)
             {
                 // 해당타입의 무기의 스텟이 있다면 슬롯에 맞게 넣어준다
-                if (AllStatList[i].mWeaponTypes[j] == _weaponType && AllStatList[i].mType != StatType.RecoverHP)
+                if (AllStatList[i].WeaponTypes[j] == _weaponType && AllStatList[i].Type != StatType.RecoverHP)
                 {
-                    for(int k = 0; k < AllStatList[i].mStatInSlot.Count; k++)
+                    for(int k = 0; k < AllStatList[i].StatInSlot.Count; k++)
                     {
-                        switch (AllStatList[i].mStatInSlot[k])
+                        switch (AllStatList[i].StatInSlot[k])
                         {
                             case 1:
-                                for(int idx = 0; idx < AllStatList[i].mStatChance[k]; idx++)
-                                    Slot1List.Add(AllStatList[i].mType);
+                                for(int idx = 0; idx < AllStatList[i].StatChance[k]; idx++)
+                                    Slot1List.Add(AllStatList[i].Type);
                                 break;
                             case 2:
-                                for (int idx = 0; idx < AllStatList[i].mStatChance[k]; idx++)
-                                    Slot2List.Add(AllStatList[i].mType);
+                                for (int idx = 0; idx < AllStatList[i].StatChance[k]; idx++)
+                                    Slot2List.Add(AllStatList[i].Type);
                                 break;
                             case 3:
-                                for (int idx = 0; idx < AllStatList[i].mStatChance[k]; idx++)
-                                    Slot3List.Add(AllStatList[i].mType);
+                                for (int idx = 0; idx < AllStatList[i].StatChance[k]; idx++)
+                                    Slot3List.Add(AllStatList[i].Type);
                                 break;
                         }
                     }
@@ -176,37 +158,56 @@ public class LevelUpStatusManager : SingleToneMaker<LevelUpStatusManager>
         string desc = "";
         while (true)
         {
+            Stat selectStat;
+            if (_list.Count == 0)
+            {
+                selectStat = AllStatList.Find((item) => item.Type == StatType.RecoverHP);
+                switch (_num)
+                {
+                    case 1:
+                        mSlot1Select = selectStat.Type;
+                        break;
+                    case 2:
+                        mSlot2Select = selectStat.Type;
+                        break;
+                    case 3:
+                        mSlot3Select = selectStat.Type;
+                        break;
+                }
+                return desc = selectStat.Desc + selectStat.StatIncrease.ToString() + selectStat.StatUnit;
+            }
             int ran = UnityEngine.Random.Range(0, _list.Count);
-            Stat selectStat = AllStatList.Find((item) => item.mType == _list[ran]);
+            selectStat = AllStatList.Find((item) => item.Type == _list[ran]);
             // 선택된 스텟이 맥스이면?
-            if (selectStat.mSelectCount == selectStat.mSelectMaxCount)
+            if (selectStat.SelectCount == selectStat.SelectMaxCount)
             {
                 // 우선 해당 스텟을 삭제
-                Slot1List.RemoveAll((type) => type == selectStat.mType);
-                Slot2List.RemoveAll((type) => type == selectStat.mType);
-                Slot3List.RemoveAll((type) => type == selectStat.mType);
+                Slot1List.RemoveAll((type) => type == selectStat.Type);
+                Slot2List.RemoveAll((type) => type == selectStat.Type);
+                Slot3List.RemoveAll((type) => type == selectStat.Type);
+                continue;
             }
             else
             {
                 switch (_num)
                 {
                     case 1:
-                        mSlot1Select = selectStat.mType;
+                        mSlot1Select = selectStat.Type;
                         break;
                     case 2:
-                        mSlot2Select = selectStat.mType;
+                        mSlot2Select = selectStat.Type;
                         break;
                     case 3:
-                        mSlot3Select = selectStat.mType;
+                        mSlot3Select = selectStat.Type;
                         break;
                 }
-                switch (selectStat.mStatUnit)
+                switch (selectStat.StatUnit)
                 {
                     case "%":
-                        desc = selectStat.mDesc + (selectStat.mStatIncrease * 100).ToString() + selectStat.mStatUnit;
+                        desc = selectStat.Desc + (selectStat.StatIncrease * 100).ToString() + selectStat.StatUnit;
                         break;
                     default:
-                        desc = selectStat.mDesc + selectStat.mStatIncrease.ToString() + selectStat.mStatUnit;
+                        desc = selectStat.Desc + selectStat.StatIncrease.ToString() + selectStat.StatUnit;
                         break;
                 }
                 return desc;
@@ -232,7 +233,7 @@ public class LevelUpStatusManager : SingleToneMaker<LevelUpStatusManager>
         }
         for(int i = 0; i < AllStatList.Count; i++)
         {
-            if(AllStatList[i].mType == selectType)
+            if(AllStatList[i].Type == selectType)
             {
                 AllStatList[i].PlusSelectCount();
                 // IStatus의 api호출
@@ -240,5 +241,7 @@ public class LevelUpStatusManager : SingleToneMaker<LevelUpStatusManager>
                 break;
             }
         }
+        // 만약 다 찍은 슬롯이라 Null타입이라면
+        Debug.Log("모두 찍은 슬롯입니다.");
     }
 }

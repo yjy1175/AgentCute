@@ -48,6 +48,8 @@ public class Spawn : Projectile
     private Vector3 mJoyStickPos = Vector3.zero;
     [SerializeField]
     float scale;
+    [SerializeField]
+    float baseX, baseY;
     #endregion
     #region method
     protected override void destroySelf()
@@ -76,9 +78,10 @@ public class Spawn : Projectile
         }
     }
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-
+        baseX = transform.localScale.x;
+        baseY = transform.localScale.y;
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -96,8 +99,8 @@ public class Spawn : Projectile
     // 일반형인지 랜덤형인지 구분할 변수가 필요(projectileSpec에서 랜덤형 구분)
     public override void setEnable(Vector3 _target, Vector3 _player, float _angle)
     {
-        float scale = GameObject.Find("PlayerObject").GetComponent<IAttack>().ProjectileScale + 1;
-        transform.localScale = new Vector3(scale, scale, scale);
+        float scale = GameObject.Find("PlayerObject").GetComponent<IAttack>().ProjectileScale;
+        transform.localScale = new Vector3(baseX + scale, baseY + scale, scale);
         target = _target;
         mPlayer = _player;
         scale = AddScaleCoefficient - 1;
@@ -126,14 +129,13 @@ public class Spawn : Projectile
                 break;
             case SpawnType.ReverseSpawn:
                 transform.position = mPlayer;
-                float size = gameObject.transform.localScale.x;
                 if (gameObject.transform.position.x < GameObject.Find("PlayerObject").transform.position.x)
                 {
-                    gameObject.transform.localScale = new Vector3(size, size, size);
+                    gameObject.transform.localScale = new Vector3(baseX, baseY, baseX);
                 }
                 else
                 {
-                    gameObject.transform.localScale = new Vector3(-1 * size, size, size);
+                    gameObject.transform.localScale = new Vector3(-baseX, baseY, baseX);
                 }
                 break;
         }

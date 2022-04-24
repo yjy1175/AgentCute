@@ -1,11 +1,11 @@
 StatType,StatWeaponType,StatDesc,StatDescENG,StatDescJPN,StatInSlot,StatChance,StatIncrease,StatMax,StatMaxAssign,StatUnit
 AutoAttack,sw/sp/bg/st,기본 공격 피해량 +,Auto attack damage +,,1/2,50/25,0.025,0.3,CriticalChance/RecoverHP,%
 CriticalChance,sw/sp/bg/st,치명타 확률 +,Critical chance +,,1/2,50/25,0.025,0.25,AutoAttack/RecoverHP,%
-AutoAttackSPD,sw/sp/bg/st,기본 공격 속도 +,Auto attack speed +,,2/3,10/20,0.5,0.25,Null,%
+AutoAttackSPD,sw/sp/bg/st,기본 공격 속도 +,Auto attack speed +,,2/3,10/20,0.05,0.25,Null,%
 MoveSPD,sw/sp/bg/st,이동 속도 +,Moving speed +,,2/3,10/20,0.02,0.1,Null,%
-AutoAttackTimes,sw/sp/bg/st,기본 공격 횟수 +,Auto attack times +,,2/3,10/20,1,2,Null,
+AutoAttackTimes,sw/sp/bg/st,기본 공격 개수 증가 +,Auto attack times +,,2/3,10/20,1,2,Null,
 AutoAttackRange,sw/sp,기본 공격 범위 +,Auto attack range +,,2/3,10/20,0.1,0.3,Null,%
 AutoAttackStiff,sw/sp,기본 공격 경직 추가 +,Auto attack stiffen mobs +,,2/3,10/20,0.25,0.75,Null,s
-AutoLaunchSpread,bg/st,기본 공격 투사체 추가 +,Auto attack spread +,,2/3,10/20,1,3,Null,
+AutoLaunchSpread,bg/st,기본 공격 횟수 중가 +,Auto attack spread +,,2/3,10/20,1,3,Null,
 AutoLaunchThrough,bg/st,기본 공격 관통 수 +,Auto attack penetrate +,,2/3,10/20,1,3,Null,
-RecoverHP,sw/sp/bg/st,HP 회복 +3,Recover HP +3,,1,100,3,3,Null,
+RecoverHP,sw/sp/bg/st,HP 회복 +,Recover HP +,,1,100,3,-1,Null,

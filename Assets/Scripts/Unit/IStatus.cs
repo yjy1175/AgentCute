@@ -402,52 +402,52 @@ public abstract class IStatus : MonoBehaviour
             return false;
 
     }
-    public void LevelUpStatus(LevelUpStatusManager.Stat _stat)
+    public void LevelUpStatus(Stat _stat)
     {
-        switch (_stat.mType)
+        switch (_stat.Type)
         {
             // null
             case LevelUpStatusManager.StatType.Null:
                 break;
             // 기본 공격 피해량 증가
             case LevelUpStatusManager.StatType.AutoAttack:
-                AddAttackPoint += _stat.mStatIncrease;
+                AddAttackPoint += _stat.StatIncrease;
                 break;
             // 치명타 확률 증가
             case LevelUpStatusManager.StatType.CriticalChance:
-                AddCriticalChance += _stat.mStatIncrease;
+                AddCriticalChance += _stat.StatIncrease;
                 break;
             // 기본 공격 속도 증가
             case LevelUpStatusManager.StatType.AutoAttackSPD:
-                AddAttackSpeed += _stat.mStatIncrease;
+                AddAttackSpeed += _stat.StatIncrease;
                 break;
             // 이동 속도 증가
             case LevelUpStatusManager.StatType.MoveSPD:
-                AddSpeed += _stat.mStatIncrease;
+                AddSpeed += _stat.StatIncrease;
                 break;
             // 발사체 개수 증가
             case LevelUpStatusManager.StatType.AutoAttackTimes:
-                AddProjectileCount += (int)_stat.mStatIncrease;
+                AddProjectileCount += (int)_stat.StatIncrease;
                 break;
             // 기본 공격 범위 증가
             case LevelUpStatusManager.StatType.AutoAttackRange:
-                AddAttackRange += _stat.mStatIncrease;
+                AddAttackRange += _stat.StatIncrease;
                 break;
             // 기본 공격 경직 증가
             case LevelUpStatusManager.StatType.AutoAttackStiff:
-                AddStiffTime += _stat.mStatIncrease;
+                AddStiffTime += _stat.StatIncrease;
                 break;
             // 발사체 횟수 증가
             case LevelUpStatusManager.StatType.AutoLaunchSpread:
-                AddRAttackCount += (int)_stat.mStatIncrease;
+                AddRAttackCount += (int)_stat.StatIncrease;
                 break;
             // 발사체 관통 증가
             case LevelUpStatusManager.StatType.AutoLaunchThrough:
-                AddPassCount += (int)_stat.mStatIncrease;
+                AddPassCount += (int)_stat.StatIncrease;
                 break;
             // HP회복
             case LevelUpStatusManager.StatType.RecoverHP:
-                Hp += (int)_stat.mStatIncrease;
+                Hp += (int)_stat.StatIncrease;
                 break;
         }
     }
