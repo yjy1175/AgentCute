@@ -72,7 +72,7 @@ public class Spawn : Projectile
             newPos = mJoyStickPos + mPlayer;
             angle = setAngle(newPos - mPlayer);
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            transform.position = mPlayer + (newPos - mPlayer).normalized * (GetComponent<SpriteRenderer>().size.x * (1.5f + scale));
+            transform.position = mPlayer;
         }
     }
     // Start is called before the first frame update
@@ -105,7 +105,7 @@ public class Spawn : Projectile
         switch ((SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType))
         {
             case SpawnType.General:
-                transform.position = mPlayer + (target - mPlayer).normalized * (GetComponent<SpriteRenderer>().size.x * (0.3f + scale));
+                transform.position = mPlayer;
                 angle = setAngle(target - mPlayer) + _angle;
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 break;
@@ -120,7 +120,7 @@ public class Spawn : Projectile
                 break;
             case SpawnType.ShortWide:
                 // 추후에 정확한 계산공식 구해서 적용
-                transform.position = mPlayer + (target - mPlayer).normalized * (GetComponent<SpriteRenderer>().size.x * (0.7f + scale));
+                transform.position = mPlayer;
                 angle = setAngle(target - mPlayer) + _angle;
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 break;

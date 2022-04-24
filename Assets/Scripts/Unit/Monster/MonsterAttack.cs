@@ -26,8 +26,10 @@ public class MonsterAttack : IAttack
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        // 몬스터의 데미지 설정을 위한 override
+        base.Start();
         mIsUsingSkill = false;
 
         if (gameObject.GetComponent<MonsterStatus>().MonsterGrade == MonsterManager.MonsterGrade.Boss)
@@ -56,7 +58,7 @@ public class MonsterAttack : IAttack
                 //모션 TRIGGER를 호출 -> MonsterStatus의 모션명을 받아서 사용 
 
                 //스킬 사용
-                int skillNum = 3;//GetSkillNumber(md);
+                int skillNum = GetSkillNumber(md);
                 if (skillNum != -1) { 
                     Debug.Log("랜덤스킬 넘버: "+ skillNum);
                     Skill skill = mMonsterSkill[skillNum].GetComponent<Skill>();

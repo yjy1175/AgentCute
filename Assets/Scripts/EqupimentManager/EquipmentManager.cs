@@ -208,6 +208,17 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         Costume cCostume = costumes[_name].GetComponent<Costume>();
         if (cCostume.IsLocked)
         {
+            // 전에 착용하던 코스튬이 있으면 해당 스텟을 빼준다.
+            if(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().MPlayerCurrentCostume != null)
+            {
+                for (Costume.CostumeBuffType idx = Costume.CostumeBuffType.PlayerSPD; idx < Costume.CostumeBuffType.Exit; idx++)
+                {
+                    GameObject.Find("PlayerObject").GetComponent<PlayerStatus>()
+                        .ChangeDicreaseStatusForCostume(idx, GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().MPlayerCurrentCostume);
+                }
+            }
+
+
             GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().MPlayerCurrentCostume = cCostume;
             for (SpriteType i = SpriteType.CostumeHelmet; i < SpriteType.Exit;)
             {
@@ -275,7 +286,7 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
             for(Costume.CostumeBuffType idx = Costume.CostumeBuffType.PlayerSPD; idx < Costume.CostumeBuffType.Exit; idx++)
             {
                 GameObject.Find("PlayerObject").GetComponent<PlayerStatus>()
-                    .ChangeStatusForCostume(idx, cCostume);
+                    .ChangeIncreaseStatusForCostume(idx, cCostume);
             }
 
 

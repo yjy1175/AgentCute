@@ -72,8 +72,12 @@ public abstract class Projectile : MonoBehaviour
         addProjectilesCount = 0;
         addScaleCoefficient = 1f;
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    // 지속데미지를 위해서 Stay로 바꿈
+    // 하지만 0.02초단위로 데미지가 너무 많이 들어가서 우선 0.5초 단위로 바꿈
+    // 컨트롤할 bool 형 변수 선언
+    private void OnTriggerStay2D(Collider2D collision)
     {
+        Debug.Log(gameObject.tag + collision.tag);
         if ((gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Monster"))) { 
             // 관통 구현
             // -1 : 무한 관통
@@ -122,6 +126,7 @@ public abstract class Projectile : MonoBehaviour
                         ObjectPoolManager.Instance.DisableGameObject(gameObject);
                     }
                 }
+                
                 collision.gameObject.GetComponent<IStatus>().DamageHp = damage;
             }
         }

@@ -203,6 +203,9 @@ public class IAttack : MonoBehaviour
     {
         for (int i = 0; i < _count; i++)
         {
+            // 기본공격의 경우 추가되었을때, 예전 방향에서 나가는 버그를 수정하기위해
+            // 여기서 매 발사시, firePosition을 갱신
+            _fire = firePosition.transform.position;
             launchProjectile(_skill, 0, _target, _fire, false);
             yield return new WaitForSeconds(_skill.Spec.SkillCountTime);
         }

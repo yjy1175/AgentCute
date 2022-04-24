@@ -46,6 +46,28 @@ public abstract class IStatus : MonoBehaviour
         }
     }
 
+    // 연속되는 데미지 방지용 bool형 변수
+    [SerializeField]
+    private bool mIsDamage;
+    public bool IsDamage
+    {
+        get { return mIsDamage; }
+        set
+        {
+            mIsDamage = value;
+            if (!mIsDamage && gameObject.activeInHierarchy)
+            {
+                StartCoroutine(CoIsDamage());
+            }
+        }
+    }
+
+    IEnumerator CoIsDamage()
+    {
+        yield return new WaitForSeconds(0.5f);
+        IsDamage = true;
+    }
+
     //직전에 입은 데미지
     [SerializeField]
     protected int mDamaged;
@@ -57,13 +79,17 @@ public abstract class IStatus : MonoBehaviour
         get { return mDamaged; }
         set
         {
-            if (mIsInvincibility)
-                value = 0;
-            mDamaged = value;
-            mHp = Mathf.Max(0, mHp - mDamaged);
-            gameObject.GetComponent<IEventHandler>().ChangeHp(mHp, gameObject);
-            MessageBoxManager.BoxType bt = (MessageBoxManager.BoxType)Enum.Parse(typeof(MessageBoxManager.BoxType), gameObject.tag + "Damage");
-            MessageBoxManager.Instance.createMessageBox(bt, value.ToString(), gameObject.transform.position);
+            if (mIsInvincibility || !mIsDamage)
+                mDamaged = 0;
+            else
+            {
+                IsDamage = false;
+                mDamaged = value;
+                mHp = Mathf.Max(0, mHp - mDamaged);
+                gameObject.GetComponent<IEventHandler>().ChangeHp(mHp, gameObject);
+                MessageBoxManager.BoxType bt = (MessageBoxManager.BoxType)Enum.Parse(typeof(MessageBoxManager.BoxType), gameObject.tag + "Damage");
+                MessageBoxManager.Instance.createMessageBox(bt, value.ToString(), gameObject.transform.position);
+            }
         }
     }
 
@@ -325,6 +351,7 @@ public abstract class IStatus : MonoBehaviour
 
     protected virtual void Start()
     {
+        mIsDamage = true;
         // 기본 레벨업 스텟 초기화
         mAddAttackPoint = 0;
         mAddSpeed = 0;
@@ -365,15 +392,16 @@ public abstract class IStatus : MonoBehaviour
                 return false;
             }
         }
-        else
+        else if (_obj.CompareTag("Monster"))
         {
             mObjectDamage = mBaseDamage;
             GetComponent<IEventHandler>().ChangeAttackPoint(mObjectDamage, gameObject);
             return false;
         }
+        else
+            return false;
 
     }
-
     public void LevelUpStatus(LevelUpStatusManager.Stat _stat)
     {
         switch (_stat.mType)
@@ -433,7 +461,21 @@ public abstract class IStatus : MonoBehaviour
     {
         return currentWeapon==null ?0:currentWeapon.Spec.WeaponDamage;
     }
-    public void ChangeStatusForCostume(Costume.CostumeBuffType _key, Costume _item)
+    public void ChangeDicreaseStatusForCostume(Costume.CostumeBuffType _key, Costume _item)
+    {
+        // 플레이어 체력 감소
+        if (_key == Costume.CostumeBuffType.PlayerHP)
+        {
+            Hp = Hp - _item.GetBuffValue(_key);
+            MaxHP = Hp;
+        }
+        // 플레이어 이속 감소
+        else if (_key == Costume.CostumeBuffType.PlayerSPD)
+        {
+            MoveSpeedRate -= _item.GetBuffValue(_key) / 100f;
+        }
+    }
+    public void ChangeIncreaseStatusForCostume(Costume.CostumeBuffType _key, Costume _item)
     {
         // 플레이어 체력 상승
         if(_key == Costume.CostumeBuffType.PlayerHP)
@@ -444,7 +486,7 @@ public abstract class IStatus : MonoBehaviour
         // 플레이어 이속 상승
         else if (_key == Costume.CostumeBuffType.PlayerSPD)
         {
-            mMoveSpeedRate += _item.GetBuffValue(_key) / 100f;
+            MoveSpeedRate += _item.GetBuffValue(_key) / 100f;
         }
     }
     public void ChangeStatusForSkill(Skill.ESkillBuffType _type, float value)
@@ -452,7 +494,7 @@ public abstract class IStatus : MonoBehaviour
         // 속도증가 버프
         if (_type == Skill.ESkillBuffType.PlayerSPD)
         {
-            mMoveSpeedRate += value;
+            MoveSpeedRate += value;
         }
         // 순간이동
         else if (_type == Skill.ESkillBuffType.PlayerPosition)
@@ -483,7 +525,7 @@ public abstract class IStatus : MonoBehaviour
     {
         if(_type == Skill.ESkillBuffType.PlayerSPD)
         {
-            mMoveSpeedRate -= value;
+            MoveSpeedRate -= value;
         }
         else if(_type == Skill.ESkillBuffType.PlayerWeaponSprite)
         {
