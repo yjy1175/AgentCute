@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5575163441938254570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: 92556618aa233394fb68b4a3c409f77b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.9858491, b: 0.98781997, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
     projectileDamage: 1.2
     speed: 0
     count: 1
-    angle: 0
+    angle: 45
     spawnTime: 0.1
     maxPassCount: -1
     mStiffTime: 0
