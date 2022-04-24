@@ -77,7 +77,6 @@ public abstract class Projectile : MonoBehaviour
     // 컨트롤할 bool 형 변수 선언
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log(gameObject.tag + collision.tag);
         if ((gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Monster"))) { 
             // 관통 구현
             // -1 : 무한 관통

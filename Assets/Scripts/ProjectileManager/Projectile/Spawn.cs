@@ -99,8 +99,13 @@ public class Spawn : Projectile
     // 일반형인지 랜덤형인지 구분할 변수가 필요(projectileSpec에서 랜덤형 구분)
     public override void setEnable(Vector3 _target, Vector3 _player, float _angle)
     {
-        float scale = GameObject.Find("PlayerObject").GetComponent<IAttack>().ProjectileScale;
-        transform.localScale = new Vector3(baseX + scale, baseY + scale, scale);
+        //TO-DO Player관련 코드로 의존성 제거 필요
+        if (gameObject.tag.Equals("PlayerProjectile"))
+        {
+            float scale = GameObject.Find("PlayerObject").GetComponent<IAttack>().ProjectileScale;
+            transform.localScale = new Vector3(baseX + scale, baseY + scale, scale);
+        }
+
         target = _target;
         mPlayer = _player;
         scale = AddScaleCoefficient - 1;
