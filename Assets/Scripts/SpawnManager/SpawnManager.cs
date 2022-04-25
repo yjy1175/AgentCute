@@ -133,11 +133,12 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             bossMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "보스 등장", 6, 0);
             StartCoroutine(bossMessageCoroutine);
 
-            currentTime = -10f;//다음 웨이브 시작시간
+            //TO-DO 데이터 셋으로 받게 수정 필요
+            currentTime = -60f;//다음 웨이브 시작시간 
 
             if(waveMessageCoroutine!=null)
                 StopCoroutine(waveMessageCoroutine);
-            waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + bossNum, 6, 10);
+            waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + bossNum, 6, 60);
             StartCoroutine(waveMessageCoroutine);
 
             
