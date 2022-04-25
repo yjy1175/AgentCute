@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1016602598567436317}
   - component: {fileID: 958278211020701416}
   - component: {fileID: 23148293507060086}
+  - component: {fileID: 5392513851873734929}
   m_Layer: 6
   m_Name: GiantSlime2
   m_TagString: Monster
@@ -123,6 +124,7 @@ MonoBehaviour:
   mHp: 0
   mMaxHp: 0
   mSize: 0
+  mCloseDamaged: 0
   mDamaged: 0
   mPotionHp: 0
   mMoveSpeed: 0
@@ -209,7 +211,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &958278211020701416
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -248,3 +250,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863a001ce64236d4eb4a9f60b1093774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5392513851873734929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2446323715619086419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 529fd930cd0e46b4b9e59d9f06e255fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mStatusObject: {fileID: 0}
+  mHpBar: {fileID: 0}

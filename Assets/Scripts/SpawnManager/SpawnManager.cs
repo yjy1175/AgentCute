@@ -31,6 +31,13 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
     public GameObject[] TempMonster;
 
+    [SerializeField]
+    private int bossNum = 0;
+
+
+    IEnumerator bossMessageCoroutine;
+    IEnumerator waveMessageCoroutine;
+
     /*
      *  임시로 스폰매니저에 변수 생성 Todo : 추후에 잡은 몬스터의 수는 플레이어 매니저나
      *  나중에 게임매니저에서 관리
@@ -57,25 +64,26 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     // Start is called before the first frame update
     void Start()
     {
+        bossNum = 0;
         //TO-DO 어디서 create 할지 정해야함.
-        currentTime = 0f;
         for (int i = 0; i < TempMonster.Length; i++)
         {
             ObjectPoolManager.Instance.CreateDictTable(TempMonster[i], 5, 5);
         }
-        spawnBossMonster();
     }
 
     // Update is called once per frame
     void Update()
     {
-        SpawnNormalMonster();
+        SpawnMonster();
+        currentTime += Time.deltaTime;
+
         allMonsterText.text = "전체 : " + allMonsterCount.ToString() + " 마리";
         currentKillMonsterText.text = "킬 : " + currentKillMosterCount.ToString() + " 마리";
         currentAllMonsterText.text = "필드 : " + (allMonsterCount - currentKillMosterCount).ToString() +" 마리";
     }
 
-    private void SpawnNormalMonster()
+    private void SpawnMonster()
     {
         for (int i = 0; i < dataSetNormal.Count; i++)
         {
@@ -88,52 +96,73 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                     GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetNormal[i].spawnMonster);
                     if (monster != null && spawnPoints[spawnZone[j]].GetComponent<SpawnZone>().Spawnable)
                     {
-                        setMonsterData(ref monster);
-                        monster.transform.position = spawnPoints[spawnZone[j]].position;
-                        monster.GetComponent<MonsterStatus>().mIsDieToKillCount = false;
-                        monster.GetComponent<MonsterStatus>().mIsDieToGetExp = false;
-                        monster.SetActive(true);
-                        // 스폰된 몬스터의 수 증가
-                        allMonsterCount++;
+                        SpawnMonster(ref monster, spawnPoints[spawnZone[j]].position);
                     }
-                    // 우선은 안나오게 해놨습니다 재훈님이 따로 다른곳에서 나오게 수정 부탁드립니다.
                     else
                     {
-                        //Debug.Log(spawnPos + " 가 장애물 지역이라 소환 안됨");
+                        //수정한상태. 이부분 로그가 나오면 문제
+                        Debug.Log(spawnZone[j] + "번째 장애물 지역 소환 안됨");
                     }
                 }
                 temp.currentTime = 0;
             }
-            /*
-             * TO-DO : C#의 특정상 구조체를 구조체의 값에만 접근할수 없어서 복사형태로 짜놈. 나중에 curretTime관련 배열만들어서 사용하는게 날듯
-             */
-            currentTime += Time.deltaTime;
             temp.currentTime += Time.deltaTime;
             dataSetNormal[i] = temp;
         }
-    }
 
-    private void spawnBossMonster()
-    {
-        for (int i = 0; i < dataSetBoss.Count; i++)
+        //보스 스폰
+        if (bossNum  <dataSetBoss.Count && dataSetBoss[bossNum].realStartSpawnTime < currentTime)
         {
-            StartCoroutine(spawnBoss(i));
+            for (int i = 0; i < dataSetNormal.Count; i++)
+            {
+                SpawnData temp = dataSetNormal[i];
+                temp.currentTime = 0f;
+                dataSetNormal[i] = temp;
+            }
+
+
+            GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetBoss[bossNum].spawnMonster);
+            monster.GetComponent<MonsterEventHandler>().registerHpObserver(registerBossHp);
+            bossNum++;
+
+            List<int> spawnZone = RandSpawnList(1);
+            SpawnMonster(ref monster, spawnPoints[spawnZone[0]].position);
+
+            if(bossMessageCoroutine!=null)
+                StopCoroutine(bossMessageCoroutine);
+            bossMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "보스 등장", 6, 0);
+            StartCoroutine(bossMessageCoroutine);
+
+            currentTime = -10f;//다음 웨이브 시작시간
+
+            if(waveMessageCoroutine!=null)
+                StopCoroutine(waveMessageCoroutine);
+            waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + bossNum, 6, 10);
+            StartCoroutine(waveMessageCoroutine);
+
+            
         }
     }
-
     
-    private void setMonsterData(ref GameObject monster)
+    private void SpawnMonster(ref GameObject monster, Vector3 _vec)
     {
         MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(monster.name);
         monster.GetComponent<MonsterStatus>().Hp = md.monsterHp;
+        monster.GetComponent<MonsterStatus>().MaxHP = md.monsterHp;
         monster.GetComponent<MonsterStatus>().Size = md.monsterSize;
         monster.GetComponent<MonsterStatus>().MonsterGrade= md.monsterGrade;
         monster.GetComponent<MonsterStatus>().MonsterInName = md.monsterInName;
         monster.GetComponent<MonsterAttack>().CloseAttackPower = md.closeAttackPower;
         monster.GetComponent<MonsterStatus>().MoveSpeed = md.monsterSpeed;
         monster.GetComponent<MonsterStatus>().MoveSpeedRate = 1f;
+        monster.GetComponent<MonsterStatus>().mIsDieToKillCount = false;
+        monster.GetComponent<MonsterStatus>().mIsDieToGetExp = false;
+        monster.transform.position = _vec;
         //TO-DO : monster가 생기는 event를 유저가 구독하여 hp register는 Player에서 구독하도록 변경이 필요.
         monster.GetComponent<MonsterEventHandler>().registerHpObserver(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().registerMonsterHp);
+
+        monster.SetActive(true);
+        allMonsterCount++;
     }
 
     private void InitAllSpawnData()
@@ -168,39 +197,63 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     private List<int> RandSpawnList(int cnt)
     {
         List<int> list = new List<int>();
-        while (list.Count < cnt)
+        int temp = 0;
+        //무한루프의 가능성이 있을지? 모든 spanw이 Spawnable라면?
+        while (list.Count < cnt && temp<100)
         {
             int idx = UnityEngine.Random.Range(0, spawnPoints.Length);
-            if (!list.Contains(idx))
+            if (spawnPoints[idx].GetComponent<SpawnZone>().Spawnable)
             {
                 list.Add(idx);
             }
+            temp++;
         }
         return list;
     }
 
-    IEnumerator spawnBoss(int i)
+    /*
+     * TO-DO 광폭화 어디서 할지 결정 필요
+    //광폭화 컨셉은 MonsterAttack으로 이동시키는게 맞음
+    IEnumerator (int i, GameObject _obj)
     {
-        yield return new WaitForSeconds(dataSetBoss[i].realStartSpawnTime);
-        GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetBoss[i].spawnMonster);
-        setMonsterData(ref monster);
-        if (monster != null)
-        {
-            monster.GetComponent<MonsterEventHandler>().registerHpObserver(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().registerMonsterHp);
-            int index = UnityEngine.Random.Range(0, spawnPoints.Length);
-            monster.transform.position = spawnPoints[index].position;
-            monster.SetActive(true);
-
-            //TO-DO : 보스 광폭화 설정. 일단은 하드코딩해놓은 상태.
-            //csv에서 읽어오소 해당 시간에 따라 광포하하도록 수정필요
-            //디버그모드를 위해 보스생성 룰 3개를위해 이부분 피쳐처리 및 수정 필요
-            yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(60);
             if (monster.activeInHierarchy)
             {
                 monster.GetComponent<SpriteRenderer>().color = Color.red;
-                //monster.GetComponent<MonsterMove>().Speed = 10f;
                 monster.GetComponent<MonsterAttack>().CloseAttackPower = 30;
             }
         }
+    }
+    */
+
+    public void registerBossHp(int _hp, GameObject _obj)
+    {
+        if (_hp <= 0)
+        {
+            if (currentTime < 0f)
+            {
+                if (waveMessageCoroutine != null)
+                    StopCoroutine(waveMessageCoroutine);
+                waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + bossNum, 6, 0);
+                StartCoroutine(waveMessageCoroutine);
+            }
+            currentTime = Mathf.Max(0f, currentTime);
+        }
+    }
+
+
+    //TO-DO 보스등장 메시지는 여기서하는게 맞을까?
+    IEnumerator SpawnMessage(GameObject _obj, string _txt, int _cnt, float _time)
+    {
+        yield return new WaitForSeconds(_time);
+
+        Debug.Log(_obj.name + _txt + _cnt);
+        _obj.GetComponent<Text>().text = _txt;
+        for (int i = 0; i < _cnt; i++)
+        {
+            yield return new WaitForSeconds(0.5f);
+            _obj.SetActive(!_obj.activeInHierarchy);
+        }
+        _obj.SetActive(false);
     }
 }

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4317411682674776900}
   - component: {fileID: 3749446533805847059}
   - component: {fileID: 358947715756549906}
+  - component: {fileID: 5241262704805223033}
   m_Layer: 6
   m_Name: GiantSlime1
   m_TagString: Monster
@@ -208,6 +209,7 @@ MonoBehaviour:
   mHp: 0
   mMaxHp: 0
   mSize: 0
+  mCloseDamaged: 0
   mDamaged: 0
   mPotionHp: 0
   mMoveSpeed: 0
@@ -249,6 +251,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863a001ce64236d4eb4a9f60b1093774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5241262704805223033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109854676447758817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 529fd930cd0e46b4b9e59d9f06e255fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mStatusObject: {fileID: 0}
+  mHpBar: {fileID: 0}
 --- !u!1 &8748719142119684920
 GameObject:
   m_ObjectHideFlags: 0

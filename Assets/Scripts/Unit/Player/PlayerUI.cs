@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerUI : IUI
 {
+
     [SerializeField]
-    private GameObject mLevelBar;
+    private Transform mLevelBar;
     [SerializeField]
-    private GameObject mHpBar;
-    [SerializeField]
-    private GameObject mExpBar;
+    private Transform mExpBar;
     [SerializeField]
     private Text mGoldText;
+
+    
 
     void Awake()
     {
@@ -19,9 +20,10 @@ public class PlayerUI : IUI
         gameObject.GetComponent<PlayerEventHandler>().registerHpObserver(RegisterHpObserver);
         gameObject.GetComponent<PlayerEventHandler>().registerExpObserver(RegisterExpObserver);
         gameObject.GetComponent<PlayerEventHandler>().registerGoldObserver(RegisterGoldObserver);
-        mLevelBar = GameObject.Find("LevelBar");
-        mHpBar = GameObject.Find("HpBar");
-        mExpBar = GameObject.Find("ExpBar");
+        mStatusObject = GameObject.Find("PlayerStatusObject");
+        mLevelBar = mStatusObject.transform.Find("LevelBar");
+        mHpBar = mStatusObject.transform.Find("HpBar");
+        mExpBar = mStatusObject.transform.Find("ExpBar");
         mGoldText = GameObject.Find("Gold").transform.GetChild(2).GetComponent<Text>();
     }
 
