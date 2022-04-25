@@ -44,8 +44,6 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     public Text currentKillMonsterText;
     public static int currentKillMosterCount = 0;
 
-    private const int SPAWN_MINUT = 60;
-
     public void init()
     {
         allMonsterCount = 0;
@@ -154,7 +152,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             ds.spawnNumber = (int)spawnData[idx]["SpawnNumber"];
             ds.spawnStartTime_1 = (int)spawnData[idx]["SpawnStartTime1"];
             ds.spawnStartTime_2 = (int)spawnData[idx]["SpawnStartTime2"];
-            ds.realStartSpawnTime = UnityEngine.Random.Range(ds.spawnStartTime_1 * SPAWN_MINUT, ds.spawnStartTime_2 * SPAWN_MINUT);
+            ds.realStartSpawnTime = UnityEngine.Random.Range(ds.spawnStartTime_1, ds.spawnStartTime_2);
             ds.spawnTime = (int)spawnData[idx]["SpawnTime"];
             ds.currentTime = 0f;
             if (MonsterManager.Instance.GetMonsterData(ds.spawnMonster).monsterGrade ==  MonsterManager.MonsterGrade.Boss)
