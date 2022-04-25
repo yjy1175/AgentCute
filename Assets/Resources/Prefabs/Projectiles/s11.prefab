@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 1671520234600637813}
   - component: {fileID: 3939788902916132355}
   - component: {fileID: 5741388054392179450}
+  - component: {fileID: -1836791676441539921}
   m_Layer: 8
   m_Name: s11
-  m_TagString: PlayerProjectile
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,21 +100,29 @@ MonoBehaviour:
   damage: 0
   currentPassCount: 0
   myPos: {x: 0, y: 0, z: 0}
-  isActive: 0
+  mIsActive: 0
+  mAttackSpeedCheckTime: 1
+  mIsCriticalDamage: 0
   spec:
-    type: s11
-    typeName: 
-    equipName: 
-    equipDesc: 
-    equipRank: 0
-    projectileDamage: 1.1
-    speed: 0
-    count: 1
-    angle: 45
-    spawnTime: 0.1
-    maxPassCount: -1
+    mType: 
+    mTypeName: 
+    mEquipName: 
+    mEquipDesc: 
+    mEquipRank: 0
+    mProjectileDamage: 0
+    mProjectileDamageType: 0
+    mProjectileDamageSplit: 0
+    mProjectileDamageSplitSec: 0
+    mProjectileAttackSpeed: 0
+    mMoveSpeed: 0
+    mCount: 0
+    mAngle: 0
+    mSpawnTime: 0
+    mMaxPassCount: 0
     mStiffTime: 0
     mKnockback: 0
+    mProjectileSizeX: 0
+    mProjectileSizeY: 0
   target: {x: 0, y: 0, z: 0}
   angle: 0
   mSpawnType: General
@@ -121,7 +130,6 @@ MonoBehaviour:
   mPlayer: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
   mJoyStickPos: {x: 0, y: 0, z: 0}
-  scale: 0
 --- !u!61 &5741388054392179450
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -148,3 +156,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6368473, y: 0.4185487}
   m_EdgeRadius: 0
+--- !u!50 &-1836791676441539921
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5954632522571643598}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

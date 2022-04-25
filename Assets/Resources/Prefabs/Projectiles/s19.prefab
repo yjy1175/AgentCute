@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5395324657230778064}
   - component: {fileID: 2792427156234816624}
   - component: {fileID: 7995290508985481819}
-  m_Layer: 0
+  - component: {fileID: -7983016218755483054}
+  m_Layer: 11
   m_Name: s19
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,21 +120,29 @@ MonoBehaviour:
   damage: 0
   currentPassCount: 0
   myPos: {x: 0, y: 0, z: 0}
-  isActive: 0
+  mIsActive: 0
+  mAttackSpeedCheckTime: 1
+  mIsCriticalDamage: 0
   spec:
-    type: s19
-    typeName: 
-    equipName: 
-    equipDesc: 
-    equipRank: 0
-    projectileDamage: 1
-    speed: 0
-    count: 1
-    angle: 0
-    spawnTime: 0.66
-    maxPassCount: -1
+    mType: s19
+    mTypeName: 
+    mEquipName: 
+    mEquipDesc: 
+    mEquipRank: 0
+    mProjectileDamage: 1
+    mProjectileDamageType: 0
+    mProjectileDamageSplit: 1
+    mProjectileDamageSplitSec: -1
+    mProjectileAttackSpeed: 0.1
+    mMoveSpeed: 0
+    mCount: 1
+    mAngle: 0
+    mSpawnTime: 0.66
+    mMaxPassCount: -1
     mStiffTime: 1
     mKnockback: 2
+    mProjectileSizeX: 2
+    mProjectileSizeY: 2
   target: {x: 0, y: 0, z: 0}
   angle: 0
   mSpawnType: SelfSpawn
@@ -141,7 +150,6 @@ MonoBehaviour:
   mPlayer: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
   mJoyStickPos: {x: 0, y: 0, z: 0}
-  scale: 0
 --- !u!61 &7995290508985481819
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -168,3 +176,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.04228, y: 0.51062083}
   m_EdgeRadius: 0
+--- !u!50 &-7983016218755483054
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8132456535224065882}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

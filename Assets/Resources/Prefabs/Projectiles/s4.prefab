@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5863264822692479042}
   - component: {fileID: 8685339441971991713}
   - component: {fileID: 110889126383718488}
+  - component: {fileID: -2305322549243219630}
   m_Layer: 8
   m_Name: s4
-  m_TagString: PlayerProjectile
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,23 +120,36 @@ MonoBehaviour:
   damage: 0
   currentPassCount: 0
   myPos: {x: 0, y: 0, z: 0}
-  isActive: 0
+  mIsActive: 0
+  mAttackSpeedCheckTime: 1
+  mIsCriticalDamage: 0
   spec:
-    type: s4
-    typeName: 
-    equipName: 
-    equipDesc: 
-    equipRank: 0
-    projectileDamage: 7.5
-    speed: 0
-    count: 3
-    angle: 0
-    spawnTime: 0.25
-    maxPassCount: -1
+    mType: 
+    mTypeName: 
+    mEquipName: 
+    mEquipDesc: 
+    mEquipRank: 0
+    mProjectileDamage: 0
+    mProjectileDamageType: 0
+    mProjectileDamageSplit: 0
+    mProjectileDamageSplitSec: 0
+    mProjectileAttackSpeed: 0
+    mMoveSpeed: 0
+    mCount: 0
+    mAngle: 0
+    mSpawnTime: 0
+    mMaxPassCount: 0
+    mStiffTime: 0
+    mKnockback: 0
+    mProjectileSizeX: 0
+    mProjectileSizeY: 0
   target: {x: 0, y: 0, z: 0}
   angle: 0
   mSpawnType: 2
   mUJoySitick: {fileID: 0}
+  mPlayer: {x: 0, y: 0, z: 0}
+  newPos: {x: 0, y: 0, z: 0}
+  mJoyStickPos: {x: 0, y: 0, z: 0}
 --- !u!61 &110889126383718488
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -162,3 +176,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.85164857, y: 0.7854544}
   m_EdgeRadius: 0
+--- !u!50 &-2305322549243219630
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055732342364266604}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

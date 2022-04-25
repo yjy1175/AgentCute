@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 3911393880084443989}
   - component: {fileID: 8036020003253729715}
   - component: {fileID: 6871973384471656072}
+  - component: {fileID: 5172234875954660234}
   m_Layer: 8
   m_Name: l12
-  m_TagString: PlayerProjectile
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,19 +101,29 @@ MonoBehaviour:
   damage: 0
   currentPassCount: 0
   myPos: {x: 0, y: 0, z: 0}
-  isActive: 0
+  mIsActive: 0
+  mAttackSpeedCheckTime: 1
+  mIsCriticalDamage: 0
   spec:
-    type: l12
-    typeName: 
-    equipName: 
-    equipDesc: 
-    equipRank: 0
-    projectileDamage: 4.5
-    speed: 8
-    count: 1
-    angle: 0
-    spawnTime: 4
-    maxPassCount: -1
+    mType: 
+    mTypeName: 
+    mEquipName: 
+    mEquipDesc: 
+    mEquipRank: 0
+    mProjectileDamage: 0
+    mProjectileDamageType: 0
+    mProjectileDamageSplit: 0
+    mProjectileDamageSplitSec: 0
+    mProjectileAttackSpeed: 0
+    mMoveSpeed: 0
+    mCount: 0
+    mAngle: 0
+    mSpawnTime: 0
+    mMaxPassCount: 0
+    mStiffTime: 0
+    mKnockback: 0
+    mProjectileSizeX: 0
+    mProjectileSizeY: 0
   target: {x: 0, y: 0, z: 0}
   angle: 0
 --- !u!61 &8036020003253729715
@@ -160,3 +171,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &5172234875954660234
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072099177095707146}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
