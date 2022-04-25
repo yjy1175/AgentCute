@@ -161,7 +161,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             {
                 dataSetBoss.Add(ds);
             }
-            else if(MonsterManager.Instance.GetMonsterData(ds.spawnMonster).monsterGrade == MonsterManager.MonsterGrade.Normal)
+            else 
             {
                 dataSetNormal.Add(ds);
             }

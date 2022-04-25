@@ -2138,7 +2138,7 @@ MonoBehaviour:
   - {fileID: 337956427}
   TempMonster:
   - {fileID: 2402880713698910942, guid: b316127afaa0c364fa4f3f512bcaac63, type: 3}
-  - {fileID: 607600207061063460, guid: 174bd7a6abf8b884da3c9a878c759f22, type: 3}
+  - {fileID: 7527885541567228081, guid: 5693127e79c720a4888543ab3fb81fda, type: 3}
   - {fileID: 8665364517176831368, guid: a5ed992fd16a1354aa0a971fd172b9f8, type: 3}
   - {fileID: 2699543621885345178, guid: 2ff0628649be73740ba7187ca97cabc5, type: 3}
   - {fileID: 1109854676447758817, guid: 8a1ca9527a11da94bb3d13fa9163aff8, type: 3}
