@@ -22,22 +22,15 @@ public class Radia : Projectile
     }
     #endregion
     #region method
-    protected override void destroySelf()
-    {
-        /*생성후 파괴되는 매서드*/
-    }
     protected override void launchProjectile()
     {
         /*방사 매서드*/
     }
     // Start is called before the first frame update
-    void Start()
-    {
-        destroySelf();
-    }
     // Update is called once per frame
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
         launchProjectile();
     }
 

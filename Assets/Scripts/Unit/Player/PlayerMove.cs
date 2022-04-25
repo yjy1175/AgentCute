@@ -61,11 +61,6 @@ public class PlayerMove : IMove
             }
             mDir = new Vector3(h, v, 0).normalized;
         }
-        else
-        {
-            mAnim.SetFloat("RunState", 0f);
-            mAnim.SetBool("Run", false);
-        }
     }
 
     private void FixedUpdate()
@@ -73,5 +68,18 @@ public class PlayerMove : IMove
         // 모든 물리연산은 FixedUpdate에서
         if(mMoveable)
             transform.Translate(mDir * mSpeed * Time.fixedDeltaTime);
+    }
+
+    public override void StopStiffTime(float _time)
+    {
+        base.StopStiffTime(_time);
+        StartCoroutine(CoStiffAnimation(_time));
+    }
+
+    IEnumerator CoStiffAnimation(float _time)
+    {
+        mAnim.SetFloat("RunState", 1f);
+        yield return new WaitForSeconds(_time);
+        mAnim.SetFloat("RunState", 0f);
     }
 }

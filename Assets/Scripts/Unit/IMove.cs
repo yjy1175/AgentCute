@@ -32,7 +32,7 @@ public abstract class IMove : MonoBehaviour
     }
     protected virtual void UpdateMove() { }
 
-    public void StopStiffTime(float _time)
+    public virtual void StopStiffTime(float _time)
     {
         if (mMoveable && gameObject.activeInHierarchy)
         {

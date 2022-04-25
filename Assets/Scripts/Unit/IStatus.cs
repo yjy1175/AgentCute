@@ -46,32 +46,28 @@ public abstract class IStatus : MonoBehaviour
         }
     }
 
-    // 연속되는 데미지 방지용 bool형 변수
+
     [SerializeField]
-    private bool mIsDamage;
-    public bool IsDamage
+    protected int mCloseDamaged;
+    public int CloseDamaged
     {
-        get { return mIsDamage; }
+        get { return mCloseDamaged; }
         set
         {
-            mIsDamage = value;
-            if (!mIsDamage && gameObject.activeInHierarchy)
-            {
-                StartCoroutine(CoIsDamage());
-            }
+            if (mIsInvincibility)
+                mCloseDamaged = 0;
+            mCloseDamaged = value;
+            mHp = Mathf.Max(0, mHp - mCloseDamaged);
+            gameObject.GetComponent<IEventHandler>().ChangeHp(mHp, gameObject);
+            MessageBoxManager.BoxType bt =(MessageBoxManager.BoxType)Enum.Parse(typeof(MessageBoxManager.BoxType), gameObject.tag + "Damage");
+            MessageBoxManager.Instance.createMessageBox(bt, mCloseDamaged.ToString(), transform.position);
         }
     }
 
-    IEnumerator CoIsDamage()
-    {
-        yield return new WaitForSeconds(0.5f);
-        IsDamage = true;
-    }
-
-    //직전에 입은 데미지
+    //직전에 입은 데미지(발사체)
     [SerializeField]
     protected int mDamaged;
-    public virtual int DamageHp
+    public  int DamageHp
     {
         /*
          *  TO-DO :player Attack에서 있어서 동기화가 되는지 확인필요
@@ -79,17 +75,11 @@ public abstract class IStatus : MonoBehaviour
         get { return mDamaged; }
         set
         {
-            if (mIsInvincibility || !mIsDamage)
+            if (mIsInvincibility)
                 mDamaged = 0;
-            else
-            {
-                IsDamage = false;
-                mDamaged = value;
-                mHp = Mathf.Max(0, mHp - mDamaged);
-                gameObject.GetComponent<IEventHandler>().ChangeHp(mHp, gameObject);
-                MessageBoxManager.BoxType bt = (MessageBoxManager.BoxType)Enum.Parse(typeof(MessageBoxManager.BoxType), gameObject.tag + "Damage");
-                MessageBoxManager.Instance.createMessageBox(bt, value.ToString(), gameObject.transform.position);
-            }
+            mDamaged = value;
+            mHp = Mathf.Max(0, mHp - mDamaged);
+            gameObject.GetComponent<IEventHandler>().ChangeHp(mHp, gameObject);
         }
     }
 
@@ -351,7 +341,6 @@ public abstract class IStatus : MonoBehaviour
 
     protected virtual void Start()
     {
-        mIsDamage = true;
         // 기본 레벨업 스텟 초기화
         mAddAttackPoint = 0;
         mAddSpeed = 0;
@@ -530,6 +519,92 @@ public abstract class IStatus : MonoBehaviour
         else if(_type == Skill.ESkillBuffType.PlayerWeaponSprite)
         {
             EquipmentManager.Instance.ChangeWeapon(currentWeapon.Spec.Type);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            Projectile projectile = collision.GetComponent<Projectile>();
+            if (projectile.IsActive)
+            {
+                // 넉백 확인
+                if(projectile.Spec.Knockback > 0)
+                {
+                    RaycastHit2D ray = Physics2D.Raycast(
+                        transform.position + (transform.position - projectile.transform.position).normalized * (GetComponent<BoxCollider2D>().size.x * projectile.Spec.Knockback),
+                        Vector2.zero, 
+                        LayerMask.GetMask("Tilemap"));
+                    if(ray.collider == null)
+                    {
+                        transform.Translate(
+                            (transform.position - projectile.transform.position).normalized * 
+                            GetComponent<BoxCollider2D>().size.x * projectile.Spec.Knockback);
+                    }
+                }
+                // 경직 확인
+                if(projectile.Spec.StiffTime + mAddStiffTime > 0)
+                {
+                    GetComponent<IMove>().StopStiffTime(projectile.Spec.StiffTime + mAddStiffTime);
+                }
+            }
+            // 데미지 입히기 및 데미지 박스 띄우기(타입별)
+            ChangeHpForDamage(projectile, projectile.Spec.ProjectileDamageType, projectile.Damage);
+        }
+    }
+
+    private void ChangeHpForDamage(Projectile obj, ProjectileManager.DamageType _type, int _damage)
+    {
+        switch (_type)
+        {
+            // 일반형
+            case ProjectileManager.DamageType.Normal:
+                DamageHp = _damage;
+                DrawDamageBox(obj.IsCriticalDamage, _damage, transform.position);
+                break;
+            // 스플릿형
+            case ProjectileManager.DamageType.SplitByNumber:
+                int num = obj.Spec.ProjectileDamageSplit;
+                for (int i = 0; i < num; i++)
+                {
+                    DamageHp = _damage / num;
+                    DrawDamageBox(obj.IsCriticalDamage, _damage / num, transform.position + Vector3.up * i * 0.5f);
+                }
+                break;
+            // 도트형
+            case ProjectileManager.DamageType.SplitByTime:
+                int splitnum = (int)(obj.Spec.SpawnTime / obj.Spec.ProjectileDamageSplitSec);
+                int damage = _damage / splitnum;
+                StartCoroutine(CoSplitByTime(obj.Spec.ProjectileDamageSplitSec, splitnum, damage, obj.IsCriticalDamage, transform.position));
+                break;
+        }
+    }
+
+    private void DrawDamageBox(bool _isCritical, int _damage, Vector3 _pos)
+    {
+        if (_isCritical)
+        {
+            MessageBoxManager.Instance.createMessageBox(
+                MessageBoxManager.BoxType.CriticalDamage, _damage.ToString(), _pos);
+        }
+        else
+        {
+            MessageBoxManager.BoxType bt = 
+                (MessageBoxManager.BoxType)Enum.Parse(typeof(MessageBoxManager.BoxType), gameObject.tag + "Damage");
+            MessageBoxManager.Instance.createMessageBox(bt, _damage.ToString(), _pos);
+        }
+    }
+
+    IEnumerator CoSplitByTime(float _time, int _splitNum, int _damage, bool _isCritical, Vector3 _pos)
+    {
+        int num = _splitNum;
+        while (num > 0)
+        {
+            num--;
+            DamageHp = _damage;
+            DrawDamageBox(_isCritical, _damage, _pos);
+            yield return new WaitForSeconds(_time);
         }
     }
 }

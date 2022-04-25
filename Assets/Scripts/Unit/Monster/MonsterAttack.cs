@@ -61,7 +61,7 @@ public class MonsterAttack : IAttack
         {
             if (mAutoAttackCheckTime.Equals(0f))
             {
-                GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().DamageHp = mCloseAttackPower;
+                GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().CloseDamaged = mCloseAttackPower;
                 mAutoAttackCheckTime = mAutoAttackSpeed;
             }
         }
@@ -80,8 +80,6 @@ public class MonsterAttack : IAttack
                 int skillNum = GetSkillNumber(md);
                 if (skillNum != -1)
                 {
-                    //skillNum = 2;//TEMP
-                    Debug.Log("랜덤스킬 넘버: " + skillNum);
                     Skill skill = mMonsterSkill[skillNum].GetComponent<Skill>();
                     SkillLaunchType skillLaunchType = (SkillLaunchType)Enum.Parse(typeof(SkillLaunchType), skill.Spec.SkillLaunchType);
                     int count = skill.Spec.SkillCount;

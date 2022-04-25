@@ -7,91 +7,123 @@ public class ProjectileSpec : EquipSpec
 {
     #region variable
     [SerializeField]
-    private string type;
+    private string mType;
     public override string Type
     {
-        get { return type; }
-        set { type = value; }
+        get { return mType; }
+        set { mType = value; }
     }
 
     [SerializeField]
-    private string typeName;
+    private string mTypeName;
     public override string TypeName
     {
-        get { return typeName; }
-        set { typeName = value; }
+        get { return mTypeName; }
+        set { mTypeName = value; }
     }
 
     [SerializeField]
-    private string equipName;
-    public override string Name
+    private string mEquipName;
+    public override string EquipName
     {
-        get { return equipName; }
-        set { equipName = value; }
+        get { return mEquipName; }
+        set { mEquipName = value; }
     }
 
     [SerializeField]
-    private string equipDesc;
-    public override string Desc
+    private string mEquipDesc;
+    public override string EquipDesc
     {
-        get { return equipDesc; }
-        set { equipDesc = value; }
+        get { return mEquipDesc; }
+        set { mEquipDesc = value; }
     }
 
     [SerializeField]
-    private int equipRank;
+    private int mEquipRank;
     public override int Rank
     {
-        get { return equipRank; }
-        set { equipRank = value; }
+        get { return mEquipRank; }
+        set { mEquipRank = value; }
     }
 
     [SerializeField]
-    private float projectileDamage;
+    private float mProjectileDamage;
     public float ProjectileDamage
     {
-        get { return projectileDamage; }
-        set { projectileDamage = value; }
+        get { return mProjectileDamage; }
+        set { mProjectileDamage = value; }
     }
 
     [SerializeField]
-    private float speed;
-    public float Speed
+    private ProjectileManager.DamageType mProjectileDamageType;
+    public ProjectileManager.DamageType ProjectileDamageType
     {
-        get { return speed; }
-        set { speed = value; }
+        get { return mProjectileDamageType; }
+        set { mProjectileDamageType = value; }
     }
 
     [SerializeField]
-    private int count;
+    private int mProjectileDamageSplit;
+    public int ProjectileDamageSplit
+    {
+        get { return mProjectileDamageSplit; }
+        set { mProjectileDamageSplit = value; }
+    }
+
+    [SerializeField]
+    private float mProjectileDamageSplitSec;
+    public float ProjectileDamageSplitSec
+    {
+        get { return mProjectileDamageSplitSec; }
+        set { mProjectileDamageSplitSec = value; }
+    }
+
+    [SerializeField]
+    private float mProjectileAttackSpeed;
+    public float ProjectileAttackSpeed
+    {
+        get { return mProjectileAttackSpeed; }
+        set { mProjectileAttackSpeed = value; }
+    }
+
+    [SerializeField]
+    private float mMoveSpeed;
+    public float MoveSpeed
+    {
+        get { return mMoveSpeed; }
+        set { mMoveSpeed = value; }
+    }
+
+    [SerializeField]
+    private int mCount;
     public int Count
     {
-        get { return count; }
-        set { count = value; }
+        get { return mCount; }
+        set { mCount = value; }
     }
 
     [SerializeField]
-    private int angle;
+    private int mAngle;
     public int Angle
     {
-        get { return angle; }
-        set { angle = value; }
+        get { return mAngle; }
+        set { mAngle = value; }
     }
 
     [SerializeField]
-    private float spawnTime;
+    private float mSpawnTime;
     public float SpawnTime
     {
-        get { return spawnTime; }
-        set { spawnTime = value; }
+        get { return mSpawnTime; }
+        set { mSpawnTime = value; }
     }
 
     [SerializeField]
-    private int maxPassCount;
+    private int mMaxPassCount;
     public int MaxPassCount
     {
-        get { return maxPassCount; }
-        set { maxPassCount = value; }
+        get { return mMaxPassCount; }
+        set { mMaxPassCount = value; }
     }
 
     [SerializeField]
@@ -108,6 +140,22 @@ public class ProjectileSpec : EquipSpec
     {
         get { return mKnockback; }
         set { mKnockback = value; }
+    }
+
+    [SerializeField]
+    private float mProjectileSizeX;
+    public float ProjectileSizeX
+    {
+        get { return mProjectileSizeX; }
+        set { mProjectileSizeX = value; }
+    }
+
+    [SerializeField]
+    private float mProjectileSizeY;
+    public float ProjectileSizeY
+    {
+        get { return mProjectileSizeY; }
+        set { mProjectileSizeY = value; }
     }
     #endregion
 }

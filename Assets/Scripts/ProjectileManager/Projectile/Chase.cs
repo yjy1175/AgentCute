@@ -24,14 +24,10 @@ public class Chase : Projectile
     private float angle = 0;
     #endregion
     #region method
-    protected override void destroySelf()
-    {
-        /*생성후 파괴되는 매서드*/
-    }
     protected override void launchProjectile()
     {
         /*추적 매서드*/
-        if (isActive)
+        if (mIsActive)
         {
            Vector3 dir = target - transform.position;
             Debug.Log(dir);
@@ -44,7 +40,7 @@ public class Chase : Projectile
             //angle = setAngle(dir);
             //Quaternion rotTarget = Quaternion.AngleAxis(angle, Vector3.forward);
             //transform.rotation = Quaternion.Slerp(transform.rotation, rotTarget, Time.deltaTime * spec.Speed);
-            transform.Translate(dir.normalized * Time.deltaTime * spec.Speed);
+            transform.Translate(dir.normalized * Time.deltaTime * spec.MoveSpeed);
         }
     }
     // Start is called before the first frame update
@@ -53,8 +49,9 @@ public class Chase : Projectile
 
     }
     // Update is called once per frame
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
         launchProjectile();
     }
     // 발사 방향에 따라 발사체를 회전시키는 함수
@@ -70,12 +67,12 @@ public class Chase : Projectile
         transform.position = _player + ranDir();
         target = _target;
         gameObject.SetActive(true);
-        isActive = true;
+        mIsActive = true;
     }
 
     public override void setDisable()
     {
-        isActive = false;
+        mIsActive = false;
         myPos = transform.position;
     }
 

@@ -24,16 +24,12 @@ public class Launch : Projectile
     private float angle = 0;
     #endregion
     #region method
-    protected override void destroySelf()
-    {
-        /*생성후 파괴되는 매서드*/
-    }
     protected override void launchProjectile()
     {
-        if (isActive)
+        if (mIsActive)
         {
             // Rotate로 회전 시켰기 때문에 단위벡터의 방향은 고정
-            transform.Translate(Vector2.right * Time.deltaTime * spec.Speed);
+            transform.Translate(Vector2.right * Time.deltaTime * spec.MoveSpeed);
         }
     }
     // 발사 방향에 따라 발사체를 회전시키는 함수
@@ -45,7 +41,7 @@ public class Launch : Projectile
     // 비활성화
     public override void setDisable()
     {
-        isActive = false;
+        mIsActive = false;
         myPos = transform.position;
     }
 
@@ -63,15 +59,16 @@ public class Launch : Projectile
          angle = setAngle(target - _player) + _angle;
          transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
          gameObject.SetActive(true);
-         isActive = true;
+         mIsActive = true;
     }
     void Start()
     {
 #if DEBUG
 #endif
     }
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
         launchProjectile();
     }
     #endregion

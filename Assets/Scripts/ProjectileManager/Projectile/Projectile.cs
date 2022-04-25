@@ -5,30 +5,6 @@ using UnityEngine;
 public abstract class Projectile : MonoBehaviour
 {
     #region variable
-    // 추가 관통 마리수
-    [SerializeField]
-    private static int addPassCount;
-    public static int AddPassCount
-    {
-        get { return addPassCount; }
-        set { addPassCount = value; }
-    }
-    // 추가 발사체 개수
-    [SerializeField]
-    private static int addProjectilesCount;
-    public static int AddProjectilesCount
-    {
-        get { return addProjectilesCount; }
-        set { addProjectilesCount = value; }
-    }
-    // 추가 발사체 범위
-    [SerializeField]
-    private static float addScaleCoefficient = 1f;
-    public static float AddScaleCoefficient
-    {
-        get { return addScaleCoefficient; }
-        set { addScaleCoefficient = value; }
-    }
     [SerializeField]
     protected int damage;
     public virtual int Damage
@@ -52,8 +28,24 @@ public abstract class Projectile : MonoBehaviour
 
     //실제 active상태인지 체크
     [SerializeField]
-    protected bool isActive = false;
+    protected bool mIsActive = false;
+    public bool IsActive
+    {
+        get { return mIsActive; }
+        set { mIsActive = value; }
+    }
 
+    [SerializeField]
+    private float mAttackSpeedCheckTime = 1;
+
+    // 각 공격당 크리티컬 데미지인지 체크
+    [SerializeField]
+    private bool mIsCriticalDamage;
+    public bool IsCriticalDamage
+    {
+        get { return mIsCriticalDamage; }
+        set { mIsCriticalDamage = value; }
+    }
 
     public abstract ProjectileSpec Spec
     {
@@ -66,76 +58,62 @@ public abstract class Projectile : MonoBehaviour
         set;
     }
     #endregion
-    public static void init()
+    private void OnDisable()
     {
-        addPassCount = 0;
-        addProjectilesCount = 0;
-        addScaleCoefficient = 1f;
+        mAttackSpeedCheckTime = 1;
+    }
+    protected virtual void FixedUpdate() 
+    {
+        if(mIsActive)
+            mAttackSpeedCheckTime += Time.fixedDeltaTime;
     }
     // 지속데미지를 위해서 Stay로 바꿈
     // 하지만 0.02초단위로 데미지가 너무 많이 들어가서 우선 0.5초 단위로 바꿈
     // 컨트롤할 bool 형 변수 선언
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((gameObject.CompareTag("PlayerProjectile") && collision.gameObject.CompareTag("Monster"))) { 
+        if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Player"))
+        {
             // 관통 구현
             // -1 : 무한 관통
-            if (isActive)
+            if (mIsActive)
             {
                 if (Spec.MaxPassCount != -1)
                 {
                     currentPassCount++;
                     // 현재 관통한 마리수가 정해진 수치보다 커지면 disable
-                    if (currentPassCount > (Spec.MaxPassCount + GameObject.Find("PlayerObject").GetComponent<IAttack>().PassCount))
+                    if (currentPassCount > (Spec.MaxPassCount + 
+                        (collision.gameObject.CompareTag("Monster") ? GameObject.Find("PlayerObject").GetComponent<IAttack>().PassCount : 0)))
                     {
                         setDisable();
                         ObjectPoolManager.Instance.DisableGameObject(gameObject);
                     }
                 }
-                collision.gameObject.GetComponent<IStatus>().DamageHp = damage;
-                // 경직 시간이 있으면
-                if(Spec.StiffTime + GameObject.Find("PlayerObject").GetComponent<IAttack>().StiffTime > 0)
-                {
-                    collision.gameObject.GetComponent<IMove>().StopStiffTime(
-                        Spec.StiffTime + GameObject.Find("PlayerObject").GetComponent<IAttack>().StiffTime);
-                }
-
-                // 넉백 수치가 있으면
-                if(Spec.Knockback > 0)
-                {
-                    // 프로젝타일의 진행방향으로 플레이어 콜라이더 * 수치만큼 이동
-                    collision.gameObject.transform.Translate(
-                        (transform.position - Target).normalized * 
-                        GameObject.Find("PlayerObject").GetComponent<BoxCollider2D>().size.x * 
-                        Spec.Knockback);
-                }
-            }
-        }
-        else if (gameObject.CompareTag("MonsterProjectile") && collision.gameObject.CompareTag("Player"))
-        {
-            if (isActive)
-            {
-                if (Spec.MaxPassCount != -1)
-                {
-                    currentPassCount++;
-                    // 현재 관통한 마리수가 정해진 수치보다 커지면 disable
-                    if (currentPassCount > (Spec.MaxPassCount))
-                    {
-                        setDisable();
-                        ObjectPoolManager.Instance.DisableGameObject(gameObject);
-                    }
-                }
-                
-                collision.gameObject.GetComponent<IStatus>().DamageHp = damage;
             }
         }
     }
 
     #region method
-    protected abstract void destroySelf();
     protected abstract void launchProjectile();
     public abstract void setEnable(Vector3 _target, Vector3 _player, float _angle);
     public abstract void setDisable();
+    public void setSize(Vector3 _size)
+    {
+        transform.localScale = _size;
+    }
+    public void setDisableWaitForTime(float _time)
+    {
+        StartCoroutine(CoDisableWaitForTime(_time));
+    }
+    IEnumerator CoDisableWaitForTime(float _time)
+    {
+        yield return new WaitForSeconds(_time);
+        if (gameObject.activeInHierarchy)
+        {
+            setDisable();
+            ObjectPoolManager.Instance.DisableGameObject(gameObject);
+        }
+    }
     #endregion
 }
 

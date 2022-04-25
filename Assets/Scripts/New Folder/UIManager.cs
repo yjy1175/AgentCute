@@ -195,7 +195,6 @@ public class UIManager : SingleToneMaker<UIManager>
         // 씬 리로드
         // 정적 변수들 init
         SpawnManager.Instance.init();
-        Projectile.init();
         SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
     }
     private void GamePause()
@@ -311,14 +310,14 @@ public class UIManager : SingleToneMaker<UIManager>
     {
         if(_skillList.Count > 0)
         {
-            mSkillInfoNameText.text = _skillList[_num].GetComponent<Skill>().Spec.Name;
+            mSkillInfoNameText.text = _skillList[_num].GetComponent<Skill>().Spec.EquipName;
             mSkillInfoTypeText.text = _skillList[_num].GetComponent<Skill>().Spec.TypeName;
             mSkillInfoCoolTimeText.text = "";
             for (int i = 0; i < _skillList[_num].GetComponent<Skill>().Spec.getSkillCoolTime().Count; i++)
             {
                 mSkillInfoCoolTimeText.text += "[" + _skillList[_num].GetComponent<Skill>().Spec.getSkillCoolTime()[i] + "초]";
             }
-            mSkillInfoDescText.text = _skillList[_num].GetComponent<Skill>().Spec.Desc;
+            mSkillInfoDescText.text = _skillList[_num].GetComponent<Skill>().Spec.EquipDesc;
 
             mSkillInfoPannel.SetActive(true);
         }

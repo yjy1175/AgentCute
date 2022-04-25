@@ -46,21 +46,13 @@ public class Spawn : Projectile
     private Vector3 newPos = Vector3.zero;
     [SerializeField]
     private Vector3 mJoyStickPos = Vector3.zero;
-    [SerializeField]
-    float scale;
-    [SerializeField]
-    float baseX, baseY;
     #endregion
     #region method
-    protected override void destroySelf()
-    {
-        /*생성후 파괴되는 매서드*/
-    }
     protected override void launchProjectile()
     {
         /*스폰 매서드*/
         // 방향키에 따라 위치가 바뀌는 경우
-        if (isActive && (SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType) == SpawnType.LongWide)
+        if (mIsActive && (SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType) == SpawnType.LongWide)
         {
             mPlayer = GameObject.Find("fire").transform.position;
             mUJoySitick = GameObject.Find("Canvas").transform.Find("UltimateSkillJoyStick").GetComponent<VertualJoyStick>();
@@ -77,15 +69,10 @@ public class Spawn : Projectile
             transform.position = mPlayer;
         }
     }
-    // Start is called before the first frame update
-    void Awake()
-    {
-        baseX = transform.localScale.x;
-        baseY = transform.localScale.y;
-    }
     // Update is called once per frame
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
         launchProjectile();
     }
     public float setAngle(Vector3 dir)
@@ -99,16 +86,8 @@ public class Spawn : Projectile
     // 일반형인지 랜덤형인지 구분할 변수가 필요(projectileSpec에서 랜덤형 구분)
     public override void setEnable(Vector3 _target, Vector3 _player, float _angle)
     {
-        //TO-DO Player관련 코드로 의존성 제거 필요
-        if (gameObject.tag.Equals("PlayerProjectile"))
-        {
-            float scale = GameObject.Find("PlayerObject").GetComponent<IAttack>().ProjectileScale;
-            transform.localScale = new Vector3(baseX + scale, baseY + scale, scale);
-        }
-
         target = _target;
         mPlayer = _player;
-        scale = AddScaleCoefficient - 1;
         // 랜덤형인 경우
         switch ((SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType))
         {
@@ -134,25 +113,27 @@ public class Spawn : Projectile
                 break;
             case SpawnType.ReverseSpawn:
                 transform.position = mPlayer;
-                if (gameObject.transform.position.x < GameObject.Find("PlayerObject").transform.position.x)
+                float sizeX = transform.localScale.x;
+                float sizeY = transform.localScale.y;
+                if (transform.position.x < GameObject.Find("PlayerObject").transform.position.x)
                 {
-                    gameObject.transform.localScale = new Vector3(baseX, baseY, baseX);
+                    transform.localScale = new Vector3(sizeX, sizeY, 1f);
                 }
                 else
                 {
-                    gameObject.transform.localScale = new Vector3(-baseX, baseY, baseX);
+                    transform.localScale = new Vector3(-sizeX, sizeY, 1f);
                 }
                 break;
         }
         gameObject.SetActive(true);
-        isActive = true;
+        mIsActive = true;
     }
 
     public override void setDisable()
     {
         mJoyStickPos = Vector3.zero;
         newPos = Vector3.zero;
-        isActive = false;
+        mIsActive = false;
     }
     #endregion
 }

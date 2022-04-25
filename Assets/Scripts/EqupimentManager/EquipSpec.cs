@@ -15,12 +15,12 @@ public abstract class EquipSpec
         get;
         set;
     }
-    public abstract string Name
+    public abstract string EquipName
     {
         get;
         set;
     }
-    public abstract string Desc
+    public abstract string EquipDesc
     {
         get;
         set;

@@ -36,8 +36,8 @@ public class SkillManager : SingleToneMaker<SkillManager>
             item.Spec.TypeName = skillsData[i]["SkillTypeName"].ToString();
             item.Spec.SkillLaunchType = skillsData[i]["SkillLaunchType"].ToString();
             item.Spec.SkillWeaponType = skillsData[i]["SkillWeaponType"].ToString();
-            item.Spec.Name = skillsData[i]["SkillName"].ToString();
-            item.Spec.Desc = skillsData[i]["SkillDesc"].ToString();
+            item.Spec.EquipName = skillsData[i]["SkillName"].ToString();
+            item.Spec.EquipDesc = skillsData[i]["SkillDesc"].ToString();
             //item.Spec.Rank = int.Parse(skillsData[i]["ProjectileSpawnTime"].ToString());
             item.Spec.SkillCount = int.Parse(skillsData[i]["SkillCount"].ToString());
             item.Spec.SkillCountTime = float.Parse(skillsData[i]["SkillCountTime"].ToString());

@@ -25,7 +25,7 @@ public class CostumeSpec : EquipSpec
 
     [SerializeField]
     private string mEquipName;
-    public override string Name
+    public override string EquipName
     {
         get { return mEquipName; }
         set { mEquipName = value; }
@@ -33,7 +33,7 @@ public class CostumeSpec : EquipSpec
 
     [SerializeField]
     private string mEquipDesc;
-    public override string Desc
+    public override string EquipDesc
     {
         get { return mEquipDesc; }
         set { mEquipDesc = value; }

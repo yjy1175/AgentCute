@@ -26,7 +26,7 @@ public class WeaponSpec : EquipSpec
 
     [SerializeField]
     private string equipName;
-    public override string Name
+    public override string EquipName
     {
         get { return equipName; }
         set { equipName = value; }
@@ -34,7 +34,7 @@ public class WeaponSpec : EquipSpec
 
     [SerializeField]
     private string equipDesc;
-    public override string Desc
+    public override string EquipDesc
     {
         get { return equipDesc; }
         set { equipDesc = value; }

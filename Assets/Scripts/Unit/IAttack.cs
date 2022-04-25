@@ -108,7 +108,6 @@ public class IAttack : MonoBehaviour
     private void RegisterProjectileScaleObserver(float _scale, GameObject _obj)
     {
         mProjectileScale= _scale;
-        Debug.Log(mProjectileScale);
     }
     private void RegisterStiffTimeObserver(float _time, GameObject _obj)
     {
@@ -164,12 +163,11 @@ public class IAttack : MonoBehaviour
         // 각도가 없을 경우 한발만 발사
         for (int i = 0; i < launchCount; i++)
         {
-            StartCoroutine(
-                LaunchCorutines(
-                    (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * i),
-                    TileDict[mSkill][mProjectileIndex].gameObject.name,
-                    mTargetPos,
-                    mFirePos, mNotSingle));
+            LaunchCorutines(
+                (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * i),
+                TileDict[mSkill][mProjectileIndex].gameObject.name,
+                mTargetPos,
+                mFirePos, mNotSingle);
         }
     }
 
@@ -177,25 +175,20 @@ public class IAttack : MonoBehaviour
     * _angle : 추가 각도 설정입니다.
     * _name : 해당 발사체오브젝트의 name입니다.
     */
-    protected IEnumerator LaunchCorutines(float _angle, string _name, Vector3 _targetPos, Vector3 _firePos, bool _notSingle)
+    protected void LaunchCorutines(float _angle, string _name, Vector3 _targetPos, Vector3 _firePos, bool _notSingle)
     {
         GameObject obj = ObjectPoolManager.Instance.EnableGameObject(_name);
         if (_notSingle) firstProjectile = obj;
         float keepTime = obj.GetComponent<Projectile>().Spec.SpawnTime;
+        Vector3 size = new Vector3(
+            obj.GetComponent<Projectile>().Spec.ProjectileSizeX * (1 + mProjectileScale),
+            obj.GetComponent<Projectile>().Spec.ProjectileSizeY * (1 + mProjectileScale),
+            1);
+        obj.GetComponent<Projectile>().setSize(size);
         setProjectileData(ref obj);
         obj.GetComponent<Projectile>().CurrentPassCount = 0;
         obj.GetComponent<Projectile>().setEnable(_targetPos, _firePos, _angle);
-
-        yield return new WaitForSeconds(keepTime);
-        // 간헐적 disable문제때문에 해당 오브젝트의 Active가 true일 시만 disable되게 했습니다
-        // 스폰시간이 다되기 전 발사체가 몬스터와 부딪힐 때 disable이 한번 호출되는데 혹시나 다른 객체로
-        // 접근해서 disable해서 간헐적 문제가 발생할 수 있을거라 추측해서 조건문 걸었습니다.
-        // 추후에 다른곳에서의 문제가 발견되면 삭제할 예정
-        if (obj.activeInHierarchy)
-        {
-            obj.GetComponent<Projectile>().setDisable();
-            ObjectPoolManager.Instance.DisableGameObject(obj);
-        }
+        obj.GetComponent<Projectile>().setDisableWaitForTime(keepTime);
     }
 
 
@@ -214,8 +207,8 @@ public class IAttack : MonoBehaviour
     // 발사체 데미지를 설정합니다.
     private void setProjectileData(ref GameObject obj)
     {
-        // 발사체가 발사 될때 마다 데미지 설정하는 api호출
-        GetComponent<IStatus>().AttackPointSetting(gameObject);
+        // 발사체가 발사 될때 마다 데미지 설정하는 api호출(크리티컬 여부 반환)
+        obj.GetComponent<Projectile>().IsCriticalDamage = GetComponent<IStatus>().AttackPointSetting(gameObject);
         obj.GetComponent<Projectile>().Damage = 
             (int)(mObjectDamage * obj.GetComponent<Projectile>().Spec.ProjectileDamage);
     }
@@ -245,7 +238,6 @@ public class IAttack : MonoBehaviour
             default:
                 Debug.Log("잘못된 Enum타입 " + _enum.ToString() + "이 들어왔습니다");
                 break;
-
         }
     }
 }

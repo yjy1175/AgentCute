@@ -40,7 +40,7 @@ public class SkillSpec : EquipSpec
 
     [SerializeField]
     private string skillName;
-    public override string Name
+    public override string EquipName
     {
         get { return skillName; }
         set { skillName = value; }
@@ -48,7 +48,7 @@ public class SkillSpec : EquipSpec
 
     [SerializeField]
     private string skillDesc;
-    public override string Desc
+    public override string EquipDesc
     {
         get { return skillDesc; }
         set { skillDesc = value; }

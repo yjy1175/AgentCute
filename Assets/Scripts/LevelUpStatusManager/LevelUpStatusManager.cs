@@ -241,7 +241,5 @@ public class LevelUpStatusManager : SingleToneMaker<LevelUpStatusManager>
                 break;
             }
         }
-        // 만약 다 찍은 슬롯이라 Null타입이라면
-        Debug.Log("모두 찍은 슬롯입니다.");
     }
 }

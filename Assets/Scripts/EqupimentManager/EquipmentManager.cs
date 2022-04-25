@@ -83,8 +83,8 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                     item = weapons[weaponData[i]["WeaponType"].ToString()].GetComponent<Weapon>();
                     item.Spec.Type = weaponData[i]["WeaponType"].ToString();
                     item.Spec.TypeName = weaponData[i]["WeaponTypeName"].ToString();
-                    item.Spec.Name = weaponData[i]["WeaponName"].ToString();
-                    item.Spec.Desc = weaponData[i]["WeaponDesc"].ToString();
+                    item.Spec.EquipName = weaponData[i]["WeaponName"].ToString();
+                    item.Spec.EquipDesc = weaponData[i]["WeaponDesc"].ToString();
                     //item.Spec.EquipRank = int.Parse(weaponData[i]["WeaponRank"].ToString());
                     item.Spec.WeaponDamage = int.Parse(weaponData[i]["WeaponATK"].ToString());
                     //item.Spec.WeaponAttackSpeed = float.Parse(weaponData[i]["WeaponAttackSpeed"].ToString());
@@ -115,8 +115,8 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                 {
                     item = costumes[costumeData[i]["CostumeLoad"].ToString()].GetComponent<Costume>();
                     item.Spec.TypeName = costumeData[i]["CostumeTypeName"].ToString();
-                    item.Spec.Name = costumeData[i]["CostumeName"].ToString();
-                    item.Spec.Desc = costumeData[i]["CostumeDesc"].ToString();
+                    item.Spec.EquipName = costumeData[i]["CostumeName"].ToString();
+                    item.Spec.EquipDesc = costumeData[i]["CostumeDesc"].ToString();
                     //item.Spec.Rank = int.Parse(costumeData[i]["CostumeRank "].ToString());
                     string[] tmp = costumeData[i]["CostumeStatBuff"].ToString().Split('/');
                     for(int idx = 0; idx < tmp.Length; idx++)
