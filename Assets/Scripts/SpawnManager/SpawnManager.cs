@@ -19,12 +19,19 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         public float spawnTime;
         public float currentTime;
     }
+    public struct WaveData
+    {
+        public float hpScale;
+    }
+
     /*
      * TO-DO Spawn_Map은 Enum으로 해서 관리 뭐뭐나올지 모르니 일단 skip
      */
 
+    public List<WaveData> dataSetWave;
     public List<SpawnData> dataSetNormal;
     public List<SpawnData> dataSetBoss;
+    
     private float currentTime = 0f;
 
     public Transform[] spawnPoints;
@@ -59,6 +66,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     void Awake()
     {
         InitAllSpawnData();
+        InitWaveData();
     }
 
     // Start is called before the first frame update
@@ -148,7 +156,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     private void SpawnMonster(ref GameObject monster, Vector3 _vec)
     {
         MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(monster.name);
-        monster.GetComponent<MonsterStatus>().Hp = md.monsterHp;
+        monster.GetComponent<MonsterStatus>().Hp = (int)((float)md.monsterHp * dataSetWave[bossNum].hpScale);
         monster.GetComponent<MonsterStatus>().MaxHP = md.monsterHp;
         monster.GetComponent<MonsterStatus>().Size = md.monsterSize;
         monster.GetComponent<MonsterStatus>().MonsterGrade= md.monsterGrade;
@@ -165,6 +173,22 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         monster.SetActive(true);
         allMonsterCount++;
     }
+
+
+    private void InitWaveData()
+    {
+        dataSetWave = new List<WaveData>();
+        List<Dictionary<string, object>> waveData = CSVReader.Read("CSVFile\\Wave");
+        for (int idx = 0; idx < waveData.Count; idx++)
+        {
+            WaveData ws = new WaveData();
+            Debug.Log("ws.hpScale :" + waveData[idx]["HpScale"]);
+            ws.hpScale = float.Parse(waveData[idx]["HpScale"].ToString());
+            dataSetWave.Add(ws);
+        }
+    }
+
+
 
     private void InitAllSpawnData()
     {
