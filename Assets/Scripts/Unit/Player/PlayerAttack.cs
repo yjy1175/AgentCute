@@ -8,7 +8,6 @@ public class PlayerAttack : IAttack
 {
     public GameObject GBtn;
     public GameObject UBtn;
-    public VertualJoyStick Ujoystick;
     public VertualJoyStick Mjoystick;
 
     private GameObject mChargingBar;
@@ -62,6 +61,10 @@ public class PlayerAttack : IAttack
     {
         // key : 스킬 게임오브젝트 value : 각 스킬의 발사체 오브젝트
         base.Start();
+        firePosition = transform.GetChild(0).gameObject;
+        GBtn = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+        UBtn = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
+        Mjoystick = GameObject.Find("Canvas").transform.GetChild(2).GetComponent<VertualJoyStick>();
         TileDict = new SkillDic();
         mChargingBar = GameObject.Find("ChargingBar").gameObject;
         mChargingBar.SetActive(false);

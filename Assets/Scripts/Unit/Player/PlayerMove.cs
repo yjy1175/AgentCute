@@ -14,7 +14,7 @@ public class PlayerMove : IMove
     private VertualJoyStick mJoyStick;
     void Awake()
     {
-        mAnim = transform.GetChild(0).GetComponent<Animator>();
+        mAnim = transform.GetChild(1).GetComponent<Animator>();
         mJoyStick = GameObject.Find("Canvas").transform.Find("JoyStick").GetComponent<VertualJoyStick>();
     }
 
