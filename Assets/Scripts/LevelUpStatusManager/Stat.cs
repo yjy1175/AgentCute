@@ -89,7 +89,13 @@ public class Stat
         get { return mSelectMaxCount; }
         set { mSelectMaxCount = value; }
     }
-
+    [SerializeField]
+    private Sprite mStatImage;
+    public Sprite StatImage
+    {
+        get { return mStatImage; }
+        set { mStatImage = value; }
+    }
     public void PlusSelectCount()
     {
         mSelectCount++;

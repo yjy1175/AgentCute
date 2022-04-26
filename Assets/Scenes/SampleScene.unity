@@ -16941,6 +16941,9 @@ MonoBehaviour:
   mFirstSelectText: {fileID: 1081374353}
   mSecondSelectText: {fileID: 928721609}
   mThirdSelectText: {fileID: 1946074871}
+  mFirstSelectImage: {fileID: 877604486}
+  mSecondSelectImage: {fileID: 943682725}
+  mThirdSelectImage: {fileID: 1661287785}
   mGameOverPannel: {fileID: 1377274783}
   mTestLobbyPannel: {fileID: 2030990695}
   mBaseSkill: {fileID: 0}

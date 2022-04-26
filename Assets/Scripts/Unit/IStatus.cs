@@ -414,8 +414,12 @@ public abstract class IStatus : MonoBehaviour
             case LevelUpStatusManager.StatType.MoveSPD:
                 AddSpeed += _stat.StatIncrease;
                 break;
-            // 발사체 개수 증가
-            case LevelUpStatusManager.StatType.AutoAttackTimes:
+            // 발사체 개수 증가(근거리)
+            case LevelUpStatusManager.StatType.AutoAttackTimesMelee:
+                AddProjectileCount += (int)_stat.StatIncrease;
+                break;
+            // 발사체 개수 증가(원거리)
+            case LevelUpStatusManager.StatType.AutoAttackTimesRange:
                 AddProjectileCount += (int)_stat.StatIncrease;
                 break;
             // 기본 공격 범위 증가
@@ -436,7 +440,7 @@ public abstract class IStatus : MonoBehaviour
                 break;
             // HP회복
             case LevelUpStatusManager.StatType.RecoverHP:
-                Hp += (int)_stat.StatIncrease;
+                PotionHp += (int)_stat.StatIncrease;
                 break;
         }
     }

@@ -52,5 +52,8 @@ public class MonsterMove : IMove
             }
         }
     }
-
+    public override void StopStiffTime(float _time)
+    {
+        base.StopStiffTime(_time);
+    }
 }

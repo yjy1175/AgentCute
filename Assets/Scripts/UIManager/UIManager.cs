@@ -46,6 +46,12 @@ public class UIManager : SingleToneMaker<UIManager>
     private Text mSecondSelectText;
     [SerializeField]
     private Text mThirdSelectText;
+    [SerializeField]
+    private Image mFirstSelectImage;
+    [SerializeField]
+    private Image mSecondSelectImage;
+    [SerializeField]
+    private Image mThirdSelectImage;
 
     [Header("게임오버")]
     [SerializeField]
@@ -172,6 +178,11 @@ public class UIManager : SingleToneMaker<UIManager>
         mFirstSelectText.text = LevelUpStatusManager.Instance.SelectStatus(1);
         mSecondSelectText.text = LevelUpStatusManager.Instance.SelectStatus(2);
         mThirdSelectText.text = LevelUpStatusManager.Instance.SelectStatus(3);
+
+        mFirstSelectImage.sprite = LevelUpStatusManager.Instance.SelectSlotImage(1);
+        mSecondSelectImage.sprite = LevelUpStatusManager.Instance.SelectSlotImage(2);
+        mThirdSelectImage.sprite = LevelUpStatusManager.Instance.SelectSlotImage(3);
+
         mStatusSelectPannel.SetActive(true);
     }
     public void ClickedSelectStatus(int _num)

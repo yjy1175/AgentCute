@@ -12,7 +12,8 @@ public class LevelUpStatusManager : SingleToneMaker<LevelUpStatusManager>
         CriticalChance,
         AutoAttackSPD,
         MoveSPD,
-        AutoAttackTimes,
+        AutoAttackTimesMelee,
+        AutoAttackTimesRange,
         AutoAttackRange,
         AutoAttackStiff,
         AutoLaunchSpread,
@@ -93,6 +94,9 @@ public class LevelUpStatusManager : SingleToneMaker<LevelUpStatusManager>
             newStat.StatUnit = statusData[i]["StatUnit"].ToString();
             newStat.SelectCount = 0;
             newStat.SelectMaxCount = (int)(newStat.StatMax / newStat.StatIncrease);
+
+            newStat.StatImage = Resources.Load<Sprite>("UI/WarUI/WarIcon/" + newStat.Type.ToString());
+
             AllStatList.Add(newStat);
         }
     }
@@ -213,6 +217,32 @@ public class LevelUpStatusManager : SingleToneMaker<LevelUpStatusManager>
                 return desc;
             }
         }
+    }
+
+    public Sprite SelectSlotImage(int _num)
+    {
+        StatType selectType = StatType.Null;
+        Sprite newSprite = null;
+        switch (_num)
+        {
+            case 1:
+                selectType = mSlot1Select;
+                break;
+            case 2:
+                selectType = mSlot2Select;
+                break;
+            case 3:
+                selectType = mSlot3Select;
+                break;
+        }
+        for (int i = 0; i < AllStatList.Count; i++)
+        {
+            if (AllStatList[i].Type == selectType)
+            {
+                newSprite = AllStatList[i].StatImage;
+            }
+        }
+        return newSprite;
     }
 
     // 해당 스텟 선택 시 IStatus의 api를 호출
