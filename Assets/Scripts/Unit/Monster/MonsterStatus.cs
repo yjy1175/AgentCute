@@ -25,7 +25,7 @@ public class MonsterStatus : IStatus
     protected override void Start()
     {
         base.Start();
-        BaseDamage = 2;
+        BaseDamage = 0;
     }
 
     public virtual MonsterManager.MonsterGrade MonsterGrade

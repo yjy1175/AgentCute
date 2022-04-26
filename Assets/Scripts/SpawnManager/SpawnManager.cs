@@ -93,18 +93,25 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
     private void SpawnMonster()
     {
+        SpawnNormalMonster();
+        SpawnBossMonster();
+    }
+
+    private void SpawnNormalMonster()
+    {
+        //노멀몹 스폰
         for (int i = 0; i < dataSetNormal.Count; i++)
         {
             SpawnData temp = dataSetNormal[i];
             if (dataSetNormal[i].realStartSpawnTime < currentTime && dataSetNormal[i].currentTime > dataSetNormal[i].spawnTime)
             {
-                List<int> spawnZone = RandSpawnList(dataSetNormal[i].spawnNumber);
+                List<int> spawnZone = RandSpawnList(dataSetNormal[i].spawnNumber + bossNum);//성욱님 요구사항으로 웨이브마다 +1마리씩 더 스폰 
                 for (int j = 0; j < spawnZone.Count; j++)
                 {
                     GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetNormal[i].spawnMonster);
                     if (monster != null && spawnPoints[spawnZone[j]].GetComponent<SpawnZone>().Spawnable)
                     {
-                        SpawnMonster(ref monster, spawnPoints[spawnZone[j]].position);
+                        SpawnMonsterSet(ref monster, spawnPoints[spawnZone[j]].position);
                     }
                     else
                     {
@@ -117,10 +124,28 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             temp.currentTime += Time.deltaTime;
             dataSetNormal[i] = temp;
         }
+    }
 
-        //보스 스폰
-        if (bossNum  <dataSetBoss.Count && dataSetBoss[bossNum].realStartSpawnTime < currentTime)
+    private void SpawnBossMonster()
+    {
+        if (bossNum < dataSetBoss.Count && dataSetBoss[bossNum].realStartSpawnTime < currentTime)
         {
+
+            int childCnt = GameObject.Find("ObjectPoolSet").transform.childCount;
+            for(int i=0;i< childCnt; i++)
+            {
+                GameObject obj = GameObject.Find("ObjectPoolSet").transform.GetChild(i).gameObject;
+                for(int j=0;j< dataSetNormal.Count; j++)
+                {
+                    if (dataSetNormal[j].spawnMonster.Equals(obj.name))
+                    {
+                        ObjectPoolManager.Instance.DisableGameObject(obj);
+                    }
+                }
+            }
+
+
+            //몬스터 소환 time 초기화
             for (int i = 0; i < dataSetNormal.Count; i++)
             {
                 SpawnData temp = dataSetNormal[i];
@@ -128,15 +153,15 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                 dataSetNormal[i] = temp;
             }
 
-
             GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetBoss[bossNum].spawnMonster);
             monster.GetComponent<MonsterEventHandler>().registerHpObserver(registerBossHp);
-            bossNum++;
 
             List<int> spawnZone = RandSpawnList(1);
-            SpawnMonster(ref monster, spawnPoints[spawnZone[0]].position);
+            SpawnMonsterSet(ref monster, spawnPoints[spawnZone[0]].position);
 
-            if(bossMessageCoroutine!=null)
+            bossNum++;
+
+            if (bossMessageCoroutine != null)
                 StopCoroutine(bossMessageCoroutine);
             bossMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "보스 등장", 6, 0);
             StartCoroutine(bossMessageCoroutine);
@@ -144,16 +169,15 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             //TO-DO 데이터 셋으로 받게 수정 필요
             currentTime = -60f;//다음 웨이브 시작시간 
 
-            if(waveMessageCoroutine!=null)
+            if (waveMessageCoroutine != null)
                 StopCoroutine(waveMessageCoroutine);
             waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + bossNum, 6, 60);
             StartCoroutine(waveMessageCoroutine);
-
-            
         }
     }
-    
-    private void SpawnMonster(ref GameObject monster, Vector3 _vec)
+
+
+    private void SpawnMonsterSet(ref GameObject monster, Vector3 _vec)
     {
         MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(monster.name);
         monster.GetComponent<MonsterStatus>().Hp = (int)((float)md.monsterHp * dataSetWave[bossNum].hpScale);

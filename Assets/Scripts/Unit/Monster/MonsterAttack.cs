@@ -83,6 +83,9 @@ public class MonsterAttack : IAttack
                     Skill skill = mMonsterSkill[skillNum].GetComponent<Skill>();
                     SkillLaunchType skillLaunchType = (SkillLaunchType)Enum.Parse(typeof(SkillLaunchType), skill.Spec.SkillLaunchType);
                     int count = skill.Spec.SkillCount;
+
+                    //Base데미지 설정
+                    gameObject.GetComponent<MonsterStatus>().BaseDamage = md.skillAttackPower[skillNum];
                     FireSkillLaunchType(skillLaunchType, skill, count,
                             GameObject.Find("PlayerObject").transform.position, firePosition.transform.position, false);
                     StartCoroutine(SkillStopTime(skill.Spec.SkilStopTime, skillNum));
