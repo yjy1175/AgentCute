@@ -11,6 +11,8 @@ public class PlayerUI : IUI
     private Transform mExpBar;
     [SerializeField]
     private Text mGoldText;
+    [SerializeField]
+    private Text mPauseLevelText;
 
     
 
@@ -25,6 +27,7 @@ public class PlayerUI : IUI
         mHpBar = mStatusObject.transform.Find("HpBar");
         mExpBar = mStatusObject.transform.Find("ExpBar");
         mGoldText = GameObject.Find("Gold").transform.GetChild(2).GetComponent<Text>();
+        mPauseLevelText = GameObject.Find("Canvas").transform.Find("PausePannel").transform.GetChild(0).GetChild(1).GetComponent<Text>();
     }
 
     // Start is called before the first frame update
@@ -46,9 +49,10 @@ public class PlayerUI : IUI
     {
 
         mLevelBar.transform.Find("LevelText").GetComponent<Text>().text = "Lv." + _level;
+        mPauseLevelText.text = _level.ToString();
         // 레벨업 시 스텟선택창 팝업하는 API 호출
         // TO-DO : UIManager에 이벤트 등록 하기
-        if(_level != 1)
+        if (_level != 1)
             UIManager.Instance.StatusSelectPannelOn();
     }
 

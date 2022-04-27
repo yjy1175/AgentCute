@@ -77,7 +77,7 @@ public class MapManager : SingleToneMaker<MapManager>
     {
         // 맵번호를 랜덤으로 뽑고
         MapType  ranNum = (MapType)Random.Range((int)MapType.Field, (int)MapType.Exit);
-        mCurrentMapType = ranNum;
+        mCurrentMapType = MapType.Field;
         // 해당 맵을 Dic에서 불러온후
         GameObject newMap = maps[mCurrentMapType.ToString()];
         // Grid안에 생성해준다

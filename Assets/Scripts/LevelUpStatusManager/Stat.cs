@@ -75,6 +75,14 @@ public class Stat
         get { return mStatUnit; }
         set { mStatUnit = value; }
     }
+
+    private LevelUpStatusEventHandler mHendler = new LevelUpStatusEventHandler();
+    public LevelUpStatusEventHandler Hendler
+    {
+        get { return mHendler; }
+        set { mHendler = value; }
+    }
+
     [SerializeField]
     private int mSelectCount;
     public int SelectCount
@@ -99,6 +107,6 @@ public class Stat
     public void PlusSelectCount()
     {
         mSelectCount++;
-        Debug.Log(mDesc + "À» 1È¸ Âï¾ú½À´Ï´Ù. ÃÑ " + mSelectCount + "È¸ / " + mSelectMaxCount + "È¸");
+        mHendler.ChangeValue(mSelectCount, mType);
     }
 }

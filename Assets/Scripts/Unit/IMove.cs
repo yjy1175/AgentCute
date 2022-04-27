@@ -48,6 +48,7 @@ public abstract class IMove : MonoBehaviour
         if (mMoveable)
         {
             mMoveable = false;
+            Debug.Log("경직 기다리는 중..");
             yield return new WaitForSeconds(_time);
             mMoveable = true;
         }

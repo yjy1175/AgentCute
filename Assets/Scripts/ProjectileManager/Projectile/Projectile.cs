@@ -89,6 +89,19 @@ public abstract class Projectile : MonoBehaviour
                         ObjectPoolManager.Instance.DisableGameObject(gameObject);
                     }
                 }
+                // 경직 확인
+                float tmpStiffTime = collision.gameObject.CompareTag("Monster") ? GameObject.Find("PlayerObject").GetComponent<IAttack>().StiffTime : 0f;
+                if (Spec.StiffTime + tmpStiffTime > 0)
+                {
+                    // 기본공격일 경우
+                    if (Spec.Type == GameObject.Find("PlayerObject").GetComponent<IAttack>().CurrentBaseSkill.Spec.getProjectiles()[0])
+                    {
+                        collision.GetComponent<IMove>().StopStiffTime(Spec.StiffTime + tmpStiffTime);
+                    }
+                    // 타 스킬일 경우
+                    else
+                        collision.GetComponent<IMove>().StopStiffTime(Spec.StiffTime);
+                }
             }
         }
     }

@@ -184,6 +184,7 @@ public class UIManager : SingleToneMaker<UIManager>
         mThirdSelectImage.sprite = LevelUpStatusManager.Instance.SelectSlotImage(3);
 
         mStatusSelectPannel.SetActive(true);
+        mPausePannel.SetActive(true);
     }
     public void ClickedSelectStatus(int _num)
     {
@@ -192,6 +193,7 @@ public class UIManager : SingleToneMaker<UIManager>
         // 게임 재개
         GameRestart();
         mStatusSelectPannel.SetActive(false);
+        mPausePannel.SetActive(false);
     }
     public void GameOverPannelOn()
     {

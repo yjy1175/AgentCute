@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public abstract class IStatus : MonoBehaviour
@@ -193,6 +194,7 @@ public abstract class IStatus : MonoBehaviour
         set
         {
             currentWeapon = value;
+            GameObject.Find("Canvas").transform.Find("PausePannel").transform.GetChild(1).GetChild(1).GetComponent<Text>().text = currentWeapon.Spec.TypeName;
         }
         get
         {
@@ -547,11 +549,6 @@ public abstract class IStatus : MonoBehaviour
                             GetComponent<BoxCollider2D>().size.x * projectile.Spec.Knockback);
                     }
                 }
-                // 경직 확인
-                if(projectile.Spec.StiffTime + mAddStiffTime > 0)
-                {
-                    GetComponent<IMove>().StopStiffTime(projectile.Spec.StiffTime + mAddStiffTime);
-                }
             }
             // 데미지 입히기 및 데미지 박스 띄우기(타입별)
             ChangeHpForDamage(projectile, projectile.Spec.ProjectileDamageType, projectile.Damage);
@@ -580,7 +577,7 @@ public abstract class IStatus : MonoBehaviour
             case ProjectileManager.DamageType.SplitByTime:
                 int splitnum = (int)(obj.Spec.SpawnTime / obj.Spec.ProjectileDamageSplitSec);
                 int damage = _damage / splitnum;
-                StartCoroutine(CoSplitByTime(obj.Spec.ProjectileDamageSplitSec, splitnum, damage, obj.IsCriticalDamage, transform.position));
+                StartCoroutine(CoSplitByTime(obj.Spec.ProjectileDamageSplitSec, splitnum, damage, obj.IsCriticalDamage));
                 break;
         }
     }
@@ -600,14 +597,14 @@ public abstract class IStatus : MonoBehaviour
         }
     }
 
-    IEnumerator CoSplitByTime(float _time, int _splitNum, int _damage, bool _isCritical, Vector3 _pos)
+    IEnumerator CoSplitByTime(float _time, int _splitNum, int _damage, bool _isCritical)
     {
         int num = _splitNum;
         while (num > 0)
         {
             num--;
             DamageHp = _damage;
-            DrawDamageBox(_isCritical, _damage, _pos);
+            DrawDamageBox(_isCritical, _damage, transform.position);
             yield return new WaitForSeconds(_time);
         }
     }
