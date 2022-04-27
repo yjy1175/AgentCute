@@ -103,11 +103,19 @@ public class SkillSpec : EquipSpec
     }
 
     [SerializeField]
-    private float mSkilStopTime;
-    public float SkilStopTime
+    private float mSkillStartTime;
+    public float SkillStartTime
     {
-        get { return mSkilStopTime; }
-        set { mSkilStopTime = value; }
+        get { return mSkillStartTime; }
+        set { mSkillStartTime = value; }
+    }
+
+    [SerializeField]
+    private float mSkillStopTime;
+    public float SkillStopTime
+    {
+        get { return mSkillStopTime; }
+        set { mSkillStopTime = value; }
     }
 
     [SerializeField]

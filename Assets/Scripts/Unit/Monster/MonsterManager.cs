@@ -13,6 +13,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
         public MapManager.MapType monsterSpawnMap;
         public string monsterInName;
         public int monsterSize;
+        public string monsterType;
         public string monsterName;
         public MonsterGrade monsterGrade;
         public int monsterHp;
@@ -123,6 +124,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
             md.id = int.Parse(monsterDataCsv[idx]["ID"].ToString());
             md.monsterSpawnMap = (MapManager.MapType)Enum.Parse(typeof(MapManager.MapType), monsterDataCsv[idx]["MonsterSpawnMap"].ToString());
             md.monsterSize = int.Parse(monsterDataCsv[idx]["MonsterSize"].ToString());
+            md.monsterType = monsterDataCsv[idx]["MonsterType"].ToString();
             md.monsterName = monsterDataCsv[idx]["MonsterName"].ToString();
             md.monsterGrade = (MonsterGrade)Enum.Parse(typeof(MonsterGrade), monsterDataCsv[idx]["MonsterGrade"].ToString());
             md.monsterHp = int.Parse(monsterDataCsv[idx]["MonsterHp"].ToString());
