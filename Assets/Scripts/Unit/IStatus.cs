@@ -442,7 +442,7 @@ public abstract class IStatus : MonoBehaviour
                 break;
             // HPÈ¸º¹
             case LevelUpStatusManager.StatType.RecoverHP:
-                PotionHp += (int)_stat.StatIncrease;
+                PotionHp = (int)_stat.StatIncrease;
                 break;
         }
     }

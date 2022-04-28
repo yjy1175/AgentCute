@@ -163,14 +163,18 @@ public class MonsterAttack : IAttack
                             GameObject.Find("PlayerObject").transform.position, firePosition.transform.position, false);
 
         //스킬사용 동안 멈춤
-        gameObject.GetComponent<IStatus>().MoveSpeed = 0;
+        // 무브스피드를 조정하는 것이아니라 bool형변수로 컨트롤해야합니다.
+        // 초기 설정되었던 보스몬스터의 이속이 스킬을 사용한 이후 1로 변경이 됩니다.
+        //gameObject.GetComponent<IStatus>().MoveSpeed = 0;
+        gameObject.GetComponent<IMove>().MMoveable = false;
         transform.GetComponent<Animator>().SetTrigger(MonsterManager.Instance.GetMonsterData(gameObject.name).skillAttackAnimation[_skillNum]);
         mIsUsingSkill = true;
         yield return new WaitForSeconds(skill.Spec.SkillStopTime);
 
         //다시 움직이는 애니메이션으로 동작
         transform.GetComponent<Animator>().SetTrigger("Walk");
-        gameObject.GetComponent<IStatus>().MoveSpeed = 1;
+        //gameObject.GetComponent<IStatus>().MoveSpeed = 1;
+        gameObject.GetComponent<IMove>().MMoveable = true;
         mIsUsingSkill = false;
     }
 

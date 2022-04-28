@@ -206,7 +206,6 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         for (int idx = 0; idx < waveData.Count; idx++)
         {
             WaveData ws = new WaveData();
-            Debug.Log("ws.hpScale :" + waveData[idx]["HpScale"]);
             ws.hpScale = float.Parse(waveData[idx]["HpScale"].ToString());
             dataSetWave.Add(ws);
         }

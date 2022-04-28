@@ -131,7 +131,7 @@ public class PlayerStatus : IStatus
         {
             return (int)(0.7 * mPlayerMaxExp);
         }
-        else if (_md == MonsterManager.MonsterGrade.Normal)
+        else if (_md == MonsterManager.MonsterGrade.Normal || _md == MonsterManager.MonsterGrade.Range)
         {
             return 1;
         }
