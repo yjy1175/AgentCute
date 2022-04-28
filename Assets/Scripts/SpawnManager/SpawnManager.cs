@@ -180,8 +180,17 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     private void SpawnMonsterSet(ref GameObject monster, Vector3 _vec)
     {
         MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(monster.name);
-        monster.GetComponent<MonsterStatus>().Hp = (int)((float)md.monsterHp * dataSetWave[bossNum].hpScale);
-        monster.GetComponent<MonsterStatus>().MaxHP = (int)((float)md.monsterHp * dataSetWave[bossNum].hpScale);
+        if(md.monsterGrade == MonsterManager.MonsterGrade.Boss)
+        {
+            monster.GetComponent<MonsterStatus>().Hp = md.monsterHp;
+            monster.GetComponent<MonsterStatus>().MaxHP = md.monsterHp;
+            
+        }
+        else {
+            monster.GetComponent<MonsterStatus>().Hp = (int)((float)md.monsterHp * dataSetWave[bossNum].hpScale);
+            monster.GetComponent<MonsterStatus>().MaxHP = (int)((float)md.monsterHp * dataSetWave[bossNum].hpScale);
+        }
+
         monster.GetComponent<MonsterStatus>().Size = md.monsterSize;
         monster.GetComponent<MonsterStatus>().MonsterGrade= md.monsterGrade;
         monster.GetComponent<MonsterStatus>().MonsterInName = md.monsterInName;
