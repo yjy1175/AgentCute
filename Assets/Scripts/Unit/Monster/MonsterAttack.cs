@@ -4,6 +4,8 @@ using UnityEngine;
 using System;
 public class MonsterAttack : IAttack
 {
+    private bool DEBUG = true;
+
     protected int mCloseAttackPower;
     protected int mCloseAttackRange;
     protected int mStandoffAttackPower;
@@ -95,7 +97,7 @@ public class MonsterAttack : IAttack
                 //스킬 사용
                 if (skillNum != -1)
                 {
-                    StartCoroutine(SkillStopTime(skillNum));
+                    StartCoroutine(UseSkill(skillNum));
                 }
             }
             tempTime = tempTileMax;
@@ -144,36 +146,57 @@ public class MonsterAttack : IAttack
     }
 
 
-    private IEnumerator SkillStopTime(int _skillNum)
+    //_skillNum으로 등록된 스킬을 사용합니다
+    //애니메이션의 event작업을 지양하기 위해서 애니메이션중 스킬이 나가야하는 모션을 코드로 관리하도록 되어있습니다
+    //1. 스킬 대미지 설정   -> TO DO : projectile로 넘길수 있는 방법이 있을지 확인해봐야함 만약 맵에 이전 스킬의 영향이 남아있으면 새 스킬 BaseDamage로 설정되는 버그가 발생할 수 있음
+    //2. 스킬 사용시 멈춤설정
+    //3. 스킬 모션 동작.
+    //4. 모션 중 스킬이 발동되더야할 시점까지 wait
+    //5. 스킬발사
+    //6. 스킬 동작시간 동안 멈춤
+    //7. 다시 움직이는 애니메이션 동작
+    private IEnumerator UseSkill(int _skillNum)
     {
         MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(gameObject.name);
         Skill skill = mMonsterSkill[_skillNum].GetComponent<Skill>();
+
+        //1. 스킬 대미지 설정
         SkillLaunchType skillLaunchType = (SkillLaunchType)Enum.Parse(typeof(SkillLaunchType), skill.Spec.SkillLaunchType);
         gameObject.GetComponent<MonsterStatus>().BaseDamage = md.skillAttackPower[_skillNum];
 
-        //애니메이션에서 스킬 발사 이전모션까지는 대기
+        //2. 스킬 사용시 멈춤설정
+        gameObject.GetComponent<IMove>().MMoveable = false;
+
+        if (DEBUG)
+            Debug.Log(gameObject.name + " 대기시간" + skill.Spec.SkillStartTime);
+
+        //3. 스킬 모션 동작.
+        transform.GetComponent<Animator>().SetTrigger(MonsterManager.Instance.GetMonsterData(gameObject.name).skillAttackAnimation[_skillNum]);
+
+        //4. 모션 중 스킬이 발동되더야할 시점까지 wait
         yield return new WaitForSeconds(skill.Spec.SkillStartTime);
 
+        if (DEBUG)
+            Debug.Log(gameObject.name + " 스킬발사");
 
-        //Base데미지 설정
-        gameObject.GetComponent<MonsterStatus>().BaseDamage = md.skillAttackPower[_skillNum];
 
-        //스킬발사
+        //5. 스킬발사
         FireSkillLaunchType(skillLaunchType, skill, skill.Spec.SkillCount,
                             GameObject.Find("PlayerObject").transform.position, firePosition.transform.position, false);
-
-        //스킬사용 동안 멈춤
-        // 무브스피드를 조정하는 것이아니라 bool형변수로 컨트롤해야합니다.
-        // 초기 설정되었던 보스몬스터의 이속이 스킬을 사용한 이후 1로 변경이 됩니다.
-        //gameObject.GetComponent<IStatus>().MoveSpeed = 0;
-        gameObject.GetComponent<IMove>().MMoveable = false;
-        transform.GetComponent<Animator>().SetTrigger(MonsterManager.Instance.GetMonsterData(gameObject.name).skillAttackAnimation[_skillNum]);
         mIsUsingSkill = true;
+
+        if (DEBUG)
+            Debug.Log(gameObject.name + " 스킬동작동안 멈춤시간 :" + skill.Spec.SkillStopTime);
+
+
+        //6. 스킬 동작시간동안 멈춤
         yield return new WaitForSeconds(skill.Spec.SkillStopTime);
 
-        //다시 움직이는 애니메이션으로 동작
+        if (DEBUG)
+            Debug.Log(gameObject.name + " Walk로 전환");
+
+        //7. 다시 움직이는 애니메이션 동작
         transform.GetComponent<Animator>().SetTrigger("Walk");
-        //gameObject.GetComponent<IStatus>().MoveSpeed = 1;
         gameObject.GetComponent<IMove>().MMoveable = true;
         mIsUsingSkill = false;
     }
