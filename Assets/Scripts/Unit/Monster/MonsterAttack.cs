@@ -13,7 +13,7 @@ public class MonsterAttack : IAttack
 
 
     private float tempTime = 0f;
-    private float tempTileMax = 2f;
+    private float tempTileMax = 3f;
 
     private bool mIsUsingSkill;
 

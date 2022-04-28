@@ -55,7 +55,6 @@ public class IAttack : MonoBehaviour
     protected GameObject firstProjectile;
 
 
-    //TO-Do value가 List<Projectile>로 변경 
     protected SkillDic TileDict;
     public GameObject firePosition;
 

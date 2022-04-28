@@ -1,37 +1,37 @@
 ID,MonsterSpawnMap,MonsterInName,MonsterType,MonsterSize,MonsterName,MonsterGrade,MonsterHp,MonsterPhysicalDefense,MonsterMagicDefense,MonsterSpeed,MonsterAttackSpeed,CloseAttackPower,CloseAttackRange,SkillAttackPower1,SkillAttackPowerRange1,SkillAttackAnimation1,SkillAttackPower2,SkillAttackPowerRange2,SkillAttackAnimation2,SkillAttackPower3,SkillAttackPowerRange3,SkillAttackAnimation3,SkillAttackPower4,SkillAttackPowerRange4,SkillAttackAnimation4,CloseAttackAnimation,HitAnimation,MonsterAI,ChaseAnimation,DeathAnimation,MonsterDrop
-0,Field,GoblinWorker,Goblin,1,∞Ì∫Ì∏∞ ¿œ≤€,Normal,20,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,Goblin Worker Hit.anim,null,Goblin Worker Walk.anim,Goblin Worker Die.anim,null
-1,Field,GoblinBomber,Goblin,1,∞Ì∫Ì∏∞ ∆¯≈∫∫¥,Range,30,0,0,1,1,1,1,2,5,GoblinBomberAttack,0,0,-1,0,0,-1,0,0,-1,null,Goblin Bomber Hit.anim,null,Goblin Bomber Walk.anim,Goblin Bomber Die.anim,null
-2,Field,GoblinShaman,Goblin,1,∞Ì∫Ì∏∞ ª˛∏’,Normal,40,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,Goblin Shaman Hit.anim,null,Goblin Shama Walk.anim,Goblin Shaman Die.anim,null
-3,Field,GoblinAssassin,Goblin,1,∞Ì∫Ì∏∞ æÓΩÿΩ≈,Normal,60,0,0,3,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,Goblin Assassin Hit.anim,null,Goblin Assassin Walk.anim,Goblin Assassin Die.anim,null
-4,Field,GiantSlime1,Slime,2,¿⁄¿Ãæ∆Æ ΩΩ∂Û¿” 1,Boss,"2,000",0,0,2,1,2,1,10,5,GiantSlimeMotionA,20,5,GiantSlimeMotionA,30,2,GiantSlimeMotionB,3,5,GiantSlimeMotionA,null,Giant Slime Hit.anim,GiantSlime1AI,Giant Slime Walk.anim,Giant Slime Die.anim,null
-5,Field,GiantSlime2,Slime,2,¿⁄¿Ãæ∆Æ ΩΩ∂Û¿” 2,Boss,"3,000",0,0,2,1,3,1,2,5,GiantSlimeMotionA,2,5,GiantSlimeMotionA,4,2,GiantSlimeMotionB,4,5,GiantSlimeMotionA,null,Giant Slime Hit.anim,GiantSlime2AI,Giant Slime Walk.anim,Giant Slime Die.anim,null
-6,Field,GiantSlime3,Slime,2,¿⁄¿Ãæ∆Æ ΩΩ∂Û¿” 3,Boss,"4,000",0,0,2,1,3,1,3,5,GiantSlimeMotionA,3,5,GiantSlimeMotionA,5,2,GiantSlimeMotionB,5,5,GiantSlimeMotionA,null,Giant Slime Hit.anim,GiantSlime3AI,Giant Slime Walk.anim,Giant Slime Die.anim,null
-7,Field,Mimic,Mimic,1,πÃπÕ,Normal,50,0,0,2,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,null,null,Mimic Walk.anim,Mimic Die.anim,0/1/2/3/4
-8,Field,FieldDragon,Dragon,2,« µÂµÂ∑°∞Ô,Boss,"50,000",0,0,2,1,8,2,4,5,FieldDragonMotionA.anim,4,5,FieldDragonMotionA.anim,8,7,FieldDragonMotionB.anim,6,5,FieldDragonMotionC.anim,null,FieldDragonHit.anim,FieldDragonAI,FieldDragonWalk.anim,FieldDragonDie.anim,null
-9,Ice,IceElemental,empty,1,æÛ¿Ωø¯º“,Normal,20,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,IceElementalHit.anim,null,IceElementalWalk.anim,IceElementalDie.anim,null
-10,Ice,Penguin,empty,1,∆Î±œ,Normal,30,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,PenguinHit.anim,null,PenguinWalk.anim,PenguinDie.anim,null
-11,Ice,JackaPole,empty,1,º¯∑œ≈‰≥¢,Normal,50,0,0,2,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,JackPoleHit.anim,null,JackPoleWalk.anim,JackPoleDie.anim,null
-12,Ice,FariyDragon,empty,1,ø‰¡§øÎ,Range,100,0,0,1,1,1,1,2,0,FairyDragonAttack.anim,0,0,-1,0,0,-1,0,0,-1,null,FairyDragonHit.anim,null,FariyDragonWalk.anim,FairyDragonDie.anim,null
-13,Ice,Yeti1,empty,2,øπ∆º1,Boss,"2,500",0,0,2,1,2,1,2,5,YetiMotionA.anim,3,5,YetiMotionA.anim,3,2,YetiMotionA.anim,2,5,YetiMotionB.anim,null,YetiHit.anim,YetiAI,YetiWlak.anim,YetiDie.anim,null
-14,Ice,Yeti2,empty,2,øπ∆º2,Boss,"3,500",0,0,2,1,3,1,3,5,YetiMotionA.anim,4,5,YetiMotionA.anim,4,2,YetiMotionA.anim,3,5,YetiMotionB.anim,null,YetiHit.anim,YetiAI,YetiWlak.anim,YetiDie.anim,null
-15,Ice,Yeti3,empty,2,øπ∆º3,Boss,"4,500",0,0,2,1,3,1,4,5,YetiMotionA.anim,5,5,YetiMotionA.anim,5,2,YetiMotionA.anim,4,5,YetiMotionB.anim,null,YetiHit.anim,YetiAI,YetiWlak.anim,YetiDie.anim,null
-16,Ice,Mimic,empty,1,πÃπÕ,Normal,50,0,0,2,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,null,null,Mimic Walk.anim,Mimic Die.anim,0/1/2/3/4
-17,Ice,IceDragon,empty,2,æ∆¿ÃΩ∫µÂ∑°∞Ô,Boss,"50,000",0,0,2,1,8,2,4,5,IceDragonMotionA.anim,4,5,IceDragonMotionA.anim,8,7,IceDragonMotionB.anim,6,5,IceDragonMotionB.anim,null,IceDragonHit.anim,IceDragonAI,IceDragonWalk.anim,IceDragonDie.anim,null
-18,Volcano,FireElemental,empty,1,»≠ø∞ø¯º“,Normal,20,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,FireElementalHit.anim,null,FireElementalWalk.anim,FireElementalDie.anim,null
-19,Volcano,Imp,empty,1,¿”«¡,Range,30,0,0,1,1,1,1,1,0,-1,0,0,-1,0,0,-1,0,0,-1,null,ImpHit.anim,null,ImpWalk.anim,ImpDie.anim,null
-20,Volcano,Boar,empty,1,∫∏æÓ,Normal,60,0,0,2,1,2,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,BoarHit.anim,null,BoarWalk.anim,BoarDie.anim,null
-21,Volcano,Demon,empty,1,µ•∏Û,Range,80,0,0,1,1,1,1,2,0,-1,0,0,-1,0,0,-1,0,0,-1,null,DemonHit.anim,null,DemonWalk.anim,DemonDie.anim,null
-22,Volcano,Ifrit1,empty,2,¿Ã«¡∏Æ∆Æ1,Boss,"2,800",0,0,2,1,2,1,1,5,IfritMotionA.anim,3,5,IfritMotionA.anim,2,5,IfritMotionA.anim,3,2,IfritMotionB.anim,null,IfritHit.anim,IfritAI,IfritWalk.anim,IfritDie.anim,null
-23,Volcano,Ifrit2,empty,2,¿Ã«¡∏Æ∆Æ2,Boss,"3,800",0,0,2,1,3,1,2,5,IfritMotionA.anim,4,5,IfritMotionA.anim,3,5,IfritMotionA.anim,4,2,IfritMotionB.anim,null,IfritHit.anim,IfritAI,IfritWalk.anim,IfritDie.anim,null
-24,Volcano,Ifrit3,empty,2,¿Ã«¡∏Æ∆Æ3,Boss,"4,800",0,0,2,1,3,1,3,5,IfritMotionA.anim,5,5,IfritMotionA.anim,4,5,IfritMotionA.anim,5,2,IfritMotionB.anim,null,IfritHit.anim,IfritAI,IfritWalk.anim,IfritDie.anim,null
-25,Volcano,FireDragon,empty,2,»≠ø∞µÂ∑°∞Ô,Boss,"50,000",0,0,2,1,8,2,4,5,FireDragonMotionA.anim,4,5,FireDragonMotionA.anim,8,5,FireDragonMotionA.anim,6,2,FireDragonMotionB.anim,null,IfritHit.anim,IfritAI,IfritWalk.anim,IfritDie.anim,null
-26,Volcano,Mimic,empty,1,πÃπÕ,Normal,50,0,0,2,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,null,null,Mimic Walk.anim,Mimic Die.anim,0/1/2/3/4
-27,Dungeon,Bat,empty,1,π⁄¡„,Normal,20,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,BatHit.anim,null,BatWalk.anim,BatDie.anim,null
-28,Dungeon,SkeletalWarrior,empty,1,«ÿ∞Ò¿¸ªÁ,Normal,30,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,SkeletalWarriorHit.anim,null,SkeletalWarriorWalk.anim,SkeletalWarriorDie.anim,null
-29,Dungeon,Gargoyle,empty,3,∞°∞Ì¿œ,Range,50,0,0,1,1,1,1,2,0,,0,0,,0,0,,0,0,0,null,GargoyleHit.anim,null,GargoyleWalk.anim,GargoyleDie.anim,null
-30,Dungeon,Ghoul,empty,1,±∏øÔ,Normal,60,0,0,1,1,2,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,GhoulHit.anim,null,GhoulWalk.anim,GhoulDie.anim,null
-31,Dungeon,Wendigo1,empty,2,¿¢µ∞Ì1,Boss,"2,400",0,0,2,1,-1,1,0,0,0,0,0,0,0,0,0,0,0,0,null,WendigoHit.anim,WendigoAI,WendigoWalk.anim,WendigoDie.anim,null
-32,Dungeon,Wendigo2,empty,2,¿¢µ∞Ì2,Boss,"3,400",0,0,2,1,-1,1,0,0,0,0,0,0,0,0,0,0,0,0,null,WendigoHit.anim,WendigoAI,WendigoWalk.anim,WendigoDie.anim,null
-33,Dungeon,Wendigo3,empty,2,¿¢µ∞Ì3,Boss,"4,400",0,1,2,1,-1,1,0,0,0,0,0,0,0,0,0,0,0,0,null,WendigoHit.anim,WendigoAI,WendigoWalk.anim,WendigoDie.anim,null
-34,Dungeon,DarkDragon,empty,2,¥Ÿ≈©µÂ∑°∞Ô,Boss,"50,000",0,0,2,1,-1,1,4,0,DarkDragonMotionA.anim,4,0,DarkDragonMotionA.anim,8,0,DarkDragonMotionA.anim,6,0,DarkDragonMotionB.anim,null,DarkDragonHit.anim,DarkDragonAI,DarkDragonWalk.anim,DarkDragonDie.anim,null
-35,Dungeon,Mimic,empty,1,πÃπÕ,Normal,50,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,null,null,Mimic Walk.anim,Mimic Die.anim,0/1/2/3/4
+0,Field,GoblinWorker,Goblin,1,Í≥†Î∏îÎ¶∞ ÏùºÍæº,Normal,20,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,Goblin Worker Hit.anim,null,Goblin Worker Walk.anim,Goblin Worker Die.anim,null
+1,Field,GoblinBomber,Goblin,1,Í≥†Î∏îÎ¶∞ Ìè≠ÌÉÑÎ≥ë,Range,30,0,0,1,1,1,1,2,5,GoblinBomberAttack,0,0,-1,0,0,-1,0,0,-1,null,Goblin Bomber Hit.anim,null,Goblin Bomber Walk.anim,Goblin Bomber Die.anim,null
+2,Field,GoblinShaman,Goblin,1,Í≥†Î∏îÎ¶∞ ÏÉ§Î®º,Normal,40,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,Goblin Shaman Hit.anim,null,Goblin Shama Walk.anim,Goblin Shaman Die.anim,null
+3,Field,GoblinAssassin,Goblin,1,Í≥†Î∏îÎ¶∞ Ïñ¥ÏåîÏã†,Normal,60,0,0,3,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,Goblin Assassin Hit.anim,null,Goblin Assassin Walk.anim,Goblin Assassin Die.anim,null
+4,Field,GiantSlime1,Slime,2,ÏûêÏù¥Ïñ∏Ìä∏ Ïä¨ÎùºÏûÑ 1,Boss,"2,000",0,0,2,1,2,1,10,5,GiantSlimeMotionA,20,5,GiantSlimeMotionA,30,2,GiantSlimeMotionB,3,5,GiantSlimeMotionA,null,Giant Slime Hit.anim,GiantSlime1AI,Giant Slime Walk.anim,Giant Slime Die.anim,null
+5,Field,GiantSlime2,Slime,2,ÏûêÏù¥Ïñ∏Ìä∏ Ïä¨ÎùºÏûÑ 2,Boss,"3,000",0,0,2,1,3,1,2,5,GiantSlimeMotionA,2,5,GiantSlimeMotionA,4,2,GiantSlimeMotionB,4,5,GiantSlimeMotionA,null,Giant Slime Hit.anim,GiantSlime2AI,Giant Slime Walk.anim,Giant Slime Die.anim,null
+6,Field,GiantSlime3,Slime,2,ÏûêÏù¥Ïñ∏Ìä∏ Ïä¨ÎùºÏûÑ 3,Boss,"4,000",0,0,2,1,3,1,3,5,GiantSlimeMotionA,3,5,GiantSlimeMotionA,5,2,GiantSlimeMotionB,5,5,GiantSlimeMotionA,null,Giant Slime Hit.anim,GiantSlime3AI,Giant Slime Walk.anim,Giant Slime Die.anim,null
+7,Field,Mimic,Mimic,1,ÎØ∏ÎØπ,Normal,50,0,0,2,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,null,null,Mimic Walk.anim,Mimic Die.anim,0/1/2/3/4
+8,Field,FieldDragon,Dragon,2,ÌïÑÎìúÎìúÎûòÍ≥§,Boss,"50,000",0,0,2,1,8,2,4,8,FieldDragonMotionA,4,8,FieldDragonMotionA,8,7,FieldDragonMotionB,6,5,FieldDragonMotionC,null,FieldDragonHit,FieldDragonAI,FieldDragonWalk,FieldDragonDie,null
+9,Ice,IceElemental,empty,1,ÏñºÏùåÏõêÏÜå,Normal,20,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,IceElementalHit.anim,null,IceElementalWalk.anim,IceElementalDie.anim,null
+10,Ice,Penguin,empty,1,Ìé≠Í∑Ñ,Normal,30,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,PenguinHit.anim,null,PenguinWalk.anim,PenguinDie.anim,null
+11,Ice,JackaPole,empty,1,ÏàúÎ°ùÌÜ†ÎÅº,Normal,50,0,0,2,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,JackPoleHit.anim,null,JackPoleWalk.anim,JackPoleDie.anim,null
+12,Ice,FariyDragon,empty,1,ÏöîÏ†ïÏö©,Range,100,0,0,1,1,1,1,2,0,FairyDragonAttack.anim,0,0,-1,0,0,-1,0,0,-1,null,FairyDragonHit.anim,null,FariyDragonWalk.anim,FairyDragonDie.anim,null
+13,Ice,Yeti1,empty,2,ÏòàÌã∞1,Boss,"2,500",0,0,2,1,2,1,2,5,YetiMotionA.anim,3,5,YetiMotionA.anim,3,2,YetiMotionA.anim,2,5,YetiMotionB.anim,null,YetiHit.anim,YetiAI,YetiWlak.anim,YetiDie.anim,null
+14,Ice,Yeti2,empty,2,ÏòàÌã∞2,Boss,"3,500",0,0,2,1,3,1,3,5,YetiMotionA.anim,4,5,YetiMotionA.anim,4,2,YetiMotionA.anim,3,5,YetiMotionB.anim,null,YetiHit.anim,YetiAI,YetiWlak.anim,YetiDie.anim,null
+15,Ice,Yeti3,empty,2,ÏòàÌã∞3,Boss,"4,500",0,0,2,1,3,1,4,5,YetiMotionA.anim,5,5,YetiMotionA.anim,5,2,YetiMotionA.anim,4,5,YetiMotionB.anim,null,YetiHit.anim,YetiAI,YetiWlak.anim,YetiDie.anim,null
+16,Ice,Mimic,empty,1,ÎØ∏ÎØπ,Normal,50,0,0,2,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,null,null,Mimic Walk.anim,Mimic Die.anim,0/1/2/3/4
+17,Ice,IceDragon,empty,2,ÏïÑÏù¥Ïä§ÎìúÎûòÍ≥§,Boss,"50,000",0,0,2,1,8,2,4,5,IceDragonMotionA.anim,4,5,IceDragonMotionA.anim,8,7,IceDragonMotionB.anim,6,5,IceDragonMotionB.anim,null,IceDragonHit.anim,IceDragonAI,IceDragonWalk.anim,IceDragonDie.anim,null
+18,Volcano,FireElemental,empty,1,ÌôîÏóºÏõêÏÜå,Normal,20,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,FireElementalHit.anim,null,FireElementalWalk.anim,FireElementalDie.anim,null
+19,Volcano,Imp,empty,1,ÏûÑÌîÑ,Range,30,0,0,1,1,1,1,1,0,-1,0,0,-1,0,0,-1,0,0,-1,null,ImpHit.anim,null,ImpWalk.anim,ImpDie.anim,null
+20,Volcano,Boar,empty,1,Î≥¥Ïñ¥,Normal,60,0,0,2,1,2,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,BoarHit.anim,null,BoarWalk.anim,BoarDie.anim,null
+21,Volcano,Demon,empty,1,Îç∞Î™¨,Range,80,0,0,1,1,1,1,2,0,-1,0,0,-1,0,0,-1,0,0,-1,null,DemonHit.anim,null,DemonWalk.anim,DemonDie.anim,null
+22,Volcano,Ifrit1,empty,2,Ïù¥ÌîÑÎ¶¨Ìä∏1,Boss,"2,800",0,0,2,1,2,1,1,5,IfritMotionA.anim,3,5,IfritMotionA.anim,2,5,IfritMotionA.anim,3,2,IfritMotionB.anim,null,IfritHit.anim,IfritAI,IfritWalk.anim,IfritDie.anim,null
+23,Volcano,Ifrit2,empty,2,Ïù¥ÌîÑÎ¶¨Ìä∏2,Boss,"3,800",0,0,2,1,3,1,2,5,IfritMotionA.anim,4,5,IfritMotionA.anim,3,5,IfritMotionA.anim,4,2,IfritMotionB.anim,null,IfritHit.anim,IfritAI,IfritWalk.anim,IfritDie.anim,null
+24,Volcano,Ifrit3,empty,2,Ïù¥ÌîÑÎ¶¨Ìä∏3,Boss,"4,800",0,0,2,1,3,1,3,5,IfritMotionA.anim,5,5,IfritMotionA.anim,4,5,IfritMotionA.anim,5,2,IfritMotionB.anim,null,IfritHit.anim,IfritAI,IfritWalk.anim,IfritDie.anim,null
+25,Volcano,FireDragon,empty,2,ÌôîÏóºÎìúÎûòÍ≥§,Boss,"50,000",0,0,2,1,8,2,4,5,FireDragonMotionA.anim,4,5,FireDragonMotionA.anim,8,5,FireDragonMotionA.anim,6,2,FireDragonMotionB.anim,null,IfritHit.anim,IfritAI,IfritWalk.anim,IfritDie.anim,null
+26,Volcano,Mimic,empty,1,ÎØ∏ÎØπ,Normal,50,0,0,2,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,null,null,Mimic Walk.anim,Mimic Die.anim,0/1/2/3/4
+27,Dungeon,Bat,empty,1,Î∞ïÏ•ê,Normal,20,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,BatHit.anim,null,BatWalk.anim,BatDie.anim,null
+28,Dungeon,SkeletalWarrior,empty,1,Ìï¥Í≥®Ï†ÑÏÇ¨,Normal,30,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,SkeletalWarriorHit.anim,null,SkeletalWarriorWalk.anim,SkeletalWarriorDie.anim,null
+29,Dungeon,Gargoyle,empty,3,Í∞ÄÍ≥†Ïùº,Range,50,0,0,1,1,1,1,2,0,,0,0,,0,0,,0,0,0,null,GargoyleHit.anim,null,GargoyleWalk.anim,GargoyleDie.anim,null
+30,Dungeon,Ghoul,empty,1,Íµ¨Ïö∏,Normal,60,0,0,1,1,2,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,GhoulHit.anim,null,GhoulWalk.anim,GhoulDie.anim,null
+31,Dungeon,Wendigo1,empty,2,Ïõ¨ÎîîÍ≥†1,Boss,"2,400",0,0,2,1,-1,1,0,0,0,0,0,0,0,0,0,0,0,0,null,WendigoHit.anim,WendigoAI,WendigoWalk.anim,WendigoDie.anim,null
+32,Dungeon,Wendigo2,empty,2,Ïõ¨ÎîîÍ≥†2,Boss,"3,400",0,0,2,1,-1,1,0,0,0,0,0,0,0,0,0,0,0,0,null,WendigoHit.anim,WendigoAI,WendigoWalk.anim,WendigoDie.anim,null
+33,Dungeon,Wendigo3,empty,2,Ïõ¨ÎîîÍ≥†3,Boss,"4,400",0,1,2,1,-1,1,0,0,0,0,0,0,0,0,0,0,0,0,null,WendigoHit.anim,WendigoAI,WendigoWalk.anim,WendigoDie.anim,null
+34,Dungeon,DarkDragon,empty,2,Îã§ÌÅ¨ÎìúÎûòÍ≥§,Boss,"50,000",0,0,2,1,-1,1,4,0,DarkDragonMotionA.anim,4,0,DarkDragonMotionA.anim,8,0,DarkDragonMotionA.anim,6,0,DarkDragonMotionB.anim,null,DarkDragonHit.anim,DarkDragonAI,DarkDragonWalk.anim,DarkDragonDie.anim,null
+35,Dungeon,Mimic,empty,1,ÎØ∏ÎØπ,Normal,50,0,0,1,1,1,1,0,0,-1,0,0,-1,0,0,-1,0,0,-1,null,null,null,Mimic Walk.anim,Mimic Die.anim,0/1/2/3/4

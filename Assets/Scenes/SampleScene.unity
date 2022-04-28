@@ -2303,6 +2303,7 @@ MonoBehaviour:
   - {fileID: 2446323715619086419, guid: fb8228e16213124489dba4d54a63219f, type: 3}
   - {fileID: 6925351037122389809, guid: 8948370812fc04a45bf54be0b64a514b, type: 3}
   - {fileID: 3292808676570943718, guid: 01dad85a6f988554faa19d2e5dc00632, type: 3}
+  - {fileID: 7078542621304732530, guid: b77a626d001706847b366a1f65ec01d3, type: 3}
   bossNum: 0
   allMonsterText: {fileID: 511439427}
   currentAllMonsterText: {fileID: 1562465413}
@@ -20302,6 +20303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1749633355}
   - component: {fileID: 1749633354}
+  - component: {fileID: 1749633356}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -20340,6 +20342,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1749633356
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749633353}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 54aa1c11abdcd8b4f8173d293e857661, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1762345154
 GameObject:
   m_ObjectHideFlags: 0
