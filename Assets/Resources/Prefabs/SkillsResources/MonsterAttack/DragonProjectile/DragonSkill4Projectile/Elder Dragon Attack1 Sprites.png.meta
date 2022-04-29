@@ -142,12 +142,12 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 36
         y: 448
-        width: 192
-        height: 64
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+        width: 156
+        height: 50
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -163,12 +163,12 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 384
-        width: 192
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 36
+        y: 385
+        width: 156
+        height: 50
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -184,12 +184,12 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 320
-        width: 192
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 36
+        y: 319
+        width: 156
+        height: 50
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -205,12 +205,12 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 256
-        width: 192
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 36
+        y: 255
+        width: 156
+        height: 50
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -226,12 +226,12 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_4
       rect:
         serializedVersion: 2
-        x: 0
+        x: 36
         y: 192
-        width: 192
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 156
+        height: 50
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -247,12 +247,12 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
-        width: 192
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 36
+        y: 129
+        width: 156
+        height: 50
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -268,12 +268,12 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_6
       rect:
         serializedVersion: 2
-        x: 0
+        x: 36
         y: 64
-        width: 192
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 156
+        height: 50
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -289,12 +289,12 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_7
       rect:
         serializedVersion: 2
-        x: 0
+        x: 36
         y: 0
-        width: 192
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 156
+        height: 50
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

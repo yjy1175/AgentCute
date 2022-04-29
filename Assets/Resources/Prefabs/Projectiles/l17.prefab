@@ -116,7 +116,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0056543997, y: 0.011158829}
@@ -155,7 +155,7 @@ MonoBehaviour:
     mCount: 1
     mAngle: 0
     mSpawnTime: 10
-    mMaxPassCount: 0
+    mMaxPassCount: -1
     mStiffTime: 1
     mKnockback: 1
     mProjectileSizeX: 1
