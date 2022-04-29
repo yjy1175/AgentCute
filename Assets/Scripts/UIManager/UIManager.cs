@@ -102,6 +102,11 @@ public class UIManager : SingleToneMaker<UIManager>
     private bool mIsSelectWeapon = false;
     private bool mIsSelectCostume = false;
 
+    [SerializeField]
+    private float mGamePlayTime;
+    [SerializeField]
+    private Text mGamePlayTimeText;
+
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -110,12 +115,18 @@ public class UIManager : SingleToneMaker<UIManager>
         mIsPause = false;
         mIsOption = false;
         mIsGiveup = false;
+
+        mGamePlayTime = 0f;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (!mIsPause)
+        {
+            mGamePlayTime += Time.deltaTime;
+            mGamePlayTimeText.text = string.Format("{0:N2}", mGamePlayTime);
+        }
     }
 
     #region method
