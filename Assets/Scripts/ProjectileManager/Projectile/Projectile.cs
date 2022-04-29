@@ -74,7 +74,7 @@ public abstract class Projectile : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Monster") || collision.gameObject.CompareTag("Player"))
         {
-            // 包烹 备泅
+                // 包烹 备泅
             // -1 : 公茄 包烹
             if (mIsActive)
             {

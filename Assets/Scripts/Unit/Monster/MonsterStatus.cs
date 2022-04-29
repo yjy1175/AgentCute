@@ -15,7 +15,16 @@ public class MonsterStatus : IStatus
     [SerializeField]
     private MonsterManager.MonsterGrade mMonsterGrade;
 
-     
+
+    public override bool AttackPointSetting(GameObject _obj)
+    {
+        mObjectDamage = mBaseDamage;//여기서 스킬 데미지가 들어가줘야함
+        GetComponent<IEventHandler>().ChangeAttackPoint(mObjectDamage, gameObject);
+        return false;
+    }
+
+
+
     public enum MonsterType
     {
         Normal,

@@ -12,7 +12,9 @@ public class IAttack : MonoBehaviour
         //projectile이 1가지일경우 
         NORMAL,
         //포물선공격
-        THROW
+        THROW,
+        //멀티 런치샷 ex 드래곤 2번스킬
+        LAUNCHMULTISHOT
     }
     // 최종 데미지
     [SerializeField]
@@ -52,7 +54,7 @@ public class IAttack : MonoBehaviour
 
     // 예를 들어 한 스킬에 발사체 2개 이상인데
     // 첫발사체가 disable된 position에서 enable
-    protected GameObject firstProjectile;
+    protected GameObject mFirstProjectile;
 
 
     protected SkillDic TileDict;
@@ -151,35 +153,42 @@ public class IAttack : MonoBehaviour
     * luanchCount = 발사체의 발사 개수 + (static 변수)전체적인 발사체의 발사 개수(레벨업으로 인한)
      * angle = 발사될 발사체의 각도입니다.(즉 발사체끼리의 각도)
     * luanchCount만큼 발사가 되고, 발사될때마다 각도만큼 벌려줍니다.(원뿔형)
+    * 
+    * return List<gameObject> : 발사된 projectile의 Gameobject list를 반환
     */
-    protected void launchProjectile(Skill mSkill, int mProjectileIndex, Vector3 mTargetPos, Vector3 mFirePos, bool mNotSingle)
+    protected List<GameObject> launchProjectile(Skill _skill, int _projectileIndex, Vector3 _targetPos, Vector3 _firePos, bool _notSingle)
     {
+        List<GameObject> objList = new List<GameObject>();
         // 기본공격만 개수 증가
         int launchCount;
-        if (mSkill.Spec.Type == "B")
-            launchCount = TileDict[mSkill][mProjectileIndex].Spec.Count + mProjectileCount;
+        if (_skill.Spec.Type == "B")
+            launchCount = TileDict[_skill][_projectileIndex].Spec.Count + mProjectileCount;
         else
-            launchCount = TileDict[mSkill][mProjectileIndex].Spec.Count;
-        int angle = TileDict[mSkill][mProjectileIndex].Spec.Angle;
+            launchCount = TileDict[_skill][_projectileIndex].Spec.Count;
+        int angle = TileDict[_skill][_projectileIndex].Spec.Angle;
         // 각도가 없을 경우 한발만 발사
         for (int i = 0; i < launchCount; i++)
         {
-            LaunchCorutines(
+            objList.Add(
+                LaunchCorutines(
                 (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * i),
-                TileDict[mSkill][mProjectileIndex].gameObject.name,
-                mTargetPos,
-                mFirePos, mNotSingle);
+                TileDict[_skill][_projectileIndex].gameObject.name,
+                _targetPos,
+                _firePos, _notSingle)
+                );
         }
+        return objList;
     }
 
     /*
     * _angle : 추가 각도 설정입니다.
     * _name : 해당 발사체오브젝트의 name입니다.
+    * return GameObject : 발사된 projectile Gameobject를 반환
     */
-    protected void LaunchCorutines(float _angle, string _name, Vector3 _targetPos, Vector3 _firePos, bool _notSingle)
+    protected GameObject LaunchCorutines(float _angle, string _name, Vector3 _targetPos, Vector3 _firePos, bool _notSingle)
     {
         GameObject obj = ObjectPoolManager.Instance.EnableGameObject(_name);
-        if (_notSingle) firstProjectile = obj;
+        if (_notSingle) mFirstProjectile = obj;
         float keepTime = obj.GetComponent<Projectile>().Spec.SpawnTime;
         Vector3 size = new Vector3(
             obj.GetComponent<Projectile>().Spec.ProjectileSizeX * (1 + mProjectileScale),
@@ -190,8 +199,8 @@ public class IAttack : MonoBehaviour
         obj.GetComponent<Projectile>().CurrentPassCount = 0;
         obj.GetComponent<Projectile>().setEnable(_targetPos, _firePos, _angle);
         obj.GetComponent<Projectile>().setDisableWaitForTime(keepTime);
+        return obj;
     }
-
 
     protected IEnumerator multiLuanch(Skill _skill, int _count, Vector3 _target, Vector3 _fire)
     {
@@ -204,6 +213,32 @@ public class IAttack : MonoBehaviour
             yield return new WaitForSeconds(_skill.Spec.SkillCountTime);
         }
     }
+
+    //_skill의 _projectileIndex번째 스킬을 멀티샷으로 날립니다.
+    //_obj의 위치에서 스킬이 발사됩니다.
+    protected IEnumerator multiLuanch(Skill _skill, int _projectileIndex, int _count, Vector3 _target, GameObject _obj)
+    {
+        for (int i = 0; i < _count; i++)
+        {
+            launchProjectile(_skill, _projectileIndex, _target, _obj.GetComponent<Transform>().position, false);
+            yield return new WaitForSeconds(_skill.Spec.SkillCountTime);
+        }
+    }
+
+
+    private void LaunchInMultilaunchSkil(Skill _skill, int _count, Vector3 _target, Vector3 _fire)
+    {
+        //첫번째 프로젝타일은 쭈욱 발사된다.
+        List<GameObject> projectileList = launchProjectile(_skill, 0, _target, _fire, true);
+
+        //두번째 프로젝 타일은 첫번째 프로젝 타일 기준으로 multi launch를 발사한다
+        //드래곤 2번스킬용으로 미사일이 1가지만 나갈경우
+        //TO-DO : 다른 프로젝타일도 발사해야하는 상황이라면 for문으로 모든 에셋에 대해 추가관리 필요
+        StartCoroutine(multiLuanch(_skill, 1, _count, _target, projectileList[0])); 
+
+    }
+
+
 
     // 발사체 데미지를 설정합니다.
     private void setProjectileData(ref GameObject obj)
@@ -238,6 +273,9 @@ public class IAttack : MonoBehaviour
                 break;
             case SkillLaunchType.THROW:
                 launchProjectile(_skill, 0, _target, _fire, false);
+                break;
+            case SkillLaunchType.LAUNCHMULTISHOT:
+                LaunchInMultilaunchSkil(_skill, _count, _target, _fire);
                 break;
             default:
                 Debug.Log("잘못된 Enum타입 " + _enum.ToString() + "이 들어왔습니다");

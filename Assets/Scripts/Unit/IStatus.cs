@@ -203,7 +203,7 @@ public abstract class IStatus : MonoBehaviour
     }
     // 기본 데미지 증가량
     [SerializeField]
-    private float mAddAttackPoint;
+    protected float mAddAttackPoint;
     public float AddAttackPoint
     {
         get { return mAddAttackPoint; }
@@ -214,11 +214,11 @@ public abstract class IStatus : MonoBehaviour
     }
     // 최종 데미지
     [SerializeField]
-    private int mObjectDamage;
+    protected int mObjectDamage;
 
     // 기본 치명타 확률
     [SerializeField]
-    private float mCriticalChance;
+    protected float mCriticalChance;
     public float CriticalChance
     {
         get { return mCriticalChance; }
@@ -226,7 +226,7 @@ public abstract class IStatus : MonoBehaviour
     }
     // 기본 치명타 확률 추가량
     [SerializeField]
-    private float mAddCriticalChance;
+    protected float mAddCriticalChance;
     public float AddCriticalChance
     {
         get { return mAddCriticalChance; }
@@ -235,7 +235,7 @@ public abstract class IStatus : MonoBehaviour
 
     // 기본 치명타 데미지
     [SerializeField]
-    private float mCriticalDamage;
+    protected float mCriticalDamage;
     public float CriticalDamage
     {
         get { return mCriticalDamage; }
@@ -359,40 +359,8 @@ public abstract class IStatus : MonoBehaviour
      *  매 공격 호출마다 불러와서 공격력 세팅
      *  리턴값은 true일 경우 크리티컬, false일 경우 기본
      */
-    public bool AttackPointSetting(GameObject _obj)
-    {
-        if (_obj.CompareTag("Player"))
-        {
-            // 추후에 무기별 계수를 데이터로 받아와서 조정
-            float ran = UnityEngine.Random.Range(0.8f, 1.2f);
-            // 크리티컬 확률에 따른 랜덤뽑기
-            int criRan = UnityEngine.Random.Range(0, 100);
+    public abstract bool AttackPointSetting(GameObject _obj);
 
-            // 크리티컬 공격
-            if (criRan < (mCriticalChance + mAddCriticalChance) * 100)
-            {
-                mObjectDamage = (int)(((mBaseDamage + currentWeapon.Spec.WeaponDamage) * (ran + mAddAttackPoint)) * mCriticalDamage);
-                GetComponent<IEventHandler>().ChangeAttackPoint(mObjectDamage, gameObject);
-                return true;
-            }
-            // 기본 공격
-            else
-            {
-                mObjectDamage = (int)((mBaseDamage + currentWeapon.Spec.WeaponDamage) * (ran + mAddAttackPoint));
-                GetComponent<IEventHandler>().ChangeAttackPoint(mObjectDamage, gameObject);
-                return false;
-            }
-        }
-        else if (_obj.CompareTag("Monster"))
-        {
-            mObjectDamage = mBaseDamage;
-            GetComponent<IEventHandler>().ChangeAttackPoint(mObjectDamage, gameObject);
-            return false;
-        }
-        else
-            return false;
-
-    }
     public void LevelUpStatus(Stat _stat)
     {
         switch (_stat.Type)

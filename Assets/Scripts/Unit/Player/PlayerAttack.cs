@@ -350,18 +350,18 @@ public class PlayerAttack : IAttack
             {
                 if(i == TileDict[_skill].Count - 1)
                 {
-                    launchProjectile(_skill, i, _target, firstProjectile.GetComponent<Projectile>().MyPos, false);
+                    launchProjectile(_skill, i, _target, mFirstProjectile.GetComponent<Projectile>().MyPos, false);
                 }
                 else
                 {
-                    launchProjectile(_skill, i, _target, firstProjectile.GetComponent<Projectile>().MyPos, true);
+                    launchProjectile(_skill, i, _target, mFirstProjectile.GetComponent<Projectile>().MyPos, true);
                 }
             }
             else
             {
                 launchProjectile(_skill, i, _target, _fire, true);
             }
-            yield return new WaitWhile(() => firstProjectile.activeInHierarchy);
+            yield return new WaitWhile(() => mFirstProjectile.activeInHierarchy);
         }
     }
 

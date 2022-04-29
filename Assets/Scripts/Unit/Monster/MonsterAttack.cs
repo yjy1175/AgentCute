@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 public class MonsterAttack : IAttack
 {
-    private bool DEBUG = true;
+    private bool DEBUG = false;
 
     protected int mCloseAttackPower;
     protected int mCloseAttackRange;

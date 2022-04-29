@@ -59,6 +59,30 @@ public class PlayerStatus : IStatus
     }
 
 
+    public override bool AttackPointSetting(GameObject _obj)
+    {
+        // 추후에 무기별 계수를 데이터로 받아와서 조정
+        float ran = UnityEngine.Random.Range(0.8f, 1.2f);
+        // 크리티컬 확률에 따른 랜덤뽑기
+        int criRan = UnityEngine.Random.Range(0, 100);
+
+        // 크리티컬 공격
+        if (criRan < (mCriticalChance + mAddCriticalChance) * 100)
+        {
+            mObjectDamage = (int)(((mBaseDamage + currentWeapon.Spec.WeaponDamage) * (ran + mAddAttackPoint)) * mCriticalDamage);
+            GetComponent<IEventHandler>().ChangeAttackPoint(mObjectDamage, gameObject);
+            return true;
+        }
+        // 기본 공격
+        else
+        {
+            mObjectDamage = (int)((mBaseDamage + currentWeapon.Spec.WeaponDamage) * (ran + mAddAttackPoint));
+            GetComponent<IEventHandler>().ChangeAttackPoint(mObjectDamage, gameObject);
+            return false;
+        }
+
+    }
+
     public void registerMonsterHp(int _hp, GameObject _obj)
     {
         if (_hp <= 0 && !_obj.GetComponent<MonsterStatus>().mIsDieToGetExp)
