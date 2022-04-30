@@ -142,10 +142,10 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_0
       rect:
         serializedVersion: 2
-        x: 36
+        x: 0
         y: 448
-        width: 156
-        height: 50
+        width: 192
+        height: 64
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +163,10 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_1
       rect:
         serializedVersion: 2
-        x: 36
-        y: 385
-        width: 156
-        height: 50
+        x: 0
+        y: 387
+        width: 192
+        height: 64
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +184,10 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_2
       rect:
         serializedVersion: 2
-        x: 36
-        y: 319
-        width: 156
-        height: 50
+        x: 0
+        y: 321
+        width: 192
+        height: 64
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,10 +205,10 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_3
       rect:
         serializedVersion: 2
-        x: 36
-        y: 255
-        width: 156
-        height: 50
+        x: 0
+        y: 258
+        width: 192
+        height: 64
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,10 +226,10 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_4
       rect:
         serializedVersion: 2
-        x: 36
+        x: 0
         y: 192
-        width: 156
-        height: 50
+        width: 192
+        height: 64
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,10 +247,10 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_5
       rect:
         serializedVersion: 2
-        x: 36
-        y: 129
-        width: 156
-        height: 50
+        x: 0
+        y: 128
+        width: 192
+        height: 64
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,10 +268,10 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_6
       rect:
         serializedVersion: 2
-        x: 36
+        x: 0
         y: 64
-        width: 156
-        height: 50
+        width: 192
+        height: 64
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,10 +289,10 @@ TextureImporter:
       name: Elder Dragon Attack1 Sprites_7
       rect:
         serializedVersion: 2
-        x: 36
+        x: 0
         y: 0
-        width: 156
-        height: 50
+        width: 192
+        height: 64
       alignment: 1
       pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}

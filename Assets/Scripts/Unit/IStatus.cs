@@ -492,7 +492,8 @@ public abstract class IStatus : MonoBehaviour
         }
         else if(_type == Skill.ESkillBuffType.PlayerWeaponSprite)
         {
-            EquipmentManager.Instance.ChangeWeapon(currentWeapon.Spec.Type);
+            PlayerManager.Instance.getPlayerWeaponSprite().sprite = currentWeapon.GetComponent<SpriteRenderer>().sprite;
+            //EquipmentManager.Instance.ChangeWeapon(currentWeapon.Spec.Type);
         }
     }
 

@@ -19,10 +19,15 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
     {
         get { return costumes; }
     }
-
     
-    // key : 몬스터 분류 , value : 해당 몬스터 장비 오브젝트
-    public StringGameObject monsterCurrentEquip;
+    public enum WeaponType
+    {
+        sw,
+        sp,
+        st,
+        bg,
+        Exit
+    }
 
     [Serializable]
     public struct CostumeSprite
@@ -52,6 +57,9 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
     }
 
     private const string NULL = "null";
+
+    [SerializeField]
+    private SpriteRenderer mLobbyPlayerWeaponSprite;
     #endregion
     void Start()
     {
@@ -91,7 +99,8 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                     //item.Spec.WeaponAttackRange = int.Parse(weaponData[i]["WeaponAttackRange"].ToString());
                     item.Spec.WeaponAddSpeed = float.Parse(weaponData[i]["WeaponSPD"].ToString());
 
-                    item.IsLocked = true;
+                    // 추후에 초기 데이터 필요
+                    item.IsLocked = false;
                 }
             }
         }
@@ -127,7 +136,7 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                             item.SetBuffDic((Costume.CostumeBuffType)Enum.Parse(typeof(Costume.CostumeBuffType),tmp[idx]), int.Parse(tmp[++idx]));
                         }
                     }
-                    item.IsLocked = true;
+                    item.IsLocked = false;
                 }
             }
             for (int i = 0; i < costumesList.Length; i++)
@@ -185,7 +194,7 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         // Todo : playerCurrentWeapon의 게임오브젝트 해당 게임오브젝트로 변경
         Weapon cWeapon = weapons[_name].GetComponent<Weapon>();
         // 해금이 되어있다면
-        if (cWeapon.IsLocked)
+        if (!cWeapon.IsLocked)
         {
             if(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().PlayerCurrentWeapon != null)
             {
@@ -203,10 +212,31 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
             // 경고문구 출력
         }
     }
+    public bool ChangeWeaponLobbyPlayer(string _name)
+    {
+        // Todo : playerCurrentWeapon의 게임오브젝트 해당 게임오브젝트로 변경
+        Weapon cWeapon = weapons[_name].GetComponent<Weapon>();
+        // 해금이 되어있다면
+        if (!cWeapon.IsLocked)
+        {
+            if (GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentWeaponName != "")
+            {
+                GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.BaseATK -=
+                    weapons[GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentWeaponName].GetComponent<Weapon>().Spec.WeaponDamage;
+                GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.MoveSpeedRate -=
+                weapons[GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentWeaponName].GetComponent<Weapon>().Spec.WeaponAddSpeed;
+            }
+            GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentWeaponName = _name;
+            mLobbyPlayerWeaponSprite.sprite = cWeapon.GetComponent<SpriteRenderer>().sprite;
+            GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.BaseATK += cWeapon.Spec.WeaponDamage;
+            GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.MoveSpeedRate += cWeapon.Spec.WeaponAddSpeed;
+        }
+        return !cWeapon.IsLocked;
+    }
     public void ChangeCostume(string _name)
     {
         Costume cCostume = costumes[_name].GetComponent<Costume>();
-        if (cCostume.IsLocked)
+        if (!cCostume.IsLocked)
         {
             // 전에 착용하던 코스튬이 있으면 해당 스텟을 빼준다.
             if(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().MPlayerCurrentCostume != null)
@@ -302,7 +332,6 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         List<GameObject> newList = new List<GameObject>();
         foreach(string key in weapons.Keys)
         {
-//            Debug.Log(key);
             string type = weapons[key].GetComponent<Weapon>().Spec.Type.Substring(0, 2);
             if (type == _type)
             {
