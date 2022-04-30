@@ -24,10 +24,10 @@ G,일반스킬,None,sp,돌파,Storm,,전방을 강하게 찔러 생성된 돌풍
 U,궁극기,None,sp,드래고닉 버스트,Dragonic Burst,,"전방의 적들을 무참히 베고, 강력한 에너지를 발산하여 공격합니다.",s14/s15,1,0,1,S,60,-1,2.91,0,2.8,0
 U,궁극기,None,sp,로드 오브 스피어,Lord Of Spear,,"주변을 빠르게 여러 번 베고, 지속 시간(4s) 동안 신성한 창을 소환하여 공격합니다.",s16/s17,1,0,1,S,55,-1,4,0,0.2,0
 M,일반스킬,THROW,Goblin,고블린스킬,GoblinSkill,,플레이어에게 폭탄투사체를 던집니다.,l13,1,0,1,S,1,1,0,0.84,0.25,0
-M,일반스킬,MULTISHOT,Slime,자이언트슬라임스킬1,GiantSlimeSkill1,,8방향으로 투사체를 3번 발사한다,l14,5,0.2,1,S,2,4,1,0,1,0
-M,일반스킬,MULTISHOT,Slime,자이언트슬라임스킬2,GiantSlimeSkill2,,3방향으로투사체를10번발사한다,l15,10,0.2,1,S,2,3,1,0,1,0
-M,일반스킬,NORMAL,Slime,자이언트슬라임스킬3,GiantSlimeSkill3,,위로점프후크게내려찍습니다.,s19,1,0,1,S,2,2,1,0,1.3,0
-M,일반스킬,NORMAL,Slime,자이언트슬라임스킬4,GiantSlimeSkill4,,초록색 산성액을 내뱉어 공격합니다.,s20,1,0,1,S,2,1,1,1.16,0.91,0
+M,일반스킬,MULTISHOT,Slime,자이언트슬라임스킬1,GiantSlimeSkill1,,8방향으로 투사체를 3번 발사한다,l14,5,0.2,1,S,3,4,1,0,1,0
+M,일반스킬,MULTISHOT,Slime,자이언트슬라임스킬2,GiantSlimeSkill2,,3방향으로투사체를10번발사한다,l15,10,0.2,1,S,5,3,1,0,1,0
+M,일반스킬,NORMAL,Slime,자이언트슬라임스킬3,GiantSlimeSkill3,,위로점프후크게내려찍습니다.,s19,1,0,1,S,17,2,1,0,1.3,0
+M,일반스킬,NORMAL,Slime,자이언트슬라임스킬4,GiantSlimeSkill4,,초록색 산성액을 내뱉어 공격합니다.,s20,1,0,1,S,11,1,1,1.16,0.91,0
 M,일반스킬,MULTISHOT,Dragon,필드드래곤스킬1,FieldDragonSkill1,,18도 각도로 360도방향에 투사체를 3번 발사한다.,l16,3,0.5,1,S,3,4,0,0,1,0
 M,일반스킬,LAUNCHMULTISHOT,Dragon,필드드래곤스킬2,FieldDragonSkill2,,작은 공 형태의 투사체를 발사후 그 투사체에서 4방향으로 투사체가 4개씩 10번 발사된다.,l17/l18,10,0.5,1,S,5,3,0,0,1,0
 M,일반스킬,NORMAL,Dragon,필드드래곤스킬3,FieldDragonSkill3,,초록색 레이저 투사체로 공격한다.,s21,1,0,1,S,17,1,0,0.75,1,0

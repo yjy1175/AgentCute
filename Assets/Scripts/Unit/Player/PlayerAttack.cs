@@ -121,9 +121,9 @@ public class PlayerAttack : IAttack
     {
         // 스킬 매니저를 통해 현재 장착중인 스킬을 받아온다
         TileDict.Clear();
-        pushProjectile(CurrentBaseSkill);
-        pushProjectile(CurrentGeneralSkill);
-        pushProjectile(CurrentUltimateSkill);
+        PushProjectile(CurrentBaseSkill);
+        PushProjectile(CurrentGeneralSkill);
+        PushProjectile(CurrentUltimateSkill);
         createObjectPool();
         mIsGameStart = true;
     }

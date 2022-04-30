@@ -132,14 +132,14 @@ public class IAttack : MonoBehaviour
     }
 
 
-    public void setTileDict(Skill _skill, List<Projectile> _projectiles)
+    public void SetTileDict(Skill _skill, List<Projectile> _projectiles)
     {
         TileDict.Add(_skill, _projectiles);
     }
 
     // 받아온 스킬의 발사체 리스트를 발사체매니저를 통해 받아온다
     //  <스킬, 발사체리스트> 타입의 Dic에 추가
-    protected void pushProjectile(Skill _skill)
+    protected void PushProjectile(Skill _skill)
     {
         List<Projectile> newList = new List<Projectile>();
         for (int i = 0; i < _skill.Spec.getProjectiles().Count; i++)
@@ -148,7 +148,7 @@ public class IAttack : MonoBehaviour
             Projectile newProjectile = ProjectileManager.Instance.allProjectiles[projectile].GetComponent<Projectile>();
             newList.Add(newProjectile);
         }
-        setTileDict(_skill, newList);
+        SetTileDict(_skill, newList);
     }
 
 
@@ -204,7 +204,7 @@ public class IAttack : MonoBehaviour
     }
 
     //프로젝타일의 ProjectileDelayTime만큼 기다렸다가 projectile이 발사된다.
-    protected IEnumerator DealyLaunchProjectile(Skill _skill, int _projectileIndex, Vector3 _targetPos, Vector3 _firePos, bool _notSingle)
+    protected IEnumerator DelayLaunchProjectile(Skill _skill, int _projectileIndex, Vector3 _targetPos, Vector3 _firePos, bool _notSingle)
     {
         // 기본공격만 개수 증가
         int launchCount = TileDict[_skill][_projectileIndex].Spec.Count;
@@ -266,7 +266,7 @@ public class IAttack : MonoBehaviour
     {
         for (int i = 0; i < _count; i++)
         {
-            StartCoroutine(DealyLaunchProjectile(_skill, _projectileIndex, _target, _fire, false));
+            StartCoroutine(DelayLaunchProjectile(_skill, _projectileIndex, _target, _fire, false));
             yield return new WaitForSeconds(_skill.Spec.SkillCountTime);
         }
     }
@@ -319,7 +319,7 @@ public class IAttack : MonoBehaviour
                 LaunchInMultilaunchSkil(_skill, _count, _target, _fire);
                 break;
             case SkillLaunchType.DELAYSHOT:
-                StartCoroutine(DealyLaunchProjectile(_skill, 0, _target, _fire, _notSingle));
+                StartCoroutine(DelayLaunchProjectile(_skill, 0, _target, _fire, _notSingle));
                 break;
             case SkillLaunchType.DELAYMULTISHOT:
                 StartCoroutine(DelayMultiLuanch(_skill, 0, _count, _target, _fire));

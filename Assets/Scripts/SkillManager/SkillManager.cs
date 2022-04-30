@@ -41,6 +41,7 @@ public class SkillManager : SingleToneMaker<SkillManager>
             //item.Spec.Rank = int.Parse(skillsData[i]["ProjectileSpawnTime"].ToString());
             item.Spec.SkillCount = int.Parse(skillsData[i]["SkillCount"].ToString());
             item.Spec.SkillCountTime = float.Parse(skillsData[i]["SkillCountTime"].ToString());
+            item.Spec.SkillPriority = int.Parse(skillsData[i]["SkillPriority"].ToString());
             item.Spec.SkillClickCount = int.Parse(skillsData[i]["SkillClickCount"].ToString());
             item.Spec.SkillCoolTimeType = skillsData[i]["SkillCoolTimeType"].ToString();
             item.Spec.SkillStartTime = float.Parse(skillsData[i]["SkillStartTime"].ToString());

@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 public class MonsterAttack : IAttack
 {
-    private bool DEBUG = false;
+    private bool DEBUG = true;
 
     protected int mCloseAttackPower;
     protected int mCloseAttackRange;
@@ -20,13 +20,15 @@ public class MonsterAttack : IAttack
     [SerializeField]
     private List<GameObject> mMonsterSkill = new List<GameObject>();
 
+    [SerializeField]
+    private List<float> mSkillCheckCoolTime;
+
     void Awake()
     {
         //TO-DO 모든 몬스터는 공속이 다 1f?
         mAutoAttackSpeed = 1f;
         mAutoAttackCheckTime = 0f;
     }
-
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -36,6 +38,12 @@ public class MonsterAttack : IAttack
 
 
         tempTime = 0f;
+
+        //쿨타임 배열 설정
+        if (gameObject.GetComponent<MonsterStatus>().MonsterGrade == MonsterManager.MonsterGrade.Boss)
+            mSkillCheckCoolTime = new List<float> { 0f, 0f, 0f, 0f };
+        else if (gameObject.GetComponent<MonsterStatus>().MonsterGrade == MonsterManager.MonsterGrade.Range)
+            mSkillCheckCoolTime = new List<float> { 0f };
 
         if (UseSkillCheck())
         {
@@ -47,7 +55,7 @@ public class MonsterAttack : IAttack
             mMonsterSkill = SkillManager.Instance.FindMonsterSkill(md.monsterType);
             for (int i = 0; i < mMonsterSkill.Count; i++)
             {
-                pushProjectile(mMonsterSkill[i].GetComponent<Skill>());
+                PushProjectile(mMonsterSkill[i].GetComponent<Skill>());
             }
             //TO-DO 어디서 objectpool을 하는게 맞을지 고민. 여기서 하면 각 몬스터가 소환될때마다 create를 하는 문제가 발생한다.
             //objectpool 이 같은 object가 들어올때 재생성은 안하긴 하지만 1회만 호출하고싶은데 그런경우는 어디서 해야 옳을지 고민이필요.
@@ -61,6 +69,11 @@ public class MonsterAttack : IAttack
         UseSkil();
 
         mAutoAttackCheckTime = Mathf.Max(mAutoAttackCheckTime - Time.deltaTime, 0);
+
+        for(int i = 0; i < mSkillCheckCoolTime.Count; i++)
+        {
+            mSkillCheckCoolTime[i] = Mathf.Max(mSkillCheckCoolTime[i] - Time.deltaTime, 0f);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -114,29 +127,33 @@ public class MonsterAttack : IAttack
     private int GetSkillNumber()
     {
         MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(gameObject.name);
-
-        if (md.monsterGrade == MonsterManager.MonsterGrade.Boss) { 
-            //사용 가능한 스킬을 찾는다
-            List<int> skillNumber = new List<int>();
+        int skillNumber = -1;
+        if (md.monsterGrade == MonsterManager.MonsterGrade.Boss) {
+            int priorityValue = 99;
             for (int i = 0; i < md.skillAttackPowerRange.Count; i++)
             {
-                if (Mathf.Abs(Vector3.Distance(GameObject.Find("PlayerObject").transform.position, gameObject.transform.position)) <= md.skillAttackPowerRange[i])
+                if (Mathf.Abs(Vector3.Distance(GameObject.Find("PlayerObject").transform.position, gameObject.transform.position)) <= md.skillAttackPowerRange[i]
+                        && mSkillCheckCoolTime[i].Equals(0f)
+                        && mMonsterSkill[i].GetComponent<Skill>().Spec.SkillPriority < priorityValue)
                 {
-                    skillNumber.Add(i);
+                    priorityValue = mMonsterSkill[i].GetComponent<Skill>().Spec.SkillPriority;
+                    skillNumber = i;
                 }
             }
-            //스킬을 리스트에 대해 랜덤을 돌린다
-            //리턴한다.
-            return skillNumber.Count == 0 ? -1 : skillNumber[UnityEngine.Random.Range(0, skillNumber.Count)];
+            if(skillNumber!= -1)
+            {
+                mSkillCheckCoolTime[skillNumber] = mMonsterSkill[skillNumber].GetComponent<Skill>().Spec.getSkillCoolTime()[0];
+            }
         }
         else if(md.monsterGrade == MonsterManager.MonsterGrade.Range)
         {
-            if (Mathf.Abs(Vector3.Distance(GameObject.Find("PlayerObject").transform.position, gameObject.transform.position)) <= md.skillAttackPowerRange[0])
+            if (Mathf.Abs(Vector3.Distance(GameObject.Find("PlayerObject").transform.position, gameObject.transform.position)) <= md.skillAttackPowerRange[0]
+                && mSkillCheckCoolTime[0].Equals(0f))
             {
-                return 0;
+                skillNumber = 0;
             }
         }
-        return -1;
+        return skillNumber;
     }
 
     private bool UseSkillCheck()

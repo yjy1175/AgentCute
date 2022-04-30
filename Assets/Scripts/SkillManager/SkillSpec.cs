@@ -95,6 +95,14 @@ public class SkillSpec : EquipSpec
     }
 
     [SerializeField]
+    private int mSkillPriority;
+    public int SkillPriority
+    {
+        get { return mSkillPriority; }
+        set { mSkillPriority = value; }
+    }
+
+    [SerializeField]
     private float[] mSkillRunTime = new float[2];
     public float[] MSkillRunTime
     {
