@@ -196,11 +196,6 @@ public class IAttack : MonoBehaviour
         GameObject obj = ObjectPoolManager.Instance.EnableGameObject(_name);
         if (_notSingle) mFirstProjectile = obj;
         float keepTime = obj.GetComponent<Projectile>().Spec.SpawnTime;
-        Vector3 size = new Vector3(
-            obj.GetComponent<Projectile>().Spec.ProjectileSizeX * (1 + mProjectileScale),
-            obj.GetComponent<Projectile>().Spec.ProjectileSizeY * (1 + mProjectileScale),
-            1);
-        obj.GetComponent<Projectile>().setSize(size);
         setProjectileData(ref obj);
         obj.GetComponent<Projectile>().CurrentPassCount = 0;
         obj.GetComponent<Projectile>().setEnable(_targetPos, _firePos, _angle);
@@ -216,7 +211,7 @@ public class IAttack : MonoBehaviour
         int angle = TileDict[_skill][_projectileIndex].Spec.Angle;
         if (DEBUG)
             Debug.Log(_projectileIndex + "번째 projectile인" + TileDict[_skill][_projectileIndex].gameObject.name + "을 " + launchCount + "번, " + angle + "각도로 발사중");
-
+        
         for (int i = 0; i < launchCount; i++)
         {
             LaunchCorutines(
@@ -285,6 +280,12 @@ public class IAttack : MonoBehaviour
         obj.GetComponent<Projectile>().IsCriticalDamage = GetComponent<IStatus>().AttackPointSetting(gameObject);
         obj.GetComponent<Projectile>().Damage = 
             (int)(mObjectDamage * obj.GetComponent<Projectile>().Spec.ProjectileDamage);
+
+        Vector3 size = new Vector3(
+            obj.GetComponent<Projectile>().Spec.ProjectileSizeX * (1 + mProjectileScale),
+            obj.GetComponent<Projectile>().Spec.ProjectileSizeY * (1 + mProjectileScale),
+            1);
+        obj.GetComponent<Projectile>().setSize(size);
     }
 
     protected void createObjectPool()
