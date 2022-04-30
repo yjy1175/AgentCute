@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
 
 public class SpawnManager : SingleToneMaker<SpawnManager>
 {
@@ -39,7 +39,10 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     public GameObject[] TempMonster;
 
     [SerializeField]
-    private int bossNum = 0;
+    private GameObject[] MapMonster;
+
+    [SerializeField]
+    private int mBossNum = 0;
 
 
     IEnumerator bossMessageCoroutine;
@@ -58,6 +61,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     public Text currentKillMonsterText;
     public static int currentKillMosterCount = 0;
 
+    private MapManager.MapType mMapType;
+
     public void init()
     {
         allMonsterCount = 0;
@@ -65,19 +70,26 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     }
     void Awake()
     {
-        InitAllSpawnData();
-        InitWaveData();
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        bossNum = 0;
+        mMapType = MapManager.Instance.CurrentMapType;
+
+        InitAllSpawnData();
+        InitWaveData();
+
+        
+
+        mBossNum = 0;
         //TO-DO 어디서 create 할지 정해야함.
         for (int i = 0; i < TempMonster.Length; i++)
         {
             ObjectPoolManager.Instance.CreateDictTable(TempMonster[i], 5, 5);
         }
+        
     }
 
     // Update is called once per frame
@@ -105,7 +117,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             SpawnData temp = dataSetNormal[i];
             if (dataSetNormal[i].realStartSpawnTime < currentTime && dataSetNormal[i].currentTime > dataSetNormal[i].spawnTime)
             {
-                List<int> spawnZone = RandSpawnList(dataSetNormal[i].spawnNumber + bossNum);//성욱님 요구사항으로 웨이브마다 +1마리씩 더 스폰 
+                List<int> spawnZone = RandSpawnList(dataSetNormal[i].spawnNumber + mBossNum);//성욱님 요구사항으로 웨이브마다 +1마리씩 더 스폰 
                 for (int j = 0; j < spawnZone.Count; j++)
                 {
                     GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetNormal[i].spawnMonster);
@@ -128,7 +140,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
     private void SpawnBossMonster()
     {
-        if (bossNum < dataSetBoss.Count && dataSetBoss[bossNum].realStartSpawnTime < currentTime)
+        if (mBossNum < dataSetBoss.Count && dataSetBoss[mBossNum].realStartSpawnTime < currentTime)
         {
 
             int childCnt = GameObject.Find("ObjectPoolSet").transform.childCount;
@@ -153,13 +165,13 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                 dataSetNormal[i] = temp;
             }
 
-            GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetBoss[bossNum].spawnMonster);
+            GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetBoss[mBossNum].spawnMonster);
             monster.GetComponent<MonsterEventHandler>().registerHpObserver(registerBossHp);
 
             List<int> spawnZone = RandSpawnList(1);
             SpawnMonsterSet(ref monster, spawnPoints[spawnZone[0]].position);
 
-            bossNum++;
+            mBossNum++;
 
             if (bossMessageCoroutine != null)
                 StopCoroutine(bossMessageCoroutine);
@@ -171,7 +183,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
             if (waveMessageCoroutine != null)
                 StopCoroutine(waveMessageCoroutine);
-            waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + bossNum, 6, 60);
+            waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + mBossNum, 6, 60);
             StartCoroutine(waveMessageCoroutine);
         }
     }
@@ -187,8 +199,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             
         }
         else {
-            monster.GetComponent<MonsterStatus>().Hp = (int)((float)md.monsterHp * dataSetWave[bossNum].hpScale);
-            monster.GetComponent<MonsterStatus>().MaxHP = (int)((float)md.monsterHp * dataSetWave[bossNum].hpScale);
+            monster.GetComponent<MonsterStatus>().Hp = (int)((float)md.monsterHp * dataSetWave[mBossNum].hpScale);
+            monster.GetComponent<MonsterStatus>().MaxHP = (int)((float)md.monsterHp * dataSetWave[mBossNum].hpScale);
         }
 
         monster.GetComponent<MonsterStatus>().Size = md.monsterSize;
@@ -227,27 +239,36 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         dataSetNormal = new List<SpawnData>();
         dataSetBoss = new List<SpawnData>();
         List<Dictionary<string, object>> spawnData = CSVReader.Read("CSVFile\\SpawnData");
+
+        Debug.Log("현재 맵타입" + mMapType);
+        
         for (int idx = 0; idx < spawnData.Count; idx++)
         {
+            if ((MapManager.MapType)Enum.Parse(typeof(MapManager.MapType), spawnData[idx]["SpawnMap"].ToString()) == mMapType) { 
+                SpawnData ds = new SpawnData();
+                ds.Id = (int)spawnData[idx]["ID"];
+                ds.spawnMonster = spawnData[idx]["SpawnMonster"].ToString();
+                ds.spawnMap = spawnData[idx]["SpawnMap"].ToString();
+                ds.spawnOrder = (int)spawnData[idx]["SpawnOrder"];
+                ds.spawnNumber = (int)spawnData[idx]["SpawnNumber"];
+                ds.spawnStartTime_1 = (int)spawnData[idx]["SpawnStartTime1"];
+                ds.spawnStartTime_2 = (int)spawnData[idx]["SpawnStartTime2"];
+                ds.realStartSpawnTime = UnityEngine.Random.Range(ds.spawnStartTime_1, ds.spawnStartTime_2);
+                ds.spawnTime = (int)spawnData[idx]["SpawnTime"];
+                ds.currentTime = 0f;
+                if (MonsterManager.Instance.GetMonsterData(ds.spawnMonster).monsterGrade ==  MonsterManager.MonsterGrade.Boss)
+                {
+                    dataSetBoss.Add(ds);
+                }
+                else 
+                {
+                    dataSetNormal.Add(ds);
+                }
 
-            SpawnData ds = new SpawnData();
-            ds.Id = (int)spawnData[idx]["ID"];
-            ds.spawnMonster = spawnData[idx]["SpawnMonster"].ToString();
-            ds.spawnMap = spawnData[idx]["SpawnMap"].ToString();
-            ds.spawnOrder = (int)spawnData[idx]["SpawnOrder"];
-            ds.spawnNumber = (int)spawnData[idx]["SpawnNumber"];
-            ds.spawnStartTime_1 = (int)spawnData[idx]["SpawnStartTime1"];
-            ds.spawnStartTime_2 = (int)spawnData[idx]["SpawnStartTime2"];
-            ds.realStartSpawnTime = UnityEngine.Random.Range(ds.spawnStartTime_1, ds.spawnStartTime_2);
-            ds.spawnTime = (int)spawnData[idx]["SpawnTime"];
-            ds.currentTime = 0f;
-            if (MonsterManager.Instance.GetMonsterData(ds.spawnMonster).monsterGrade ==  MonsterManager.MonsterGrade.Boss)
-            {
-                dataSetBoss.Add(ds);
-            }
-            else 
-            {
-                dataSetNormal.Add(ds);
+                GameObject obj = Resources.Load<GameObject>("Prefabs\\Monster\\" + mMapType.ToString() + "\\" + spawnData[idx]["SpawnMonster"].ToString());
+                Debug.Log(obj.name);
+                ObjectPoolManager.Instance.CreateDictTable(obj, 5, 5);
+
             }
         }
     }
@@ -291,7 +312,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             {
                 if (waveMessageCoroutine != null)
                     StopCoroutine(waveMessageCoroutine);
-                waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + bossNum, 6, 0);
+                waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + mBossNum, 6, 0);
                 StartCoroutine(waveMessageCoroutine);
             }
             currentTime = Mathf.Max(0f, currentTime);
