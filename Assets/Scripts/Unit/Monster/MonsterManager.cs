@@ -19,7 +19,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
         public int monsterHp;
         public int monsterPhysicalDefense;
         public int monsterMagicDefense;
-        public int monsterSpeed;
+        public float monsterSpeed;
         public int monsterAttackSpeed;
         public int closeAttackPower;
         public int closeAttackRange;
@@ -130,7 +130,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
             md.monsterHp = int.Parse(monsterDataCsv[idx]["MonsterHp"].ToString());
             md.monsterPhysicalDefense = int.Parse(monsterDataCsv[idx]["MonsterPhysicalDefense"].ToString());
             md.monsterMagicDefense = int.Parse(monsterDataCsv[idx]["MonsterMagicDefense"].ToString());
-            md.monsterSpeed = int.Parse(monsterDataCsv[idx]["MonsterSpeed"].ToString());
+            md.monsterSpeed = float.Parse(monsterDataCsv[idx]["MonsterSpeed"].ToString());
             md.monsterAttackSpeed = int.Parse(monsterDataCsv[idx]["MonsterAttackSpeed"].ToString());
             md.closeAttackPower = int.Parse(monsterDataCsv[idx]["CloseAttackPower"].ToString());
             md.closeAttackRange = int.Parse(monsterDataCsv[idx]["CloseAttackRange"].ToString());
