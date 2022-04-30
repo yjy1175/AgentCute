@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using System;
 public class UIManager : SingleToneMaker<UIManager>
 {
     #region variables
@@ -107,6 +107,9 @@ public class UIManager : SingleToneMaker<UIManager>
     [SerializeField]
     private Text mGamePlayTimeText;
 
+    [SerializeField]
+    private Text mMapText;
+
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -117,6 +120,8 @@ public class UIManager : SingleToneMaker<UIManager>
         mIsGiveup = false;
 
         mGamePlayTime = 0f;
+
+        mMapText.text = MapManager.Instance.CurrentMapType.ToString();
     }
 
     // Update is called once per frame
@@ -376,6 +381,15 @@ public class UIManager : SingleToneMaker<UIManager>
                 break;
         }
     }
+
+    public void ClickMapSelectBtn()
+    {
+        int enumCnt = Enum.GetValues(typeof(MapManager.MapType)).Length;
+        int nextMap = ((int)MapManager.Instance.CurrentMapType + 1) % (enumCnt-1);
+        MapManager.Instance.CurrentMapType = (MapManager.MapType)Enum.Parse(typeof(MapManager.MapType), nextMap.ToString());
+        mMapText.text = MapManager.Instance.CurrentMapType.ToString();
+    }
+
     public void ClickGameStart()
     {
         if(mIsGSkillSelect && mIsUSkillSelect && mIsSelectWeapon && mIsSelectCostume)

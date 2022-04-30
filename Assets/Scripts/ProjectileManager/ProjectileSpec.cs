@@ -157,6 +157,14 @@ public class ProjectileSpec : EquipSpec
         get { return mProjectileSizeY; }
         set { mProjectileSizeY = value; }
     }
+
+    [SerializeField]
+    private float mProjectileDelayTime;
+    public float ProjectileDelayTime
+    {
+        get { return mProjectileDelayTime; }
+        set { mProjectileDelayTime = value; }
+    }
     #endregion
 }
 

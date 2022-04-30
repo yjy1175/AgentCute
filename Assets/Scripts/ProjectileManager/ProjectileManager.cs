@@ -55,6 +55,7 @@ public class ProjectileManager : SingleToneMaker<ProjectileManager>
             item.Spec.Knockback = float.Parse(projectilesData[i]["ProjectileConferKnockback"].ToString());
             item.Spec.ProjectileSizeX = float.Parse(projectilesData[i]["ProjectileSizeX"].ToString());
             item.Spec.ProjectileSizeY = float.Parse(projectilesData[i]["ProjectileSizeY"].ToString());
+            item.Spec.ProjectileDelayTime = float.Parse(projectilesData[i]["ProjectileDelayTime"].ToString());
             // 스폰형인 경우 스폰 타입 지정
             if (item.Spec.Type[0] == 's')
             {

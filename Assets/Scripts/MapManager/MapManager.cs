@@ -40,12 +40,7 @@ public class MapManager : SingleToneMaker<MapManager>
         Exit
     }
     #endregion
-
-    private void Awake()
-    {
-        //CurrentMapType = MapType.Volcano;
-    }
-
+    
     #region method
     void Start()
     {
@@ -85,10 +80,37 @@ public class MapManager : SingleToneMaker<MapManager>
      *  return 값으로 해당 맵의 이름을 반환해준다
      *  추후에 몬스터 스폰에서 api이용하시면 됩니다.
      */
-    public void RandomMapSelect()
+    public void RandMapSelect()
     {
         // 맵번호를 랜덤으로 뽑고
         MapType  ranNum = (MapType)Random.Range((int)MapType.Field, (int)MapType.Exit);
+        //CurrentMapType = MapType.Volcano;
+
+        // 해당 맵을 Dic에서 불러온후
+        GameObject newMap = maps[mCurrentMapType.ToString()];
+        // Grid안에 생성해준다
+        Instantiate(newMap, Vector3.zero, Quaternion.identity, GameObject.Find("Grid").transform);
+        // 맵을 초기화 해준다.
+        baseX = newMap.GetComponent<Map>().Width;
+        baseY = newMap.GetComponent<Map>().Height;
+        initMapList();
+        moveTileMap(0, 0, 1, -1);
+        moveTileMap(0, 1, 1, 0);
+        moveTileMap(0, 2, 1, 1);
+        moveTileMap(1, 0, 0, -1);
+        moveTileMap(1, 1, 0, 0);
+        moveTileMap(1, 2, 0, 1);
+        moveTileMap(2, 0, -1, -1);
+        moveTileMap(2, 1, -1, 0);
+        moveTileMap(2, 2, -1, 1);
+        mIsUpdate = true;
+    }
+
+    //DEBUG용 맵선택 API
+    public void MapSelect()
+    {
+        // 맵번호를 랜덤으로 뽑고
+        //MapType  ranNum = (MapType)Random.Range((int)MapType.Field, (int)MapType.Exit);
         //CurrentMapType = MapType.Volcano;
         
         // 해당 맵을 Dic에서 불러온후

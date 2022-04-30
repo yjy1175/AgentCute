@@ -18,8 +18,17 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
     [SerializeField]
     private Text mTestCostumeRankText;
 
-   void Start()
+    [SerializeField]
+    private bool mIsGameStart;
+    public bool IsGameStart
     {
+        get { return mIsGameStart; }
+        set { mIsGameStart = value; }
+    }
+
+    void Start()
+    {
+        IsGameStart = false; 
         mPlayer = GameObject.Find("PlayerObject");
         InitPlayerBaseStat();
     }
@@ -55,11 +64,15 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
     public void SettingGameStart()
     {
         mPlayer.GetComponent<PlayerAttack>().getProjectiles();
-        MapManager.Instance.RandomMapSelect();
+        MapManager.Instance.MapSelect();
+        SpawnManager.Instance.InitAllSpawnData();
+
         string weaponType =
             mPlayer.GetComponent<PlayerStatus>()
             .PlayerCurrentWeapon.GetComponent<Weapon>().Spec.Type;
         weaponType = weaponType.Substring(0, 2);
         LevelUpStatusManager.Instance.SetSlots(weaponType);
+
+        IsGameStart = true;
     }
 }

@@ -6,6 +6,7 @@ using System;
 
 public class SpawnManager : SingleToneMaker<SpawnManager>
 {
+    private bool DEBUG = true;
     public struct SpawnData
     {
         public int Id;
@@ -24,22 +25,16 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         public float hpScale;
     }
 
-    /*
-     * TO-DO Spawn_Map은 Enum으로 해서 관리 뭐뭐나올지 모르니 일단 skip
-     */
-
-    public List<WaveData> dataSetWave;
-    public List<SpawnData> dataSetNormal;
-    public List<SpawnData> dataSetBoss;
+    [SerializeField]
+    private List<WaveData> dataSetWave;
+    [SerializeField]
+    private List<SpawnData> dataSetNormal;
+    [SerializeField]
+    private List<SpawnData> dataSetBoss;
     
     private float currentTime = 0f;
 
     public Transform[] spawnPoints;
-
-    public GameObject[] TempMonster;
-
-    [SerializeField]
-    private GameObject[] MapMonster;
 
     [SerializeField]
     private int mBossNum = 0;
@@ -76,31 +71,20 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     // Start is called before the first frame update
     void Start()
     {
-        mMapType = MapManager.Instance.CurrentMapType;
-
-        InitAllSpawnData();
-        InitWaveData();
-
-        
-
+        InitWaveData();       
         mBossNum = 0;
-        //TO-DO 어디서 create 할지 정해야함.
-        for (int i = 0; i < TempMonster.Length; i++)
-        {
-            ObjectPoolManager.Instance.CreateDictTable(TempMonster[i], 5, 5);
-        }
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        SpawnMonster();
-        currentTime += Time.deltaTime;
-
-        allMonsterText.text = "전체 : " + allMonsterCount.ToString() + " 마리";
-        currentKillMonsterText.text = "킬 : " + currentKillMosterCount.ToString() + " 마리";
-        currentAllMonsterText.text = "필드 : " + (allMonsterCount - currentKillMosterCount).ToString() +" 마리";
+        if (PlayerManager.Instance.IsGameStart) {
+            SpawnMonster();
+            currentTime += Time.deltaTime;
+            allMonsterText.text = "전체 : " + allMonsterCount.ToString() + " 마리";
+            currentKillMonsterText.text = "킬 : " + currentKillMosterCount.ToString() + " 마리";
+            currentAllMonsterText.text = "필드 : " + (allMonsterCount - currentKillMosterCount).ToString() +" 마리";
+        }
     }
 
     private void SpawnMonster()
@@ -234,13 +218,15 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
 
 
-    private void InitAllSpawnData()
+    public void InitAllSpawnData()
     {
+        mMapType = MapManager.Instance.CurrentMapType;
+
         dataSetNormal = new List<SpawnData>();
         dataSetBoss = new List<SpawnData>();
         List<Dictionary<string, object>> spawnData = CSVReader.Read("CSVFile\\SpawnData");
-
-        Debug.Log("현재 맵타입" + mMapType);
+        if (DEBUG)
+            Debug.Log("현재 맵타입" + mMapType);
         
         for (int idx = 0; idx < spawnData.Count; idx++)
         {

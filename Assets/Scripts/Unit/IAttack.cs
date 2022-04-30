@@ -5,6 +5,8 @@ using UnityEngine;
 public class IAttack : MonoBehaviour
 {
 
+    private bool DEBUG = false;
+
     public enum SkillLaunchType
     {
         //멀티샷 공격
@@ -14,7 +16,11 @@ public class IAttack : MonoBehaviour
         //포물선공격
         THROW,
         //멀티 런치샷 ex 드래곤 2번스킬
-        LAUNCHMULTISHOT
+        LAUNCHMULTISHOT,
+        //NORMAL공격을 딜레이를 두어 발사한다.
+        DELAYSHOT,
+        //DELAYSHOT을 멀티샷으로 발사한다.
+        DELAYMULTISHOT
     }
     // 최종 데미지
     [SerializeField]
@@ -202,6 +208,26 @@ public class IAttack : MonoBehaviour
         return obj;
     }
 
+    //프로젝타일의 ProjectileDelayTime만큼 기다렸다가 projectile이 발사된다.
+    protected IEnumerator DealyLaunchProjectile(Skill _skill, int _projectileIndex, Vector3 _targetPos, Vector3 _firePos, bool _notSingle)
+    {
+        // 기본공격만 개수 증가
+        int launchCount = TileDict[_skill][_projectileIndex].Spec.Count;
+        int angle = TileDict[_skill][_projectileIndex].Spec.Angle;
+        if (DEBUG)
+            Debug.Log(_projectileIndex + "번째 projectile인" + TileDict[_skill][_projectileIndex].gameObject.name + "을 " + launchCount + "번, " + angle + "각도로 발사중");
+
+        for (int i = 0; i < launchCount; i++)
+        {
+            LaunchCorutines(
+                 (launchCount == 1 ? 0 : -((launchCount - 1) * angle / 2) + angle * i),
+                 TileDict[_skill][_projectileIndex].gameObject.name,
+                 _targetPos,
+                 _firePos, _notSingle);
+            yield return new WaitForSeconds(TileDict[_skill][_projectileIndex].Spec.ProjectileDelayTime);
+        }
+    }
+
     protected IEnumerator multiLuanch(Skill _skill, int _count, Vector3 _target, Vector3 _fire)
     {
         for (int i = 0; i < _count; i++)
@@ -215,7 +241,7 @@ public class IAttack : MonoBehaviour
     }
 
     //_skill의 _projectileIndex번째 스킬을 멀티샷으로 날립니다.
-    //_obj의 위치에서 스킬이 발사됩니다.
+    //_obj의 position에서 스킬이 발사됩니다.
     protected IEnumerator multiLuanch(Skill _skill, int _projectileIndex, int _count, Vector3 _target, GameObject _obj)
     {
         for (int i = 0; i < _count; i++)
@@ -225,7 +251,8 @@ public class IAttack : MonoBehaviour
         }
     }
 
-
+    //첫번째 발사된 projectile기준으로 multiLuanch가 발사된다
+    //드래곤 2번 스킬 참고
     private void LaunchInMultilaunchSkil(Skill _skill, int _count, Vector3 _target, Vector3 _fire)
     {
         //첫번째 프로젝타일은 쭈욱 발사된다.
@@ -234,8 +261,19 @@ public class IAttack : MonoBehaviour
         //두번째 프로젝 타일은 첫번째 프로젝 타일 기준으로 multi launch를 발사한다
         //드래곤 2번스킬용으로 미사일이 1가지만 나갈경우
         //TO-DO : 다른 프로젝타일도 발사해야하는 상황이라면 for문으로 모든 에셋에 대해 추가관리 필요
-        StartCoroutine(multiLuanch(_skill, 1, _count, _target, projectileList[0])); 
+        StartCoroutine(multiLuanch(_skill, 1, _count, _target, projectileList[0]));
 
+    }
+
+    //런치된 미사일 기준으로 멀티 런치샷이 나간다.
+    //이프리트 0번 스킬 참고
+    protected IEnumerator DelayMultiLuanch(Skill _skill, int _projectileIndex, int _count, Vector3 _target, Vector3 _fire)
+    {
+        for (int i = 0; i < _count; i++)
+        {
+            StartCoroutine(DealyLaunchProjectile(_skill, _projectileIndex, _target, _fire, false));
+            yield return new WaitForSeconds(_skill.Spec.SkillCountTime);
+        }
     }
 
 
@@ -263,8 +301,10 @@ public class IAttack : MonoBehaviour
 
     protected void FireSkillLaunchType(SkillLaunchType _enum, Skill _skill, int _count, Vector3 _target, Vector3 _fire, bool _notSingle)
     {
+        if (DEBUG)
+            Debug.Log(gameObject.name + "가 " + _enum.ToString() + "타입의 "+ _skill.name+ "을 "+_count+"번 사용합니다");
         switch (_enum)
-        {
+        {            
             case SkillLaunchType.MULTISHOT:
                 StartCoroutine(multiLuanch(_skill, _count, _target, _fire));
                 break;
@@ -277,6 +317,13 @@ public class IAttack : MonoBehaviour
             case SkillLaunchType.LAUNCHMULTISHOT:
                 LaunchInMultilaunchSkil(_skill, _count, _target, _fire);
                 break;
+            case SkillLaunchType.DELAYSHOT:
+                StartCoroutine(DealyLaunchProjectile(_skill, 0, _target, _fire, _notSingle));
+                break;
+            case SkillLaunchType.DELAYMULTISHOT:
+                StartCoroutine(DelayMultiLuanch(_skill, 0, _count, _target, _fire));
+                break;
+
             default:
                 Debug.Log("잘못된 Enum타입 " + _enum.ToString() + "이 들어왔습니다");
                 break;
