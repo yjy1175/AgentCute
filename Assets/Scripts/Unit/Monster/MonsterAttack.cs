@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 public class MonsterAttack : IAttack
 {
-    private bool DEBUG = false;
+    private bool DEBUG = true;
 
     protected int mCloseAttackPower;
     protected int mCloseAttackRange;
@@ -42,7 +42,7 @@ public class MonsterAttack : IAttack
             MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(gameObject.name);
 
 
-            firePosition = transform.Find("FirePosition").gameObject;
+            mFirePosition = transform.Find("FirePosition").gameObject;
             TileDict = new SkillDic();
             mMonsterSkill = SkillManager.Instance.FindMonsterSkill(md.monsterType);
             for (int i = 0; i < mMonsterSkill.Count; i++)
@@ -157,6 +157,8 @@ public class MonsterAttack : IAttack
     //7. 다시 움직이는 애니메이션 동작
     private IEnumerator UseSkill(int _skillNum)
     {
+        if (DEBUG)
+            Debug.Log(gameObject.name + "의 " + _skillNum + "번째 스킬사용시전");
         MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(gameObject.name);
         Skill skill = mMonsterSkill[_skillNum].GetComponent<Skill>();
 
@@ -182,7 +184,7 @@ public class MonsterAttack : IAttack
 
         //5. 스킬발사
         FireSkillLaunchType(skillLaunchType, skill, skill.Spec.SkillCount,
-                            GameObject.Find("PlayerObject").transform.position, firePosition.transform.position, false);
+                            GameObject.Find("PlayerObject").transform.position, mFirePosition.transform.position, false);
         mIsUsingSkill = true;
 
         if (DEBUG)

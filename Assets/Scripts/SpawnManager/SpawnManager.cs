@@ -256,19 +256,18 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                 ds.realStartSpawnTime = UnityEngine.Random.Range(ds.spawnStartTime_1, ds.spawnStartTime_2);
                 ds.spawnTime = (int)spawnData[idx]["SpawnTime"];
                 ds.currentTime = 0f;
+                GameObject obj = Resources.Load<GameObject>("Prefabs\\Monster\\" + mMapType.ToString() + "\\" + spawnData[idx]["SpawnMonster"].ToString());
+
                 if (MonsterManager.Instance.GetMonsterData(ds.spawnMonster).monsterGrade ==  MonsterManager.MonsterGrade.Boss)
                 {
                     dataSetBoss.Add(ds);
+                    ObjectPoolManager.Instance.CreateDictTable(obj, 1, 1);
                 }
                 else 
                 {
+                    ObjectPoolManager.Instance.CreateDictTable(obj, 100, 10);
                     dataSetNormal.Add(ds);
                 }
-
-                GameObject obj = Resources.Load<GameObject>("Prefabs\\Monster\\" + mMapType.ToString() + "\\" + spawnData[idx]["SpawnMonster"].ToString());
-                Debug.Log(obj.name);
-                ObjectPoolManager.Instance.CreateDictTable(obj, 5, 5);
-
             }
         }
     }

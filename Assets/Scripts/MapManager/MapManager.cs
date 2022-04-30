@@ -13,6 +13,13 @@ public class MapManager : SingleToneMaker<MapManager>
     private Transform[,] tileMapList = new Transform[3, 3];
     [SerializeField]
     private MapType mCurrentMapType;
+
+    public MapType CurrentMapType
+    {
+        get { return mCurrentMapType; }
+        set { mCurrentMapType = value; }
+    }
+
     [SerializeField]
     private Vector3 nowPos;
     [SerializeField]
@@ -33,6 +40,11 @@ public class MapManager : SingleToneMaker<MapManager>
         Exit
     }
     #endregion
+
+    private void Awake()
+    {
+        //CurrentMapType = MapType.Volcano;
+    }
 
     #region method
     void Start()
@@ -77,7 +89,8 @@ public class MapManager : SingleToneMaker<MapManager>
     {
         // 맵번호를 랜덤으로 뽑고
         MapType  ranNum = (MapType)Random.Range((int)MapType.Field, (int)MapType.Exit);
-        mCurrentMapType = MapType.Field;
+        //CurrentMapType = MapType.Volcano;
+        
         // 해당 맵을 Dic에서 불러온후
         GameObject newMap = maps[mCurrentMapType.ToString()];
         // Grid안에 생성해준다

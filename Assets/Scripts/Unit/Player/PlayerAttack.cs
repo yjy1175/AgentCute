@@ -61,7 +61,7 @@ public class PlayerAttack : IAttack
     {
         // key : 스킬 게임오브젝트 value : 각 스킬의 발사체 오브젝트
         base.Start();
-        firePosition = transform.GetChild(0).gameObject;
+        mFirePosition = transform.GetChild(0).gameObject;
         GBtn = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
         UBtn = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
         Mjoystick = GameObject.Find("Canvas").transform.GetChild(2).GetComponent<VertualJoyStick>();
@@ -87,15 +87,15 @@ public class PlayerAttack : IAttack
                     StartCoroutine(multiLuanch(
                         CurrentBaseSkill,
                         mRAttackCount + CurrentBaseSkill.Spec.SkillCount,
-                        MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position), firePosition.transform.position));
+                        MonsterManager.Instance.GetNearestMonsterPos(mFirePosition.transform.position), mFirePosition.transform.position));
                 }
                 else
                 {
                     launchProjectile(
                         CurrentBaseSkill,
                         0,
-                        MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position),
-                        firePosition.transform.position,
+                        MonsterManager.Instance.GetNearestMonsterPos(mFirePosition.transform.position),
+                        mFirePosition.transform.position,
                         false);
                 }
             }
@@ -200,8 +200,8 @@ public class PlayerAttack : IAttack
             if (launchCount > 1)
             {
                 if (mTarget == Vector3.zero)
-                    mTarget = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
-                Vector3 firePos = firePosition.transform.position;
+                    mTarget = MonsterManager.Instance.GetNearestMonsterPos(mFirePosition.transform.position);
+                Vector3 firePos = mFirePosition.transform.position;
                 // 마지막 클릭일 경우
                 if (count - 1 == _skill.CurrentUseCount)
                 {
@@ -287,8 +287,8 @@ public class PlayerAttack : IAttack
         {
             count--;
             if(mTarget == Vector3.zero)
-                mTarget = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
-            firePos = firePosition.transform.position;
+                mTarget = MonsterManager.Instance.GetNearestMonsterPos(mFirePosition.transform.position);
+            firePos = mFirePosition.transform.position;
             if(TileDict[_skill].Count > 1)
             {
                 int ranNum = Random.Range(0, TileDict[_skill].Count);
@@ -314,9 +314,9 @@ public class PlayerAttack : IAttack
         // 만약 터치패드의 입력이 없을 경우 근거리 몬스터로 발사
         if(mTarget == Vector3.zero)
         {
-            mTarget = MonsterManager.Instance.GetNearestMonsterPos(firePosition.transform.position);
+            mTarget = MonsterManager.Instance.GetNearestMonsterPos(mFirePosition.transform.position);
         }
-        Vector3 firePos = firePosition.transform.position;
+        Vector3 firePos = mFirePosition.transform.position;
         // 발사체가 한개인 경우
         if(projectileCount <= 1)
         {
