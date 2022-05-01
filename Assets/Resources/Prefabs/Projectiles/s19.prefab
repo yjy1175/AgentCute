@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 101
   m_Sprite: {fileID: 3837292206575998723, guid: a2ca1cacb61c5524ea2dd797db92805b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -141,8 +141,9 @@ MonoBehaviour:
     mMaxPassCount: -1
     mStiffTime: 1
     mKnockback: 2
-    mProjectileSizeX: 2
-    mProjectileSizeY: 2
+    mProjectileSizeX: 8
+    mProjectileSizeY: 8
+    mProjectileDelayTime: 0
   target: {x: 0, y: 0, z: 0}
   angle: 0
   mSpawnType: SelfSpawn

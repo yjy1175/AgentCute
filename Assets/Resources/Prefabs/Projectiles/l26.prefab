@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_Sprite: {fileID: 6657893770769798689, guid: f0a2d2fd45f6e93468a4613ae6cdc369, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -115,14 +115,15 @@ MonoBehaviour:
     mProjectileDamageSplitSec: -1
     mProjectileAttackSpeed: 1
     mMoveSpeed: 10
-    mCount: 1
+    mCount: 36
     mAngle: 10
-    mSpawnTime: 10
-    mMaxPassCount: 0
-    mStiffTime: 1
-    mKnockback: 0
+    mSpawnTime: 5
+    mMaxPassCount: -1
+    mStiffTime: 0
+    mKnockback: 1
     mProjectileSizeX: 2
     mProjectileSizeY: 2
+    mProjectileDelayTime: 0.1
   target: {x: 0, y: 0, z: 0}
   angle: 0
 --- !u!50 &-5626200339862288282

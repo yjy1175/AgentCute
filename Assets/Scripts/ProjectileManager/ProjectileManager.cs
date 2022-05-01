@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ProjectileManager : SingleToneMaker<ProjectileManager>
 {
+    private bool DEBUG = false;
+
     #region variable
     // key : s, c, l, r(타입 첫글자) value :  <key : 0~(타입 다음글자), value = 발사체 오브젝트>
     public StringGameObject allProjectiles;
@@ -38,6 +40,8 @@ public class ProjectileManager : SingleToneMaker<ProjectileManager>
         Projectile item;
         for(int i = 0; i < projectilesList.Length; i++)
         {
+            if (DEBUG)
+                Debug.Log("projectile 명 : "+projectilesData[i]["ProjectileType"]);
             item = allProjectiles[projectilesData[i]["ProjectileType"].ToString()].GetComponent<Projectile>();
             item.Spec.Type = projectilesData[i]["ProjectileType"].ToString();
             item.Spec.ProjectileDamage = float.Parse(projectilesData[i]["ProjectileDamage"].ToString());

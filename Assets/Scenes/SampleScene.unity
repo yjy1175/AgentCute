@@ -4281,9 +4281,7 @@ MonoBehaviour:
   costumes:
     m_keys: []
     m_values: []
-  monsterCurrentEquip:
-    m_keys: []
-    m_values: []
+  mLobbyPlayerWeaponSprite: {fileID: 0}
 --- !u!4 &307134898
 Transform:
   m_ObjectHideFlags: 0
