@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5101047403821976714}
   - component: {fileID: 715599529900204420}
   - component: {fileID: 4001426869352017519}
-  - component: {fileID: 9076115339039061931}
-  - component: {fileID: 5408533958313163426}
+  - component: {fileID: 3468073894274973446}
+  - component: {fileID: 4491940123742077164}
   m_Layer: 11
   m_Name: s29
   m_TagString: Projectile
@@ -131,7 +131,7 @@ MonoBehaviour:
   mPlayer: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
   mJoyStickPos: {x: 0, y: 0, z: 0}
---- !u!50 &9076115339039061931
+--- !u!50 &3468073894274973446
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -140,19 +140,19 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8760894415102365698}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &5408533958313163426
+--- !u!61 &4491940123742077164
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,7 +165,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.9387726, y: -0.0023951232}
+  m_Offset: {x: 0.92608386, y: 0.011375099}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0.125, w: 0}
     pivot: {x: -0.00022090806, y: 0.48844597}
@@ -176,5 +176,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0107278, y: 1.7757082}
+  m_Size: {x: 1.0377399, y: 1.6949413}
   m_EdgeRadius: 0
