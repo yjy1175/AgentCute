@@ -171,10 +171,11 @@ MonoBehaviour:
   mStiffTime: 0
   mRAttackCount: 0
   mPassCount: 0
-  firePosition: {fileID: 0}
+  mFirePosition: {fileID: 0}
   mAutoAttackSpeed: 0
   currentBaseSkill: {fileID: 0}
   mMonsterSkill: []
+  mSkillCheckCoolTime: []
 --- !u!114 &5670251932431289214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +237,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.080582276, y: -0.30020845}
+  m_Offset: {x: -0.0509907, y: -0.24694365}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -247,5 +248,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5923486, y: 0.28581995}
+  m_Size: {x: 0.6515317, y: 0.5186068}
   m_EdgeRadius: 0

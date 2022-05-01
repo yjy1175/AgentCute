@@ -30,8 +30,8 @@ ID,MonsterSpawnMap,MonsterInName,MonsterType,MonsterSize,MonsterName,MonsterGrad
 28,Dungeon,SkeletalWarrior,null,1,해골전사,Normal,30,0,0,1,1,1,1,0,0,null,0,0,null,0,0,null,0,0,null,null,SkeletalWarriorHit,null,SkeletalWarriorWalk,SkeletalWarriorDie,null
 29,Dungeon,Gargoyle,Gargoyle,3,가고일,Range,50,0,0,1,1,1,1,2,5,GargoyleAttack,0,0,null,0,0,null,0,0,null,null,GargoyleHit,null,GargoyleWalk,GargoyleDie,null
 30,Dungeon,Ghoul,null,1,구울,Normal,60,0,0,1,1,2,1,0,0,null,0,0,null,0,0,null,0,0,null,null,GhoulHit,null,GhoulWalk,GhoulDie,null
-31,Dungeon,Wendigo1,Wendigo,2,웬디고1,Boss,"2,400",0,0,2,1,-1,1,3,5,WendigoSkillA,2,5,WendigoSkillB,2,5,WendigoSkillC,3,5,WendigoSkillD,null,WendigoHit,WendigoAI,WendigoWalk,WendigoDie,null
-32,Dungeon,Wendigo2,Wendigo,2,웬디고2,Boss,"3,400",0,0,2,1,-1,1,3,5,WendigoSkillA,3,5,WendigoSkillB,4,5,WendigoSkillC,4,5,WendigoSkillD,null,WendigoHit,WendigoAI,WendigoWalk,WendigoDie,null
-33,Dungeon,Wendigo3,Wendigo,2,웬디고3,Boss,"4,400",0,1,2,1,-1,1,3,5,WendigoSkillA,4,5,WendigoSkillB,6,5,WendigoSkillC,6,5,WendigoSkillD,null,WendigoHit,WendigoAI,WendigoWalk,WendigoDie,null
+31,Dungeon,Wendigo1,Wendigo,2,웬디고1,Boss,"2,400",0,0,2,1,-1,1,3,5,WendigoMotionA,2,5,WendigoMotionB,2,5,WendigoMotionC,3,5,WendigoMotionD,null,WendigoHit,WendigoAI,WendigoWalk,WendigoDie,null
+32,Dungeon,Wendigo2,Wendigo,2,웬디고2,Boss,"3,400",0,0,2,1,-1,1,3,5,WendigoMotionA,3,5,WendigoMotionB,4,5,WendigoMotionC,4,5,WendigoMotionD,null,WendigoHit,WendigoAI,WendigoWalk,WendigoDie,null
+33,Dungeon,Wendigo3,Wendigo,2,웬디고3,Boss,"4,400",0,1,2,1,-1,1,3,5,WendigoMotionA,4,5,WendigoMotionB,6,5,WendigoMotionC,6,5,WendigoMotionD,null,WendigoHit,WendigoAI,WendigoWalk,WendigoDie,null
 34,Dungeon,DarkDragon,Dragon,2,다크드래곤,Boss,"50,000",0,0,2,1,-1,1,4,8,DarkDragonMotionA,4,8,DarkDragonMotionA,8,7,DarkDragonMotionA,6,5,DarkDragonMotionB,null,DarkDragonHit,DarkDragonAI,DarkDragonWalk,DarkDragonDie,null
 35,Dungeon,Mimic,null,1,미믹,Normal,50,0,0,1,1,1,1,0,0,null,0,0,null,0,0,-1,0,0,null,null,null,null,Mimic Walk,Mimic Die,0/1/2/3/4

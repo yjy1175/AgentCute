@@ -104,25 +104,25 @@ MonoBehaviour:
   mAttackSpeedCheckTime: 1
   mIsCriticalDamage: 0
   spec:
-    mType: 
+    mType: l29
     mTypeName: 
     mEquipName: 
     mEquipDesc: 
     mEquipRank: 0
-    mProjectileDamage: 0
+    mProjectileDamage: 1
     mProjectileDamageType: 0
     mProjectileDamageSplit: 0
-    mProjectileDamageSplitSec: 0
-    mProjectileAttackSpeed: 0
-    mMoveSpeed: 0
-    mCount: 0
+    mProjectileDamageSplitSec: -1
+    mProjectileAttackSpeed: 1
+    mMoveSpeed: 10
+    mCount: 1
     mAngle: 0
-    mSpawnTime: 0
+    mSpawnTime: 10
     mMaxPassCount: 0
     mStiffTime: 0
     mKnockback: 0
-    mProjectileSizeX: 0
-    mProjectileSizeY: 0
+    mProjectileSizeX: 1
+    mProjectileSizeY: 1
     mProjectileDelayTime: 0
   target: {x: 0, y: 0, z: 0}
   angle: 0
@@ -157,7 +157,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0011929274, y: 0.008350372}
