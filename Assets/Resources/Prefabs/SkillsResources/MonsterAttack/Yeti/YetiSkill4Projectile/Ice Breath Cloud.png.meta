@@ -1,40 +1,43 @@
 fileFormatVersion: 2
-guid: a2ca1cacb61c5524ea2dd797db92805b
+guid: f7aeba5237042f044bd9764d2d463c61
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3837292206575998723
-    second: Dust_Effect_06_0
+      213: -2341786718712088853
+    second: Ice Breath Cloud_0
   - first:
-      213: -920541258431081018
-    second: Dust_Effect_06_1
+      213: -255797139430225067
+    second: Ice Breath Cloud_1
   - first:
-      213: 1485012361594762389
-    second: Dust_Effect_06_2
+      213: 2580269897058735713
+    second: Ice Breath Cloud_2
   - first:
-      213: -828577658639973222
-    second: Dust_Effect_06_3
+      213: 2316971373090226677
+    second: Ice Breath Cloud_3
   - first:
-      213: -7627482169121496282
-    second: Dust_Effect_06_4
+      213: 8928652524251196948
+    second: Ice Breath Cloud_4
   - first:
-      213: -3803567655678595457
-    second: Dust_Effect_06_5
+      213: 4263985626085866897
+    second: Ice Breath Cloud_5
   - first:
-      213: 8743958462585154464
-    second: Dust_Effect_06_6
+      213: -2247235576441721449
+    second: Ice Breath Cloud_6
   - first:
-      213: 8269636456281385497
-    second: Dust_Effect_06_7
+      213: -4436393644899057554
+    second: Ice Breath Cloud_7
   - first:
-      213: -6595089466394515329
-    second: Dust_Effect_06_8
+      213: -5617154784380111576
+    second: Ice Breath Cloud_8
   - first:
-      213: -771796757174030951
-    second: Dust_Effect_06_9
+      213: 1478772940038114734
+    second: Ice Breath Cloud_9
   - first:
-      213: 2085393629009568825
-    second: Dust_Effect_06_10
+      213: -8400952034277280417
+    second: Ice Breath Cloud_10
+  - first:
+      213: -9049412181588622834
+    second: Ice Breath Cloud_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -79,7 +82,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -120,236 +123,269 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dust_Effect_06_0
+      name: Ice Breath Cloud_0
       rect:
         serializedVersion: 2
         x: 0
         y: 128
-        width: 144
+        width: 96
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.3459465, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30756585eecc04530800000000000000
-      internalID: 3837292206575998723
+      spriteID: be6307bf26d408fd0800000000000000
+      internalID: -2341786718712088853
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_1
+      name: Ice Breath Cloud_1
       rect:
         serializedVersion: 2
-        x: 144
+        x: 96
         y: 128
-        width: 144
+        width: 96
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.3459465, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c5df1a4a949933f0800000000000000
-      internalID: -920541258431081018
+      spriteID: 55b43b16bd9337cf0800000000000000
+      internalID: -255797139430225067
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_2
+      name: Ice Breath Cloud_2
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 96
+        height: 64
+      alignment: 9
+      pivot: {x: 0.3459465, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 166d1deecc5fec320800000000000000
+      internalID: 2580269897058735713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Breath Cloud_3
       rect:
         serializedVersion: 2
         x: 288
         y: 128
-        width: 144
+        width: 96
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.3459465, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5947bebffd2db9410800000000000000
-      internalID: 1485012361594762389
+      spriteID: 5f1cacf1039872020800000000000000
+      internalID: 2316971373090226677
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_3
+      name: Ice Breath Cloud_4
       rect:
         serializedVersion: 2
-        x: 432
+        x: 384
         y: 128
-        width: 144
+        width: 96
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.3459465, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9480fb620d4084f0800000000000000
-      internalID: -828577658639973222
+      spriteID: 41e23ee2a22f8eb70800000000000000
+      internalID: 8928652524251196948
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_4
+      name: Ice Breath Cloud_5
       rect:
         serializedVersion: 2
         x: 0
         y: 64
-        width: 144
+        width: 96
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.3459465, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62323ea116db52690800000000000000
-      internalID: -7627482169121496282
+      spriteID: 19d383ad558bc2b30800000000000000
+      internalID: 4263985626085866897
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_5
+      name: Ice Breath Cloud_6
       rect:
         serializedVersion: 2
-        x: 144
+        x: 95
         y: 64
-        width: 144
+        width: 96
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.3459465, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7eac1c8e53073bc0800000000000000
-      internalID: -3803567655678595457
+      spriteID: 79d229b462730d0e0800000000000000
+      internalID: -2247235576441721449
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_6
+      name: Ice Breath Cloud_7
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 63
+        width: 96
+        height: 64
+      alignment: 9
+      pivot: {x: 0.3459465, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e60cdf72c73ce62c0800000000000000
+      internalID: -4436393644899057554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ice Breath Cloud_8
       rect:
         serializedVersion: 2
         x: 288
         y: 64
-        width: 144
+        width: 96
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.3459465, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0aba82de4e7c85970800000000000000
-      internalID: 8743958462585154464
+      spriteID: 82533ac0c7bdb02b0800000000000000
+      internalID: -5617154784380111576
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_7
+      name: Ice Breath Cloud_9
       rect:
         serializedVersion: 2
-        x: 432
+        x: 383
         y: 64
-        width: 144
+        width: 96
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.3459465, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91aa546ea86a3c270800000000000000
-      internalID: 8269636456281385497
+      spriteID: ead8e627728a58410800000000000000
+      internalID: 1478772940038114734
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_8
+      name: Ice Breath Cloud_10
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 144
+        width: 96
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.3459465, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7862a592198974a0800000000000000
-      internalID: -6595089466394515329
+      spriteID: f55becd82a2d96b80800000000000000
+      internalID: -8400952034277280417
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_9
+      name: Ice Breath Cloud_11
       rect:
         serializedVersion: 2
-        x: 144
+        x: 96
         y: 0
-        width: 144
+        width: 96
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.3459465, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99de7d140f60a45f0800000000000000
-      internalID: -771796757174030951
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dust_Effect_06_10
-      rect:
-        serializedVersion: 2
-        x: 288
-        y: 0
-        width: 144
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9346af9e47ec0fc10800000000000000
-      internalID: 2085393629009568825
+      spriteID: e02415211970a6280800000000000000
+      internalID: -9049412181588622834
       vertices: []
       indices: 
       edges: []

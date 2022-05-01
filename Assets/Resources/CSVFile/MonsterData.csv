@@ -10,8 +10,8 @@ ID,MonsterSpawnMap,MonsterInName,MonsterType,MonsterSize,MonsterName,MonsterGrad
 8,Field,FieldDragon,Dragon,2,필드드래곤,Boss,"50,000",0,0,5,1,8,2,4,8,FieldDragonMotionA,4,8,FieldDragonMotionA,8,7,FieldDragonMotionB,6,5,FieldDragonMotionC,null,FieldDragonHit,FieldDragonAI,FieldDragonWalk,FieldDragonDie,null
 9,Ice,IceElemental,null,1,얼음원소,Normal,15,0,0,1,1,1,1,0,0,null,0,0,null,0,0,null,0,0,null,null,IceElementalHit,null,IceElementalWalk,IceElementalDie,null
 10,Ice,Penguin,null,1,펭귄,Normal,30,0,0,1,1,1,1,0,0,null,0,0,null,0,0,null,0,0,null,null,PenguinHit,null,PenguinWalk,PenguinDie,null
-11,Ice,JackaPole,null,1,순록토끼,Normal,50,0,0,2,1,1,1,0,0,null,0,0,null,0,0,null,0,0,null,null,JackPoleHit,null,JackPoleWalk,JackPoleDie,null
-12,Ice,FariyDragon,FairyDragon,1,요정용,Range,80,0,0,1,2,1,1,2,5,FairyDragonAttack,0,0,null,0,0,null,0,0,null,null,FairyDragonHit,null,FariyDragonWalk,FairyDragonDie,null
+11,Ice,JackPole,null,1,순록토끼,Normal,50,0,0,2,1,1,1,0,0,null,0,0,null,0,0,null,0,0,null,null,JackPoleHit,null,JackPoleWalk,JackPoleDie,null
+12,Ice,FairyDragon,FairyDragon,1,요정용,Range,80,0,0,1,2,1,1,2,5,FairyDragonAttack,0,0,null,0,0,null,0,0,null,null,FairyDragonHit,null,FariyDragonWalk,FairyDragonDie,null
 13,Ice,Yeti1,Yeti,2,예티1,Boss,"2,500",0,0,2,1,2,1,2,5,YetiMotionA,3,8,YetiMotionA,3,3,YetiMotionA,2,8,YetiMotionB,null,YetiHit,YetiAI,YetiWlak,YetiDie,null
 14,Ice,Yeti2,Yeti,2,예티2,Boss,"3,500",0,0,2,1,3,1,3,5,YetiMotionA,4,8,YetiMotionA,4,3,YetiMotionA,3,8,YetiMotionB,null,YetiHit,YetiAI,YetiWlak,YetiDie,null
 15,Ice,Yeti3,Yeti,2,예티3,Boss,"4,500",0,0,2,1,3,1,4,5,YetiMotionA,5,8,YetiMotionA,5,3,YetiMotionA,4,8,YetiMotionB,null,YetiHit,YetiAI,YetiWlak,YetiDie,null

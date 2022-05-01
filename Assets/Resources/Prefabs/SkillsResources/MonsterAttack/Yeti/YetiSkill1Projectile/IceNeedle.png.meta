@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 5a6a3a764b9daf94eb11841d407d519e
+guid: 3a9b01fd8f3df9941bd2b9bab866442c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8153528865245898326
-    second: "\u3141\u3134\u3147\u3141\u3134\u3147_0"
+      213: -7713571791801646934
+    second: IceNeedle_0
   - first:
-      213: -4580227421306260860
-    second: "\u3141\u3134\u3147\u3141\u3134\u3147_1"
+      213: 2548329706234645377
+    second: IceNeedle_1
   - first:
-      213: -5841784995935503927
-    second: "\u3141\u3134\u3147\u3141\u3134\u3147_2"
+      213: -1878139061421921254
+    second: IceNeedle_2
   - first:
-      213: 2265603375463856525
-    second: "\u3141\u3134\u3147\u3141\u3134\u3147_3"
+      213: -8428986325227436682
+    second: IceNeedle_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -44,7 +44,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -99,89 +99,101 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u3141\u3134\u3147\u3141\u3134\u3147_0"
+      name: IceNeedle_0
       rect:
         serializedVersion: 2
-        x: 90
-        y: 113
-        width: 46
-        height: 176
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 0
+        y: 811
+        width: 372
+        height: 113
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa9df1142b8d8de80800000000000000
-      internalID: -8153528865245898326
+      spriteID: aa08038d253e3f490800000000000000
+      internalID: -7713571791801646934
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u3141\u3134\u3147\u3141\u3134\u3147_1"
+      name: IceNeedle_1
       rect:
         serializedVersion: 2
-        x: 183
-        y: 113
-        width: 58
-        height: 176
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 0
+        y: 626
+        width: 372
+        height: 118
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 482798a6d63cf60c0800000000000000
-      internalID: -4580227421306260860
+      spriteID: 18b01bebd5c7d5320800000000000000
+      internalID: 2548329706234645377
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u3141\u3134\u3147\u3141\u3134\u3147_2"
+      name: IceNeedle_2
       rect:
         serializedVersion: 2
-        x: 288
-        y: 112
-        width: 83
-        height: 173
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 0
+        y: 368
+        width: 372
+        height: 192
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c9be0f4f7fcdeea0800000000000000
-      internalID: -5841784995935503927
+      spriteID: a1c292579728fe5e0800000000000000
+      internalID: -1878139061421921254
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u3141\u3134\u3147\u3141\u3134\u3147_3"
+      name: IceNeedle_3
       rect:
         serializedVersion: 2
-        x: 374
-        y: 113
-        width: 173
-        height: 174
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 0
+        y: 43
+        width: 372
+        height: 259
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d89f27c244a017f10800000000000000
-      internalID: 2265603375463856525
+      spriteID: 675813c8899360b80800000000000000
+      internalID: -8428986325227436682
       vertices: []
       indices: 
       edges: []

@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 9210888919280519820}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c551347d16f17354ba86df198a737eb2, type: 2}
+  m_Controller: {fileID: 9100000, guid: fb16d7dd2c93cd441ab190cfb0f89a94, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -119,21 +119,30 @@ MonoBehaviour:
   damage: 0
   currentPassCount: 0
   myPos: {x: 0, y: 0, z: 0}
-  isActive: 0
+  mIsActive: 0
+  mAttackSpeedCheckTime: 1
+  mIsCriticalDamage: 0
   spec:
-    type: 
-    typeName: 
-    equipName: 
-    equipDesc: 
-    equipRank: 0
-    projectileDamage: 0
-    speed: 0
-    count: 0
-    angle: 0
-    spawnTime: 0
-    maxPassCount: 0
+    mType: 
+    mTypeName: 
+    mEquipName: 
+    mEquipDesc: 
+    mEquipRank: 0
+    mProjectileDamage: 0
+    mProjectileDamageType: 0
+    mProjectileDamageSplit: 0
+    mProjectileDamageSplitSec: 0
+    mProjectileAttackSpeed: 0
+    mMoveSpeed: 0
+    mCount: 0
+    mAngle: 0
+    mSpawnTime: 0
+    mMaxPassCount: 0
     mStiffTime: 0
     mKnockback: 0
+    mProjectileSizeX: 0
+    mProjectileSizeY: 0
+    mProjectileDelayTime: 0
   target: {x: 0, y: 0, z: 0}
   angle: 0
   mSpawnType: 
@@ -141,7 +150,6 @@ MonoBehaviour:
   mPlayer: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
   mJoyStickPos: {x: 0, y: 0, z: 0}
-  scale: 0
 --- !u!61 &2768961710673633894
 BoxCollider2D:
   m_ObjectHideFlags: 0

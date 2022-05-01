@@ -10,8 +10,8 @@ ID,SpawnMonster,MonsterStep,SpawnMap,SpawnOrder,SpawnNumber,SpawnStartTime1,Spaw
 8,FieldDragon,4,Field,8,1,180,180,-1,-1
 9,IceElemental,0,Ice,1,4,0,0,1,-1
 10,Penguin,0,Ice,2,2,45,45,1,-1
-11,JackaPole,0,Ice,3,1,90,90,1,-1
-12,FariyDragon,0,Ice,5,1,135,135,6,-1
+11,JackPole,0,Ice,3,1,90,90,1,-1
+12,FairyDragon,0,Ice,5,1,135,135,6,-1
 13,Yeti1,1,Ice,4,1,180,180,-1,100
 14,Yeti2,2,Ice,6,1,180,180,-1,120
 15,Yeti3,3,Ice,7,1,180,180,-1,140

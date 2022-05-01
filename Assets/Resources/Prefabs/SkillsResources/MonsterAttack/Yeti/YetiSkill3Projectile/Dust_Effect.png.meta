@@ -1,40 +1,40 @@
 fileFormatVersion: 2
-guid: a2ca1cacb61c5524ea2dd797db92805b
+guid: d93201edcdc7cfc45ad561991ff5dc9a
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: 3837292206575998723
-    second: Dust_Effect_06_0
+    second: Dust_Effect_0
   - first:
       213: -920541258431081018
-    second: Dust_Effect_06_1
+    second: Dust_Effect_1
   - first:
       213: 1485012361594762389
-    second: Dust_Effect_06_2
+    second: Dust_Effect_2
   - first:
       213: -828577658639973222
-    second: Dust_Effect_06_3
+    second: Dust_Effect_3
   - first:
       213: -7627482169121496282
-    second: Dust_Effect_06_4
+    second: Dust_Effect_4
   - first:
       213: -3803567655678595457
-    second: Dust_Effect_06_5
+    second: Dust_Effect_5
   - first:
       213: 8743958462585154464
-    second: Dust_Effect_06_6
+    second: Dust_Effect_6
   - first:
       213: 8269636456281385497
-    second: Dust_Effect_06_7
+    second: Dust_Effect_7
   - first:
       213: -6595089466394515329
-    second: Dust_Effect_06_8
+    second: Dust_Effect_8
   - first:
       213: -771796757174030951
-    second: Dust_Effect_06_9
+    second: Dust_Effect_9
   - first:
       213: 2085393629009568825
-    second: Dust_Effect_06_10
+    second: Dust_Effect_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -124,15 +124,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dust_Effect_06_0
+      name: Dust_Effect_0
       rect:
         serializedVersion: 2
         x: 0
         y: 128
         width: 144
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -145,15 +145,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_1
+      name: Dust_Effect_1
       rect:
         serializedVersion: 2
         x: 144
         y: 128
         width: 144
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -166,15 +166,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_2
+      name: Dust_Effect_2
       rect:
         serializedVersion: 2
-        x: 288
+        x: 287
         y: 128
         width: 144
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -187,15 +187,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_3
+      name: Dust_Effect_3
       rect:
         serializedVersion: 2
         x: 432
         y: 128
         width: 144
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -208,15 +208,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_4
+      name: Dust_Effect_4
       rect:
         serializedVersion: 2
         x: 0
         y: 64
         width: 144
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -229,15 +229,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_5
+      name: Dust_Effect_5
       rect:
         serializedVersion: 2
         x: 144
         y: 64
         width: 144
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -250,15 +250,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_6
+      name: Dust_Effect_6
       rect:
         serializedVersion: 2
-        x: 288
-        y: 64
+        x: 289
+        y: 63
         width: 144
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -271,15 +271,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_7
+      name: Dust_Effect_7
       rect:
         serializedVersion: 2
         x: 432
         y: 64
         width: 144
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -292,15 +292,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_8
+      name: Dust_Effect_8
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 1
         width: 144
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -313,15 +313,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_9
+      name: Dust_Effect_9
       rect:
         serializedVersion: 2
         x: 144
         y: 0
         width: 144
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -334,15 +334,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dust_Effect_06_10
+      name: Dust_Effect_10
       rect:
         serializedVersion: 2
-        x: 288
+        x: 287
         y: 0
         width: 144
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
