@@ -115,7 +115,8 @@ public class Spawn : Projectile
                 transform.position = mPlayer;
                 float sizeX = transform.localScale.x;
                 float sizeY = transform.localScale.y;
-                if (transform.position.x < GameObject.Find("PlayerObject").transform.position.x)
+                //TO-DO : monsterAttack에 의존성이 생기는 코드라 player도 사용하려면 수정이 필요
+                if (CallerPos.x < GameObject.Find("PlayerObject").transform.position.x)
                 {
                     transform.localScale = new Vector3(sizeX, sizeY, 1f);
                 }

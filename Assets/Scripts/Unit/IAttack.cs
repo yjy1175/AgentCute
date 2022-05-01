@@ -286,6 +286,11 @@ public class IAttack : MonoBehaviour
             obj.GetComponent<Projectile>().Spec.ProjectileSizeY * (1 + mProjectileScale),
             1);
         obj.GetComponent<Projectile>().setSize(size);
+
+        //caller pos 위치 저장
+        obj.GetComponent<Projectile>().CallerPos = gameObject.transform.position;
+
+
     }
 
     protected void createObjectPool()

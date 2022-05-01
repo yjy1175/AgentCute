@@ -57,6 +57,15 @@ public abstract class Projectile : MonoBehaviour
         get;
         set;
     }
+
+    private Vector3 mCallerPos;
+    public  Vector3 CallerPos
+    {
+        get { return mCallerPos; }
+        set { mCallerPos = value; }
+    }
+
+
     #endregion
     private void OnDisable()
     {
