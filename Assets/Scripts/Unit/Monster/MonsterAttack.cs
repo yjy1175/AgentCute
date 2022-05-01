@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 public class MonsterAttack : IAttack
 {
-    private bool DEBUG = true;
+    private bool DEBUG = false;
 
     protected int mCloseAttackPower;
     protected int mCloseAttackRange;
@@ -64,7 +64,7 @@ public class MonsterAttack : IAttack
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
         UseSkil();
 
@@ -74,6 +74,8 @@ public class MonsterAttack : IAttack
         {
             mSkillCheckCoolTime[i] = Mathf.Max(mSkillCheckCoolTime[i] - Time.deltaTime, 0f);
         }
+
+        base.FixedUpdate();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -198,10 +200,9 @@ public class MonsterAttack : IAttack
         if (DEBUG)
             Debug.Log(gameObject.name + " 스킬발사");
 
-
         //5. 스킬발사
         FireSkillLaunchType(skillLaunchType, skill, skill.Spec.SkillCount,
-                            GameObject.Find("PlayerObject").transform.position, mFirePosition.transform.position, false);
+                            GameObject.Find("PlayerObject").transform.position, mFirePosition.transform.position, false, skill.Spec.SkillStopTime);
         mIsUsingSkill = true;
 
         if (DEBUG)

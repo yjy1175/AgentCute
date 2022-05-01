@@ -46,6 +46,7 @@ public class SkillManager : SingleToneMaker<SkillManager>
             item.Spec.SkillCoolTimeType = skillsData[i]["SkillCoolTimeType"].ToString();
             item.Spec.SkillStartTime = float.Parse(skillsData[i]["SkillStartTime"].ToString());
             item.Spec.SkillStopTime = float.Parse(skillsData[i]["SkillStopTime"].ToString());
+            item.Spec.SKillRushSpeed = float.Parse(skillsData[i]["SKillRushSpeed"].ToString());
             string[] tmp = skillsData[i]["SkillRunTime"].ToString().Split('/');
             float[] skillRunTimeList = new float[2];
             for (int k = 0; k < tmp.Length; k++)

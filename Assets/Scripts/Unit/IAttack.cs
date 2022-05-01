@@ -20,7 +20,9 @@ public class IAttack : MonoBehaviour
         //NORMAL공격을 딜레이를 두어 발사한다.
         DELAYSHOT,
         //DELAYSHOT을 멀티샷으로 발사한다.
-        DELAYMULTISHOT
+        DELAYMULTISHOT,
+        //특정 위치로 돌진
+        RUSH
     }
     // 최종 데미지
     [SerializeField]
@@ -81,9 +83,16 @@ public class IAttack : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private bool mIsRush;
+    [SerializeField]
+    private Vector3 mRushDir;
+    [SerializeField]
+    private float mRushSpeed;
+
 
     // Start is called before the first frame update
-     protected virtual void Start()
+    protected virtual void Start()
     {
         // key : 스킬 게임오브젝트 value : 각 스킬의 발사체 오브젝트
         gameObject.GetComponent<IEventHandler>().registerAttackSpeedObserver(RegisterAttackSpeedObserver);
@@ -95,9 +104,13 @@ public class IAttack : MonoBehaviour
         gameObject.GetComponent<IEventHandler>().registerPassCountObserver(RegisterPassCountObserver);
     }
 
-    // Update is called once per frame
-    void Update()
+    virtual protected void  FixedUpdate()
     {
+
+        if (mIsRush)
+        {
+            transform.Translate(mRushDir * mRushSpeed * Time.fixedDeltaTime);
+        }
 
     }
 
@@ -223,6 +236,7 @@ public class IAttack : MonoBehaviour
         }
     }
 
+
     protected IEnumerator multiLuanch(Skill _skill, int _count, Vector3 _target, Vector3 _fire)
     {
         for (int i = 0; i < _count; i++)
@@ -271,6 +285,23 @@ public class IAttack : MonoBehaviour
         }
     }
 
+    //_time 시간내에 gameobject의 position에서 _target으로 이동
+    protected IEnumerator RushAndLuanch(Skill _skill, int _projectileIndex, Vector3 _target, float _time)
+    {
+        mIsRush = true;
+        mRushDir = _target - transform.position;
+        mRushDir.Normalize();
+        mRushSpeed = _skill.Spec.SKillRushSpeed;
+
+        if (DEBUG)
+        {
+            Debug.Log("mRushDir : " + mRushDir + ",거리 : " + Vector3.Distance(_target, transform.position) + ",mRushSpeed : " + mRushSpeed);
+        }
+        yield return new WaitForSeconds(_time);
+
+        launchProjectile(_skill, _projectileIndex, _target, gameObject.transform.position, false);
+        mIsRush = false;
+    }
 
 
     // 발사체 데미지를 설정합니다.
@@ -305,7 +336,7 @@ public class IAttack : MonoBehaviour
     }
 
 
-    protected void FireSkillLaunchType(SkillLaunchType _enum, Skill _skill, int _count, Vector3 _target, Vector3 _fire, bool _notSingle)
+    protected void FireSkillLaunchType(SkillLaunchType _enum, Skill _skill, int _count, Vector3 _target, Vector3 _fire, bool _notSingle, float _time)
     {
         if (DEBUG)
             Debug.Log(gameObject.name + "가 " + _enum.ToString() + "타입의 "+ _skill.name+ "을 "+_count+"번 사용합니다");
@@ -329,7 +360,9 @@ public class IAttack : MonoBehaviour
             case SkillLaunchType.DELAYMULTISHOT:
                 StartCoroutine(DelayMultiLuanch(_skill, 0, _count, _target, _fire));
                 break;
-
+            case SkillLaunchType.RUSH:
+                StartCoroutine(RushAndLuanch(_skill, 0, _target, _time));
+                break;
             default:
                 Debug.Log("잘못된 Enum타입 " + _enum.ToString() + "이 들어왔습니다");
                 break;

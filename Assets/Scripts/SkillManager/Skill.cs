@@ -76,15 +76,15 @@ public class Skill : MonoBehaviour
         
     }
 
-    public void BuffOn()
+    public void BuffOn(GameObject _obj)
     {
-        GameObject.Find("PlayerObject").GetComponent<PlayerStatus>()
+        _obj.GetComponent<IStatus>()
              .ChangeStatusForSkill(mSkillBuffType, mSkillBuffValue);
     }
 
-    public void BuffOff()
+    public void BuffOff(GameObject _obj)
     {
-        GameObject.Find("PlayerObject").GetComponent<PlayerStatus>()
+        _obj.GetComponent<IStatus>()
      .ChangeStatusForSkillOff(mSkillBuffType, mSkillBuffValue);
     }
     #endregion

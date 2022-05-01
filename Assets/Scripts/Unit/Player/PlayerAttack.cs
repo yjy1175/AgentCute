@@ -189,7 +189,7 @@ public class PlayerAttack : IAttack
         // 해당 스킬의 버프능력이 있다면 실행
         if (_skill.SkillBuffType != Skill.ESkillBuffType.None)
         {
-            _skill.BuffOn();
+            _skill.BuffOn(gameObject);
         }
         int count = _skill.Spec.SkillClickCount;
         // 스킬의 지속시간이 있는 경우
@@ -417,7 +417,7 @@ public class PlayerAttack : IAttack
         // 지속시간동안 유지되는 버프이면 여기서 off
         if (_skill.SkillBuffType != Skill.ESkillBuffType.None)
         {
-            _skill.BuffOff();
+            _skill.BuffOff(gameObject);
         }
         // 방어 코드...
         mUSkillUseable = false;

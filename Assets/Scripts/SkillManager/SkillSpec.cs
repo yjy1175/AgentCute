@@ -127,6 +127,15 @@ public class SkillSpec : EquipSpec
     }
 
     [SerializeField]
+    private float mSKillRushSpeed;
+    public float SKillRushSpeed
+    {
+        get { return mSKillRushSpeed; }
+        set { mSKillRushSpeed = value; }
+    }
+
+
+    [SerializeField]
     private bool isLocked;
     public bool IsLocked
     {
