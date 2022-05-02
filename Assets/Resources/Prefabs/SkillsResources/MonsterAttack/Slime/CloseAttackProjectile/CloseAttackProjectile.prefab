@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 3583006209535631161}
   - component: {fileID: 1830669271461308874}
   - component: {fileID: 3514511522166048429}
-  - component: {fileID: -2830748281944943514}
-  - component: {fileID: 2768961710673633894}
   m_Layer: 0
   m_Name: CloseAttackProjectile
   m_TagString: Untagged
@@ -95,7 +93,7 @@ Animator:
   m_GameObject: {fileID: 9210888919280519820}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fb16d7dd2c93cd441ab190cfb0f89a94, type: 2}
+  m_Controller: {fileID: 9100000, guid: c551347d16f17354ba86df198a737eb2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -104,75 +102,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-2830748281944943514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9210888919280519820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2101f05966149eb46a0b1c7a93f624c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  currentPassCount: 0
-  myPos: {x: 0, y: 0, z: 0}
-  mIsActive: 0
-  mAttackSpeedCheckTime: 1
-  mIsCriticalDamage: 0
-  spec:
-    mType: 
-    mTypeName: 
-    mEquipName: 
-    mEquipDesc: 
-    mEquipRank: 0
-    mProjectileDamage: 0
-    mProjectileDamageType: 0
-    mProjectileDamageSplit: 0
-    mProjectileDamageSplitSec: 0
-    mProjectileAttackSpeed: 0
-    mMoveSpeed: 0
-    mCount: 0
-    mAngle: 0
-    mSpawnTime: 0
-    mMaxPassCount: 0
-    mStiffTime: 0
-    mKnockback: 0
-    mProjectileSizeX: 0
-    mProjectileSizeY: 0
-    mProjectileDelayTime: 0
-  target: {x: 0, y: 0, z: 0}
-  angle: 0
-  mSpawnType: 
-  mUJoySitick: {fileID: 0}
-  mPlayer: {x: 0, y: 0, z: 0}
-  newPos: {x: 0, y: 0, z: 0}
-  mJoyStickPos: {x: 0, y: 0, z: 0}
---- !u!61 &2768961710673633894
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9210888919280519820}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.007187724, y: -0.002395749}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.44, y: 0.64}
-    newSize: {x: 1.44, y: 0.64}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.04228, y: 0.51062083}
-  m_EdgeRadius: 0
