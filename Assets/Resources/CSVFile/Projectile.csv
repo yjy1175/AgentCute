@@ -1,12 +1,12 @@
 ProjectileType,ProjectileSpeed,ProjectileDamage,ProjectileDamageType,ProjectileDamageSplit,ProjectileDamageSplitSec,ProjectileAttackSpeed,ProjectileCount,ProjectileAngle,ProjectileSpawnTime,ProjectileMaxPassCount,ProjectileConferStiff,ProjectileConferKnockback,ProjectileSpawnType,ProjectileSizeX,ProjectileSizeY,ProjectileDelayTime
-l0,11,1,Normal,1,-1,0.5,1,15,4,0,0,0,null,1,1,0
+l0,11,0.7,Normal,1,-1,0.5,1,15,4,0,0,0,null,1,1,0
 l1,11,0.8,Normal,1,-1,0.5,3,15,4,0,0,0,null,1,1,0
 l2,11,1,Normal,1,-1,0.5,1,0,4,0,0,0,null,1,1,0
 s0,0,1.25,Normal,1,-1,0.5,1,0,0.41,-1,0,0,General,1,1,0
 s1,0,1.5,Normal,1,-1,0.5,1,0,0.41,-1,0,1,General,1,1,0
 l3,11,0.7,Normal,1,-1,0.5,1,0,4,0,0,0,null,1,1,0
 l4,21,12,Normal,1,-1,0.5,1,0,4,-1,0,0,null,1,1,0
-l5,11,1,Normal,1,-1,0.5,1,15,4,0,0,0,null,1,1,0
+l5,11,0.7,Normal,1,-1,0.5,1,15,4,0,0,0,null,1,1,0
 l6,11,1.6,SplitByNumber,2,-1,0.5,1,0,4,0,0,0,null,1,1,0
 l7,10,1.5,Normal,1,-1,0.5,3,15,4,0,0,0,null,1,1,0
 c0,2,2.8,SplitByTime,1,1,0.5,1,60,5,-1,0,0,null,1,1,0
@@ -31,6 +31,8 @@ s14,0,10.8,SplitByNumber,6,-1,0.5,1,0,0.41,-1,0,0,ShortWide,1,1,0
 s15,0,10.5,SplitByTime,1,0.5,0.5,1,0,2.5,-1,0,2,LongWide,1,1,0
 s16,0,5,Normal,1,-1,0.5,1,0,0.25,-1,0,0,SelfSpawn,1,1,0
 s17,0,5,SplitByTime,1,0.5,0.5,1,0,4,-1,0.5,0,LongWide,1,1,0
+s31,0,0,Normal,0,-1,1,1,0,0.16,-1,0,0,General,1.5,1.5,0
+s32,0,0,Normal,0,-1,1,1,0,3,-1,0,0,SelfSpawn,1.8,1.8,0
 s99,0,1,Normal,1,-1,0.1,1,0,3,-1,0,0,General,2,2,0
 l13,3,1,Normal,1,-1,0.5,1,0,10,0,0,0,null,1,1,0
 l14,5,1,Normal,1,-1,0.1,18,20,10,0,0,0,null,1,1,0

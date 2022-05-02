@@ -12,6 +12,7 @@ TagManager:
   - Item
   - Projectile
   - WareHouse
+  - StartZone
   layers:
   - Default
   - TransparentFX

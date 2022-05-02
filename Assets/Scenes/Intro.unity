@@ -728,7 +728,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: FTG ver(1.0.10)
+  m_Text: FTG ver(1.1.0)
 --- !u!222 &1416006185
 CanvasRenderer:
   m_ObjectHideFlags: 0

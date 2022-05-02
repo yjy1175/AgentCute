@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3128714514049640082}
   - component: {fileID: 6174734329072734354}
   - component: {fileID: 3459993842901923136}
-  - component: {fileID: 3806928718620344720}
   m_Layer: 11
   m_Name: s30
   m_TagString: Projectile
@@ -125,29 +124,29 @@ MonoBehaviour:
   mAttackSpeedCheckTime: 1
   mIsCriticalDamage: 0
   spec:
-    mType: 
+    mType: s30
     mTypeName: 
     mEquipName: 
     mEquipDesc: 
     mEquipRank: 0
-    mProjectileDamage: 0
+    mProjectileDamage: 1
     mProjectileDamageType: 0
-    mProjectileDamageSplit: 0
-    mProjectileDamageSplitSec: 0
-    mProjectileAttackSpeed: 0
+    mProjectileDamageSplit: 1
+    mProjectileDamageSplitSec: -1
+    mProjectileAttackSpeed: 0.1
     mMoveSpeed: 0
-    mCount: 0
+    mCount: 1
     mAngle: 0
-    mSpawnTime: 0
-    mMaxPassCount: 0
-    mStiffTime: 0
-    mKnockback: 0
-    mProjectileSizeX: 0
-    mProjectileSizeY: 0
+    mSpawnTime: 0.66
+    mMaxPassCount: -1
+    mStiffTime: 1
+    mKnockback: 2
+    mProjectileSizeX: 3
+    mProjectileSizeY: 3
     mProjectileDelayTime: 0
   target: {x: 0, y: 0, z: 0}
   angle: 0
-  mSpawnType: 
+  mSpawnType: SelfSpawn
   mUJoySitick: {fileID: 0}
   mPlayer: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
@@ -199,49 +198,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3806928718620344720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869162304583399544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2101f05966149eb46a0b1c7a93f624c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  currentPassCount: 0
-  myPos: {x: 0, y: 0, z: 0}
-  mIsActive: 0
-  mAttackSpeedCheckTime: 1
-  mIsCriticalDamage: 0
-  spec:
-    mType: 
-    mTypeName: 
-    mEquipName: 
-    mEquipDesc: 
-    mEquipRank: 0
-    mProjectileDamage: 0
-    mProjectileDamageType: 0
-    mProjectileDamageSplit: 0
-    mProjectileDamageSplitSec: 0
-    mProjectileAttackSpeed: 0
-    mMoveSpeed: 0
-    mCount: 0
-    mAngle: 0
-    mSpawnTime: 0
-    mMaxPassCount: 0
-    mStiffTime: 0
-    mKnockback: 0
-    mProjectileSizeX: 0
-    mProjectileSizeY: 0
-    mProjectileDelayTime: 0
-  target: {x: 0, y: 0, z: 0}
-  angle: 0
-  mSpawnType: 
-  mUJoySitick: {fileID: 0}
-  mPlayer: {x: 0, y: 0, z: 0}
-  newPos: {x: 0, y: 0, z: 0}
-  mJoyStickPos: {x: 0, y: 0, z: 0}
