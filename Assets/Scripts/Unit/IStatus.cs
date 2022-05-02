@@ -489,7 +489,7 @@ public abstract class IStatus : MonoBehaviour
                 }
             }
             // 데미지 입히기 및 데미지 박스 띄우기(타입별)
-            if(projectile.Damage > 0 && !mIsInvincibility)
+            if(!mIsInvincibility)
                 ChangeHpForDamage(projectile, projectile.Spec.ProjectileDamageType, projectile.IsDamage(gameObject));
         }
     }

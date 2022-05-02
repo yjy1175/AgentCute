@@ -15,6 +15,9 @@ public class PlayerStatus : IStatus
     private int mPlayerLevel;
 
     [SerializeField]
+    private int mPlayerMaxLevel;
+
+    [SerializeField]
     private int mGold;
     [SerializeField]
     private int mGainGold;
@@ -39,30 +42,20 @@ public class PlayerStatus : IStatus
         set { mIsFirstDie = value; }
     }
 
-    // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        //TO-DO : 플레이어 스텟들 하드코딩. csv파일 받으면 수정필요.
-        mPlayerMaxExp = 100;
+        PlayerLevel = 1;  
+        PlayerMaxExp = PlayerManager.Instance.mLevelData[mPlayerLevel];
+
+        mPlayerMaxLevel = PlayerManager.Instance.mLevelData.Count;
+
         PlayerExp = 0;
-        PlayerLevel = 1;
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-        /*
-         * TO-DO : UI관련 클래스 만들어 그곳에서 관리하도록 수정.EventHandler를 통해 값이 업데이트 될때마다 수정하도록 변경 필요
-         */
-
-
-        //if (Input.GetKey(KeyCode.Z))
-        //{
-        //    StartCoroutine(InvincibilityCorutine(3f));
-        //}
-
 
     }
 
@@ -111,13 +104,23 @@ public class PlayerStatus : IStatus
     {
         set
         {
-            mPlayerGetExp = value;
-            PlayerExp += mPlayerGetExp;
-            while (PlayerExp >= PlayerMaxExp)
-            {
-                //TO-DO LevelUp effect는?
-                PlayerExp -= PlayerMaxExp;
-                PlayerLevel += 1;
+            if(PlayerLevel < mPlayerMaxLevel) { 
+                mPlayerGetExp = value;
+                PlayerExp += mPlayerGetExp;
+                while (PlayerExp >= PlayerMaxExp && PlayerLevel < mPlayerMaxLevel)
+                {
+                    //TO-DO LevelUp effect는?
+                    PlayerExp -= PlayerMaxExp;
+                    PlayerMaxExp = PlayerManager.Instance.mLevelData[PlayerLevel + 1];
+                    PlayerLevel += 1;         
+                }
+
+                if (PlayerLevel >= mPlayerMaxLevel)
+                {
+                    PlayerMaxExp = 0;
+                    PlayerExp = 0;
+                }
+
             }
         }
         get
@@ -129,8 +132,7 @@ public class PlayerStatus : IStatus
     {
         set
         {
-            mPlayerExp = value;
-
+            mPlayerMaxExp = value;
         }
         get
         {
@@ -167,7 +169,7 @@ public class PlayerStatus : IStatus
     {
         if (_md == MonsterManager.MonsterGrade.Boss)
         {
-            return (int)(0.7 * mPlayerMaxExp);
+            return (int)(1 * mPlayerMaxExp);
         }
         else if (_md == MonsterManager.MonsterGrade.Normal || _md == MonsterManager.MonsterGrade.Range)
         {

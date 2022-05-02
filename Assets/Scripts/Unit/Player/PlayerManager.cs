@@ -24,17 +24,27 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
 
     [SerializeField]
     private bool mIsGameStart;
+
+    [SerializeField]
+    public Dictionary<int, int> mLevelData;
     public bool IsGameStart
     {
         get { return mIsGameStart; }
         set { mIsGameStart = value; }
     }
 
+
+    private void Awake()
+    {
+        mLevelData = new Dictionary<int, int>();
+        InitPlayerLevelData();
+    }
     void Start()
     {
         IsGameStart = false; 
         mPlayer = GameObject.Find("PlayerObject");
         InitPlayerBaseStat();
+        
     }
 
     // Update is called once per frame
@@ -66,6 +76,16 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         // 스킬 셋 UI로 불러오기
         UIManager.Instance.SkillSelectUILoad(loadInfo.WarWeaponName.Substring(0, 2));
     }
+
+    private void InitPlayerLevelData()
+    {
+        List<Dictionary<string, object>> levelData = CSVReader.Read("CSVFile/LevelData");
+        for (int i = 0; i < levelData.Count; i++)
+        {
+            mLevelData[int.Parse(levelData[i]["Level"].ToString())] = int.Parse(levelData[i]["Exp"].ToString());
+        }
+    }
+
     public SpriteRenderer getPlayerWeaponSprite()
     {
         return mWeaponSprite;
