@@ -18,24 +18,32 @@ public class PlayerStatus : IStatus
     private int mGold;
     [SerializeField]
     private int mGainGold;
-
-    [SerializeField]
-    private Costume mPlayerCurrentCostume;
-    public Costume MPlayerCurrentCostume
+    public int GainGold
     {
-        get { return mPlayerCurrentCostume; }
-        // 스텟적용도 여기서?
-        set { mPlayerCurrentCostume = value; }
+        get { return mGainGold; }
     }
 
+    [SerializeField]
+    private int mDiamond;
+    public int Diamond
+    {
+        get { return mDiamond; }
+        set { mDiamond = value; }
+    }
 
+    [SerializeField]
+    private bool mIsFirstDie = true;
+    public bool IsFirstDie
+    {
+        get { return mIsFirstDie; }
+        set { mIsFirstDie = value; }
+    }
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         //TO-DO : 플레이어 스텟들 하드코딩. csv파일 받으면 수정필요.
-        mMaxHp = mHp;
         mPlayerMaxExp = 100;
         PlayerExp = 0;
         PlayerLevel = 1;
@@ -69,14 +77,14 @@ public class PlayerStatus : IStatus
         // 크리티컬 공격
         if (criRan < (mCriticalChance + mAddCriticalChance) * 100)
         {
-            mObjectDamage = (int)(((mBaseDamage + currentWeapon.Spec.WeaponDamage) * (ran + mAddAttackPoint)) * mCriticalDamage);
+            mObjectDamage = (int)(((mBaseDamage) * (ran + mAddAttackPoint)) * mCriticalDamage);
             GetComponent<IEventHandler>().ChangeAttackPoint(mObjectDamage, gameObject);
             return true;
         }
         // 기본 공격
         else
         {
-            mObjectDamage = (int)((mBaseDamage + currentWeapon.Spec.WeaponDamage) * (ran + mAddAttackPoint));
+            mObjectDamage = (int)((mBaseDamage) * (ran + mAddAttackPoint));
             GetComponent<IEventHandler>().ChangeAttackPoint(mObjectDamage, gameObject);
             return false;
         }
@@ -91,6 +99,12 @@ public class PlayerStatus : IStatus
             MonsterManager.MonsterGrade md = _obj.GetComponent<MonsterStatus>().MonsterGrade;
             PlayerGetExp = GetMonsterExp(md);
         }
+    }
+
+    public void Resurrection()
+    {
+        Hp = MaxHP;
+        IsFirstDie = false;
     }
 
     public int PlayerGetExp

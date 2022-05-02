@@ -8,6 +8,7 @@ public class PlayerAttack : IAttack
 {
     public GameObject GBtn;
     public GameObject UBtn;
+    public GameObject DBtn;
     public VertualJoyStick Mjoystick;
 
     private GameObject mChargingBar;
@@ -16,7 +17,9 @@ public class PlayerAttack : IAttack
     private Image mGeneralSkillImg;
     [SerializeField]
     private Image mUltimateSkillImg;
-    
+    [SerializeField]
+    private Image mDodgeSkillImg;
+
     [SerializeField]
     private Skill currentGeneralSkill;
     public Skill CurrentGeneralSkill
@@ -40,6 +43,17 @@ public class PlayerAttack : IAttack
             mUltimateSkillImg.sprite = Resources.Load<Sprite>("UI/SkillIcon/" + currentUltimateSkill.name);
         }
     }
+    [SerializeField]
+    private Skill currentDodgeSkill;
+    public Skill CurrentDodgeSkill
+    {
+        get { return currentDodgeSkill; }
+        set
+        {
+            currentDodgeSkill = value;
+            mDodgeSkillImg.sprite = Resources.Load<Sprite>("UI/SkillIcon/" + currentDodgeSkill.name);
+        }
+    }
 
     [SerializeField]
     private Vector3 mTarget;
@@ -52,6 +66,8 @@ public class PlayerAttack : IAttack
     private bool mGSkillUseable  = true;
     [SerializeField]
     private bool mUSkillUseable = true;
+    [SerializeField]
+    private bool mDSkillUseable = true;
 
     [SerializeField]
     private bool mIsGameStart;
@@ -64,6 +80,7 @@ public class PlayerAttack : IAttack
         mFirePosition = transform.GetChild(0).gameObject;
         GBtn = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
         UBtn = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
+        DBtn = GameObject.Find("Canvas").transform.GetChild(2).gameObject;
         Mjoystick = GameObject.Find("Canvas").transform.GetChild(2).GetComponent<VertualJoyStick>();
         TileDict = new SkillDic();
         mChargingBar = GameObject.Find("ChargingBar").gameObject;
@@ -72,10 +89,11 @@ public class PlayerAttack : IAttack
     }
     private void Update()
     {
+        RemainSkillCount(DBtn, currentDodgeSkill, mDSkillUseable);
         RemainSkillCount(GBtn, currentGeneralSkill, mGSkillUseable);
         RemainSkillCount(UBtn, currentUltimateSkill, mUSkillUseable);
     }
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
         if (mAutoAttackCheckTime > mAutoAttackSpeed && mIsGameStart)
         {
@@ -108,7 +126,7 @@ public class PlayerAttack : IAttack
     {
         if (_skill != null)
         {
-            if (_skill.Spec.SkillClickCount > 1 && _skill.Spec.MSkillRunTime[0] == 0)
+            if (_skill.Spec.SkillClickCount > 1 && _skill.Spec.SkillRunTime[0] == 0)
             {
                 int count = _skill.Spec.SkillClickCount - _skill.CurrentUseCount;
                 if (!_look)
@@ -122,6 +140,7 @@ public class PlayerAttack : IAttack
         // 스킬 매니저를 통해 현재 장착중인 스킬을 받아온다
         TileDict.Clear();
         PushProjectile(CurrentBaseSkill);
+        PushProjectile(CurrentDodgeSkill);
         PushProjectile(CurrentGeneralSkill);
         PushProjectile(CurrentUltimateSkill);
         createObjectPool();
@@ -152,6 +171,16 @@ public class PlayerAttack : IAttack
             mUSkillUseable = false;
             useSkill(UBtn, CurrentUltimateSkill);
             StartCoroutine(activeAnimation(CurrentUltimateSkill));
+        }
+    }
+
+    public void clickDodgeSkillBtn()
+    {
+        if (mDSkillUseable)
+        {
+            mDSkillUseable = false;
+            useSkill(DBtn, CurrentDodgeSkill);
+            GetComponent<PlayerStatus>().Invincibility(CurrentDodgeSkill.Spec.SkillStartTime);
         }
     }
     /*
@@ -193,7 +222,7 @@ public class PlayerAttack : IAttack
         }
         int count = _skill.Spec.SkillClickCount;
         // 스킬의 지속시간이 있는 경우
-        if (_skill.Spec.MSkillRunTime[0] > 0)
+        if (_skill.Spec.SkillRunTime[0] > 0)
         {
             int launchCount = _skill.Spec.SkillCount;
             // (익설티드 소드)
@@ -220,7 +249,7 @@ public class PlayerAttack : IAttack
                     // 첫 검기 발사 후 지속시간 쿨타임 코루틴 실행
                     _skill.CurrentCoolTimeIndex++;
                     _skill.CurrentUseCount++;
-                    StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime[0], _btn, _skill));
+                    StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.SkillRunTime[0], _btn, _skill));
                 }
                 // 중간일 경우
                 else
@@ -242,7 +271,7 @@ public class PlayerAttack : IAttack
             else
             {
                 launchSkill(_skill);
-                StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime[0], _btn, _skill));
+                StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.SkillRunTime[0], _btn, _skill));
             }
         }
         // 한번 클릭
@@ -280,8 +309,8 @@ public class PlayerAttack : IAttack
     {
         // Todo : 무한발사 스킬 지속시간과 한발당 발사시간 데이터 받아오기
         // 나중에 이런스킬류가 더 생기게되면 테이블이 필요해요...
-        int count = (int)(_skill.Spec.MSkillRunTime[0] / _skill.Spec.MSkillRunTime[1]); //  지속 시간 / 한발당 발사시간
-        StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.MSkillRunTime[0], UBtn, _skill));
+        int count = (int)(_skill.Spec.SkillRunTime[0] / _skill.Spec.SkillRunTime[1]); //  지속 시간 / 한발당 발사시간
+        StartCoroutine(WaitForChargingTime(mChargingBar, _skill.Spec.SkillRunTime[0], UBtn, _skill));
         Vector3 firePos;
         while (count != 0)
         {
@@ -299,7 +328,7 @@ public class PlayerAttack : IAttack
                 launchProjectile(_skill, 0, mTarget, firePos, false);
             }
 
-            yield return new WaitForSeconds(_skill.Spec.MSkillRunTime[1]); // 한발당 발사시간
+            yield return new WaitForSeconds(_skill.Spec.SkillRunTime[1]); // 한발당 발사시간
         }
 
     }
@@ -380,6 +409,9 @@ public class PlayerAttack : IAttack
                 case "U":
                     mUSkillUseable = false;
                     break;
+                case "D":
+                    mDSkillUseable = false;
+                    break;
             }
             lefttime -= Time.deltaTime;
             _btn.transform.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount =( lefttime  / _cooltime);
@@ -393,6 +425,9 @@ public class PlayerAttack : IAttack
                 break;
             case "U":
                 mUSkillUseable = true;
+                break;
+            case "D":
+                mDSkillUseable = true;
                 break;
         }
     }

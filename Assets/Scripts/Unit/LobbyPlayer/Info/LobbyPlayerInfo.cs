@@ -94,14 +94,33 @@ public class LobbyPlayerInfo
     public string CurrentWeaponName
     {
         get { return mCurrentWeaponName; }
-        set { mCurrentWeaponName = value; }
+        set 
+        { 
+            mCurrentWeaponName = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
     }
     [SerializeField]
     private string mCurrentCostumeName;
     public string CurrentCostumeName
     {
         get { return mCurrentCostumeName; }
-        set { mCurrentCostumeName = value; }
+        set 
+        { 
+            mCurrentCostumeName = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
+    }
+    [SerializeField]
+    private string mCurrentCostumeShapeName;
+    public string CurrentCostumeShapeName
+    {
+        get { return mCurrentCostumeShapeName; }
+        set
+        {
+            mCurrentCostumeShapeName = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
     }
     #endregion
     #region GOODS
@@ -110,21 +129,33 @@ public class LobbyPlayerInfo
     public int Gold
     {
         get { return mGold; }
-        set { mGold = value; }
+        set 
+        { 
+            mGold = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
     }
     [SerializeField]
     private int mDiamond;
     public int Diamond
     {
         get { return mDiamond; }
-        set { mDiamond = value; }
+        set
+        {
+            mDiamond = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
     }
     [SerializeField]
     private int mStemina;
     public int Stemina
     {
         get { return mStemina; }
-        set { mStemina = value; }
+        set
+        { 
+            mStemina = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
     }
     #endregion
     #endregion

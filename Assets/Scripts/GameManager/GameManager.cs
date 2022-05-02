@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadTestLobbyScene()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("LobbyScene");
     }
 
     public void QuitGame()

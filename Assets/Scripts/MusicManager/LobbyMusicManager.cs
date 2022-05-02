@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicManager : MonoBehaviour
+public class LobbyMusicManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject BackgroundMusic;
@@ -19,16 +19,5 @@ public class MusicManager : MonoBehaviour
             backmusic.Play();
             DontDestroyOnLoad(BackgroundMusic); //배경음악 계속 재생하게(이후 버튼매니저에서 조작)
         }
-    }
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

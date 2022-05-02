@@ -104,7 +104,7 @@ public class SkillSpec : EquipSpec
 
     [SerializeField]
     private float[] mSkillRunTime = new float[2];
-    public float[] MSkillRunTime
+    public float[] SkillRunTime
     {
         get { return mSkillRunTime; }
         set { mSkillRunTime = value; }

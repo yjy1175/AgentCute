@@ -68,6 +68,11 @@ public class Spawn : Projectile
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             transform.position = mPlayer;
         }
+        if(mIsActive && (SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType) == SpawnType.SelfSpawn)
+        {
+            mPlayer = GameObject.Find("fire").transform.position;
+            transform.position = mPlayer;
+        }
     }
     // Update is called once per frame
     protected override void FixedUpdate()

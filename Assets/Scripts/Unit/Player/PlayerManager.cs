@@ -8,6 +8,10 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
     // Start is called before the first frame update
     [SerializeField]
     private GameObject mPlayer;
+    public GameObject Player
+    {
+        get { return mPlayer; }
+    }
     [SerializeField]
     private SpriteRenderer mWeaponSprite;
 
@@ -43,13 +47,24 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         List<Dictionary<string, object>> playerBaseStatData = CSVReader.Read("CSVFile/PlayerBaseStat");
         for(int i = 0; i < playerBaseStatData.Count; i++)
         {
-            mPlayer.GetComponent<IStatus>().Hp = int.Parse(playerBaseStatData[i]["PlayerBaseHP"].ToString());
-            mPlayer.GetComponent<IStatus>().BaseDamage = int.Parse(playerBaseStatData[i]["PlayerBaseATK"].ToString());
-            mPlayer.GetComponent<IStatus>().MoveSpeed = float.Parse(playerBaseStatData[i]["PlayerBaseSPD"].ToString());
             mPlayer.GetComponent<IStatus>().CriticalChance = float.Parse(playerBaseStatData[i]["PlayerBaseCritChance"].ToString());
             mPlayer.GetComponent<IStatus>().CriticalDamage = float.Parse(playerBaseStatData[i]["PlayerBaseCritDamage"].ToString());
             mPlayer.GetComponent<IStatus>().AttackSpeed = float.Parse(playerBaseStatData[i]["PlayerBaseATKSPD"].ToString());
         }
+        WarInfo loadInfo = SaveLoadManager.Instance.LoadPlayerWarData();
+
+        mPlayer.GetComponent<IStatus>().Hp = loadInfo.WarHp;
+        mPlayer.GetComponent<IStatus>().MaxHP = loadInfo.WarHp;
+        mPlayer.GetComponent<IStatus>().BaseDamage = loadInfo.WarDamage;
+        mPlayer.GetComponent<IStatus>().MoveSpeed = loadInfo.WarMoveSpeed;
+        mPlayer.GetComponent<PlayerStatus>().Diamond = loadInfo.WarDiamond;
+
+        // 장비, 외형 입히기(코스튬은 입힐 필요 X)
+        EquipmentManager.Instance.ChangeWeapon(loadInfo.WarWeaponName);
+        EquipmentManager.Instance.ChangeCostume(loadInfo.WarCostumeShapeName);
+
+        // 스킬 셋 UI로 불러오기
+        UIManager.Instance.SkillSelectUILoad(loadInfo.WarWeaponName.Substring(0, 2));
     }
     public SpriteRenderer getPlayerWeaponSprite()
     {
@@ -74,5 +89,10 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         LevelUpStatusManager.Instance.SetSlots(weaponType);
 
         IsGameStart = true;
+    }
+
+    public void ResurrectionPlayer()
+    {
+        mPlayer.GetComponent<PlayerStatus>().Resurrection();
     }
 }

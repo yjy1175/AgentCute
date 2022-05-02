@@ -74,7 +74,19 @@ public class PlayerUI : IUI
         // 플레이어 사망시 게임오버 UI 팝업 API호출
         // TO-DO : UIManager에 이벤트 등록 하기
         if (_hp <= 0)
-            UIManager.Instance.GameOverPannelOn();
+        {
+            if (GetComponent<PlayerStatus>().IsFirstDie)
+            {
+                // 부활 가능한 패널
+                UIManager.Instance.GameOverResurrectionPannelOn();
+            }
+            else
+            {
+                // 부활 불가능한 패널
+                UIManager.Instance.GameOverPannelOn();
+            }
+        }
+            
     }
 
 }

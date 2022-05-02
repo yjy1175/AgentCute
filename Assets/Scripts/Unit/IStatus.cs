@@ -55,13 +55,13 @@ public abstract class IStatus : MonoBehaviour
         get { return mCloseDamaged; }
         set
         {
+            mCloseDamaged = value;
             if (mIsInvincibility)
                 mCloseDamaged = 0;
-            mCloseDamaged = value;
             mHp = Mathf.Max(0, mHp - mCloseDamaged);
             gameObject.GetComponent<IEventHandler>().ChangeHp(mHp, gameObject);
             MessageBoxManager.BoxType bt =(MessageBoxManager.BoxType)Enum.Parse(typeof(MessageBoxManager.BoxType), gameObject.tag + "Damage");
-            MessageBoxManager.Instance.createMessageBox(bt, mCloseDamaged.ToString(), transform.position);
+            MessageBoxManager.Instance.createMessageBox(bt, mCloseDamaged == 0 ? "무적": mCloseDamaged.ToString(), transform.position);
         }
     }
 
@@ -76,8 +76,6 @@ public abstract class IStatus : MonoBehaviour
         get { return mDamaged; }
         set
         {
-            if (mIsInvincibility)
-                mDamaged = 0;
             mDamaged = value;
             mHp = Mathf.Max(0, mHp - mDamaged);
             gameObject.GetComponent<IEventHandler>().ChangeHp(mHp, gameObject);
@@ -414,43 +412,15 @@ public abstract class IStatus : MonoBehaviour
                 break;
         }
     }
-    protected IEnumerator InvincibilityCorutine(float time)
+    public void Invincibility(float _time)
+    {
+        StartCoroutine(InvincibilityCorutine(_time));
+    }
+    protected IEnumerator InvincibilityCorutine(float _time)
     {
         mIsInvincibility = true;
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(_time);
         mIsInvincibility = false;
-    }
-    public int getCurrentWeponeDamage()
-    {
-        return currentWeapon==null ?0:currentWeapon.Spec.WeaponDamage;
-    }
-    public void ChangeDicreaseStatusForCostume(Costume.CostumeBuffType _key, Costume _item)
-    {
-        // 플레이어 체력 감소
-        if (_key == Costume.CostumeBuffType.PlayerHP)
-        {
-            Hp = Hp - _item.GetBuffValue(_key);
-            MaxHP = Hp;
-        }
-        // 플레이어 이속 감소
-        else if (_key == Costume.CostumeBuffType.PlayerSPD)
-        {
-            MoveSpeedRate -= _item.GetBuffValue(_key) / 100f;
-        }
-    }
-    public void ChangeIncreaseStatusForCostume(Costume.CostumeBuffType _key, Costume _item)
-    {
-        // 플레이어 체력 상승
-        if(_key == Costume.CostumeBuffType.PlayerHP)
-        {
-            Hp = Hp + _item.GetBuffValue(_key);
-            MaxHP = Hp;
-        }
-        // 플레이어 이속 상승
-        else if (_key == Costume.CostumeBuffType.PlayerSPD)
-        {
-            MoveSpeedRate += _item.GetBuffValue(_key) / 100f;
-        }
     }
     public void ChangeStatusForSkill(Skill.ESkillBuffType _type, float value)
     {
@@ -480,8 +450,8 @@ public abstract class IStatus : MonoBehaviour
         }
         else if (_type == Skill.ESkillBuffType.PlayerWeaponSprite)
         {
-            List<GameObject> wList =  EquipmentManager.Instance.FindWepaonList("sw");
-            PlayerManager.Instance.getPlayerWeaponSprite().sprite = wList[(int)value].GetComponent<SpriteRenderer>().sprite;
+            List<GameObject> wList =  EquipmentManager.Instance.FindWepaonList("WS");
+            PlayerManager.Instance.getPlayerWeaponSprite().sprite = wList[0].GetComponent<SpriteRenderer>().sprite;
         }
     }
     public void ChangeStatusForSkillOff(Skill.ESkillBuffType _type, float value)
@@ -493,7 +463,6 @@ public abstract class IStatus : MonoBehaviour
         else if(_type == Skill.ESkillBuffType.PlayerWeaponSprite)
         {
             PlayerManager.Instance.getPlayerWeaponSprite().sprite = currentWeapon.GetComponent<SpriteRenderer>().sprite;
-            //EquipmentManager.Instance.ChangeWeapon(currentWeapon.Spec.Type);
         }
     }
 
@@ -520,7 +489,8 @@ public abstract class IStatus : MonoBehaviour
                 }
             }
             // 데미지 입히기 및 데미지 박스 띄우기(타입별)
-            ChangeHpForDamage(projectile, projectile.Spec.ProjectileDamageType, projectile.Damage);
+            if(projectile.Damage > 0 && !mIsInvincibility)
+                ChangeHpForDamage(projectile, projectile.Spec.ProjectileDamageType, projectile.Damage);
         }
     }
 

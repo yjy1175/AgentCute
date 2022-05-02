@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
 {
     // Start is called before the first frame update
@@ -54,12 +54,46 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     private GameObject mWareHousePannel;
     [SerializeField]
     private bool mIsOpenWareHousePannel = false;
+
+    [Header("경고창")]
+    [SerializeField]
+    private GameObject mAlertEnterPannel;
+    [SerializeField]
+    private GameObject mAlertEnterExitPannel;
+
+    [Header("던전 입장")]
+    [SerializeField]
+    private GameObject mSupportItemPannel;
+    [SerializeField]
+    private GameObject mDeongunStartPannel;
     #endregion
     void Start()
     {
-        
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
     }
+    public void OpenAlertEnterPannel(string _desc)
+    {
+        mAlertEnterPannel.transform.GetChild(2).GetComponent<Text>().text = _desc;
+        mAlertEnterPannel.SetActive(true);
+    }
+    public void CloseAlertEnterPannel()
+    {
+        mAlertEnterPannel.SetActive(false);
+    }
+    public void OpenAlertEnterExitPannel(string _desc)
+    {
+        mAlertEnterExitPannel.transform.GetChild(2).GetComponent<Text>().text = _desc;
+        mAlertEnterExitPannel.SetActive(true);
+    }
+    public void EnterAlertEnterExitPannel()
+    {
 
+    }
+    public void CloseAlertEnterExitPannel()
+    {
+        mAlertEnterExitPannel.SetActive(false);
+    }
     private void GamePause()
     {
         Time.timeScale = Convert.ToInt32(mIsPause);
@@ -112,6 +146,32 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
             mIsOpenWareHousePannel = !mIsOpenWareHousePannel;
             mWareHousePannel.SetActive(mIsOpenWareHousePannel);
         }
+        // 플레이어가 던전 입구와 상호작용 대기중 이라면
+        if (player.IsTriggerInStartZone)
+        {
+            GamePause();
+            mSupportItemPannel.SetActive(true);
+        }
+    }
+    public void ClickAdvButton(bool _ok)
+    {
+        // 광고 보기 한 경우
+        if (_ok)
+        {
+            // TODO : 광고 틀기, 던전 버프 랜덤 적용, 광고 횟수 차감
+        }
+        // 광고 보지 않은 경우
+        else
+        {
+            mSupportItemPannel.SetActive(false);
+            mDeongunStartPannel.SetActive(true);
+        }
+    }
+    public void CloseDeongunStartPannel()
+    {
+        GamePause();
+        mDeongunStartPannel.SetActive(false);
+        // TODO : 적용되고있던 던전 버프 삭제
     }
     public void GameExit()
     {

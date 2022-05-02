@@ -25,4 +25,11 @@ public class EquipButton : MonoBehaviour
         get { return mEquipCheckImage; }
         set { mEquipCheckImage = value; }
     }
+    [SerializeField]
+    private GameObject mShapeCheckImage;
+    public GameObject ShapeCheckImage
+    {
+        get { return mShapeCheckImage; }
+        set { mShapeCheckImage = value; }
+    }
 }

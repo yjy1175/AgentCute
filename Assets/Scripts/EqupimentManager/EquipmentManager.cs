@@ -19,7 +19,13 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
     {
         get { return costumes; }
     }
-    
+    public enum CostumeTpye
+    {
+        swsp,
+        bgst,
+        bgstswsp,
+        Exit
+    }
     public enum WeaponType
     {
         sw,
@@ -60,6 +66,9 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
 
     [SerializeField]
     private SpriteRenderer mLobbyPlayerWeaponSprite;
+
+    [SerializeField]
+    private List<SpriteRenderer> mLobbyPlayerCostumeSprites;
     #endregion
     void Start()
     {
@@ -100,7 +109,11 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                     item.Spec.WeaponAddSpeed = float.Parse(weaponData[i]["WeaponSPD"].ToString());
 
                     // 추후에 초기 데이터 필요
-                    item.IsLocked = false;
+                    // 기본 지급 무기들만 해금
+                    if (item.Spec.Type.Substring(2) == "00")
+                        item.IsLocked = false;
+                    else
+                        item.IsLocked = true;
                 }
             }
         }
@@ -136,7 +149,11 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                             item.SetBuffDic((Costume.CostumeBuffType)Enum.Parse(typeof(Costume.CostumeBuffType),tmp[idx]), int.Parse(tmp[++idx]));
                         }
                     }
-                    item.IsLocked = false;
+                    // 기본 지급 코스튬만 해금
+                    if (item.gameObject.name == "cstbgstswsp01")
+                        item.IsLocked = false;
+                    else
+                        item.IsLocked = true;
                 }
             }
             for (int i = 0; i < costumesList.Length; i++)
@@ -196,23 +213,12 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         // 해금이 되어있다면
         if (!cWeapon.IsLocked)
         {
-            if(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().PlayerCurrentWeapon != null)
-            {
-                GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().MoveSpeedRate -=
-                GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().PlayerCurrentWeapon.Spec.WeaponAddSpeed;
-            }
             GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().PlayerCurrentWeapon = cWeapon;
             SpriteRenderer playerSprite = PlayerManager.Instance.getPlayerWeaponSprite();
             playerSprite.sprite = cWeapon.GetComponent<SpriteRenderer>().sprite;
-            GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().MoveSpeedRate += cWeapon.Spec.WeaponAddSpeed;
-        }
-        // 해금이 안되어있다면
-        else
-        {
-            // 경고문구 출력
         }
     }
-    public bool ChangeWeaponLobbyPlayer(string _name)
+    public void ChangeWeaponLobbyPlayer(string _name)
     {
         // Todo : playerCurrentWeapon의 게임오브젝트 해당 게임오브젝트로 변경
         Weapon cWeapon = weapons[_name].GetComponent<Weapon>();
@@ -231,25 +237,12 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
             GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.BaseATK += cWeapon.Spec.WeaponDamage;
             GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.MoveSpeedRate += cWeapon.Spec.WeaponAddSpeed;
         }
-        return !cWeapon.IsLocked;
     }
     public void ChangeCostume(string _name)
     {
         Costume cCostume = costumes[_name].GetComponent<Costume>();
         if (!cCostume.IsLocked)
         {
-            // 전에 착용하던 코스튬이 있으면 해당 스텟을 빼준다.
-            if(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().MPlayerCurrentCostume != null)
-            {
-                for (Costume.CostumeBuffType idx = Costume.CostumeBuffType.PlayerSPD; idx < Costume.CostumeBuffType.Exit; idx++)
-                {
-                    GameObject.Find("PlayerObject").GetComponent<PlayerStatus>()
-                        .ChangeDicreaseStatusForCostume(idx, GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().MPlayerCurrentCostume);
-                }
-            }
-
-
-            GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().MPlayerCurrentCostume = cCostume;
             for (SpriteType i = SpriteType.CostumeHelmet; i < SpriteType.Exit;)
             {
                 // 해당 코스튬 부위가 있으면
@@ -311,22 +304,162 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                     }
                 }
             }
-
-            // 스텟 적용
-            for(Costume.CostumeBuffType idx = Costume.CostumeBuffType.PlayerSPD; idx < Costume.CostumeBuffType.Exit; idx++)
+        }
+    }
+    public void ChangeCostumeLobbyPlayer(string _name)
+    {
+        Costume cCostume = costumes[_name].GetComponent<Costume>();
+        if (!cCostume.IsLocked)
+        {
+            // 전에 착용하던 코스튬이 있으면 해당 스텟을 빼준다.
+            if (GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentCostumeName != "")
             {
-                GameObject.Find("PlayerObject").GetComponent<PlayerStatus>()
-                    .ChangeIncreaseStatusForCostume(idx, cCostume);
+                GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.BaseHp -=
+                    costumes[GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentCostumeName].GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerHP);
+                GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.MoveSpeedRate -=
+                    costumes[GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentCostumeName].GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerSPD) / 100f;
             }
 
 
-        }
-        // 해금 안되있을 경우
-        else
-        {
-
+            GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentCostumeName = _name;
+            for (SpriteType i = SpriteType.CostumeHelmet; i < SpriteType.Exit;)
+            {
+                // 해당 코스튬 부위가 있으면
+                if (cCostume.GetSpriteDic().ContainsKey(i))
+                {
+                    CostumeSprite newCosutume = cCostume.GetSpriteList(i);
+                    if (i == SpriteType.CostumeCloth || i == SpriteType.CostumeArmor)
+                    {
+                        mLobbyPlayerCostumeSprites[(int)i].sprite = Array.Find(newCosutume.sprite, (Sprite s) => s.name == "Body");
+                        mLobbyPlayerCostumeSprites[(int)i++].color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        mLobbyPlayerCostumeSprites[(int)i].sprite = Array.Find(newCosutume.sprite, (Sprite s) => s.name == "Left");
+                        mLobbyPlayerCostumeSprites[(int)i++].color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        mLobbyPlayerCostumeSprites[(int)i].sprite = Array.Find(newCosutume.sprite, (Sprite s) => s.name == "Right");
+                        mLobbyPlayerCostumeSprites[(int)i++].color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        continue;
+                    }
+                    else if (i == SpriteType.CostumePant)
+                    {
+                        mLobbyPlayerCostumeSprites[(int)i].sprite = Array.Find(newCosutume.sprite, (Sprite s) => s.name == "Left");
+                        mLobbyPlayerCostumeSprites[(int)i++].color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        mLobbyPlayerCostumeSprites[(int)i].sprite = Array.Find(newCosutume.sprite, (Sprite s) => s.name == "Right");
+                        mLobbyPlayerCostumeSprites[(int)i++].color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        continue;
+                    }
+                    else
+                    {
+                        mLobbyPlayerCostumeSprites[(int)i].sprite = newCosutume.sprite[0];
+                        mLobbyPlayerCostumeSprites[(int)i++].color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        continue;
+                    }
+                }
+                // 해당 코스튬 부위가 없으면
+                else
+                {
+                    mLobbyPlayerCostumeSprites[(int)i].sprite = null;
+                    switch ((int)i)
+                    {
+                        case 0:
+                            i++;
+                            break;
+                        case 1:
+                            i += 3;
+                            break;
+                        case 4:
+                            i += 3;
+                            break;
+                        case 7:
+                            i += 2;
+                            break;
+                        case 9:
+                            i++;
+                            break;
+                    }
+                }
+            }
+            // 스텟 적용
+            GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.BaseHp +=
+                    costumes[_name].GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerHP);
+            GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.MoveSpeedRate +=
+                costumes[_name].GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerSPD) / 100f;
         }
     }
+    public void ChangeCostumeShapeLobbyPlayer(string _name)
+    {
+        Costume cCostume = costumes[_name].GetComponent<Costume>();
+        if (!cCostume.IsLocked)
+        {
+            GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentCostumeShapeName = _name;
+            for (SpriteType i = SpriteType.CostumeHelmet; i < SpriteType.Exit;)
+            {
+                // 해당 코스튬 부위가 있으면
+                if (cCostume.GetSpriteDic().ContainsKey(i))
+                {
+                    CostumeSprite newCosutume = cCostume.GetSpriteList(i);
+                    if (i == SpriteType.CostumeCloth || i == SpriteType.CostumeArmor)
+                    {
+                        mLobbyPlayerCostumeSprites[(int)i].sprite = Array.Find(newCosutume.sprite, (Sprite s) => s.name == "Body");
+                        mLobbyPlayerCostumeSprites[(int)i++].color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        mLobbyPlayerCostumeSprites[(int)i].sprite = Array.Find(newCosutume.sprite, (Sprite s) => s.name == "Left");
+                        mLobbyPlayerCostumeSprites[(int)i++].color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        mLobbyPlayerCostumeSprites[(int)i].sprite = Array.Find(newCosutume.sprite, (Sprite s) => s.name == "Right");
+                        mLobbyPlayerCostumeSprites[(int)i++].color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        continue;
+                    }
+                    else if (i == SpriteType.CostumePant)
+                    {
+                        mLobbyPlayerCostumeSprites[(int)i].sprite = Array.Find(newCosutume.sprite, (Sprite s) => s.name == "Left");
+                        mLobbyPlayerCostumeSprites[(int)i++].color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        mLobbyPlayerCostumeSprites[(int)i].sprite = Array.Find(newCosutume.sprite, (Sprite s) => s.name == "Right");
+                        mLobbyPlayerCostumeSprites[(int)i++].color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        continue;
+                    }
+                    else
+                    {
+                        mLobbyPlayerCostumeSprites[(int)i].sprite = newCosutume.sprite[0];
+                        mLobbyPlayerCostumeSprites[(int)i++].color =
+                            new Color(newCosutume.r / 255f, newCosutume.g / 255f, newCosutume.b / 255f);
+                        continue;
+                    }
+                }
+                // 해당 코스튬 부위가 없으면
+                else
+                {
+                    mLobbyPlayerCostumeSprites[(int)i].sprite = null;
+                    switch ((int)i)
+                    {
+                        case 0:
+                            i++;
+                            break;
+                        case 1:
+                            i += 3;
+                            break;
+                        case 4:
+                            i += 3;
+                            break;
+                        case 7:
+                            i += 2;
+                            break;
+                        case 9:
+                            i++;
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
     public List<GameObject> FindWepaonList(string _type)
     {
         List<GameObject> newList = new List<GameObject>();
@@ -340,22 +473,39 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         }
         return newList;
     }
+    public GameObject FindWeapon(string _name)
+    {
+        return weapons[_name];
+    }
+
+
+    public bool CheckUnlockWeapon(string _type)
+    {
+        return !weapons[_type].GetComponent<Weapon>().IsLocked;
+    }
+    public bool CheckUnlockCostume(string _type)
+    {
+        return !costumes[_type].GetComponent<Costume>().IsLocked;
+    }
     public List<GameObject> FindCostumeList(string _type)
     {
         List<GameObject> newList = new List<GameObject>();
         foreach(string key in costumes.Keys)
         {
+            // cst 제거
             string tmp = key.Substring(3);
-            if (tmp.Contains(_type))
+            // 뒤의 index제거
+            tmp = tmp.Substring(0, tmp.Length - 2);
+            if (tmp == _type)
             {
                 newList.Add(costumes[key]);
             }
         }
         return newList;
     }
-    private void loadUserEquip()
+    public GameObject FindCostume(string _name)
     {
-        // 유저의 데이터 로드 후 적용
+        return costumes[_name];
     }
     #endregion
 }

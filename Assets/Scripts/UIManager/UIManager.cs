@@ -56,6 +56,8 @@ public class UIManager : SingleToneMaker<UIManager>
     [Header("게임오버")]
     [SerializeField]
     private GameObject mGameOverPannel;
+    [SerializeField]
+    private GameObject mGaneOverResurrectionPannel;
 
 
     [Header("테스트 로비")]
@@ -63,6 +65,8 @@ public class UIManager : SingleToneMaker<UIManager>
     private GameObject mTestLobbyPannel;
     [SerializeField]
     private GameObject mBaseSkill;
+    [SerializeField]
+    private GameObject mDodgeSkill;
     [SerializeField]
     private List<GameObject> mGeneralSkillBtn = new List<GameObject>();
     [SerializeField]
@@ -83,24 +87,6 @@ public class UIManager : SingleToneMaker<UIManager>
     private Text mSkillInfoDescText;
     private bool mIsGSkillSelect = false;
     private bool mIsUSkillSelect = false;
-    [SerializeField]
-    private GameObject mMinWeaponImage;
-    [SerializeField]
-    private GameObject mMaxWeaponImage;
-    [SerializeField]
-    private GameObject mMinCostumeImage;
-    [SerializeField]
-    private GameObject mMaxCostumeImage;
-    [SerializeField]
-    private List<GameObject> mSelectWeaponList;
-    [SerializeField]
-    private List<GameObject> mSelectCostumeList;
-    [SerializeField]
-    private List<GameObject> mWeaponButton = new List<GameObject>();
-    [SerializeField]
-    private List<GameObject> mCostumeButton = new List<GameObject>();
-    private bool mIsSelectWeapon = false;
-    private bool mIsSelectCostume = false;
 
     [SerializeField]
     private float mGamePlayTime;
@@ -219,12 +205,39 @@ public class UIManager : SingleToneMaker<UIManager>
         // 게임오버 패널 오픈
         mGameOverPannel.SetActive(true);
     }
+    public void GameOverResurrectionPannelOn()
+    {
+        // 일시 정지
+        GamePause();
+
+        // 게임오버 패널 오픈
+        mGaneOverResurrectionPannel.transform.GetChild(5).GetChild(1).GetComponent<Text>().text =
+            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().Diamond.ToString() + "개";
+        mGaneOverResurrectionPannel.SetActive(true);
+    }
+    public void ClickResurrectionButton()
+    {
+        if(PlayerManager.Instance.Player.GetComponent<PlayerStatus>().Diamond >= 30)
+        {
+            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().Diamond -= 30;
+            PlayerManager.Instance.ResurrectionPlayer();
+            mGaneOverResurrectionPannel.SetActive(false);
+            GameRestart();
+        }
+        else
+        {
+            // 소지 다이아 부족
+            mGaneOverResurrectionPannel.transform.GetChild(2).gameObject.SetActive(true);
+        }
+    }
     public void ClickGameReload()
     {
         // 씬 리로드
         // 정적 변수들 init
         SpawnManager.Instance.init();
-        SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
+        SaveLoadManager.Instance.SaveWarEndData();
+        GamePause();
+        SceneManager.LoadScene("LobbyScene");
     }
     private void GamePause()
     {
@@ -240,40 +253,10 @@ public class UIManager : SingleToneMaker<UIManager>
         mPauseBtn.SetActive(true);
         mBackGroundPannel.SetActive(false);
     }
-    public void ClickWeaponSelect(string _type)
+    public void SkillSelectUILoad(string _type)
     {
-        mIsGSkillSelect = false;
-        mIsUSkillSelect = false;
-        mIsSelectCostume = false;
-        mIsSelectWeapon = false;
-        for (int i = 0; i < mGeneralSkillBtn.Count; i++)
-        {
-            mGeneralSkillBtn[i].transform.GetChild(1).gameObject.SetActive(false);
-        }
-        for (int i = 0; i < mUltimateSkillBtn.Count; i++)
-        {
-            mUltimateSkillBtn[i].transform.GetChild(1).gameObject.SetActive(false);
-        }
-        for (int i = 0; i < mWeaponButton.Count; i++)
-        {
-            mWeaponButton[i].transform.GetChild(1).gameObject.SetActive(false);
-        }
-        for (int i = 0; i < mCostumeButton.Count; i++)
-        {
-            mCostumeButton[i].transform.GetChild(1).gameObject.SetActive(false);
-        }
-
-        mSelectWeaponList = GameObject.Find("EquipmentManager").GetComponent<EquipmentManager>().FindWepaonList(_type);
-        mSelectCostumeList = GameObject.Find("EquipmentManager").GetComponent<EquipmentManager>().FindCostumeList(_type);
-
-        mMinWeaponImage.GetComponent<Image>().sprite = mSelectWeaponList[0].GetComponent<SpriteRenderer>().sprite;
-        mMaxWeaponImage.GetComponent<Image>().sprite = mSelectWeaponList[4].GetComponent<SpriteRenderer>().sprite;
-
-        mMinCostumeImage.GetComponent<Image>().sprite 
-            = mSelectCostumeList.Find((item) => item.name == "cstbgstswsp01").GetComponent<SpriteRenderer>().sprite;
-        mMaxCostumeImage.GetComponent<Image>().sprite 
-            = mSelectCostumeList.Find((item) => item.name == "cstbgstswsp02").GetComponent<SpriteRenderer>().sprite;
         mBaseSkill = SkillManager.Instance.FindBaseSkill(_type);
+        mDodgeSkill = SkillManager.Instance.FindDodgeSkill(_type);
         mGeneralSkill = SkillManager.Instance.FindGeneralSkill(_type);
         mUltimateSkill = SkillManager.Instance.FindUltimateSkill(_type);
 
@@ -288,34 +271,6 @@ public class UIManager : SingleToneMaker<UIManager>
             Sprite icon = Resources.Load<Sprite>("UI/SkillIcon/" + mUltimateSkill[i].GetComponent<Skill>().name);
             mUltimateSkillBtn[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = icon;
         }
-    }
-
-    public void ClickWeaponButton(string _type)
-    {
-        int idx = int.Parse(_type.Substring(0, 1));
-        int buttonidx = int.Parse(_type.Substring(1, 1));
-        EquipmentManager.Instance.ChangeWeapon(mSelectWeaponList[idx].name);
-        for(int i = 0; i < mWeaponButton.Count; i++)
-        {
-            if (i == buttonidx)
-                mWeaponButton[i].transform.GetChild(1).gameObject.SetActive(true);
-            else
-               mWeaponButton[i].transform.GetChild(1).gameObject.SetActive(false);
-        }
-        mIsSelectWeapon = true;
-    }
-    public void ClickComstumeButton(string _name)
-    {
-        int buttonidx = int.Parse(_name.Substring(12)) -  1;
-        EquipmentManager.Instance.ChangeCostume(_name);
-        for (int i = 0; i < mCostumeButton.Count; i++)
-        {
-            if (i == buttonidx)
-                mCostumeButton[i].transform.GetChild(1).gameObject.SetActive(true);
-            else
-                mCostumeButton[i].transform.GetChild(1).gameObject.SetActive(false);
-        }
-        mIsSelectCostume = true;
     }
     public void OverSkillSelectBtn(string _type)
     {
@@ -381,7 +336,6 @@ public class UIManager : SingleToneMaker<UIManager>
                 break;
         }
     }
-
     public void ClickMapSelectBtn()
     {
         int enumCnt = Enum.GetValues(typeof(MapManager.MapType)).Length;
@@ -389,12 +343,12 @@ public class UIManager : SingleToneMaker<UIManager>
         MapManager.Instance.CurrentMapType = (MapManager.MapType)Enum.Parse(typeof(MapManager.MapType), nextMap.ToString());
         mMapText.text = MapManager.Instance.CurrentMapType.ToString();
     }
-
     public void ClickGameStart()
     {
-        if(mIsGSkillSelect && mIsUSkillSelect && mIsSelectWeapon && mIsSelectCostume)
+        if(mIsGSkillSelect && mIsUSkillSelect)
         {
-            GameObject.Find("PlayerObject").GetComponent<PlayerAttack>().CurrentBaseSkill = mBaseSkill.GetComponent<Skill>();
+            PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentBaseSkill = mBaseSkill.GetComponent<Skill>();
+            PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentDodgeSkill = mDodgeSkill.GetComponent<Skill>();
             // 플레이매니저에서 스타트 API호출
             PlayerManager.Instance.SettingGameStart();
             GameRestart();

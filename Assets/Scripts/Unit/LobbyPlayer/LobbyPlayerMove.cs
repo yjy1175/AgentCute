@@ -24,10 +24,18 @@ public class LobbyPlayerMove : MonoBehaviour
     {
         get { return mIsTriggerInWareHouse; }
     }
+
+    [SerializeField]
+    private bool mIsTriggerInStartZone;
+    public bool IsTriggerInStartZone
+    {
+        get { return mIsTriggerInStartZone; }
+    }
     void Awake()
     {
         mMoveable = true;
         mIsTriggerInWareHouse = false;
+        mIsTriggerInStartZone = false;
         mAnim = transform.GetChild(1).GetComponent<Animator>();
         mJoyStick = GameObject.Find("Canvas").transform.Find("JoyStick").GetComponent<VertualJoyStick>();
         mInteractionText = GameObject.Find("InteractionButton").transform.GetChild(0).GetChild(1).GetComponent<Text>();
@@ -97,6 +105,11 @@ public class LobbyPlayerMove : MonoBehaviour
             mIsTriggerInWareHouse = true;
             mInteractionText.text = "창고 열기";
         }
+        if (collision.CompareTag("StartZone"))
+        {
+            mIsTriggerInStartZone = true;
+            mInteractionText.text = "던전 입장";
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -104,6 +117,11 @@ public class LobbyPlayerMove : MonoBehaviour
         if (collision.CompareTag("WareHouse"))
         {
             mIsTriggerInWareHouse = false;
+            mInteractionText.text = "상호 작용";
+        }
+        if (collision.CompareTag("StartZone"))
+        {
+            mIsTriggerInStartZone = false;
             mInteractionText.text = "상호 작용";
         }
     }

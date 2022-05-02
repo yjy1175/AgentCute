@@ -51,7 +51,7 @@ public class SkillManager : SingleToneMaker<SkillManager>
             float[] skillRunTimeList = new float[2];
             for (int k = 0; k < tmp.Length; k++)
                 skillRunTimeList[k] = float.Parse(tmp[k]);
-            item.Spec.MSkillRunTime = skillRunTimeList;
+            item.Spec.SkillRunTime = skillRunTimeList;
             string[] projectiles = skillsData[i]["Projectiles"].ToString().Split('/');
             item.Spec.getProjectiles().Clear();
             for (int j = 0; j < projectiles.Length; j++)
@@ -115,6 +115,20 @@ public class SkillManager : SingleToneMaker<SkillManager>
             if (skills[key].GetComponent<Skill>().Spec.SkillWeaponType == _type)
             {
                 if (skills[key].GetComponent<Skill>().Spec.Type == "B")
+                    newSkill = skills[key];
+            }
+        }
+        return newSkill;
+    }
+
+    public GameObject FindDodgeSkill(string _type)
+    {
+        GameObject newSkill = null;
+        foreach (string key in skills.Keys)
+        {
+            if (skills[key].GetComponent<Skill>().Spec.SkillWeaponType == _type)
+            {
+                if (skills[key].GetComponent<Skill>().Spec.Type == "D")
                     newSkill = skills[key];
             }
         }

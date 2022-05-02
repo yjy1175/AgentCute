@@ -6,14 +6,16 @@ using UnityEngine;
 public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
 {
     private string mLoadFileName;
+    private string mWarFileName;
+    private bool mIsCreate = false;
     // Start is called before the first frame update
     void Awake()
     {
         mLoadFileName = "PlayerData.json";
-        LoadFile();
+        mWarFileName = "WarData.json";
     }
 
-    private void LoadFile()
+    public LobbyPlayerInfo LoadBaseData()
     {
         string path = Path.Combine(Application.dataPath, mLoadFileName);
         string fileStream = null;
@@ -21,21 +23,19 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         {
             fileStream = File.ReadAllText(path);
         }
-        catch (FileNotFoundException e)
+        catch
         {
-            CreateSaveFile();
-            Debug.Log("오류 : " + e.Message);
-            return;
+            return CreateSaveFile();
         }
         
         fileStream = AES.Decrypt(fileStream, AES.key);
 
         LobbyPlayerInfo loadInfo = JsonUtility.FromJson<LobbyPlayerInfo>(fileStream);
-        GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info = loadInfo;
+        return loadInfo;
     }
-
-    private void CreateSaveFile()
+    private LobbyPlayerInfo CreateSaveFile()
     {
+        mIsCreate = true;
         string path = Path.Combine(Application.dataPath, mLoadFileName);
         LobbyPlayerInfo newInfo = new LobbyPlayerInfo();
         // 초기값 세팅 : TODO -> 추후에 데이터로 초기값 받기
@@ -55,15 +55,61 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         newInfo.MoveSpeedRate = 1f;
         newInfo.CurrentWeaponName = "";
         newInfo.CurrentCostumeName = "";
-        newInfo.Gold = 999999;
-        newInfo.Diamond = 999999;
+        newInfo.CurrentCostumeShapeName = "";
+        newInfo.Gold = 0;
+        newInfo.Diamond = 1000;
         newInfo.Stemina = 999;
 
         string fileStream = JsonUtility.ToJson(newInfo, true);
         fileStream = AES.Encrypt(fileStream, AES.key);
 
         File.WriteAllText(path, fileStream);
+        return newInfo;
+    }
+    
+    public void SavePlayerInfoFile(LobbyPlayerInfo _info)
+    {
+        if (!mIsCreate)
+        {
+            string path = Path.Combine(Application.dataPath, mLoadFileName);
+            string fileStream = JsonUtility.ToJson(_info, true);
+            fileStream = AES.Encrypt(fileStream, AES.key);
+            File.WriteAllText(path, fileStream);
+        }
+    }
 
-        LoadFile();
+    // 전투씬에 보낼 데이터 저장
+    public void SavePlayerWarData(WarInfo _info)
+    {
+        string path = Path.Combine(Application.dataPath, mWarFileName);
+        string fileStream = JsonUtility.ToJson(_info, true);
+        fileStream = AES.Encrypt(fileStream, AES.key);
+        File.WriteAllText(path, fileStream);
+    }
+
+    // 전투씬에서 로드할 데이터
+    public WarInfo LoadPlayerWarData()
+    {
+        string path = Path.Combine(Application.dataPath, mWarFileName);
+        string fileStream = File.ReadAllText(path);
+
+        fileStream = AES.Decrypt(fileStream, AES.key);
+
+        WarInfo loadInfo = JsonUtility.FromJson<WarInfo>(fileStream);
+        return loadInfo;
+    }
+
+    // 전투가 끝난 후 저장하는 데이터
+    public void SaveWarEndData()
+    {
+        LobbyPlayerInfo info = LoadBaseData();
+
+        // 전투가 끝난 후 변경사항 저장
+        // 얻은 골드, 다이아...
+        // TODO : 업적관리에 필요한 데이터 추가
+        info.Diamond = PlayerManager.Instance.Player.GetComponent<PlayerStatus>().Diamond;
+        info.Gold += PlayerManager.Instance.Player.GetComponent<PlayerStatus>().GainGold;
+
+        SavePlayerInfoFile(info);
     }
 }
