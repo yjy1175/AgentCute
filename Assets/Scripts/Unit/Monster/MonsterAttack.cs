@@ -10,12 +10,21 @@ public class MonsterAttack : IAttack
 
     [SerializeField]
     protected int mCloseAttackPower;
+
+    public int CloseAttackPower
+    {
+        get { return mCloseAttackPower; }
+        set { mCloseAttackPower = value; }
+    }
+
+
     [SerializeField]
-    protected int mCloseAttackRange;
-    [SerializeField]
-    protected int mStandoffAttackPower;
-    [SerializeField]
-    protected int mStandoffAttackRange;
+    protected float mBerserkerModeScale;
+    public float BerserkerModeScale
+    {
+        get { return mBerserkerModeScale; }
+        set { mBerserkerModeScale = value; }
+    }
 
 
     private float tempTime = 0f;
@@ -42,6 +51,7 @@ public class MonsterAttack : IAttack
         base.Start();
         mIsUsingSkill = false;
 
+        mBerserkerModeScale = 1f;
 
         tempTime = 0f;
 
@@ -90,7 +100,7 @@ public class MonsterAttack : IAttack
         {
             if (mAutoAttackCheckTime.Equals(0f))
             {
-                GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().CloseDamaged = mCloseAttackPower;
+                GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().CloseDamaged = (int)((float)mCloseAttackPower * BerserkerModeScale);
                 mAutoAttackCheckTime = mAutoAttackSpeed;
             }
         }
@@ -194,7 +204,7 @@ public class MonsterAttack : IAttack
 
         //1. 스킬 대미지 설정
         SkillLaunchType skillLaunchType = (SkillLaunchType)Enum.Parse(typeof(SkillLaunchType), skill.Spec.SkillLaunchType);
-        gameObject.GetComponent<MonsterStatus>().BaseDamage = md.skillAttackPower[_skillNum];
+        gameObject.GetComponent<MonsterStatus>().BaseDamage = (int)((float)md.skillAttackPower[_skillNum] * BerserkerModeScale);
 
         //2. 스킬 사용시 멈춤설정
         gameObject.GetComponent<IMove>().MMoveable = false;
@@ -232,24 +242,4 @@ public class MonsterAttack : IAttack
         mIsUsingSkill = false;
     }
 
-    public int CloseAttackPower
-    {
-        get { return mCloseAttackPower; }
-        set { mCloseAttackPower = value; }
-    }
-    public int CloseAttackRange
-    {
-        get { return mCloseAttackRange; }
-        set { mCloseAttackRange = value; }
-    }
-    public int StandoffAttackPower
-    {
-        get { return mStandoffAttackPower; }
-        set { mStandoffAttackPower = value; }
-    }
-    public int StandoffAttackRange
-    {
-        get { return mStandoffAttackRange; }
-        set { mStandoffAttackRange = value; }
-    }
 }

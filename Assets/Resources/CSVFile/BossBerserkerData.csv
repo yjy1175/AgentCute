@@ -1,0 +1,13 @@
+ID,BossMonster,BossLimitTime,SpeedUp,PowerUp
+0,GiantSlime1,90,2,2
+1,GiantSlime2,110,2,2
+2,GiantSlime3,130,2,2
+3,Yeti1,100,2,2
+4,Yeti2,120,2,2
+5,Yeti3,140,2,2
+6,Ifrit1,100,2,2
+7,Ifrit2,120,2,2
+8,Ifrit3,140,2,2
+9,Wendigo1,110,2,2
+10,Wendigo2,120,2,2
+11,Wendigo3,130,2,2

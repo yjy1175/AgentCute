@@ -26,13 +26,24 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         public float speedUp;
     }
 
+    public struct BerserkerData
+    {
+        public int bossLimitTime;
+        public float speedUp;
+        public float powerUp;
+    }
+
+
     [SerializeField]
-    private List<WaveData> dataSetWave;
+    private List<WaveData> mDataSetWave;
     [SerializeField]
-    private List<SpawnData> dataSetNormal;
+    private List<SpawnData> mDataSetNormal;
     [SerializeField]
-    private List<SpawnData> dataSetBoss;
-    
+    private List<SpawnData> mDataSetBoss;
+    [SerializeField]
+    private Dictionary<string, BerserkerData> mDataSetBerserker;
+
+
     private float currentTime = 0f;
 
     public Transform[] spawnPoints;
@@ -83,6 +94,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     // Start is called before the first frame update
     void Start()
     {
+        InitBerserkerData();
         InitWaveData();       
         mBossNum = 0;
         mMonsterArea = GameObject.Find("MonsterCountCheckObject").transform.GetComponentsInChildren<Transform>();
@@ -134,15 +146,15 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     private void SpawnNormalMonster()
     {
         //노멀몹 스폰
-        for (int i = 0; i < dataSetNormal.Count; i++)
+        for (int i = 0; i < mDataSetNormal.Count; i++)
         {
-            SpawnData temp = dataSetNormal[i];
-            if (dataSetNormal[i].realStartSpawnTime < currentTime && dataSetNormal[i].currentTime > dataSetNormal[i].spawnTime)
+            SpawnData temp = mDataSetNormal[i];
+            if (mDataSetNormal[i].realStartSpawnTime < currentTime && mDataSetNormal[i].currentTime > mDataSetNormal[i].spawnTime)
             {
-                List<int> spawnZone = RandSpawnList(dataSetNormal[i].spawnNumber + mBossNum);//성욱님 요구사항으로 웨이브마다 +1마리씩 더 스폰 
+                List<int> spawnZone = RandSpawnList(mDataSetNormal[i].spawnNumber + mBossNum);//성욱님 요구사항으로 웨이브마다 +1마리씩 더 스폰 
                 for (int j = 0; j < spawnZone.Count; j++)
                 {
-                    GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetNormal[i].spawnMonster);
+                    GameObject monster = ObjectPoolManager.Instance.EnableGameObject(mDataSetNormal[i].spawnMonster);
                     if (monster != null && spawnPoints[spawnZone[j]].GetComponent<SpawnZone>().Spawnable)
                     {
                         SpawnMonsterSet(ref monster, spawnPoints[spawnZone[j]].position);
@@ -156,22 +168,22 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                 temp.currentTime = 0;
             }
             temp.currentTime += Time.deltaTime;
-            dataSetNormal[i] = temp;
+            mDataSetNormal[i] = temp;
         }
     }
 
     private void SpawnBossMonster()
     {
-        if (mBossNum < dataSetBoss.Count && dataSetBoss[mBossNum].realStartSpawnTime < currentTime)
+        if (mBossNum < mDataSetBoss.Count && mDataSetBoss[mBossNum].realStartSpawnTime < currentTime)
         {
 
             int childCnt = GameObject.Find("ObjectPoolSet").transform.childCount;
             for(int i=0;i< childCnt; i++)
             {
                 GameObject obj = GameObject.Find("ObjectPoolSet").transform.GetChild(i).gameObject;
-                for(int j=0;j< dataSetNormal.Count; j++)
+                for(int j=0;j< mDataSetNormal.Count; j++)
                 {
-                    if (dataSetNormal[j].spawnMonster.Equals(obj.name))
+                    if (mDataSetNormal[j].spawnMonster.Equals(obj.name))
                     {
                         ObjectPoolManager.Instance.DisableGameObject(obj);
                     }
@@ -180,14 +192,14 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
 
             //몬스터 소환 time 초기화
-            for (int i = 0; i < dataSetNormal.Count; i++)
+            for (int i = 0; i < mDataSetNormal.Count; i++)
             {
-                SpawnData temp = dataSetNormal[i];
+                SpawnData temp = mDataSetNormal[i];
                 temp.currentTime = 0f;
-                dataSetNormal[i] = temp;
+                mDataSetNormal[i] = temp;
             }
 
-            GameObject monster = ObjectPoolManager.Instance.EnableGameObject(dataSetBoss[mBossNum].spawnMonster);
+            GameObject monster = ObjectPoolManager.Instance.EnableGameObject(mDataSetBoss[mBossNum].spawnMonster);
             monster.GetComponent<MonsterEventHandler>().registerHpObserver(registerBossHp);
 
             List<int> spawnZone = RandSpawnList(1);
@@ -207,6 +219,9 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                 StopCoroutine(waveMessageCoroutine);
             waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + mBossNum, 6, 60);
             StartCoroutine(waveMessageCoroutine);
+
+            //버서커모드 코루틴
+            StartCoroutine(BossWaitBerserkerMode(monster));
         }
     }
 
@@ -221,8 +236,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             
         }
         else {
-            monster.GetComponent<MonsterStatus>().Hp = (int)((float)md.monsterHp * dataSetWave[mBossNum].hpScale);
-            monster.GetComponent<MonsterStatus>().MaxHP = (int)((float)md.monsterHp * dataSetWave[mBossNum].hpScale);
+            monster.GetComponent<MonsterStatus>().Hp = (int)((float)md.monsterHp * mDataSetWave[mBossNum].hpScale);
+            monster.GetComponent<MonsterStatus>().MaxHP = (int)((float)md.monsterHp * mDataSetWave[mBossNum].hpScale);
         }
 
         monster.GetComponent<MonsterStatus>().Size = md.monsterSize;
@@ -231,7 +246,9 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         monster.GetComponent<MonsterAttack>().CloseAttackPower = md.closeAttackPower;
 
         if (md.monsterGrade != MonsterManager.MonsterGrade.Boss)
-            monster.GetComponent<MonsterStatus>().MoveSpeed = md.monsterSpeed + dataSetWave[mBossNum].speedUp;
+            monster.GetComponent<MonsterStatus>().MoveSpeed = md.monsterSpeed + mDataSetWave[mBossNum].speedUp;
+        else
+            monster.GetComponent<MonsterStatus>().MoveSpeed = md.monsterSpeed;
 
         monster.GetComponent<MonsterStatus>().MoveSpeedRate = 1f;
         monster.GetComponent<MonsterStatus>().mIsDieToKillCount = false;
@@ -247,16 +264,33 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
     private void InitWaveData()
     {
-        dataSetWave = new List<WaveData>();
+        mDataSetWave = new List<WaveData>();
         List<Dictionary<string, object>> waveData = CSVReader.Read("CSVFile\\Wave");
         for (int idx = 0; idx < waveData.Count; idx++)
         {
             WaveData ws = new WaveData();
             ws.hpScale = float.Parse(waveData[idx]["HpScale"].ToString());
             ws.speedUp = float.Parse(waveData[idx]["SpeedUp"].ToString());
-            dataSetWave.Add(ws);
+            mDataSetWave.Add(ws);
         }
     }
+
+    private void InitBerserkerData()
+    {
+        mDataSetBerserker = new Dictionary<string, BerserkerData>();
+        List<Dictionary<string, object>> waveData = CSVReader.Read("CSVFile\\BossBerserkerData");
+        for (int idx = 0; idx < waveData.Count; idx++)
+        {
+            BerserkerData ws = new BerserkerData();
+            string name = waveData[idx]["BossMonster"].ToString();
+
+            ws.bossLimitTime = int.Parse(waveData[idx]["BossLimitTime"].ToString());
+            ws.powerUp = float.Parse(waveData[idx]["SpeedUp"].ToString());
+            ws.speedUp = float.Parse(waveData[idx]["PowerUp"].ToString());
+            mDataSetBerserker[name] = ws;
+        }
+    }
+
 
 
 
@@ -264,8 +298,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     {
         mMapType = MapManager.Instance.CurrentMapType;
 
-        dataSetNormal = new List<SpawnData>();
-        dataSetBoss = new List<SpawnData>();
+        mDataSetNormal = new List<SpawnData>();
+        mDataSetBoss = new List<SpawnData>();
         List<Dictionary<string, object>> spawnData = CSVReader.Read("CSVFile\\SpawnData");
         if (DEBUG)
             Debug.Log("현재 맵타입" + mMapType);
@@ -288,13 +322,13 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
                 if (MonsterManager.Instance.GetMonsterData(ds.spawnMonster).monsterGrade ==  MonsterManager.MonsterGrade.Boss)
                 {
-                    dataSetBoss.Add(ds);
+                    mDataSetBoss.Add(ds);
                     ObjectPoolManager.Instance.CreateDictTable(obj, 1, 1);
                 }
                 else 
                 {
                     ObjectPoolManager.Instance.CreateDictTable(obj, 100, 10);
-                    dataSetNormal.Add(ds);
+                    mDataSetNormal.Add(ds);
                 }
             }
         }
@@ -316,20 +350,26 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         return list;
     }
 
-    /*
-     * TO-DO 광폭화 어디서 할지 결정 필요
-    //광폭화 컨셉은 MonsterAttack으로 이동시키는게 맞음
-    IEnumerator (int i, GameObject _obj)
+    
+    IEnumerator BossWaitBerserkerMode (GameObject _obj)
     {
-        yield return new WaitForSeconds(60);
-            if (monster.activeInHierarchy)
-            {
-                monster.GetComponent<SpriteRenderer>().color = Color.red;
-                monster.GetComponent<MonsterAttack>().CloseAttackPower = 30;
-            }
+        BerserkerData ws;
+        ws = mDataSetBerserker[_obj.name];
+        if (DEBUG)
+            Debug.Log("버서커모드 적용 대기시간"+ ws.bossLimitTime);
+
+        yield return new WaitForSeconds(ws.bossLimitTime);
+        if (_obj.activeInHierarchy)
+        {
+            
+            if(DEBUG)
+                Debug.Log("버서커모드 적용 " + gameObject.name + " speedUp:" + ws.speedUp + " , powerUp" + ws.powerUp);
+            _obj.GetComponent<IStatus>().MoveSpeed *= ws.speedUp;
+            _obj.GetComponent<MonsterAttack>().BerserkerModeScale = ws.powerUp;
         }
+
     }
-    */
+    
 
     public void registerBossHp(int _hp, GameObject _obj)
     {
