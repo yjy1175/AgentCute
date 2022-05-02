@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3868566791577128496}
   - component: {fileID: 3391276882915028348}
   - component: {fileID: 3807563051101456736}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IceObject
   m_TagString: Tilemap
   m_Icon: {fileID: 0}

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8993661416341744394}
   - component: {fileID: 1033782943584328125}
   - component: {fileID: 2937827726872909167}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: VolcanoObject
   m_TagString: Tilemap
   m_Icon: {fileID: 0}

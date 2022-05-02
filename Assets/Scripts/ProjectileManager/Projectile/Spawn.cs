@@ -5,7 +5,7 @@ using System;
 
 public class Spawn : Projectile
 {
-    private bool DEBUG = true;
+    private bool DEBUG = false;
 
     #region variable
     [SerializeField]

@@ -110,10 +110,12 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
 
                     // 추후에 초기 데이터 필요
                     // 기본 지급 무기들만 해금
-                    if (item.Spec.Type.Substring(2) == "00")
-                        item.IsLocked = false;
-                    else
-                        item.IsLocked = true;
+                    //if (item.Spec.Type.Substring(2) == "00")
+                    //    item.IsLocked = false;
+                    //else
+                    //    item.IsLocked = true;
+
+                    item.IsLocked = false;
                 }
             }
         }
@@ -150,10 +152,11 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                         }
                     }
                     // 기본 지급 코스튬만 해금
-                    if (item.gameObject.name == "cstbgstswsp01")
-                        item.IsLocked = false;
-                    else
-                        item.IsLocked = true;
+                    //if (item.gameObject.name == "cstbgstswsp01")
+                    //    item.IsLocked = false;
+                    //else
+                    //    item.IsLocked = true;
+                    item.IsLocked = false;
                 }
             }
             for (int i = 0; i < costumesList.Length; i++)

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4911389231074563157}
   - component: {fileID: -6204450655473109079}
   - component: {fileID: 4812373248311158672}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DungeonObject
   m_TagString: Tilemap
   m_Icon: {fileID: 0}
