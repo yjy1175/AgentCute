@@ -17,7 +17,8 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
 
     public LobbyPlayerInfo LoadBaseData()
     {
-        string path = Path.Combine(Application.dataPath, mLoadFileName);
+        string path = "";
+        path = Path.Combine(Application.persistentDataPath, mLoadFileName);
         string fileStream = null;
         try
         {
@@ -36,7 +37,8 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
     private LobbyPlayerInfo CreateSaveFile()
     {
         mIsCreate = true;
-        string path = Path.Combine(Application.dataPath, mLoadFileName);
+        string path = "";
+        path = Path.Combine(Application.persistentDataPath, mLoadFileName);
         LobbyPlayerInfo newInfo = new LobbyPlayerInfo();
         // 초기값 세팅 : TODO -> 추후에 데이터로 초기값 받기
         List<Dictionary<string, object>> playerBaseStatData = CSVReader.Read("CSVFile/PlayerBaseStat");
@@ -71,7 +73,8 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
     {
         if (!mIsCreate)
         {
-            string path = Path.Combine(Application.dataPath, mLoadFileName);
+            string path = "";
+            path = Path.Combine(Application.persistentDataPath, mLoadFileName);
             string fileStream = JsonUtility.ToJson(_info, true);
             fileStream = AES.Encrypt(fileStream, AES.key);
             File.WriteAllText(path, fileStream);
@@ -81,7 +84,8 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
     // 전투씬에 보낼 데이터 저장
     public void SavePlayerWarData(WarInfo _info)
     {
-        string path = Path.Combine(Application.dataPath, mWarFileName);
+        string path = "";
+        path = Path.Combine(Application.persistentDataPath, mWarFileName);
         string fileStream = JsonUtility.ToJson(_info, true);
         fileStream = AES.Encrypt(fileStream, AES.key);
         File.WriteAllText(path, fileStream);
@@ -90,7 +94,8 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
     // 전투씬에서 로드할 데이터
     public WarInfo LoadPlayerWarData()
     {
-        string path = Path.Combine(Application.dataPath, mWarFileName);
+        string path = "";
+        path = Path.Combine(Application.persistentDataPath, mWarFileName);
         string fileStream = File.ReadAllText(path);
 
         fileStream = AES.Decrypt(fileStream, AES.key);
