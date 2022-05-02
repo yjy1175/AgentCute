@@ -490,12 +490,18 @@ public abstract class IStatus : MonoBehaviour
             }
             // 데미지 입히기 및 데미지 박스 띄우기(타입별)
             if(projectile.Damage > 0 && !mIsInvincibility)
-                ChangeHpForDamage(projectile, projectile.Spec.ProjectileDamageType, projectile.Damage);
+                ChangeHpForDamage(projectile, projectile.Spec.ProjectileDamageType, projectile.IsDamage(gameObject));
         }
     }
 
     private void ChangeHpForDamage(Projectile obj, ProjectileManager.DamageType _type, int _damage)
     {
+        //현 게임 컨셉상 데미지 0이하는 데미지 박스및 데미지가 발생하지 않음
+        if (_damage <= 0)
+        {
+            return;
+        }
+
         switch (_type)
         {
             // 일반형

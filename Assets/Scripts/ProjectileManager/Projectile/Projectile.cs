@@ -4,6 +4,26 @@ using UnityEngine;
 
 public abstract class Projectile : MonoBehaviour
 {
+    private bool DEBUG = false;
+
+    //무거워질 가능성이 있는지 체크
+    //TO-DO ref로 적용되는지 확인하고 아니라면 GetInstanceID를 받아 확인필요
+    [SerializeField]
+    protected HashSet<GameObject> mIsContact;
+    public int IsDamage(GameObject _obj)
+    {
+        if(DEBUG)
+            Debug.Log("호출한 object의이름 : " + gameObject.name + " 데미지를 입는 object이름" + _obj.name + "인스턴스 아이디: " + _obj.GetInstanceID());
+
+        if (!mIsContact.Contains(_obj)) {
+            mIsContact.Add(_obj);
+            return Damage;
+        }
+        else { 
+            return 0;
+        }
+    }
+
     #region variable
     [SerializeField]
     protected int damage;
@@ -67,8 +87,15 @@ public abstract class Projectile : MonoBehaviour
 
 
     #endregion
+
+    private void OnEnable()
+    {
+        mIsContact = new HashSet<GameObject>();
+    }
+
     private void OnDisable()
     {
+        mIsContact.Clear();
         mAttackSpeedCheckTime = 1;
     }
     protected virtual void FixedUpdate() 
