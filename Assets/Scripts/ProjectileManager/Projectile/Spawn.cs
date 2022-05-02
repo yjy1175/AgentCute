@@ -54,7 +54,7 @@ public class Spawn : Projectile
     #region method
     protected override void launchProjectile()
     {
-        if (gameObject.layer.Equals(8)) { 
+        if (gameObject.layer == LayerMask.NameToLayer("projectile")) { 
             /*스폰 매서드*/
             // 방향키에 따라 위치가 바뀌는 경우
             if (mIsActive && (SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType) == SpawnType.LongWide)
