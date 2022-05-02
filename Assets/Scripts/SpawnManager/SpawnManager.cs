@@ -23,6 +23,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     public struct WaveData
     {
         public float hpScale;
+        public float speedUp;
     }
 
     [SerializeField]
@@ -56,7 +57,18 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     public Text currentKillMonsterText;
     public static int currentKillMosterCount = 0;
 
+    [SerializeField]
     private MapManager.MapType mMapType;
+
+    [SerializeField]
+    private Collider2D[] mCheckMonsterCount;
+    [SerializeField]
+    private Transform[] mMonsterArea;
+    [SerializeField]
+    private Vector2 mMonsterAreadSize = new Vector2(9f, 5f);
+    [SerializeField]
+    private Collider2D[] mHit;
+
 
     public void init()
     {
@@ -73,11 +85,27 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     {
         InitWaveData();       
         mBossNum = 0;
+        mMonsterArea = GameObject.Find("MonsterCountCheckObject").transform.GetComponentsInChildren<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
+        List<int> num = new List<int>();
+        
+        string s="";
+
+        for (int i = 1; i < mMonsterArea.Length; i++) {
+            mHit = Physics2D.OverlapBoxAll(mMonsterArea[i].transform.position, mMonsterAreadSize, 0, LayerMask.NameToLayer("Monster"));
+            num.Add(Physics2D.OverlapBoxAll(mMonsterArea[i].transform.position, mMonsterAreadSize, 0).Length);
+            if(DEBUG)
+                s = s+" "+i+"의 몬스터수: " + num[i].ToString();
+        }
+        if(DEBUG)
+            Debug.Log(s);
+        */
+
         if (PlayerManager.Instance.IsGameStart) {
             SpawnMonster();
             currentTime += Time.deltaTime;
@@ -87,6 +115,16 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         }
     }
 
+    /*
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        for (int i = 0; i < mMonsterArea.Length; i++)
+        {
+            Gizmos.DrawWireCube(mMonsterArea[i].position, mMonsterAreadSize);
+        }
+    }
+    */
     private void SpawnMonster()
     {
         SpawnNormalMonster();
@@ -191,7 +229,10 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         monster.GetComponent<MonsterStatus>().MonsterGrade= md.monsterGrade;
         monster.GetComponent<MonsterStatus>().MonsterInName = md.monsterInName;
         monster.GetComponent<MonsterAttack>().CloseAttackPower = md.closeAttackPower;
-        monster.GetComponent<MonsterStatus>().MoveSpeed = md.monsterSpeed;
+
+        if (md.monsterGrade != MonsterManager.MonsterGrade.Boss)
+            monster.GetComponent<MonsterStatus>().MoveSpeed = md.monsterSpeed + dataSetWave[mBossNum].speedUp;
+
         monster.GetComponent<MonsterStatus>().MoveSpeedRate = 1f;
         monster.GetComponent<MonsterStatus>().mIsDieToKillCount = false;
         monster.GetComponent<MonsterStatus>().mIsDieToGetExp = false;
@@ -212,6 +253,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         {
             WaveData ws = new WaveData();
             ws.hpScale = float.Parse(waveData[idx]["HpScale"].ToString());
+            ws.speedUp = float.Parse(waveData[idx]["SpeedUp"].ToString());
             dataSetWave.Add(ws);
         }
     }
