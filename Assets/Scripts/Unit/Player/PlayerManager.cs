@@ -108,6 +108,8 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         weaponType = weaponType.Substring(0, 2);
         LevelUpStatusManager.Instance.SetSlots(weaponType);
 
+        MusicManager.Instance.OnMusic();
+
         IsGameStart = true;
     }
 
