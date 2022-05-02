@@ -54,28 +54,30 @@ public class Spawn : Projectile
     #region method
     protected override void launchProjectile()
     {
-        /*스폰 매서드*/
-        // 방향키에 따라 위치가 바뀌는 경우
-        if (mIsActive && (SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType) == SpawnType.LongWide)
-        {
-            mPlayer = GameObject.Find("fire").transform.position;
-            mUJoySitick = GameObject.Find("Canvas").transform.Find("UltimateSkillJoyStick").GetComponent<VertualJoyStick>();
-            Vector3 joystickPos = new Vector3(mUJoySitick.GetHorizontalValue(), mUJoySitick.GetVerticalValue(), 0);
-            // 터치패드 입력이 있을 경우
-            if (joystickPos != Vector3.zero)
-                mJoyStickPos = joystickPos;
-            // 터치패드 입력이 없을 경우
-            else
-                mJoyStickPos = mJoyStickPos == Vector3.zero ? Vector3.right : mJoyStickPos;
-            newPos = mJoyStickPos + mPlayer;
-            angle = setAngle(newPos - mPlayer);
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            transform.position = mPlayer;
-        }
-        if(mIsActive && (SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType) == SpawnType.SelfSpawn)
-        {
-            mPlayer = GameObject.Find("fire").transform.position;
-            transform.position = mPlayer;
+        if (gameObject.layer.Equals(8)) { 
+            /*스폰 매서드*/
+            // 방향키에 따라 위치가 바뀌는 경우
+            if (mIsActive && (SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType) == SpawnType.LongWide)
+            {
+                mPlayer = GameObject.Find("fire").transform.position;
+                mUJoySitick = GameObject.Find("Canvas").transform.Find("UltimateSkillJoyStick").GetComponent<VertualJoyStick>();
+                Vector3 joystickPos = new Vector3(mUJoySitick.GetHorizontalValue(), mUJoySitick.GetVerticalValue(), 0);
+                // 터치패드 입력이 있을 경우
+                if (joystickPos != Vector3.zero)
+                    mJoyStickPos = joystickPos;
+                // 터치패드 입력이 없을 경우
+                else
+                    mJoyStickPos = mJoyStickPos == Vector3.zero ? Vector3.right : mJoyStickPos;
+                newPos = mJoyStickPos + mPlayer;
+                angle = setAngle(newPos - mPlayer);
+                transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                transform.position = mPlayer;
+            }
+            if(mIsActive && (SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType) == SpawnType.SelfSpawn)
+            {
+                mPlayer = GameObject.Find("fire").transform.position;
+                transform.position = mPlayer;
+            }
         }
     }
     // Update is called once per frame
