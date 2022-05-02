@@ -5,10 +5,16 @@ using System;
 public class MonsterAttack : IAttack
 {
     private bool DEBUG = false;
+    [SerializeField]
+    private int DEBUG_SKILL_NUMBER=-1;
 
+    [SerializeField]
     protected int mCloseAttackPower;
+    [SerializeField]
     protected int mCloseAttackRange;
+    [SerializeField]
     protected int mStandoffAttackPower;
+    [SerializeField]
     protected int mStandoffAttackRange;
 
 
@@ -154,6 +160,11 @@ public class MonsterAttack : IAttack
             {
                 skillNumber = 0;
             }
+        }
+        //inspector창에서 특정스킬 디버그시 특정스킬만 나가도록 할 시 사용
+        if (DEBUG_SKILL_NUMBER != -1)
+        {
+            return DEBUG_SKILL_NUMBER;
         }
         return skillNumber;
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class IAttack : MonoBehaviour
 {
 
-    private bool DEBUG = false;
+    private bool DEBUG = true;
 
     public enum SkillLaunchType
     {
@@ -22,7 +22,9 @@ public class IAttack : MonoBehaviour
         //DELAYSHOT을 멀티샷으로 발사한다.
         DELAYMULTISHOT,
         //특정 위치로 돌진
-        RUSH
+        RUSH,
+        //waring projectile생성이후 공격
+        WARINGSHOT
     }
     // 최종 데미지
     [SerializeField]
@@ -304,6 +306,33 @@ public class IAttack : MonoBehaviour
     }
 
 
+    //Waring projectile 이후 나머지 발사체가 순서대로 발사됨
+    IEnumerator WaringAndLuanch(Skill _skill, Vector3 _target, Vector3 _fire)
+    {
+        GameObject obj = launchProjectile(_skill, 0, _target, _fire, true)[0];
+        if (DEBUG)
+        {
+            Debug.Log("첫번째 waring의 위치 : " + obj.transform.position+" ,target의 위치 :"+ _target+",fireposition의 위치 :"+_fire);
+        }
+
+        for (int i = 1; i < TileDict[_skill].Count; i++)
+        {
+            yield return new WaitWhile(() => obj.activeInHierarchy);
+            if (DEBUG)
+            {
+                Debug.Log(i+ "번째 스킬이 발사, target의 위치: "+ _target+", fireposition의 위치: "+ obj.transform.position);
+            }
+            Vector3 nextFire = obj.transform.position;
+            obj = launchProjectile(_skill, i, _target, nextFire, false)[0];
+            if (DEBUG)
+            {
+                Debug.Log("그 이후 obj의 위치"+obj.transform.position);
+            }
+
+        }
+    }
+
+
     // 발사체 데미지를 설정합니다.
     private void setProjectileData(ref GameObject obj)
     {
@@ -362,6 +391,9 @@ public class IAttack : MonoBehaviour
                 break;
             case SkillLaunchType.RUSH:
                 StartCoroutine(RushAndLuanch(_skill, 0, _target, _time));
+                break;
+            case SkillLaunchType.WARINGSHOT:
+                StartCoroutine(WaringAndLuanch(_skill, _target, _fire));
                 break;
             default:
                 Debug.Log("잘못된 Enum타입 " + _enum.ToString() + "이 들어왔습니다");

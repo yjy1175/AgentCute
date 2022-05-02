@@ -5,6 +5,8 @@ using System;
 
 public class Spawn : Projectile
 {
+    private bool DEBUG = true;
+
     #region variable
     [SerializeField]
     private ProjectileSpec spec = new ProjectileSpec();
@@ -14,11 +16,11 @@ public class Spawn : Projectile
         set { spec = value; }
     }
     [SerializeField]
-    private Vector3 target;
+    private Vector3 mTarget;
     public override Vector3 Target
     {
-        get { return target; }
-        set { target = value; }
+        get { return mTarget; }
+        set { mTarget = value; }
     }
     [SerializeField]
     private float angle = 0;
@@ -37,6 +39,8 @@ public class Spawn : Projectile
         ShortWide, // 짧은와이드형
         LongWide, // 긴와이드형
         ReverseSpawn, //목표 오브젝트에 따라 뒤집어지짐
+        TargetSpawn, //타겟 위치에 스폰
+        NormalizeSpawn,//firePosition에서 단위벡터만큼멀리서 회전하지 않고 스폰
     }
     [SerializeField]
     private VertualJoyStick mUJoySitick;
@@ -89,16 +93,19 @@ public class Spawn : Projectile
     // 자기주위 스폰
     // 랜덤 스폰형(player주변의 일정한 크기의 원에서 랜덤하게 스폰)
     // 일반형인지 랜덤형인지 구분할 변수가 필요(projectileSpec에서 랜덤형 구분)
-    public override void setEnable(Vector3 _target, Vector3 _player, float _angle)
+    public override void setEnable(Vector3 _target, Vector3 _fire, float _angle)
     {
-        target = _target;
-        mPlayer = _player;
+        if (DEBUG)
+            Debug.Log("spawn형 spawnType: "+ mSpawnType.ToString()+", enable target: " + _target + ",fire: " + _fire + ",angle: " + _angle);
+
+        mTarget = _target;
+        mPlayer = _fire;
         // 랜덤형인 경우
         switch ((SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType))
         {
             case SpawnType.General:
                 transform.position = mPlayer;
-                angle = setAngle(target - mPlayer) + _angle;
+                angle = setAngle(mTarget - mPlayer) + _angle;
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 break;
             case SpawnType.SelfSpawn:
@@ -113,7 +120,7 @@ public class Spawn : Projectile
             case SpawnType.ShortWide:
                 // 추후에 정확한 계산공식 구해서 적용
                 transform.position = mPlayer;
-                angle = setAngle(target - mPlayer) + _angle;
+                angle = setAngle(mTarget - mPlayer) + _angle;
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 break;
             case SpawnType.ReverseSpawn:
@@ -130,7 +137,19 @@ public class Spawn : Projectile
                     transform.localScale = new Vector3(-sizeX, sizeY, 1f);
                 }
                 break;
+            //TO-DO 단위벡터를 어디서 받는게 좋을까? 이것또한 받을수 있게 data설정이되어야 좋음
+            case SpawnType.NormalizeSpawn:
+                Vector3 dir = mTarget - mPlayer;
+                dir.Normalize();
+                transform.position = mPlayer + dir*2;
+                break;
+            case SpawnType.TargetSpawn:
+                transform.position = mTarget;
+                break;
         }
+        if (DEBUG)
+            Debug.Log("spawn object positon: " + transform.position);
+
         gameObject.SetActive(true);
         mIsActive = true;
     }
