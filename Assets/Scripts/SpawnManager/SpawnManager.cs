@@ -260,17 +260,11 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         _monster.GetComponent<MonsterStatus>().Size = md.monsterSize;
         _monster.GetComponent<MonsterStatus>().MonsterGrade= md.monsterGrade;
         _monster.GetComponent<MonsterStatus>().MonsterInName = md.monsterInName;
+        _monster.GetComponent<MonsterAttack>().CloseAttackPower = md.closeAttackPower;
         _monster.GetComponent<MonsterStatus>().MoveSpeedRate = 1f;
         _monster.GetComponent<MonsterStatus>().mIsDieToKillCount = false;
         _monster.GetComponent<MonsterStatus>().mIsDieToGetExp = false;
-
         _monster.transform.position = _pos;
-
-        _monster.GetComponent<MonsterAttack>().CloseAttackPower = md.closeAttackPower;
-
-        _monster.GetComponent<IMove>().Moveable = true;
-        _monster.GetComponent<BoxCollider2D>().isTrigger = false;
-
 
         //TO-DO : monster가 생기는 event를 유저가 구독하여 hp register는 Player에서 구독하도록 변경이 필요.
         _monster.GetComponent<MonsterEventHandler>().registerHpObserver(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().registerMonsterHp);

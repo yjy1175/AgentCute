@@ -14,7 +14,7 @@ public abstract class IMove : MonoBehaviour
     protected Vector3 mDir;
     [SerializeField]
     protected bool mMoveable = true;
-    public bool Moveable
+    public bool MMoveable
     {
         get { return mMoveable; }
         set { mMoveable = value; }
