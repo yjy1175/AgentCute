@@ -23,11 +23,31 @@ public class MonsterEventHandler : IEventHandler
             GetComponent<MonsterStatus>().mIsDieToKillCount = true;
             //TO-DO IEventHandler로 event화 시켜놓을것
             SpawnManager.currentKillMosterCount++;
-            GetComponent<MonsterMove>().MMoveable = true;
-            ObjectPoolManager.Instance.DisableGameObject(gameObject);
+            GetComponent<MonsterMove>().Moveable = true;
+
+            StartCoroutine(MonsterDie(_obj));
+            //ObjectPoolManager.Instance.DisableGameObject(gameObject);
         }
         
         
         base.ChangeHp(_hp, _obj);
+    }
+
+
+    IEnumerator MonsterDie(GameObject _obj)
+    {
+        transform.GetComponent<Animator>().SetTrigger("Die");
+        _obj.GetComponent<IMove>().Moveable = false;
+        _obj.GetComponent<BoxCollider2D>().isTrigger = true;
+
+        for (int i = 10; i >= 0; i--) {
+            float transparency = i / 10f;
+            Color monsterColor = _obj.GetComponent<SpriteRenderer>().color;
+            monsterColor.a = transparency;
+            _obj.GetComponent<SpriteRenderer>().color = monsterColor;
+            yield return new WaitForSeconds(0.15f);
+        }
+
+        ObjectPoolManager.Instance.DisableGameObject(_obj);
     }
 }
