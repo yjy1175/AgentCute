@@ -1,5 +1,5 @@
 ID,BossMonster,BossLimitTime,SpeedUp,PowerUp
-0,GiantSlime1,90,2,2
+0,GiantSlime1,100,2,2
 1,GiantSlime2,110,2,2
 2,GiantSlime3,130,2,2
 3,Yeti1,100,2,2
