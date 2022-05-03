@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MusicManager : SingleToneMaker<MusicManager>
 {
-    private bool DEBUG = false;
+    private bool DEBUG = true;
     [SerializeField]
     private GameObject mBackgroundMusic;
     /*
@@ -13,14 +13,28 @@ public class MusicManager : SingleToneMaker<MusicManager>
      * 화산맵 - 전투 BGM(오락실버전1) 
      * 던전맵 - 타이틀 BGM(오락실버전2)
      */
+
+    private AudioSource mAudioSource;
+
+    //projectile명을 통해 SoundData검색
+    private Dictionary<string, SoundData> mAudioClipData;
+
+    public struct SoundData
+    {
+        public AudioClip soundName;
+        public float volume;
+    }
+    
     private void Awake()
     {
         mBackgroundMusic = GameObject.Find("BackgroundMusic");
     }
-
+    
     void Start()
     {
-        
+        mAudioClipData = new Dictionary<string, SoundData>();
+        mAudioSource = GetComponent<AudioSource>();
+        LoadSoundEffect();
     }
 
     // Update is called once per frame
@@ -29,7 +43,23 @@ public class MusicManager : SingleToneMaker<MusicManager>
         
     }
 
-    public void OnMusic()
+    //mAudioClipData에 _name으로 되어있는 soundEffect 재생
+    public void OneShotProjectileSound(string _name)
+    {
+        if (!mAudioClipData.ContainsKey(_name))
+        {
+            Debug.Log(_name + "으로된 clip은 존재하지 않습니다 clip을 추가해주세요");
+            return;
+        }
+        if(DEBUG)
+            Debug.Log("projectile명 :" + _name + ",재생할 클립명 : " + mAudioClipData[_name].soundName);
+        mAudioSource.volume = mAudioClipData[_name].volume;
+        mAudioSource.PlayOneShot(mAudioClipData[_name].soundName);
+
+    }
+
+    //맵에 설정된 background음악을 play
+    public void OnBackgroundMusic()
     {
         mBackgroundMusic.GetComponent<AudioSource>().clip
                     = Resources.Load("Sound\\BGM\\" + MapManager.Instance.CurrentMapType.ToString()) as AudioClip;
@@ -37,5 +67,31 @@ public class MusicManager : SingleToneMaker<MusicManager>
             Debug.Log("음악 on: " +mBackgroundMusic.GetComponent<AudioSource>().clip.name);
         mBackgroundMusic.GetComponent<AudioSource>().Play();
         mBackgroundMusic.GetComponent<AudioSource>().loop = true;
+    }
+
+    //sound effect load
+    private void LoadSoundEffect()
+    {
+        List<Dictionary<string, object>> soundData = CSVReader.Read("CSVFile\\SoundEffect");
+
+        //AudioClip 받아와 딕셔너리화
+        AudioClip[] soundEffectsList = Resources.LoadAll<AudioClip>("Sound\\Effect");
+        Debug.Log("음악 개수 :"+ soundEffectsList.Length);
+
+        Dictionary<string, AudioClip> soundDict = new Dictionary<string, AudioClip>();
+        foreach (AudioClip clip in soundEffectsList)
+        {
+            soundDict[clip.name]=  clip;
+        }
+
+
+        for (int idx = 0; idx < soundData.Count; idx++)
+        {
+            SoundData data = new SoundData();
+
+            data.soundName = soundDict[soundData[idx]["SoundName"].ToString()];
+            data.volume = float.Parse(soundData[idx]["Volume"].ToString());
+            mAudioClipData[soundData[idx]["ProjectileName"].ToString()] = data;
+        }
     }
 }

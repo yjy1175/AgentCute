@@ -214,6 +214,10 @@ public class IAttack : MonoBehaviour
         setProjectileData(ref obj);
         obj.GetComponent<Projectile>().CurrentPassCount = 0;
         obj.GetComponent<Projectile>().setEnable(_targetPos, _firePos, _angle);
+
+        //projectile에 설정된 음악 
+        MusicManager.Instance.OneShotProjectileSound(obj.name);
+
         obj.GetComponent<Projectile>().setDisableWaitForTime(keepTime);
         return obj;
     }

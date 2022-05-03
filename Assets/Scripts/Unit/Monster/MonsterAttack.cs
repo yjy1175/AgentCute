@@ -133,11 +133,7 @@ public class MonsterAttack : IAttack
             }
             tempTime = tempTileMax;
         }
-        
-            
-
-
-            tempTime = Mathf.Max(tempTime - Time.deltaTime, 0);
+        tempTime = Mathf.Max(tempTime - Time.deltaTime, 0);
     }
     
     // -1 시 사용 가능스킬이 없음
