@@ -98,7 +98,6 @@ public class MessageBox : MonoBehaviour
     {
         isStart = false;
         textCom.color = alpha;
-        gameObject.SetActive(false);
     }
     #endregion
 }

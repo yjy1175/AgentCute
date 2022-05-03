@@ -62,7 +62,7 @@ public class ObjectPoolManager : SingleToneMaker<ObjectPoolManager>
     }
 
     //setactive dsiable된 GameObject에 대해서만 objectPool에 반환
-    //Disable시 반드시 active false를 하고 호출할것
+    //object의 activeInHierarchy 상태를 체크하고 true일 경우만 오브젝트풀에 다시 반환하기때문에 Disable시 반드시 active true인 상태에서 호출할것
     public void DisableGameObject(GameObject obj)
     {
         if (dictTable.ContainsKey(obj.name).Equals(true))

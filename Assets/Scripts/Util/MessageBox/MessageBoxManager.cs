@@ -65,7 +65,7 @@ public class MessageBoxManager : SingleToneMaker<MessageBoxManager>
     {
         foreach(GameObject item in messageTypes.Values)
         {
-            ObjectPoolManager.Instance.CreateDictTable(item, 5, 5);
+            ObjectPoolManager.Instance.CreateDictTable(item, 100, 50);
         }
     }
 
