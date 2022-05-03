@@ -433,7 +433,12 @@ public abstract class IStatus : MonoBehaviour
         else if (_type == Skill.ESkillBuffType.PlayerPosition)
         {
             Vector3 currentDir = GetComponent<PlayerAttack>().Target;
-            currentDir = (currentDir - transform.position) * value;
+            if (currentDir == Vector3.zero)
+            {
+                currentDir = Vector3.right;
+            }
+            Debug.Log(currentDir);
+            currentDir = (currentDir - transform.position).normalized * value;
             RaycastHit2D ray = Physics2D.Raycast(
                 new Vector2(transform.position.x + currentDir.x, transform.position.y + currentDir.y),
                 Vector3.zero, LayerMask.GetMask("Tilemap"));
