@@ -144,7 +144,7 @@ MonoBehaviour:
     mProjectileSizeX: 8
     mProjectileSizeY: 8
     mProjectileDelayTime: 0
-  target: {x: 0, y: 0, z: 0}
+  mTarget: {x: 0, y: 0, z: 0}
   angle: 0
   mSpawnType: SelfSpawn
   mUJoySitick: {fileID: 0}
@@ -164,10 +164,10 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.007187724, y: -0.06382785}
+  m_Offset: {x: -0.14488691, y: 0.05174111}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.6, y: 0.4}
     oldSize: {x: 1.44, y: 0.64}
     newSize: {x: 1.44, y: 0.64}
     adaptiveTilingThreshold: 0.5
@@ -175,7 +175,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.04228, y: 0.38775665}
+  m_Size: {x: 0.9931017, y: 0.44185272}
   m_EdgeRadius: 0
 --- !u!50 &-7983016218755483054
 Rigidbody2D:

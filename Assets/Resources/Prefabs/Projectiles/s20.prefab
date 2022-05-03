@@ -144,7 +144,7 @@ MonoBehaviour:
     mProjectileSizeX: 2
     mProjectileSizeY: 2
     mProjectileDelayTime: 0
-  target: {x: 0, y: 0, z: 0}
+  mTarget: {x: 0, y: 0, z: 0}
   angle: 0
   mSpawnType: ReverseSpawn
   mUJoySitick: {fileID: 0}
@@ -164,10 +164,10 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.6820483, y: 0.42116487}
+  m_Offset: {x: 1.6688578, y: 0.24968845}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
+    pivot: {x: 0.0428974, y: 0.1343184}
     oldSize: {x: 4, y: 2}
     newSize: {x: 4, y: 2}
     adaptiveTilingThreshold: 0.5
@@ -175,7 +175,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.3640966, y: 0.84232974}
+  m_Size: {x: 3.3904777, y: 1.0445842}
   m_EdgeRadius: 0
 --- !u!50 &-306967287850164318
 Rigidbody2D:

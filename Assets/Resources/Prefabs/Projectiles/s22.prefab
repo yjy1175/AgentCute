@@ -143,7 +143,8 @@ MonoBehaviour:
     mKnockback: 2
     mProjectileSizeX: 3
     mProjectileSizeY: 3
-  target: {x: 0, y: 0, z: 0}
+    mProjectileDelayTime: 0
+  mTarget: {x: 0, y: 0, z: 0}
   angle: 0
   mSpawnType: ReverseSpawn
   mUJoySitick: {fileID: 0}
@@ -184,16 +185,16 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.1189716, y: -0.78773665}
+  m_Offset: {x: 1.906748, y: -0.43968993}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 1}
-    oldSize: {x: 4.875, y: 1.5625}
+    pivot: {x: 0.2093296, y: 0.5984535}
+    oldSize: {x: 6, y: 2}
     newSize: {x: 6, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.9277043, y: 1.606132}
+  m_Size: {x: 3.7013326, y: 1.4533311}
   m_EdgeRadius: 0
