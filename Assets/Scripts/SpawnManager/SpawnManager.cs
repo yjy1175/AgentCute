@@ -43,10 +43,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     [SerializeField]
     private Dictionary<string, BerserkerData> mDataSetBerserker;
 
-
+    [SerializeField]
     private float currentTime = 0f;
-
-    public Transform[] spawnPoints;
 
     [SerializeField]
     private int mBossNum = 0;
@@ -72,14 +70,13 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     private MapManager.MapType mMapType;
 
     [SerializeField]
-    private Collider2D[] mCheckMonsterCount;
-    [SerializeField]
     private Transform[] mMonsterArea;
     [SerializeField]
     private Vector2 mMonsterAreadSize = new Vector2(9f, 5f);
     [SerializeField]
-    private Collider2D[] mHit;
-
+    private List<int> mMonsterAreaNum;
+    [SerializeField]
+    private Transform[,] mSpawnPoints;
 
     public void init()
     {
@@ -94,31 +91,33 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     // Start is called before the first frame update
     void Start()
     {
+        //swapZone 초기화
+        InitSwapZone();
+
+        //데이터 읽어오기
         InitBerserkerData();
-        InitWaveData();       
+        InitWaveData();
+
+        //boss 체크 초기화
         mBossNum = 0;
-        mMonsterArea = GameObject.Find("MonsterCountCheckObject").transform.GetComponentsInChildren<Transform>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        /*
-        List<int> num = new List<int>();
-        
-        string s="";
+        if (PlayerManager.Instance.IsGameStart)
+        {
 
-        for (int i = 1; i < mMonsterArea.Length; i++) {
-            mHit = Physics2D.OverlapBoxAll(mMonsterArea[i].transform.position, mMonsterAreadSize, 0, LayerMask.NameToLayer("Monster"));
-            num.Add(Physics2D.OverlapBoxAll(mMonsterArea[i].transform.position, mMonsterAreadSize, 0).Length);
+            string s ="";
+
+            for (int i = 1; i < mMonsterArea.Length; i++) {
+                mMonsterAreaNum[i-1] = Physics2D.OverlapBoxAll(mMonsterArea[i].transform.position, mMonsterAreadSize, 0, LayerMask.GetMask("Monster")).Length;
+                if(DEBUG)
+                    s = s+" "+i+"의 몬스터수: " + mMonsterAreaNum[i-1].ToString();
+            }
             if(DEBUG)
-                s = s+" "+i+"의 몬스터수: " + num[i].ToString();
-        }
-        if(DEBUG)
-            Debug.Log(s);
-        */
+                Debug.Log(s);
 
-        if (PlayerManager.Instance.IsGameStart) {
             SpawnMonster();
             currentTime += Time.deltaTime;
             allMonsterText.text = "전체 : " + allMonsterCount.ToString() + " 마리";
@@ -127,7 +126,6 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         }
     }
 
-    /*
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -136,7 +134,6 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             Gizmos.DrawWireCube(mMonsterArea[i].position, mMonsterAreadSize);
         }
     }
-    */
     private void SpawnMonster()
     {
         SpawnNormalMonster();
@@ -148,16 +145,16 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         //노멀몹 스폰
         for (int i = 0; i < mDataSetNormal.Count; i++)
         {
-            SpawnData temp = mDataSetNormal[i];
+            SpawnData monsterData = mDataSetNormal[i];
             if (mDataSetNormal[i].realStartSpawnTime < currentTime && mDataSetNormal[i].currentTime > mDataSetNormal[i].spawnTime)
             {
-                List<int> spawnZone = RandSpawnList(mDataSetNormal[i].spawnNumber + mBossNum);//성욱님 요구사항으로 웨이브마다 +1마리씩 더 스폰 
+                List<Transform> spawnZone = GetRandomZoneList(mDataSetNormal[i].spawnNumber + mBossNum);//성욱님 요구사항으로 웨이브마다 +1마리씩 더 스폰 
                 for (int j = 0; j < spawnZone.Count; j++)
                 {
                     GameObject monster = ObjectPoolManager.Instance.EnableGameObject(mDataSetNormal[i].spawnMonster);
-                    if (monster != null && spawnPoints[spawnZone[j]].GetComponent<SpawnZone>().Spawnable)
+                    if (monster != null && spawnZone[j].GetComponent<SpawnZone>().Spawnable)
                     {
-                        SpawnMonsterSet(ref monster, spawnPoints[spawnZone[j]].position);
+                        SpawnMonsterSet(ref monster, spawnZone[j].position);
                     }
                     else
                     {
@@ -165,10 +162,10 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                         Debug.Log(spawnZone[j] + "번째 장애물 지역 소환 안됨");
                     }
                 }
-                temp.currentTime = 0;
+                monsterData.currentTime = 0;
             }
-            temp.currentTime += Time.deltaTime;
-            mDataSetNormal[i] = temp;
+            monsterData.currentTime += Time.deltaTime;
+            mDataSetNormal[i] = monsterData;
         }
     }
 
@@ -202,8 +199,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             GameObject monster = ObjectPoolManager.Instance.EnableGameObject(mDataSetBoss[mBossNum].spawnMonster);
             monster.GetComponent<MonsterEventHandler>().registerHpObserver(registerBossHp);
 
-            List<int> spawnZone = RandSpawnList(1);
-            SpawnMonsterSet(ref monster, spawnPoints[spawnZone[0]].position);
+            List<Transform> spawnZone = GetRandomZoneList(1);
+            SpawnMonsterSet(ref monster, spawnZone[0].position);
 
             mBossNum++;
 
@@ -261,7 +258,21 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         allMonsterCount++;
     }
 
+    //swap존 초기화
+    private void InitSwapZone()
+    {
 
+        mMonsterAreaNum = new List<int>() { 0, 0, 0, 0 };
+        mSpawnPoints = new Transform[GameObject.Find("SwapZone").transform.childCount, GameObject.Find("Zone0").transform.childCount];
+        mMonsterArea = GameObject.Find("MonsterCountCheckObject").transform.GetComponentsInChildren<Transform>();
+        for (int i = 0; i < GameObject.Find("SwapZone").transform.childCount; i++)
+        {
+            for (int j = 0; j < GameObject.Find("Zone" + i.ToString()).transform.childCount; j++)
+            {
+                mSpawnPoints[i, j] = GameObject.Find("Zone" + i.ToString()).transform.GetChild(j);
+            }
+        }
+    }
     private void InitWaveData()
     {
         mDataSetWave = new List<WaveData>();
@@ -333,21 +344,42 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             }
         }
     }
-    private List<int> RandSpawnList(int cnt)
+    private List<Transform> GetRandomZoneList(int cnt)
     {
-        List<int> list = new List<int>();
-        int temp = 0;
-        //무한루프의 가능성이 있을지? 모든 spanw이 Spawnable라면?
-        while (list.Count < cnt && temp<100)
+        //mMonsterAreaNum에서 몬스터가 가장 적은 위치 체크
+        //해당 위치에서 랜덤으로 스폰
+        int nextSpawnIdx = 0;
+        int checkMonsterNum = int.MaxValue;
+        int zoneLength;
+        List<Transform> randomList = new List<Transform>();
+
+        for (int i = 0; i < mMonsterAreaNum.Count; i++)
         {
-            int idx = UnityEngine.Random.Range(0, spawnPoints.Length);
-            if (spawnPoints[idx].GetComponent<SpawnZone>().Spawnable)
+            if (mMonsterAreaNum[i] < checkMonsterNum)
             {
-                list.Add(idx);
+                nextSpawnIdx = i;
+                checkMonsterNum = mMonsterAreaNum[i];
             }
-            temp++;
         }
-        return list;
+        if (DEBUG)
+            Debug.Log("Zone" + nextSpawnIdx.ToString() + "에서 스폰");
+
+        zoneLength = GameObject.Find("Zone" + nextSpawnIdx.ToString()).transform.childCount;
+
+        
+        //모든 스폰존에서 생성이 안될수도 있기때문에 infiniteCheck
+        int infiniteCheck = 0;
+
+        while (randomList.Count < cnt && infiniteCheck < 100)
+        {
+            int idx = UnityEngine.Random.Range(0, zoneLength);
+            if (mSpawnPoints[nextSpawnIdx,idx].GetComponent<SpawnZone>().Spawnable)
+            {
+                randomList.Add(mSpawnPoints[nextSpawnIdx, idx]);
+            }
+            infiniteCheck++;
+        }
+        return randomList;
     }
 
     
@@ -359,6 +391,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             Debug.Log("버서커모드 적용 대기시간"+ ws.bossLimitTime);
 
         yield return new WaitForSeconds(ws.bossLimitTime);
+
         if (_obj.activeInHierarchy)
         {
             
