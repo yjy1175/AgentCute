@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MusicManager : SingleToneMaker<MusicManager>
 {
-    private bool DEBUG = false;
+    private bool DEBUG = true;
     [SerializeField]
     private GameObject mBackgroundMusic;
     /*
@@ -34,6 +34,9 @@ public class MusicManager : SingleToneMaker<MusicManager>
     {
         mAudioClipData = new Dictionary<string, SoundData>();
         mAudioSource = GetComponent<AudioSource>();
+        //sound √÷¿˚»≠
+        mAudioSource.dopplerLevel = 0f;
+        mAudioSource.reverbZoneMix = 0f;
         LoadSoundEffect();
     }
 
