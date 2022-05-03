@@ -1,54 +1,54 @@
 SkillType,SkillTypeName,SkillLaunchType,SkillWeaponType,SkillName,SkillNameENG,SkillNameJPN,SkillDesc,Projectiles,SkillCount,SkillCountTime,SkillClickCount,SkillCoolTimeType,SkillCoolTime,SkillPriority,SkillRunTime,SkillStartTime,SkillStopTime,SkillBuff,SKillRushSpeed
-B,�⺻����,None,bg,����� ��,Bowgun Shot,,������� �⺻ ����,l0,1,0.4,1,S,2,-1,0,0,0,0,0
-G,�Ϲݽ�ų,None,bg,��Ƽ��,Multi Shot,,ȭ���� ��ä�÷� 2���� �߻��մϴ�.,l1,2,0.4,1,S,5,-1,0,0,0,0,0
-G,�Ϲݽ�ų,None,bg,���� źȯ,Arrow Burst,,���߼� ȭ���� �߻��մϴ�. �ִ� 2ȸ.,l2/s0,1,0,2,D,0/6,-1,0,0,0,0,0
-G,�Ϲݽ�ų,None,bg,���� ���,Cross Fire,,������ ���鿡�� ������ ����� �ϰ� �˹��ŵ�ϴ�. �ִ� 3ȸ.,s1,1,0,3,D,0/7,-1,0,0,0.1,0,0
-U,�ñر�,None,bg,�������ǵ�,Over-rapid,,"���� �ð� ���� �̵��ӵ��� 25% �����ϰ�, �������� ����� �մϴ�.",l3,-1,0,1,S,60,-1,6/0.1,0,0,PlayerSPD/0.25,0
-U,�ñر�,None,bg,��Ʈ��,Hitman,,���� �������� ��� ���� �����ϴ� ������ ����� �մϴ�. �ִ� 3ȸ.,l4,1,0,3,D,1/60,-1,0,0,0.1,0,0
-B,�⺻����,None,st,���� ���Ʈ,Mana Assault,,�������� �⺻ ����,l5,1,0.4,1,S,2,-1,0,0,0,0,0
-G,�Ϲݽ�ų,None,st,�ٳ���,Banana,,������ �߻��Ͽ� �����մϴ�.,l6,2,0.2,1,S,4,-1,0,0,0,0,0
-G,�Ϲݽ�ų,None,st,ȭ��ź,Burning Cannon,,�ٷ��� ȭ������ 2���� �߻��մϴ�.,l7,2,0.4,1,S,6,-1,0,0,0,0,0
-G,�Ϲݽ�ų,None,st,�Ұ�,Incinerate,,���� �����ϴ� �Ŵ��� ȭ������� ��ȯ�Ͽ� �����մϴ�.,c0,1,0,1,S,7,-1,0,0,0.1,0,0
-U,�ñر�,None,st,���� ����Ʈ,Mana Blast,,"������ �����Ͽ� �ֺ� ������ �����ϰ�, ������ �������� �����մϴ�.",s2/s3,1,0,1,S,60,-1,3.33,0,0.3,0,0
-U,�ñر�,None,st,����Į����,Apocalypse,,���� ������ �������� ���� ������ ������ ������ ��������ϴ�.,s4/s5/s6,-1,0,1,S,60,-1,4/0.2,0,0,0,0
-B,�⺻����,None,sw,�ҵ� ���Ʈ,Sword Assault,,�ҵ��� �⺻ ����,s7,1,0,1,S,2,-1,0,0,0,0,0
-G,�Ϲݽ�ų,None,sw,���� ����,Double Cut,,������ ������ 2�������� ������ ���ϴ�.,s8,1,0,1,S,4,-1,0,0,0,0,0
-G,�Ϲݽ�ų,None,sw,����,Razing Cut,,������ ������ ���� �� ���� ������ �����մϴ�.,s9,1,0,1,S,4,-1,0,0,0,0,0
-G,�Ϲݽ�ų,None,sw,�߻�,Sword Release,,������ ���ư��� �˱⸦ �߻��Ͽ� ������ ���� ������ŵ�ϴ�.,l8,1,0,1,S,6,-1,0,0,0,0,0
-U,�ñر�,None,sw,����¡ ǻ��,Razing Fury,,���� �������� ������ �̵��ϸ鼭 ��λ��� ������ ���ϴ�. �ִ� 3ȸ.,s18,1,0,3,D,0/55,-1,0,0,0.1,PlayerPosition/6,0
-U,�ñر�,None,sw,�ͽ�Ƽ�� �ҵ�,Exalted Sword,,"������ �˱⸦ �߻��ϰ�, ���� �ð�(8s) ���� ������ ���⸦ ��ȯ�Ͽ� �����մϴ�.",s10/l10/l11,2,0,21,D,0/0.4/55,-1,11,0,0,PlayerWeaponSprite/0,0
-B,�⺻����,None,sp,���Ǿ� ���Ʈ,Spear Assault,,���Ǿ��� �⺻ ����,s11,1,0,1,S,2,-1,0,0,0,0,0
-G,�Ϲݽ�ų,None,sp,���� ���,Double Stab,,������ ������ 2�������� ������ ��ϴ�.,s12,1,0,1,S,4,-1,0,0,0,0,0
-G,�Ϲݽ�ų,None,sp,����,Assault Edge,,������ ������ ���� �� ��� ������ ���մϴ�.,s13,1,0,1,S,4,-1,0,0,0,0,0
-G,�Ϲݽ�ų,None,sp,����,Storm,,������ ���ϰ� �� ������ ��ǳ�� �߻��մϴ�.,l12,1,0,1,S,6,-1,0,0,0,0,0
-U,�ñر�,None,sp,�巡���� ����Ʈ,Dragonic Burst,,"������ ������ ������ ����, ������ �������� �߻��Ͽ� �����մϴ�.",s14/s15,1,0,1,S,60,-1,2.91,0,2.8,0,0
-U,�ñر�,None,sp,�ε� ���� ���Ǿ�,Lord Of Spear,,"�ֺ��� ������ ���� �� ����, ���� �ð�(4s) ���� �ż��� â�� ��ȯ�Ͽ� �����մϴ�.",s16/s17,1,0,1,S,55,-1,4,0,0.2,0,0
-D,ȸ�Ǳ�,None,bg,ȸ��,BowGun Dodge,,null,s31,1,0,1,S,8,-1,0,0.2,0,PlayerPosition/4,0
-D,ȸ�Ǳ�,None,st,����,Steff Shield,,null,s32,1,0,1,S,8,-1,0,3,0,0,0
-D,ȸ�Ǳ�,None,sw,ȸ��,Sword Dodge,,null,s31,1,0,2,D,1/5,-1,0,0.2,0,PlayerPosition/3.5,0
-D,ȸ�Ǳ�,None,sp,ȸ��,Spear Dodge,,null,s31,1,0,2,D,1/5,-1,0,0.2,0,PlayerPosition/3,0
-M,�Ϲݽ�ų,THROW,Goblin,��������ų,GoblinSkill,,�÷��̾�� ��ź����ü�� �����ϴ�.,l13,1,0,1,S,1,1,0,0.5,0.1,0,0
-M,�Ϲݽ�ų,MULTISHOT,Slime,���̾�Ʈ�����ӽ�ų1,GiantSlimeSkill1,,8�������� ����ü�� 3�� �߻��Ѵ�,l14,5,0.2,1,S,3,4,1,0,1,0,0
-M,�Ϲݽ�ų,MULTISHOT,Slime,���̾�Ʈ�����ӽ�ų2,GiantSlimeSkill2,,3������������ü��10���߻��Ѵ�,l15,10,0.2,1,S,5,3,1,0,1,0,0
-M,�Ϲݽ�ų,NORMAL,Slime,���̾�Ʈ�����ӽ�ų3,GiantSlimeSkill3,,����������ũ�Գ�������ϴ�.,s19,1,0,1,S,17,2,1,1.17,0.5,0,0
-M,�Ϲݽ�ų,NORMAL,Slime,���̾�Ʈ�����ӽ�ų4,GiantSlimeSkill4,,�ʷϻ� �꼺���� ����� �����մϴ�.,s20,1,0,1,S,11,1,1,0.5,0.08,0,0
-M,�Ϲݽ�ų,MULTISHOT,Dragon,�ʵ�巡�ｺų1,FieldDragonSkill1,,18�� ������ 360�����⿡ ����ü�� 3�� �߻��Ѵ�.,l16,10,0.5,1,S,3,4,0,0.5,0.16,0,0
-M,�Ϲݽ�ų,LAUNCHMULTISHOT,Dragon,�ʵ�巡�ｺų2,FieldDragonSkill2,,���� �� ������ ����ü�� �߻��� �� ����ü���� 4�������� ����ü�� 4���� 10�� �߻�ȴ�.,l17/l18,10,0.5,1,S,5,3,0,0.5,0.16,0,0
-M,�Ϲݽ�ų,NORMAL,Dragon,�ʵ�巡�ｺų3,FieldDragonSkill3,,�ʷϻ� ������ ����ü�� �����Ѵ�.,s21,1,0,1,S,17,1,0,0.75,1,0,0
-M,�Ϲݽ�ų,NORMAL,Dragon,�ʵ�巡�ｺų4,FieldDragonSkill4,,�ʷϻ� �극�� ����ü�� �����Ѵ�.,s22,1,0,1,S,11,2,0,0.5,0.16,0,0
-M,�Ϲݽ�ų,NORMAL,FairyDragon,�����뽺ų,FariyDragonSkill,,�÷��̾�� ����ü�� �߻��մϴ�.,l22,1,0,1,S,1,1,0,0.33,0.33,0,0
-M,�Ϲݽ�ų,WARINGSHOT,Yeti,��Ƽ��ų1,YetiSkill1,,���ȷ� ���������� �÷��̾�ִ� ��ǥ�� ���������� ��������� �������̰� �ھƿ�����.,s23/s24,1,0,1,S,17,1,0,0.4,0.15,0,0
-M,�Ϲݽ�ų,NORMAL,Yeti,��Ƽ��ų2,YetiSkill2,,������ ����ü�� ���� �����մϴ�.,l23,1,0,1,S,3,4,0,0.5,0.15,0,0
-M,�Ϲݽ�ų,NORMAL,Yeti,��Ƽ��ų3,YetiSkill3,,������ ũ�� ��� ������� �����մϴ�.,s30,1,0,1,S,5,3,0,0.5,0.15,0,0
-M,�Ϲݽ�ų,NORMAL,Yeti,��Ƽ��ų4,YetiSkill4,,���� �극�� ����ü�� �����մϴ�.,s25,1,0,1,S,11,2,0,0.33,0.15,0,0
-M,�Ϲݽ�ų,NORMAL,Imp,������ų,ImpSKill,,�÷��̾�� ����ü�� �߻��մϴ�.,l24,1,0,1,S,1,1,0,0.25,0.1,0,0
-M,�Ϲݽ�ų,NORMAL,Demon,����ų,DemonSkill,,�÷��̾�� 30������ 3�� ����ü�� �߻��մϴ�.,l25,1,0,1,S,1,1,0,0.25,0.1,0,0
-M,�Ϲݽ�ų,DELAYMULTISHOT,Ifrit,������Ʈ��ų1,IfritSkill1,,10�������� 36���� ����ü�� �ϳ��� �������� 2�� �߻��Ѵ�,l26,2,2,1,S,5,3,0,0.8,0,0,0
-M,�Ϲݽ�ų,MULTISHOT,Ifrit,������Ʈ��ų2,IfritSkill2,,���ۺ��� ���� ����ü�� 3�������� �߻��Ѵ�.,l27,1,0,1,S,17,1,0,0.8,0,0,0
-M,�Ϲݽ�ų,NORMAL,Ifrit,������Ʈ��ų3,IfritSkill3,,���� ȭ�� ����ü�� �߻��Ѵ�.,l28,1,0,1,S,3,4,0,0.7,0.05,0,0
-M,�Ϲݽ�ų,NORMAL,Ifrit,������Ʈ��ų4,IfritSkill4,,ȭ������ ����� �����Ѵ�.,s26,1,0,1,S,11,2,0,0.3,0,0,0
-M,�Ϲݽ�ų,NORMAL,Gargoyle,�����Ͻ�ų,GargoyleSkill,,�÷��̾�� ����ü�� �߻��մϴ�.,l29,1,0,1,S,1,1,0,0.16,1,0,0
-M,�Ϲݽ�ų,NORMAL,Wendigo,�������ų1,WendigoSkill1,null,null,s27,1,0,1,S,3,4,0,0,0.25,0,0
-M,�Ϲݽ�ų,NORMAL,Wendigo,�������ų2,WendigoSkill2,null,null,s28,1,0,1,S,5,3,0,0,0.58,0,0
-M,�Ϲݽ�ų,DELAYSHOT,Wendigo,�������ų3,WendigoSkill3,null,null,l30,1,0,1,S,11,2,0,0,2,0,0
-M,�Ϲݽ�ų,RUSH,Wendigo,�������ų4,WendigoSkill4,null,null,s29,1,0,1,S,17,1,0,0.66,0.66,0,8
+B,기본공격,None,bg,보우건 샷,Bowgun Shot,,보우건의 기본 공격,l0,1,0.4,1,S,2,-1,0,0,0,0,0
+G,일반스킬,None,bg,멀티샷,Multi Shot,,화살을 부채꼴로 2연속 발사합니다.,l1,2,0.4,1,S,5,-1,0,0,0,0,0
+G,일반스킬,None,bg,폭발 탄환,Arrow Burst,,폭발성 화살을 발사합니다. 최대 2회.,l2/s0,1,0,2,D,0/6,-1,0,0,0,0,0
+G,일반스킬,None,bg,교차 사격,Cross Fire,,전방의 적들에게 강력한 사격을 하고 넉백시킵니다. 최대 3회.,s1,1,0,3,D,0/7,-1,0,0,0.1,0,0
+U,궁극기,None,bg,오버래피드,Over-rapid,,"일정 시간 동안 이동속도가 25% 증가하고, 지속적인 사격을 합니다.",l3,-1,0,1,S,60,-1,6/0.1,0,0,PlayerSPD/0.25,0
+U,궁극기,None,bg,히트맨,Hitman,,조작 방향으로 모든 적을 관통하는 강력한 사격을 합니다. 최대 3회.,l4,1,0,3,D,1/60,-1,0,0,0.1,0,0
+B,기본공격,None,st,마나 어썰트,Mana Assault,,스태프의 기본 공격,l5,1,0.4,1,S,2,-1,0,0,0,0,0
+G,일반스킬,None,st,바나나,Banana,,마법을 발사하여 공격합니다.,l6,2,0.2,1,S,4,-1,0,0,0,0,0
+G,일반스킬,None,st,화염탄,Burning Cannon,,다량의 화염구를 2연속 발사합니다.,l7,2,0.4,1,S,6,-1,0,0,0,0,0
+G,일반스킬,None,st,소각,Incinerate,,적을 추적하는 거대한 화염기둥을 소환하여 공격합니다.,c0,1,0,1,S,7,-1,0,0,0.1,0,0
+U,궁극기,None,st,마나 블라스트,Mana Blast,,"마나를 방출하여 주변 적들을 공격하고, 강력한 에너지를 방출합니다.",s2/s3,1,0,1,S,60,-1,3.33,0,0.3,0,0
+U,궁극기,None,st,아포칼립스,Apocalypse,,넓은 범위에 지속적인 연소 폭발을 일으켜 적들을 쓸어버립니다.,s4/s5/s6,-1,0,1,S,60,-1,4/0.2,0,0,0,0
+B,기본공격,None,sw,소드 어썰트,Sword Assault,,소드의 기본 공격,s7,1,0,1,S,2,-1,0,0,0,0,0
+G,일반스킬,None,sw,연속 베기,Double Cut,,전방의 적들을 2연속으로 빠르게 벱니다.,s8,1,0,1,S,4,-1,0,0,0,0,0
+G,일반스킬,None,sw,참수,Razing Cut,,전방을 빠르게 여러 번 베어 적들을 참수합니다.,s9,1,0,1,S,4,-1,0,0,0,0,0
+G,일반스킬,None,sw,발산,Sword Release,,느리게 날아가는 검기를 발산하여 적들을 베고 경직시킵니다.,l8,1,0,1,S,6,-1,0,0,0,0,0
+U,궁극기,None,sw,레이징 퓨리,Razing Fury,,조작 방향으로 빠르게 이동하면서 경로상의 적들을 벱니다. 최대 3회.,s18,1,0,3,D,0/55,-1,0,0,0.1,PlayerPosition/6,0
+U,궁극기,None,sw,익썰티드 소드,Exalted Sword,,"강력한 검기를 발산하고, 지속 시간(8s) 동안 강력한 무기를 소환하여 공격합니다.",s10/l10/l11,2,0,21,D,0/0.4/55,-1,11,0,0,PlayerWeaponSprite/0,0
+B,기본공격,None,sp,스피어 어썰트,Spear Assault,,스피어의 기본 공격,s11,1,0,1,S,2,-1,0,0,0,0,0
+G,일반스킬,None,sp,연속 찌르기,Double Stab,,전방의 적들을 2연속으로 빠르게 찌릅니다.,s12,1,0,1,S,4,-1,0,0,0,0,0
+G,일반스킬,None,sp,참격,Assault Edge,,전방의 빠르게 여러 번 찌르는 참격을 가합니다.,s13,1,0,1,S,4,-1,0,0,0,0,0
+G,일반스킬,None,sp,돌파,Storm,,전방을 강하게 찔러 생성된 돌풍을 발사합니다.,l12,1,0,1,S,6,-1,0,0,0,0,0
+U,궁극기,None,sp,드래고닉 버스트,Dragonic Burst,,"전방의 적들을 무참히 베고, 강력한 에너지를 발산하여 공격합니다.",s14/s15,1,0,1,S,60,-1,2.91,0,2.8,0,0
+U,궁극기,None,sp,로드 오브 스피어,Lord Of Spear,,"주변을 빠르게 여러 번 베고, 지속 시간(4s) 동안 신성한 창을 소환하여 공격합니다.",s16/s17,1,0,1,S,55,-1,4,0,0.2,0,0
+D,회피기,None,bg,회피,BowGun Dodge,,null,s31,1,0,1,S,8,-1,0,0.2,0,PlayerPosition/4,0
+D,회피기,None,st,쉴드,Steff Shield,,null,s32,1,0,1,S,8,-1,0,3,0,0,0
+D,회피기,None,sw,회피,Sword Dodge,,null,s31,1,0,2,D,1/5,-1,0,0.2,0,PlayerPosition/3.5,0
+D,회피기,None,sp,회피,Spear Dodge,,null,s31,1,0,2,D,1/5,-1,0,0.2,0,PlayerPosition/3,0
+M,일반스킬,THROW,Goblin,고블린스킬,GoblinSkill,,플레이어에게 폭탄투사체를 던집니다.,l13,1,0,1,S,1,1,0,0.5,0.1,0,0
+M,일반스킬,MULTISHOT,Slime,자이언트슬라임스킬1,GiantSlimeSkill1,,8방향으로 투사체를 3번 발사한다,l14,5,0.2,1,S,3,4,1,0,1,0,0
+M,일반스킬,MULTISHOT,Slime,자이언트슬라임스킬2,GiantSlimeSkill2,,3방향으로투사체를10번발사한다,l15,10,0.2,1,S,5,3,1,0,1,0,0
+M,일반스킬,NORMAL,Slime,자이언트슬라임스킬3,GiantSlimeSkill3,,위로점프후크게내려찍습니다.,s19,1,0,1,S,17,2,1,1.17,0.5,0,0
+M,일반스킬,NORMAL,Slime,자이언트슬라임스킬4,GiantSlimeSkill4,,초록색 산성액을 내뱉어 공격합니다.,s20,1,0,1,S,11,1,1,0.5,0.08,0,0
+M,일반스킬,MULTISHOT,Dragon,필드드래곤스킬1,FieldDragonSkill1,,18도 각도로 360도방향에 투사체를 3번 발사한다.,l16,10,0.5,1,S,3,4,0,0.5,0.16,0,0
+M,일반스킬,LAUNCHMULTISHOT,Dragon,필드드래곤스킬2,FieldDragonSkill2,,작은 공 형태의 투사체를 발사후 그 투사체에서 4방향으로 투사체가 4개씩 10번 발사된다.,l17/l18,10,0.5,1,S,5,3,0,0.5,0.16,0,0
+M,일반스킬,NORMAL,Dragon,필드드래곤스킬3,FieldDragonSkill3,,초록색 레이저 투사체로 공격한다.,s21,1,0,1,S,17,1,0,0.75,1,0,0
+M,일반스킬,NORMAL,Dragon,필드드래곤스킬4,FieldDragonSkill4,,초록색 브레스 투사체로 공격한다.,s22,1,0,1,S,11,2,0,0.5,0.16,0,0
+M,일반스킬,NORMAL,FairyDragon,요정용스킬,FariyDragonSkill,,플레이어에게 투사체를 발사합니다.,l22,1,0,1,S,1,1,0,0.33,0.33,0,0
+M,일반스킬,WARINGSHOT,Yeti,예티스킬1,YetiSkill1,,양팔로 내려찍으면 플레이어가있던 좌표에 빨간원으로 경고가뜬후 얼음덩이가 솟아오른다.,s23/s24,1,0,1,S,17,1,0,0.4,0.15,0,0
+M,일반스킬,NORMAL,Yeti,예티스킬2,YetiSkill2,,얼음공 투사체를 굴려 공격합니다.,l23,1,0,1,S,3,4,0,0.5,0.15,0,0
+M,일반스킬,NORMAL,Yeti,예티스킬3,YetiSkill3,,양팔을 크게 들어 내려찍어 공격합니다.,s30,1,0,1,S,5,3,0,0.5,0.15,0,0
+M,일반스킬,NORMAL,Yeti,예티스킬4,YetiSkill4,,얼음 브레스 투사체로 공격합니다.,s25,1,0,1,S,11,2,0,0.33,0.15,0,0
+M,일반스킬,NORMAL,Imp,임프스킬,ImpSKill,,플레이어에게 투사체를 발사합니다.,l24,1,0,1,S,1,1,0,0.25,0.1,0,0
+M,일반스킬,NORMAL,Demon,데몬스킬,DemonSkill,,플레이어에게 30각도로 3개 투사체를 발사합니다.,l25,1,0,1,S,1,1,0,0.25,0.1,0,0
+M,일반스킬,DELAYMULTISHOT,Ifrit,이프리트스킬1,IfritSkill1,,10도각도로 36개의 투사체가 하나씩 연속으로 2번 발사한다,l26,2,2,1,S,5,3,0,0.8,0,0,0
+M,일반스킬,MULTISHOT,Ifrit,이프리트스킬2,IfritSkill2,,빙글빙글 도는 투사체를 3방향으로 발사한다.,l27,1,0,1,S,17,1,0,0.8,0,0,0
+M,일반스킬,NORMAL,Ifrit,이프리트스킬3,IfritSkill3,,빠른 화염 투사체를 발사한다.,l28,1,0,1,S,3,4,0,0.7,0.05,0,0
+M,일반스킬,NORMAL,Ifrit,이프리트스킬4,IfritSkill4,,화염검을 만들어 공격한다.,s26,1,0,1,S,11,2,0,0.3,0,0,0
+M,일반스킬,NORMAL,Gargoyle,가고일스킬,GargoyleSkill,,플레이어에게 투사체를 발사합니다.,l29,1,0,1,S,1,1,0,0.16,1,0,0
+M,일반스킬,NORMAL,Wendigo,웬디고스킬1,WendigoSkill1,null,null,s27,1,0,1,S,3,4,0,0,0.25,0,0
+M,일반스킬,NORMAL,Wendigo,웬디고스킬2,WendigoSkill2,null,null,s28,1,0,1,S,5,3,0,0,0.58,0,0
+M,일반스킬,DELAYSHOT,Wendigo,웬디고스킬3,WendigoSkill3,null,null,l30,1,0,1,S,11,2,0,0,2,0,0
+M,일반스킬,RUSH,Wendigo,웬디고스킬4,WendigoSkill4,null,null,s29,1,0,1,S,17,1,0,0.66,0.66,0,8
