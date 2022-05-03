@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4141030613857467847}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.97, y: 0, z: 0}
+  m_LocalPosition: {x: 1.52, y: -0.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 796751285771699024}
@@ -164,6 +164,9 @@ MonoBehaviour:
   mIsRush: 0
   mRushDir: {x: 0, y: 0, z: 0}
   mRushSpeed: 0
+  DEBUG_SKILL_NUMBER: -1
+  mCloseAttackPower: 0
+  mBerserkerModeScale: 0
   mMonsterSkill: []
   mSkillCheckCoolTime: []
 --- !u!114 &7898595611481519134
@@ -193,6 +196,7 @@ MonoBehaviour:
   mSpeed: 0
   mDir: {x: 0, y: 0, z: 0}
   mMoveable: 1
+  mTarget: {fileID: 0}
 --- !u!114 &-8206425112975742552
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,16 +4,16 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -8153528865245898326
-    second: "\u3141\u3134\u3147\u3141\u3134\u3147_0"
+    second: IfritSkill4Projectile_0
   - first:
       213: -4580227421306260860
-    second: "\u3141\u3134\u3147\u3141\u3134\u3147_1"
+    second: IfritSkill4Projectile_1
   - first:
       213: -5841784995935503927
-    second: "\u3141\u3134\u3147\u3141\u3134\u3147_2"
+    second: IfritSkill4Projectile_2
   - first:
       213: 2265603375463856525
-    second: "\u3141\u3134\u3147\u3141\u3134\u3147_3"
+    second: IfritSkill4Projectile_0_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -103,15 +103,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u3141\u3134\u3147\u3141\u3134\u3147_0"
+      name: IfritSkill4Projectile_0
       rect:
         serializedVersion: 2
         x: 90
         y: 113
         width: 46
         height: 176
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -124,15 +124,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u3141\u3134\u3147\u3141\u3134\u3147_1"
+      name: IfritSkill4Projectile_1
       rect:
         serializedVersion: 2
         x: 183
         y: 113
         width: 58
         height: 176
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -145,15 +145,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u3141\u3134\u3147\u3141\u3134\u3147_2"
+      name: IfritSkill4Projectile_2
       rect:
         serializedVersion: 2
         x: 288
         y: 112
         width: 83
         height: 173
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -166,15 +166,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u3141\u3134\u3147\u3141\u3134\u3147_3"
+      name: IfritSkill4Projectile_0_3
       rect:
         serializedVersion: 2
         x: 374
         y: 113
         width: 173
         height: 174
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
