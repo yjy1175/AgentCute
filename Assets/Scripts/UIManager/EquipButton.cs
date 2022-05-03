@@ -32,4 +32,25 @@ public class EquipButton : MonoBehaviour
         get { return mShapeCheckImage; }
         set { mShapeCheckImage = value; }
     }
+    [SerializeField]
+    private GameObject mCommonRank;
+    public GameObject CommonRank
+    {
+        get { return mCommonRank; }
+        set { mCommonRank = value; }
+    }
+    [SerializeField]
+    private GameObject mAdvancedRank;
+    public GameObject AdvancedRank
+    {
+        get { return mAdvancedRank; }
+        set { mAdvancedRank = value; }
+    }
+    [SerializeField]
+    private GameObject mSuperiorRank;
+    public GameObject SuperiorRank
+    {
+        get { return mSuperiorRank; }
+        set { mSuperiorRank = value; }
+    }
 }

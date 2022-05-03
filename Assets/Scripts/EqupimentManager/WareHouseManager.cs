@@ -197,16 +197,30 @@ public class WareHouseManager : MonoBehaviour
                 Sprite newSprite = newList[i].GetComponent<SpriteRenderer>().sprite;
                 string equipName = newList[i].GetComponent<Costume>().Spec.EquipName;
                 string desc = newList[i].GetComponent<Costume>().Spec.EquipDesc;
+                string rank = newList[i].GetComponent<Costume>().Spec.EquipRankDesc;
+                string source = newList[i].GetComponent<Costume>().Spec.EquipSource;
                 int addHp = newList[i].GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerHP);
                 int addSPD = newList[i].GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerSPD);
                 GameObject newButton = Instantiate(
                 mEquipButtonPrefab, Vector3.zero, Quaternion.identity, mCContainer[(int)type].transform);
                 newButton.GetComponent<EquipButton>().UnlockImage.SetActive(newList[i].GetComponent<Costume>().IsLocked);
                 newButton.GetComponent<EquipButton>().Image.GetComponent<Image>().sprite = newSprite;
+                switch (newList[i].GetComponent<Costume>().Spec.Rank)
+                {
+                    case 1:
+                        newButton.GetComponent<EquipButton>().CommonRank.SetActive(true);
+                        break;
+                    case 2:
+                        newButton.GetComponent<EquipButton>().AdvancedRank.SetActive(true);
+                        break;
+                    case 3:
+                        newButton.GetComponent<EquipButton>().SuperiorRank.SetActive(true);
+                        break;
+                }
 
                 mCostumeButtonList.Add(costumeName, newButton);
                 newButton.GetComponent<Button>().onClick.AddListener(() => {
-                    ClickCostumeButton(costumeName, thisType, newSprite, equipName, addHp, addSPD, desc); });
+                    ClickCostumeButton(costumeName, thisType, newSprite, equipName, addHp, addSPD, desc, rank, source); });
             }
         }
 
@@ -223,7 +237,7 @@ public class WareHouseManager : MonoBehaviour
             mCostumeButtonList[currentCostume].GetComponent<EquipButton>().ShapeCheckImage.SetActive(true);
         }
     }
-    private void ClickCostumeButton(string _typeName, EquipmentManager.CostumeTpye _type, Sprite _image, string _name, int _hp, int _addSpeed, string _desc)
+    private void ClickCostumeButton(string _typeName, EquipmentManager.CostumeTpye _type, Sprite _image, string _name, int _hp, int _addSpeed, string _desc, string _rank, string _source)
     {
         mClickedCostumeType = _typeName;
         mCostumeInfoPannel.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = _name;
@@ -239,9 +253,11 @@ public class WareHouseManager : MonoBehaviour
         else
             mCostumeInfoPannel.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = "";
 
+        mCostumeInfoPannel.transform.GetChild(5).GetChild(1).GetComponent<Text>().text = _source;
         mCostumeInfoPannel.transform.GetChild(7).GetChild(0).GetComponent<Text>().text = _desc;
 
         // TODO : 랭크 출력해주기
+        mCostumeInfoPannel.transform.GetChild(8).GetChild(0).GetComponent<Text>().text = _rank;
 
         switch (_type)
         {

@@ -190,7 +190,7 @@ Transform:
   m_GameObject: {fileID: 168804567193401907}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 889260045028832226}
   - {fileID: 4505172265742550073}
@@ -550,19 +550,26 @@ MonoBehaviour:
   mStiffTime: 0
   mRAttackCount: 0
   mPassCount: 0
-  firePosition: {fileID: 6309065481037775889}
+  mFirePosition: {fileID: 0}
   mAutoAttackSpeed: 0
   currentBaseSkill: {fileID: 0}
+  mIsRush: 0
+  mRushDir: {x: 0, y: 0, z: 0}
+  mRushSpeed: 0
   GBtn: {fileID: 0}
   UBtn: {fileID: 0}
+  DBtn: {fileID: 0}
   Mjoystick: {fileID: 0}
   mGeneralSkillImg: {fileID: 0}
   mUltimateSkillImg: {fileID: 0}
+  mDodgeSkillImg: {fileID: 0}
   currentGeneralSkill: {fileID: 0}
   currentUltimateSkill: {fileID: 0}
+  currentDodgeSkill: {fileID: 0}
   mTarget: {x: 0, y: 0, z: 0}
   mGSkillUseable: 1
   mUSkillUseable: 1
+  mDSkillUseable: 1
   mIsGameStart: 0
   mTestDebugText: {fileID: 0}
 --- !u!114 &6309065480427258096
@@ -624,9 +631,11 @@ MonoBehaviour:
   mPlayerMaxExp: 0
   mPlayerGetExp: 0
   mPlayerLevel: 0
+  mPlayerMaxLevel: 0
   mGold: 0
   mGainGold: 0
-  mPlayerCurrentCostume: {fileID: 0}
+  mDiamond: 0
+  mIsFirstDie: 1
 --- !u!114 &6309065480427258093
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -38,13 +38,26 @@ public class CostumeSpec : EquipSpec
         get { return mEquipDesc; }
         set { mEquipDesc = value; }
     }
-
+    [SerializeField]
+    private string mEquipRankDesc;
+    public string EquipRankDesc
+    {
+        get { return mEquipRankDesc; }
+        set { mEquipRankDesc = value; }
+    }
     [SerializeField]
     private int mEquipRank;
     public override int Rank
     {
         get { return mEquipRank; }
         set { mEquipRank = value; }
+    }
+    [SerializeField]
+    private string mEquipSource;
+    public string EquipSource
+    {
+        get { return mEquipSource; }
+        set { mEquipSource = value; }
     }
 #endregion
 }

@@ -141,7 +141,9 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                     item.Spec.TypeName = costumeData[i]["CostumeTypeName"].ToString();
                     item.Spec.EquipName = costumeData[i]["CostumeName"].ToString();
                     item.Spec.EquipDesc = costumeData[i]["CostumeDesc"].ToString();
-                    //item.Spec.Rank = int.Parse(costumeData[i]["CostumeRank "].ToString());
+                    item.Spec.Rank = int.Parse(costumeData[i]["EquipmentRank"].ToString());
+                    item.Spec.EquipRankDesc = costumeData[i]["EquipmentRankDesc"].ToString();
+                    item.Spec.EquipSource = costumeData[i]["EquipmentSource"].ToString();
                     string[] tmp = costumeData[i]["CostumeStatBuff"].ToString().Split('/');
                     for(int idx = 0; idx < tmp.Length; idx++)
                     {

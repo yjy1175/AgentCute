@@ -618,6 +618,9 @@ MonoBehaviour:
   mImage: {fileID: 8550779776534294717}
   mEquipCheckImage: {fileID: 8550779776265287615}
   mShapeCheckImage: {fileID: 3885969446824739733}
+  mCommonRank: {fileID: 8550779777821737302}
+  mAdvancedRank: {fileID: 8550779777630706205}
+  mSuperiorRank: {fileID: 8550779777507487809}
 --- !u!1 &8550779777420513910
 GameObject:
   m_ObjectHideFlags: 0

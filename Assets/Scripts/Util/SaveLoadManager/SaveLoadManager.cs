@@ -66,6 +66,7 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         fileStream = AES.Encrypt(fileStream, AES.key);
 
         File.WriteAllText(path, fileStream);
+        mIsCreate = false;
         return newInfo;
     }
     
@@ -78,6 +79,7 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
             string fileStream = JsonUtility.ToJson(_info, true);
             fileStream = AES.Encrypt(fileStream, AES.key);
             File.WriteAllText(path, fileStream);
+            Debug.Log("데이터 저장");
         }
     }
 

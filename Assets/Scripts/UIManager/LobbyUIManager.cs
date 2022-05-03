@@ -25,6 +25,10 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     [SerializeField]
     private bool mIsOpenSkillPannel = false;
 
+    [Header("스킬정보창")]
+    [SerializeField]
+    private GameObject mSkillInfoPannel;
+
     [Header("업적창")]
     [SerializeField]
     private GameObject mAchivePannel;
@@ -66,6 +70,18 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     private GameObject mSupportItemPannel;
     [SerializeField]
     private GameObject mDeongunStartPannel;
+
+    [Header("플레이어 정보창")]
+    [SerializeField]
+    private GameObject mPlayerInfoPannel;
+    [SerializeField]
+    private bool mIsOpenPlayerInfoPannel = false;
+
+    [Header("BM상점")]
+    [SerializeField]
+    private GameObject mBMPannel;
+    [SerializeField]
+    private bool mIsOpenBMPannel = false;
     #endregion
     void Start()
     {
@@ -110,6 +126,29 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     {
         GamePause();
         mIsOpenSkillPannel = !mIsOpenSkillPannel;
+        if (mIsOpenSkillPannel)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                string weaponType = mSkillPannel.transform.GetChild(i + 5).name;
+                List<GameObject> generalSkill = SkillManager.Instance.FindGeneralSkill(weaponType);
+                for (int j = 0; j < generalSkill.Count; j++)
+                {
+                    mSkillPannel.transform.GetChild(i + 5).GetChild(j + 1).GetChild(0).GetChild(0).GetComponent<Image>().sprite =
+                        Resources.Load<Sprite>("UI/SkillIcon/" + generalSkill[j].name);
+                    mSkillPannel.transform.GetChild(i + 5).GetChild(j + 1).GetChild(1)
+                        .gameObject.SetActive(generalSkill[j].GetComponent<Skill>().Spec.IsLocked);
+                }
+                List<GameObject> ultimateSkill = SkillManager.Instance.FindUltimateSkill(weaponType);
+                for (int j = 0; j < ultimateSkill.Count; j++)
+                {
+                    mSkillPannel.transform.GetChild(i + 5).GetChild(j + 4).GetChild(0).GetChild(0).GetComponent<Image>().sprite =
+                        Resources.Load<Sprite>("UI/SkillIcon/" + ultimateSkill[j].name);
+                    mSkillPannel.transform.GetChild(i + 5).GetChild(j + 4).GetChild(1)
+                        .gameObject.SetActive(ultimateSkill[j].GetComponent<Skill>().Spec.IsLocked);
+                }
+            }
+        }
         mSkillPannel.SetActive(mIsOpenSkillPannel);
     }
     public void ClickAchiveButton()
@@ -172,6 +211,85 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         GamePause();
         mDeongunStartPannel.SetActive(false);
         // TODO : 적용되고있던 던전 버프 삭제
+    }
+    public void ClickPlayerInfoPannel()
+    {
+        mIsOpenPlayerInfoPannel = !mIsOpenPlayerInfoPannel;
+        // 플레이어의 정보 받아오기
+        if (mIsOpenPlayerInfoPannel)
+        {
+            LobbyPlayerInfo info = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info;
+            // TODO : 업적정보 불러오기
+            mPlayerInfoPannel.transform.GetChild(7).GetChild(1).GetComponent<Text>().text 
+                = info.BaseHp.ToString();
+            mPlayerInfoPannel.transform.GetChild(7).GetChild(3).GetComponent<Text>().text 
+                = ((info.BaseATK + info.TrainingATK) * info.TrainingAddDamage).ToString();
+            mPlayerInfoPannel.transform.GetChild(7).GetChild(5).GetComponent<Text>().text 
+                = (info.BaseSPD * info.MoveSpeedRate).ToString();
+
+            if (info.CurrentWeaponName != "")
+                mPlayerInfoPannel.transform.GetChild(8).GetChild(1).GetChild(0).GetComponent<Image>().sprite
+                    = EquipmentManager.Instance.FindWeapon(info.CurrentWeaponName).GetComponent<SpriteRenderer>().sprite;
+            if (info.CurrentCostumeName != "")
+                mPlayerInfoPannel.transform.GetChild(9).GetChild(1).GetChild(0).GetComponent<Image>().sprite
+                    = EquipmentManager.Instance.FindCostume(info.CurrentCostumeName).GetComponent<SpriteRenderer>().sprite;
+            if (info.CurrentCostumeShapeName != "")
+                mPlayerInfoPannel.transform.GetChild(10).GetChild(1).GetChild(0).GetComponent<Image>().sprite
+                    = EquipmentManager.Instance.FindCostume(info.CurrentCostumeShapeName).GetComponent<SpriteRenderer>().sprite;
+        }
+        mPlayerInfoPannel.SetActive(mIsOpenPlayerInfoPannel);
+    }
+    public void ClickSkillButton(string _type)
+    {
+        string weaponType = _type.Substring(0, 2);
+        string skillType = _type.Substring(2, 1);
+        int skillNum = int.Parse(_type.Substring(3, 1));
+        List<GameObject> skillList = null;
+        if(skillType == "g")
+        {
+            skillList = SkillManager.Instance.FindGeneralSkill(weaponType);
+            Skill skill = skillList[skillNum].GetComponent<Skill>();
+            string coolTime = "";
+            mSkillInfoPannel.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().sprite =
+                Resources.Load<Sprite>("UI/SkillIcon/" + skillList[skillNum].name);
+            mSkillInfoPannel.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = skill.Spec.EquipName;
+            for (int i = 0; i < skillList[skillNum].GetComponent<Skill>().Spec.getSkillCoolTime().Count; i++)
+            {
+                coolTime += "[" + skillList[skillNum].GetComponent<Skill>().Spec.getSkillCoolTime()[i] + "초]";
+            }
+            mSkillInfoPannel.transform.GetChild(5).GetChild(0).GetComponent<Text>().text 
+                = skill.Spec.EquipDesc + "\n" + "쿨타임 : " + coolTime;
+        }
+        else
+        {
+            skillList = SkillManager.Instance.FindUltimateSkill(weaponType);
+            Skill skill = skillList[skillNum].GetComponent<Skill>();
+            string coolTime = "";
+            mSkillInfoPannel.transform.GetChild(1).GetChild(0).GetChild(0).GetComponent<Image>().sprite =
+                Resources.Load<Sprite>("UI/SkillIcon/" + skillList[skillNum].name);
+            mSkillInfoPannel.transform.GetChild(4).GetChild(0).GetComponent<Text>().text = skill.Spec.EquipName;
+            for (int i = 0; i < skillList[skillNum].GetComponent<Skill>().Spec.getSkillCoolTime().Count; i++)
+            {
+                coolTime += "[" + skillList[skillNum].GetComponent<Skill>().Spec.getSkillCoolTime()[i] + "초]";
+            }
+            mSkillInfoPannel.transform.GetChild(5).GetChild(0).GetComponent<Text>().text 
+                = skill.Spec.EquipDesc + "\n" + "쿨타임 : " + coolTime;
+        }
+        mSkillInfoPannel.SetActive(true);
+    }
+    public void CloseSkillInfoPannel()
+    {
+        mSkillInfoPannel.SetActive(false);
+    }
+    public void ClickBMButton()
+    {
+        mIsOpenBMPannel = !mIsOpenBMPannel;
+        if (mIsOpenBMPannel)
+        {
+            mBMPannel.transform.GetChild(1).GetChild(1).GetComponent<Text>().text =
+                GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.Diamond.ToString();
+        }
+        mBMPannel.SetActive(mIsOpenBMPannel);
     }
     public void GameExit()
     {

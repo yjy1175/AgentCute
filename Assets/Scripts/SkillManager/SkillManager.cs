@@ -76,6 +76,8 @@ public class SkillManager : SingleToneMaker<SkillManager>
                 item.SkillBuffValue = -1;
             }
 
+            item.Spec.IsLocked = false;
+
         }
     }
 

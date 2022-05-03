@@ -13,6 +13,8 @@ TagManager:
   - Projectile
   - WareHouse
   - StartZone
+  - NPC
+  - Shop
   layers:
   - Default
   - TransparentFX

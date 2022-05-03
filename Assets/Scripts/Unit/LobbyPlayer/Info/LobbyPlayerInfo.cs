@@ -13,7 +13,11 @@ public class LobbyPlayerInfo
     public int BaseHp
     {
         get { return mBaseHp; }
-        set { mBaseHp = value; }
+        set
+        { 
+            mBaseHp = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
     }
 
     [SerializeField]
@@ -21,7 +25,11 @@ public class LobbyPlayerInfo
     public int BaseATK
     {
         get { return mBaseATK; }
-        set { mBaseATK = value; }
+        set 
+        { 
+            mBaseATK = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
     }
 
     [SerializeField]
@@ -29,7 +37,10 @@ public class LobbyPlayerInfo
     public float BaseCriticalChance
     {
         get { return mBaseCriticalChance; }
-        set { mBaseCriticalChance = value; }
+        set 
+        { 
+            mBaseCriticalChance = value;
+        }
     }
 
     [SerializeField]
@@ -45,7 +56,11 @@ public class LobbyPlayerInfo
     public float BaseSPD
     {
         get { return mBaseSPD; }
-        set { mBaseSPD = value; }
+        set 
+        { 
+            mBaseSPD = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
     }
 
     [SerializeField]
@@ -53,7 +68,11 @@ public class LobbyPlayerInfo
     public float BaseATKSPD
     {
         get { return mBaseATKSPD; }
-        set { mBaseATKSPD = value; }
+        set
+        { 
+            mBaseATKSPD = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
     }
     #endregion
     #region TRAINNING_STAT
@@ -85,7 +104,12 @@ public class LobbyPlayerInfo
     public float MoveSpeedRate
     {
         get { return mMoveSpeedRate; }
-        set { mMoveSpeedRate = value; }
+        set 
+        {
+            mMoveSpeedRate = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+            GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerEventHendler>().ChangeMoveSpeed(mBaseSPD * mMoveSpeedRate);
+        }
     }
     #endregion
     #region EQUIP
@@ -133,6 +157,8 @@ public class LobbyPlayerInfo
         { 
             mGold = value;
             SaveLoadManager.Instance.SavePlayerInfoFile(this);
+            if (GameObject.Find("LobbyPlayer") != null)
+                GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerEventHendler>().ChangeGoods(mGold, mDiamond, mStemina);
         }
     }
     [SerializeField]
@@ -144,6 +170,8 @@ public class LobbyPlayerInfo
         {
             mDiamond = value;
             SaveLoadManager.Instance.SavePlayerInfoFile(this);
+            if(GameObject.Find("LobbyPlayer") != null)
+                GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerEventHendler>().ChangeGoods(mGold, mDiamond, mStemina);
         }
     }
     [SerializeField]
@@ -155,6 +183,7 @@ public class LobbyPlayerInfo
         { 
             mStemina = value;
             SaveLoadManager.Instance.SavePlayerInfoFile(this);
+            GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerEventHendler>().ChangeGoods(mGold, mDiamond, mStemina);
         }
     }
     #endregion
