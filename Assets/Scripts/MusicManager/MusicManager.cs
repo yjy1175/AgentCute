@@ -34,10 +34,6 @@ public class MusicManager : SingleToneMaker<MusicManager>
     {
         mAudioClipData = new Dictionary<string, SoundData>();
         mAudioSource = GetComponent<AudioSource>();
-        //sound √÷¿˚»≠
-        mAudioSource.dopplerLevel = 0f;
-        mAudioSource.reverbZoneMix = 0f;
-
         LoadSoundEffect();
     }
 
