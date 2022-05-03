@@ -119,18 +119,18 @@ public abstract class Projectile : MonoBehaviour
                     currentPassCount++;
                     // 현재 관통한 마리수가 정해진 수치보다 커지면 disable
                     if (currentPassCount > (Spec.MaxPassCount + 
-                        (collision.gameObject.CompareTag("Monster") ? GameObject.Find("PlayerObject").GetComponent<IAttack>().PassCount : 0)))
+                        (collision.gameObject.CompareTag("Monster") ? PlayerManager.Instance.Player.GetComponent<IAttack>().PassCount : 0)))
                     {
                         setDisable();
                         ObjectPoolManager.Instance.DisableGameObject(gameObject);
                     }
                 }
                 // 경직 확인
-                float tmpStiffTime = collision.gameObject.CompareTag("Monster") ? GameObject.Find("PlayerObject").GetComponent<IAttack>().StiffTime : 0f;
+                float tmpStiffTime = collision.gameObject.CompareTag("Monster") ? PlayerManager.Instance.Player.GetComponent<IAttack>().StiffTime : 0f;
                 if (Spec.StiffTime + tmpStiffTime > 0)
                 {
                     // 기본공격일 경우
-                    if (Spec.Type == GameObject.Find("PlayerObject").GetComponent<IAttack>().CurrentBaseSkill.Spec.getProjectiles()[0])
+                    if (Spec.Type == PlayerManager.Instance.Player.GetComponent<IAttack>().CurrentBaseSkill.Spec.getProjectiles()[0])
                     {
                         collision.GetComponent<IMove>().StopStiffTime(Spec.StiffTime + tmpStiffTime);
                     }

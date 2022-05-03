@@ -82,7 +82,7 @@ public class MonsterMove : IMove
         if(mTarget != null && mMoveable) { 
             transform.Translate(mDir * mSpeed * Time.deltaTime);
             int size = gameObject.GetComponent<IStatus>().Size;
-            if(gameObject.transform.position.x < GameObject.Find("PlayerObject").transform.position.x)
+            if(gameObject.transform.position.x < PlayerManager.Instance.Player.transform.position.x)
             {
                 gameObject.transform.localScale = new Vector3(size, size, size);
             }

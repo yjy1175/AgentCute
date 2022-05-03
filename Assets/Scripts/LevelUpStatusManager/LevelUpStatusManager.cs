@@ -384,7 +384,7 @@ public class LevelUpStatusManager : SingleToneMaker<LevelUpStatusManager>
             {
                 AllStatList[i].PlusSelectCount();
                 // IStatus¿« api»£√‚
-                GameObject.Find("PlayerObject").GetComponent<IStatus>().LevelUpStatus(AllStatList[i]);
+                PlayerManager.Instance.Player.GetComponent<IStatus>().LevelUpStatus(AllStatList[i]);
                 break;
             }
         }

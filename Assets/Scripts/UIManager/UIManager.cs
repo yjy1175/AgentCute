@@ -313,7 +313,7 @@ public class UIManager : SingleToneMaker<UIManager>
         switch (type)
         {
             case "G":
-                GameObject.Find("PlayerObject").GetComponent<PlayerAttack>().CurrentGeneralSkill = mGeneralSkill[num].GetComponent<Skill>();
+                PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentGeneralSkill = mGeneralSkill[num].GetComponent<Skill>();
                 for(int i = 0; i < mGeneralSkillBtn.Count; i++)
                 {
                     if (i == num)
@@ -324,7 +324,7 @@ public class UIManager : SingleToneMaker<UIManager>
                 mIsGSkillSelect = true;
                 break;
             case "U":
-                GameObject.Find("PlayerObject").GetComponent<PlayerAttack>().CurrentUltimateSkill = mUltimateSkill[num].GetComponent<Skill>();
+                PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentUltimateSkill = mUltimateSkill[num].GetComponent<Skill>();
                 for (int i = 0; i < mUltimateSkill.Count; i++)
                 {
                     if (i == num)

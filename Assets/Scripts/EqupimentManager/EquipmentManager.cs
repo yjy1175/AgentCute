@@ -218,7 +218,7 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
         // 해금이 되어있다면
         if (!cWeapon.IsLocked)
         {
-            GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().PlayerCurrentWeapon = cWeapon;
+            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().PlayerCurrentWeapon = cWeapon;
             SpriteRenderer playerSprite = PlayerManager.Instance.getPlayerWeaponSprite();
             playerSprite.sprite = cWeapon.GetComponent<SpriteRenderer>().sprite;
         }

@@ -164,7 +164,7 @@ public class MapManager : SingleToneMaker<MapManager>
     {
         // 매 프레임마다 플레이어의 위치를 받아온다
         // 추후에 플레이어 매니저를 통하여 받아오도록 수정
-        Vector3 playerPos = GameObject.Find("PlayerObject").transform.position;
+        Vector3 playerPos = PlayerManager.Instance.Player.transform.position;
         // Todo : 플레이어의 위치증감에 따라 맵을 이동시켜주는 로직 구현
         float changeY = playerPos.y - nowPos.y;
         float changeX = playerPos.x - nowPos.x;

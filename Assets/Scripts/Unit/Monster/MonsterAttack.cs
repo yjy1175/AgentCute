@@ -100,7 +100,7 @@ public class MonsterAttack : IAttack
         {
             if (mAutoAttackCheckTime.Equals(0f))
             {
-                GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().CloseDamaged = (int)((float)mCloseAttackPower * BerserkerModeScale);
+                PlayerManager.Instance.Player.GetComponent<PlayerStatus>().CloseDamaged = (int)((float)mCloseAttackPower * BerserkerModeScale);
                 mAutoAttackCheckTime = mAutoAttackSpeed;
             }
         }
@@ -146,7 +146,7 @@ public class MonsterAttack : IAttack
             int priorityValue = 99;
             for (int i = 0; i < md.skillAttackPowerRange.Count; i++)
             {
-                if (Mathf.Abs(Vector3.Distance(GameObject.Find("PlayerObject").transform.position, gameObject.transform.position)) <= md.skillAttackPowerRange[i]
+                if (Mathf.Abs(Vector3.Distance(PlayerManager.Instance.Player.transform.position, gameObject.transform.position)) <= md.skillAttackPowerRange[i]
                         && mSkillCheckCoolTime[i].Equals(0f)
                         && mMonsterSkill[i].GetComponent<Skill>().Spec.SkillPriority < priorityValue)
                 {
@@ -161,7 +161,7 @@ public class MonsterAttack : IAttack
         }
         else if(md.monsterGrade == MonsterManager.MonsterGrade.Range)
         {
-            if (Mathf.Abs(Vector3.Distance(GameObject.Find("PlayerObject").transform.position, gameObject.transform.position)) <= md.skillAttackPowerRange[0]
+            if (Mathf.Abs(Vector3.Distance(PlayerManager.Instance.Player.transform.position, gameObject.transform.position)) <= md.skillAttackPowerRange[0]
                 && mSkillCheckCoolTime[0].Equals(0f))
             {
                 skillNumber = 0;
@@ -219,7 +219,7 @@ public class MonsterAttack : IAttack
 
         //5. 스킬발사
         FireSkillLaunchType(skillLaunchType, skill, skill.Spec.SkillCount,
-                            GameObject.Find("PlayerObject").transform.position, mFirePosition.transform.position, false, skill.Spec.SkillStopTime);
+                            PlayerManager.Instance.Player.transform.position, mFirePosition.transform.position, false, skill.Spec.SkillStopTime);
         mIsUsingSkill = true;
 
         if (DEBUG)

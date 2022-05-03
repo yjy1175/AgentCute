@@ -272,7 +272,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         _monster.GetComponent<BoxCollider2D>().isTrigger = false;
 
         //TO-DO : monster가 생기는 event를 유저가 구독하여 hp register는 Player에서 구독하도록 변경이 필요.
-        _monster.GetComponent<MonsterEventHandler>().registerHpObserver(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().registerMonsterHp);
+        _monster.GetComponent<MonsterEventHandler>().registerHpObserver(PlayerManager.Instance.Player.GetComponent<PlayerStatus>().registerMonsterHp);
 
         _monster.SetActive(true);
         allMonsterCount++;
