@@ -203,7 +203,7 @@ public class MonsterAttack : IAttack
         gameObject.GetComponent<MonsterStatus>().BaseDamage = (int)((float)md.skillAttackPower[_skillNum] * BerserkerModeScale);
 
         //2. 스킬 사용시 멈춤설정
-        gameObject.GetComponent<IMove>().MMoveable = false;
+        gameObject.GetComponent<IMove>().Moveable = false;
 
         if (DEBUG)
             Debug.Log(gameObject.name + " 대기시간" + skill.Spec.SkillStartTime);
@@ -234,7 +234,7 @@ public class MonsterAttack : IAttack
 
         //7. 다시 움직이는 애니메이션 동작
         transform.GetComponent<Animator>().SetTrigger("Walk");
-        gameObject.GetComponent<IMove>().MMoveable = true;
+        gameObject.GetComponent<IMove>().Moveable = true;
         mIsUsingSkill = false;
     }
 

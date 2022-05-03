@@ -205,12 +205,12 @@ public class PlayerAttack : IAttack
                 break;
         }
         if(_skill.gameObject.name != "Exalted Sword")
-            GetComponent<PlayerMove>().MMoveable = false;
+            GetComponent<PlayerMove>().Moveable = false;
         GetComponent<PlayerMove>().MAnim.SetFloat("AttackState", 0f);
         GetComponent<PlayerMove>().MAnim.SetFloat("NormalState", num);
         GetComponent<PlayerMove>().MAnim.SetTrigger("Attack");
         yield return new WaitForSeconds(_skill.Spec.SkillStopTime); // Todo : 추후에 스킬 데이터에서 대기시간을 받아 입력 
-        GetComponent<PlayerMove>().MMoveable = true;
+        GetComponent<PlayerMove>().Moveable = true;
     }
 
     private void useSkill(GameObject _btn, Skill _skill)
