@@ -31,6 +31,20 @@ public class LobbyPlayerMove : MonoBehaviour
     {
         get { return mIsTriggerInStartZone; }
     }
+
+    [SerializeField]
+    private bool mIsTriggerInSupplyZone;
+    public bool IsTriggerInSupplyZone
+    {
+        get { return mIsTriggerInSupplyZone; }
+    }
+
+    [SerializeField]
+    private bool mIsTriggerInTrainingZone;
+    public bool IsTriggerInTrainingZone
+    {
+        get { return mIsTriggerInTrainingZone; }
+    }
     void Awake()
     {
         mMoveable = true;
@@ -104,11 +118,25 @@ public class LobbyPlayerMove : MonoBehaviour
         {
             mIsTriggerInWareHouse = true;
             mInteractionText.text = "창고 열기";
+            mInteractionText.color = Color.red;
         }
         if (collision.CompareTag("StartZone"))
         {
             mIsTriggerInStartZone = true;
             mInteractionText.text = "던전 입장";
+            mInteractionText.color = Color.red;
+        }
+        if (collision.CompareTag("NPC"))
+        {
+            mIsTriggerInTrainingZone = true;
+            mInteractionText.text = "훈련 하기";
+            mInteractionText.color = Color.red;
+        }
+        if (collision.CompareTag("Shop"))
+        {
+            mIsTriggerInSupplyZone = true;
+            mInteractionText.text = "보급품 구매";
+            mInteractionText.color = Color.red;
         }
     }
 
@@ -118,11 +146,25 @@ public class LobbyPlayerMove : MonoBehaviour
         {
             mIsTriggerInWareHouse = false;
             mInteractionText.text = "상호 작용";
+            mInteractionText.color = Color.white;
         }
         if (collision.CompareTag("StartZone"))
         {
             mIsTriggerInStartZone = false;
             mInteractionText.text = "상호 작용";
+            mInteractionText.color = Color.white;
+        }
+        if (collision.CompareTag("NPC"))
+        {
+            mIsTriggerInTrainingZone = false;
+            mInteractionText.text = "상호 작용";
+            mInteractionText.color = Color.white;
+        }
+        if (collision.CompareTag("Shop"))
+        {
+            mIsTriggerInSupplyZone = false;
+            mInteractionText.text = "상호 작용";
+            mInteractionText.color = Color.white;
         }
     }
 }

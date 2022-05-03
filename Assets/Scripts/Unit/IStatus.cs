@@ -437,7 +437,6 @@ public abstract class IStatus : MonoBehaviour
             {
                 currentDir = Vector3.right;
             }
-            Debug.Log(currentDir);
             currentDir = (currentDir - transform.position).normalized * value;
             RaycastHit2D ray = Physics2D.Raycast(
                 new Vector2(transform.position.x + currentDir.x, transform.position.y + currentDir.y),

@@ -82,6 +82,22 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     private GameObject mBMPannel;
     [SerializeField]
     private bool mIsOpenBMPannel = false;
+
+    [Header("보급품상점")]
+    [SerializeField]
+    private GameObject mSupplyShopPannel;
+    [SerializeField]
+    private bool mIsOpenSupplyShopPannel = false;
+    [SerializeField]
+    private GameObject mBuyAlertPannel;
+    [SerializeField]
+    private List<GameObject> mGoodsImageList = new List<GameObject>();
+    [SerializeField]
+    private List<int> mPriceList = new List<int>();
+    [SerializeField]
+    private int mBuyNum;
+    [SerializeField]
+    private GameObject mBoxAnimationPannel;
     #endregion
     void Start()
     {
@@ -178,7 +194,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     public void ClickInteractionButton()
     {
         LobbyPlayerMove player = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerMove>();
-        // 플레이어가 창고와 상호작용대기중이라면
+        // 플레이어가 창고와 상호작용대기중 이라면
         if (player.IsTriggerInWareHouse)
         {
             GamePause();
@@ -190,6 +206,12 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         {
             GamePause();
             mSupportItemPannel.SetActive(true);
+        }
+        // 플레이어가 보급품교관과 상호작용 대기중 이라면
+        if (player.IsTriggerInSupplyZone)
+        {
+            GamePause();
+            mSupplyShopPannel.SetActive(true);
         }
     }
     public void ClickAdvButton(bool _ok)
@@ -211,6 +233,69 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         GamePause();
         mDeongunStartPannel.SetActive(false);
         // TODO : 적용되고있던 던전 버프 삭제
+    }
+    public void CloseSupplyShopPannel()
+    {
+        GamePause();
+        mSupplyShopPannel.SetActive(false);
+    }
+    public void ClickBuyAlertButton(int _num)
+    {
+        mBuyNum = _num;
+        mBuyAlertPannel.transform.GetChild(4).GetChild(0).GetComponent<Image>().sprite =
+            mGoodsImageList[_num].GetComponent<Image>().sprite;
+
+        mBuyAlertPannel.SetActive(true);
+    }
+    public void CloseBuyAlertButton()
+    {
+        mBuyAlertPannel.SetActive(false);
+    }
+    public void ClickBuyButton()
+    {
+        LobbyPlayerInfo info = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info;
+        // 애니메이션 불필요(스테미나)
+        if (mBuyNum == 2)
+        {
+            if(info.Diamond >= mPriceList[mBuyNum])
+            {
+                info.Diamond -= mPriceList[mBuyNum];
+                info.Stemina += 3;
+                CloseBuyAlertButton();
+                // 구매확인 창 띄우기
+            }
+            // 구매 불가능
+            else
+            {
+                OpenAlertEnterPannel("다이아가 부족합니다.");
+            }
+        }
+        // 애니메이션 필요
+        else
+        {
+            if (info.Diamond >= mPriceList[mBuyNum])
+            {
+                info.Diamond -= mPriceList[mBuyNum];
+                CloseBuyAlertButton();
+                StartCoroutine(BoxAnimaion());
+            }
+            // 구매 불가능
+            else
+            {
+                OpenAlertEnterPannel("다이아가 부족합니다.");
+            }
+        }
+    }
+    IEnumerator BoxAnimaion()
+    {
+        GamePause();
+        mBoxAnimationPannel.SetActive(true);
+        mBoxAnimationPannel.transform.GetChild(mBuyNum).gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.8f);
+        mBoxAnimationPannel.transform.GetChild(mBuyNum).gameObject.SetActive(false);
+        mBoxAnimationPannel.SetActive(false);
+        GamePause();
+        // 구매확인 창 띄우기
     }
     public void ClickPlayerInfoPannel()
     {
