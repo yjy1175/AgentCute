@@ -72,7 +72,11 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         // 장비, 외형 입히기(코스튬은 입힐 필요 X)
         EquipmentManager.Instance.ChangeWeapon(loadInfo.WarWeaponName);
         EquipmentManager.Instance.ChangeCostume(loadInfo.WarCostumeShapeName);
-
+        if (mPlayer.GetComponent<PlayerStatus>().PlayerCurrentWeapon.name.Substring(0, 2) == "sw" ||
+            mPlayer.GetComponent<PlayerStatus>().PlayerCurrentWeapon.name.Substring(0, 2) == "sp")
+        {
+            mPlayer.GetComponent<IStatus>().AttackSpeed = 1f;
+        }
         // 스킬 셋 UI로 불러오기
         UIManager.Instance.SkillSelectUILoad(loadInfo.WarWeaponName.Substring(0, 2));
     }
