@@ -6,7 +6,10 @@ using System;
 
 public class SpawnManager : SingleToneMaker<SpawnManager>
 {
-    private bool DEBUG = true;
+    private bool DEBUG = false;
+
+    //CSVFile/SpawnData.csv 데이터 저장용 구조체 
+    //몬스터 spawnRule 정보
     public struct SpawnData
     {
         public int Id;
@@ -20,16 +23,23 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         public float spawnTime;
         public float currentTime;
     }
+
+    //CSVFile/Wave.csv 데이터 저장용 구조체 
+    //Wave별 몬스터 증가 stat정보
     public struct WaveData
     {
         public float hpScale;
         public float speedUp;
     }
 
+    //CSVFile/BossBerserkerData.csv 데이터 저장용 구조체 
+    //보스몬스터 버서커모드 관련 정보
     public struct BerserkerData
     {
         public int bossLimitTime;
+        //보스몬스터 속도 배수
         public float speedUp;
+        //보스몬스터 공격력 배수
         public float powerUp;
     }
 
@@ -46,10 +56,11 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     [SerializeField]
     private float currentTime = 0f;
 
+    //다음에 나올 보스번호 체크 & WaveNumber
     [SerializeField]
     private int mBossNum = 0;
 
-
+    //TO-DO UI쪽에서 관리하도록 수정필요
     IEnumerator bossMessageCoroutine;
     IEnumerator waveMessageCoroutine;
 
@@ -69,6 +80,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     [SerializeField]
     private MapManager.MapType mMapType;
 
+    //spawn룰에 관련된 멤버 변수
     [SerializeField]
     private Transform[] mMonsterArea;
     [SerializeField]
@@ -126,6 +138,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         }
     }
 
+    /*
+    spawnzone 체크용 디버그 gizmos
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -134,12 +148,14 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             Gizmos.DrawWireCube(mMonsterArea[i].position, mMonsterAreadSize);
         }
     }
+    */
     private void SpawnMonster()
     {
         SpawnNormalMonster();
         SpawnBossMonster();
     }
 
+    //NormalMonster 스폰
     private void SpawnNormalMonster()
     {
         //노멀몹 스폰
@@ -169,6 +185,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         }
     }
 
+
+    //보스몬스터 스폰
     private void SpawnBossMonster()
     {
         if (mBossNum < mDataSetBoss.Count && mDataSetBoss[mBossNum].realStartSpawnTime < currentTime)
@@ -180,7 +198,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                 GameObject obj = GameObject.Find("ObjectPoolSet").transform.GetChild(i).gameObject;
                 for(int j=0;j< mDataSetNormal.Count; j++)
                 {
-                    if (mDataSetNormal[j].spawnMonster.Equals(obj.name))
+                    if (obj.activeInHierarchy && mDataSetNormal[j].spawnMonster.Equals(obj.name))
                     {
                         ObjectPoolManager.Instance.DisableGameObject(obj);
                     }
@@ -222,46 +240,42 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         }
     }
 
-
-    private void SpawnMonsterSet(ref GameObject monster, Vector3 _vec)
+    //스폰전 몬스터 status 설정
+    private void SpawnMonsterSet(ref GameObject _monster, Vector3 _pos)
     {
-        MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(monster.name);
+        MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(_monster.name);
         if(md.monsterGrade == MonsterManager.MonsterGrade.Boss)
         {
-            monster.GetComponent<MonsterStatus>().Hp = md.monsterHp;
-            monster.GetComponent<MonsterStatus>().MaxHP = md.monsterHp;
-            
+            _monster.GetComponent<MonsterStatus>().Hp = md.monsterHp;
+            _monster.GetComponent<MonsterStatus>().MaxHP = md.monsterHp;
+            _monster.GetComponent<MonsterStatus>().MoveSpeed = md.monsterSpeed;
+
         }
         else {
-            monster.GetComponent<MonsterStatus>().Hp = (int)((float)md.monsterHp * mDataSetWave[mBossNum].hpScale);
-            monster.GetComponent<MonsterStatus>().MaxHP = (int)((float)md.monsterHp * mDataSetWave[mBossNum].hpScale);
+            _monster.GetComponent<MonsterStatus>().Hp = (int)((float)md.monsterHp * mDataSetWave[mBossNum].hpScale);
+            _monster.GetComponent<MonsterStatus>().MaxHP = (int)((float)md.monsterHp * mDataSetWave[mBossNum].hpScale);
+            _monster.GetComponent<MonsterStatus>().MoveSpeed = md.monsterSpeed + mDataSetWave[mBossNum].speedUp;
         }
 
-        monster.GetComponent<MonsterStatus>().Size = md.monsterSize;
-        monster.GetComponent<MonsterStatus>().MonsterGrade= md.monsterGrade;
-        monster.GetComponent<MonsterStatus>().MonsterInName = md.monsterInName;
-        monster.GetComponent<MonsterAttack>().CloseAttackPower = md.closeAttackPower;
+        _monster.GetComponent<MonsterStatus>().Size = md.monsterSize;
+        _monster.GetComponent<MonsterStatus>().MonsterGrade= md.monsterGrade;
+        _monster.GetComponent<MonsterStatus>().MonsterInName = md.monsterInName;
+        _monster.GetComponent<MonsterAttack>().CloseAttackPower = md.closeAttackPower;
+        _monster.GetComponent<MonsterStatus>().MoveSpeedRate = 1f;
+        _monster.GetComponent<MonsterStatus>().mIsDieToKillCount = false;
+        _monster.GetComponent<MonsterStatus>().mIsDieToGetExp = false;
+        _monster.transform.position = _pos;
 
-        if (md.monsterGrade != MonsterManager.MonsterGrade.Boss)
-            monster.GetComponent<MonsterStatus>().MoveSpeed = md.monsterSpeed + mDataSetWave[mBossNum].speedUp;
-        else
-            monster.GetComponent<MonsterStatus>().MoveSpeed = md.monsterSpeed;
-
-        monster.GetComponent<MonsterStatus>().MoveSpeedRate = 1f;
-        monster.GetComponent<MonsterStatus>().mIsDieToKillCount = false;
-        monster.GetComponent<MonsterStatus>().mIsDieToGetExp = false;
-        monster.transform.position = _vec;
         //TO-DO : monster가 생기는 event를 유저가 구독하여 hp register는 Player에서 구독하도록 변경이 필요.
-        monster.GetComponent<MonsterEventHandler>().registerHpObserver(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().registerMonsterHp);
+        _monster.GetComponent<MonsterEventHandler>().registerHpObserver(GameObject.Find("PlayerObject").GetComponent<PlayerStatus>().registerMonsterHp);
 
-        monster.SetActive(true);
+        _monster.SetActive(true);
         allMonsterCount++;
     }
 
     //swap존 초기화
     private void InitSwapZone()
     {
-
         mMonsterAreaNum = new List<int>() { 0, 0, 0, 0 };
         mSpawnPoints = new Transform[GameObject.Find("SwapZone").transform.childCount, GameObject.Find("Zone0").transform.childCount];
         mMonsterArea = GameObject.Find("MonsterCountCheckObject").transform.GetComponentsInChildren<Transform>();
@@ -273,6 +287,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             }
         }
     }
+
+    //Wave데이터 저장
     private void InitWaveData()
     {
         mDataSetWave = new List<WaveData>();
@@ -285,6 +301,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             mDataSetWave.Add(ws);
         }
     }
+
+    //BerserkerData 저장
 
     private void InitBerserkerData()
     {
@@ -302,9 +320,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         }
     }
 
-
-
-
+    //스폰 데이터 저장
     public void InitAllSpawnData()
     {
         mMapType = MapManager.Instance.CurrentMapType;
@@ -344,7 +360,9 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             }
         }
     }
-    private List<Transform> GetRandomZoneList(int cnt)
+
+    //return : cnt개수만큼 몬스터수가 적은 Zone에서 spawn
+    private List<Transform> GetRandomZoneList(int _cnt)
     {
         //mMonsterAreaNum에서 몬스터가 가장 적은 위치 체크
         //해당 위치에서 랜덤으로 스폰
@@ -370,7 +388,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         //모든 스폰존에서 생성이 안될수도 있기때문에 infiniteCheck
         int infiniteCheck = 0;
 
-        while (randomList.Count < cnt && infiniteCheck < 100)
+        while (randomList.Count < _cnt && infiniteCheck < 100)
         {
             int idx = UnityEngine.Random.Range(0, zoneLength);
             if (mSpawnPoints[nextSpawnIdx,idx].GetComponent<SpawnZone>().Spawnable)
@@ -382,7 +400,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         return randomList;
     }
 
-    
+    //보스 버서커모드 대기 코루틴
     IEnumerator BossWaitBerserkerMode (GameObject _obj)
     {
         BerserkerData ws;
@@ -403,7 +421,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
     }
     
-
+    //TO-DO 보스몬스터 체력을 보여주는 UI, UIManager등에서 관리하도록 수정이 필요한지 고민필요
     public void registerBossHp(int _hp, GameObject _obj)
     {
         if (_hp <= 0)
