@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 39544442780625130}
   - component: {fileID: -8094032900918453460}
   - component: {fileID: 7686159744258887503}
+  - component: {fileID: -5408674285048626043}
   m_Layer: 6
   m_Name: Yeti3
   m_TagString: Monster
@@ -164,6 +165,9 @@ MonoBehaviour:
   mIsRush: 0
   mRushDir: {x: 0, y: 0, z: 0}
   mRushSpeed: 0
+  DEBUG_SKILL_NUMBER: -1
+  mCloseAttackPower: 0
+  mBerserkerModeScale: 0
   mMonsterSkill: []
   mSkillCheckCoolTime: []
 --- !u!114 &-7620291158312932702
@@ -193,6 +197,7 @@ MonoBehaviour:
   mSpeed: 0
   mDir: {x: 0, y: 0, z: 0}
   mMoveable: 1
+  mTarget: {fileID: 0}
 --- !u!114 &-1146297494041188265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,3 +304,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.90340185, y: 1.2872112}
   m_EdgeRadius: 0
+--- !u!114 &-5408674285048626043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212679277510218074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79dfd30061627c3409a70b92298b1998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 2098226601987042156}
   - component: {fileID: -5998295802262379926}
   - component: {fileID: -353672297656871123}
+  - component: {fileID: 3375711409836357071}
   m_Layer: 6
   m_Name: Ifrit2
   m_TagString: Monster
@@ -158,10 +159,17 @@ MonoBehaviour:
   mStiffTime: 0
   mRAttackCount: 0
   mPassCount: 0
-  firePosition: {fileID: 0}
+  mFirePosition: {fileID: 0}
   mAutoAttackSpeed: 0
   currentBaseSkill: {fileID: 0}
+  mIsRush: 0
+  mRushDir: {x: 0, y: 0, z: 0}
+  mRushSpeed: 0
+  DEBUG_SKILL_NUMBER: -1
+  mCloseAttackPower: 0
+  mBerserkerModeScale: 0
   mMonsterSkill: []
+  mSkillCheckCoolTime: []
 --- !u!114 &5096182040752821666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +197,7 @@ MonoBehaviour:
   mSpeed: 0
   mDir: {x: 0, y: 0, z: 0}
   mMoveable: 1
+  mTarget: {fileID: 0}
 --- !u!114 &8277157987878350448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,3 +304,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9112346, y: 1.326375}
   m_EdgeRadius: 0
+--- !u!114 &3375711409836357071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4889788392028379908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79dfd30061627c3409a70b92298b1998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
