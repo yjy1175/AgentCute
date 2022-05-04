@@ -204,6 +204,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     public void ClickInteractionButton()
     {
         LobbyPlayerMove player = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerMove>();
+        LobbyPlayerInfo info = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info;
         // 플레이어가 창고와 상호작용대기중 이라면
         if (player.IsTriggerInWareHouse)
         {
@@ -214,8 +215,15 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         // 플레이어가 던전 입구와 상호작용 대기중 이라면
         if (player.IsTriggerInStartZone)
         {
-            GamePause();
-            mSupportItemPannel.SetActive(true);
+            if(info.CurrentWeaponName == "" || info.CurrentCostumeName == "")
+            {
+                OpenAlertEnterPannel("무기와 코스튬을 장착하지 않으면 던전에 입장할 수 없습니다.");
+            }
+            else
+            {
+                GamePause();
+                mSupportItemPannel.SetActive(true);
+            }
         }
         // 플레이어가 보급품교관과 상호작용 대기중 이라면
         if (player.IsTriggerInSupplyZone)
@@ -480,5 +488,43 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
 #else
          Application.Quit();
 #endif
+    }
+
+
+    // 테스트용
+    public void ClickUnlock()
+    {
+        LobbyPlayerInfo mInfo = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info;
+        List<string> nameList = new List<string>();
+        // 무기 해금 정보 수정
+        foreach (string key in mInfo.Weaponlock.Keys)
+        {
+            nameList.Add(key);
+            EquipmentManager.Instance.FindWeapon(key).GetComponent<Weapon>().IsLocked = false;
+            WareHouseManager.Instance.ChangeWeaponUnlock(key, false);
+        }
+        for (int i = 0; i < nameList.Count; i++)
+            mInfo.Weaponlock[nameList[i]] = false;
+        nameList.Clear();
+        // 코스튬 해금 정보 수정
+        foreach (string key in mInfo.Costumelock.Keys)
+        {
+            nameList.Add(key);
+            EquipmentManager.Instance.FindCostume(key).GetComponent<Costume>().IsLocked = false;
+            WareHouseManager.Instance.ChangeCostumeUnlock(key, false);
+        }
+        for (int i = 0; i < nameList.Count; i++)
+            mInfo.Costumelock[nameList[i]] = false;
+        nameList.Clear();
+        // 스킬 해금 정보 수정
+        foreach (string key in mInfo.Skilllock.Keys)
+        {
+            nameList.Add(key);
+            SkillManager.Instance.FindSkill(key).GetComponent<Skill>().Spec.IsLocked = false;
+        }
+        for (int i = 0; i < nameList.Count; i++)
+            mInfo.Skilllock[nameList[i]] = false;
+        nameList.Clear();
+        OpenAlertEnterPannel("모든 장비, 스킬이 해금되었습니다.");
     }
 }

@@ -440,7 +440,7 @@ public abstract class IStatus : MonoBehaviour
             currentDir = (currentDir - transform.position).normalized * value;
             RaycastHit2D ray = Physics2D.Raycast(
                 new Vector2(transform.position.x + currentDir.x, transform.position.y + currentDir.y),
-                Vector3.zero, LayerMask.GetMask("Tilemap"));
+                Vector3.zero, 1f, LayerMask.GetMask("Tilemap"));
             // 벽이 없으면 순간이동
             if(ray.collider == null)
             {
@@ -483,7 +483,8 @@ public abstract class IStatus : MonoBehaviour
                 {
                     RaycastHit2D ray = Physics2D.Raycast(
                         transform.position + (transform.position - projectile.transform.position).normalized * (GetComponent<BoxCollider2D>().size.x * projectile.Spec.Knockback),
-                        Vector2.zero, 
+                        Vector2.zero,
+                        1f,
                         LayerMask.GetMask("Tilemap"));
                     if(ray.collider == null)
                     {

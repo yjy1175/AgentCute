@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class WareHouseManager : MonoBehaviour
+public class WareHouseManager : SingleToneMaker<WareHouseManager>
 {
     [SerializeField]
     private GameObject mEquipButtonPrefab;
@@ -195,6 +195,8 @@ public class WareHouseManager : MonoBehaviour
     // 무기 해금 정보 변경 시
     public void ChangeWeaponUnlock(string _name, bool _locked)
     {
+        if (_name == "WS00")
+            return;
         GameObject btn = mWeaponButtonList[_name];
         btn.GetComponent<EquipButton>().UnlockImage.SetActive(_locked);
     }

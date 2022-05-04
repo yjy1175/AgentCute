@@ -74,6 +74,7 @@ public class DeongunStartManager : MonoBehaviour
             mWarInfo.WarCostumeName = playerData.CurrentCostumeName;
             mWarInfo.WarCostumeShapeName = playerData.CurrentCostumeShapeName;
             mWarInfo.WarBuff = currentBuffType;
+            mWarInfo.WarSkillLock = playerData.Skilllock;
             SaveLoadManager.Instance.SavePlayerWarData(mWarInfo);
             // 스테미너 감소
             playerData.Stemina--;

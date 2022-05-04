@@ -81,4 +81,13 @@ public class WarInfo
         get { return mWarBuff; }
         set { mWarBuff = value; }
     }
+
+    // 전투 씬에 보낼 스킬 해금 정보
+    [SerializeField]
+    private StringBoolean mWarSkillLock;
+    public StringBoolean WarSkillLock
+    {
+        get { return mWarSkillLock; }
+        set { mWarSkillLock = value; }
+    }
 }

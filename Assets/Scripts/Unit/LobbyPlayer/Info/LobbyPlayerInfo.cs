@@ -239,7 +239,7 @@ public class LobbyPlayerInfo
     {
         get { return mSkilllock; }
         set
-        {
+        { 
             mSkilllock = value;
             SaveLoadManager.Instance.SavePlayerInfoFile(this);
         }

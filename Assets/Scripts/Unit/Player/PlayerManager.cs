@@ -77,6 +77,11 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         {
             mPlayer.GetComponent<IStatus>().AttackSpeed = 1f;
         }
+        // 스킬 해금 정보 불러오기
+        foreach (string key in loadInfo.WarSkillLock.Keys)
+        {
+            SkillManager.Instance.FindSkill(key).GetComponent<Skill>().Spec.IsLocked = loadInfo.WarSkillLock[key];
+        }
         // 스킬 셋 UI로 불러오기
         UIManager.Instance.SkillSelectUILoad(loadInfo.WarWeaponName.Substring(0, 2));
     }

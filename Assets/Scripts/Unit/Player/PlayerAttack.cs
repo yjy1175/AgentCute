@@ -142,7 +142,8 @@ public class PlayerAttack : IAttack
         PushProjectile(CurrentBaseSkill);
         PushProjectile(CurrentDodgeSkill);
         PushProjectile(CurrentGeneralSkill);
-        PushProjectile(CurrentUltimateSkill);
+        if(CurrentUltimateSkill != null)
+            PushProjectile(CurrentUltimateSkill);
         createObjectPool();
         mIsGameStart = true;
     }
@@ -166,7 +167,7 @@ public class PlayerAttack : IAttack
     }
     public void clickUltimateSkillBtn()
     {
-        if (mUSkillUseable)
+        if (mUSkillUseable && CurrentUltimateSkill != null)
         {
             mUSkillUseable = false;
             useSkill(UBtn, CurrentUltimateSkill);
