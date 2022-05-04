@@ -20,3 +20,6 @@ public class CstBuffTypeValue : SerializableDictionary<Costume.CostumeBuffType, 
 [System.Serializable]
 public class MonsterDataSet : SerializableDictionary<string, MonsterManager.MonsterData> { }
 
+[System.Serializable]
+public class TrainingSet : SerializableDictionary<TrainingManager.TrainingType, TrainingManager.Training> { }
+

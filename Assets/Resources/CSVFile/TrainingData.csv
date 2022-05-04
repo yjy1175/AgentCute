@@ -1,0 +1,5 @@
+StatusType,StatusDesc,StatusIncrease,StatusMax,StatusCostIncrease,StatusCostMin,StatusPriorType,StatusUnit,StatusDescENG,StatusDescJPN
+PlayerHp,체력 +,1,12,150,100,None,,HP +,HP +
+PlayerATK,공격력 +,1,12,150,100,None,,ATK +,ATK +
+PlayerDamage,피해량 +,3,15,300,200,None,%,Damage +,ダメ?ジ +
+PlayerDamageZ,피해량 +,5,5,0,5500,PlayerDamage,%,Damage +,ダメ?ジ +

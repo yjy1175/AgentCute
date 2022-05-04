@@ -5,6 +5,7 @@ using UnityEditor;
 using System.Reflection;
 using System;
 
+[CustomPropertyDrawer(typeof(TrainingSet))]
 [CustomPropertyDrawer(typeof(MonsterDataSet))]
 [CustomPropertyDrawer(typeof(CstBuffTypeValue))]
 [CustomPropertyDrawer(typeof(TypeSprite))]

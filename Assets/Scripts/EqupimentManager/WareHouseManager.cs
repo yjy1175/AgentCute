@@ -73,8 +73,9 @@ public class WareHouseManager : MonoBehaviour
     // 무기 데이터 로드
     private void initWeaponButtonList()
     {
+        mWeaponButtonList.Clear();
         // 장비매니저에서 해당 타입의 장비를 받아와 버튼을 만들어 넣어준다.
-        for(EquipmentManager.WeaponType type = EquipmentManager.WeaponType.sw; 
+        for (EquipmentManager.WeaponType type = EquipmentManager.WeaponType.sw; 
             type < EquipmentManager.WeaponType.Exit; type++)
         {
             List<GameObject> newList = EquipmentManager.Instance.FindWepaonList(type.ToString());
@@ -126,41 +127,51 @@ public class WareHouseManager : MonoBehaviour
     public void ClickChangeWeapon()
     {
         CloseWeaponInfoPannel();
+        string costumeType = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentCostumeName;
         if (EquipmentManager.Instance.CheckUnlockWeapon(mClickedWeaponType))
         {
-            // 장착 판넬 띄우기
-            string currentWeapon = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentWeaponName;
-            if (currentWeapon != "")
+            // 현재 장착한 코스튬 정보 확인
+            if(costumeType == "" || costumeType.Substring(3, costumeType.Length - 5).Contains(mClickedWeaponType.Substring(0, 2)))
             {
-                GameObject curWeapon = EquipmentManager.Instance.FindWeapon(currentWeapon);
-                mWeaponChangePannel.transform.GetChild(3).GetChild(1).GetChild(0).GetComponent<Text>().text
-                    = curWeapon.GetComponent<Weapon>().Spec.EquipName;
-                mWeaponChangePannel.transform.GetChild(3).GetChild(2).GetChild(0).GetComponent<Image>().sprite
-                    = curWeapon.GetComponent<SpriteRenderer>().sprite;
-                mWeaponChangePannel.transform.GetChild(3).GetChild(3).GetChild(0).GetComponent<Text>().text
-                    = "ATK : +" + curWeapon.GetComponent<Weapon>().Spec.WeaponDamage;
-                if (curWeapon.GetComponent<Weapon>().Spec.WeaponAddSpeed > 0)
-                    mWeaponChangePannel.transform.GetChild(3).GetChild(4).GetChild(0).GetComponent<Text>().text
-                        = "SPD : +" + (curWeapon.GetComponent<Weapon>().Spec.WeaponAddSpeed * 100).ToString() + "%";
+                // 장착 판넬 띄우기
+                string currentWeapon = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentWeaponName;
+                if (currentWeapon != "")
+                {
+                    GameObject curWeapon = EquipmentManager.Instance.FindWeapon(currentWeapon);
+                    mWeaponChangePannel.transform.GetChild(3).GetChild(1).GetChild(0).GetComponent<Text>().text
+                        = curWeapon.GetComponent<Weapon>().Spec.EquipName;
+                    mWeaponChangePannel.transform.GetChild(3).GetChild(2).GetChild(0).GetComponent<Image>().sprite
+                        = curWeapon.GetComponent<SpriteRenderer>().sprite;
+                    mWeaponChangePannel.transform.GetChild(3).GetChild(3).GetChild(0).GetComponent<Text>().text
+                        = "ATK : +" + curWeapon.GetComponent<Weapon>().Spec.WeaponDamage;
+                    if (curWeapon.GetComponent<Weapon>().Spec.WeaponAddSpeed > 0)
+                        mWeaponChangePannel.transform.GetChild(3).GetChild(4).GetChild(0).GetComponent<Text>().text
+                            = "SPD : +" + (curWeapon.GetComponent<Weapon>().Spec.WeaponAddSpeed * 100).ToString() + "%";
+                    else
+                        mWeaponChangePannel.transform.GetChild(3).GetChild(4).GetChild(0).GetComponent<Text>().text = "";
+                }
+
+                GameObject newWeapon = EquipmentManager.Instance.FindWeapon(mClickedWeaponType);
+
+                mWeaponChangePannel.transform.GetChild(4).GetChild(1).GetChild(0).GetComponent<Text>().text
+                    = newWeapon.GetComponent<Weapon>().Spec.EquipName;
+                mWeaponChangePannel.transform.GetChild(4).GetChild(2).GetChild(0).GetComponent<Image>().sprite
+                    = newWeapon.GetComponent<SpriteRenderer>().sprite;
+                mWeaponChangePannel.transform.GetChild(4).GetChild(3).GetChild(0).GetComponent<Text>().text
+                    = "ATK : +" + newWeapon.GetComponent<Weapon>().Spec.WeaponDamage;
+                if (newWeapon.GetComponent<Weapon>().Spec.WeaponAddSpeed > 0)
+                    mWeaponChangePannel.transform.GetChild(4).GetChild(4).GetChild(0).GetComponent<Text>().text
+                        = "SPD : +" + (newWeapon.GetComponent<Weapon>().Spec.WeaponAddSpeed * 100).ToString() + "%";
                 else
-                    mWeaponChangePannel.transform.GetChild(3).GetChild(4).GetChild(0).GetComponent<Text>().text = "";
+                    mWeaponChangePannel.transform.GetChild(4).GetChild(4).GetChild(0).GetComponent<Text>().text = "";
+
+                mWeaponChangePannel.SetActive(true);
             }
-
-            GameObject newWeapon = EquipmentManager.Instance.FindWeapon(mClickedWeaponType);
-
-            mWeaponChangePannel.transform.GetChild(4).GetChild(1).GetChild(0).GetComponent<Text>().text
-                = newWeapon.GetComponent<Weapon>().Spec.EquipName;
-            mWeaponChangePannel.transform.GetChild(4).GetChild(2).GetChild(0).GetComponent<Image>().sprite
-                = newWeapon.GetComponent<SpriteRenderer>().sprite;
-            mWeaponChangePannel.transform.GetChild(4).GetChild(3).GetChild(0).GetComponent<Text>().text
-                = "ATK : +" + newWeapon.GetComponent<Weapon>().Spec.WeaponDamage;
-            if (newWeapon.GetComponent<Weapon>().Spec.WeaponAddSpeed > 0)
-                mWeaponChangePannel.transform.GetChild(4).GetChild(4).GetChild(0).GetComponent<Text>().text
-                    = "SPD : +" + (newWeapon.GetComponent<Weapon>().Spec.WeaponAddSpeed * 100).ToString() + "%";
             else
-                mWeaponChangePannel.transform.GetChild(4).GetChild(4).GetChild(0).GetComponent<Text>().text = "";
-
-            mWeaponChangePannel.SetActive(true);
+            {
+                // 경고 문구
+                LobbyUIManager.Instance.OpenAlertEnterPannel("현재 장착한 코스튬으로는 착용 불가능한 무기입니다.");
+            }
         }
         else
         {
@@ -181,11 +192,17 @@ public class WareHouseManager : MonoBehaviour
         mWeaponButtonList[mClickedWeaponType].GetComponent<EquipButton>().EquipCheckImage.SetActive(true);
         CloseWeaponChangePannel();
     }
-
+    // 무기 해금 정보 변경 시
+    public void ChangeWeaponUnlock(string _name, bool _locked)
+    {
+        GameObject btn = mWeaponButtonList[_name];
+        btn.GetComponent<EquipButton>().UnlockImage.SetActive(_locked);
+    }
 
     // 코스튬 데이터 로드
     private void initCostumeButtonList()
     {
+        mCostumeButtonList.Clear();
         for (EquipmentManager.CostumeTpye type = EquipmentManager.CostumeTpye.swsp;
             type < EquipmentManager.CostumeTpye.Exit; type++)
         {
@@ -337,7 +354,7 @@ public class WareHouseManager : MonoBehaviour
             // 무기와 맞지 않는 코스튬
             else
             {
-                LobbyUIManager.Instance.OpenAlertEnterPannel("현재 장착된 무기로는 장착 불가능한 코스튬입니다.");
+                LobbyUIManager.Instance.OpenAlertEnterPannel("현재 장착된 무기로는 착용 불가능한 코스튬입니다.");
             }
         }
         // 해금되어있지 않음
@@ -413,5 +430,11 @@ public class WareHouseManager : MonoBehaviour
         mCostumeButtonList[mClickedCostumeType].GetComponent<EquipButton>().ShapeCheckImage.SetActive(true);
 
         CloseCostumeShpaeChangePannel();
+    }
+    // 코스튬 해금 정보 변경 시
+    public void ChangeCostumeUnlock(string _name, bool _locked)
+    {
+        GameObject btn = mCostumeButtonList[_name];
+        btn.GetComponent<EquipButton>().UnlockImage.SetActive(_locked);
     }
 }

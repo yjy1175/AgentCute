@@ -77,25 +77,48 @@ public class LobbyPlayerInfo
     #endregion
     #region TRAINNING_STAT
     [SerializeField]
+    private List<int> mTrainingLevelList;
+    public List<int> TrainingLevelList
+    {
+        get { return mTrainingLevelList; }
+        set 
+        { 
+            mTrainingLevelList = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
+    }
+    [SerializeField]
     private int mTrainingHp;
     public int TrainingHp
     {
         get { return mTrainingHp; }
-        set { mTrainingHp = value; }
+        set 
+        { 
+            mTrainingHp = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
     }
     [SerializeField]
     private int mTrainingATK;
     public int TrainingATK
     {
         get { return mTrainingATK; }
-        set { mTrainingATK = value; }
+        set 
+        { 
+            mTrainingATK = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
     }
     [SerializeField]
     private float mTrainingAddDamage;
     public float TrainingAddDamage
     {
         get { return mTrainingAddDamage; }
-        set { mTrainingAddDamage = value; }
+        set 
+        { 
+            mTrainingAddDamage = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
     }
     #endregion
     #region EQUIP_STAT

@@ -51,6 +51,11 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
             newInfo.BaseCriticalDamage = float.Parse(playerBaseStatData[i]["PlayerBaseCritDamage"].ToString());
             newInfo.BaseATKSPD = float.Parse(playerBaseStatData[i]["PlayerBaseATKSPD"].ToString());
         }
+        newInfo.TrainingLevelList = new List<int>();
+        newInfo.TrainingLevelList.Add(0);
+        newInfo.TrainingLevelList.Add(0);
+        newInfo.TrainingLevelList.Add(0);
+        newInfo.TrainingLevelList.Add(0);
         newInfo.TrainingHp = 0;
         newInfo.TrainingATK = 0;
         newInfo.TrainingAddDamage = 1f;

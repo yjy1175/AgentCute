@@ -98,6 +98,16 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     private int mBuyNum;
     [SerializeField]
     private GameObject mBoxAnimationPannel;
+
+    [Header("훈련")]
+    [SerializeField]
+    private GameObject mTrainingPannel;
+    [SerializeField]
+    private GameObject mTrainingAlertPannel;
+    [SerializeField]
+    private int mSelectCost;
+    [SerializeField]
+    private TrainingManager.TrainingType mSelectType;
     #endregion
     void Start()
     {
@@ -213,6 +223,93 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
             GamePause();
             mSupplyShopPannel.SetActive(true);
         }
+        // 플레이어가 훈련교관과 상호작용 대기중 이라면
+        if (player.IsTriggerInTrainingZone)
+        {
+            GamePause();
+            SetTrainingPannel();
+        }
+    }
+    public void SetTrainingPannel()
+    {
+        for (TrainingManager.TrainingType type = TrainingManager.TrainingType.PlayerHp;
+            type < TrainingManager.TrainingType.Exit; type++)
+        {
+            TrainingManager.Training training = TrainingManager.Instance.TrainingSet[type];
+            // 훈련 가능한지 판단
+            if (TrainingManager.Instance.PossibleForLevelUp(type))
+            {
+                // 레벨업 버튼 활성화
+                mTrainingPannel.transform.GetChild((int)type).GetChild(1).gameObject.SetActive(true);
+                // 해당 훈련이 Max이면 Max버튼 활성화
+                if (training.mMax == training.mCurrentValue)
+                    mTrainingPannel.transform.GetChild((int)type).GetChild(1).GetChild(1).gameObject.SetActive(true);
+                // 레벨 UI
+                mTrainingPannel.transform.GetChild((int)type).GetChild(2).GetChild(1).GetComponent<Text>().text =
+                    training.mLevel.ToString();
+                mTrainingPannel.transform.GetChild((int)type).GetChild(2).GetChild(2).gameObject.SetActive(false);
+                // 수치 UI
+                mTrainingPannel.transform.GetChild((int)type).GetChild(3).GetChild(0).GetComponent<Text>().text =
+                    training.mDesc + training.mCurrentValue.ToString() + training.mUnit;
+                mTrainingPannel.transform.GetChild((int)type).GetChild(3).GetChild(1).gameObject.SetActive(false);
+            }
+                
+        }
+
+        mTrainingPannel.SetActive(true);
+    }
+    public void CloseTrainingPannel()
+    {
+        mTrainingPannel.SetActive(false);
+        GamePause();
+    }
+    public void ClickTrainingButton(int _num)
+    {
+        TrainingManager.Training training = TrainingManager.Instance.TrainingSet[(TrainingManager.TrainingType)_num];
+        if(training.mMax == training.mCurrentValue)
+        {
+            //경고
+            OpenAlertEnterPannel("현재 선택한 훈련이 이미 최대치 입니다.");
+        }
+        else
+        {
+            mSelectType = (TrainingManager.TrainingType)_num;
+            // 현재 수치
+            mTrainingAlertPannel.transform.GetChild(2).GetChild(0).GetChild(1).GetComponent<Text>().text =
+                training.mLevel.ToString();
+            mTrainingAlertPannel.transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>().text =
+                training.mDesc + training.mCurrentValue.ToString() + training.mUnit;
+            // 다음 수치
+            mTrainingAlertPannel.transform.GetChild(4).GetChild(0).GetChild(1).GetComponent<Text>().text =
+                (training.mLevel + 1).ToString();
+            mTrainingAlertPannel.transform.GetChild(4).GetChild(1).GetChild(0).GetComponent<Text>().text =
+                training.mDesc + TrainingManager.Instance.NextLevelValue((TrainingManager.TrainingType)_num) + training.mUnit;
+            // 비용
+            mSelectCost = training.mCurrentCost;
+            mTrainingAlertPannel.transform.GetChild(6).GetChild(2).GetComponent<Text>().text = training.mCurrentCost.ToString();
+
+            mTrainingAlertPannel.SetActive(true);
+        }
+    }
+    public void CloseTrainingAlertPannel()
+    {
+        mTrainingAlertPannel.SetActive(false);
+    }
+    public void ClickTrainging()
+    {
+        LobbyPlayerInfo playerInfo = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info;
+        if (playerInfo.Gold >= mSelectCost)
+        {
+            playerInfo.Gold -= mSelectCost;
+            TrainingManager.Instance.LevelUpTraining(mSelectType);
+            SetTrainingPannel();
+            mTrainingAlertPannel.SetActive(false);
+
+        }
+        else
+        {
+            OpenAlertEnterPannel("골드가 부족합니다.");
+        }
     }
     public void ClickAdvButton(bool _ok)
     {
@@ -306,9 +403,9 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
             LobbyPlayerInfo info = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info;
             // TODO : 업적정보 불러오기
             mPlayerInfoPannel.transform.GetChild(7).GetChild(1).GetComponent<Text>().text 
-                = info.BaseHp.ToString();
+                = (info.BaseHp + info.TrainingHp).ToString();
             mPlayerInfoPannel.transform.GetChild(7).GetChild(3).GetComponent<Text>().text 
-                = ((info.BaseATK + info.TrainingATK) * info.TrainingAddDamage).ToString();
+                = Mathf.Ceil((info.BaseATK + info.TrainingATK) * info.TrainingAddDamage).ToString();
             mPlayerInfoPannel.transform.GetChild(7).GetChild(5).GetComponent<Text>().text 
                 = (info.BaseSPD * info.MoveSpeedRate).ToString();
 
