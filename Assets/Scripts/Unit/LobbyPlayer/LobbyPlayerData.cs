@@ -36,5 +36,21 @@ public class LobbyPlayerData : MonoBehaviour
         {
             EquipmentManager.Instance.ChangeCostumeShapeLobbyPlayer(mInfo.CurrentCostumeShapeName);
         }
+
+        // 무기 해금 정보 수정
+        foreach(string key in mInfo.Weaponlock.Keys)
+        {
+            EquipmentManager.Instance.FindWeapon(key).GetComponent<Weapon>().IsLocked = mInfo.Weaponlock[key];
+        }
+        // 코스튬 해금 정보 수정
+        foreach (string key in mInfo.Costumelock.Keys)
+        {
+            EquipmentManager.Instance.FindCostume(key).GetComponent<Costume>().IsLocked = mInfo.Costumelock[key];
+        }
+        // 스킬 해금 정보 수정
+        foreach (string key in mInfo.Skilllock.Keys)
+        {
+            SkillManager.Instance.FindSkill(key).GetComponent<Skill>().Spec.IsLocked = mInfo.Skilllock[key];
+        }
     }
 }

@@ -100,6 +100,10 @@ public class UIManager : SingleToneMaker<UIManager>
     [SerializeField]
     private Text mMapText;
 
+
+    [Header("스킬선택창")]
+    [SerializeField]
+    private GameObject mSkillSelectPannel;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -264,79 +268,76 @@ public class UIManager : SingleToneMaker<UIManager>
         mGeneralSkill = SkillManager.Instance.FindGeneralSkill(_type);
         mUltimateSkill = SkillManager.Instance.FindUltimateSkill(_type);
 
+        mSkillSelectPannel.transform.GetChild(2).GetChild(1).GetComponent<Text>().text
+            = PlayerManager.Instance.Player.GetComponent<PlayerStatus>().PlayerCurrentWeapon.Spec.TypeName;
         // 스킬아이콘 변경 되는 곳
         for (int i = 0; i < mGeneralSkillBtn.Count; i++)
         {
             Sprite icon = Resources.Load<Sprite>("UI/SkillIcon/" + mGeneralSkill[i].GetComponent<Skill>().name);
-            mGeneralSkillBtn[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = icon;
+            mGeneralSkillBtn[i].transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = icon;
+            if (!mGeneralSkill[i].GetComponent<Skill>().Spec.IsLocked)
+            {
+                mSkillSelectPannel.transform.GetChild(6).GetChild(1).GetChild(0).GetChild(1).gameObject.SetActive(false);
+                mSkillSelectPannel.transform.GetChild(6).GetChild(1).GetChild(1).GetChild(1).gameObject.SetActive(false);
+                mGeneralSkillBtn[i].transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+                mGeneralSkillBtn[i].transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
+            }
+                
         }
         for (int i = 0; i < mUltimateSkillBtn.Count; i++)
         {
             Sprite icon = Resources.Load<Sprite>("UI/SkillIcon/" + mUltimateSkill[i].GetComponent<Skill>().name);
-            mUltimateSkillBtn[i].transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite = icon;
-        }
-    }
-    public void OverSkillSelectBtn(string _type)
-    {
-        string type = _type.Substring(0, 1);
-        int num = int.Parse(_type.Substring(1, 1));
-        switch (type)
-        {
-            case "G":
-                SettingInfoPannel(mGeneralSkill, num);
-                break;
-            case "U":
-                SettingInfoPannel(mUltimateSkill, num);
-                break;
-        }
-    }
-    public void OutSKillSelectBtn()
-    {
-        mSkillInfoPannel.SetActive(false);
-    }
-    private void SettingInfoPannel(List<GameObject> _skillList, int _num)
-    {
-        if(_skillList.Count > 0)
-        {
-            mSkillInfoNameText.text = _skillList[_num].GetComponent<Skill>().Spec.EquipName;
-            mSkillInfoTypeText.text = _skillList[_num].GetComponent<Skill>().Spec.TypeName;
-            mSkillInfoCoolTimeText.text = "";
-            for (int i = 0; i < _skillList[_num].GetComponent<Skill>().Spec.getSkillCoolTime().Count; i++)
+            mUltimateSkillBtn[i].transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = icon;
+            if (!mUltimateSkill[i].GetComponent<Skill>().Spec.IsLocked)
             {
-                mSkillInfoCoolTimeText.text += "[" + _skillList[_num].GetComponent<Skill>().Spec.getSkillCoolTime()[i] + "초]";
+                mSkillSelectPannel.transform.GetChild(7).GetChild(1).GetChild(0).GetChild(1).gameObject.SetActive(false);
+                mSkillSelectPannel.transform.GetChild(7).GetChild(1).GetChild(1).GetChild(1).gameObject.SetActive(false);
+                mUltimateSkillBtn[i].transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+                mUltimateSkillBtn[i].transform.GetChild(1).GetChild(1).gameObject.SetActive(false);
             }
-            mSkillInfoDescText.text = _skillList[_num].GetComponent<Skill>().Spec.EquipDesc;
-
-            mSkillInfoPannel.SetActive(true);
         }
     }
     public void ClickSkillSelectBtn(string _type)
     {
         string type = _type.Substring(0, 1);
         int num = int.Parse(_type.Substring(1, 1));
+        string coolTime = "";
+        Sprite icon = null;
         switch (type)
         {
             case "G":
-                PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentGeneralSkill = mGeneralSkill[num].GetComponent<Skill>();
-                for(int i = 0; i < mGeneralSkillBtn.Count; i++)
+                if (!mGeneralSkill[num].GetComponent<Skill>().Spec.IsLocked)
                 {
-                    if (i == num)
-                        mGeneralSkillBtn[i].transform.GetChild(1).gameObject.SetActive(true);
-                    else
-                        mGeneralSkillBtn[i].transform.GetChild(1).gameObject.SetActive(false);
+                    icon = Resources.Load<Sprite>("UI/SkillIcon/" + mGeneralSkill[num].GetComponent<Skill>().name);
+                    PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentGeneralSkill = mGeneralSkill[num].GetComponent<Skill>();
+                    mSkillSelectPannel.transform.GetChild(6).GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = icon;
+                    mSkillSelectPannel.transform.GetChild(6).GetChild(0).GetComponent<Text>().text 
+                        = mGeneralSkill[num].GetComponent<Skill>().Spec.EquipName;
+                    for (int i = 0; i < mGeneralSkill[num].GetComponent<Skill>().Spec.getSkillCoolTime().Count; i++)
+                    {
+                        coolTime += "[" + mGeneralSkill[num].GetComponent<Skill>().Spec.getSkillCoolTime()[i] + "초]";
+                    }
+                    mSkillSelectPannel.transform.GetChild(6).GetChild(1).GetChild(1).GetChild(0).GetComponent<Text>().text =
+                        mGeneralSkill[num].GetComponent<Skill>().Spec.EquipDesc + "\n" + "쿨타임 : " + coolTime;
+                    mIsGSkillSelect = true;
                 }
-                mIsGSkillSelect = true;
                 break;
             case "U":
-                PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentUltimateSkill = mUltimateSkill[num].GetComponent<Skill>();
-                for (int i = 0; i < mUltimateSkill.Count; i++)
+                if (!mUltimateSkill[num].GetComponent<Skill>().Spec.IsLocked)
                 {
-                    if (i == num)
-                        mUltimateSkillBtn[i].transform.GetChild(1).gameObject.SetActive(true);
-                    else
-                        mUltimateSkillBtn[i].transform.GetChild(1).gameObject.SetActive(false);
+                    icon = Resources.Load<Sprite>("UI/SkillIcon/" + mUltimateSkill[num].GetComponent<Skill>().name);
+                    PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentUltimateSkill = mUltimateSkill[num].GetComponent<Skill>();
+                    mSkillSelectPannel.transform.GetChild(7).GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = icon;
+                    mSkillSelectPannel.transform.GetChild(7).GetChild(0).GetComponent<Text>().text 
+                        = mUltimateSkill[num].GetComponent<Skill>().Spec.EquipName; ;
+                    for (int i = 0; i < mUltimateSkill[num].GetComponent<Skill>().Spec.getSkillCoolTime().Count; i++)
+                    {
+                        coolTime += "[" + mUltimateSkill[num].GetComponent<Skill>().Spec.getSkillCoolTime()[i] + "초]";
+                    }
+                    mSkillSelectPannel.transform.GetChild(7).GetChild(1).GetChild(1).GetChild(0).GetComponent<Text>().text =
+                        mUltimateSkill[num].GetComponent<Skill>().Spec.EquipDesc + "\n" + "쿨타임 : " + coolTime;
+                    mIsUSkillSelect = true;
                 }
-                mIsUSkillSelect = true;
                 break;
         }
     }
@@ -349,14 +350,18 @@ public class UIManager : SingleToneMaker<UIManager>
     }
     public void ClickGameStart()
     {
-        if(mIsGSkillSelect && mIsUSkillSelect)
+        if(mIsGSkillSelect)
         {
             PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentBaseSkill = mBaseSkill.GetComponent<Skill>();
             PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentDodgeSkill = mDodgeSkill.GetComponent<Skill>();
             // 플레이매니저에서 스타트 API호출
             PlayerManager.Instance.SettingGameStart();
             GameRestart();
-            mTestLobbyPannel.SetActive(false);
+            mSkillSelectPannel.SetActive(false);
+        }
+        else
+        {
+
         }
     }
     #endregion

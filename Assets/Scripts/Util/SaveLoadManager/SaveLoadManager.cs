@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using System.IO;
 using UnityEngine;
 
@@ -63,10 +64,33 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         newInfo.CurrentWeaponName = "";
         newInfo.CurrentCostumeName = "";
         newInfo.CurrentCostumeShapeName = "";
-        newInfo.Gold = 0;
-        newInfo.Diamond = 1000;
+        newInfo.Gold = 10000;
+        newInfo.Diamond = 10000;
         newInfo.Stemina = 999;
-
+        List<Dictionary<string, object>> weponLockData = CSVReader.Read("CSVFile\\Weapon");
+        newInfo.Weaponlock = new StringBoolean();
+        for(int i = 0; i < weponLockData.Count; i++)
+        {
+            string weaponName = weponLockData[i]["WeaponType"].ToString();
+            bool locked = Convert.ToBoolean(weponLockData[i]["Weaponlock"].ToString());
+            newInfo.Weaponlock.Add(weaponName, locked);
+        }
+        List<Dictionary<string, object>> costumeLockData = CSVReader.Read("CSVFile\\Costume");
+        newInfo.Costumelock = new StringBoolean();
+        for (int i = 0; i < costumeLockData.Count; i++)
+        {
+            string costumeName = costumeLockData[i]["CostumeLoad"].ToString();
+            bool locked = Convert.ToBoolean(costumeLockData[i]["CostumeLock"].ToString());
+            newInfo.Costumelock.Add(costumeName, locked);
+        }
+        List<Dictionary<string, object>> skillLockData = CSVReader.Read("CSVFile\\Skill");
+        newInfo.Skilllock = new StringBoolean();
+        for (int i = 0; i < skillLockData.Count; i++)
+        {
+            string skillName = skillLockData[i]["SkillNameENG"].ToString();
+            bool locked = Convert.ToBoolean(skillLockData[i]["SkillLock"].ToString());
+            newInfo.Skilllock.Add(skillName, locked);
+        }
         string fileStream = JsonUtility.ToJson(newInfo, true);
         fileStream = AES.Encrypt(fileStream, AES.key);
 

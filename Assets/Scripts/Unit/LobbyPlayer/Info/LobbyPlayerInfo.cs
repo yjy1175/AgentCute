@@ -210,5 +210,40 @@ public class LobbyPlayerInfo
         }
     }
     #endregion
+    #region UNLOCK_INFO
+    [SerializeField]
+    private StringBoolean mWeaponlock;
+    public StringBoolean Weaponlock
+    {
+        get { return mWeaponlock; }
+        set 
+        {
+            mWeaponlock = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
+    }
+    [SerializeField]
+    private StringBoolean mCostumelock;
+    public StringBoolean Costumelock
+    {
+        get { return mCostumelock; }
+        set
+        {
+            mCostumelock = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
+    }
+    [SerializeField]
+    private StringBoolean mSkilllock;
+    public StringBoolean Skilllock
+    {
+        get { return mSkilllock; }
+        set
+        { 
+            mSkilllock = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
+    }
+    #endregion
     #endregion
 }
