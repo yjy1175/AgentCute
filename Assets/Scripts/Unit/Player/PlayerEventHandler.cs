@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerEventHandler : IEventHandler
 {
     public delegate void LevelObserver(int _level);
-    public delegate void ExpObserver(int _exp);
+
+    //ExpObserver 사용시 Player현재 경험치, 최대경험치가 바뀔경우 호출되므로 PlayerStatus의 경험치를 PlayerExp,PlayerMaxExp를 참조하여 사용할 것
+    public delegate void ExpObserver();
     public delegate void GoldObserver(int _gold);
 
     public event LevelObserver LevelObserverEvent;
@@ -45,9 +47,9 @@ public class PlayerEventHandler : IEventHandler
         ExpObserverEvent -= _obs;
     }
 
-    public virtual void ChangeExp(int _exp)
+    public virtual void ChangeExp()
     {
-        ExpObserverEvent?.Invoke(_exp);
+        ExpObserverEvent?.Invoke();
     }
 
     //Gold EventHadeler

@@ -104,24 +104,19 @@ public class PlayerStatus : IStatus
     {
         set
         {
-            if(PlayerLevel < mPlayerMaxLevel) { 
-                mPlayerGetExp = value;
-                PlayerExp += mPlayerGetExp;
-                while (PlayerExp >= PlayerMaxExp && PlayerLevel < mPlayerMaxLevel)
-                {
-                    //TO-DO LevelUp effect´Â?
-                    PlayerExp -= PlayerMaxExp;
-                    PlayerMaxExp = PlayerManager.Instance.mLevelData[PlayerLevel + 1];
-                    PlayerLevel += 1;         
-                }
+            if (PlayerLevel >= mPlayerMaxLevel)
+                return;
 
-                if (PlayerLevel >= mPlayerMaxLevel)
-                {
-                    PlayerMaxExp = 0;
-                    PlayerExp = 0;
-                }
-
+            mPlayerGetExp = value;
+            PlayerExp += mPlayerGetExp;
+            StartCoroutine(LevelUpCheck());
+            if (PlayerLevel >= mPlayerMaxLevel)
+            {
+                PlayerMaxExp = 0;
+                PlayerExp = 0;
             }
+
+
         }
         get
         {
@@ -133,6 +128,7 @@ public class PlayerStatus : IStatus
         set
         {
             mPlayerMaxExp = value;
+            gameObject.GetComponent<PlayerEventHandler>().ChangeExp();
         }
         get
         {
@@ -144,7 +140,7 @@ public class PlayerStatus : IStatus
         set
         {
             mPlayerExp = value;
-            gameObject.GetComponent<PlayerEventHandler>().ChangeExp(mPlayerExp);
+            gameObject.GetComponent<PlayerEventHandler>().ChangeExp();
         }
         get
         {
@@ -169,7 +165,7 @@ public class PlayerStatus : IStatus
     {
         if (_md == MonsterManager.MonsterGrade.Boss)
         {
-            return (int)(1 * mPlayerMaxExp);
+            return 200;
         }
         else if (_md == MonsterManager.MonsterGrade.Normal || _md == MonsterManager.MonsterGrade.Range)
         {
@@ -194,4 +190,17 @@ public class PlayerStatus : IStatus
             return mGold;
         }
     }
+
+    IEnumerator LevelUpCheck()
+    {
+        while (PlayerExp >= PlayerMaxExp && PlayerLevel < mPlayerMaxLevel)
+        {
+            PlayerExp -= PlayerMaxExp;
+            PlayerLevel += 1;
+            PlayerMaxExp = PlayerManager.Instance.mLevelData[PlayerLevel];
+            UIManager.Instance.StatusSelectPannelOn();
+            yield return new WaitWhile(() => UIManager.Instance.StatusSelectPannel.activeInHierarchy);
+        }
+    }
+
 }

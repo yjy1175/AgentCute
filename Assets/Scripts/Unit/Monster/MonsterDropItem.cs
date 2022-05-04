@@ -63,7 +63,6 @@ public class MonsterDropItem : MonoBehaviour
             //확정적 아이템 drop
             foreach (string itemStr in itemList)
             {
-                Debug.Log(itemStr);
                 int itemId = int.Parse(itemStr);
                 if (ItemManager.Instance.GetItemData(itemId).mustDrop == 1)
                 {

@@ -46,22 +46,17 @@ public class PlayerUI : IUI
         mGoldText.text = _gold + " gold";
     }
     private void RegisterLevelObserver(int _level)
-    {
-
+    { 
         mLevelBar.transform.Find("LevelText").GetComponent<Text>().text = "Lv." + _level;
         mPauseLevelText.text = _level.ToString();
-        // 레벨업 시 스텟선택창 팝업하는 API 호출
-        // TO-DO : UIManager에 이벤트 등록 하기
-        if (_level != 1)
-            UIManager.Instance.StatusSelectPannelOn();
     }
 
-    private void RegisterExpObserver(int _exp)
+    private void RegisterExpObserver()
     {
         int playerExp = gameObject.GetComponent<PlayerStatus>().PlayerExp;
         int playerExpMax = gameObject.GetComponent<PlayerStatus>().PlayerMaxExp;
         mExpBar.transform.Find("Exp").GetComponent<Image>().fillAmount = ((float)playerExp / (float)playerExpMax);
-        mExpBar.transform.Find("ExpText").GetComponent<Text>().text = _exp.ToString()+"/"+gameObject.GetComponent<PlayerStatus>().PlayerMaxExp;
+        mExpBar.transform.Find("ExpText").GetComponent<Text>().text = playerExp.ToString()+"/"+ playerExpMax.ToString();
     }
 
     private void RegisterHpObserver(int _hp, GameObject _obj)
@@ -88,5 +83,4 @@ public class PlayerUI : IUI
         }
             
     }
-
 }
