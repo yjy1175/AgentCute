@@ -40,6 +40,10 @@ public class UIManager : SingleToneMaker<UIManager>
     [Header("능력치선택창")]
     [SerializeField]
     private GameObject mStatusSelectPannel;
+    public GameObject StatusSelectPannel
+    {
+        get { return mStatusSelectPannel; }
+    }
     [SerializeField]
     private Text mFirstSelectText;
     [SerializeField]
