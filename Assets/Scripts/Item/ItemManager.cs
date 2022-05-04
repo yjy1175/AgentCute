@@ -12,8 +12,8 @@ public class ItemManager : SingleToneMaker<ItemManager>
         public int hp;
         public int gold;
         public int dropRate;
-        public int Scale;
-        public int time;
+        public int scale;
+        public int mustDrop;
     }
     [SerializeField]
     private List<ItemData> dataSet;
@@ -60,7 +60,8 @@ public class ItemManager : SingleToneMaker<ItemManager>
             // md.damage = int.Parse(itemDataCsv[idx]["Damage"].ToString());
             data.gold = int.Parse(itemDataCsv[idx]["Gold"].ToString());
             data.dropRate = int.Parse(itemDataCsv[idx]["Droprate"].ToString());
-            data.Scale = int.Parse(itemDataCsv[idx]["Scale"].ToString());
+            data.scale = int.Parse(itemDataCsv[idx]["Scale"].ToString());
+            data.mustDrop = int.Parse(itemDataCsv[idx]["MustDrop"].ToString());
             dataSet.Add(data);
         }
     }

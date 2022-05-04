@@ -124,7 +124,8 @@ public class MonsterAttack : IAttack
             {
                 //몬스터 스킬 랜덤선택 => 거리비교를 통해 사용해야할 스킨 번호를 메서드로 리턴
                 int skillNum = GetSkillNumber();
-                Debug.Log("사용스킬num :"+ skillNum);
+                if(DEBUG)
+                    Debug.Log("사용스킬num :"+ skillNum);
                 //스킬 사용
                 if (skillNum != -1)
                 {

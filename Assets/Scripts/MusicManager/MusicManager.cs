@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MusicManager : SingleToneMaker<MusicManager>
 {
-    private bool DEBUG = true;
+    private bool DEBUG = false;
     [SerializeField]
     private GameObject mBackgroundMusic;
     /*
