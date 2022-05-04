@@ -5,23 +5,23 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     [SerializeField]
-    int mHp;
+    private int mHp;
     public int Hp
     {
         set { mHp = value; }
         get { return mHp; }
     }
     [SerializeField]
-    int mDamage;
+    private int mDamage;
     public int Damage
     {
         set { mDamage = value; }
         get { return mDamage; }
     }
     [SerializeField]
-    int mExp;
+    private int mExp;
     [SerializeField]
-    int mGold;
+    private int mGold;
     public int Gold
     {
         set { mGold = value; }
@@ -37,6 +37,18 @@ public class Item : MonoBehaviour
         }
         get { return mScale; }
     }
+
+    [SerializeField]
+    private int mMustDrop;
+    public int MustDrop
+    {
+        set
+        {
+            mMustDrop = value;
+        }
+        get { return mMustDrop; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

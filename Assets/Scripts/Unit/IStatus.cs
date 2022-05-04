@@ -475,7 +475,8 @@ public abstract class IStatus : MonoBehaviour
         if (collision.gameObject.CompareTag("Projectile"))
         {
             Projectile projectile = collision.GetComponent<Projectile>();
-            if (projectile.IsActive)
+            int damage = projectile.IsDamage(gameObject);
+            if (projectile.IsActive  && damage !=0)
             {
                 // 넉백 확인
                 if(projectile.Spec.Knockback > 0)
@@ -486,15 +487,17 @@ public abstract class IStatus : MonoBehaviour
                         LayerMask.GetMask("Tilemap"));
                     if(ray.collider == null)
                     {
+                        
                         transform.Translate(
                             (transform.position - projectile.transform.position).normalized * 
                             GetComponent<BoxCollider2D>().size.x * projectile.Spec.Knockback);
+                            
                     }
                 }
             }
             // 데미지 입히기 및 데미지 박스 띄우기(타입별)
             if(!mIsInvincibility)
-                ChangeHpForDamage(projectile, projectile.Spec.ProjectileDamageType, projectile.IsDamage(gameObject));
+                ChangeHpForDamage(projectile, projectile.Spec.ProjectileDamageType, damage);
         }
     }
 

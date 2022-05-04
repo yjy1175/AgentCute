@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 6132042985942999371}
   - component: {fileID: 270727687150139146}
   - component: {fileID: -7268572125041832856}
+  - component: {fileID: -1363223838709550317}
   m_Layer: 6
   m_Name: Wendigo1
   m_TagString: Monster
@@ -211,6 +212,9 @@ MonoBehaviour:
   mIsRush: 0
   mRushDir: {x: 0, y: 0, z: 0}
   mRushSpeed: 0
+  DEBUG_SKILL_NUMBER: -1
+  mCloseAttackPower: 0
+  mBerserkerModeScale: 0
   mMonsterSkill: []
   mSkillCheckCoolTime: []
 --- !u!114 &-6484457541007903768
@@ -299,3 +303,16 @@ MonoBehaviour:
   mSpeed: 0
   mDir: {x: 0, y: 0, z: 0}
   mMoveable: 1
+  mTarget: {fileID: 0}
+--- !u!114 &-1363223838709550317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4425703693211975953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79dfd30061627c3409a70b92298b1998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
