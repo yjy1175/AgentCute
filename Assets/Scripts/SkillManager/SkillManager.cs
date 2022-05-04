@@ -151,5 +151,10 @@ public class SkillManager : SingleToneMaker<SkillManager>
         return newList;
     }
 
+    public GameObject FindSkill(string _name)
+    {
+        return skills[_name];
+    }
+
     #endregion
 }

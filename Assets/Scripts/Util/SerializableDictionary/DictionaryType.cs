@@ -23,3 +23,6 @@ public class MonsterDataSet : SerializableDictionary<string, MonsterManager.Mons
 [System.Serializable]
 public class TrainingSet : SerializableDictionary<TrainingManager.TrainingType, TrainingManager.Training> { }
 
+[System.Serializable]
+public class StringBoolean : SerializableDictionary<string, bool> { }
+
