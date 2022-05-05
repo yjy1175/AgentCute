@@ -164,7 +164,11 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             SpawnData monsterData = mDataSetNormal[i];
             if (mDataSetNormal[i].realStartSpawnTime < currentTime && mDataSetNormal[i].currentTime > mDataSetNormal[i].spawnTime)
             {
-                List<Transform> spawnZone = GetRandomZoneList(mDataSetNormal[i].spawnNumber + mBossNum);//성욱님 요구사항으로 웨이브마다 +1마리씩 더 스폰 
+                //TO-DO : 미믹은 wave에 따라 몬스터 수가 증가하면 안되서 하드코딩으로 임시적용
+                //몬스터 type이나 plus를 할 여부를 csv로 받아 데이터값으로 적용하도록 수정 필요
+                int plusSwapnCount = mDataSetNormal[i].spawnMonster.Equals("Mimic") ? 0 : mBossNum;
+
+                List <Transform> spawnZone = GetRandomZoneList(mDataSetNormal[i].spawnNumber + plusSwapnCount);//성욱님 요구사항으로 웨이브마다 +1마리씩 더 스폰 
                 for (int j = 0; j < spawnZone.Count; j++)
                 {
                     GameObject monster = ObjectPoolManager.Instance.EnableGameObject(mDataSetNormal[i].spawnMonster);
