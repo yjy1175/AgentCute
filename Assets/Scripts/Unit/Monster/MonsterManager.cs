@@ -29,6 +29,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
         public List<float> skillAttackPowerRange;
         public List<string> skillAttackAnimation;
         public string monsterDrop;
+        public int monsterExp;
     }
     public enum MonsterGrade
     {
@@ -157,6 +158,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
 
 
             md.monsterDrop = monsterDataCsv[idx]["MonsterDrop"].ToString();
+            md.monsterExp = int.Parse(monsterDataCsv[idx]["MonsterExp"].ToString());
             dataSet[key] = md;
         }
     }

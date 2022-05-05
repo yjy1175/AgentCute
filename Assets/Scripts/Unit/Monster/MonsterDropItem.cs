@@ -27,59 +27,63 @@ public class MonsterDropItem : MonoBehaviour
     {
         if (_hp <= 0 && !mIsDropItem)
         {
-            mIsDropItem = true;
-            string[] itemList = MonsterManager.Instance.GetMonsterData(gameObject.name).monsterDrop.Split('/');
-            int rateTotalSum = 0;
-            int randSum = 0;
-            int randNum;
+            if (!MonsterManager.Instance.GetMonsterData(gameObject.name).monsterDrop.Equals("null")) { 
 
-            //랜덤 sum을 구함
-            foreach (string item in itemList)
-            {
-                int num = int.Parse(item);
-                rateTotalSum += ItemManager.Instance.GetItemData(num).dropRate;
-            }
-            randNum = Random.Range(0, rateTotalSum);
+                mIsDropItem = true;
+                string[] itemList = MonsterManager.Instance.GetMonsterData(gameObject.name).monsterDrop.Split('/');
+                int rateTotalSum = 0;
+                int randSum = 0;
+                int randNum;
 
-
-            //랜덤 sum에따른 아이템 active 
-            foreach (string itemStr in itemList)
-            {
-                int itemId = int.Parse(itemStr);
-                if (ItemManager.Instance.GetItemData(itemId).mustDrop ==1)
-                    continue;
-                randSum += ItemManager.Instance.GetItemData(itemId).dropRate;
-                if (randNum <= randSum)
+                //랜덤 sum을 구함
+                foreach (string item in itemList)
                 {
-                    GameObject itemObj = ObjectPoolManager.Instance.EnableGameObject(ItemManager.Instance.GetItemData(itemId).itemInName);
-                    setItemData(ref itemObj, itemId);
-                    itemObj.transform.position = gameObject.transform.position;
-                    itemObj.SetActive(true);
-                    break;
+                    int num = int.Parse(item);
+                    rateTotalSum += ItemManager.Instance.GetItemData(num).dropRate;
+                }
+                randNum = Random.Range(0, rateTotalSum);
+
+
+                //랜덤 sum에따른 아이템 active 
+                foreach (string itemStr in itemList)
+                {
+                    int itemId = int.Parse(itemStr);
+                    if (ItemManager.Instance.GetItemData(itemId).mustDrop ==1)
+                        continue;
+                    randSum += ItemManager.Instance.GetItemData(itemId).dropRate;
+                    if (randNum <= randSum)
+                    {
+                        GameObject itemObj = ObjectPoolManager.Instance.EnableGameObject(ItemManager.Instance.GetItemData(itemId).itemInName);
+                        setItemData(ref itemObj, itemId);
+                        itemObj.transform.position = gameObject.transform.position;
+                        itemObj.SetActive(true);
+                        break;
+                    }
+
                 }
 
-            }
-
-            //확정적 아이템 drop
-            foreach (string itemStr in itemList)
-            {
-                int itemId = int.Parse(itemStr);
-                if (ItemManager.Instance.GetItemData(itemId).mustDrop == 1)
+                //확정적 아이템 drop
+                foreach (string itemStr in itemList)
                 {
-                    GameObject itemObj = ObjectPoolManager.Instance.EnableGameObject(ItemManager.Instance.GetItemData(itemId).itemInName);
-                    setItemData(ref itemObj, itemId);
+                    int itemId = int.Parse(itemStr);
+                    if (ItemManager.Instance.GetItemData(itemId).mustDrop == 1)
+                    {
+                        GameObject itemObj = ObjectPoolManager.Instance.EnableGameObject(ItemManager.Instance.GetItemData(itemId).itemInName);
+                        setItemData(ref itemObj, itemId);
                     
-                    //여러개 드랍시 가로, 세로로만 나오는것을 방지하기위해 랜덤한 위치에 드랍
-                    Vector3 pos = gameObject.transform.position;
-                    pos.x += Random.Range(0, 3);
-                    pos.y += Random.Range(0, 3);
-                    itemObj.transform.position = pos;
+                        //여러개 드랍시 가로, 세로로만 나오는것을 방지하기위해 랜덤한 위치에 드랍
+                        Vector3 pos = gameObject.transform.position;
+                        pos.x += Random.Range(0, 3);
+                        pos.y += Random.Range(0, 3);
+                        itemObj.transform.position = pos;
 
-                    itemObj.SetActive(true);
+                        itemObj.SetActive(true);
+                    }
                 }
             }
-
-
+            
+            //몬스터에 설정된 경험치 드랍
+            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().PlayerGetExp = MonsterManager.Instance.GetMonsterData(gameObject.name).monsterExp;
         }
     }
 

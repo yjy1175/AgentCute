@@ -228,7 +228,10 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             StartCoroutine(bossMessageCoroutine);
 
             //TO-DO 데이터 셋으로 받게 수정 필요
-            currentTime = -60f;//다음 웨이브 시작시간 
+            if(mMapType==MapManager.MapType.BossRelay)
+                currentTime = -99999999f;//다음 웨이브 시작시간 
+            else
+                currentTime = -60f;//다음 웨이브 시작시간 
 
             if (waveMessageCoroutine != null)
                 StopCoroutine(waveMessageCoroutine);
@@ -414,20 +417,22 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     //보스 버서커모드 대기 코루틴
     IEnumerator BossWaitBerserkerMode (GameObject _obj)
     {
-        BerserkerData ws;
-        ws = mDataSetBerserker[_obj.name];
-        if (DEBUG)
-            Debug.Log("버서커모드 적용 대기시간"+ ws.bossLimitTime);
+        if (mDataSetBerserker.ContainsKey(_obj.name)) {   
+            BerserkerData ws;
+            ws = mDataSetBerserker[_obj.name];
+            if (DEBUG)
+                Debug.Log("버서커모드 적용 대기시간"+ ws.bossLimitTime);
 
-        yield return new WaitForSeconds(ws.bossLimitTime);
+            yield return new WaitForSeconds(ws.bossLimitTime);
 
-        if (_obj.activeInHierarchy)
-        {
+            if (_obj.activeInHierarchy)
+            {
             
-            if(DEBUG)
-                Debug.Log("버서커모드 적용 " + gameObject.name + " speedUp:" + ws.speedUp + " , powerUp" + ws.powerUp);
-            _obj.GetComponent<IStatus>().MoveSpeed *= ws.speedUp;
-            _obj.GetComponent<MonsterAttack>().BerserkerModeScale = ws.powerUp;
+                if(DEBUG)
+                    Debug.Log("버서커모드 적용 " + gameObject.name + " speedUp:" + ws.speedUp + " , powerUp" + ws.powerUp);
+                _obj.GetComponent<IStatus>().MoveSpeed *= ws.speedUp;
+                _obj.GetComponent<MonsterAttack>().BerserkerModeScale = ws.powerUp;
+            }
         }
 
     }
@@ -454,7 +459,6 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     {
         yield return new WaitForSeconds(_time);
 
-        Debug.Log(_obj.name + _txt + _cnt);
         _obj.GetComponent<Text>().text = _txt;
         for (int i = 0; i < _cnt; i++)
         {

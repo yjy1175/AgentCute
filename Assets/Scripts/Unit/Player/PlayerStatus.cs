@@ -164,11 +164,7 @@ public class PlayerStatus : IStatus
 
     private int GetMonsterExp(MonsterManager.MonsterGrade _md)
     {
-        if (_md == MonsterManager.MonsterGrade.Boss)
-        {
-            return 200;
-        }
-        else if (_md == MonsterManager.MonsterGrade.Normal || _md == MonsterManager.MonsterGrade.Range)
+        if (_md == MonsterManager.MonsterGrade.Normal || _md == MonsterManager.MonsterGrade.Range)
         {
             return 1;
         }
