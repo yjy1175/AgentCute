@@ -422,7 +422,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
                 if (name == GachaManager.Instance.CutePotion)
                 {
                     item.GetChild(0).GetChild(0).GetComponent<Text>().text = "귀여워지는 물약";
-                    item.GetChild(1).GetChild(3).GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/전체 UI 에셋/Cute_Potion");
+                    item.GetChild(1).GetChild(3).GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/UIAsset/Cute_Potion");
                     item.GetChild(5).GetChild(0).GetComponent<Text>().text = "전투 시작 시 레벨10부터 진행할 수 있다.";
                 }
                 else
@@ -465,7 +465,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
                     item.GetChild(i).GetChild(2).gameObject.SetActive(false);
                     if (nameList[i] == GachaManager.Instance.CutePotion)
                     {
-                        item.GetChild(i).GetChild(3).GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/전체 UI 에셋/Cute_Potion");
+                        item.GetChild(i).GetChild(3).GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/UIAsset/Cute_Potion");
                     }
                     else
                     {
