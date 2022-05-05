@@ -38,7 +38,6 @@ public class MapManager : SingleToneMaker<MapManager>
         Ice,
         Dungeon,
         BossRelay,
-        Exit
     }
     #endregion
     
@@ -84,7 +83,7 @@ public class MapManager : SingleToneMaker<MapManager>
     public void RandMapSelect()
     {
         // 맵번호를 랜덤으로 뽑고
-        MapType  ranNum = (MapType)Random.Range((int)MapType.Field, (int)MapType.Exit);
+        mCurrentMapType = (MapType)Random.Range((int)MapType.Field, (int)MapType.BossRelay);
         //CurrentMapType = MapType.Volcano;
 
         // 해당 맵을 Dic에서 불러온후

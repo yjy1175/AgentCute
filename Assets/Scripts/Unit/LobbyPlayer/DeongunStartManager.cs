@@ -59,13 +59,14 @@ public class DeongunStartManager : MonoBehaviour
         {
             LobbyUIManager.Instance.OpenAlertEnterPannel("모드 선택이 올바르지 않습니다.");
         }
-        else if(mWarInfo.WarMode == GameMode.BossMode)
-        {
-            LobbyUIManager.Instance.OpenAlertEnterPannel("생존 모드에서 드래곤을 제외한 모든 보스 처치를 완료해야합니다.");
-        }
-        else
+        else 
         {
             LobbyPlayerInfo playerData = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info;
+            if (mWarInfo.WarMode == GameMode.BossMode)
+                mWarInfo.IsBossRelay = true;
+            else
+                mWarInfo.IsBossRelay = false;
+
             mWarInfo.WarHp = playerData.BaseHp + playerData.TrainingHp;
             mWarInfo.WarDamage = (int)((playerData.BaseATK + playerData.TrainingATK) * playerData.TrainingAddDamage);
             mWarInfo.WarMoveSpeed = playerData.BaseSPD * playerData.MoveSpeedRate;

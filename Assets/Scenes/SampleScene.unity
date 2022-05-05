@@ -21654,6 +21654,7 @@ MonoBehaviour:
   - {fileID: 3730228200864390541}
   mTestCostumeRankText: {fileID: 197010560}
   mIsGameStart: 0
+  mSelectMap: {fileID: 1863473928}
 --- !u!1 &1319617664
 GameObject:
   m_ObjectHideFlags: 0

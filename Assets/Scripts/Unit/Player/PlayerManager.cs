@@ -33,6 +33,8 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         set { mIsGameStart = value; }
     }
 
+    // DEBUG용 맵 선택 오브젝트
+    public GameObject mSelectMap;
 
     private void Awake()
     {
@@ -84,6 +86,13 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         }
         // 스킬 셋 UI로 불러오기
         UIManager.Instance.SkillSelectUILoad(loadInfo.WarWeaponName.Substring(0, 2));
+
+        // 맵 정보 불러오기
+        if (loadInfo.IsBossRelay)
+        {
+            MapManager.Instance.CurrentMapType = MapManager.MapType.BossRelay;
+            mSelectMap.SetActive(false);
+        }
     }
 
     private void InitPlayerLevelData()

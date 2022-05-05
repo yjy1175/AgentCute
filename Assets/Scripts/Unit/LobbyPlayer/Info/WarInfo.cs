@@ -90,4 +90,13 @@ public class WarInfo
         get { return mWarSkillLock; }
         set { mWarSkillLock = value; }
     }
+
+    // 전투 씬에 보낼 모드 정보
+    [SerializeField]
+    private bool mIsBossRelay;
+    public bool IsBossRelay
+    {
+        get { return mIsBossRelay; }
+        set { mIsBossRelay = value; }
+    }
 }
