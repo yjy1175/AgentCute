@@ -378,12 +378,20 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     //return : cnt개수만큼 몬스터수가 적은 Zone에서 spawn
     private List<Transform> GetRandomZoneList(int _cnt)
     {
+        List<Transform> randomList = new List<Transform>();
+
+        if (mMapType == MapManager.MapType.BossRelay)
+        {
+            randomList.Add(GameObject.Find("BossRelaySpawnZone").transform);
+            return randomList;
+        }
+
         //mMonsterAreaNum에서 몬스터가 가장 적은 위치 체크
         //해당 위치에서 랜덤으로 스폰
         int nextSpawnIdx = 0;
         int checkMonsterNum = int.MaxValue;
         int zoneLength;
-        List<Transform> randomList = new List<Transform>();
+        
 
         for (int i = 0; i < mMonsterAreaNum.Count; i++)
         {
