@@ -18,7 +18,8 @@ public class MusicManager : SingleToneMaker<MusicManager>
 
     //projectile명을 통해 SoundData검색
     private Dictionary<string, SoundData> mAudioClipData;
-
+    
+    public float mAmplificationScale;
     public struct SoundData
     {
         public AudioClip soundName;
@@ -32,6 +33,7 @@ public class MusicManager : SingleToneMaker<MusicManager>
     
     void Start()
     {
+        mAmplificationScale = 1f;
         mAudioClipData = new Dictionary<string, SoundData>();
         mAudioSource = GetComponent<AudioSource>();
         //sound 최적화
@@ -57,9 +59,12 @@ public class MusicManager : SingleToneMaker<MusicManager>
         }
         if(DEBUG)
             Debug.Log("projectile명 :" + _name + ",재생할 클립명 : " + mAudioClipData[_name].soundName);
-        mAudioSource.volume = mAudioClipData[_name].volume;
-        mAudioSource.PlayOneShot(mAudioClipData[_name].soundName);
 
+
+
+        mAudioSource.volume = mAudioClipData[_name].volume * mAmplificationScale;
+        mAudioSource.PlayOneShot(mAudioClipData[_name].soundName);
+        StartCoroutine(SoundAmplificationDecrease());
     }
 
     //맵에 설정된 background음악을 play
@@ -100,5 +105,13 @@ public class MusicManager : SingleToneMaker<MusicManager>
             data.volume = float.Parse(soundData[idx]["Volume"].ToString());
             mAudioClipData[soundData[idx]["ProjectileName"].ToString()] = data;
         }
+    }
+
+
+    IEnumerator SoundAmplificationDecrease()
+    {
+        mAmplificationScale *= 0.9f;
+        yield return new WaitForSeconds(0.3f);
+        mAmplificationScale *= 10 / 9f;
     }
 }

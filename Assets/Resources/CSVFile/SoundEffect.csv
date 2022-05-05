@@ -42,8 +42,8 @@ ID,ProjectileName,SoundName,Volume
 40,l16,None,0
 41,l17,None,0
 42,l18,None,0
-43,s21,DragonSkill3,1
-44,s22,DragonSkill4,1
+43,s21,DragonSkill3,0.4
+44,s22,DragonSkill4,0.4
 45,l22,None,0
 46,s23,None,0
 47,s24,YetiSkill1,0.3
