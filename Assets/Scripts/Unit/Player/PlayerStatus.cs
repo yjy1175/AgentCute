@@ -97,6 +97,7 @@ public class PlayerStatus : IStatus
     public void Resurrection()
     {
         Hp = MaxHP;
+        Invincibility(1f);
         IsFirstDie = false;
     }
 
