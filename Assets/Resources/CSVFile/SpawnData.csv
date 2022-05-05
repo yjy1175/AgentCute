@@ -1,5 +1,5 @@
 ID,SpawnMonster,MonsterStep,SpawnMap,SpawnOrder,SpawnNumber,SpawnStartTime1,SpawnStartTime2,SpawnTime,BossLimitTime
-31,Wendigo1,1,Dungeon,4,1,0,0,-1,110
+0,GoblinWorker,0,Field,1,4,0,0,1,-1
 1,GoblinBomber,0,Field,2,2,45,45,5,-1
 2,GoblinShaman,0,Field,3,2,90,90,1,-1
 3,GoblinAssassin,0,Field,5,1,135,135,3,-1
@@ -35,3 +35,16 @@ ID,SpawnMonster,MonsterStep,SpawnMap,SpawnOrder,SpawnNumber,SpawnStartTime1,Spaw
 33,Wendigo3,3,Dungeon,7,1,180,180,-1,130
 34,Mimic,0,Dungeon,0,1,0,60,23,-1
 35,DarkDragon,4,Dungeon,8,1,180,180,-1,-1
+36,RelayGiantSlime1,1,BossRelay,1,1,0,0,-1,-1
+37,RelayYeti1,2,BossRelay,2,1,0,0,-1,-1
+38,RelayIfrit1,3,BossRelay,3,1,0,0,-1,-1
+39,RelayWendigo1,4,BossRelay,4,1,0,0,-1,-1
+40,RelayGiantSlime2,5,BossRelay,5,1,0,0,-1,-1
+41,RelayYeti2,6,BossRelay,6,1,0,0,-1,-1
+42,RelayIfrit2,7,BossRelay,7,1,0,0,-1,-1
+43,RelayWendigo2,8,BossRelay,8,1,0,0,-1,-1
+44,RelayGiantSlime3,9,BossRelay,9,1,0,0,-1,-1
+45,RelayYeti3,10,BossRelay,10,1,0,0,-1,-1
+46,RelayIfrit3,11,BossRelay,11,1,0,0,-1,-1
+47,RelayWendigo3,12,BossRelay,12,1,0,0,-1,-1
+48,BossDragon,13,BossRelay,13,1,0,0,-1,-1

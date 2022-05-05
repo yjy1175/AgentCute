@@ -86,7 +86,6 @@ public class MusicManager : SingleToneMaker<MusicManager>
 
         //AudioClip ¹Þ¾Æ¿Í µñ¼Å³Ê¸®È­
         AudioClip[] soundEffectsList = Resources.LoadAll<AudioClip>("Sound\\Effect");
-        Debug.Log("À½¾Ç °³¼ö :"+ soundEffectsList.Length);
 
         Dictionary<string, AudioClip> soundDict = new Dictionary<string, AudioClip>();
         foreach (AudioClip clip in soundEffectsList)
@@ -100,7 +99,6 @@ public class MusicManager : SingleToneMaker<MusicManager>
             SoundData data = new SoundData();
             if (soundData[idx]["SoundName"].ToString().Equals("None"))
                 continue;
-            Debug.Log(soundData[idx]["SoundName"].ToString());
             data.soundName = soundDict[soundData[idx]["SoundName"].ToString()];
             data.volume = float.Parse(soundData[idx]["Volume"].ToString());
             mAudioClipData[soundData[idx]["ProjectileName"].ToString()] = data;
