@@ -325,7 +325,6 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                     costumes[GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentCostumeName].GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerSPD) / 100f;
             }
 
-
             GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentCostumeName = _name;
             // 장착전 초기화
             for (SpriteType i = SpriteType.CostumeHelmet; i < SpriteType.Exit; i++)

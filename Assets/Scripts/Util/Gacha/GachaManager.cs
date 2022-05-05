@@ -26,16 +26,19 @@ public class GachaManager : SingleToneMaker<GachaManager>
             {
                 mGachaList.Add(chanceData[i]["Name"].ToString());
             }
+            for(int j = 0; j < 50; j++)
+            {
+                mGachaList.Add(mCutePotion);
+            }
         }
     }
     // ÇÑ¹ø »Ì±â
     public string OneItemDraw()
     {
         LobbyPlayerInfo info = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info;
-        int ran = UnityEngine.Random.Range(0, mGachaList.Count);
+        int ran = Random.Range(0, mGachaList.Count);
         string item = mGachaList[ran];
-        Debug.Log(ran);
-        if (!info.Costumelock[item])
+        if (item == mCutePotion || !info.Costumelock[item])
         {
             item = mCutePotion;
             info.CutePotionCount += 1;

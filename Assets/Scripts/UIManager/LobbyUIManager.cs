@@ -383,8 +383,8 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
             if (info.Diamond >= mPriceList[mBuyNum])
             {
                 info.Diamond -= mPriceList[mBuyNum];
-                CloseBuyAlertButton();
                 StartCoroutine(BoxAnimaion());
+                CloseBuyAlertButton();
             }
             // 구매 불가능
             else
@@ -415,6 +415,9 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
             case 0: // 한번 뽑기
                 item = mGachaItemListPannel.transform.GetChild(3);
                 item.gameObject.SetActive(true);
+                item.GetChild(1).GetChild(0).gameObject.SetActive(false);
+                item.GetChild(1).GetChild(1).gameObject.SetActive(false);
+                item.GetChild(1).GetChild(2).gameObject.SetActive(false);
                 string name = GachaManager.Instance.OneItemDraw();
                 if (name == GachaManager.Instance.CutePotion)
                 {
