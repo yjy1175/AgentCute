@@ -20,7 +20,6 @@ public class Gold : Item
     {
         if (collision.gameObject.CompareTag("Player") && gameObject.activeInHierarchy)
         {
-            gameObject.SetActive(false);
             ObjectPoolManager.Instance.DisableGameObject(gameObject);
             if (Gold != 0) { 
                 collision.gameObject.GetComponent<PlayerStatus>().Gold += Gold;

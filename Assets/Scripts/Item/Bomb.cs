@@ -36,7 +36,7 @@ public class Bomb : Item
         obj.GetComponent<Transform>().localScale = new Vector3(Scale, Scale, Scale);
         obj.GetComponent<Projectile>().Damage = Damage;
         obj.GetComponent<Projectile>().setEnable(gameObject.transform.position, gameObject.transform.position, 0);
-
+        MusicManager.Instance.OneShotProjectileSound("s99");
         yield return new WaitForSeconds(0.8f);
         ObjectPoolManager.Instance.DisableGameObject(gameObject);
         if (obj.activeInHierarchy)

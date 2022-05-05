@@ -1,12 +1,12 @@
 ID,SpawnMonster,MonsterStep,SpawnMap,SpawnOrder,SpawnNumber,SpawnStartTime1,SpawnStartTime2,SpawnTime,BossLimitTime
-0,GoblinWorker,0,Field,1,4,0,0,1,-1
+31,Wendigo1,1,Dungeon,4,1,0,0,-1,110
 1,GoblinBomber,0,Field,2,2,45,45,5,-1
 2,GoblinShaman,0,Field,3,2,90,90,1,-1
 3,GoblinAssassin,0,Field,5,1,135,135,3,-1
 4,GiantSlime1,1,Field,4,1,180,180,-1,90
 5,GiantSlime2,2,Field,6,1,180,180,-1,110
 6,GiantSlime3,3,Field,7,1,180,180,-1,130
-7,Mimic,0,Field,0,1,0,60,25,-1
+7,Mimic,0,Field,0,1,0,60,23,-1
 8,FieldDragon,4,Field,8,1,180,180,-1,-1
 9,IceElemental,0,Ice,1,4,0,0,1,-1
 10,Penguin,0,Ice,2,2,45,45,1,-1
@@ -15,7 +15,7 @@ ID,SpawnMonster,MonsterStep,SpawnMap,SpawnOrder,SpawnNumber,SpawnStartTime1,Spaw
 13,Yeti1,1,Ice,4,1,180,180,-1,100
 14,Yeti2,2,Ice,6,1,180,180,-1,120
 15,Yeti3,3,Ice,7,1,180,180,-1,140
-16,Mimic,0,Ice,0,1,0,60,25,-1
+16,Mimic,0,Ice,0,1,0,60,23,-1
 17,IceDragon,4,Ice,8,1,180,180,-1,-1
 18,FireElemental,0,Volcano,1,5,0,0,1,-1
 19,Imp,0,Volcano,2,2,45,45,5,-1
@@ -24,7 +24,7 @@ ID,SpawnMonster,MonsterStep,SpawnMap,SpawnOrder,SpawnNumber,SpawnStartTime1,Spaw
 22,Ifrit1,1,Volcano,4,1,180,180,-1,100
 23,Ifrit2,2,Volcano,6,1,180,180,-1,120
 24,Ifrit3,3,Volcano,7,1,180,180,-1,140
-25,Mimic,0,Volcano,0,1,0,60,25,-1
+25,Mimic,0,Volcano,0,1,0,60,23,-1
 26,FireDragon,4,Volcano,8,1,180,180,-1,-1
 27,Bat,0,Dungeon,1,4,0,0,1,-1
 28,SkeletalWarrior,0,Dungeon,2,2,45,45,1,-1
@@ -33,5 +33,5 @@ ID,SpawnMonster,MonsterStep,SpawnMap,SpawnOrder,SpawnNumber,SpawnStartTime1,Spaw
 31,Wendigo1,1,Dungeon,4,1,180,180,-1,110
 32,Wendigo2,2,Dungeon,6,1,180,180,-1,120
 33,Wendigo3,3,Dungeon,7,1,180,180,-1,130
-34,Mimic,0,Dungeon,0,1,0,60,25,-1
+34,Mimic,0,Dungeon,0,1,0,60,23,-1
 35,DarkDragon,4,Dungeon,8,1,180,180,-1,-1

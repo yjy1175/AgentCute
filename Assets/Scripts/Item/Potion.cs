@@ -20,7 +20,6 @@ public class Potion : Item
     {
         if (collision.gameObject.CompareTag("Player") && gameObject.activeInHierarchy)
         {
-            gameObject.SetActive(false);
             ObjectPoolManager.Instance.DisableGameObject(gameObject);
             if (Hp != 0)
                 collision.gameObject.GetComponent<PlayerStatus>().PotionHp = Hp;

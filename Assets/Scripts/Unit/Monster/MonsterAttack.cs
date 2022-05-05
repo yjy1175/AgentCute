@@ -72,7 +72,6 @@ public class MonsterAttack : IAttack
             }
             //TO-DO 어디서 objectpool을 하는게 맞을지 고민. 여기서 하면 각 몬스터가 소환될때마다 create를 하는 문제가 발생한다.
             //objectpool 이 같은 object가 들어올때 재생성은 안하긴 하지만 1회만 호출하고싶은데 그런경우는 어디서 해야 옳을지 고민이필요.
-            Debug.Log("이거 언제 호출됨?");
             createObjectPool();
         }
     }

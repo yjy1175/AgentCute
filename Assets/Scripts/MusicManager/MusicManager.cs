@@ -51,7 +51,8 @@ public class MusicManager : SingleToneMaker<MusicManager>
     {
         if (!mAudioClipData.ContainsKey(_name))
         {
-            Debug.Log(_name + "으로된 clip은 존재하지 않습니다 clip을 추가해주세요");
+            if(DEBUG)
+                Debug.Log(_name + "으로된 clip은 설정되어있지 않습니다");
             return;
         }
         if(DEBUG)
@@ -69,6 +70,7 @@ public class MusicManager : SingleToneMaker<MusicManager>
         if(DEBUG)   
             Debug.Log("음악 on: " +mBackgroundMusic.GetComponent<AudioSource>().clip.name);
         mBackgroundMusic.GetComponent<AudioSource>().Play();
+        mBackgroundMusic.GetComponent<AudioSource>().volume = 0.3f;
         mBackgroundMusic.GetComponent<AudioSource>().loop = true;
     }
 
@@ -91,7 +93,9 @@ public class MusicManager : SingleToneMaker<MusicManager>
         for (int idx = 0; idx < soundData.Count; idx++)
         {
             SoundData data = new SoundData();
-
+            if (soundData[idx]["SoundName"].ToString().Equals("None"))
+                continue;
+            Debug.Log(soundData[idx]["SoundName"].ToString());
             data.soundName = soundDict[soundData[idx]["SoundName"].ToString()];
             data.volume = float.Parse(soundData[idx]["Volume"].ToString());
             mAudioClipData[soundData[idx]["ProjectileName"].ToString()] = data;
