@@ -33,7 +33,7 @@ public class VertualJoyStick : MonoBehaviour, IDragHandler, IPointerDownHandler,
             {
                 Touch touch = Input.GetTouch(0);
                 if(touch.position.x < Screen.width / 2 && touch.position.y < Screen.height / 2)
-                    transform.position = touch.position - new Vector3(GetComponent<RectTransform>().sizeDelta.x / 2, GetComponent<RectTransform>().sizeDelta.x / 2, 0);
+                    transform.position = touch.position - new Vector2(GetComponent<RectTransform>().sizeDelta.x / 2, GetComponent<RectTransform>().sizeDelta.x / 2);
             }
 #endif
         }

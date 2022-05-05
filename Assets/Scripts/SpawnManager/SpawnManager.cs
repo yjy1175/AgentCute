@@ -132,9 +132,9 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
             SpawnMonster();
             currentTime += Time.deltaTime;
-            allMonsterText.text = "전체 : " + allMonsterCount.ToString() + " 마리";
-            currentKillMonsterText.text = "킬 : " + currentKillMosterCount.ToString() + " 마리";
-            currentAllMonsterText.text = "필드 : " + (allMonsterCount - currentKillMosterCount).ToString() +" 마리";
+            //allMonsterText.text = "전체 : " + allMonsterCount.ToString() + " 마리";
+            currentKillMonsterText.text = "처치 : " + currentKillMosterCount.ToString() + " 마리";
+            //currentAllMonsterText.text = "필드 : " + (allMonsterCount - currentKillMosterCount).ToString() +" 마리";
         }
     }
 
