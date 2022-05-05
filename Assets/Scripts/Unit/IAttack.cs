@@ -5,7 +5,7 @@ using UnityEngine;
 public class IAttack : MonoBehaviour
 {
 
-    private bool DEBUG = true;
+    private bool DEBUG = false;
 
     public enum SkillLaunchType
     {

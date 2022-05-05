@@ -49,11 +49,8 @@ public class MonsterAttack : IAttack
     {
         // 몬스터의 데미지 설정을 위한 override
         base.Start();
-        mIsUsingSkill = false;
 
         mBerserkerModeScale = 1f;
-
-        tempTime = 0f;
 
         //쿨타임 배열 설정
         if (gameObject.GetComponent<MonsterStatus>().MonsterGrade == MonsterManager.MonsterGrade.Boss)
@@ -75,8 +72,14 @@ public class MonsterAttack : IAttack
             }
             //TO-DO 어디서 objectpool을 하는게 맞을지 고민. 여기서 하면 각 몬스터가 소환될때마다 create를 하는 문제가 발생한다.
             //objectpool 이 같은 object가 들어올때 재생성은 안하긴 하지만 1회만 호출하고싶은데 그런경우는 어디서 해야 옳을지 고민이필요.
+            Debug.Log("이거 언제 호출됨?");
             createObjectPool();
         }
+    }
+    protected void OnEnable()
+    {
+        mIsUsingSkill = false;
+        tempTime = 0f;
     }
 
     // Update is called once per frame
