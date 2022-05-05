@@ -43,4 +43,11 @@ public class Map : MonoBehaviour
             return mHeight;
         }
     }
+    [SerializeField]
+    private bool mIsBossRelay;
+    public bool IsBossRelay
+    {
+        get { return mIsBossRelay; }
+        set { mIsBossRelay = value; }
+    }
 }

@@ -37,6 +37,7 @@ public class MapManager : SingleToneMaker<MapManager>
         Volcano,
         Ice,
         Dungeon,
+        BossRelay,
         Exit
     }
     #endregion
@@ -93,17 +94,20 @@ public class MapManager : SingleToneMaker<MapManager>
         // 맵을 초기화 해준다.
         baseX = newMap.GetComponent<Map>().Width;
         baseY = newMap.GetComponent<Map>().Height;
-        initMapList();
-        moveTileMap(0, 0, 1, -1);
-        moveTileMap(0, 1, 1, 0);
-        moveTileMap(0, 2, 1, 1);
-        moveTileMap(1, 0, 0, -1);
-        moveTileMap(1, 1, 0, 0);
-        moveTileMap(1, 2, 0, 1);
-        moveTileMap(2, 0, -1, -1);
-        moveTileMap(2, 1, -1, 0);
-        moveTileMap(2, 2, -1, 1);
-        mIsUpdate = true;
+        if(baseX > 0 && baseY > 0)
+        {
+            initMapList();
+            moveTileMap(0, 0, 1, -1);
+            moveTileMap(0, 1, 1, 0);
+            moveTileMap(0, 2, 1, 1);
+            moveTileMap(1, 0, 0, -1);
+            moveTileMap(1, 1, 0, 0);
+            moveTileMap(1, 2, 0, 1);
+            moveTileMap(2, 0, -1, -1);
+            moveTileMap(2, 1, -1, 0);
+            moveTileMap(2, 2, -1, 1);
+            mIsUpdate = true;
+        }
     }
 
     //DEBUG용 맵선택 API
@@ -120,17 +124,20 @@ public class MapManager : SingleToneMaker<MapManager>
         // 맵을 초기화 해준다.
         baseX = newMap.GetComponent<Map>().Width;
         baseY = newMap.GetComponent<Map>().Height;
-        initMapList();
-        moveTileMap(0, 0, 1, -1);
-        moveTileMap(0, 1, 1, 0);
-        moveTileMap(0, 2, 1, 1);
-        moveTileMap(1, 0, 0, -1);
-        moveTileMap(1, 1, 0, 0);
-        moveTileMap(1, 2, 0, 1);
-        moveTileMap(2, 0, -1, -1);
-        moveTileMap(2, 1, -1, 0);
-        moveTileMap(2, 2, -1, 1);
-        mIsUpdate = true;
+        if (baseX > 0 && baseY > 0)
+        {
+            initMapList();
+            moveTileMap(0, 0, 1, -1);
+            moveTileMap(0, 1, 1, 0);
+            moveTileMap(0, 2, 1, 1);
+            moveTileMap(1, 0, 0, -1);
+            moveTileMap(1, 1, 0, 0);
+            moveTileMap(1, 2, 0, 1);
+            moveTileMap(2, 0, -1, -1);
+            moveTileMap(2, 1, -1, 0);
+            moveTileMap(2, 2, -1, 1);
+            mIsUpdate = true;
+        }
     }
     /*
      * 해당 position에 object타일맵의 타일이 있는지 판단해주는 api입니다.
