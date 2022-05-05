@@ -16,10 +16,6 @@ public class MonsterUI : IUI
         gameObject.GetComponent<MonsterEventHandler>().registerHpObserver(RegisterHpObserver);
         mHpBar.gameObject.SetActive(true);
     }
-    private void OnDisable()
-    {
-        mHpBar.gameObject.SetActive(false);
-    }
 
     private void RegisterHpObserver(int _hp, GameObject _obj)
     {
@@ -27,5 +23,10 @@ public class MonsterUI : IUI
         int maxHp = gameObject.GetComponent<MonsterStatus>().MaxHP;
         mHpBar.transform.Find("Hp").GetComponent<Image>().fillAmount = ((float)hp / (float)maxHp);
         mHpBar.transform.Find("HpText").GetComponent<Text>().text = _hp.ToString();
+        mHpBar.gameObject.SetActive(true);
+        if (hp <= 0)
+        {
+            mHpBar.gameObject.SetActive(false); ;
+        }
     }
 }
