@@ -132,7 +132,6 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -977,43 +976,6 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Wendigo Sprite Sheet_8: 5761067656467280267
-      Wendigo Sprite Sheet_21: -1080890791166611626
-      Wendigo Sprite Sheet_27: 876387214346423900
-      Wendigo Sprite Sheet_20: 6837683219347010604
-      Wendigo Sprite Sheet_3: -5793580234167564532
-      Wendigo Sprite Sheet_10: 8686564631724160741
-      Wendigo Sprite Sheet_22: 8329674724365770486
-      Wendigo Sprite Sheet_7: 4712521685270810789
-      Wendigo Sprite Sheet_15: -5331625570041858847
-      Wendigo Sprite Sheet_29: 2780569801917722944
-      Wendigo Sprite Sheet_23: 448863929491213028
-      Wendigo Sprite Sheet_9: -8544976449475802183
-      Wendigo Sprite Sheet_28: -1689232842975482099
-      Wendigo Sprite Sheet_12: -5814412404962884027
-      Wendigo Sprite Sheet_26: 1615596725666824457
-      Wendigo Sprite Sheet_11: -7921049462009375279
-      Wendigo Sprite Sheet_2: -6105676011778137012
-      Wendigo Sprite Sheet_31: 2792669248399350745
-      Wendigo Sprite Sheet_34: 7056602228879102995
-      Wendigo Sprite Sheet_35: 4491199579085127813
-      Wendigo Sprite Sheet_30: -6946986327411640741
-      Wendigo Sprite Sheet_0: -5243538096066994455
-      Wendigo Sprite Sheet_17: 3092145784240220956
-      Wendigo Sprite Sheet_6: 7867251470420111102
-      Wendigo Sprite Sheet_32: -470695590561429674
-      Wendigo Sprite Sheet_19: -8419274413054710337
-      Wendigo Sprite Sheet_4: -8523247024800396645
-      Wendigo Sprite Sheet_25: -2746985951865490336
-      Wendigo Sprite Sheet_5: -7443725794153315407
-      Wendigo Sprite Sheet_1: -8857898469560337109
-      Wendigo Sprite Sheet_24: -4054394800864805414
-      Wendigo Sprite Sheet_18: -9046288512451721215
-      Wendigo Sprite Sheet_14: 2239812191025038820
-      Wendigo Sprite Sheet_16: 7765437159898339827
-      Wendigo Sprite Sheet_33: 8176237212033808046
-      Wendigo Sprite Sheet_13: 9140585892989561755
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

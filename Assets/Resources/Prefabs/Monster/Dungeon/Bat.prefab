@@ -129,6 +129,12 @@ MonoBehaviour:
   mFirePosition: {fileID: 0}
   mAutoAttackSpeed: 0
   currentBaseSkill: {fileID: 0}
+  mIsRush: 0
+  mRushDir: {x: 0, y: 0, z: 0}
+  mRushSpeed: 0
+  DEBUG_SKILL_NUMBER: -1
+  mCloseAttackPower: 0
+  mBerserkerModeScale: 0
   mMonsterSkill: []
   mSkillCheckCoolTime: []
 --- !u!114 &486496904582873253
@@ -158,6 +164,7 @@ MonoBehaviour:
   mSpeed: 0
   mDir: {x: 0, y: 0, z: 0}
   mMoveable: 1
+  mTarget: {fileID: 0}
 --- !u!114 &3461228668566835751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,10 +244,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010202408, y: 0.15048409}
+  m_Offset: {x: -0.011672616, y: 0.007871151}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.7}
     oldSize: {x: 0.5, y: 0.75}
     newSize: {x: 0.5, y: 0.75}
     adaptiveTilingThreshold: 0.5
@@ -248,5 +255,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4183817, y: 0.29089546}
+  m_Size: {x: 0.4213221, y: 0.2703123}
   m_EdgeRadius: 0
