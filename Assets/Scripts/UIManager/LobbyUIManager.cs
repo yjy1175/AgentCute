@@ -98,6 +98,8 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     private int mBuyNum;
     [SerializeField]
     private GameObject mBoxAnimationPannel;
+    [SerializeField]
+    private GameObject mGachaItemListPannel;
 
     [Header("훈련")]
     [SerializeField]
@@ -372,7 +374,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
             // 구매 불가능
             else
             {
-                OpenAlertEnterPannel("다이아가 부족합니다.");
+                OpenAlertEnterPannel("다이아몬드가 부족합니다.");
             }
         }
         // 애니메이션 필요
@@ -387,7 +389,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
             // 구매 불가능
             else
             {
-                OpenAlertEnterPannel("다이아가 부족합니다.");
+                OpenAlertEnterPannel("다이아몬드가 부족합니다.");
             }
         }
     }
@@ -401,6 +403,81 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         mBoxAnimationPannel.SetActive(false);
         GamePause();
         // 구매확인 창 띄우기
+        ItemDraw();
+    }
+    public void ItemDraw()
+    {
+        Transform item = null;
+        mGachaItemListPannel.transform.GetChild(3).gameObject.SetActive(false);
+        mGachaItemListPannel.transform.GetChild(4).gameObject.SetActive(false);
+        switch (mBuyNum)
+        {
+            case 0: // 한번 뽑기
+                item = mGachaItemListPannel.transform.GetChild(3);
+                item.gameObject.SetActive(true);
+                string name = GachaManager.Instance.OneItemDraw();
+                if (name == GachaManager.Instance.CutePotion)
+                {
+                    item.GetChild(0).GetChild(0).GetComponent<Text>().text = "귀여워지는 물약";
+                    item.GetChild(1).GetChild(3).GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/전체 UI 에셋/Cute_Potion");
+                    item.GetChild(5).GetChild(0).GetComponent<Text>().text = "전투 시작 시 레벨10부터 진행할 수 있다.";
+                }
+                else
+                {
+                    GameObject costume = EquipmentManager.Instance.FindCostume(name);
+                    item.GetChild(0).GetChild(0).GetComponent<Text>().text = costume.GetComponent<Costume>().Spec.EquipName;
+                    item.GetChild(6).gameObject.SetActive(true);
+                    item.GetChild(6).GetChild(0).GetComponent<Text>().text = costume.GetComponent<Costume>().Spec.EquipRankDesc;
+                    switch(name.Substring(3, name.Length - 5))
+                    {
+                        case "bgst":
+                            item.GetChild(6).GetChild(1).GetComponent<Text>().text = "스태프 또는 석궁 무기에 장착 가능합니다.";
+                            break;
+                        case "swsp":
+                            item.GetChild(6).GetChild(1).GetComponent<Text>().text = "소드 또는 스피어 무기에 장착 가능합니다.";
+                            break;
+                        case "bgstswsp":
+                            item.GetChild(6).GetChild(1).GetComponent<Text>().text = "모든 무기에 장착 가능합니다.";
+                            break;
+                    }
+                    item.GetChild(1).GetChild(costume.GetComponent<Costume>().Spec.Rank - 1).gameObject.SetActive(true);
+                    item.GetChild(1).GetChild(3).GetComponent<Image>().sprite = costume.GetComponent<SpriteRenderer>().sprite;
+                    int hp = costume.GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerHP);
+                    if (hp > 0)
+                        item.GetChild(2).GetChild(0).GetComponent<Text>().text = "HP : +" + hp.ToString();
+                    int spd = costume.GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerSPD);
+                    if (spd > 0)
+                        item.GetChild(3).GetChild(0).GetComponent<Text>().text = "SPD : +" + spd.ToString();
+                    item.GetChild(5).GetChild(0).GetComponent<Text>().text = costume.GetComponent<Costume>().Spec.EquipDesc;
+                }
+                break;
+            case 1: // 10번 뽑기
+                item = mGachaItemListPannel.transform.GetChild(4);
+                item.gameObject.SetActive(true);
+                List<string> nameList = GachaManager.Instance.TenItemDraw();
+                for(int i = 0; i < nameList.Count; i++)
+                {
+                    item.GetChild(i).GetChild(0).gameObject.SetActive(false);
+                    item.GetChild(i).GetChild(1).gameObject.SetActive(false);
+                    item.GetChild(i).GetChild(2).gameObject.SetActive(false);
+                    if (nameList[i] == GachaManager.Instance.CutePotion)
+                    {
+                        item.GetChild(i).GetChild(3).GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/전체 UI 에셋/Cute_Potion");
+                    }
+                    else
+                    {
+                        GameObject costume = EquipmentManager.Instance.FindCostume(nameList[i]);
+                        item.GetChild(i).GetChild(costume.GetComponent<Costume>().Spec.Rank - 1).gameObject.SetActive(true);
+                        item.GetChild(i).GetChild(3).GetComponent<Image>().sprite = costume.GetComponent<SpriteRenderer>().sprite;
+                    }
+                }
+                break;
+        }
+        mGachaItemListPannel.SetActive(true);
+    }
+    public void CloseGachItemListPannel()
+    {
+        mGachaItemListPannel.SetActive(false);
     }
     public void ClickPlayerInfoPannel()
     {

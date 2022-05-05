@@ -209,6 +209,17 @@ public class LobbyPlayerInfo
             GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerEventHendler>().ChangeGoods(mGold, mDiamond, mStemina);
         }
     }
+    [SerializeField]
+    private int mCutePotionCount;
+    public int CutePotionCount
+    {
+        get { return mCutePotionCount; }
+        set 
+        { 
+            mCutePotionCount = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
+    }
     #endregion
     #region UNLOCK_INFO
     [SerializeField]
