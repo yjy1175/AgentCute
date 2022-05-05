@@ -60,6 +60,11 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     [SerializeField]
     private int mBossNum = 0;
 
+    public int WaveCount
+    {
+        get { return mBossNum; }
+    }
+
     //TO-DO UI쪽에서 관리하도록 수정필요
     IEnumerator bossMessageCoroutine;
     IEnumerator waveMessageCoroutine;
