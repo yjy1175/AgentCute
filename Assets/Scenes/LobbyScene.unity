@@ -56996,7 +56996,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uC7A5\uBE44 \uBC0F \uC2A4\uD0AC \uD574\uAE08"
+  m_Text: "\uBB34\uAE30 \uBC0F \uC2A4\uD0AC \uD574\uAE08"
 --- !u!222 &1554162157
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -73882,6 +73882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: -1
+  isMove: 1
 --- !u!114 &2034709695
 MonoBehaviour:
   m_ObjectHideFlags: 0

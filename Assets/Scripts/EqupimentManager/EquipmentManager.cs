@@ -327,6 +327,11 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
 
 
             GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentCostumeName = _name;
+            // 장착전 초기화
+            for (SpriteType i = SpriteType.CostumeHelmet; i < SpriteType.Exit; i++)
+            {
+                mLobbyPlayerCostumeSprites[(int)i].sprite = null;
+            }
             for (SpriteType i = SpriteType.CostumeHelmet; i < SpriteType.Exit;)
             {
                 // 해당 코스튬 부위가 있으면

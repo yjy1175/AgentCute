@@ -8647,6 +8647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  isMove: 0
 --- !u!114 &552586171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24346,6 +24347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  isMove: 0
 --- !u!114 &1474026077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26364,6 +26366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: -1
+  isMove: 1
 --- !u!114 &1617255895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27995,6 +27998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  isMove: 0
 --- !u!114 &1711935249
 MonoBehaviour:
   m_ObjectHideFlags: 0

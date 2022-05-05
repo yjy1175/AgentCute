@@ -44,6 +44,8 @@ public class GachaManager : SingleToneMaker<GachaManager>
         {
             // 해당 코스튬 해금(세이브용)
             info.Costumelock[item] = false;
+            // 매니저 해금
+            EquipmentManager.Instance.FindCostume(item).GetComponent<Costume>().IsLocked = false;
             // UI적용
             WareHouseManager.Instance.ChangeCostumeUnlock(item, false);
         }

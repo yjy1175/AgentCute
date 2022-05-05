@@ -583,16 +583,16 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         for (int i = 0; i < nameList.Count; i++)
             mInfo.Weaponlock[nameList[i]] = false;
         nameList.Clear();
-        // 코스튬 해금 정보 수정
-        foreach (string key in mInfo.Costumelock.Keys)
-        {
-            nameList.Add(key);
-            EquipmentManager.Instance.FindCostume(key).GetComponent<Costume>().IsLocked = false;
-            WareHouseManager.Instance.ChangeCostumeUnlock(key, false);
-        }
-        for (int i = 0; i < nameList.Count; i++)
-            mInfo.Costumelock[nameList[i]] = false;
-        nameList.Clear();
+        //// 코스튬 해금 정보 수정
+        //foreach (string key in mInfo.Costumelock.Keys)
+        //{
+        //    nameList.Add(key);
+        //    EquipmentManager.Instance.FindCostume(key).GetComponent<Costume>().IsLocked = false;
+        //    WareHouseManager.Instance.ChangeCostumeUnlock(key, false);
+        //}
+        //for (int i = 0; i < nameList.Count; i++)
+        //    mInfo.Costumelock[nameList[i]] = false;
+        //nameList.Clear();
         // 스킬 해금 정보 수정
         foreach (string key in mInfo.Skilllock.Keys)
         {
@@ -602,6 +602,6 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         for (int i = 0; i < nameList.Count; i++)
             mInfo.Skilllock[nameList[i]] = false;
         nameList.Clear();
-        OpenAlertEnterPannel("모든 장비, 스킬이 해금되었습니다.");
+        OpenAlertEnterPannel("모든 무기, 스킬이 해금되었습니다.");
     }
 }
