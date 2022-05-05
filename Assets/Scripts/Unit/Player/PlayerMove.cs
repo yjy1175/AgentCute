@@ -151,7 +151,7 @@ public class PlayerMove : IMove
         }
     }
 
-    //RayCase를 쏘아 유저기준 Size크기의 Vector3를 key로 갖는 딕셔너리를 만든다.
+    //RayCast를 쏘아 유저기준 Size크기의 Vector3를 key로 갖는 딕셔너리를 만든다.
     private void MakeMap()
     {
         //TO-DO frame drop이 없는 선 안에서 모든 몬스터가 쫓아오도록 size 조정필요

@@ -268,11 +268,14 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
         _monster.GetComponent<MonsterAttack>().CloseAttackPower = md.closeAttackPower;
 
+        //TO-DO MonsterEventHandler에서 MonsterDie와 쌍이 일치해야 예상치 않는 버그가 방지된다. 해당 부분은 api화로 해놓는게 버그 방지에 좋아보인다.
         _monster.GetComponent<IMove>().Moveable = true;
-        _monster.GetComponent<BoxCollider2D>().isTrigger = false;
         Color monsterColor = _monster.GetComponent<SpriteRenderer>().color;
         monsterColor.a = 1f;
         _monster.GetComponent<SpriteRenderer>().color = monsterColor;
+        _monster.GetComponent<MonsterAttack>().enabled = true;
+        _monster.GetComponent<BoxCollider2D>().enabled = true;
+
 
         //TO-DO : monster가 생기는 event를 유저가 구독하여 hp register는 Player에서 구독하도록 변경이 필요.
         _monster.GetComponent<MonsterEventHandler>().registerHpObserver(PlayerManager.Instance.Player.GetComponent<PlayerStatus>().registerMonsterHp);

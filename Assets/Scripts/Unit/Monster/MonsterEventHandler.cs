@@ -22,9 +22,7 @@ public class MonsterEventHandler : IEventHandler
         {
             GetComponent<MonsterStatus>().mIsDieToKillCount = true;
             //TO-DO IEventHandler로 event화 시켜놓을것
-            SpawnManager.currentKillMosterCount++;
-            GetComponent<MonsterMove>().Moveable = true;
-            
+            SpawnManager.currentKillMosterCount++;            
             StartCoroutine(MonsterDie(_obj));
 
         }
@@ -37,7 +35,14 @@ public class MonsterEventHandler : IEventHandler
     {
         transform.GetComponent<Animator>().SetTrigger("Die");
         _obj.GetComponent<IMove>().Moveable = false;
-        _obj.GetComponent<BoxCollider2D>().isTrigger = true;
+        _obj.GetComponent<MonsterAttack>().enabled = false;
+        _obj.GetComponent<BoxCollider2D>().enabled = false;
+
+        //TO-DO 몬스터가 죽어도 UseSkill에서 Moveable를 walk로 바꾸면서 true로 움직이는 부분이 있어
+        //스킬사용 후 사망시 몬스터가 움직이는 버그가 발생.  handler쪽에서 코루틴을 중지시켜줬지만 MonsterAttack에서 
+        //매번 hpeventhandler구독하기는 요소가 큰것같아 사망 handler를 만든이후 MonsterAttack에서 stop하도록 수정필요
+        _obj.GetComponent<MonsterAttack>().StopAllCoroutines();
+
 
         for (int i = 10; i >= 0; i--)
         {
