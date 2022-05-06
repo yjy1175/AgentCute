@@ -13,7 +13,7 @@ public class MonsterGameEndCheck : MonoBehaviour
     private void OnEnable()
     {
         PlayerManager.Instance.Player.GetComponent<PlayerEventHandler>().registerHpObserver(RegisterHpObserver);
-        gameObject.GetComponent<MonsterEventHandler>().registerHpObserver(registerBossHp);
+        gameObject.GetComponent<MonsterEventHandler>().registerHpObserver(RegisterBossHp);
     }
     // Update is called once per frame
     void Update()
@@ -32,7 +32,7 @@ public class MonsterGameEndCheck : MonoBehaviour
 
     }
 
-    public void registerBossHp(int _hp, GameObject _obj)
+    public void RegisterBossHp(int _hp, GameObject _obj)
     {
         if (_hp <= 0)
         {

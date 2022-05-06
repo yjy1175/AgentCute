@@ -175,11 +175,11 @@ public class DeongunStartManager : SingleToneMaker<DeongunStartManager>
             }
             mWarInfo.WarHp = playerData.BaseHp + playerData.TrainingHp 
                 - EquipmentManager.Instance.FindCostume(originCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerHP)
-                + EquipmentManager.Instance.FindCostume(mCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerHP);
+                + EquipmentManager.Instance.FindCostume(mWarInfo.WarCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerHP);
             mWarInfo.WarDamage = (int)((playerData.BaseATK + playerData.TrainingATK) * playerData.TrainingAddDamage);
             mWarInfo.WarMoveSpeed = playerData.BaseSPD * (playerData.MoveSpeedRate 
                 - EquipmentManager.Instance.FindCostume(originCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerSPD) / 100f
-                + EquipmentManager.Instance.FindCostume(mCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerSPD) / 100f);
+                + EquipmentManager.Instance.FindCostume(mWarInfo.WarCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerSPD) / 100f);
             mWarInfo.WarDiamond = playerData.Diamond;
             mWarInfo.WarWeaponName = playerData.CurrentWeaponName;
             mWarInfo.WarSkillLock = playerData.Skilllock;
