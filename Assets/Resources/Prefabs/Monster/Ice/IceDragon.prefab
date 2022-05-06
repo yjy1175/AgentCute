@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 4309738052289710997}
   - component: {fileID: 9006520060932562225}
   - component: {fileID: 8563228990153928349}
-  - component: {fileID: 6995359058093312060}
+  - component: {fileID: 3532791154140887250}
   m_Layer: 6
   m_Name: IceDragon
   m_TagString: Monster
@@ -322,7 +322,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
---- !u!114 &6995359058093312060
+--- !u!114 &3532791154140887250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -331,6 +331,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6546879599773562883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e97dfb08a52dc86428e9cefc83c20079, type: 3}
+  m_Script: {fileID: 11500000, guid: 43d29614a2d9e69469396f9dc0af723f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

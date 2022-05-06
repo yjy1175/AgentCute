@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 5812245265002904831}
   - component: {fileID: 8161718965600423542}
   - component: {fileID: 5823796080056747151}
-  - component: {fileID: 1504228480252666235}
+  - component: {fileID: 1354485637457846996}
   m_Layer: 6
   m_Name: FireDragon
   m_TagString: Monster
@@ -292,7 +292,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
---- !u!114 &1504228480252666235
+--- !u!114 &1354485637457846996
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 201545185475124410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e97dfb08a52dc86428e9cefc83c20079, type: 3}
+  m_Script: {fileID: 11500000, guid: 43d29614a2d9e69469396f9dc0af723f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8542949508962236385

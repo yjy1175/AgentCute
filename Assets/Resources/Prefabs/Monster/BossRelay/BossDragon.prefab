@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 6786413353474455229}
   - component: {fileID: -319447286943372367}
   - component: {fileID: -1750826748240266753}
-  - component: {fileID: 1674164637818091286}
+  - component: {fileID: 3847928634843331453}
   m_Layer: 6
   m_Name: BossDragon
   m_TagString: Monster
@@ -288,7 +288,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.1623883, y: 1.6281005}
   m_EdgeRadius: 0
---- !u!114 &1674164637818091286
+--- !u!114 &3847928634843331453
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 317464643416855164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e97dfb08a52dc86428e9cefc83c20079, type: 3}
+  m_Script: {fileID: 11500000, guid: 43d29614a2d9e69469396f9dc0af723f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6931552794244015246
