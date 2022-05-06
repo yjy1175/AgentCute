@@ -14,6 +14,9 @@ public class IEventHandler : MonoBehaviour
     public delegate void HpObserver(int _hp, GameObject _obj);
     public event HpObserver HpObserverEvent;
 
+    public delegate void DieObserver(bool _isDie, GameObject _obj);
+    public event DieObserver DieObserverEvent;
+
     // 아이템으로 인한 이동속도 계수 변경 옵저버
     public delegate void MoveSpeedObserver(float _moveSpeed, GameObject _obj);
     public event MoveSpeedObserver MoveSpeedObserverEvent;
@@ -64,7 +67,27 @@ public class IEventHandler : MonoBehaviour
     public virtual void ChangeHp(int _hp, GameObject _obj)
     {
         HpObserverEvent?.Invoke(_hp, _obj);
+        if(_hp<=0 && !gameObject.GetComponent<IStatus>().IsDie)
+        {
+            gameObject.GetComponent<IStatus>().IsDie = true;
+        }
     }
+
+    public virtual void registerIsDieObserver(DieObserver _obs)
+    {
+        //HpObserverEvent는 null이여도 -연산에대해 에러가 발생하지 않음
+        DieObserverEvent -= _obs;
+        DieObserverEvent += _obs;
+    }
+    public virtual void UnRegisterIsDieObserver(DieObserver _obs)
+    {
+        DieObserverEvent -= _obs;
+    }
+    public virtual void ChangeIsDie(bool _dieCheck, GameObject _obj)
+    {
+        DieObserverEvent?.Invoke(_dieCheck, _obj);
+    }
+
 
     // MoveSpeed
     public virtual void registerMoveSpeedObserver(MoveSpeedObserver _obs)

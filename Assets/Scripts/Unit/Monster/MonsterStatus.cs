@@ -23,13 +23,6 @@ public class MonsterStatus : IStatus
         return false;
     }
 
-
-
-    public enum MonsterType
-    {
-        Normal,
-        Boss
-    };
     // Start is called before the first frame update
     protected override void Start()
     {

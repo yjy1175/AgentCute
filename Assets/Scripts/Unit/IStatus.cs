@@ -11,15 +11,26 @@ public abstract class IStatus : MonoBehaviour
     protected int mHp;
     public virtual int Hp
     {
-        /*
-         *  TO-DO :player Attack에서 있어서 동기화가 되는지 확인필요
-         */
         get { return mHp; }
         set
         {
             mHp = value;
             gameObject.GetComponent<IEventHandler>().ChangeHp(mHp, gameObject);
         }
+    }
+    [SerializeField]
+    protected bool mIsDie;
+    public virtual bool IsDie
+    {
+        get { return mIsDie; }
+        set
+        {
+            if (mIsDie != value) { 
+                mIsDie = value;
+                gameObject.GetComponent<IEventHandler>().ChangeIsDie(mIsDie, gameObject);
+            }
+        }
+
     }
 
     //최대 HP

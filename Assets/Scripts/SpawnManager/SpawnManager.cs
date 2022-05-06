@@ -51,18 +51,25 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     [SerializeField]
     private List<SpawnData> mDataSetBoss;
     [SerializeField]
+    private List<SpawnData> mDataSetRelayBoss;
+    [SerializeField]
     private Dictionary<string, BerserkerData> mDataSetBerserker;
 
     [SerializeField]
     private float currentTime = 0f;
 
     //다음에 나올 보스번호 체크 & WaveNumber
+    
+    //보스 릴레이 스폰 여부
     [SerializeField]
-    private int mBossNum = 0;
+    private bool mIsSpawnRelayBoss = false;
+
+    [SerializeField]
+    private int mWaveCount = 0;
 
     public int WaveCount
     {
-        get { return mBossNum; }
+        get { return mWaveCount; }
     }
 
     //TO-DO UI쪽에서 관리하도록 수정필요
@@ -116,7 +123,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         InitWaveData();
 
         //boss 체크 초기화
-        mBossNum = 0;
+        mWaveCount = 0;
     }
 
     // Update is called once per frame
@@ -158,6 +165,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     {
         SpawnNormalMonster();
         SpawnBossMonster();
+        SpawnRelayBossMonster();
     }
 
     //NormalMonster 스폰
@@ -171,7 +179,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             {
                 //TO-DO : 미믹은 wave에 따라 몬스터 수가 증가하면 안되서 하드코딩으로 임시적용
                 //몬스터 type이나 plus를 할 여부를 csv로 받아 데이터값으로 적용하도록 수정 필요
-                int plusSwapnCount = mDataSetNormal[i].spawnMonster.Equals("Mimic") ? 0 : mBossNum;
+                int plusSwapnCount = mDataSetNormal[i].spawnMonster.Equals("Mimic") ? 0 : mWaveCount;
 
                 List <Transform> spawnZone = GetRandomZoneList(mDataSetNormal[i].spawnNumber + plusSwapnCount);//성욱님 요구사항으로 웨이브마다 +1마리씩 더 스폰 
                 for (int j = 0; j < spawnZone.Count; j++)
@@ -198,7 +206,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     //보스몬스터 스폰
     private void SpawnBossMonster()
     {
-        if (mBossNum < mDataSetBoss.Count && mDataSetBoss[mBossNum].realStartSpawnTime < currentTime)
+        if (mWaveCount < mDataSetBoss.Count && mDataSetBoss[mWaveCount].realStartSpawnTime < currentTime)
         {
 
             int childCnt = GameObject.Find("ObjectPoolSet").transform.childCount;
@@ -223,37 +231,48 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                 mDataSetNormal[i] = temp;
             }
 
-            GameObject monster = ObjectPoolManager.Instance.EnableGameObject(mDataSetBoss[mBossNum].spawnMonster);
-            monster.GetComponent<MonsterEventHandler>().registerHpObserver(registerBossHp);
+            GameObject monster = ObjectPoolManager.Instance.EnableGameObject(mDataSetBoss[mWaveCount].spawnMonster);
+            monster.GetComponent<MonsterEventHandler>().registerIsDieObserver(registerBossDieCheck);
 
             List<Transform> spawnZone = GetRandomZoneList(1);
             SpawnMonsterSet(ref monster, spawnZone[0].position);
 
-            mBossNum++;
+            mWaveCount++;
 
+            //보스등장 알림
             if (bossMessageCoroutine != null)
                 StopCoroutine(bossMessageCoroutine);
             bossMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "보스 등장", 6, 0);
             StartCoroutine(bossMessageCoroutine);
 
-            //TO-DO 데이터 셋으로 받게 수정 필요 BossRelay 코드가 많아지면 SpawnManager에 분기되는것이 많아질것으로 보임.
-            //하위클래스를 만들어 SpawnManager를 일반과 보스릴레이용으로 구분하는게 좋아보임
-            if(mMapType==MapManager.MapType.BossRelay)
-                currentTime = -99999999f;//다음 웨이브 시작시간 
-            else { 
-                currentTime = -60f;//다음 웨이브 시작시간 
-                if (waveMessageCoroutine != null)
-                    StopCoroutine(waveMessageCoroutine);
-            
-                waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + mBossNum, 6, 60);
-                StartCoroutine(waveMessageCoroutine);
-            }
-
-            //60초 이후 UI를 띄워준다.
+            //다음웨이브 시작알림
+            currentTime = -60f;//다음 웨이브 시작시간 
+            //60초 이후 다음 웨이브 시작 UI를 띄워준다.
             MakeWaveAlarm(60f);
             //버서커모드 코루틴
             StartCoroutine(BossWaitBerserkerMode(monster));
         }
+    }
+
+
+    private void SpawnRelayBossMonster()
+    {
+        if (!mIsSpawnRelayBoss && mMapType == MapManager.MapType.BossRelay)
+        {
+            Debug.Log("보스소환");
+            mIsSpawnRelayBoss = true;
+           
+            GameObject monster = ObjectPoolManager.Instance.EnableGameObject(mDataSetRelayBoss[mWaveCount].spawnMonster);
+            monster.GetComponent<MonsterEventHandler>().registerIsDieObserver(registerBossRelayDieCheck);
+
+            SpawnMonsterSet(ref monster, GameObject.Find("BossRelaySpawnZone").transform.position);
+            mWaveCount++;
+
+            if (bossMessageCoroutine != null)
+                StopCoroutine(bossMessageCoroutine);
+            bossMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, mWaveCount + "번째 보스 등장", 6, 0);
+            StartCoroutine(bossMessageCoroutine);
+        }        
     }
 
     //스폰전 몬스터 status 설정
@@ -268,11 +287,12 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
         }
         else {
-            _monster.GetComponent<MonsterStatus>().Hp = (int)((float)md.monsterHp * mDataSetWave[mBossNum].hpScale);
-            _monster.GetComponent<MonsterStatus>().MaxHP = (int)((float)md.monsterHp * mDataSetWave[mBossNum].hpScale);
-            _monster.GetComponent<MonsterStatus>().MoveSpeed = md.monsterSpeed + mDataSetWave[mBossNum].speedUp;
+            _monster.GetComponent<MonsterStatus>().Hp = (int)((float)md.monsterHp * mDataSetWave[mWaveCount].hpScale);
+            _monster.GetComponent<MonsterStatus>().MaxHP = (int)((float)md.monsterHp * mDataSetWave[mWaveCount].hpScale);
+            _monster.GetComponent<MonsterStatus>().MoveSpeed = md.monsterSpeed + mDataSetWave[mWaveCount].speedUp;
         }
 
+        _monster.GetComponent<MonsterStatus>().IsDie = false;
         _monster.GetComponent<MonsterStatus>().Size = md.monsterSize;
         _monster.GetComponent<MonsterStatus>().MonsterGrade= md.monsterGrade;
         _monster.GetComponent<MonsterStatus>().MonsterInName = md.monsterInName;
@@ -287,7 +307,6 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         //TO-DO MonsterEventHandler에서 MonsterDie와 쌍이 일치해야 예상치 않는 버그가 방지된다. 해당 부분은 api화로 해놓는게 버그 방지에 좋아보인다.
         _monster.GetComponent<IMove>().Moveable = true;
         _monster.GetComponent<MonsterMove>().IsDie = false;
-
         Color monsterColor = _monster.GetComponent<SpriteRenderer>().color;
         monsterColor.a = 1f;
         _monster.GetComponent<SpriteRenderer>().color = monsterColor;
@@ -356,6 +375,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
         mDataSetNormal = new List<SpawnData>();
         mDataSetBoss = new List<SpawnData>();
+        mDataSetRelayBoss = new List<SpawnData>();
         List<Dictionary<string, object>> spawnData = CSVReader.Read("CSVFile\\SpawnData");
         if (DEBUG)
             Debug.Log("현재 맵타입" + mMapType);
@@ -378,7 +398,13 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
                 if (MonsterManager.Instance.GetMonsterData(ds.spawnMonster).monsterGrade ==  MonsterManager.MonsterGrade.Boss)
                 {
-                    mDataSetBoss.Add(ds);
+                    if(MonsterManager.Instance.GetMonsterData(ds.spawnMonster).monsterSpawnMap == MapManager.MapType.BossRelay)
+                    {
+                        mDataSetRelayBoss.Add(ds);
+                    }
+                    else {
+                        mDataSetBoss.Add(ds);
+                    }
                     ObjectPoolManager.Instance.CreateDictTable(obj, 1, 1);
                 }
                 else 
@@ -394,12 +420,6 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     private List<Transform> GetRandomZoneList(int _cnt)
     {
         List<Transform> randomList = new List<Transform>();
-
-        if (mMapType == MapManager.MapType.BossRelay)
-        {
-            randomList.Add(GameObject.Find("BossRelaySpawnZone").transform);
-            return randomList;
-        }
 
         //mMonsterAreaNum에서 몬스터가 가장 적은 위치 체크
         //해당 위치에서 랜덤으로 스폰
@@ -461,29 +481,29 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     }
     
     //TO-DO 보스몬스터 체력을 보여주는 UI, UIManager등에서 관리하도록 수정이 필요한지 고민필요
-    public void registerBossHp(int _hp, GameObject _obj)
+    public void registerBossDieCheck(bool _hp, GameObject _obj)
     {
-        if (_hp <= 0)
+        if (currentTime < 0f)
         {
-            if (currentTime < 0f)
-            {
-                //보스 사망시 바로 UI를 띄워준다.
-                MakeWaveAlarm(0f);
-            }
-            currentTime = Mathf.Max(0f, currentTime);
+            //보스 사망시 바로 UI를 띄워준다.
+            MakeWaveAlarm(0f);
         }
+        currentTime = Mathf.Max(0f, currentTime);
     }
+    public void registerBossRelayDieCheck(bool isDie, GameObject _obj)
+    {
+        mIsSpawnRelayBoss = !isDie;
+        Debug.Log(_obj.name + "보스사망" + "사망시 체력");
+    }
+
 
     void MakeWaveAlarm(float _time)
     {
-        if (mMapType == MapManager.MapType.BossRelay)
-            return;
         if (waveMessageCoroutine != null)
             StopCoroutine(waveMessageCoroutine);
-        if(mMapType != MapManager.MapType.BossRelay) { 
-            waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + mBossNum, 6, _time);
-            StartCoroutine(waveMessageCoroutine);
-        }
+        waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + mWaveCount, 6, _time);
+        StartCoroutine(waveMessageCoroutine);
+        
     }
 
     //TO-DO 보스등장 메시지는 여기서하는게 맞을까?
