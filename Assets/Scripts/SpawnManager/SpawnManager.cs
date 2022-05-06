@@ -284,7 +284,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             _monster.GetComponent<MonsterStatus>().Hp = md.monsterHp;
             _monster.GetComponent<MonsterStatus>().MaxHP = md.monsterHp;
             _monster.GetComponent<MonsterStatus>().MoveSpeed = md.monsterSpeed;
-
+            _monster.GetComponent<CircleCollider2D>().enabled = true;
         }
         else {
             _monster.GetComponent<MonsterStatus>().Hp = (int)((float)md.monsterHp * mDataSetWave[mWaveCount].hpScale);
@@ -310,7 +310,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         _monster.GetComponent<SpriteRenderer>().color = monsterColor;
         _monster.GetComponent<MonsterAttack>().enabled = true;
         _monster.GetComponent<BoxCollider2D>().enabled = true;
-
+        
 
         //TO-DO : monster가 생기는 event를 유저가 구독하여 hp register는 Player에서 구독하도록 변경이 필요.
         _monster.GetComponent<MonsterEventHandler>().registerIsDieObserver(PlayerManager.Instance.Player.GetComponent<PlayerStatus>().registerMonsterDie);
