@@ -18,7 +18,7 @@ public class VertualJoyStick : MonoBehaviour, IDragHandler, IPointerDownHandler,
         bgImg = GetComponent<Image>();
         controllerImg = transform.GetChild(0).GetComponent<Image>();
     }
-    /*
+
     private void Update()
     {
         if (isMove && Time.timeScale == 1)
@@ -26,22 +26,21 @@ public class VertualJoyStick : MonoBehaviour, IDragHandler, IPointerDownHandler,
 #if UNITY_EDITOR
             if (Input.GetMouseButtonDown(0))
             {
-                if(Input.mousePosition.x < Screen.width / 2 && Input.mousePosition.y < Screen.height / 2)
+                if (Input.mousePosition.x < Screen.width / 2 && Input.mousePosition.y < Screen.height / 2)
                     transform.position = Input.mousePosition - new Vector3(GetComponent<RectTransform>().sizeDelta.x / 2, GetComponent<RectTransform>().sizeDelta.x / 2, 0);
             }
-/*
 #else
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
-                if(touch.position.x < Screen.width / 2 && touch.position.y < Screen.height / 2)
-                    transform.position = touch.position - new Vector2(GetComponent<RectTransform>().sizeDelta.x / 2, GetComponent<RectTransform>().sizeDelta.x / 2);
+                if(touch.phase == TouchPhase.Began)
+                    if(touch.position.x < Screen.width / 2 && touch.position.y < Screen.height / 2)
+                        transform.position = touch.position - new Vector2(GetComponent<RectTransform>().sizeDelta.x / 2, GetComponent<RectTransform>().sizeDelta.x / 2);
             }
 #endif
-
         }
     }
-    */
+    
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 pos;
