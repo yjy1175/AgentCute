@@ -286,6 +286,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
         //TO-DO MonsterEventHandler에서 MonsterDie와 쌍이 일치해야 예상치 않는 버그가 방지된다. 해당 부분은 api화로 해놓는게 버그 방지에 좋아보인다.
         _monster.GetComponent<IMove>().Moveable = true;
+        _monster.GetComponent<MonsterMove>().IsDie = false;
+
         Color monsterColor = _monster.GetComponent<SpriteRenderer>().color;
         monsterColor.a = 1f;
         _monster.GetComponent<SpriteRenderer>().color = monsterColor;
