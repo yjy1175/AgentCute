@@ -25,7 +25,15 @@ public class MusicManager : SingleToneMaker<MusicManager>
         public AudioClip soundName;
         public float volume;
     }
-    
+    [SerializeField]
+    private GameObject mBGMOn;
+    [SerializeField]
+    private GameObject mBGMOff;
+    [SerializeField]
+    private GameObject mEFMOn;
+    [SerializeField]
+    private GameObject mEFMOff;
+
     private void Awake()
     {
         mBackgroundMusic = GameObject.Find("BackgroundMusic");
@@ -111,5 +119,19 @@ public class MusicManager : SingleToneMaker<MusicManager>
         mAmplificationScale *= 0.9f;
         yield return new WaitForSeconds(0.3f);
         mAmplificationScale *= 10 / 9f;
+    }
+
+    public void MuteBGM(bool _mute)
+    {
+        mBackgroundMusic.GetComponent<AudioSource>().mute = _mute;
+        mBGMOn.transform.GetChild(0).gameObject.SetActive(!_mute);
+        mBGMOff.transform.GetChild(0).gameObject.SetActive(_mute);
+    }
+
+    public void MuteEFM(bool _mute)
+    {
+        mAudioSource.mute = _mute;
+        mEFMOn.transform.GetChild(0).gameObject.SetActive(!_mute);
+        mEFMOff.transform.GetChild(0).gameObject.SetActive(_mute);
     }
 }

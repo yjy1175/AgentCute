@@ -48707,6 +48707,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3313f7273957aa4b9ae5deec4ded705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mBackGroundMusic: {fileID: 87555234}
+  mIsBackGroundMusicMute: 0
+  mBackOn: {fileID: 1901807707}
+  mBackOff: {fileID: 1535792392}
 --- !u!1 &1276281141
 GameObject:
   m_ObjectHideFlags: 0
@@ -57243,7 +57247,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1535792395}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1274940766}
+        m_TargetAssemblyTypeName: LobbyMusicManager, Assembly-CSharp
+        m_MethodName: MuteBackGroundMusic
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1535792395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70199,7 +70215,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1901807710}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1274940766}
+        m_TargetAssemblyTypeName: LobbyMusicManager, Assembly-CSharp
+        m_MethodName: MuteBackGroundMusic
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1901807710
 MonoBehaviour:
   m_ObjectHideFlags: 0
