@@ -1,0 +1,12 @@
+SupplyBuffType,SupplyIntValue,SupplyStringValue,SupplyWeaponType,SupplyChance,SupplyDesc
+PlayerBaseSPD,3,null,sw/sp/bg/st,20,이동 속도 3% 증가버프를 획득하였습니다.
+PlayerBaseSPD,5,null,sw/sp/bg/st,10,이동 속도 5% 증가버프를 획득하였습니다.
+PlayerBaseHP,3,null,sw/sp/bg/st,20,체력 3 증가버프를 획득하였습니다.
+PlayerBaseHP,5,null,sw/sp/bg/st,10,체력 5 증가버프를 획득하였습니다.
+PlayerCostume,0,cstswsp05,sw/sp,23,코스튬 체험권을 획득하였습니다.
+PlayerCostume,0,cstbgst05,bg/st,30,코스튬 체험권을 획득하였습니다.
+PlayerCostume,0,cstswsp06,sw/sp,7,코스튬 체험권을 획득하였습니다.
+PlayerCostume,0,cstswsp07,sw/sp,7,코스튬 체험권을 획득하였습니다.
+PlayerCostume,0,cstswsp08,sw/sp,3,코스튬 체험권을 획득하였습니다.
+PlayerCostume,0,cstbgst06,bg/st,7,코스튬 체험권을 획득하였습니다.
+PlayerCostume,0,cstbgst07,bg/st,3,코스튬 체험권을 획득하였습니다.

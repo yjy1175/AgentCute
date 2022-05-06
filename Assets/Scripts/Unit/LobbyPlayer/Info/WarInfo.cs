@@ -73,13 +73,28 @@ public class WarInfo
         set { mWarCostumeShapeName = value; }
     }
 
-    // 전투 씬에 보낼 던전 버프 타입
+    // 전투 씬에 보낼 던전 버프 스텟
     [SerializeField]
-    private DeongunStartManager.DeongunBuffType mWarBuff;
-    public DeongunStartManager.DeongunBuffType WarBuff
+    private DeongunStartManager.DeongunBuffType mWarDeongunBuffType;
+    public DeongunStartManager.DeongunBuffType WarDeongunBuffType
     {
-        get { return mWarBuff; }
-        set { mWarBuff = value; }
+        get { return mWarDeongunBuffType; }
+        set { mWarDeongunBuffType = value; }
+    }
+    [SerializeField]
+    private int mWarBuffHp;
+    public int WarBuffHp
+    {
+        get { return mWarBuffHp; }
+        set { mWarBuffHp = value; }
+    }
+
+    [SerializeField]
+    private float mWarBuffSpeedRate;
+    public float WarBuffSpeedRate
+    {
+        get { return mWarBuffSpeedRate; }
+        set { mWarBuffSpeedRate = value; }
     }
 
     // 전투 씬에 보낼 스킬 해금 정보
@@ -98,5 +113,14 @@ public class WarInfo
     {
         get { return mIsBossRelay; }
         set { mIsBossRelay = value; }
+    }
+
+    // 전투 씬에 보낼 귀여워지는 물약 사용 여부
+    [SerializeField]
+    private bool mIsWarCutePotion;
+    public bool IsWarCutePotion
+    {
+        get { return mIsWarCutePotion; }
+        set { mIsWarCutePotion = value; }
     }
 }

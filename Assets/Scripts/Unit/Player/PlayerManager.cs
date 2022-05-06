@@ -32,6 +32,10 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         get { return mIsGameStart; }
         set { mIsGameStart = value; }
     }
+    [SerializeField]
+    private bool mIsCutePotion = false;
+    [SerializeField]
+    private Image mSupplyImage;
 
     // DEBUG용 맵 선택 오브젝트
     public GameObject mSelectMap;
@@ -65,10 +69,10 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         }
         WarInfo loadInfo = SaveLoadManager.Instance.LoadPlayerWarData();
 
-        mPlayer.GetComponent<IStatus>().Hp = loadInfo.WarHp;
-        mPlayer.GetComponent<IStatus>().MaxHP = loadInfo.WarHp;
+        mPlayer.GetComponent<IStatus>().Hp = loadInfo.WarHp + loadInfo.WarBuffHp;
+        mPlayer.GetComponent<IStatus>().MaxHP = loadInfo.WarHp + loadInfo.WarBuffHp;
         mPlayer.GetComponent<IStatus>().BaseDamage = loadInfo.WarDamage;
-        mPlayer.GetComponent<IStatus>().MoveSpeed = loadInfo.WarMoveSpeed;
+        mPlayer.GetComponent<IStatus>().MoveSpeed = loadInfo.WarMoveSpeed * (1 + loadInfo.WarBuffSpeedRate * 0.01f);
         mPlayer.GetComponent<PlayerStatus>().Diamond = loadInfo.WarDiamond;
 
         // 장비, 외형 입히기(코스튬은 입힐 필요 X)
@@ -93,6 +97,22 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
             MapManager.Instance.CurrentMapType = MapManager.MapType.BossRelay;
             mSelectMap.SetActive(false);
         }
+        // 던전 버프 타입별 UI수정
+        switch (loadInfo.WarDeongunBuffType)
+        {
+            case DeongunStartManager.DeongunBuffType.PlayerBaseHP:
+                mSupplyImage.sprite = Resources.Load<Sprite>("UI/WarUI/WarIcon/RecoverHP");
+                break;
+            case DeongunStartManager.DeongunBuffType.PlayerBaseSPD:
+                mSupplyImage.sprite = Resources.Load<Sprite>("UI/WarUI/WarIcon/MoveSPD");
+                break;
+            case DeongunStartManager.DeongunBuffType.PlayerCostume:
+                mSupplyImage.sprite 
+                    = EquipmentManager.Instance.FindCostume(loadInfo.WarCostumeName).GetComponent<SpriteRenderer>().sprite;
+                break;
+        }
+        // 귀여워지는 물약 사용 여부
+        mIsCutePotion = loadInfo.IsWarCutePotion;
     }
 
     private void InitPlayerLevelData()
@@ -127,7 +147,14 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         LevelUpStatusManager.Instance.SetSlots(weaponType);
 
         MusicManager.Instance.OnBackgroundMusic();
-
+        UIManager.Instance.GameRestart();
+        if (mIsCutePotion)
+        {
+            int exp = 0;
+            for (int i = 1; i < 10; i++)
+                exp += mLevelData[i];
+            Player.GetComponent<PlayerStatus>().PlayerGetExp += exp;
+        }
         IsGameStart = true;
     }
 

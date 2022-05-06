@@ -323,23 +323,55 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     }
     public void ClickAdvButton(bool _ok)
     {
+        mDeongunStartPannel.transform.GetChild(3).GetChild(6).gameObject.SetActive(true);
+        mDeongunStartPannel.transform.GetChild(2).GetChild(2).gameObject.SetActive(true);
         // 광고 보기 한 경우
         if (_ok)
         {
             // TODO : 광고 틀기, 던전 버프 랜덤 적용, 광고 횟수 차감
+            DeongunStartManager.Instance.DrawBuff();
+            mDeongunStartPannel.transform.GetChild(2).GetChild(2).gameObject.SetActive(false);
         }
         // 광고 보지 않은 경우
-        else
+        mSupportItemPannel.SetActive(false);
+
+        // 던전 버프 UI
+        switch (DeongunStartManager.Instance.CurrentBuffType)
         {
-            mSupportItemPannel.SetActive(false);
-            mDeongunStartPannel.SetActive(true);
+            case DeongunStartManager.DeongunBuffType.None:
+                break;
+            case DeongunStartManager.DeongunBuffType.PlayerBaseHP:
+                mDeongunStartPannel.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite 
+                    = Resources.Load<Sprite>("UI/WarUI/WarIcon/RecoverHP");
+                break;
+            case DeongunStartManager.DeongunBuffType.PlayerBaseSPD:
+                mDeongunStartPannel.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite 
+                    = Resources.Load<Sprite>("UI/WarUI/WarIcon/MoveSPD");
+                break;
+            case DeongunStartManager.DeongunBuffType.PlayerCostume:
+                mDeongunStartPannel.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite 
+                    = EquipmentManager.Instance.FindCostume(DeongunStartManager.Instance.CosumeName)
+                    .GetComponent<SpriteRenderer>().sprite;
+                break;
         }
+        mDeongunStartPannel.transform.GetChild(2).GetChild(1).GetComponent<Text>().text 
+            = DeongunStartManager.Instance.BuffDesc;
+        // 귀여워지는 물약 UI
+        LobbyPlayerInfo info = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info;
+        if(info.CutePotionCount > 0)
+        {
+            mDeongunStartPannel.transform.GetChild(3).GetChild(6).gameObject.SetActive(false);
+            mDeongunStartPannel.transform.GetChild(3).GetChild(0).GetComponent<Text>().text =
+                info.CutePotionCount.ToString();
+        }
+        mDeongunStartPannel.SetActive(true);
     }
     public void CloseDeongunStartPannel()
     {
         GamePause();
         mDeongunStartPannel.SetActive(false);
         // TODO : 적용되고있던 던전 버프 삭제
+        DeongunStartManager.Instance.ResetBuff();
     }
     public void CloseSupplyShopPannel()
     {

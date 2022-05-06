@@ -254,7 +254,7 @@ public class UIManager : SingleToneMaker<UIManager>
         mPauseBtn.SetActive(false);
         mBackGroundPannel.SetActive(true);
     }
-    private void GameRestart()
+    public void GameRestart()
     {
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
@@ -356,7 +356,7 @@ public class UIManager : SingleToneMaker<UIManager>
             PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentDodgeSkill = mDodgeSkill.GetComponent<Skill>();
             // 플레이매니저에서 스타트 API호출
             PlayerManager.Instance.SettingGameStart();
-            GameRestart();
+            //GameRestart();
             mSkillSelectPannel.SetActive(false);
         }
         else
