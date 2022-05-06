@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: -2343027093376447540}
   - component: {fileID: -4237301904761129351}
   - component: {fileID: 5384124610240065763}
+  - component: {fileID: 6806310523080553016}
   m_Layer: 6
   m_Name: DarkDragon
   m_TagString: Monster
@@ -131,6 +132,12 @@ MonoBehaviour:
   mFirePosition: {fileID: 0}
   mAutoAttackSpeed: 0
   currentBaseSkill: {fileID: 0}
+  mIsRush: 0
+  mRushDir: {x: 0, y: 0, z: 0}
+  mRushSpeed: 0
+  DEBUG_SKILL_NUMBER: -1
+  mCloseAttackPower: 0
+  mBerserkerModeScale: 0
   mMonsterSkill: []
   mSkillCheckCoolTime: []
 --- !u!114 &-1081574453662045461
@@ -160,6 +167,8 @@ MonoBehaviour:
   mSpeed: 0
   mDir: {x: 0, y: 0, z: 0}
   mMoveable: 1
+  mTarget: {fileID: 0}
+  mIsDie: 0
 --- !u!114 &-2288669341698474548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +259,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.12050432, y: -0.68594974}
@@ -266,6 +275,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.1623883, y: 1.6281005}
   m_EdgeRadius: 0
+--- !u!58 &6806310523080553016
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1847422478433623628}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.25
 --- !u!1 &3480909016274781083
 GameObject:
   m_ObjectHideFlags: 0

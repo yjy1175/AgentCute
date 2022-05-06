@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5253913897967937980}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6583698, y: -0.24511963, z: 0}
+  m_LocalPosition: {x: 0.6583698, y: 0.1227, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 5755311143659298872}
@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 5451573296280032421}
   - component: {fileID: 3360089267599425734}
   - component: {fileID: 8141190458073910028}
+  - component: {fileID: 5967797616814569870}
   m_Layer: 6
   m_Name: RelayYeti3
   m_TagString: Monster
@@ -198,6 +199,7 @@ MonoBehaviour:
   mDir: {x: 0, y: 0, z: 0}
   mMoveable: 1
   mTarget: {fileID: 0}
+  mIsDie: 0
 --- !u!114 &3754980033969104862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,13 +290,13 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.12532544, y: -0.27023304}
+  m_Offset: {x: -0.12532544, y: 0.270233}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.2}
     oldSize: {x: 2, y: 2}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
@@ -316,3 +318,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79dfd30061627c3409a70b92298b1998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &5967797616814569870
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6115777871061573331}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.25

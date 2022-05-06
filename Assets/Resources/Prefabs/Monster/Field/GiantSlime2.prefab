@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 989299774154576830}
   - component: {fileID: 989299774154575903}
   - component: {fileID: 3414686415570291982}
+  - component: {fileID: 4907619731395775636}
   m_Layer: 6
   m_Name: GiantSlime2
   m_TagString: Monster
@@ -231,6 +232,7 @@ MonoBehaviour:
   mDir: {x: 0, y: 0, z: 0}
   mMoveable: 1
   mTarget: {fileID: 0}
+  mIsDie: 0
 --- !u!50 &989299774154603622
 Rigidbody2D:
   serializedVersion: 4
@@ -262,7 +264,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.10213107}
@@ -316,3 +318,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79dfd30061627c3409a70b92298b1998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &4907619731395775636
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989299774154601466}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.2}
+  serializedVersion: 2
+  m_Radius: 0.25
