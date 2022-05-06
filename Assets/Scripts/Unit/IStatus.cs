@@ -18,20 +18,6 @@ public abstract class IStatus : MonoBehaviour
             gameObject.GetComponent<IEventHandler>().ChangeHp(mHp, gameObject);
         }
     }
-    [SerializeField]
-    protected bool mIsDie;
-    public virtual bool IsDie
-    {
-        get { return mIsDie; }
-        set
-        {
-            if (mIsDie != value) { 
-                mIsDie = value;
-                gameObject.GetComponent<IEventHandler>().ChangeIsDie(mIsDie, gameObject);
-            }
-        }
-
-    }
 
     //최대 HP
     [SerializeField]
@@ -43,6 +29,22 @@ public abstract class IStatus : MonoBehaviour
         {
             mMaxHp = value;
         }
+    }
+
+    [SerializeField]
+    protected bool mIsDie;
+    public virtual bool IsDie
+    {
+        get { return mIsDie; }
+        set
+        {
+            if (mIsDie != value)
+            {
+                mIsDie = value;
+                gameObject.GetComponent<IEventHandler>().ChangeIsDie(mIsDie, gameObject);
+            }
+        }
+
     }
 
     // 사이즈
@@ -81,9 +83,6 @@ public abstract class IStatus : MonoBehaviour
     protected int mDamaged;
     public  int DamageHp
     {
-        /*
-         *  TO-DO :player Attack에서 있어서 동기화가 되는지 확인필요
-         */
         get { return mDamaged; }
         set
         {

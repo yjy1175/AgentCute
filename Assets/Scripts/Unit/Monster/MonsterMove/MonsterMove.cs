@@ -24,9 +24,14 @@ public class MonsterMove : IMove
     protected override void Start()
     {
         base.Start();
-        //mTarget = GameObject.Find("UnitRoot");
         mSpeed = gameObject.GetComponent<IStatus>().MoveSpeed;
     }
+
+    private void OnEnable()
+    {
+        gameObject.GetComponent<MonsterEventHandler>().registerIsDieObserver(registerMonsterDie);
+    }
+    
 
     // Update is called once per frame
     void Update()
@@ -65,6 +70,12 @@ public class MonsterMove : IMove
             }
         }
     }
+
+    public void registerMonsterDie(bool _die, GameObject _obj)
+    {
+        mIsDie = _die;
+    }
+
     public override void StopStiffTime(float _time)
     {
         base.StopStiffTime(_time);

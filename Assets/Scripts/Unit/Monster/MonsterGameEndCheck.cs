@@ -12,8 +12,8 @@ public class MonsterGameEndCheck : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerManager.Instance.Player.GetComponent<PlayerEventHandler>().registerHpObserver(RegisterHpObserver);
-        gameObject.GetComponent<MonsterEventHandler>().registerHpObserver(RegisterBossHp);
+        PlayerManager.Instance.Player.GetComponent<PlayerEventHandler>().registerIsDieObserver(RegisterPlayerIsDieObserver);
+        gameObject.GetComponent<MonsterEventHandler>().registerIsDieObserver(RegisterBossIsDieObserver);
     }
     // Update is called once per frame
     void Update()
@@ -21,9 +21,9 @@ public class MonsterGameEndCheck : MonoBehaviour
         
     }
 
-    private void RegisterHpObserver(int _hp, GameObject _obj)
+    private void RegisterPlayerIsDieObserver(bool _Die, GameObject _obj)
     {
-        if (_hp <= 0)
+        if (_Die)
         {
             //TO-DO
             Debug.Log("player »ç¸Á");
@@ -32,11 +32,11 @@ public class MonsterGameEndCheck : MonoBehaviour
 
     }
 
-    public void RegisterBossHp(int _hp, GameObject _obj)
+    public void RegisterBossIsDieObserver(bool _die, GameObject _obj)
     {
-        if (_hp <= 0)
+        if (_die)
         {
-            Debug.Log("º¸½º¸ó½ºÅÍ »ç¸Á");
+            Debug.Log("º¸½º¸ó½ºÅÍ(µå·¡°ï) »ç¸Á");
         }
     }
 }

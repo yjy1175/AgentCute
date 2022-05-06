@@ -84,11 +84,10 @@ public class PlayerStatus : IStatus
 
     }
 
-    public void registerMonsterHp(int _hp, GameObject _obj)
+    public void registerMonsterDie(bool _die, GameObject _obj)
     {
-        if (_hp <= 0 && !_obj.GetComponent<MonsterStatus>().mIsDieToGetExp)
+        if (_die)
         {
-            _obj.GetComponent<MonsterStatus>().mIsDieToGetExp = true;
             MonsterManager.MonsterGrade md = _obj.GetComponent<MonsterStatus>().MonsterGrade;
             PlayerGetExp = GetMonsterExp(md);
         }

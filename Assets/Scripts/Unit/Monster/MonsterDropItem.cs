@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MonsterDropItem : MonoBehaviour
 {
-    private bool mIsDropItem;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -19,17 +17,15 @@ public class MonsterDropItem : MonoBehaviour
 
     private void OnEnable()
     {
-        gameObject.GetComponent<MonsterEventHandler>().registerHpObserver(registerMonsterHp);
-        mIsDropItem = false;
+        gameObject.GetComponent<MonsterEventHandler>().registerIsDieObserver(registerMonsterDie);
     }
 
-    public void registerMonsterHp(int _hp, GameObject _obj)
+    public void registerMonsterDie(bool _die, GameObject _obj)
     {
-        if (_hp <= 0 && !mIsDropItem)
+        if (_die)
         {
             if (!MonsterManager.Instance.GetMonsterData(gameObject.name).monsterDrop.Equals("null")) { 
 
-                mIsDropItem = true;
                 string[] itemList = MonsterManager.Instance.GetMonsterData(gameObject.name).monsterDrop.Split('/');
                 int rateTotalSum = 0;
                 int randSum = 0;

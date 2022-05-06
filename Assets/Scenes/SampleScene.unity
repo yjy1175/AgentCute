@@ -2808,7 +2808,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTime: 0
-  mBossNum: 0
+  mIsSpawnRelayBoss: 0
+  mWaveCount: 0
   allMonsterText: {fileID: 0}
   currentAllMonsterText: {fileID: 0}
   currentKillMonsterText: {fileID: 225354738}
@@ -8403,6 +8404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 531027615}
+  - component: {fileID: 531027616}
   m_Layer: 0
   m_Name: RayCastManager
   m_TagString: Untagged
@@ -8424,6 +8426,18 @@ Transform:
   m_Father: {fileID: 1211573771}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &531027616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531027614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b3dd81d3dd4254aa4f8a930050fa66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &546671929
 GameObject:
   m_ObjectHideFlags: 0

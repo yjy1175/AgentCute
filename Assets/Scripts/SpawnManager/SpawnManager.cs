@@ -293,12 +293,11 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         }
 
         _monster.GetComponent<MonsterStatus>().IsDie = false;
+        _monster.GetComponent<MonsterMove>().IsDie = false;
         _monster.GetComponent<MonsterStatus>().Size = md.monsterSize;
         _monster.GetComponent<MonsterStatus>().MonsterGrade= md.monsterGrade;
         _monster.GetComponent<MonsterStatus>().MonsterInName = md.monsterInName;
         _monster.GetComponent<MonsterStatus>().MoveSpeedRate = 1f;
-        _monster.GetComponent<MonsterStatus>().mIsDieToKillCount = false;
-        _monster.GetComponent<MonsterStatus>().mIsDieToGetExp = false;
         _monster.transform.position = _pos;
 
 
@@ -306,7 +305,6 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
         //TO-DO MonsterEventHandler에서 MonsterDie와 쌍이 일치해야 예상치 않는 버그가 방지된다. 해당 부분은 api화로 해놓는게 버그 방지에 좋아보인다.
         _monster.GetComponent<IMove>().Moveable = true;
-        _monster.GetComponent<MonsterMove>().IsDie = false;
         Color monsterColor = _monster.GetComponent<SpriteRenderer>().color;
         monsterColor.a = 1f;
         _monster.GetComponent<SpriteRenderer>().color = monsterColor;
@@ -315,7 +313,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
 
         //TO-DO : monster가 생기는 event를 유저가 구독하여 hp register는 Player에서 구독하도록 변경이 필요.
-        _monster.GetComponent<MonsterEventHandler>().registerHpObserver(PlayerManager.Instance.Player.GetComponent<PlayerStatus>().registerMonsterHp);
+        _monster.GetComponent<MonsterEventHandler>().registerIsDieObserver(PlayerManager.Instance.Player.GetComponent<PlayerStatus>().registerMonsterDie);
 
         _monster.SetActive(true);
         allMonsterCount++;
