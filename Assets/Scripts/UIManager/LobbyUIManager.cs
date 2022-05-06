@@ -110,6 +110,12 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     private int mSelectCost;
     [SerializeField]
     private TrainingManager.TrainingType mSelectType;
+
+    [Header("∞°¿ÃµÂ")]
+    [SerializeField]
+    private GameObject mGuidePannel;
+    [SerializeField]
+    private bool mIsOpenGuidePannel;
     #endregion
     void Start()
     {
@@ -592,6 +598,18 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
                 GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.Diamond.ToString();
         }
         mBMPannel.SetActive(mIsOpenBMPannel);
+    }
+    public void ClickGuideButton()
+    {
+        mIsOpenGuidePannel = !mIsOpenGuidePannel;
+        mGuidePannel.SetActive(mIsOpenGuidePannel);
+    }
+    public void ClickNextGuide(bool _isNext)
+    {
+        mGuidePannel.transform.GetChild(1).gameObject.SetActive(!_isNext);
+        mGuidePannel.transform.GetChild(2).gameObject.SetActive(_isNext);
+        mGuidePannel.transform.GetChild(3).gameObject.SetActive(!_isNext);
+        mGuidePannel.transform.GetChild(4).gameObject.SetActive(_isNext);
     }
     public void GameExit()
     {
