@@ -225,9 +225,9 @@ public class UIManager : SingleToneMaker<UIManager>
     }
     public void ClickResurrectionButton()
     {
-        if(PlayerManager.Instance.Player.GetComponent<PlayerStatus>().Diamond >= 30)
+        if(PlayerManager.Instance.Player.GetComponent<PlayerStatus>().Diamond >= 6)
         {
-            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().Diamond -= 30;
+            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().Diamond -= 6;
             PlayerManager.Instance.ResurrectionPlayer();
             mGaneOverResurrectionPannel.SetActive(false);
             GameRestart();
