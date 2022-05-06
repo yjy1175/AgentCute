@@ -161,10 +161,8 @@ public class PlayerMove : IMove
         {
             for (int j = 0; j < Size; j++)
             {
-                Vector3 targetPosition = Vector3Int.FloorToInt(transform.position);
-
                 Node node = new Node();
-                node.isMove = MoveableWithRay(Size / 2 - i, Size / 2 - j);
+                node.isMove = CustomRayCastManager.Instance.NomarlizeMoveableWithRay(transform.position, Size / 2 - i, Size / 2 - j, 0.5f, 0.49f, true, ref mRayPosition); 
                 node.value = 99999;
                 mBfsMap[mRayPosition] = node;
                 if (DEBUG)
@@ -181,46 +179,6 @@ public class PlayerMove : IMove
             Debug.Log("장애물 개수" + count);
             Debug.Log("MakeMap 이후 mBfsMap의크기" + mBfsMap.Count);
         }
-    }
-
-    //object위치에서 x,y거리만큼 떨어진곳에 장애물이 있는지 확인
-    //타일의 정중앙에서 rayCaset를 발사하여 장애물이 있는지 체크
-    //장애물이 없으면 true , 있으면 false를 리턴
-    private bool MoveableWithRay(int x, int y)
-    {
-        Vector3 targetPosition = transform.position;
-        targetPosition.x += x;
-        targetPosition.y += y;
-        float distance = Vector3.Distance(targetPosition, transform.position);
-
-
-        Vector3 dir = (targetPosition - transform.position).normalized * distance;
-        Vector2 rayTargetPosition = new Vector2(transform.position.x + dir.x, transform.position.y + dir.y);
-
-        //rayTargetPosition의 위치를 tile의 한가운데로 위치시켜줌
-        rayTargetPosition = Vector2Int.FloorToInt(rayTargetPosition);
-        rayTargetPosition.x += 0.5f;
-        rayTargetPosition.y += 0.5f;
-        mRayPosition = rayTargetPosition;
-
-        for (int i = 0; i < 4; i++)
-        {
-            RaycastHit2D ray = Physics2D.Raycast(rayTargetPosition, mVectorDir[i], raydist, LayerMask.GetMask("Tilemap"));
-            if (ray.collider != null)
-            {
-                if (DEBUG)
-                {
-                    for (int j = 0; j < 8; j++)
-                    {
-                        Vector3 debugVector = mVectorDir[j] * raydist;
-                        Debug.DrawRay(new Vector2(rayTargetPosition.x, rayTargetPosition.y), debugVector, Color.red);
-                    }
-                }
-                return false;
-            }
-        }
-        return true;
-
     }
 
 }
