@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 1940037258501925986}
   - component: {fileID: 1940037258501926856}
   - component: {fileID: 3006193785815220709}
+  - component: {fileID: 3588190423444422745}
   m_Layer: 6
   m_Name: RelayGiantSlime1
   m_TagString: Monster
@@ -203,6 +204,7 @@ MonoBehaviour:
   mDir: {x: 0, y: 0, z: 0}
   mMoveable: 1
   mTarget: {fileID: 0}
+  mIsDie: 0
 --- !u!114 &1940037258501925922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +288,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79dfd30061627c3409a70b92298b1998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &3588190423444422745
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940037258501934202}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.2}
+  serializedVersion: 2
+  m_Radius: 0.25
 --- !u!1 &1940037258501934719
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 4253504436617134222}
   - component: {fileID: 2586881427379190764}
   - component: {fileID: 4749279514757142987}
+  - component: {fileID: -9161458710857019606}
   m_Layer: 6
   m_Name: RelayWendigo3
   m_TagString: Monster
@@ -142,13 +143,13 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.12329465, y: -0.18312079}
+  m_Offset: {x: -0.10533619, y: 0.41669124}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.2}
     oldSize: {x: 2, y: 2}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
@@ -156,7 +157,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.768922, y: 1.3595122}
+  m_Size: {x: 0.8048389, y: 1.4241625}
   m_EdgeRadius: 0
 --- !u!114 &5290748239511789476
 MonoBehaviour:
@@ -274,6 +275,7 @@ MonoBehaviour:
   mDir: {x: 0, y: 0, z: 0}
   mMoveable: 1
   mTarget: {fileID: 0}
+  mIsDie: 0
 --- !u!114 &4749279514757142987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +288,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79dfd30061627c3409a70b92298b1998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &-9161458710857019606
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409239146568513173}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.09338391, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.25
 --- !u!1 &666587697823305846
 GameObject:
   m_ObjectHideFlags: 0
