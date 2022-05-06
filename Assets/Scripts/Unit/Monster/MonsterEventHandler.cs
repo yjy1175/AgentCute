@@ -34,7 +34,7 @@ public class MonsterEventHandler : IEventHandler
     IEnumerator MonsterDie(GameObject _obj)
     {
         transform.GetComponent<Animator>().SetTrigger("Die");
-        _obj.GetComponent<IMove>().Moveable = false;
+        _obj.GetComponent<MonsterMove>().IsDie = true;
         _obj.GetComponent<MonsterAttack>().enabled = false;
         _obj.GetComponent<BoxCollider2D>().enabled = false;
 

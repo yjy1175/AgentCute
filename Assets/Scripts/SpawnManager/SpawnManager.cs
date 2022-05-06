@@ -236,17 +236,21 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             bossMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "보스 등장", 6, 0);
             StartCoroutine(bossMessageCoroutine);
 
-            //TO-DO 데이터 셋으로 받게 수정 필요
+            //TO-DO 데이터 셋으로 받게 수정 필요 BossRelay 코드가 많아지면 SpawnManager에 분기되는것이 많아질것으로 보임.
+            //하위클래스를 만들어 SpawnManager를 일반과 보스릴레이용으로 구분하는게 좋아보임
             if(mMapType==MapManager.MapType.BossRelay)
                 currentTime = -99999999f;//다음 웨이브 시작시간 
-            else
+            else { 
                 currentTime = -60f;//다음 웨이브 시작시간 
+                if (waveMessageCoroutine != null)
+                    StopCoroutine(waveMessageCoroutine);
+            
+                waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + mBossNum, 6, 60);
+                StartCoroutine(waveMessageCoroutine);
+            }
 
-            if (waveMessageCoroutine != null)
-                StopCoroutine(waveMessageCoroutine);
-            waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + mBossNum, 6, 60);
-            StartCoroutine(waveMessageCoroutine);
-
+            //60초 이후 UI를 띄워준다.
+            MakeWaveAlarm(60f);
             //버서커모드 코루틴
             StartCoroutine(BossWaitBerserkerMode(monster));
         }
@@ -282,6 +286,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
         //TO-DO MonsterEventHandler에서 MonsterDie와 쌍이 일치해야 예상치 않는 버그가 방지된다. 해당 부분은 api화로 해놓는게 버그 방지에 좋아보인다.
         _monster.GetComponent<IMove>().Moveable = true;
+        _monster.GetComponent<MonsterMove>().IsDie = false;
+
         Color monsterColor = _monster.GetComponent<SpriteRenderer>().color;
         monsterColor.a = 1f;
         _monster.GetComponent<SpriteRenderer>().color = monsterColor;
@@ -461,15 +467,24 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         {
             if (currentTime < 0f)
             {
-                if (waveMessageCoroutine != null)
-                    StopCoroutine(waveMessageCoroutine);
-                waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + mBossNum, 6, 0);
-                StartCoroutine(waveMessageCoroutine);
+                //보스 사망시 바로 UI를 띄워준다.
+                MakeWaveAlarm(0f);
             }
             currentTime = Mathf.Max(0f, currentTime);
         }
     }
 
+    void MakeWaveAlarm(float _time)
+    {
+        if (mMapType == MapManager.MapType.BossRelay)
+            return;
+        if (waveMessageCoroutine != null)
+            StopCoroutine(waveMessageCoroutine);
+        if(mMapType != MapManager.MapType.BossRelay) { 
+            waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + mBossNum, 6, _time);
+            StartCoroutine(waveMessageCoroutine);
+        }
+    }
 
     //TO-DO 보스등장 메시지는 여기서하는게 맞을까?
     IEnumerator SpawnMessage(GameObject _obj, string _txt, int _cnt, float _time)

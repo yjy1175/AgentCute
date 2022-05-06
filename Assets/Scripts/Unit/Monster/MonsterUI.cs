@@ -14,7 +14,6 @@ public class MonsterUI : IUI
         mStatusObject = GameObject.Find("MonsterStatusObject");
         mHpBar = mStatusObject.transform.Find("HpBar");
         gameObject.GetComponent<MonsterEventHandler>().registerHpObserver(RegisterHpObserver);
-        mHpBar.gameObject.SetActive(true);
     }
 
     private void RegisterHpObserver(int _hp, GameObject _obj)

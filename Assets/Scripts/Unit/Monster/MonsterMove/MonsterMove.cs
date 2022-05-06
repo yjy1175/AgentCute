@@ -10,6 +10,16 @@ public class MonsterMove : IMove
 
     [SerializeField]
     private GameObject mTarget;
+
+    [SerializeField]
+    private bool mIsDie;
+    public bool IsDie
+    {
+        set { mIsDie = value; }
+        get { return mIsDie; }
+    }
+
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -42,7 +52,7 @@ public class MonsterMove : IMove
     private void FixedUpdate()
     {
         // 모든 물리연산은 FixedUpdate 에서
-        if (mMoveable) {
+        if (mMoveable && !mIsDie) {
             transform.Translate(mDir * mSpeed * Time.deltaTime);
             int size = gameObject.GetComponent<IStatus>().Size;
             if (gameObject.transform.position.x < PlayerManager.Instance.Player.transform.position.x)
