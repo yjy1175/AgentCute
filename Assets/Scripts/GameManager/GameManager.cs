@@ -6,10 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject mLobbyImage;
+    [SerializeField]
+    private List<Sprite> mBackImage = new List<Sprite>();
+    [SerializeField]
+    private GameObject mTitleImage;
     // Start is called before the first frame update
     void Start()
     {
-        
+        int ran = Random.Range(0, mBackImage.Count);
+        mLobbyImage.GetComponent<Image>().sprite = mBackImage[ran];
+        mTitleImage.transform.GetChild(ran).gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -31,4 +39,6 @@ public class GameManager : MonoBehaviour
         Application.Quit();
 #endif
     }
+
+
 }
