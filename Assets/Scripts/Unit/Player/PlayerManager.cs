@@ -74,7 +74,8 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         mPlayer.GetComponent<IStatus>().BaseDamage = loadInfo.WarDamage;
         mPlayer.GetComponent<IStatus>().MoveSpeed = loadInfo.WarMoveSpeed * (1 + loadInfo.WarBuffSpeedRate * 0.01f);
         mPlayer.GetComponent<PlayerStatus>().Diamond = loadInfo.WarDiamond;
-
+        //TO-DO loadInfo에서 설정필요
+        mPlayer.GetComponent<PlayerStatus>().MagnetPower = 3f;
         // 장비, 외형 입히기(코스튬은 입힐 필요 X)
         EquipmentManager.Instance.ChangeWeapon(loadInfo.WarWeaponName);
         EquipmentManager.Instance.ChangeCostume(loadInfo.WarCostumeShapeName);

@@ -38,6 +38,15 @@ public class WarInfo
         set { mWarMoveSpeed = value; }
     }
 
+    //전투 씬에 보낼 아이템 자석기능 파워
+    private float mWarMagnetPower;
+    public float WarMagnetPower
+    {
+        get { return mWarMagnetPower; }
+        set { mWarMagnetPower = value; }
+    }
+
+
     // 전투 씬에 보낼 다이아 수량
     [SerializeField]
     private int mWarDiamond;

@@ -42,6 +42,17 @@ public class PlayerStatus : IStatus
         set { mIsFirstDie = value; }
     }
 
+    [SerializeField]
+    private float mMagnetPower;
+    public float MagnetPower
+    {
+        get { return mMagnetPower; }
+        set { mMagnetPower = value;
+            gameObject.GetComponent<PlayerEventHandler>().ChangeMagnetPower(mMagnetPower);
+        }
+    }
+
+
     protected override void Start()
     {
         base.Start();

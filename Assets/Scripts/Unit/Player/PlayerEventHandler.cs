@@ -9,11 +9,12 @@ public class PlayerEventHandler : IEventHandler
     //ExpObserver 사용시 Player현재 경험치, 최대경험치가 바뀔경우 호출되므로 PlayerStatus의 경험치를 PlayerExp,PlayerMaxExp를 참조하여 사용할 것
     public delegate void ExpObserver();
     public delegate void GoldObserver(int _gold);
+    public delegate void MagnetPowerObserver(float _magerPower);
 
     public event LevelObserver LevelObserverEvent;
     public event ExpObserver ExpObserverEvent;
     public event GoldObserver GoldObserverEvent;
-
+    public event MagnetPowerObserver MagnetPowerObserverEvent;
 
 
     //Level EventHandler
@@ -67,4 +68,18 @@ public class PlayerEventHandler : IEventHandler
         GoldObserverEvent?.Invoke(_gold);
     }
 
+    //magnet Power 옵저버
+    public virtual void registerMagnetPowerbserver(MagnetPowerObserver _obs)
+    {
+        MagnetPowerObserverEvent -= _obs;
+        MagnetPowerObserverEvent += _obs;
+    }
+    public virtual void UnregisterMagnetPowerbserver(MagnetPowerObserver _obs)
+    {
+        MagnetPowerObserverEvent -= _obs;
+    }
+    public void ChangeMagnetPower(float _magnetPower)
+    {
+        MagnetPowerObserverEvent?.Invoke(_magnetPower);
+    }
 }

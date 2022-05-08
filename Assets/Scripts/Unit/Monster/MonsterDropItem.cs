@@ -70,9 +70,8 @@ public class MonsterDropItem : MonoBehaviour
                         int y = Random.Range(0, 6) - 3;
                         Vector3 pos = gameObject.transform.position;
 
-                        CustomRayCastManager.Instance.NomarlizeMoveableWithRay(transform.position, x,y, 0.5f, 0.49f, true, ref pos);
                         //여러개 드랍시 가로, 세로로만 나오는것을 방지하기위해 랜덤한 위치에 드랍
-                        if (CustomRayCastManager.Instance.NomarlizeMoveableWithRay(transform.position, x, y, 0.5f, 0.49f, true, ref pos))
+                        if (CustomRayCastManager.Instance.NomarlizeMoveableWithRay(transform.position, x, y, 0.49f, 0.49f, false, ref pos))
                             itemObj.transform.position = pos;
                         else
                             itemObj.transform.position = transform.position;

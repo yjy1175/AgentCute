@@ -120,6 +120,18 @@ public class LobbyPlayerInfo
             SaveLoadManager.Instance.SavePlayerInfoFile(this);
         }
     }
+    [SerializeField]
+
+    private float mTrainingMagnetPower;
+    public float TrainingMagnetPower
+    {
+        get { return mTrainingMagnetPower; }
+        set
+        {
+            mTrainingMagnetPower = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
+    }
     #endregion
     #region EQUIP_STAT
     [SerializeField]
