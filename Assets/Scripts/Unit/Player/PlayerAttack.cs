@@ -181,7 +181,7 @@ public class PlayerAttack : IAttack
         {
             mDSkillUseable = false;
             useSkill(DBtn, CurrentDodgeSkill);
-            GetComponent<PlayerStatus>().Invincibility(CurrentDodgeSkill.Spec.SkillStartTime);
+            GetComponent<PlayerStatus>().Invincibility(CurrentDodgeSkill.Spec.SkillMotionStartTime);
         }
     }
     /*
@@ -210,7 +210,7 @@ public class PlayerAttack : IAttack
         GetComponent<PlayerMove>().MAnim.SetFloat("AttackState", 0f);
         GetComponent<PlayerMove>().MAnim.SetFloat("NormalState", num);
         GetComponent<PlayerMove>().MAnim.SetTrigger("Attack");
-        yield return new WaitForSeconds(_skill.Spec.SkillStopTime); // Todo : 추후에 스킬 데이터에서 대기시간을 받아 입력 
+        yield return new WaitForSeconds(_skill.Spec.SkillMotionRemainTime); // Todo : 추후에 스킬 데이터에서 대기시간을 받아 입력 
         GetComponent<PlayerMove>().Moveable = true;
     }
 

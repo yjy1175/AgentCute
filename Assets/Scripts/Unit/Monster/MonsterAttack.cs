@@ -209,34 +209,38 @@ public class MonsterAttack : IAttack
         gameObject.GetComponent<IMove>().Moveable = false;
 
         if (DEBUG)
-            Debug.Log(gameObject.name + " 대기시간" + skill.Spec.SkillStartTime);
+            Debug.Log(gameObject.name + " 대기시간" + skill.Spec.SkillMotionStartTime);
 
         //3. 스킬 모션 동작.
         transform.GetComponent<Animator>().SetTrigger(MonsterManager.Instance.GetMonsterData(gameObject.name).skillAttackAnimation[_skillNum]);
 
         //4. 모션 중 스킬이 발동되더야할 시점까지 wait
-        yield return new WaitForSeconds(skill.Spec.SkillStartTime);
+        yield return new WaitForSeconds(skill.Spec.SkillMotionStartTime);
 
         if (DEBUG)
             Debug.Log(gameObject.name + " 스킬발사");
 
         //5. 스킬발사
         FireSkillLaunchType(skillLaunchType, skill, skill.Spec.SkillCount,
-                            PlayerManager.Instance.Player.transform.position, mFirePosition.transform.position, false, skill.Spec.SkillStopTime);
+                            PlayerManager.Instance.Player.transform.position, mFirePosition.transform.position, false, skill.Spec.SkillMotionRemainTime);
         mIsUsingSkill = true;
 
         if (DEBUG)
-            Debug.Log(gameObject.name + " 스킬동작동안 멈춤시간 :" + skill.Spec.SkillStopTime);
+            Debug.Log(gameObject.name + " 스킬동작동안 멈춤시간 :" + skill.Spec.SkillMotionRemainTime);
 
 
         //6. 스킬 동작시간동안 멈춤
-        yield return new WaitForSeconds(skill.Spec.SkillStopTime);
+        yield return new WaitForSeconds(skill.Spec.SkillMotionRemainTime);
 
         if (DEBUG)
             Debug.Log(gameObject.name + " Walk로 전환");
 
         //7. 다시 움직이는 애니메이션 동작
         transform.GetComponent<Animator>().SetTrigger("Walk");
+
+        //8. 딜타임
+        yield return new WaitForSeconds(skill.Spec.SkillStopTime);
+
         gameObject.GetComponent<IMove>().Moveable = true;
         mIsUsingSkill = false;
     }
