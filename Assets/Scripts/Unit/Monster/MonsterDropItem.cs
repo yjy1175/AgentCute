@@ -24,9 +24,10 @@ public class MonsterDropItem : MonoBehaviour
     {
         if (_die)
         {
-            if (!MonsterManager.Instance.GetMonsterData(gameObject.name).monsterDrop.Equals("null")) { 
+            int rank = gameObject.GetComponent<MonsterStatus>().MonsterRank;
+            if (!MonsterManager.Instance.GetMonsterData(gameObject.name, rank).monsterDrop.Equals("null")) { 
 
-                string[] itemList = MonsterManager.Instance.GetMonsterData(gameObject.name).monsterDrop.Split('/');
+                string[] itemList = MonsterManager.Instance.GetMonsterData(gameObject.name, rank).monsterDrop.Split('/');
                 int rateTotalSum = 0;
                 int randSum = 0;
                 int randNum;
@@ -81,7 +82,7 @@ public class MonsterDropItem : MonoBehaviour
             }
             
             //몬스터에 설정된 경험치 드랍
-            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().PlayerGetExp = MonsterManager.Instance.GetMonsterData(gameObject.name).monsterExp;
+            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().PlayerGetExp = MonsterManager.Instance.GetMonsterData(gameObject.name, rank).monsterExp;
         }
     }
 

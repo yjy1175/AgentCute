@@ -11,7 +11,8 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
     {
         public int id;
         public MapManager.MapType monsterSpawnMap;
-        public string monsterInName;
+        public int monsterRank;
+        public string monsterColor;
         public int monsterSize;
         public string monsterType;
         public string monsterName;
@@ -40,7 +41,7 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
 
 
     [SerializeField]
-    private MonsterDataSet dataSet;
+    private Dictionary<Tuple<string, int>, MonsterManager.MonsterData> mDataSet;
 
     private void Awake()
     {
@@ -88,12 +89,14 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
      * 몬스터 string을 str로 넣어주면 몬스터 data를 return 해준다.
      */
 
-    public MonsterData GetMonsterData(string str)
+    public MonsterData GetMonsterData(string _str, int _num)
     {
         /*
          * TO-DO 없는 key값에 대한 예외처리 필요
          * */
-        return dataSet[str];
+        Tuple<string, int> tuple = new Tuple<string, int>(_str, _num);
+        Debug.Log("getmonster "+_str+" "+_num);
+        return mDataSet[tuple];
     }
 
     /*
@@ -111,22 +114,26 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
      */
     private void InitAllSpawnData()
     {
-        dataSet = new MonsterDataSet();
+        mDataSet = new Dictionary<Tuple<string, int>, MonsterManager.MonsterData>();
         List<Dictionary<string, object>> monsterDataCsv = CSVReader.Read("CSVFile\\MonsterData");
         for (int idx = 0; idx < monsterDataCsv.Count; idx++)
         {
-            string key;
             MonsterData md = new MonsterData();
+
+            //이름과 Rank로 구분
+            Tuple<string, int> key = new Tuple<string, int>(monsterDataCsv[idx]["MonsterInName"].ToString(), int.Parse(monsterDataCsv[idx]["MonsterRank"].ToString()));
+
             md.skillAttackPower = new List<int>();
             md.skillAttackPowerRange = new List<float>();
             md.skillAttackAnimation = new List<string>();
-            key = monsterDataCsv[idx]["MonsterInName"].ToString();
 
             md.id = int.Parse(monsterDataCsv[idx]["ID"].ToString());
             md.monsterSpawnMap = (MapManager.MapType)Enum.Parse(typeof(MapManager.MapType), monsterDataCsv[idx]["MonsterSpawnMap"].ToString());
             md.monsterSize = int.Parse(monsterDataCsv[idx]["MonsterSize"].ToString());
             md.monsterType = monsterDataCsv[idx]["MonsterType"].ToString();
             md.monsterName = monsterDataCsv[idx]["MonsterName"].ToString();
+            md.monsterColor = monsterDataCsv[idx]["MonsterColor"].ToString();
+
             md.monsterGrade = (MonsterGrade)Enum.Parse(typeof(MonsterGrade), monsterDataCsv[idx]["MonsterGrade"].ToString());
             md.monsterHp = int.Parse(monsterDataCsv[idx]["MonsterHp"].ToString());
             md.monsterPhysicalDefense = int.Parse(monsterDataCsv[idx]["MonsterPhysicalDefense"].ToString());
@@ -159,8 +166,9 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
 
             md.monsterDrop = monsterDataCsv[idx]["MonsterDrop"].ToString();
             md.monsterExp = int.Parse(monsterDataCsv[idx]["MonsterExp"].ToString());
-            dataSet[key] = md;
+            mDataSet[key] = md;
         }
+        Debug.Log("mDataSet : " + mDataSet.Count + " monsterDataCsv: " + monsterDataCsv.Count);
     }
 
 

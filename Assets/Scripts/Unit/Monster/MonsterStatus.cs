@@ -12,6 +12,12 @@ public class MonsterStatus : IStatus
     [SerializeField]
     private MonsterManager.MonsterGrade mMonsterGrade;
 
+    private int mMonsterRank;
+    public int MonsterRank{
+        get { return mMonsterRank; }
+        set { mMonsterRank = value; }
+    }
+
 
     public override bool AttackPointSetting(GameObject _obj)
     {

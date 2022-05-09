@@ -14,6 +14,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     {
         public int Id;
         public string spawnMonster;
+        public int monsterRank;
         public string spawnMap;
         public int spawnOrder;
         public int spawnNumber;
@@ -187,7 +188,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                     GameObject monster = ObjectPoolManager.Instance.EnableGameObject(mDataSetNormal[i].spawnMonster);
                     if (monster != null && spawnZone[j].GetComponent<SpawnZone>().Spawnable)
                     {
-                        SpawnMonsterSet(ref monster, spawnZone[j].position);
+                        SpawnMonsterSet(ref monster, mDataSetNormal[i].monsterRank, spawnZone[j].position);
                     }
                     else
                     {
@@ -234,8 +235,9 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             GameObject monster = ObjectPoolManager.Instance.EnableGameObject(mDataSetBoss[mWaveCount].spawnMonster);
             monster.GetComponent<MonsterEventHandler>().registerIsDieObserver(registerBossDieCheck);
 
+            
             List<Transform> spawnZone = GetRandomZoneList(1);
-            SpawnMonsterSet(ref monster, spawnZone[0].position);
+            SpawnMonsterSet(ref monster, mDataSetBoss[mWaveCount].monsterRank, spawnZone[0].position);
 
             mWaveCount++;
 
@@ -265,7 +267,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
             GameObject monster = ObjectPoolManager.Instance.EnableGameObject(mDataSetRelayBoss[mWaveCount].spawnMonster);
             monster.GetComponent<MonsterEventHandler>().registerIsDieObserver(registerBossRelayDieCheck);
 
-            SpawnMonsterSet(ref monster, GameObject.Find("BossRelaySpawnZone").transform.position);
+            SpawnMonsterSet(ref monster, mDataSetRelayBoss[mWaveCount].monsterRank, GameObject.Find("BossRelaySpawnZone").transform.position);
             mWaveCount++;
 
             if (bossMessageCoroutine != null)
@@ -276,9 +278,9 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     }
 
     //스폰전 몬스터 status 설정
-    private void SpawnMonsterSet(ref GameObject _monster, Vector3 _pos)
+    private void SpawnMonsterSet(ref GameObject _monster, int _rank, Vector3 _pos)
     {
-        MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(_monster.name);
+        MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(_monster.name, _rank);
         if(md.monsterGrade == MonsterManager.MonsterGrade.Boss)
         {
             _monster.GetComponent<MonsterStatus>().Hp = md.monsterHp;
@@ -296,7 +298,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         _monster.GetComponent<MonsterMove>().IsDie = false;
         _monster.GetComponent<MonsterStatus>().Size = md.monsterSize;
         _monster.GetComponent<MonsterStatus>().MonsterGrade= md.monsterGrade;
-        _monster.GetComponent<MonsterStatus>().MonsterInName = md.monsterInName;
+        _monster.GetComponent<MonsterStatus>().MonsterRank = md.monsterRank;
         _monster.GetComponent<MonsterStatus>().MoveSpeedRate = 1f;
         _monster.transform.position = _pos;
 
@@ -306,7 +308,9 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         //TO-DO MonsterEventHandler에서 MonsterDie와 쌍이 일치해야 예상치 않는 버그가 방지된다. 해당 부분은 api화로 해놓는게 버그 방지에 좋아보인다.
         _monster.GetComponent<IMove>().Moveable = true;
         Color monsterColor = _monster.GetComponent<SpriteRenderer>().color;
-        monsterColor.a = 1f;
+        ColorUtility.TryParseHtmlString(md.monsterColor.ToString(), out monsterColor);
+
+
         _monster.GetComponent<SpriteRenderer>().color = monsterColor;
         _monster.GetComponent<MonsterAttack>().enabled = true;
         _monster.GetComponent<BoxCollider2D>().enabled = true;
@@ -380,10 +384,12 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         
         for (int idx = 0; idx < spawnData.Count; idx++)
         {
-            if ((MapManager.MapType)Enum.Parse(typeof(MapManager.MapType), spawnData[idx]["SpawnMap"].ToString()) == mMapType) { 
+            if ((MapManager.MapType)Enum.Parse(typeof(MapManager.MapType), spawnData[idx]["SpawnMap"].ToString()) == mMapType) {
+             
                 SpawnData ds = new SpawnData();
                 ds.Id = (int)spawnData[idx]["ID"];
                 ds.spawnMonster = spawnData[idx]["SpawnMonster"].ToString();
+                ds.monsterRank = (int)spawnData[idx]["MonsterRank"];
                 ds.spawnMap = spawnData[idx]["SpawnMap"].ToString();
                 ds.spawnOrder = (int)spawnData[idx]["SpawnOrder"];
                 ds.spawnNumber = (int)spawnData[idx]["SpawnNumber"];
@@ -394,10 +400,13 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                 ds.currentTime = 0f;
                 GameObject obj = Resources.Load<GameObject>("Prefabs\\Monster\\" + mMapType.ToString() + "\\" + spawnData[idx]["SpawnMonster"].ToString());
 
-                if (MonsterManager.Instance.GetMonsterData(ds.spawnMonster).monsterGrade ==  MonsterManager.MonsterGrade.Boss)
+                MonsterManager.MonsterData temp = MonsterManager.Instance.GetMonsterData(ds.spawnMonster, ds.monsterRank);
+
+                if (temp.monsterGrade ==  MonsterManager.MonsterGrade.Boss)
                 {
-                    if(MonsterManager.Instance.GetMonsterData(ds.spawnMonster).monsterSpawnMap == MapManager.MapType.BossRelay)
+                    if (MonsterManager.Instance.GetMonsterData(ds.spawnMonster, ds.monsterRank).monsterSpawnMap == MapManager.MapType.BossRelay)
                     {
+                        Debug.Log("릴레이 보스 spawn data" + ds.spawnMonster + "rank: " + ds.monsterRank + MonsterManager.Instance.GetMonsterData(ds.spawnMonster, ds.monsterRank).monsterGrade);
                         mDataSetRelayBoss.Add(ds);
                     }
                     else {
@@ -491,7 +500,6 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     public void registerBossRelayDieCheck(bool isDie, GameObject _obj)
     {
         mIsSpawnRelayBoss = !isDie;
-        Debug.Log(_obj.name + "보스사망" + "사망시 체력");
     }
 
 

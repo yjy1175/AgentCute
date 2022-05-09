@@ -60,7 +60,7 @@ public class MonsterAttack : IAttack
 
         if (UseSkillCheck())
         {
-            MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(gameObject.name);
+            MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(gameObject.name, gameObject.GetComponent<MonsterStatus>().MonsterRank);
 
 
             mFirePosition = transform.Find("FirePosition").gameObject;
@@ -143,7 +143,7 @@ public class MonsterAttack : IAttack
     //랜덤으로 사용사능한 스킬번호 return 
     private int GetSkillNumber()
     {
-        MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(gameObject.name);
+        MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(gameObject.name, gameObject.GetComponent<MonsterStatus>().MonsterRank);
         int skillNumber = -1;
         if (md.monsterGrade == MonsterManager.MonsterGrade.Boss) {
             int priorityValue = 99;
@@ -198,9 +198,8 @@ public class MonsterAttack : IAttack
     {
         if (DEBUG)
             Debug.Log(gameObject.name + "의 " + _skillNum + "번째 스킬사용시전");
-        MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(gameObject.name);
+        MonsterManager.MonsterData md = MonsterManager.Instance.GetMonsterData(gameObject.name, gameObject.GetComponent<MonsterStatus>().MonsterRank);
         Skill skill = mMonsterSkill[_skillNum].GetComponent<Skill>();
-
         //1. 스킬 대미지 설정
         SkillLaunchType skillLaunchType = (SkillLaunchType)Enum.Parse(typeof(SkillLaunchType), skill.Spec.SkillLaunchType);
         gameObject.GetComponent<MonsterStatus>().BaseDamage = (int)((float)md.skillAttackPower[_skillNum] * BerserkerModeScale);
@@ -212,7 +211,7 @@ public class MonsterAttack : IAttack
             Debug.Log(gameObject.name + " 대기시간" + skill.Spec.SkillMotionStartTime);
 
         //3. 스킬 모션 동작.
-        transform.GetComponent<Animator>().SetTrigger(MonsterManager.Instance.GetMonsterData(gameObject.name).skillAttackAnimation[_skillNum]);
+        transform.GetComponent<Animator>().SetTrigger(md.skillAttackAnimation[_skillNum]);
 
         //4. 모션 중 스킬이 발동되더야할 시점까지 wait
         yield return new WaitForSeconds(skill.Spec.SkillMotionStartTime);
