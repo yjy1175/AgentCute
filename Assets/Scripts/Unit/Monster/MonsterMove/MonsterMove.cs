@@ -36,20 +36,20 @@ public class MonsterMove : IMove
     // Update is called once per frame
     void Update()
     {
-        //보스의 경우 BFS알고리즘만 사용
-        if(gameObject.GetComponent<MonsterStatus>().MonsterGrade == MonsterManager.MonsterGrade.Boss)
+
+        if (Vector3.Distance(PlayerManager.Instance.Player.transform.position, transform.position) < 0.5f)
         {
-            MovingPattern2();
+            MovingPattern1();
         }
-        else
-        {
-            //일반몹의 경우 wave 0,1 에 대해서는 무식한 이동 알고리즘 적용. 2,3에는 BFS AI알고리즘 적용
-            if (SpawnManager.Instance.WaveCount < 2) {
-                MovingPattern1();
+        else { 
+            //보스의 경우 BFS알고리즘만 사용
+            if (gameObject.GetComponent<MonsterStatus>().MonsterGrade == MonsterManager.MonsterGrade.Boss || SpawnManager.Instance.WaveCount >=2)
+            {
+                MovingPattern2();
             }
             else
             {
-                MovingPattern2();
+                MovingPattern1();
             }
         }
     }

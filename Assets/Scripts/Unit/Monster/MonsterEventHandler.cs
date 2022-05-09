@@ -31,7 +31,7 @@ public class MonsterEventHandler : IEventHandler
     {
         transform.GetComponent<Animator>().SetTrigger("Die");
         _obj.GetComponent<MonsterAttack>().enabled = false;
-        _obj.GetComponent<BoxCollider2D>().enabled = false;
+        _obj.GetComponent<CapsuleCollider2D>().enabled = false;
         if(gameObject.GetComponent<MonsterStatus>().MonsterGrade == MonsterManager.MonsterGrade.Boss)
            _obj.GetComponent<CircleCollider2D>().enabled = false;
         _obj.GetComponent<MonsterAttack>().StopAllCoroutines();

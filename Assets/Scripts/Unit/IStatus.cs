@@ -492,7 +492,7 @@ public abstract class IStatus : MonoBehaviour
                 if(projectile.Spec.Knockback > 0)
                 {
                     RaycastHit2D ray = Physics2D.Raycast(
-                        transform.position + (transform.position - projectile.transform.position).normalized * (GetComponent<BoxCollider2D>().size.x * projectile.Spec.Knockback),
+                        transform.position + (transform.position - projectile.transform.position).normalized * (GetComponent<CapsuleCollider2D>().size.x * projectile.Spec.Knockback),
                         Vector2.zero,
                         1f,
                         LayerMask.GetMask("Tilemap"));
@@ -501,7 +501,7 @@ public abstract class IStatus : MonoBehaviour
                         
                         transform.Translate(
                             (transform.position - projectile.transform.position).normalized * 
-                            GetComponent<BoxCollider2D>().size.x * projectile.Spec.Knockback);
+                            GetComponent<CapsuleCollider2D>().size.x * projectile.Spec.Knockback);
                             
                     }
                 }
