@@ -510,8 +510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e97a6e15d7f24418f44c7353a5b72b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataSet:
-    m_keys: []
 --- !u!1 &37735204
 GameObject:
   m_ObjectHideFlags: 0
@@ -35772,6 +35770,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff6c81040ceb8b54b99d09532cef746c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mMagnetPower: 3
+  mMagenetSpeed: 4
 --- !u!212 &6776406776483109450 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 685936582218852694, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
