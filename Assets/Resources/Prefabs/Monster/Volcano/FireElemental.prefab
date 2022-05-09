@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4523640475069816673}
   - component: {fileID: -6286688521283744455}
   - component: {fileID: 6362645111603421406}
-  - component: {fileID: -2960055293855062167}
+  - component: {fileID: 5295757633390519449}
   m_Layer: 6
   m_Name: FireElemental
   m_TagString: Monster
@@ -165,6 +165,7 @@ MonoBehaviour:
   mDir: {x: 0, y: 0, z: 0}
   mMoveable: 1
   mTarget: {fileID: 0}
+  mIsDie: 0
 --- !u!114 &-6286688521283744455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mHp: 0
   mMaxHp: 0
+  mIsDie: 0
   mSize: 0
   mCloseDamaged: 0
   mDamaged: 0
@@ -207,8 +209,6 @@ MonoBehaviour:
   mId: 0
   mSpawnMap: 
   mMonsterInName: 
-  mIsDieToKillCount: 0
-  mIsDieToGetExp: 0
   mMonsterGrade: 0
 --- !u!50 &6362645111603421406
 Rigidbody2D:
@@ -231,8 +231,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &-2960055293855062167
-BoxCollider2D:
+--- !u!70 &5295757633390519449
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -244,16 +244,6 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.033671856, y: -0.05245495}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.3}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.37806416, y: 0.36390054}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.021874905, y: -0.06498464}
+  m_Size: {x: 0.32431126, y: 0.3243795}
+  m_Direction: 0

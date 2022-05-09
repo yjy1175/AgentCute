@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 5846562235429798286}
   - component: {fileID: -2249289874108764139}
   - component: {fileID: 2412774464234539575}
-  - component: {fileID: -1147657098074673382}
+  - component: {fileID: 9042351179399342426}
   m_Layer: 6
   m_Name: FairyDragon
   m_TagString: Monster
@@ -163,6 +163,9 @@ MonoBehaviour:
   mIsRush: 0
   mRushDir: {x: 0, y: 0, z: 0}
   mRushSpeed: 0
+  DEBUG_SKILL_NUMBER: -1
+  mCloseAttackPower: 0
+  mBerserkerModeScale: 0
   mMonsterSkill: []
   mSkillCheckCoolTime: []
 --- !u!114 &6530398612566436628
@@ -192,6 +195,8 @@ MonoBehaviour:
   mSpeed: 0
   mDir: {x: 0, y: 0, z: 0}
   mMoveable: 1
+  mTarget: {fileID: 0}
+  mIsDie: 0
 --- !u!114 &-2249289874108764139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mHp: 0
   mMaxHp: 0
+  mIsDie: 0
   mSize: 0
   mCloseDamaged: 0
   mDamaged: 0
@@ -234,8 +240,6 @@ MonoBehaviour:
   mId: 0
   mSpawnMap: 
   mMonsterInName: 
-  mIsDieToKillCount: 0
-  mIsDieToGetExp: 0
   mMonsterGrade: 0
 --- !u!50 &2412774464234539575
 Rigidbody2D:
@@ -258,8 +262,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &-1147657098074673382
-BoxCollider2D:
+--- !u!70 &9042351179399342426
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -271,16 +275,6 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.101826966, y: -0.2898151}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.79374206, y: 0.9503991}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.08170053, y: 0.04436198}
+  m_Size: {x: 0.7024031, y: 0.76968604}
+  m_Direction: 0

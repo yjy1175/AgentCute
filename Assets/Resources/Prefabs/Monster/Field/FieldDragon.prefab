@@ -17,8 +17,8 @@ GameObject:
   - component: {fileID: 2522269029078241266}
   - component: {fileID: 8360060715658081865}
   - component: {fileID: 4233381750821879142}
-  - component: {fileID: 2119343774579995480}
   - component: {fileID: 1303261331131227181}
+  - component: {fileID: 7702873367100653086}
   m_Layer: 6
   m_Name: FieldDragon
   m_TagString: Monster
@@ -248,32 +248,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &2119343774579995480
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2720214593146090343}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.12050432, y: -0.68594974}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6, y: 3}
-    newSize: {x: 6, y: 3}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.1623883, y: 1.6281005}
-  m_EdgeRadius: 0
 --- !u!58 &1303261331131227181
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -287,9 +261,25 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.038828135}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.19757211
+  m_Radius: 0.25
+--- !u!70 &7702873367100653086
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2720214593146090343}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.026441216, y: 0.290856}
+  m_Size: {x: 1.6426704, y: 1.6426704}
+  m_Direction: 0
 --- !u!1 &7566048397747005216
 GameObject:
   m_ObjectHideFlags: 0

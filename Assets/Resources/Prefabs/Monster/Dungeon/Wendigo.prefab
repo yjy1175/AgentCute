@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 3296897991309850713}
   - component: {fileID: 8100551274383487104}
   - component: {fileID: 3203168158563383130}
-  - component: {fileID: -5445072700882609579}
   - component: {fileID: 8190404658296072224}
   - component: {fileID: -6484457541007903768}
   - component: {fileID: 6132042985942999371}
@@ -50,6 +49,7 @@ GameObject:
   - component: {fileID: -7268572125041832856}
   - component: {fileID: -1363223838709550317}
   - component: {fileID: 1091859088541263045}
+  - component: {fileID: 4032222701234356361}
   m_Layer: 6
   m_Name: Wendigo
   m_TagString: Monster
@@ -163,32 +163,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &-5445072700882609579
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4425703693211975953}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.10533619, y: 0.41669124}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.2}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.8048389, y: 1.4241625}
-  m_EdgeRadius: 0
 --- !u!114 &8190404658296072224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mHp: 0
   mMaxHp: 0
+  mIsDie: 0
   mSize: 0
   mCloseDamaged: 0
   mDamaged: 0
@@ -272,8 +247,6 @@ MonoBehaviour:
   mId: 0
   mSpawnMap: 
   mMonsterInName: 
-  mIsDieToKillCount: 0
-  mIsDieToGetExp: 0
   mMonsterGrade: 0
 --- !u!114 &270727687150139146
 MonoBehaviour:
@@ -334,3 +307,19 @@ CircleCollider2D:
   m_Offset: {x: -0.09338391, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!70 &4032222701234356361
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4425703693211975953}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0961183, y: 0.3308692}
+  m_Size: {x: 0.67356783, y: 1.3463957}
+  m_Direction: 0
