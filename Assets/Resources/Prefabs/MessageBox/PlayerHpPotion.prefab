@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3997309792019139476}
   - component: {fileID: 931144645606913363}
   - component: {fileID: 1128585570679952837}
+  - component: {fileID: 8854050606325531331}
   m_Layer: 0
   m_Name: PlayerHpPotion
   m_TagString: Untagged
@@ -53,7 +54,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: be47425c524f42b4c8a345ac00db9d25, type: 3}
+  - {fileID: 2100000, guid: a2e5463eb898cb043b0e58205afbb09e, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -93,7 +94,7 @@ TextMesh:
   m_FontSize: 70
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: be47425c524f42b4c8a345ac00db9d25, type: 3}
+  m_Font: {fileID: 12800000, guid: a2e5463eb898cb043b0e58205afbb09e, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4278255551
@@ -132,3 +133,14 @@ MonoBehaviour:
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
   resolutionDependant: 1
   doubleResolution: 1024
+--- !u!210 &8854050606325531331
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3997309792019139477}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 102

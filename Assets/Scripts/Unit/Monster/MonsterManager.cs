@@ -95,7 +95,6 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
          * TO-DO 없는 key값에 대한 예외처리 필요
          * */
         Tuple<string, int> tuple = new Tuple<string, int>(_str, _num);
-        Debug.Log("getmonster "+_str+" "+_num);
         return mDataSet[tuple];
     }
 
@@ -168,7 +167,6 @@ public class MonsterManager : SingleToneMaker<MonsterManager>
             md.monsterExp = int.Parse(monsterDataCsv[idx]["MonsterExp"].ToString());
             mDataSet[key] = md;
         }
-        Debug.Log("mDataSet : " + mDataSet.Count + " monsterDataCsv: " + monsterDataCsv.Count);
     }
 
 

@@ -261,7 +261,6 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     {
         if (!mIsSpawnRelayBoss && mMapType == MapManager.MapType.BossRelay)
         {
-            Debug.Log("보스소환");
             mIsSpawnRelayBoss = true;
            
             GameObject monster = ObjectPoolManager.Instance.EnableGameObject(mDataSetRelayBoss[mWaveCount].spawnMonster);
@@ -406,7 +405,6 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                 {
                     if (MonsterManager.Instance.GetMonsterData(ds.spawnMonster, ds.monsterRank).monsterSpawnMap == MapManager.MapType.BossRelay)
                     {
-                        Debug.Log("릴레이 보스 spawn data" + ds.spawnMonster + "rank: " + ds.monsterRank + MonsterManager.Instance.GetMonsterData(ds.spawnMonster, ds.monsterRank).monsterGrade);
                         mDataSetRelayBoss.Add(ds);
                     }
                     else {
