@@ -5,6 +5,8 @@ using UnityEditor;
 using System.Reflection;
 using System;
 
+[CustomPropertyDrawer(typeof(StringIntInt))]
+[CustomPropertyDrawer(typeof(StringInt))]
 [CustomPropertyDrawer(typeof(StringBoolean))]
 [CustomPropertyDrawer(typeof(TrainingSet))]
 [CustomPropertyDrawer(typeof(MonsterDataSet))]

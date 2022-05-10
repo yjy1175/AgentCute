@@ -27,3 +27,9 @@ public class TrainingSet : SerializableDictionary<TrainingManager.TrainingType, 
 [System.Serializable]
 public class StringBoolean : SerializableDictionary<string, bool> { }
 
+[System.Serializable]
+public class StringInt : SerializableDictionary<string, int> { }
+
+[System.Serializable]
+public class StringIntInt : SerializableDictionary<string, SerializableDictionary<int, int>> { }
+

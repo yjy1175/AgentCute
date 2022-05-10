@@ -17,6 +17,10 @@ public class LobbyPlayerData : MonoBehaviour
             GetComponent<LobbyPlayerEventHendler>().ChangeGoods(mInfo.Gold, mInfo.Diamond, mInfo.Stemina);
         }
     }
+
+    [SerializeField]
+    private LobbyPlayerAchievementData mAchieveData = null;
+    public LobbyPlayerAchievementData AchieveData => mAchieveData;
     private void Start()
     {
         Info = SaveLoadManager.Instance.LoadBaseData();
