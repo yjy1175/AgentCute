@@ -298,6 +298,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
         _monster.GetComponent<MonsterStatus>().Size = md.monsterSize;
         _monster.GetComponent<MonsterStatus>().MonsterGrade= md.monsterGrade;
         _monster.GetComponent<MonsterStatus>().MonsterRank = md.monsterRank;
+        _monster.GetComponent<MonsterStatus>().IsBerserker = false;
         _monster.GetComponent<MonsterStatus>().MoveSpeedRate = 1f;
         _monster.transform.position = _pos;
 
@@ -482,6 +483,9 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
                     Debug.Log("버서커모드 적용 " + gameObject.name + " speedUp:" + ws.speedUp + " , powerUp" + ws.powerUp);
                 _obj.GetComponent<IStatus>().MoveSpeed *= ws.speedUp;
                 _obj.GetComponent<MonsterAttack>().BerserkerModeScale = ws.powerUp;
+                _obj.GetComponent<MonsterStatus>().IsBerserker = true;
+                _obj.GetComponent<IStatus>().Hp = _obj.GetComponent<IStatus>().Hp;
+
             }
         }
 

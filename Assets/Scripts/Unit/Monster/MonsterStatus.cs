@@ -18,6 +18,15 @@ public class MonsterStatus : IStatus
         set { mMonsterRank = value; }
     }
 
+    private bool mIsBerserker;
+    public bool IsBerserker
+    {
+        get { return mIsBerserker; }
+        set {
+            mIsBerserker = value;
+        }
+    }
+
 
     public override bool AttackPointSetting(GameObject _obj)
     {
