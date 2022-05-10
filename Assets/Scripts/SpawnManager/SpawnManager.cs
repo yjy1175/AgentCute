@@ -54,7 +54,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     [SerializeField]
     private List<SpawnData> mDataSetRelayBoss;
     [SerializeField]
-    private Dictionary<string, BerserkerData> mDataSetBerserker;
+    private Dictionary<Tuple<string, int>, BerserkerData> mDataSetBerserker;
 
     [SerializeField]
     private float currentTime = 0f;
@@ -355,17 +355,17 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
     private void InitBerserkerData()
     {
-        mDataSetBerserker = new Dictionary<string, BerserkerData>();
+        mDataSetBerserker = new Dictionary<Tuple<string,int>, BerserkerData>();
         List<Dictionary<string, object>> waveData = CSVReader.Read("CSVFile\\BossBerserkerData");
         for (int idx = 0; idx < waveData.Count; idx++)
         {
             BerserkerData ws = new BerserkerData();
-            string name = waveData[idx]["BossMonster"].ToString();
-
+            Tuple<string, int> key = new Tuple<string, int>(waveData[idx]["BossMonster"].ToString(), (int)waveData[idx]["MonsterRank"]);
+            
             ws.bossLimitTime = int.Parse(waveData[idx]["BossLimitTime"].ToString());
-            ws.powerUp = float.Parse(waveData[idx]["SpeedUp"].ToString());
-            ws.speedUp = float.Parse(waveData[idx]["PowerUp"].ToString());
-            mDataSetBerserker[name] = ws;
+            ws.speedUp = float.Parse(waveData[idx]["SpeedUp"].ToString());
+            ws.powerUp = float.Parse(waveData[idx]["PowerUp"].ToString());
+            mDataSetBerserker[key] = ws;
         }
     }
 
@@ -465,9 +465,11 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     //보스 버서커모드 대기 코루틴
     IEnumerator BossWaitBerserkerMode (GameObject _obj)
     {
-        if (mDataSetBerserker.ContainsKey(_obj.name)) {   
+
+        Tuple<string, int> key = new Tuple<string, int>(_obj.name, _obj.GetComponent<MonsterStatus>().MonsterRank);
+        if (mDataSetBerserker.ContainsKey(key)) {   
             BerserkerData ws;
-            ws = mDataSetBerserker[_obj.name];
+            ws = mDataSetBerserker[key];
             if (DEBUG)
                 Debug.Log("버서커모드 적용 대기시간"+ ws.bossLimitTime);
 
