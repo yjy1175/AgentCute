@@ -33,3 +33,12 @@ public class StringInt : SerializableDictionary<string, int> { }
 [System.Serializable]
 public class StringIntInt : SerializableDictionary<string, SerializableDictionary<int, int>> { }
 
+[System.Serializable]
+public class StringAchievement : SerializableDictionary<string, Achievement> { }
+
+[System.Serializable]
+public class StringState : SerializableDictionary<string, Achievement.AState> { }
+
+[System.Serializable]
+public class IntInt : SerializableDictionary<int, int> { }
+

@@ -22,6 +22,9 @@ public class MonsterEventHandler : IEventHandler
         {
             SpawnManager.currentKillMosterCount++;
             StartCoroutine(MonsterDie(_obj));
+            // 죽은 몬스터가 보스이면 보스킬 카운트 증가
+            if (_obj.GetComponent<MonsterStatus>().MonsterGrade == MonsterManager.MonsterGrade.Boss)
+                SpawnManager.currentKillBossMonsterCount++;
         }
         base.ChangeIsDie(_dieCheck, _obj);
     }

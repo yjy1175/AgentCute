@@ -186,8 +186,6 @@ public class DeongunStartManager : SingleToneMaker<DeongunStartManager>
             mWarInfo.WarSkillLock = playerData.Skilllock;
             mWarInfo.IsWarCutePotion = mIsCutePotionCheck;
             SaveLoadManager.Instance.SavePlayerWarData(mWarInfo);
-            // 스테미너 감소
-            playerData.Stemina--;
             if (mIsCutePotionCheck)
                 playerData.CutePotionCount--;
             // 전투 씬 로드

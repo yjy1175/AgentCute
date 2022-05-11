@@ -121,7 +121,6 @@ public class LobbyPlayerInfo
         }
     }
     [SerializeField]
-
     private float mTrainingMagnetPower;
     public float TrainingMagnetPower
     {
@@ -193,7 +192,7 @@ public class LobbyPlayerInfo
             mGold = value;
             SaveLoadManager.Instance.SavePlayerInfoFile(this);
             if (GameObject.Find("LobbyPlayer") != null)
-                GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerEventHendler>().ChangeGoods(mGold, mDiamond, mStemina);
+                GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerEventHendler>().ChangeGoods(mGold, mDiamond);
         }
     }
     [SerializeField]
@@ -206,19 +205,7 @@ public class LobbyPlayerInfo
             mDiamond = value;
             SaveLoadManager.Instance.SavePlayerInfoFile(this);
             if(GameObject.Find("LobbyPlayer") != null)
-                GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerEventHendler>().ChangeGoods(mGold, mDiamond, mStemina);
-        }
-    }
-    [SerializeField]
-    private int mStemina;
-    public int Stemina
-    {
-        get { return mStemina; }
-        set
-        { 
-            mStemina = value;
-            SaveLoadManager.Instance.SavePlayerInfoFile(this);
-            GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerEventHendler>().ChangeGoods(mGold, mDiamond, mStemina);
+                GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerEventHendler>().ChangeGoods(mGold, mDiamond);
         }
     }
     [SerializeField]

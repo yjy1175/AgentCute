@@ -89,6 +89,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     // 현재 잡은 몬스터의 수
     public Text currentKillMonsterText;
     public static int currentKillMosterCount = 0;
+    // 현재 잡은 보스몬스터의 수
+    public static int currentKillBossMonsterCount = 0;
 
     [SerializeField]
     private MapManager.MapType mMapType;
@@ -107,6 +109,7 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     {
         allMonsterCount = 0;
         currentKillMosterCount = 0;
+        currentKillBossMonsterCount = 0;
     }
     void Awake()
     {

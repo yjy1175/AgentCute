@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class WeaponReward : Reward
 {
-    protected override void Awake()
+    public override void Set()
     {
-        base.Awake();
+        base.Set();
         mIcon = EquipmentManager.Instance.FindWeapon(mRewardName).GetComponent<SpriteRenderer>().sprite;
     }
     public override void Give()

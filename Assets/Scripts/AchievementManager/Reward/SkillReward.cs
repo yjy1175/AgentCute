@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SkillReward : Reward
 {
-    protected override void Awake()
+    public override void Set()
     {
-        base.Awake();
+        base.Set();
         mIcon = Resources.Load<Sprite>("UI/SkillIcon/" + mRewardName);
     }
     public override void Give()

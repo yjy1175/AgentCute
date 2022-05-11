@@ -9,12 +9,28 @@ public abstract class Reward : MonoBehaviour
     public GameObject Player => mPlayer;
     [SerializeField]
     protected string mRewardName;
+    public string RewardName
+    {
+        get => mRewardName;
+        set
+        {
+            mRewardName = value;
+        }
+    }
     [SerializeField]
     protected int mRewardQuantity;
+    public int RewardQuantity
+    {
+        get => mRewardQuantity;
+        set
+        {
+            mRewardQuantity = value;
+        }
+    }
     [SerializeField]
     protected Sprite mIcon;
     public Sprite Icon => mIcon;
-    protected virtual void Awake()
+    public  virtual void Set()
     {
         mPlayer = GameObject.Find("LobbyPlayer");
     }

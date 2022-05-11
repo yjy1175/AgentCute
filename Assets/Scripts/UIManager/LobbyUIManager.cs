@@ -189,6 +189,10 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     {
         GamePause();
         mIsOpenAchivePannel = !mIsOpenAchivePannel;
+        if (mIsOpenAchivePannel)
+        {
+            AchievementManager.Instance.UpdateState();
+        }
         mAchivePannel.SetActive(mIsOpenAchivePannel);
     }
     public void ClickDailyQuestButton()
@@ -399,36 +403,17 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     public void ClickBuyButton()
     {
         LobbyPlayerInfo info = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info;
-        // 애니메이션 불필요(스테미나)
-        if (mBuyNum == 2)
-        {
-            if(info.Diamond >= mPriceList[mBuyNum])
-            {
-                info.Diamond -= mPriceList[mBuyNum];
-                info.Stemina += 3;
-                CloseBuyAlertButton();
-                // 구매확인 창 띄우기
-            }
-            // 구매 불가능
-            else
-            {
-                OpenAlertEnterPannel("다이아몬드가 부족합니다.");
-            }
-        }
         // 애니메이션 필요
+        if (info.Diamond >= mPriceList[mBuyNum])
+        {
+            info.Diamond -= mPriceList[mBuyNum];
+            StartCoroutine(BoxAnimaion());
+            CloseBuyAlertButton();
+        }
+        // 구매 불가능
         else
         {
-            if (info.Diamond >= mPriceList[mBuyNum])
-            {
-                info.Diamond -= mPriceList[mBuyNum];
-                StartCoroutine(BoxAnimaion());
-                CloseBuyAlertButton();
-            }
-            // 구매 불가능
-            else
-            {
-                OpenAlertEnterPannel("다이아몬드가 부족합니다.");
-            }
+            OpenAlertEnterPannel("다이아몬드가 부족합니다.");
         }
     }
     IEnumerator BoxAnimaion()

@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEditor;
 using System.Reflection;
 using System;
-
+[CustomPropertyDrawer(typeof(IntInt))]
+[CustomPropertyDrawer(typeof(StringState))]
+[CustomPropertyDrawer(typeof(StringAchievement))]
 [CustomPropertyDrawer(typeof(StringIntInt))]
 [CustomPropertyDrawer(typeof(StringInt))]
 [CustomPropertyDrawer(typeof(StringBoolean))]

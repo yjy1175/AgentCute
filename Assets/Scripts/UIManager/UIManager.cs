@@ -89,11 +89,11 @@ public class UIManager : SingleToneMaker<UIManager>
     private Text mSkillInfoCoolTimeText;
     [SerializeField]
     private Text mSkillInfoDescText;
+    [SerializeField]
     private bool mIsGSkillSelect = false;
-    private bool mIsUSkillSelect = false;
-
     [SerializeField]
     private float mGamePlayTime;
+    public float GamePlayerTime => mGamePlayTime;
     [SerializeField]
     private Text mGamePlayTimeText;
 
@@ -242,8 +242,8 @@ public class UIManager : SingleToneMaker<UIManager>
     {
         // 씬 리로드
         // 정적 변수들 init
-        SpawnManager.Instance.init();
         SaveLoadManager.Instance.SaveWarEndData();
+        SpawnManager.Instance.init();
         GamePause();
         SceneManager.LoadScene("LobbyScene");
     }
@@ -336,7 +336,6 @@ public class UIManager : SingleToneMaker<UIManager>
                     }
                     mSkillSelectPannel.transform.GetChild(7).GetChild(1).GetChild(1).GetChild(0).GetComponent<Text>().text =
                         mUltimateSkill[num].GetComponent<Skill>().Spec.EquipDesc + "\n" + "쿨타임 : " + coolTime;
-                    mIsUSkillSelect = true;
                 }
                 break;
         }

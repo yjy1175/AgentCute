@@ -14,16 +14,25 @@ public class LobbyPlayerData : MonoBehaviour
         { 
             mInfo = value;
             GetComponent<LobbyPlayerEventHendler>().ChangeMoveSpeed(mInfo.BaseSPD * mInfo.MoveSpeedRate);
-            GetComponent<LobbyPlayerEventHendler>().ChangeGoods(mInfo.Gold, mInfo.Diamond, mInfo.Stemina);
+            GetComponent<LobbyPlayerEventHendler>().ChangeGoods(mInfo.Gold, mInfo.Diamond);
         }
     }
 
     [SerializeField]
     private LobbyPlayerAchievementData mAchieveData = null;
-    public LobbyPlayerAchievementData AchieveData => mAchieveData;
+    public LobbyPlayerAchievementData AchieveData 
+    {
+        get => mAchieveData;
+        set
+        {
+            mAchieveData = value;
+        }
+    }
     private void Start()
     {
         Info = SaveLoadManager.Instance.LoadBaseData();
+        AchieveData = SaveLoadManager.Instance.LoadAchieveData();
+        AchievementManager.Instance.SaveDataLoadFromAchievement();
         initEquip();
     }
     public void  initEquip()

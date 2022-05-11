@@ -8,12 +8,14 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
 {
     private string mLoadFileName;
     private string mWarFileName;
+    private string mAchieveFileName;
     private bool mIsCreate = false;
     // Start is called before the first frame update
     void Awake()
     {
         mLoadFileName = "PlayerData.json";
         mWarFileName = "WarData.json";
+        mAchieveFileName = "AchieveData.json";
     }
 
     public LobbyPlayerInfo LoadBaseData()
@@ -33,6 +35,25 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         fileStream = AES.Decrypt(fileStream, AES.key);
 
         LobbyPlayerInfo loadInfo = JsonUtility.FromJson<LobbyPlayerInfo>(fileStream);
+        return loadInfo;
+    }
+    public LobbyPlayerAchievementData LoadAchieveData()
+    {
+        string path = "";
+        path = Path.Combine(Application.persistentDataPath, mAchieveFileName);
+        string fileStream = null;
+        try
+        {
+            fileStream = File.ReadAllText(path);
+        }
+        catch
+        {
+            return CerateAchieveDataFile();
+        }
+
+        fileStream = AES.Decrypt(fileStream, AES.key);
+
+        LobbyPlayerAchievementData loadInfo = JsonUtility.FromJson<LobbyPlayerAchievementData>(fileStream);
         return loadInfo;
     }
     private LobbyPlayerInfo CreateSaveFile()
@@ -66,7 +87,6 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         newInfo.CurrentCostumeShapeName = "";
         newInfo.Gold = 0;
         newInfo.Diamond = 190;
-        newInfo.Stemina = 999;
         List<Dictionary<string, object>> weponLockData = CSVReader.Read("CSVFile\\Weapon");
         newInfo.Weaponlock = new StringBoolean();
         for(int i = 0; i < weponLockData.Count; i++)
@@ -98,6 +118,99 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         mIsCreate = false;
         return newInfo;
     }
+    private LobbyPlayerAchievementData CerateAchieveDataFile()
+    {
+        string path = "";
+        path = Path.Combine(Application.persistentDataPath, mAchieveFileName);
+
+        LobbyPlayerAchievementData newData = new LobbyPlayerAchievementData();
+
+        newData.Progress = new StringState();
+        foreach (string key in AchievementManager.Instance.Achievements.Keys)
+        {
+            // 전체적인 진행도
+            newData.Progress.Add(key, AchievementManager.Instance.Achievements[key].GetComponent<Achievement>().State);
+        }
+
+        // 모드 클리어
+        newData.ModeClear = new List<int>();
+        newData.ModeClear.Add(0);
+        newData.ModeClear.Add(0);
+
+        // 처지(무기)
+        newData.KillToWeapon = new List<int>();
+        newData.KillToWeapon.Add(0);
+        newData.KillToWeapon.Add(0);
+        newData.KillToWeapon.Add(0);
+        newData.KillToWeapon.Add(0);
+
+        //처치(스킬)
+        newData.KillToSkill = new StringInt();
+        newData.KillToSkill.Add("Sword Release", 0);
+        newData.KillToSkill.Add("Storm", 0);
+        newData.KillToSkill.Add("Cross Fire", 0);
+        newData.KillToSkill.Add("Incinerate", 0);
+
+        //생존시간(무기)
+        newData.TimeToWeapon = new List<int>();
+        newData.TimeToWeapon.Add(0);
+        newData.TimeToWeapon.Add(0);
+        newData.TimeToWeapon.Add(0);
+        newData.TimeToWeapon.Add(0);
+
+        //생존시간(코스튬)
+        newData.TimeToCostume = new List<int>();
+        newData.TimeToCostume.Add(0);
+        newData.TimeToCostume.Add(0);
+
+        // 보스처지(무기)
+        newData.BossKillToWeapon = new List<IntInt>();
+        for(EquipmentManager.WeaponType i = EquipmentManager.WeaponType.sw; i < EquipmentManager.WeaponType.Exit; i++)
+        {
+            newData.BossKillToWeapon.Add(new IntInt());
+            newData.BossKillToWeapon[(int)i].Add(0, 0);
+            newData.BossKillToWeapon[(int)i].Add(1, 0);
+            newData.BossKillToWeapon[(int)i].Add(2, 0);
+            newData.BossKillToWeapon[(int)i].Add(3, 0);
+        }
+
+        // 보스처치(코스튬)
+        newData.BossKillToCostume = new List<IntInt>();
+        for (EquipmentManager.CostumeTpye i = EquipmentManager.CostumeTpye.swsp; i < EquipmentManager.CostumeTpye.bgstswsp; i++)
+        {
+            newData.BossKillToCostume.Add(new IntInt());
+            newData.BossKillToCostume[(int)i].Add(0, 0);
+            newData.BossKillToCostume[(int)i].Add(1, 0);
+            newData.BossKillToCostume[(int)i].Add(2, 0);
+            newData.BossKillToCostume[(int)i].Add(3, 0);
+        }
+
+        // 웨이브 클리어(무기)
+        newData.WaveClearToWeapon = new List<IntInt>();
+        for (EquipmentManager.WeaponType i = EquipmentManager.WeaponType.sw; i < EquipmentManager.WeaponType.Exit; i++)
+        {
+            newData.WaveClearToWeapon.Add(new IntInt());
+            newData.WaveClearToWeapon[(int)i].Add(0, 0);
+            newData.WaveClearToWeapon[(int)i].Add(1, 0);
+            newData.WaveClearToWeapon[(int)i].Add(2, 0);
+            newData.WaveClearToWeapon[(int)i].Add(3, 0);
+        }
+
+        // 보스 모드 클리어
+        newData.BossModeWaveClear = new List<int>();
+        newData.BossModeWaveClear.Add(0);
+        newData.BossModeWaveClear.Add(0);
+        newData.BossModeWaveClear.Add(0);
+        newData.BossModeWaveClear.Add(0);
+
+        // 파일 저장
+        string fileStream = JsonUtility.ToJson(newData, true);
+        fileStream = AES.Encrypt(fileStream, AES.key);
+
+        File.WriteAllText(path, fileStream);
+
+        return newData;
+    }
     
     public void SavePlayerInfoFile(LobbyPlayerInfo _info)
     {
@@ -108,8 +221,16 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
             string fileStream = JsonUtility.ToJson(_info, true);
             fileStream = AES.Encrypt(fileStream, AES.key);
             File.WriteAllText(path, fileStream);
-            Debug.Log("데이터 저장");
         }
+    }
+    public void SaveAchievementData(LobbyPlayerAchievementData _info)
+    {
+        string path = "";
+        path = Path.Combine(Application.persistentDataPath, mAchieveFileName);
+        string fileStream = JsonUtility.ToJson(_info, true);
+        fileStream = AES.Encrypt(fileStream, AES.key);
+        File.WriteAllText(path, fileStream);
+        Debug.Log("업적 데이터 저장");
     }
 
     // 전투씬에 보낼 데이터 저장
@@ -147,5 +268,70 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         info.Gold += PlayerManager.Instance.Player.GetComponent<PlayerStatus>().GainGold;
 
         SavePlayerInfoFile(info);
+
+        LobbyPlayerAchievementData achieveInfo = LoadAchieveData();
+
+        string weaponType = PlayerManager.Instance.Player.GetComponent<PlayerStatus>()
+            .PlayerCurrentWeapon.Spec.Type.Substring(0, 2);
+        EquipmentManager.WeaponType type = (EquipmentManager.WeaponType)Enum.Parse
+            (typeof(EquipmentManager.WeaponType), weaponType);
+
+        // 무기별 킬 체크
+        achieveInfo.KillToWeapon[(int)type] += SpawnManager.currentKillMosterCount;
+        // 무기별 생존 시간 체크
+        achieveInfo.TimeToWeapon[(int)type] += (int)UIManager.Instance.GamePlayerTime;
+        // 무기별 보스 킬 체크
+        for(int i = 0; i < SpawnManager.currentKillBossMonsterCount; i++)
+        {
+            achieveInfo.BossKillToWeapon[(int)type][i]++;
+        }
+        // 무기별 웨이브 클리어 체크
+        for(int i = 0; i < SpawnManager.Instance.WaveCount; i++)
+        {
+            achieveInfo.WaveClearToWeapon[(int)type][i]++;
+        }
+        // 스킬별 킬 체크
+        if (achieveInfo.KillToSkill.ContainsKey(PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentGeneralSkill.name))
+        {
+            achieveInfo.KillToSkill[PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentGeneralSkill.name] 
+                += SpawnManager.currentKillMosterCount;
+        }
+        // 코스튬 생존 시간 체크(누적x)
+        if((EquipmentManager.CostumeTpye.swsp).ToString().Contains(weaponType))
+            achieveInfo.TimeToCostume[0] = (int)UIManager.Instance.GamePlayerTime;
+        else
+            achieveInfo.TimeToCostume[1] = (int)UIManager.Instance.GamePlayerTime;
+        // 코스튬 보스 킬 체크
+        if ((EquipmentManager.CostumeTpye.swsp).ToString().Contains(weaponType))
+        {
+            for (int i = 0; i < SpawnManager.currentKillBossMonsterCount; i++)
+            {
+                achieveInfo.BossKillToCostume[0][i]++;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < SpawnManager.currentKillBossMonsterCount; i++)
+            {
+                achieveInfo.BossKillToCostume[1][i]++;
+            }
+        }
+
+        // 모드 도전 횟수
+        if (MapManager.Instance.CurrentMapType == MapManager.MapType.BossRelay)
+            achieveInfo.ModeClear[1]++;
+        else
+            achieveInfo.ModeClear[0]++;
+
+        // 보스 릴레이 모드 클리어 단계수
+        if(MapManager.Instance.CurrentMapType == MapManager.MapType.BossRelay)
+        {
+            for (int i = 0; i < SpawnManager.Instance.WaveCount; i++)
+            {
+                achieveInfo.BossModeWaveClear[i]++;
+            }
+        }
+
+        SaveAchievementData(achieveInfo);
     }
 }

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+[Serializable]
 public class LobbyPlayerAchievementData
 {
     // 전체적인 업적 달성도
     [SerializeField]
-    private List<Tuple<string, Achievement.AState>> mProgress;
-    public List<Tuple<string, Achievement.AState>> Progress
+    private StringState mProgress;
+    public StringState Progress
     {
         get => mProgress;
         set
@@ -40,6 +41,18 @@ public class LobbyPlayerAchievementData
         }
     }
 
+    // 처치(스킬)
+    [SerializeField]
+    private StringInt mKillToSkill;
+    public StringInt KillToSkill
+    {
+        get => mKillToSkill;
+        set
+        {
+            mKillToSkill = value;
+        }
+    }
+
     // 생존 시간(무기)
     [SerializeField]
     private List<int> mTimeToWeapon;
@@ -65,8 +78,8 @@ public class LobbyPlayerAchievementData
 
     // 보스 처치(무기)
     [SerializeField]
-    private List<List<int>> mBossKillToWeapon;
-    public List<List<int>> BossKillToWeapon
+    private List<IntInt> mBossKillToWeapon;
+    public List<IntInt> BossKillToWeapon
     {
         get => mBossKillToWeapon;
         set
@@ -76,8 +89,8 @@ public class LobbyPlayerAchievementData
     }
     // 보스 처치(코스튬)
     [SerializeField]
-    private List<List<int>> mBossKillToCostume;
-    public List<List<int>> BossKillToCostume
+    private List<IntInt> mBossKillToCostume;
+    public List<IntInt> BossKillToCostume
     {
         get => mBossKillToCostume;
         set
@@ -88,8 +101,8 @@ public class LobbyPlayerAchievementData
 
     // 웨이브 클리어(무기)
     [SerializeField]
-    private List<List<int>> mWaveClearToWeapon;
-    public List<List<int>> WaveClearToWeapon
+    private List<IntInt> mWaveClearToWeapon;
+    public List<IntInt> WaveClearToWeapon
     {
         get => mWaveClearToWeapon;
         set

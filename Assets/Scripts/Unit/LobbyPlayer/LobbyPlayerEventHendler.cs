@@ -7,7 +7,7 @@ public class LobbyPlayerEventHendler : MonoBehaviour
     public delegate void MoveSpeedObserver(float _speed);
     public event MoveSpeedObserver MoveSpeedObserverEvent;
 
-    public delegate void GoodsObserver(int _gold, int _diamond, int _stamina);
+    public delegate void GoodsObserver(int _gold, int _diamond);
     public event GoodsObserver GoodsObserverEvent;
 
     public void resgisterMoveSpeedObsever(MoveSpeedObserver _obs)
@@ -33,8 +33,8 @@ public class LobbyPlayerEventHendler : MonoBehaviour
     {
         GoodsObserverEvent -= _obs;
     }
-    public void ChangeGoods(int _gold, int _diamond, int _stamina)
+    public void ChangeGoods(int _gold, int _diamond)
     {
-        GoodsObserverEvent?.Invoke(_gold, _diamond, _stamina);
+        GoodsObserverEvent?.Invoke(_gold, _diamond);
     }
 }

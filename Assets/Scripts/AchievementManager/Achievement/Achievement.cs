@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Achievement : MonoBehaviour
 {
+    private const int NONE = -999;
     public enum AState
     {
         Unactive,
@@ -43,8 +44,15 @@ public abstract class Achievement : MonoBehaviour
         }
     }
     [SerializeField]
-    protected AState mState;
-    public AState State => mState;
+    protected AState mState = AState.Unactive;
+    public AState State
+    {
+        get => mState;
+        set
+        {
+            mState = value;
+        }
+    }
 
     [Header("Previous")]
     [SerializeField]
@@ -91,16 +99,33 @@ public abstract class Achievement : MonoBehaviour
         }
     }
     [SerializeField]
-    protected int mCurrentValue;
+    protected string mSkillCondition;
+    public string SkillCondition
+    {
+        get => mSkillCondition;
+        set
+        {
+            mSkillCondition = value;
+        }
+    }
+    [SerializeField]
+    protected int mCurrentValue = 0;
     public int CurrentValue => mCurrentValue;
 
     [Header("Reward")]
     [SerializeField]
     protected Reward mReward;
-
+    public Reward Reward
+    {
+        get => mReward;
+        set
+        {
+            mReward = value;
+        }
+    }
     public void WaitForCompleted()
     {
-        if (mState != AState.WaitForComplete)
+        if (mState == AState.Inactive)
             mState = AState.WaitForComplete;
     }
     public void Completed()
@@ -111,7 +136,6 @@ public abstract class Achievement : MonoBehaviour
             mReward.Give();
             NextAchievementActive();
         }
-
     }
     public void Inactive()
     {
@@ -120,7 +144,8 @@ public abstract class Achievement : MonoBehaviour
     }
     public virtual void CheckComplete()
     {
-        if (mState == AState.Complete || mState == AState.Unactive)
+        mCurrentValue = 0;
+        if (mState == AState.Complete || mState == AState.Unactive || mState == AState.WaitForComplete)
             return;
     }
     private void NextAchievementActive()
@@ -128,5 +153,15 @@ public abstract class Achievement : MonoBehaviour
         if (AchievementManager.Instance.FindNextAchievement(this) is null)
             return;
         AchievementManager.Instance.FindNextAchievement(this).Inactive();
+    }
+
+    public int FinalCondition()
+    {
+        if (mSecondIntCondition == NONE)
+            return mFirstIntCondition;
+        else if (mThirdIntCondition == NONE)
+            return mSecondIntCondition;
+        else
+            return mThirdIntCondition;
     }
 }
