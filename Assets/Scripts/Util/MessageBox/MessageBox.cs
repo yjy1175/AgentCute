@@ -87,6 +87,8 @@ public class MessageBox : MonoBehaviour
     }
     public void setEnable(string _msg, Vector3 _pos)
     {
+        GetComponent<MeshRenderer>().sortingLayerID = 0;
+        GetComponent<MeshRenderer>().sortingOrder = 102;
         newAlpha = alpha;
         textCom.text = _msg;
         transform.position = _pos;

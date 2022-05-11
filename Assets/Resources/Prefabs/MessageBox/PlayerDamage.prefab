@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6140302652923686784}
   - component: {fileID: -1250901502584532665}
   - component: {fileID: 3469759383022055476}
-  - component: {fileID: -6111395342828315910}
   m_Layer: 0
   m_Name: PlayerDamage
   m_TagString: Untagged
@@ -133,14 +132,3 @@ MonoBehaviour:
   outlineColor: {r: 0, g: 0, b: 0, a: 1}
   resolutionDependant: 1
   doubleResolution: 1024
---- !u!210 &-6111395342828315910
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6140302652923686785}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 102
