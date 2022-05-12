@@ -29,11 +29,11 @@ AgentCute에서는 길에대한 가중치가 모두 같기때문에 BFS를 사�
 * AgentCute에서는 게임의 난이도를 위하여 2wave이상일 경우, 보스몹에 한하여 AI알고리즘을 적용되었습니다
 
 ## 참고소스
-* [playerMove.cs](../Assets/Scripts/Unit/Player/PlayerMove.cs)
+* [playerMove.cs](../../Assets/Scripts/Unit/Player/PlayerMove.cs)
 BFS생성
-* [MonsterMove.cs](../Assets/Scripts/Unit/Monster/MonsterMove/MonsterMove.cs)
+* [MonsterMove.cs](../../Assets/Scripts/Unit/Monster/MonsterMove/MonsterMove.cs)
 BFS를 참고하여 이동
-* [CustomRayCastManager.cs](../Assets/Scripts/RayCastManager/CustomRayCastManager.cs)
+* [CustomRayCastManager.cs](../../Assets/Scripts/RayCastManager/CustomRayCastManager.cs)
 custom raycast util
 
 
