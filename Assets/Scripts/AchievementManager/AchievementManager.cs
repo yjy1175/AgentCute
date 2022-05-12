@@ -101,6 +101,8 @@ public class AchievementManager : SingleToneMaker<AchievementManager>
                 newAchv.AchievementName + "\n" + newAchv.AchievementDesc;
             newUI.GetComponent<AchieveInfoButton>().mRewardIcon.transform.GetChild(0).GetComponent<Image>().sprite =
                 newAchv.Reward.Icon;
+            newUI.GetComponent<AchieveInfoButton>().mRewardIcon.transform.GetChild(1).GetComponent<Text>().text =
+                "x" + " " + newAchv.Reward.RewardQuantity;
             newUI.GetComponent<AchieveInfoButton>().mInactive.transform.GetChild(1).GetComponent<Text>().text =
                 newAchv.FinalCondition().ToString();
             newUI.GetComponent<AchieveInfoButton>().mRewardButton.GetComponent<Button>()

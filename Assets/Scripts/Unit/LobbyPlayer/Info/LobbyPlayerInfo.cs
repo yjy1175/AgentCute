@@ -219,6 +219,17 @@ public class LobbyPlayerInfo
             SaveLoadManager.Instance.SavePlayerInfoFile(this);
         }
     }
+    [SerializeField]
+    private int mDailyAdCount;
+    public int DailyAddCount
+    {
+        get => mDailyAdCount;
+        set
+        {
+            mDailyAdCount = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
+    }
     #endregion
     #region UNLOCK_INFO
     [SerializeField]

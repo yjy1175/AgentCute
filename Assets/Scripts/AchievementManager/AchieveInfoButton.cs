@@ -15,14 +15,14 @@ public class AchieveInfoButton : MonoBehaviour
     public void Unactive()
     {
         mDesc.transform.GetChild(1).gameObject.SetActive(true);
-        mRewardIcon.transform.GetChild(1).gameObject.SetActive(true);
+        mRewardIcon.transform.GetChild(2).gameObject.SetActive(true);
         mUnactive.SetActive(true);
     }
 
     public void Inactive()
     {
         mDesc.transform.GetChild(1).gameObject.SetActive(false);
-        mRewardIcon.transform.GetChild(1).gameObject.SetActive(false);
+        mRewardIcon.transform.GetChild(2).gameObject.SetActive(false);
         mUnactive.SetActive(false);
 
         mInactive.SetActive(true);
@@ -31,7 +31,7 @@ public class AchieveInfoButton : MonoBehaviour
     public void WaitForComplete()
     {
         mDesc.transform.GetChild(1).gameObject.SetActive(false);
-        mRewardIcon.transform.GetChild(1).gameObject.SetActive(false);
+        mRewardIcon.transform.GetChild(2).gameObject.SetActive(false);
         mUnactive.SetActive(false);
 
         mInactive.SetActive(false);
@@ -42,7 +42,7 @@ public class AchieveInfoButton : MonoBehaviour
     public void Complete()
     {
         mDesc.transform.GetChild(1).gameObject.SetActive(false);
-        mRewardIcon.transform.GetChild(1).gameObject.SetActive(false);
+        mRewardIcon.transform.GetChild(2).gameObject.SetActive(false);
         mUnactive.SetActive(false);
 
         mInactive.SetActive(false);

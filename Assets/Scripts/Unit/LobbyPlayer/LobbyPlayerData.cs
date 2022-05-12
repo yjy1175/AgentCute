@@ -28,6 +28,17 @@ public class LobbyPlayerData : MonoBehaviour
             mAchieveData = value;
         }
     }
+
+    [SerializeField]
+    private int mCurrentAdCount;
+    public int CurrentAdCount
+    {
+        get => mCurrentAdCount;
+        set
+        {
+            mCurrentAdCount = value;
+        }
+    }
     private void Start()
     {
         Info = SaveLoadManager.Instance.LoadBaseData();
