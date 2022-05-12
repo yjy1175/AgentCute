@@ -86,7 +86,7 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         newInfo.CurrentCostumeName = "";
         newInfo.CurrentCostumeShapeName = "";
         newInfo.Gold = 0;
-        newInfo.Diamond = 190;
+        newInfo.Diamond = 10000;
         List<Dictionary<string, object>> weponLockData = CSVReader.Read("CSVFile\\Weapon");
         newInfo.Weaponlock = new StringBoolean();
         for(int i = 0; i < weponLockData.Count; i++)
