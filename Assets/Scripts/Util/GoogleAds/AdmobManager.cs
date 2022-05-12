@@ -36,7 +36,15 @@ public class AdmobManager : SingleToneMaker<AdmobManager>
         videoAd.OnAdClosed += HandleOnAdClosed;
         videoAd.OnUserEarnedReward += HandleOnUserEarnedReward;
     }
-
+    private void OnDestroy()
+    {
+        videoAd.OnAdLoaded -= HandleOnAdLoaded;
+        videoAd.OnAdFailedToLoad -= HandleOnAdFailedToLoad;
+        videoAd.OnAdFailedToShow -= HandleOnAdFailedToShow;
+        videoAd.OnAdOpening -= HandleOnAdOpening;
+        videoAd.OnAdClosed -= HandleOnAdClosed;
+        videoAd.OnUserEarnedReward -= HandleOnUserEarnedReward;
+    }
     private void Load()
     {
         AdRequest request = new AdRequest.Builder().Build();
