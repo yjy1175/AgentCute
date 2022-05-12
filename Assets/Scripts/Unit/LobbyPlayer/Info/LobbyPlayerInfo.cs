@@ -6,6 +6,18 @@ using System;
 public class LobbyPlayerInfo
 {
     #region variable
+    #region TIME
+    [SerializeField]
+    private int mDate;
+    public int Date
+    {
+        get => mDate;
+        set
+        {
+            mDate = value;
+        }
+    }
+    #endregion
     #region BASE_STAT
     // ±âº» ½ºÅÝ
     [SerializeField]

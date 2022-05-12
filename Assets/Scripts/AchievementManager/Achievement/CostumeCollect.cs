@@ -12,7 +12,6 @@ public class CostumeCollect : Achievement
         {
             if (!checkDic[key])
             {
-                Debug.Log(".");
                 mCurrentValue++;
             }
 

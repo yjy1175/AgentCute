@@ -234,6 +234,8 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
             else
             {
                 GamePause();
+                mSupportItemPannel.transform.GetChild(8).GetChild(1).GetComponent<Text>().text =
+                    info.DailyAddCount.ToString();
                 mSupportItemPannel.SetActive(true);
             }
         }
@@ -340,8 +342,15 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         {
             // TODO : 광고 틀기, 던전 버프 랜덤 적용, 광고 횟수 차감
             // 일일 광고 제한 횟수 체크 하기
-            AdmobManager.Instance.Show(AdmobManager.AdType.Supply);
-            mDeongunStartPannel.transform.GetChild(2).GetChild(2).gameObject.SetActive(false);
+            if(GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.DailyAddCount > 0)
+            {
+                AdmobManager.Instance.Show(AdmobManager.AdType.Supply);
+                mDeongunStartPannel.transform.GetChild(2).GetChild(2).gameObject.SetActive(false);
+            }
+            else
+            {
+                OpenAlertEnterPannel("일일 광고 횟수가 모두 소진되었습니다.\n오전9시에 횟수가 충전됩니다.");
+            }
         }
         // 광고 보지 않은 경우
         else

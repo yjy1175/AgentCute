@@ -61,8 +61,20 @@ public class UIManager : SingleToneMaker<UIManager>
     [SerializeField]
     private GameObject mGameOverPannel;
     [SerializeField]
-    private GameObject mGaneOverResurrectionPannel;
-
+    private GameObject mGaneOverFirstResurrectionPannel;
+    public GameObject GaneOverFirstResurrectionPannel => mGaneOverFirstResurrectionPannel;
+    [SerializeField]
+    private GameObject mGaneOverSecondResurrectionPannel;
+    [SerializeField]
+    private bool mIsAdSkip;
+    public bool IsAdSkip
+    {
+        get => mIsAdSkip;
+        set
+        {
+            mIsAdSkip = value;
+        }
+    }
 
     [Header("테스트 로비")]
     [SerializeField]
@@ -124,7 +136,7 @@ public class UIManager : SingleToneMaker<UIManager>
         if (!mIsPause)
         {
             mGamePlayTime += Time.deltaTime;
-            mGamePlayTimeText.text = string.Format("{0:N2}", mGamePlayTime);
+            mGamePlayTimeText.text = (int)mGamePlayTime + "초";
         }
     }
 
@@ -211,31 +223,82 @@ public class UIManager : SingleToneMaker<UIManager>
         GamePause();
 
         // 게임오버 패널 오픈
+        mGameOverPannel.transform.GetChild(3).GetChild(0).GetComponent<Text>().text =
+            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().GainGold.ToString();
+        mGameOverPannel.transform.GetChild(5).GetChild(0).GetComponent<Text>().text =
+            string.Format("{0:N2}", mGamePlayTime);
         mGameOverPannel.SetActive(true);
     }
-    public void GameOverResurrectionPannelOn()
+    public void GameOverFirstResurrectionPannelOn()
     {
         // 일시 정지
         GamePause();
 
         // 게임오버 패널 오픈
-        mGaneOverResurrectionPannel.transform.GetChild(5).GetChild(1).GetComponent<Text>().text =
-            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().Diamond.ToString() + "개";
-        mGaneOverResurrectionPannel.SetActive(true);
+        mGaneOverFirstResurrectionPannel.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = 
+            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().GainGold.ToString();
+        mGaneOverFirstResurrectionPannel.transform.GetChild(5).GetChild(0).GetComponent<Text>().text =
+            ((int)(mGamePlayTime)).ToString() + "초";
+        // 광고 패스 구매한 경우
+        if (mIsAdSkip)
+        {
+            mGaneOverFirstResurrectionPannel.transform.GetChild(7).GetChild(0).GetComponent<Text>().text =
+                "무료 부활";
+        }
+        // 미구매
+        else
+        {
+            mGaneOverFirstResurrectionPannel.transform.GetChild(7).GetChild(0).GetComponent<Text>().text =
+                "광고 시청 후 무료 부활";
+        }
+        mGaneOverFirstResurrectionPannel.SetActive(true);
     }
-    public void ClickResurrectionButton()
+    public void GameOverSecondResurrectionPannelOn()
+    {
+        // 일시 정지
+        GamePause();
+
+        // 게임오버 패널 오픈
+        mGaneOverSecondResurrectionPannel.transform.GetChild(9).GetChild(1).GetComponent<Text>().text =
+            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().Diamond.ToString() + "개";
+        mGaneOverSecondResurrectionPannel.transform.GetChild(3).GetChild(0).GetComponent<Text>().text =
+    PlayerManager.Instance.Player.GetComponent<PlayerStatus>().GainGold.ToString();
+        mGaneOverSecondResurrectionPannel.transform.GetChild(5).GetChild(0).GetComponent<Text>().text =
+            ((int)(mGamePlayTime)).ToString() + "초";
+        mGaneOverSecondResurrectionPannel.SetActive(true);
+    }
+    public void Ressureection(GameObject _pannel)
+    {
+        PlayerManager.Instance.ResurrectionPlayer();
+        _pannel.SetActive(false);
+        GameRestart();
+    }
+    public void ClickFirstResurrectionButton()
+    {
+        // TODO : 광고 시청 후 부활 가능
+        // 광고 패스 구매 시
+        if (mIsAdSkip)
+        {
+            Ressureection(mGaneOverFirstResurrectionPannel);
+        }
+        // 미구매시
+        else
+        {
+            // 광고 재생 후 보상형으로 부활
+            AdmobManager.Instance.Show(AdmobManager.AdType.Resurrection);
+        }
+    }
+    public void ClickSecondResurrectionButton()
     {
         if(PlayerManager.Instance.Player.GetComponent<PlayerStatus>().Diamond >= 6)
         {
             PlayerManager.Instance.Player.GetComponent<PlayerStatus>().Diamond -= 6;
-            PlayerManager.Instance.ResurrectionPlayer();
-            mGaneOverResurrectionPannel.SetActive(false);
-            GameRestart();
+            Ressureection(mGaneOverSecondResurrectionPannel);
         }
         else
         {
             // 소지 다이아 부족
-            mGaneOverResurrectionPannel.transform.GetChild(2).gameObject.SetActive(true);
+            mGaneOverSecondResurrectionPannel.transform.GetChild(6).gameObject.SetActive(true);
         }
     }
     public void ClickGameReload()

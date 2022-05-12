@@ -70,15 +70,20 @@ public class PlayerUI : IUI
         // TO-DO : UIManager에 이벤트 등록 하기
         if (_hp <= 0)
         {
-            if (GetComponent<PlayerStatus>().IsFirstDie)
+            switch (GetComponent<PlayerStatus>().DieCount)
             {
-                // 부활 가능한 패널
-                UIManager.Instance.GameOverResurrectionPannelOn();
-            }
-            else
-            {
-                // 부활 불가능한 패널
-                UIManager.Instance.GameOverPannelOn();
+                case 0:
+                    // 광고 부활 가능한 패널
+                    UIManager.Instance.GameOverFirstResurrectionPannelOn();
+                    break;
+                case 1:
+                    // 다이아 부활 가능한 패널
+                    UIManager.Instance.GameOverSecondResurrectionPannelOn();
+                    break;
+                case 2:
+                    // 부활 불가능한 패널
+                    UIManager.Instance.GameOverPannelOn();
+                    break;
             }
         }
             

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
 {
@@ -10,6 +11,7 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
     private string mWarFileName;
     private string mAchieveFileName;
     private bool mIsCreate = false;
+    private int mCurrentDay;
     // Start is called before the first frame update
     void Awake()
     {
@@ -59,8 +61,6 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
     private LobbyPlayerInfo CreateSaveFile()
     {
         mIsCreate = true;
-        string path = "";
-        path = Path.Combine(Application.persistentDataPath, mLoadFileName);
         LobbyPlayerInfo newInfo = new LobbyPlayerInfo();
         // 초기값 세팅 : TODO -> 추후에 데이터로 초기값 받기
         List<Dictionary<string, object>> playerBaseStatData = CSVReader.Read("CSVFile/PlayerBaseStat");
@@ -111,10 +111,8 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
             bool locked = Convert.ToBoolean(skillLockData[i]["SkillLock"].ToString());
             newInfo.Skilllock.Add(skillName, locked);
         }
-        string fileStream = JsonUtility.ToJson(newInfo, true);
-        fileStream = AES.Encrypt(fileStream, AES.key);
-
-        File.WriteAllText(path, fileStream);
+        newInfo.DailyAddCount = 3;
+        WebChkAndSave(newInfo);
         mIsCreate = false;
         return newInfo;
     }
@@ -216,11 +214,7 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
     {
         if (!mIsCreate)
         {
-            string path = "";
-            path = Path.Combine(Application.persistentDataPath, mLoadFileName);
-            string fileStream = JsonUtility.ToJson(_info, true);
-            fileStream = AES.Encrypt(fileStream, AES.key);
-            File.WriteAllText(path, fileStream);
+            StartCoroutine(WebChkAndSave(_info));
         }
     }
     public void SaveAchievementData(LobbyPlayerAchievementData _info)
@@ -230,7 +224,6 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         string fileStream = JsonUtility.ToJson(_info, true);
         fileStream = AES.Encrypt(fileStream, AES.key);
         File.WriteAllText(path, fileStream);
-        Debug.Log("업적 데이터 저장");
     }
 
     // 전투씬에 보낼 데이터 저장
@@ -333,5 +326,33 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         }
 
         SaveAchievementData(achieveInfo);
+    }
+
+    IEnumerator WebChkAndSave(LobbyPlayerInfo _info)
+    {
+        string url = "www.naver.com";
+        UnityWebRequest request = new UnityWebRequest();
+        using (request = UnityWebRequest.Get(url))
+        {
+            yield return request.SendWebRequest();
+            if (request.result == UnityWebRequest.Result.ConnectionError)
+            {
+                // 인터넷 연결 오류
+                LobbyUIManager.Instance.OpenAlertEnterPannel("인터넷 연결이 필요합니다.\n강제로 진행 시 불이익이 생길 수 있습니다.");
+            }
+            else
+            {
+                string date = request.GetResponseHeader("date");
+                DateTime dateTime = DateTime.Parse(date).ToUniversalTime();
+                mCurrentDay = dateTime.Day;
+            }
+        }
+        string path = "";
+        path = Path.Combine(Application.persistentDataPath, mLoadFileName);
+        _info.Date = mCurrentDay;
+        string fileStream = JsonUtility.ToJson(_info, true);
+        fileStream = AES.Encrypt(fileStream, AES.key);
+        File.WriteAllText(path, fileStream);
+
     }
 }

@@ -111,8 +111,10 @@ public class AdmobManager : SingleToneMaker<AdmobManager>
             case AdType.Supply:
                 DeongunStartManager.Instance.DrawBuff();
                 LobbyUIManager.Instance.OpenDoengunPannel();
+                GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.DailyAddCount--;
                 break;
             case AdType.Resurrection:
+                UIManager.Instance.Ressureection(UIManager.Instance.GaneOverFirstResurrectionPannel);
                 break;
         }
     }

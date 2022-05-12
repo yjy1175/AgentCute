@@ -35,11 +35,11 @@ public class PlayerStatus : IStatus
     }
 
     [SerializeField]
-    private bool mIsFirstDie = true;
-    public bool IsFirstDie
+    private int mDieCount = 0;
+    public int DieCount
     {
-        get { return mIsFirstDie; }
-        set { mIsFirstDie = value; }
+        get { return mDieCount; }
+        set { mDieCount = value; }
     }
 
     [SerializeField]
@@ -108,7 +108,7 @@ public class PlayerStatus : IStatus
     {
         Hp = MaxHP;
         Invincibility(1f);
-        IsFirstDie = false;
+        DieCount++;
     }
 
     public int PlayerGetExp
