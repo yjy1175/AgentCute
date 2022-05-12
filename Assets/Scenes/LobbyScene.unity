@@ -21164,7 +21164,7 @@ GameObject:
   - component: {fileID: 430847403}
   - component: {fileID: 430847402}
   m_Layer: 5
-  m_Name: BowgunImage
+  m_Name: StaffImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35438,7 +35438,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 10}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &872489763
 MonoBehaviour:
@@ -40288,7 +40288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 998455318}
   m_Layer: 5
-  m_Name: StaffList
+  m_Name: BowgunList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41698,7 +41698,7 @@ GameObject:
   - component: {fileID: 1046050209}
   - component: {fileID: 1046050208}
   m_Layer: 5
-  m_Name: StaffImage
+  m_Name: BowgunImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57900,7 +57900,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC11D\uAD81"
+  m_Text: "\uC2A4\uD0DC\uD504"
 --- !u!222 &1528894756
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -64376,7 +64376,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 10}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1711774138
 MonoBehaviour:
@@ -69073,7 +69073,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 10}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1837740818
 MonoBehaviour:
@@ -76002,7 +76002,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC2A4\uD0DC\uD504"
+  m_Text: "\uBCF4\uC6B0\uAC74"
 --- !u!222 &2022501324
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -76046,7 +76046,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 30, y: 10}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2022883863
 MonoBehaviour:
@@ -77350,7 +77350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2052101186
 RectTransform:
   m_ObjectHideFlags: 0
@@ -77997,7 +77997,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2067938778}
   m_Layer: 5
-  m_Name: BowgunList
+  m_Name: StaffList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

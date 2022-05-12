@@ -30,8 +30,8 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
     {
         sw,
         sp,
-        st,
         bg,
+        st,
         Exit
     }
 
