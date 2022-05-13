@@ -327,7 +327,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
             }
             else
             {
-                OpenAlertEnterPannel("일일 광고 횟수가 모두 소진되었습니다.\n오전9시에 횟수가 충전됩니다.");
+                OpenAlertEnterPannel("일일 광고 횟수가 모두 소진되었습니다.\n00시에 횟수가 충전됩니다.");
             }
         }
         // 광고 보지 않은 경우
@@ -357,6 +357,9 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
                 mDeongunStartPannel.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite
                     = EquipmentManager.Instance.FindCostume(DeongunStartManager.Instance.CosumeName)
                     .GetComponent<SpriteRenderer>().sprite;
+                break;
+            default:
+                OpenAlertEnterPannel("예기치 못한 오류 발생");
                 break;
         }
         mDeongunStartPannel.transform.GetChild(2).GetChild(1).GetComponent<Text>().text

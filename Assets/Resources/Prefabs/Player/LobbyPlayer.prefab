@@ -626,22 +626,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mInfo:
+    mDate: 0
     mBaseHp: 0
     mBaseATK: 0
     mBaseCriticalChance: 0
     mBaseCriticalDamage: 0
     mBaseSPD: 0
     mBaseATKSPD: 0
+    mTrainingLevelList: 
     mTrainingHp: 0
     mTrainingATK: 0
     mTrainingAddDamage: 0
+    mTrainingMagnetPower: 0
+    mTrainingGoldPower: 0
+    mTrainingRevive: 0
+    mTrainingShieldTime: 0
+    mTrainingDodgeTime: 0
     mMoveSpeedRate: 0
     mCurrentWeaponName: 
     mCurrentCostumeName: 
     mCurrentCostumeShapeName: 
     mGold: 0
     mDiamond: 0
-    mStemina: 0
+    mCutePotionCount: 0
+    mDailyAdCount: 0
+    mWeaponlock:
+      m_keys: []
+      m_values: 
+    mCostumelock:
+      m_keys: []
+      m_values: 
+    mSkilllock:
+      m_keys: []
+      m_values: 
+  mAchieveData:
+    mProgress:
+      m_keys: []
+      m_values: 
+    mModeClear: 
+    mKillToWeapon: 
+    mKillToSkill:
+      m_keys: []
+      m_values: 
+    mTimeToWeapon: 
+    mTimeToCostume: 
+    mBossKillToWeapon: []
+    mBossKillToCostume: []
+    mWaveClearToWeapon: []
+    mBossModeWaveClear: 
 --- !u!114 &1096120673402983979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,6 +694,8 @@ MonoBehaviour:
   mInteractionText: {fileID: 0}
   mIsTriggerInWareHouse: 0
   mIsTriggerInStartZone: 0
+  mIsTriggerInSupplyZone: 0
+  mIsTriggerInTrainingZone: 0
 --- !u!114 &9210635812579958363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -676,7 +710,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mGoldText: {fileID: 0}
   mDiamondText: {fileID: 0}
-  mSteminaText: {fileID: 0}
 --- !u!114 &1235026670686264744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1238,7 +1271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2423178370051753800
 Transform:
   m_ObjectHideFlags: 0
