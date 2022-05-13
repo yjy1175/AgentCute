@@ -41,6 +41,7 @@ public class Spawn : Projectile
         ReverseSpawn, //목표 오브젝트에 따라 뒤집어지짐
         TargetSpawn, //타겟 위치에 스폰
         NormalizeSpawn,//firePosition에서 단위벡터만큼멀리서 회전하지 않고 스폰
+        AfterImageSpawn, // 잔상 형 스폰
     }
     [SerializeField]
     private VertualJoyStick mUJoySitick;
@@ -77,6 +78,20 @@ public class Spawn : Projectile
             {
                 mPlayer = GameObject.Find("fire").transform.position;
                 transform.position = mPlayer;
+            }
+            if(mIsActive && (SpawnType)Enum.Parse(typeof(SpawnType), mSpawnType) == SpawnType.AfterImageSpawn)
+            {
+                mPlayer = GameObject.Find("fire").transform.position;
+                Vector3 dir = mPlayer - transform.position;
+                if(dir.x > 0f)
+                {
+                    transform.localScale = new Vector3(-mSizeX, mSizeY, 0);
+                }
+                else
+                {
+                    transform.localScale = new Vector3(mSizeX, mSizeY, 0);
+                }
+                transform.Translate(Time.deltaTime * dir * PlayerManager.Instance.Player.GetComponent<PlayerMove>().Speed * 1.5f);
             }
         }
     }
@@ -124,6 +139,9 @@ public class Spawn : Projectile
                 transform.position = mPlayer;
                 angle = setAngle(mTarget - mPlayer) + _angle;
                 transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                break;
+            case SpawnType.AfterImageSpawn:
+                transform.position = mPlayer;
                 break;
             case SpawnType.ReverseSpawn:
                 transform.position = mPlayer;

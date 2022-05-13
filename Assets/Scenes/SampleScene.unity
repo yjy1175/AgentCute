@@ -24666,6 +24666,10 @@ MonoBehaviour:
   mIsGameStart: 0
   mIsCutePotion: 0
   mSupplyImage: {fileID: 1142093639}
+  mEndGoldRate: 0
+  mAutoReviveValue: 0
+  mStaffShieldTime: 0
+  mMeleeDodgeCount: 0
   mSelectMap: {fileID: 1863473928}
 --- !u!1 &1319617664
 GameObject:

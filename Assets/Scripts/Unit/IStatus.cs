@@ -440,7 +440,7 @@ public abstract class IStatus : MonoBehaviour
             MoveSpeedRate += value;
         }
         // 순간이동
-        else if (_type == Skill.ESkillBuffType.PlayerPosition)
+        else if (_type == Skill.ESkillBuffType.PlayerPosition || _type == Skill.ESkillBuffType.PlayerDash)
         {
             Vector3 currentDir = GetComponent<PlayerAttack>().Target;
             if (currentDir == Vector3.zero)

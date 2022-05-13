@@ -58,6 +58,7 @@ public class Skill : MonoBehaviour
         None,
         PlayerSPD,
         PlayerPosition,
+        PlayerDash,
         PlayerWeaponSprite
     }
 

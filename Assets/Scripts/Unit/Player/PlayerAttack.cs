@@ -235,7 +235,7 @@ public class PlayerAttack : IAttack
     private void useSkill(GameObject _btn, Skill _skill)
     {
         // 해당 스킬의 버프능력이 있다면 실행
-        if (_skill.SkillBuffType != Skill.ESkillBuffType.None)
+        if (_skill.SkillBuffType != Skill.ESkillBuffType.None && _skill.SkillBuffType != Skill.ESkillBuffType.PlayerDash)
         {
             _skill.BuffOn(gameObject);
         }
@@ -331,6 +331,10 @@ public class PlayerAttack : IAttack
                     WaitForCoolTime(_btn, _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex], _skill.Spec.Type));
             }
         }
+        if (_skill.SkillBuffType == Skill.ESkillBuffType.PlayerDash)
+        {
+            _skill.BuffOn(gameObject);
+        }
     }
     // 시간내의 무한 발사인 경우
     // 지속 시간, 타겟
@@ -359,7 +363,10 @@ public class PlayerAttack : IAttack
 
             yield return new WaitForSeconds(_skill.Spec.SkillRunTime[1]); // 한발당 발사시간
         }
-
+                if (_skill.SkillBuffType != Skill.ESkillBuffType.None || _skill.SkillBuffType != Skill.ESkillBuffType.PlayerDash)
+        {
+            _skill.BuffOn(gameObject);
+        }
     }
     // 우선 발사체가 한개인 경우만 구현
     private void launchSkill(Skill _skill)

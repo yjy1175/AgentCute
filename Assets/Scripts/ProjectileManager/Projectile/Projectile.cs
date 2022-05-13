@@ -85,7 +85,10 @@ public abstract class Projectile : MonoBehaviour
         set { mCallerPos = value; }
     }
 
-
+    [SerializeField]
+    protected float mSizeX;
+    [SerializeField]
+    protected float mSizeY;
     #endregion
 
     private void OnEnable()
@@ -149,6 +152,8 @@ public abstract class Projectile : MonoBehaviour
     public void setSize(Vector3 _size)
     {
         transform.localScale = _size;
+        mSizeX = _size.x;
+        mSizeY = _size.y;
     }
     public void setDisableWaitForTime(float _time)
     {
