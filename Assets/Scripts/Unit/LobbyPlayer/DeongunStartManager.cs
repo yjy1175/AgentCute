@@ -180,11 +180,15 @@ public class DeongunStartManager : SingleToneMaker<DeongunStartManager>
             mWarInfo.WarMoveSpeed = playerData.BaseSPD * (playerData.MoveSpeedRate 
                 - EquipmentManager.Instance.FindCostume(originCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerSPD) / 100f
                 + EquipmentManager.Instance.FindCostume(mWarInfo.WarCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerSPD) / 100f);
-            mWarInfo.WarMagnetPower = playerData.TrainingMagnetPower;
             mWarInfo.WarDiamond = playerData.Diamond;
             mWarInfo.WarWeaponName = playerData.CurrentWeaponName;
             mWarInfo.WarSkillLock = playerData.Skilllock;
             mWarInfo.IsWarCutePotion = mIsCutePotionCheck;
+            mWarInfo.WarMagnetPower = playerData.TrainingMagnetPower;
+            mWarInfo.WarGoldRate = playerData.TrainingGoldPower;
+            mWarInfo.WarRevuveValue = playerData.TrainingRevive;
+            mWarInfo.WarStaffShieldTime = playerData.TrainingShieldTime;
+            mWarInfo.WarMeleeDodgeCount = playerData.TrainingDodgeTime;
             SaveLoadManager.Instance.SavePlayerWarData(mWarInfo);
             if (mIsCutePotionCheck)
                 playerData.CutePotionCount--;

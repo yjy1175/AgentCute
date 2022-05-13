@@ -39,6 +39,7 @@ public class WarInfo
     }
 
     //전투 씬에 보낼 아이템 자석기능 파워
+    [SerializeField]
     private float mWarMagnetPower;
     public float WarMagnetPower
     {
@@ -46,6 +47,53 @@ public class WarInfo
         set { mWarMagnetPower = value; }
     }
 
+    // 전투 씬에 보낼 획득 골드량 수치
+    [SerializeField]
+    private float mWarGoldRate;
+    public float WarGoldRate
+    {
+        get => mWarGoldRate;
+        set
+        {
+            mWarGoldRate = value;
+        }
+    }
+
+    // 전투 씬에 보낼 추가 부활 횟수
+    [SerializeField]
+    private int mWarReviveValue;
+    public int WarRevuveValue
+    {
+        get => mWarReviveValue;
+        set
+        {
+            mWarReviveValue = value;
+        }
+    }
+
+    // 전투 씬에 보낼 추가 스태프 쉴드 지속시간
+    [SerializeField]
+    private float mWarStaffShieldTime;
+    public float WarStaffShieldTime
+    {
+        get => mWarStaffShieldTime;
+        set
+        {
+            mWarStaffShieldTime = value;
+        }
+    }
+
+    // 전투 씬에 보낼 추가 근거리 회피 추가횟수
+    [SerializeField]
+    private int mWarMeleeDodgeCount;
+    public int WarMeleeDodgeCount
+    {
+        get => mWarMeleeDodgeCount;
+        set
+        {
+            mWarMeleeDodgeCount = value;
+        }
+    }
 
     // 전투 씬에 보낼 다이아 수량
     [SerializeField]

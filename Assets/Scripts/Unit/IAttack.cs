@@ -218,7 +218,14 @@ public class IAttack : MonoBehaviour
         //projectile에 설정된 음악 
         MusicManager.Instance.OneShotProjectileSound(obj.name);
 
-        obj.GetComponent<Projectile>().setDisableWaitForTime(keepTime);
+        // 스태프 쉴드 스킬일 경우 추가 시간 적용
+        string weaponType = PlayerManager.Instance.Player.GetComponent<PlayerStatus>()
+            .PlayerCurrentWeapon.Spec.Type.Substring(0, 2);
+        obj.GetComponent<Projectile>().setDisableWaitForTime(
+            EquipmentManager.WeaponType.st.ToString() == weaponType ?
+            keepTime + PlayerManager.Instance.StaffShieldTime :
+            keepTime);
+
         return obj;
     }
 

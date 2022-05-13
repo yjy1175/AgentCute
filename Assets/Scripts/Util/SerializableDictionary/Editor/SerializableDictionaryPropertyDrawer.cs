@@ -11,6 +11,7 @@ using System;
 [CustomPropertyDrawer(typeof(StringInt))]
 [CustomPropertyDrawer(typeof(StringBoolean))]
 [CustomPropertyDrawer(typeof(TrainingSet))]
+[CustomPropertyDrawer(typeof(TrainingButtonSet))]
 [CustomPropertyDrawer(typeof(MonsterDataSet))]
 [CustomPropertyDrawer(typeof(CstBuffTypeValue))]
 [CustomPropertyDrawer(typeof(TypeSprite))]

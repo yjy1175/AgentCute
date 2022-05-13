@@ -30,7 +30,6 @@ public class Chase : Projectile
         if (mIsActive)
         {
            Vector3 dir = target - transform.position;
-            Debug.Log(dir);
             // 추적이 완료되었는데도 스폰시간이 남았다면 다시 추적
             if (dir.sqrMagnitude <= new Vector3(2, 2, 0).sqrMagnitude)
             {

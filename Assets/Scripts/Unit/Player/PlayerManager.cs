@@ -36,7 +36,18 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
     private bool mIsCutePotion = false;
     [SerializeField]
     private Image mSupplyImage;
-
+    [SerializeField]
+    private float mEndGoldRate;
+    public float EndGoldRate => mEndGoldRate;
+    [SerializeField]
+    private int mAutoReviveValue;
+    public int AutoReviveValue => mAutoReviveValue;
+    [SerializeField]
+    private float mStaffShieldTime;
+    public float StaffShieldTime => mStaffShieldTime;
+    [SerializeField]
+    private int mMeleeDodgeCount;
+    public int MeleeDodgeCount => mMeleeDodgeCount;
     // DEBUG용 맵 선택 오브젝트
     public GameObject mSelectMap;
 
@@ -58,6 +69,10 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
     {
         
     }
+    public void AutoReviveValueDiscount()
+    {
+        mAutoReviveValue--;
+    }
     private void InitPlayerBaseStat()
     {
         List<Dictionary<string, object>> playerBaseStatData = CSVReader.Read("CSVFile/PlayerBaseStat");
@@ -74,8 +89,11 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
         mPlayer.GetComponent<IStatus>().BaseDamage = loadInfo.WarDamage;
         mPlayer.GetComponent<IStatus>().MoveSpeed = loadInfo.WarMoveSpeed * (1 + loadInfo.WarBuffSpeedRate * 0.01f);
         mPlayer.GetComponent<PlayerStatus>().Diamond = loadInfo.WarDiamond;
-        //TO-DO loadInfo에서 설정필요
-        mPlayer.GetComponent<PlayerStatus>().MagnetPower = 3f;
+        mPlayer.GetComponent<PlayerStatus>().MagnetPower = loadInfo.WarMagnetPower;
+        mEndGoldRate = loadInfo.WarGoldRate;
+        mAutoReviveValue = loadInfo.WarRevuveValue;
+        mStaffShieldTime = loadInfo.WarStaffShieldTime;
+        mMeleeDodgeCount = loadInfo.WarMeleeDodgeCount;
         // 장비, 외형 입히기(코스튬은 입힐 필요 X)
         EquipmentManager.Instance.ChangeWeapon(loadInfo.WarWeaponName);
         EquipmentManager.Instance.ChangeCostume(loadInfo.WarCostumeShapeName);

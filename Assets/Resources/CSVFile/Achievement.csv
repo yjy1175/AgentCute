@@ -16,8 +16,8 @@ Achievement_14,더 귀여운 옷을 입어보자 1,null,근거리 무기를 장�
 Achievement_15,더 귀여운 옷을 입어보자 2,null,원거리 무기를 장착하고 누적 시간 15분 생존,SurvivorTimeToWeapon,5,900,-999,CostumeReward,cstbgst01,1
 Achievement_16,승리했다! 나의 귀여움으로! 1,Achievement_14,근거리 코스튬을 장착하고 로비로 나가지 않고 보스 1단계 처치,BossKillToCostume,0,0,1,CostumeReward,cstswsp02,1
 Achievement_17,승리했다! 나의 귀여움으로! 2,Achievement_15,원거리 코스튬을 장착하고 로비로 나가지 않고 보스 1단계 처치,BossKillToCostume,1,0,1,CostumeReward,cstbgst02,1
-Achievement_18,귀여움이 내 강함이지 1,Achievement_16,근거리 코스튬을 장착하고 로비로 나가지 않고 8분 생존,SurvivorTimeToCostume,0,4800,-999,CostumeReward,cstswsp03,1
-Achievement_19,귀여움이 내 강함이지 2,Achievement_17,원거리 코스튬을 장착하고 로비로 나가지 않고 8분 생존,SurvivorTimeToCostume,1,4800,-999,CostumeReward,cstbgst03,1
+Achievement_18,귀여움이 내 강함이지 1,Achievement_16,근거리 코스튬을 장착하고 로비로 나가지 않고 8분 생존,SurvivorTimeToCostume,0,480,-999,CostumeReward,cstswsp03,1
+Achievement_19,귀여움이 내 강함이지 2,Achievement_17,원거리 코스튬을 장착하고 로비로 나가지 않고 8분 생존,SurvivorTimeToCostume,1,480,-999,CostumeReward,cstbgst03,1
 Achievement_20,귀여움의 궁극 1,Achievement_18,근거리 무기를 장착하고 3번째 웨이브 클리어,WaveClearToWeapon,4,2,1,CostumeReward,cstswsp04,1
 Achievement_21,아무런 일도 없던 것 처럼 1,Achievement_19,근거리 무기를 장착하고 4번째 웨이브 클리어,WaveClearToWeapon,4,3,1,GoldReward,Gold_02,350
 Achievement_22,아무런 일도 없던 것 처럼 2,Achievement_20,원거리 무기를 장착하고 4번째 웨이브 클리어,WaveClearToWeapon,5,3,1,GoldReward,Gold_02,350
@@ -45,10 +45,10 @@ Achievement_43,새로운 검이 날 부른다!,Achievement_39,소드를 장착�
 Achievement_44,새로운 창이 날 부른다!,Achievement_40,스피어를 장착하고 누적 몬스터 10000마리 처치,MonsterKillToWeapon,1,10000,-999,WeaponReward,sp02,1
 Achievement_45,새로운 활이 날 부른다!,Achievement_41,보우건을 장착하고 누적 몬스터 10000마리 처치,MonsterKillToWeapon,2,10000,-999,WeaponReward,bg02,1
 Achievement_46,새로운 지팡이가 날 부른다!,Achievement_42,스태프를 장착하고 누적 몬스터 10000마리 처치,MonsterKillToWeapon,3,10000,-999,WeaponReward,st02,1
-Achievement_47,단칼에 베어주마,Achievement_43,소드를 장착하고 2단계 보스 15마리 처치,BossKillToWeapon,0,3,15,WeaponReward,sw03,1
-Achievement_48,유려한 창의 흐름,Achievement_44,스피어를 장착하고 2단계 보스 15마리 처치,BossKillToWeapon,1,3,15,WeaponReward,sp03,1
-Achievement_49,화살이 비처럼 내려와,Achievement_45,크로스 보우를 장착하고 2단계 보스 15마리 처치,BossKillToWeapon,2,3,15,WeaponReward,bg03,1
-Achievement_50,마나의 근원이 느껴져,Achievement_46,스태프를 장착하고 2단계 보스 15 마리 처치,BossKillToWeapon,3,3,15,WeaponReward,st03,1
+Achievement_47,단칼에 베어주마,Achievement_43,소드를 장착하고 2단계 보스 15마리 처치,BossKillToWeapon,0,1,15,WeaponReward,sw03,1
+Achievement_48,유려한 창의 흐름,Achievement_44,스피어를 장착하고 2단계 보스 15마리 처치,BossKillToWeapon,1,1,15,WeaponReward,sp03,1
+Achievement_49,화살이 비처럼 내려와,Achievement_45,크로스 보우를 장착하고 2단계 보스 15마리 처치,BossKillToWeapon,2,1,15,WeaponReward,bg03,1
+Achievement_50,마나의 근원이 느껴져,Achievement_46,스태프를 장착하고 2단계 보스 15 마리 처치,BossKillToWeapon,3,1,15,WeaponReward,st03,1
 Achievement_51,더 귀여워지고 강해질거야(소드),Achievement_47,소드를 장착하고 로비로 나가지 않고 보스 3단계 처치,BossKillToWeapon,0,2,1,WeaponReward,sw04,1
 Achievement_52,더 귀여워지고 강해질거야(스피어),Achievement_48,스피어를 장착하고 로비로 나가지 않고 보스 3단계 처치,BossKillToWeapon,1,2,1,WeaponReward,sp04,1
 Achievement_53,더 귀여워지고 강해질거야(크로스보우),Achievement_49,보우건을 장착하고 로비로 나가지 않고 보스 3단계 처치,BossKillToWeapon,2,2,1,WeaponReward,bg04,1

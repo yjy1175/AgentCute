@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMagnet : MonoBehaviour
 {
     [SerializeField]
-    private float mMagnetPower = 3f;
+    private float mMagnetPower;
     [SerializeField]
     private float mMagenetSpeed = 4f;
     void Start()
@@ -26,12 +26,11 @@ public class PlayerMagnet : MonoBehaviour
         }
         
     }
-    // Update is called once per frame
 
 
     public void RegisterMagentPowerObserver(float _magnetPower)
     {
-        mMagnetPower = _magnetPower;
+        mMagnetPower = _magnetPower + 1f;
         Debug.Log("register는 정상작동");
     }
 }

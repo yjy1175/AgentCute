@@ -133,13 +133,57 @@ public class LobbyPlayerInfo
         }
     }
     [SerializeField]
-    private float mTrainingMagnetPower;
-    public float TrainingMagnetPower
+    private int mTrainingMagnetPower;
+    public int TrainingMagnetPower
     {
         get { return mTrainingMagnetPower; }
         set
         {
             mTrainingMagnetPower = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
+    }
+    [SerializeField]
+    private float mTrainingGoldPower;
+    public float TrainingGoldPower
+    {
+        get { return mTrainingGoldPower; }
+        set
+        {
+            mTrainingGoldPower = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
+    }
+    [SerializeField]
+    private int mTrainingRevive;
+    public int TrainingRevive
+    {
+        get { return mTrainingRevive; }
+        set
+        {
+            mTrainingRevive = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
+    }
+    [SerializeField]
+    private float mTrainingShieldTime;
+    public float TrainingShieldTime
+    {
+        get { return mTrainingShieldTime; }
+        set
+        {
+            mTrainingShieldTime = value;
+            SaveLoadManager.Instance.SavePlayerInfoFile(this);
+        }
+    }
+    [SerializeField]
+    private int mTrainingDodgeTime;
+    public int TrainingDodgeTime
+    {
+        get { return mTrainingDodgeTime; }
+        set
+        {
+            mTrainingDodgeTime = value;
             SaveLoadManager.Instance.SavePlayerInfoFile(this);
         }
     }

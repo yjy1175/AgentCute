@@ -84,12 +84,12 @@ public class AdmobManager : SingleToneMaker<AdmobManager>
     //광고 로드에 실패했을 때
     public void HandleOnAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
     {
-
+        LobbyUIManager.Instance.OpenAlertEnterPannel("인터넷 연결이 필요합니다.");
     }
     //광고 보여주기를 실패했을 때
     public void HandleOnAdFailedToShow(object sender, AdErrorEventArgs args)
     {
-
+        LobbyUIManager.Instance.OpenAlertEnterPannel("인터넷 연결이 필요합니다.");
     }
     //광고가 제대로 실행되었을 때
     public void HandleOnAdOpening(object sender, EventArgs args)

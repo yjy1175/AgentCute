@@ -37,6 +37,9 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         fileStream = AES.Decrypt(fileStream, AES.key);
 
         LobbyPlayerInfo loadInfo = JsonUtility.FromJson<LobbyPlayerInfo>(fileStream);
+        DateTime nowTime = DateTime.Now;
+        if (nowTime.Day != loadInfo.Date)
+            loadInfo.DailyAddCount = 3;
         return loadInfo;
     }
     public LobbyPlayerAchievementData LoadAchieveData()
@@ -78,9 +81,19 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         newInfo.TrainingLevelList.Add(0);
         newInfo.TrainingLevelList.Add(0);
         newInfo.TrainingLevelList.Add(0);
+        newInfo.TrainingLevelList.Add(0);
+        newInfo.TrainingLevelList.Add(0);
+        newInfo.TrainingLevelList.Add(0);
+        newInfo.TrainingLevelList.Add(0);
+        newInfo.TrainingLevelList.Add(0);
         newInfo.TrainingHp = 0;
         newInfo.TrainingATK = 0;
         newInfo.TrainingAddDamage = 1f;
+        newInfo.TrainingMagnetPower = 0;
+        newInfo.TrainingGoldPower = 1f;
+        newInfo.TrainingRevive = 0;
+        newInfo.TrainingShieldTime = 0;
+        newInfo.TrainingDodgeTime = 0;
         newInfo.MoveSpeedRate = 1f;
         newInfo.CurrentWeaponName = "";
         newInfo.CurrentCostumeName = "";
@@ -112,8 +125,8 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
             newInfo.Skilllock.Add(skillName, locked);
         }
         newInfo.DailyAddCount = 3;
-        WebChkAndSave(newInfo);
         mIsCreate = false;
+        SavePlayerInfoFile(newInfo);
         return newInfo;
     }
     private LobbyPlayerAchievementData CerateAchieveDataFile()
@@ -214,7 +227,12 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
     {
         if (!mIsCreate)
         {
-            StartCoroutine(WebChkAndSave(_info));
+            string path = "";
+            path = Path.Combine(Application.persistentDataPath, mLoadFileName);
+            _info.Date = DateTime.Now.Day;
+            string fileStream = JsonUtility.ToJson(_info, true);
+            fileStream = AES.Encrypt(fileStream, AES.key);
+            File.WriteAllText(path, fileStream);
         }
     }
     public void SaveAchievementData(LobbyPlayerAchievementData _info)
@@ -232,7 +250,7 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         string path = "";
         path = Path.Combine(Application.persistentDataPath, mWarFileName);
         string fileStream = JsonUtility.ToJson(_info, true);
-        fileStream = AES.Encrypt(fileStream, AES.key);
+        //fileStream = AES.Encrypt(fileStream, AES.key);
         File.WriteAllText(path, fileStream);
     }
 
@@ -243,7 +261,7 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         path = Path.Combine(Application.persistentDataPath, mWarFileName);
         string fileStream = File.ReadAllText(path);
 
-        fileStream = AES.Decrypt(fileStream, AES.key);
+        //fileStream = AES.Decrypt(fileStream, AES.key);
 
         WarInfo loadInfo = JsonUtility.FromJson<WarInfo>(fileStream);
         return loadInfo;
@@ -258,7 +276,8 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         // 얻은 골드, 다이아...
         // TODO : 업적관리에 필요한 데이터 추가
         info.Diamond = PlayerManager.Instance.Player.GetComponent<PlayerStatus>().Diamond;
-        info.Gold += PlayerManager.Instance.Player.GetComponent<PlayerStatus>().GainGold;
+        // 획득 골드 수치
+        info.Gold += (int)(PlayerManager.Instance.Player.GetComponent<PlayerStatus>().GainGold * PlayerManager.Instance.EndGoldRate);
 
         SavePlayerInfoFile(info);
 
@@ -290,10 +309,10 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
                 += SpawnManager.currentKillMosterCount;
         }
         // 코스튬 생존 시간 체크(누적x)
-        if((EquipmentManager.CostumeTpye.swsp).ToString().Contains(weaponType))
-            achieveInfo.TimeToCostume[0] = (int)UIManager.Instance.GamePlayerTime;
+        if ((EquipmentManager.CostumeTpye.swsp).ToString().Contains(weaponType))
+            achieveInfo.TimeToCostume[0] = Mathf.Max(achieveInfo.TimeToCostume[0], (int)UIManager.Instance.GamePlayerTime);
         else
-            achieveInfo.TimeToCostume[1] = (int)UIManager.Instance.GamePlayerTime;
+            achieveInfo.TimeToCostume[1] = Mathf.Max(achieveInfo.TimeToCostume[1], (int)UIManager.Instance.GamePlayerTime);
         // 코스튬 보스 킬 체크
         if ((EquipmentManager.CostumeTpye.swsp).ToString().Contains(weaponType))
         {
@@ -326,33 +345,5 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         }
 
         SaveAchievementData(achieveInfo);
-    }
-
-    IEnumerator WebChkAndSave(LobbyPlayerInfo _info)
-    {
-        string url = "www.naver.com";
-        UnityWebRequest request = new UnityWebRequest();
-        using (request = UnityWebRequest.Get(url))
-        {
-            yield return request.SendWebRequest();
-            if (request.result == UnityWebRequest.Result.ConnectionError)
-            {
-                // 인터넷 연결 오류
-                LobbyUIManager.Instance.OpenAlertEnterPannel("인터넷 연결이 필요합니다.\n강제로 진행 시 불이익이 생길 수 있습니다.");
-            }
-            else
-            {
-                string date = request.GetResponseHeader("date");
-                DateTime dateTime = DateTime.Parse(date).ToUniversalTime();
-                mCurrentDay = dateTime.Day;
-            }
-        }
-        string path = "";
-        path = Path.Combine(Application.persistentDataPath, mLoadFileName);
-        _info.Date = mCurrentDay;
-        string fileStream = JsonUtility.ToJson(_info, true);
-        fileStream = AES.Encrypt(fileStream, AES.key);
-        File.WriteAllText(path, fileStream);
-
     }
 }

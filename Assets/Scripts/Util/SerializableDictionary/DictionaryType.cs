@@ -25,6 +25,9 @@ public class MonsterDataSet : SerializableDictionary<Tuple<string,int>, MonsterM
 public class TrainingSet : SerializableDictionary<TrainingManager.TrainingType, TrainingManager.Training> { }
 
 [System.Serializable]
+public class TrainingButtonSet : SerializableDictionary<TrainingManager.TrainingType, GameObject> { }
+
+[System.Serializable]
 public class StringBoolean : SerializableDictionary<string, bool> { }
 
 [System.Serializable]

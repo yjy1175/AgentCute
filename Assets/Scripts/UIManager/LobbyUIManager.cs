@@ -254,30 +254,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     }
     public void SetTrainingPannel()
     {
-        for (TrainingManager.TrainingType type = TrainingManager.TrainingType.PlayerHp;
-            type < TrainingManager.TrainingType.Exit; type++)
-        {
-            TrainingManager.Training training = TrainingManager.Instance.TrainingSet[type];
-            // 훈련 가능한지 판단
-            if (TrainingManager.Instance.PossibleForLevelUp(type))
-            {
-                // 레벨업 버튼 활성화
-                mTrainingPannel.transform.GetChild((int)type).GetChild(1).gameObject.SetActive(true);
-                // 해당 훈련이 Max이면 Max버튼 활성화
-                if (training.mMax == training.mCurrentValue)
-                    mTrainingPannel.transform.GetChild((int)type).GetChild(1).GetChild(1).gameObject.SetActive(true);
-                // 레벨 UI
-                mTrainingPannel.transform.GetChild((int)type).GetChild(2).GetChild(1).GetComponent<Text>().text =
-                    training.mLevel.ToString();
-                mTrainingPannel.transform.GetChild((int)type).GetChild(2).GetChild(2).gameObject.SetActive(false);
-                // 수치 UI
-                mTrainingPannel.transform.GetChild((int)type).GetChild(3).GetChild(0).GetComponent<Text>().text =
-                    training.mDesc + training.mCurrentValue.ToString() + training.mUnit;
-                mTrainingPannel.transform.GetChild((int)type).GetChild(3).GetChild(1).gameObject.SetActive(false);
-            }
-                
-        }
-
+        TrainingManager.Instance.UpdateStstus();
         mTrainingPannel.SetActive(true);
     }
     public void CloseTrainingPannel()
@@ -285,9 +262,10 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         mTrainingPannel.SetActive(false);
         GamePause();
     }
-    public void ClickTrainingButton(int _num)
+    public void ClickTrainingButton()
     {
-        TrainingManager.Training training = TrainingManager.Instance.TrainingSet[(TrainingManager.TrainingType)_num];
+
+        TrainingManager.Training training = TrainingManager.Instance.TrainingSet[TrainingManager.Instance.CurrentSelectType];
         if(training.mMax == training.mCurrentValue)
         {
             //경고
@@ -295,17 +273,17 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         }
         else
         {
-            mSelectType = (TrainingManager.TrainingType)_num;
+            mSelectType = TrainingManager.Instance.CurrentSelectType;
             // 현재 수치
             mTrainingAlertPannel.transform.GetChild(2).GetChild(0).GetChild(1).GetComponent<Text>().text =
                 training.mLevel.ToString();
             mTrainingAlertPannel.transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>().text =
-                training.mDesc + training.mCurrentValue.ToString() + training.mUnit;
+                training.mName + " +" + training.mCurrentValue.ToString() + training.mUnit;
             // 다음 수치
             mTrainingAlertPannel.transform.GetChild(4).GetChild(0).GetChild(1).GetComponent<Text>().text =
                 (training.mLevel + 1).ToString();
             mTrainingAlertPannel.transform.GetChild(4).GetChild(1).GetChild(0).GetComponent<Text>().text =
-                training.mDesc + TrainingManager.Instance.NextLevelValue((TrainingManager.TrainingType)_num) + training.mUnit;
+                training.mName + " +" +TrainingManager.Instance.NextLevelValue(mSelectType) + training.mUnit;
             // 비용
             mSelectCost = training.mCurrentCost;
             mTrainingAlertPannel.transform.GetChild(6).GetChild(2).GetComponent<Text>().text = training.mCurrentCost.ToString();

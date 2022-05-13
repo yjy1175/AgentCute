@@ -24,7 +24,7 @@ G,일반스킬,None,sp,돌파,Storm,,전방을 강하게 찔러 생성된 돌풍
 U,궁극기,None,sp,드래고닉 버스트,Dragonic Burst,,"전방의 적들을 무참히 베고, 강력한 에너지를 발산하여 공격합니다.",s14/s15,1,0,1,S,60,-1,2.91,0,2.8,0,0,0,TRUE
 U,궁극기,None,sp,로드 오브 스피어,Lord Of Spear,,"주변을 빠르게 여러 번 베고, 지속 시간(4s) 동안 신성한 창을 소환하여 공격합니다.",s16/s17,1,0,1,S,55,-1,4,0,0.2,0,0,0,TRUE
 D,회피기,None,bg,회피,BowGun Dodge,,null,s31,1,0,1,S,8,-1,0,0.2,0,0,PlayerPosition/4,0,FALSE
-D,회피기,None,st,쉴드,Steff Shield,,null,s32,1,0,1,S,8,-1,0,3,0,0,0,0,FALSE
+D,회피기,None,st,쉴드,Steff Shield,,null,s32,1,0,1,S,8,-1,0,1.5,0,0,0,0,FALSE
 D,회피기,None,sw,회피,Sword Dodge,,null,s31,1,0,2,D,1/5,-1,0,0.2,0,0,PlayerPosition/3.5,0,FALSE
 D,회피기,None,sp,회피,Spear Dodge,,null,s31,1,0,2,D,1/5,-1,0,0.2,0,0,PlayerPosition/3,0,FALSE
 M,일반스킬,THROW,Goblin,고블린스킬,GoblinSkill,,플레이어에게 폭탄투사체를 던집니다.,l13,1,0,1,S,1,1,0,0.5,0.1,0,0,0,FALSE
