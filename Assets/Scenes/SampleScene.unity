@@ -39155,6 +39155,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerObject
       objectReference: {fileID: 0}
+    - target: {fileID: 1720011319124573002, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.232
+      objectReference: {fileID: 0}
     - target: {fileID: 3116149935955760086, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -39163,6 +39167,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4082864926055920688, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 28d930bcdcdc37342809697b85844b62, type: 2}
     - target: {fileID: 4566790549671009646, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -39207,6 +39215,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6308347717038970133, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
+      propertyPath: m_Size.x
+      value: 5.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308347717038970133, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
+      propertyPath: m_Size.y
+      value: 5.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308347717038970133, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 663d3cf6f5f9b234ebef88ea7daadcc3, type: 3}
+    - target: {fileID: 6308347717038970133, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308347717038970133, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308347717038970133, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6309065480427258103, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
       propertyPath: GBtn
       value: 
@@ -39239,6 +39271,10 @@ PrefabInstance:
       propertyPath: mUltimateSkillImg
       value: 
       objectReference: {fileID: 1880792530}
+    - target: {fileID: 8201246972542053180, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
 --- !u!1 &6641142738334399005 stripped

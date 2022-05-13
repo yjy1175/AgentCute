@@ -51,6 +51,8 @@ MonoBehaviour:
   mIsActive: 0
   mAttackSpeedCheckTime: 1
   mIsCriticalDamage: 0
+  mSizeX: 0
+  mSizeY: 0
   spec:
     mType: s31
     mTypeName: 
@@ -65,7 +67,7 @@ MonoBehaviour:
     mMoveSpeed: 0
     mCount: 1
     mAngle: 0
-    mSpawnTime: 1
+    mSpawnTime: 0.3
     mMaxPassCount: -1
     mStiffTime: 0
     mKnockback: 0
@@ -79,6 +81,7 @@ MonoBehaviour:
   mPlayer: {x: 0, y: 0, z: 0}
   newPos: {x: 0, y: 0, z: 0}
   mJoyStickPos: {x: 0, y: 0, z: 0}
+  mIsChange: 0
 --- !u!198 &1111843385244271914
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -1351,7 +1354,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
+        key1: {r: 0.47668213, g: 0.941307, b: 0.9811321, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}

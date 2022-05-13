@@ -31,7 +31,7 @@ s14,0,10.8,SplitByNumber,6,-1,0.5,1,0,0.41,-1,0,0,ShortWide,1.5,1,0
 s15,0,10.5,SplitByTime,1,0.5,0.5,1,0,2.5,-1,0,2,LongWide,1,1,0
 s16,0,5,Normal,1,-1,0.5,1,0,0.25,-1,0,0,SelfSpawn,1,1,0
 s17,0,5,SplitByTime,1,0.5,0.5,1,0,4,-1,0.5,0,LongWide,1,1,0
-s31,0,0,Normal,0,-1,1,1,0,1,-1,0,0,AfterImageSpawn,1.5,1.5,0
+s31,0,0,Normal,0,-1,1,1,0,0.3,-1,0,0,AfterImageSpawn,1.5,1.5,0
 s32,0,0,Normal,0,-1,1,1,0,1.5,-1,0,0,SelfSpawn,1.8,1.8,0
 s99,0,1,Normal,1,-1,0.1,1,0,3,-1,0,0,General,2,2,0
 l13,3,1,Normal,1,-1,0.5,1,0,10,0,0,0,null,1,1,0

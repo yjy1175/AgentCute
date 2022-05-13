@@ -51,6 +51,8 @@ public class Spawn : Projectile
     private Vector3 newPos = Vector3.zero;
     [SerializeField]
     private Vector3 mJoyStickPos = Vector3.zero;
+    [SerializeField]
+    private bool mIsChange;
     #endregion
     #region method
     protected override void launchProjectile()
@@ -83,15 +85,19 @@ public class Spawn : Projectile
             {
                 mPlayer = GameObject.Find("fire").transform.position;
                 Vector3 dir = mPlayer - transform.position;
-                if(dir.x > 0f)
+                if (!mIsChange)
                 {
-                    transform.localScale = new Vector3(-mSizeX, mSizeY, 0);
+                    if (dir.x > 0f)
+                    {
+                        transform.localScale = new Vector3(-mSizeX, mSizeY, 0);
+                    }
+                    else
+                    {
+                        transform.localScale = new Vector3(mSizeX, mSizeY, 0);
+                    }
+                    mIsChange = true;
                 }
-                else
-                {
-                    transform.localScale = new Vector3(mSizeX, mSizeY, 0);
-                }
-                transform.Translate(Time.deltaTime * dir * PlayerManager.Instance.Player.GetComponent<PlayerMove>().Speed * 1.5f);
+                transform.Translate(Time.deltaTime * dir * PlayerManager.Instance.Player.GetComponent<PlayerMove>().Speed * 4f);
             }
         }
     }
@@ -114,7 +120,7 @@ public class Spawn : Projectile
     {
         if (DEBUG)
             Debug.Log("spawn형 spawnType: "+ mSpawnType.ToString()+", enable target: " + _target + ",fire: " + _fire + ",angle: " + _angle);
-
+        mIsChange = false;
         mTarget = _target;
         mPlayer = _fire;
         // 랜덤형인 경우
@@ -179,6 +185,7 @@ public class Spawn : Projectile
         mJoyStickPos = Vector3.zero;
         newPos = Vector3.zero;
         mIsActive = false;
+        mIsChange = false;
     }
     #endregion
 }

@@ -107,10 +107,27 @@ public class PlayerStatus : IStatus
     public void Resurrection()
     {
         Hp = MaxHP;
-        Invincibility(1f);
+        Invincibility(3f);
+        StartCoroutine(RessurrectionAnimation(3f));
         DieCount++;
     }
-
+    IEnumerator RessurrectionAnimation(float _time)
+    {
+        Color sphereAlpha = transform.GetChild(3).GetComponent<SpriteRenderer>().color;
+        Color angelAlpha = transform.GetChild(3).GetChild(0).GetComponent<SpriteRenderer>().color;
+        float leftTime = _time;
+        transform.GetChild(3).gameObject.SetActive(true);
+        while (_time > 0)
+        {
+            leftTime -= Time.deltaTime;
+            sphereAlpha.a = leftTime / _time;
+            angelAlpha.a = leftTime / _time;
+            transform.GetChild(3).GetComponent<SpriteRenderer>().color = sphereAlpha;
+            transform.GetChild(3).GetChild(0).GetComponent<SpriteRenderer>().color = angelAlpha;
+            yield return new WaitForFixedUpdate();
+        }
+        transform.GetChild(3).gameObject.SetActive(false);
+    }
     public int PlayerGetExp
     {
         set
