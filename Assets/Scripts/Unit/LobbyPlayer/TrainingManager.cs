@@ -161,6 +161,9 @@ public class TrainingManager : SingleToneMaker<TrainingManager>
                 // 네임 및 수치 표기
                 button.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = training.mName;
                 button.transform.GetChild(0).GetChild(3).GetComponent<Text>().text = "+ " + training.mCurrentValue + training.mUnit;
+
+
+                button.transform.GetChild(1).gameObject.SetActive(false);
             }
             else
             {
