@@ -123,6 +123,8 @@ public class DeongunStartManager : SingleToneMaker<DeongunStartManager>
         {
             mIsClickedSurvivalModeCheck = false;
             mSurvivalModeCheck.transform.GetChild(0).gameObject.SetActive(mIsClickedSurvivalModeCheck);
+            if(mIsCutePotionCheck)
+                ClickCutePotion();
         }   
         mWarInfo.WarMode = mIsClickedBossModeCheck ? GameMode.BossMode : GameMode.None;
     }

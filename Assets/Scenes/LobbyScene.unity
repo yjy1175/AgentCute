@@ -44465,10 +44465,10 @@ PrefabInstance:
     - target: {fileID: 4190848161125023827, guid: 4328574eed29c834a98d8585a7e94d31, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 3a482980b6f39df4d9095bd4bdd52a59, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 4190848161125023827, guid: 4328574eed29c834a98d8585a7e94d31, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4731279833936955096, guid: 4328574eed29c834a98d8585a7e94d31, type: 3}
       propertyPath: m_LocalScale.x

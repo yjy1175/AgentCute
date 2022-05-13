@@ -66,7 +66,6 @@ public class IAttack : MonoBehaviour
     // 첫발사체가 disable된 position에서 enable
     protected GameObject mFirstProjectile;
 
-
     protected SkillDic TileDict;
     public GameObject mFirePosition;
 
@@ -351,10 +350,13 @@ public class IAttack : MonoBehaviour
         obj.GetComponent<Projectile>().IsCriticalDamage = GetComponent<IStatus>().AttackPointSetting(gameObject);
         obj.GetComponent<Projectile>().Damage = 
             (int)(mObjectDamage * obj.GetComponent<Projectile>().Spec.ProjectileDamage);
-
+        bool isPlayerBaseSkill = false;
+        if (CurrentBaseSkill != null)
+            if(TileDict[CurrentBaseSkill][0].Spec.Type == obj.GetComponent<Projectile>().Spec.Type)
+                isPlayerBaseSkill = true;
         Vector3 size = new Vector3(
-            obj.GetComponent<Projectile>().Spec.ProjectileSizeX * (1 + mProjectileScale),
-            obj.GetComponent<Projectile>().Spec.ProjectileSizeY * (1 + mProjectileScale),
+            obj.GetComponent<Projectile>().Spec.ProjectileSizeX * (isPlayerBaseSkill ? mProjectileScale + 1: 1) ,
+            obj.GetComponent<Projectile>().Spec.ProjectileSizeY * (isPlayerBaseSkill ? mProjectileScale + 1 : 1),
             1);
         obj.GetComponent<Projectile>().setSize(size);
 
