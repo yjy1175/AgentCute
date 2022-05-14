@@ -32,30 +32,9 @@ public class MonsterMove : IMove
         gameObject.GetComponent<MonsterEventHandler>().registerIsDieObserver(registerMonsterDie);
     }
     
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (Vector3.Distance(PlayerManager.Instance.Player.transform.position, transform.position) < 0.5f)
-        {
-            MovingPattern1();
-        }
-        else { 
-            //보스의 경우 BFS알고리즘만 사용
-            if (gameObject.GetComponent<MonsterStatus>().MonsterGrade == MonsterManager.MonsterGrade.Boss || SpawnManager.Instance.WaveCount >=2)
-            {
-                MovingPattern2();
-            }
-            else
-            {
-                MovingPattern1();
-            }
-        }
-    }
-
     private void FixedUpdate()
     {
+        SelectMovingPattern();
         // 모든 물리연산은 FixedUpdate 에서
         if (mMoveable && !mIsDie) {
             transform.Translate(mDir * mSpeed * Time.deltaTime);
@@ -67,6 +46,28 @@ public class MonsterMove : IMove
             else
             {
                 gameObject.transform.localScale = new Vector3(-1 * size, size, size);
+            }
+        }
+    }
+
+
+    private void SelectMovingPattern()
+    {
+
+        if (Vector3.Distance(PlayerManager.Instance.Player.transform.position, transform.position) < 0.5f)
+        {
+            MovingPattern1();
+        }
+        else
+        {
+            //보스의 경우 BFS알고리즘만 사용
+            if (gameObject.GetComponent<MonsterStatus>().MonsterGrade == MonsterManager.MonsterGrade.Boss || SpawnManager.Instance.WaveCount >= 2)
+            {
+                MovingPattern2();
+            }
+            else
+            {
+                MovingPattern1();
             }
         }
     }

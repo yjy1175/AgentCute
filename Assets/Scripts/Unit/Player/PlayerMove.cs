@@ -40,14 +40,6 @@ public class PlayerMove : IMove
         mJoyStick = GameObject.Find("Canvas").transform.Find("JoyStick").GetComponent<VertualJoyStick>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateMove();
-
-        MovingStartegy();
-    }
-
 
     protected override void UpdateMove()
     {
@@ -89,9 +81,12 @@ public class PlayerMove : IMove
 
     private void FixedUpdate()
     {
+        MovingStartegy();
+        UpdateMove();
         // 모든 물리연산은 FixedUpdate에서
-        if(mMoveable)
+        if (mMoveable) { 
             transform.Translate(mDir * mSpeed * Time.fixedDeltaTime);
+        }
     }
 
     public override void StopStiffTime(float _time)
