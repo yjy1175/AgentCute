@@ -500,8 +500,8 @@ TextureImporter:
         y: 576
         width: 192
         height: 96
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.15}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -644,7 +644,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 480
+        y: 481
         width: 192
         height: 96
       alignment: 9
@@ -1084,8 +1084,8 @@ TextureImporter:
       name: Elder Dragon Green Sprite Sheet_38
       rect:
         serializedVersion: 2
-        x: 1152
-        y: 288
+        x: 1149
+        y: 289
         width: 192
         height: 96
       alignment: 9
