@@ -93,7 +93,7 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         newInfo.TrainingGoldPower = 1f;
         newInfo.TrainingRevive = 0;
         newInfo.TrainingShieldTime = 0;
-        newInfo.TrainingDodgeTime = 0;
+        newInfo.TrainingDodgeTime = 0f;
         newInfo.MoveSpeedRate = 1f;
         newInfo.CurrentWeaponName = "";
         newInfo.CurrentCostumeName = "";

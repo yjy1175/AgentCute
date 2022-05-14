@@ -177,8 +177,8 @@ public class LobbyPlayerInfo
         }
     }
     [SerializeField]
-    private int mTrainingDodgeTime;
-    public int TrainingDodgeTime
+    private float mTrainingDodgeTime;
+    public float TrainingDodgeTime
     {
         get { return mTrainingDodgeTime; }
         set

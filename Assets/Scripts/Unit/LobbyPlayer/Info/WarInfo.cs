@@ -85,8 +85,8 @@ public class WarInfo
 
     // 전투 씬에 보낼 추가 근거리 회피 추가횟수
     [SerializeField]
-    private int mWarMeleeDodgeCount;
-    public int WarMeleeDodgeCount
+    private float mWarMeleeDodgeCount;
+    public float WarMeleeDodgeCount
     {
         get => mWarMeleeDodgeCount;
         set

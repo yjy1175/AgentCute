@@ -46,8 +46,8 @@ public class PlayerManager : SingleToneMaker<PlayerManager>
     private float mStaffShieldTime;
     public float StaffShieldTime => mStaffShieldTime;
     [SerializeField]
-    private int mMeleeDodgeCount;
-    public int MeleeDodgeCount => mMeleeDodgeCount;
+    private float mMeleeDodgeCount;
+    public float MeleeDodgeCount => mMeleeDodgeCount;
     // DEBUG용 맵 선택 오브젝트
     public GameObject mSelectMap;
 

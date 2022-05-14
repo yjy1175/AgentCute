@@ -279,11 +279,17 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
                 training.mLevel.ToString();
             mTrainingAlertPannel.transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>().text =
                 training.mName + " +" + training.mCurrentValue.ToString() + training.mUnit;
+            if(training.mType == TrainingManager.TrainingType.PlayerDodge)
+                mTrainingAlertPannel.transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<Text>().text =
+                    training.mName + " -" + training.mCurrentValue.ToString() + training.mUnit;
             // 다음 수치
             mTrainingAlertPannel.transform.GetChild(4).GetChild(0).GetChild(1).GetComponent<Text>().text =
                 (training.mLevel + 1).ToString();
             mTrainingAlertPannel.transform.GetChild(4).GetChild(1).GetChild(0).GetComponent<Text>().text =
                 training.mName + " +" +TrainingManager.Instance.NextLevelValue(mSelectType) + training.mUnit;
+            if (training.mType == TrainingManager.TrainingType.PlayerDodge)
+                mTrainingAlertPannel.transform.GetChild(4).GetChild(1).GetChild(0).GetComponent<Text>().text =
+                    training.mName + " -" + TrainingManager.Instance.NextLevelValue(mSelectType) + training.mUnit;
             // 비용
             mSelectCost = training.mCurrentCost;
             mTrainingAlertPannel.transform.GetChild(6).GetChild(2).GetComponent<Text>().text = training.mCurrentCost.ToString();

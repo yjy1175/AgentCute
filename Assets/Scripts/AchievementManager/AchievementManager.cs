@@ -42,6 +42,7 @@ public class AchievementManager : SingleToneMaker<AchievementManager>
             newAchv.AchievementID = achieveID;
             newAchv.AchievementName = achievementData[i]["AchievementName"].ToString();
             newAchv.AchievementDesc = achievementData[i]["AchievementDesc"].ToString();
+            newAchv.AchievementUnit = achievementData[i]["AchievementUnit"].ToString();
 
             newAchv.PreviousID = achievementData[i]["PrevAchievementID"].ToString();
             if (newAchv.PreviousID == NULL)
@@ -104,7 +105,7 @@ public class AchievementManager : SingleToneMaker<AchievementManager>
             newUI.GetComponent<AchieveInfoButton>().mRewardIcon.transform.GetChild(1).GetComponent<Text>().text =
                 "x" + " " + newAchv.Reward.RewardQuantity;
             newUI.GetComponent<AchieveInfoButton>().mInactive.transform.GetChild(1).GetComponent<Text>().text =
-                newAchv.FinalCondition().ToString();
+                newAchv.FinalCondition().ToString() + newAchv.AchievementUnit;
             newUI.GetComponent<AchieveInfoButton>().mRewardButton.GetComponent<Button>()
                 .onClick.AddListener(() => { ClickRewardButton(newAchv.AchievementID); });
             mAchievementButtons.Add(newAchv.name, newUI);
@@ -118,7 +119,7 @@ public class AchievementManager : SingleToneMaker<AchievementManager>
         {
             mAchievements[key].GetComponent<Achievement>().CheckComplete();
             mAchievementButtons[key].GetComponent<AchieveInfoButton>().mInactive.transform.GetChild(0).GetComponent<Text>().text =
-                mAchievements[key].GetComponent<Achievement>().CurrentValue.ToString();
+                mAchievements[key].GetComponent<Achievement>().CurrentValue.ToString() + mAchievements[key].GetComponent<Achievement>().AchievementUnit;
             GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>()
                 .AchieveData.Progress[mAchievements[key].GetComponent<Achievement>().AchievementID] = mAchievements[key].GetComponent<Achievement>().State;
             switch (mAchievements[key].GetComponent<Achievement>().State)

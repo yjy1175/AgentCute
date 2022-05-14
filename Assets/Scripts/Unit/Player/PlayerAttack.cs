@@ -127,19 +127,11 @@ public class PlayerAttack : IAttack
         if (_skill != null)
         {
             int count = _skill.Spec.SkillClickCount - _skill.CurrentUseCount;
-            int realCount = 0;
-            // 근거리 회피 스킬은 추가 스텟적용
-            string weaponType = PlayerManager.Instance.Player.GetComponent<PlayerStatus>()
-                .PlayerCurrentWeapon.Spec.Type.Substring(0, 2);
-            if (_skill.Spec.Type == "D" && (EquipmentManager.CostumeTpye.swsp).ToString().Contains(weaponType))
-                realCount = count + PlayerManager.Instance.MeleeDodgeCount;
-            else
-                realCount = count;
-            if (realCount > 0 && _skill.Spec.SkillRunTime[0] == 0)
+            if (count > 0 && _skill.Spec.SkillRunTime[0] == 0)
             {
                 if (!_look)
-                    realCount = 0;
-               _btn.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = realCount > 0 ? realCount.ToString() : "";
+                    count = 0;
+               _btn.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = count > 0 ? count.ToString() : "";
             }
             else
             {
@@ -296,25 +288,23 @@ public class PlayerAttack : IAttack
         // 한번 클릭
         else if (count == 1)
         {
-            launchSkill(_skill);
-            StartCoroutine(
-                WaitForCoolTime(_btn, _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex], _skill.Spec.Type));
-        }
-        // 클릭횟수가 정해져 있는 경우
-        else
-        {
-            // 근거리 회피 스킬일 경우 추가 스텟적용
-            int realCount = 0;
+            float coolTime = _skill.Spec.getSkillCoolTime()[_skill.CurrentCoolTimeIndex];
             string weaponType = PlayerManager.Instance.Player.GetComponent<PlayerStatus>()
                 .PlayerCurrentWeapon.Spec.Type.Substring(0, 2);
             if (_skill.Spec.Type == "D" && (EquipmentManager.CostumeTpye.swsp).ToString().Contains(weaponType))
             {
-                realCount = count + PlayerManager.Instance.MeleeDodgeCount;
+                coolTime -= PlayerManager.Instance.MeleeDodgeCount;
             }
-            else
-                realCount = count;
+            launchSkill(_skill);
+            StartCoroutine(
+                WaitForCoolTime(_btn, coolTime, _skill.Spec.Type));
+            Debug.Log(coolTime);
+        }
+        // 클릭횟수가 정해져 있는 경우
+        else
+        {
             // 마지막 클릭일 경우
-            if (realCount - 1 == _skill.CurrentUseCount)
+            if (count - 1 == _skill.CurrentUseCount)
             {
                 _skill.CurrentCoolTimeIndex++;
                 launchSkill(_skill);

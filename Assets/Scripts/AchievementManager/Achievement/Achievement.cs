@@ -44,6 +44,16 @@ public abstract class Achievement : MonoBehaviour
         }
     }
     [SerializeField]
+    protected string mAchievementUnit;
+    public string AchievementUnit
+    {
+        get => mAchievementUnit;
+        set
+        {
+            mAchievementUnit = value;
+        }
+    }
+    [SerializeField]
     protected AState mState = AState.Unactive;
     public AState State
     {
