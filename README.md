@@ -22,7 +22,7 @@ uml 이미지
 
 * [몬스터 이동 알고리즘](./Docs/move/Move.md)
 
-* [싱글톤](./Docs/singleTone/Singletone.md)
+* [싱글톤](./Docs/singletone/Singletone.md)
 
 * [Unit 구조](./Docs/unit/Unit.md)
 
@@ -32,7 +32,7 @@ uml 이미지
 
 * [Sound](./Docs/sound/Sound.md)
 
-* [ObjectPool](./Docs/objectpool/Objectpool.md)
+* [ObjectPool](./Docs/objectpool/ObjectPool.md)
 
 * [EventHandler](./Docs/EventHandler/EventHandler.md)
 
