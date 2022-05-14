@@ -322,7 +322,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
             // 일일 광고 제한 횟수 체크 하기
             if(GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.DailyAddCount > 0)
             {
-                AdmobManager.Instance.Show(AdmobManager.AdType.Supply);
+                AdmobManager.Instance.Show();
                 mDeongunStartPannel.transform.GetChild(2).GetChild(2).gameObject.SetActive(false);
             }
             else

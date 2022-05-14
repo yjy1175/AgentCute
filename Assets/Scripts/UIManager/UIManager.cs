@@ -62,7 +62,6 @@ public class UIManager : SingleToneMaker<UIManager>
     private GameObject mGameOverPannel;
     [SerializeField]
     private GameObject mGaneOverFirstResurrectionPannel;
-    public GameObject GaneOverFirstResurrectionPannel => mGaneOverFirstResurrectionPannel;
     [SerializeField]
     private GameObject mGaneOverSecondResurrectionPannel;
     [SerializeField]
@@ -128,6 +127,7 @@ public class UIManager : SingleToneMaker<UIManager>
         mGamePlayTime = 0f;
 
         mMapText.text = MapManager.Instance.CurrentMapType.ToString();
+        AdmobManager.Instance.registerEndRewardObserver(RegisterEndRewardObserver);
     }
 
     // Update is called once per frame
@@ -267,6 +267,15 @@ public class UIManager : SingleToneMaker<UIManager>
             ((int)(mGamePlayTime)).ToString() + "초";
         mGaneOverSecondResurrectionPannel.SetActive(true);
     }
+    private void RegisterEndRewardObserver(bool _isEnd)
+    {
+        if (_isEnd)
+        {
+            PlayerManager.Instance.ResurrectionPlayer();
+            mGaneOverFirstResurrectionPannel.SetActive(false);
+            GameRestart();
+        }
+    }
     public void Ressureection(GameObject _pannel)
     {
         PlayerManager.Instance.ResurrectionPlayer();
@@ -285,7 +294,7 @@ public class UIManager : SingleToneMaker<UIManager>
         else
         {
             // 광고 재생 후 보상형으로 부활
-            AdmobManager.Instance.Show(AdmobManager.AdType.Resurrection);
+            AdmobManager.Instance.Show();
         }
     }
     public void ClickSecondResurrectionButton()

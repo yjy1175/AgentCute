@@ -62,6 +62,20 @@ public class DeongunStartManager : SingleToneMaker<DeongunStartManager>
         SurvivalMode,
         BossMode
     }
+    private void Awake()
+    {
+        AdmobManager.Instance.registerEndRewardObserver(RegisterEndRewardObserver);
+;    }
+    // 보상형 광고가 끝나는 이벤트를 받는 함수
+    private void RegisterEndRewardObserver(bool _isEnd)
+    {
+        if (_isEnd)
+        {
+            DrawBuff();
+            LobbyUIManager.Instance.OpenDoengunPannel();
+            GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.DailyAddCount--;
+        }
+    }
     // 무기타입에 맞는 버프셋을 리턴
     private List<DeongunBuff> MakeDeongunBuffList()
     {
@@ -99,6 +113,7 @@ public class DeongunStartManager : SingleToneMaker<DeongunStartManager>
         mCostumeName = selectBuff.mStringValue;
         mBuffDesc = selectBuff.mDesc;
     }
+    // 버프 리셋
     public void ResetBuff()
     {
         mCurrentBuffType = DeongunBuffType.None;
