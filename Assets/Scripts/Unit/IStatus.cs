@@ -438,6 +438,7 @@ public abstract class IStatus : MonoBehaviour
         if (_type == Skill.ESkillBuffType.PlayerSPD)
         {
             MoveSpeedRate += value;
+            Debug.Log(value + "만큼 증가");
         }
         // 순간이동
         else if (_type == Skill.ESkillBuffType.PlayerPosition || _type == Skill.ESkillBuffType.PlayerDash)
@@ -473,6 +474,7 @@ public abstract class IStatus : MonoBehaviour
         if(_type == Skill.ESkillBuffType.PlayerSPD)
         {
             MoveSpeedRate -= value;
+            Debug.Log(value + "만큼 감소");
         }
         else if(_type == Skill.ESkillBuffType.PlayerWeaponSprite)
         {

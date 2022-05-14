@@ -350,12 +350,7 @@ public class PlayerAttack : IAttack
             {
                 launchProjectile(_skill, 0, mTarget, firePos, false);
             }
-
             yield return new WaitForSeconds(_skill.Spec.SkillRunTime[1]); // 한발당 발사시간
-        }
-                if (_skill.SkillBuffType != Skill.ESkillBuffType.None || _skill.SkillBuffType != Skill.ESkillBuffType.PlayerDash)
-        {
-            _skill.BuffOn(gameObject);
         }
     }
     // 우선 발사체가 한개인 경우만 구현

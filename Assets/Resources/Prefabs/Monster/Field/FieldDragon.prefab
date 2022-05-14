@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 4233381750821879142}
   - component: {fileID: 1303261331131227181}
   - component: {fileID: 7702873367100653086}
+  - component: {fileID: -242259655025659220}
   m_Layer: 6
   m_Name: FieldDragon
   m_TagString: Monster
@@ -280,6 +281,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0.026441216, y: 0.290856}
   m_Size: {x: 1.6426704, y: 1.6426704}
   m_Direction: 0
+--- !u!114 &-242259655025659220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2720214593146090343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43d29614a2d9e69469396f9dc0af723f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7566048397747005216
 GameObject:
   m_ObjectHideFlags: 0

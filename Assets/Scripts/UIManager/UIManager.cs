@@ -115,6 +115,12 @@ public class UIManager : SingleToneMaker<UIManager>
     [Header("스킬선택창")]
     [SerializeField]
     private GameObject mSkillSelectPannel;
+
+    [Header("엔딩패널")]
+    [SerializeField]
+    private GameObject mFirstEndingPannel;
+    [SerializeField]
+    private GameObject mSecondEndingPannel;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -312,12 +318,27 @@ public class UIManager : SingleToneMaker<UIManager>
     }
     public void ClickGameReload()
     {
-        // 씬 리로드
-        // 정적 변수들 init
+        if(SpawnManager.Instance.WaveCount >= 4)
+        {
+            // 첫번째 엔딩 출력
+            mFirstEndingPannel.SetActive(true);
+        }
+        else
+        {
+            ClickRealGameReload();
+        }
+    }
+    public void ClickRealGameReload()
+    {
         SaveLoadManager.Instance.SaveWarEndData();
         SpawnManager.Instance.init();
         GamePause();
         SceneManager.LoadScene("LobbyScene");
+    }
+    public void OpenSecondEndingPannel()
+    {
+        GamePause();
+        mSecondEndingPannel.SetActive(true);
     }
     private void GamePause()
     {
@@ -432,7 +453,7 @@ public class UIManager : SingleToneMaker<UIManager>
         }
         else
         {
-
+            
         }
     }
     #endregion
