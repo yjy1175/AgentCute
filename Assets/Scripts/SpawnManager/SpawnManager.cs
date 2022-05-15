@@ -8,6 +8,8 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 {
     private bool DEBUG = false;
 
+    public int LAST_WAVE = 4;
+
     //CSVFile/SpawnData.csv 데이터 저장용 구조체 
     //몬스터 spawnRule 정보
     public struct SpawnData
@@ -167,8 +169,10 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
     */
     private void SpawnMonster()
     {
-        SpawnNormalMonster();
-        SpawnBossMonster();
+        if(mWaveCount < LAST_WAVE) { 
+            SpawnNormalMonster();
+            SpawnBossMonster();
+        }
         SpawnRelayBossMonster();
     }
 
@@ -512,6 +516,9 @@ public class SpawnManager : SingleToneMaker<SpawnManager>
 
     void MakeWaveAlarm(float _time)
     {
+        if (mWaveCount == LAST_WAVE)
+            return;
+
         if (waveMessageCoroutine != null)
             StopCoroutine(waveMessageCoroutine);
         waveMessageCoroutine = SpawnMessage(GameObject.Find("MonsterStatusObject").transform.Find("Alarm").gameObject, "wave " + mWaveCount, 6, _time);
