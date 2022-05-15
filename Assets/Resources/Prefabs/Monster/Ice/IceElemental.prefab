@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -7068833900291801008}
   - component: {fileID: -3106844486694497366}
   - component: {fileID: 3223797362927152933}
+  - component: {fileID: -6411013688844221921}
   m_Layer: 6
   m_Name: IceElemental
   m_TagString: Monster
@@ -247,3 +248,15 @@ CapsuleCollider2D:
   m_Offset: {x: -0.039218217, y: -0.04089664}
   m_Size: {x: 0.2820049, y: 0.3061392}
   m_Direction: 0
+--- !u!114 &-6411013688844221921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2738259776990461673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79dfd30061627c3409a70b92298b1998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

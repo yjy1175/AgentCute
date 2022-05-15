@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3458183652825456792}
   - component: {fileID: 8862443999843287370}
   - component: {fileID: 8235679096576736281}
+  - component: {fileID: 8702186523933603495}
   m_Layer: 6
   m_Name: JackPole
   m_TagString: Monster
@@ -247,3 +248,15 @@ CapsuleCollider2D:
   m_Offset: {x: -0.02809453, y: -0.000000029802322}
   m_Size: {x: 0.27975726, y: 0.38702744}
   m_Direction: 0
+--- !u!114 &8702186523933603495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6752688537172983028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79dfd30061627c3409a70b92298b1998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

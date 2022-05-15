@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 700586785026172211}
   - component: {fileID: 700586785026149078}
   - component: {fileID: 2005732373485978775}
+  - component: {fileID: -4373937208095938934}
   m_Layer: 6
   m_Name: GoblinWorker
   m_TagString: Monster
@@ -247,3 +248,15 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.3, y: 0.5}
   m_Direction: 0
+--- !u!114 &-4373937208095938934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700586785026173601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79dfd30061627c3409a70b92298b1998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

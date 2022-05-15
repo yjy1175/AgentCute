@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6352299099366397279}
   - component: {fileID: 428878494826599408}
   - component: {fileID: 8589478394131291867}
+  - component: {fileID: 5392618260908600975}
   m_Layer: 6
   m_Name: Gargoyle
   m_TagString: Monster
@@ -248,6 +249,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0016769157, y: -0.013417931}
   m_Size: {x: 0.23949586, y: 0.16570067}
   m_Direction: 1
+--- !u!114 &5392618260908600975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005868388278312075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79dfd30061627c3409a70b92298b1998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8757802689760622376
 GameObject:
   m_ObjectHideFlags: 0

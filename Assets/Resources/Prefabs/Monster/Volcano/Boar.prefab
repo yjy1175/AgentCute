@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -330381685262727673}
   - component: {fileID: -547440356819437684}
   - component: {fileID: 3773044841655422774}
+  - component: {fileID: 750916992285724351}
   m_Layer: 6
   m_Name: Boar
   m_TagString: Monster
@@ -247,3 +248,15 @@ CapsuleCollider2D:
   m_Offset: {x: -0.04002599, y: 0.034671262}
   m_Size: {x: 0.7095511, y: 0.46555087}
   m_Direction: 1
+--- !u!114 &750916992285724351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5053960400552166519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79dfd30061627c3409a70b92298b1998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3563554924185121196}
   - component: {fileID: -889673782638490307}
   - component: {fileID: 6194053314546751109}
+  - component: {fileID: 4664523701480895997}
   m_Layer: 6
   m_Name: Demon
   m_TagString: Monster
@@ -248,6 +249,18 @@ CapsuleCollider2D:
   m_Offset: {x: -0.076292515, y: 0.043925762}
   m_Size: {x: 0.32955265, y: 0.65321636}
   m_Direction: 0
+--- !u!114 &4664523701480895997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2453869203386389948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79dfd30061627c3409a70b92298b1998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3728811705636790007
 GameObject:
   m_ObjectHideFlags: 0

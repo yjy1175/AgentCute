@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2207844811298954562}
   - component: {fileID: 9019666969561427235}
   - component: {fileID: 3693363262602691180}
+  - component: {fileID: -3477239886981857151}
   m_Layer: 6
   m_Name: Ghoul
   m_TagString: Monster
@@ -247,3 +248,15 @@ CapsuleCollider2D:
   m_Offset: {x: -0.002420783, y: 0.054750323}
   m_Size: {x: 0.44321084, y: 0.709501}
   m_Direction: 0
+--- !u!114 &-3477239886981857151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9027855769779413165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79dfd30061627c3409a70b92298b1998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
