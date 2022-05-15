@@ -50,10 +50,12 @@ public class MonsterDropItem : MonoBehaviour
                     randSum += ItemManager.Instance.GetItemData(itemId).dropRate;
                     if (randNum <= randSum)
                     {
-                        GameObject itemObj = ObjectPoolManager.Instance.EnableGameObject(ItemManager.Instance.GetItemData(itemId).itemInName);
-                        setItemData(ref itemObj, itemId);
-                        itemObj.transform.position = gameObject.transform.position;
-                        itemObj.SetActive(true);
+                        if(ItemManager.Instance.GetItemData(itemId).mustDrop == 0) { 
+                            GameObject itemObj = ObjectPoolManager.Instance.EnableGameObject(ItemManager.Instance.GetItemData(itemId).itemInName);
+                            setItemData(ref itemObj, itemId);
+                            itemObj.transform.position = gameObject.transform.position;
+                            itemObj.SetActive(true);
+                        }
                         break;
                     }
 

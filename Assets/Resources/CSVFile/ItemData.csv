@@ -8,3 +8,5 @@ ID,ItemInName,Damage,Hp,Gold,Droprate,Scale,MustDrop
 6,Gold2,0,0,20,0,3,1
 7,Gold3,0,0,30,0,3,1
 8,Gold3,0,0,50,0,3,1
+9,Gold1,0,0,1,10,2,0
+10,None,0,0,0,90,0,-1
