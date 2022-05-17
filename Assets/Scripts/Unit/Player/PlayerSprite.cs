@@ -26,10 +26,24 @@ public class PlayerSprite : MonoBehaviour
 
     [SerializeField]
     private int[] mSaveInfo;
-    public int[] SaveInfo => mSaveInfo;
+    public int[] SaveInfo 
+    {
+        get => mSaveInfo;
+        set
+        {
+            mSaveInfo = value;
+        }
+    }
     [SerializeField]
     private Color[] mSaveColorInfo;
-    public Color[] SaveColorInfo => mSaveColorInfo;
+    public Color[] SaveColorInfo
+    {
+        get => mSaveColorInfo;
+        set
+        {
+            mSaveColorInfo = value;
+        }
+    }
 
     private const string SPRITE_NUM = "Sprite_";
     public string SpriteKey => SPRITE_NUM;
@@ -144,19 +158,18 @@ public class PlayerSprite : MonoBehaviour
     public void ClickShowHelmet()
     {
         mShowHelmet = !mShowHelmet;
-        // 모자 감추기일 시
-        if (!mShowHelmet)
-        {
-            mOriginHelmet = mHelmetSpriteRenderer.sprite;
-            mHelmetSpriteRenderer.sprite = null;
-            mHairSpriteRenderer.sprite = mOriginHair;
-        }
         // 모자 보일 시
-        else
+        if (mShowHelmet)
         {
-            mOriginHair = mHairSpriteRenderer.sprite;
             mHairSpriteRenderer.sprite = null;
             mHelmetSpriteRenderer.sprite = mOriginHelmet;
+
+        }
+        // 모자 감출 시
+        else
+        {
+            mHelmetSpriteRenderer.sprite = null;
+            mHairSpriteRenderer.sprite = mOriginHair;
         }
         if(mShowHelmetButton != null)
             mShowHelmetButton.transform.GetChild(0).GetChild(0).gameObject.SetActive(!mShowHelmet);

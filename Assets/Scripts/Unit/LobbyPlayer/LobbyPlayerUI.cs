@@ -18,7 +18,7 @@ public class LobbyPlayerUI : MonoBehaviour
 
     private void ResisterGoodsObserver(int _gold, int _diamond)
     {
-        mGoldText.text = _gold.ToString();
+        mGoldText.text = _gold.ToString() + "g";
         mDiamondText.text = _diamond.ToString();
     }
 }

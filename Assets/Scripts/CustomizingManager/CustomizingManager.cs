@@ -39,6 +39,8 @@ public class CustomizingManager : SingleToneMaker<CustomizingManager>
     [SerializeField]
     private Color mNowColor;
 
+
+
     private const int SKIN_SPRITE_COUNT = 6;
     public enum SpriteType
     {
@@ -50,6 +52,7 @@ public class CustomizingManager : SingleToneMaker<CustomizingManager>
 
     private void Awake()
     {
+        //PlayerPrefs.DeleteAll();
         InitSpriteList();
     }
     private void InitSpriteList()
@@ -63,6 +66,7 @@ public class CustomizingManager : SingleToneMaker<CustomizingManager>
         // 수염 리스트
         mFaceHairList = Resources.LoadAll<Sprite>("SPUM/SPUM_Sprites/Packages/Ver300/1_FaceHair");
     }
+    // 각 커스터마이징 부위 판넬
     public void ClickSelectPannel(int _num)
     {
         mCurrentSelectType = (SpriteType)_num;
@@ -131,6 +135,7 @@ public class CustomizingManager : SingleToneMaker<CustomizingManager>
         }
         mSelectPannel.SetActive(true);
     }
+    // 각 커스터마이징 부위 선택
     private void SelectSprite(int _num, SpriteType _type)
     {
         foreach(int key in mCurrentButtonList.Keys)
@@ -175,6 +180,7 @@ public class CustomizingManager : SingleToneMaker<CustomizingManager>
         }
         mCurrentButtonList.Clear();
     }
+    // 각 커스터마이징 부위 색깔 선택
     public void OpenColorPicker(int _num)
     {
         mCurrentSelectType = (SpriteType)_num;
@@ -193,10 +199,11 @@ public class CustomizingManager : SingleToneMaker<CustomizingManager>
     IEnumerator CaptureTempArea()
     {
         yield return new WaitForEndOfFrame();
-#if ENABLE_INPUT_SYSTEM
-        Vector2 pos = Mouse.current.position.ReadValue();
-#elif ENABLE_LEGACY_INPUT_MANAGER
-        Vector2 pos = EventSystem.current.currentInputModule.input.mousePosition;
+        Vector2 pos = Vector2.zero;
+#if UNITY_EDITOR
+        pos = Mouse.current.position.ReadValue();
+#else
+        pos = Input.GetTouch(0).position;
 #endif
 
         tex.ReadPixels(new Rect(pos.x, pos.y, 1, 1), 0, 0);
@@ -263,12 +270,16 @@ public class CustomizingManager : SingleToneMaker<CustomizingManager>
                     mPlayerSprite.SetEye(mEyeList[mPlayerSprite.SaveInfo[i]], mEyeList[mPlayerSprite.SaveInfo[i] + 1]);
                     break;
                 case SpriteType.FaceHair:
-                    if(mPlayerSprite.SaveInfo[i] > 0)
+                    if (mPlayerSprite.SaveInfo[i] > 0)
                         mPlayerSprite.SetFaceHair(mFaceHairList[mPlayerSprite.SaveInfo[i] - 1]);
+                    else
+                        mPlayerSprite.SetFaceHair(null);
                     break;
                 case SpriteType.Hair:
                     if (mPlayerSprite.SaveInfo[i] > 0)
                         mPlayerSprite.SetHair(mHairList[mPlayerSprite.SaveInfo[i] - 1]);
+                    else
+                        mPlayerSprite.SetHair(null);
                     break;
             }
         }
@@ -287,6 +298,89 @@ public class CustomizingManager : SingleToneMaker<CustomizingManager>
                     mPlayerSprite.SetHairColor(mPlayerSprite.SaveColorInfo[i]);
                     break;
             }
+        }
+    }
+
+    // 초기화
+    public void InitCustome()
+    {
+        for (int i = 0; i < mPlayerSprite.SaveInfo.Length; i++)
+        {
+            switch ((SpriteType)i)
+            {
+                case SpriteType.Skin:
+                    List<Sprite> newList = new List<Sprite>();
+                    for (int j = 0; j <  SKIN_SPRITE_COUNT; j++)
+                        newList.Add(mSkinList[j]);
+                    mPlayerSprite.SetSkin(newList);
+                    break;
+                case SpriteType.Eye:
+                    mPlayerSprite.SetEye(mEyeList[0], mEyeList[1]);
+                    break;
+                case SpriteType.FaceHair:
+                        mPlayerSprite.SetFaceHair(null);
+                    break;
+                case SpriteType.Hair:
+                        mPlayerSprite.SetHair(null);
+                    break;
+            }
+            mPlayerSprite.SaveInfo[i] = 0;
+        }
+    }
+
+    // 랜덤 선택
+    public void RandomSelect()
+    {
+        int ran = 0;
+
+        // Sprite
+        for (int i = 0; i < mPlayerSprite.SaveInfo.Length; i++)
+        {
+            switch ((SpriteType)i)
+            {
+                case SpriteType.Skin:
+                    int[] range = { 0, 6, 12, 18, 24 };
+                    ran = UnityEngine.Random.Range(0, range.Length);
+                    List<Sprite> newList = new List<Sprite>();
+                    for (int j = range[ran]; j < range[ran] + SKIN_SPRITE_COUNT; j++)
+                        newList.Add(mSkinList[j]);
+                    mPlayerSprite.SetSkin(newList);
+                    mPlayerSprite.SaveInfo[i] = range[ran];
+                    break;
+                case SpriteType.Eye:
+                    mPlayerSprite.SetEye(mEyeList[0], mEyeList[1]);
+                    mPlayerSprite.SaveInfo[i] = 0;
+                    break;
+                case SpriteType.FaceHair:
+                    ran = UnityEngine.Random.Range(0, mFaceHairList.Length);
+                    mPlayerSprite.SetFaceHair(mFaceHairList[ran]);
+                    mPlayerSprite.SaveInfo[i] = ran + 1;
+                    break;
+                case SpriteType.Hair:
+                    ran = UnityEngine.Random.Range(0, mHairList.Length);
+                    mPlayerSprite.SetHair(mHairList[ran]);
+                    mPlayerSprite.SaveInfo[i] = ran + 1;
+                    break;
+            }
+        }
+
+        // Color
+        for (int i = 0; i < mPlayerSprite.SaveColorInfo.Length; i++)
+        {
+            Color newColor = new Color(Random.Range(0, 1f), Random.Range(0, 1f), Random.Range(0, 1f), 1f);
+            switch ((SpriteType)i)
+            {
+                case SpriteType.Eye:
+                    mPlayerSprite.SetEyeColor(newColor);
+                    break;
+                case SpriteType.FaceHair:
+                    mPlayerSprite.SetFaceHairColor(newColor);
+                    break;
+                case SpriteType.Hair:
+                    mPlayerSprite.SetHairColor(newColor);
+                    break;
+            }
+            mPlayerSprite.SaveColorInfo[i] = newColor;
         }
     }
 }

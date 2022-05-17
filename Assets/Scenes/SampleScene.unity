@@ -12031,7 +12031,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0 gold
+  m_Text: 0g
 --- !u!222 &638402353
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -40148,6 +40148,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 28d930bcdcdc37342809697b85844b62, type: 2}
+    - target: {fileID: 4514881426787204644, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514881426787204644, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4566790549671009646, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -40248,6 +40256,14 @@ PrefabInstance:
       propertyPath: mUltimateSkillImg
       value: 
       objectReference: {fileID: 1880792530}
+    - target: {fileID: 8092054297220659673, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092054297220659673, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8201246972542053180, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}
       propertyPath: m_IsActive
       value: 0

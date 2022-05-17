@@ -43,7 +43,7 @@ public class PlayerUI : IUI
     }
     public void RegisterGoldObserver(int _gold)
     {
-        mGoldText.text = _gold + " gold";
+        mGoldText.text = _gold + "g";
     }
     private void RegisterLevelObserver(int _level)
     { 

@@ -230,9 +230,9 @@ public class UIManager : SingleToneMaker<UIManager>
 
         // 게임오버 패널 오픈
         mGameOverPannel.transform.GetChild(3).GetChild(0).GetComponent<Text>().text =
-            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().GainGold.ToString();
+            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().GainGold.ToString() + "g";
         mGameOverPannel.transform.GetChild(5).GetChild(0).GetComponent<Text>().text =
-            string.Format("{0:N2}", mGamePlayTime);
+            ((int)(mGamePlayTime)).ToString() + "초";
         mGameOverPannel.SetActive(true);
     }
     public void GameOverFirstResurrectionPannelOn()
@@ -242,7 +242,7 @@ public class UIManager : SingleToneMaker<UIManager>
 
         // 게임오버 패널 오픈
         mGaneOverFirstResurrectionPannel.transform.GetChild(3).GetChild(0).GetComponent<Text>().text = 
-            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().GainGold.ToString();
+            PlayerManager.Instance.Player.GetComponent<PlayerStatus>().GainGold.ToString() + "g";
         mGaneOverFirstResurrectionPannel.transform.GetChild(5).GetChild(0).GetComponent<Text>().text =
             ((int)(mGamePlayTime)).ToString() + "초";
         // 광고 패스 구매한 경우
@@ -268,7 +268,7 @@ public class UIManager : SingleToneMaker<UIManager>
         mGaneOverSecondResurrectionPannel.transform.GetChild(9).GetChild(1).GetComponent<Text>().text =
             PlayerManager.Instance.Player.GetComponent<PlayerStatus>().Diamond.ToString() + "개";
         mGaneOverSecondResurrectionPannel.transform.GetChild(3).GetChild(0).GetComponent<Text>().text =
-    PlayerManager.Instance.Player.GetComponent<PlayerStatus>().GainGold.ToString();
+    PlayerManager.Instance.Player.GetComponent<PlayerStatus>().GainGold.ToString() + "g";
         mGaneOverSecondResurrectionPannel.transform.GetChild(5).GetChild(0).GetComponent<Text>().text =
             ((int)(mGamePlayTime)).ToString() + "초";
         mGaneOverSecondResurrectionPannel.SetActive(true);
