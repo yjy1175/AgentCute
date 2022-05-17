@@ -486,6 +486,8 @@ GameObject:
   - component: {fileID: 5989482010959964970}
   - component: {fileID: 3931014726613869481}
   - component: {fileID: 838893848722458882}
+  - component: {fileID: 5206025344281486645}
+  - component: {fileID: 4558105359255627658}
   m_Layer: 7
   m_Name: PlayerObject
   m_TagString: Player
@@ -732,6 +734,43 @@ CapsuleCollider2D:
   m_Offset: {x: -0.009384915, y: 0.35323396}
   m_Size: {x: 0.35922638, y: 0.65015846}
   m_Direction: 0
+--- !u!114 &5206025344281486645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838893848722458881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dd417188c2dae84ea16ead3e4b7f318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mSkinSpriteRenderer: []
+  mEyesSpriteRenderer: []
+  mFaceHairSpriteRenderer: {fileID: 0}
+  mHairSpriteRenderer: {fileID: 0}
+  mOriginHair: {fileID: 0}
+  mHelmetSpriteRenderer: {fileID: 0}
+  mOriginHelmet: {fileID: 0}
+  mShowHelmet: 0
+  mShowHelmetButton: {fileID: 0}
+  mSaveInfo: 
+  mSaveColorInfo: []
+--- !u!114 &4558105359255627658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838893848722458881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff6c81040ceb8b54b99d09532cef746c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mMagnetPower: 3
+  mMagenetSpeed: 4
 --- !u!1 &978156455021065364
 GameObject:
   m_ObjectHideFlags: 0

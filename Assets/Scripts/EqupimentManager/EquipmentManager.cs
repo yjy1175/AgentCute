@@ -308,9 +308,6 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                             break;
                     }
                 }
-                // 투명모자 초기화
-                if (!PlayerManager.Instance.Player.GetComponent<PlayerSprite>().ShowHelmet)
-                    PlayerManager.Instance.Player.GetComponent<PlayerSprite>().ClickShowHelmet();
             }
         }
     }
