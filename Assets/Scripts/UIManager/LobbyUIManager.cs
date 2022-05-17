@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
 {
@@ -517,6 +518,10 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         {
             LobbyPlayerInfo info = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info;
             // TODO : 업적정보 불러오기
+            mPlayerInfoPannel.transform.GetChild(6).GetChild(0).GetComponent<Text>().text =
+                AchievementManager.Instance.CompleteCount.ToString();
+            mPlayerInfoPannel.transform.GetChild(6).GetChild(1).GetComponent<Text>().text = 
+                AchievementManager.Instance.Achievements.Count.ToString();
             mPlayerInfoPannel.transform.GetChild(7).GetChild(1).GetComponent<Text>().text 
                 = (info.BaseHp + info.TrainingHp).ToString();
             mPlayerInfoPannel.transform.GetChild(7).GetChild(3).GetComponent<Text>().text 
@@ -607,6 +612,11 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
 #else
          Application.Quit();
 #endif
+    }
+
+    public void ClickCustomizingScene()
+    {
+        SceneManager.LoadScene("CustomeScene");
     }
 
 

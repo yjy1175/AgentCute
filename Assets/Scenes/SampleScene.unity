@@ -3548,6 +3548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513d360d24fee1b4b90d50d7d8b4e3f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LAST_WAVE: 4
   currentTime: 0
   mIsSpawnRelayBoss: 0
   mWaveCount: 0
@@ -23351,9 +23352,83 @@ Transform:
   - {fileID: 531027615}
   - {fileID: 1414013677}
   - {fileID: 1628503817}
+  - {fileID: 1217864981}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1217864980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1217864981}
+  - component: {fileID: 1217864983}
+  - component: {fileID: 1217864982}
+  m_Layer: 0
+  m_Name: CustomizingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1217864981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217864980}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1211573771}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1217864982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217864980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a9bbe94398f6e41b5b887301163734, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mSkinList: []
+  mEyeList: []
+  mFaceHairList: []
+  mHairList: []
+  mSelectPannel: {fileID: 0}
+  mContainer: {fileID: 0}
+  mSpriteItem: {fileID: 0}
+  mColorPannel: {fileID: 0}
+  mPlayerSprite: {fileID: 6641142738334399007}
+  mSaveInfo: 
+  mSaveColorInfo: []
+  mCurrentSelectType: 0
+  mCurrentButtonList:
+    m_keys: 
+    m_values: []
+  tex: {fileID: 0}
+  mNowColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &1217864983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217864980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cb508a01dcdd34cadc31fa5f17830c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1218645027
 GameObject:
   m_ObjectHideFlags: 0
@@ -40264,6 +40339,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mMagnetPower: 3
   mMagenetSpeed: 4
+--- !u!114 &6641142738334399007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6641142738334399005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dd417188c2dae84ea16ead3e4b7f318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mSkinSpriteRenderer: []
+  mEyesSpriteRenderer: []
+  mFaceHairSpriteRenderer: {fileID: 0}
+  mHairSpriteRenderer: {fileID: 0}
+  mHelmetSpriteRenderer: {fileID: 0}
+  mIsNoneHelmet: 0
+  mSaveInfo: 
+  mSaveColorInfo: []
 --- !u!212 &6776406776483109450 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 685936582218852694, guid: 69652f14862bcf54e98eb3052a1ffa52, type: 3}

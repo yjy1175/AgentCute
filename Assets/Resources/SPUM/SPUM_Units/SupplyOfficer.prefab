@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 3296870032206666635}
   - component: {fileID: 3799795171861472726}
   m_Layer: 0
-  m_Name: _3L_Foot
+  m_Name: _3L_Foot.
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -984,7 +984,7 @@ GameObject:
   - component: {fileID: 4636004028700361292}
   - component: {fileID: 6121204978693733680}
   m_Layer: 0
-  m_Name: Front
+  m_Name: Front.
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1122,7 +1122,7 @@ GameObject:
   - component: {fileID: 9059582136503613665}
   - component: {fileID: 8207503381106443874}
   m_Layer: 0
-  m_Name: _12R_Foot
+  m_Name: _12R_Foot.
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1703,7 +1703,7 @@ GameObject:
   - component: {fileID: 6548438544588679782}
   - component: {fileID: 1798109641275508985}
   m_Layer: 0
-  m_Name: 6_FaceHair
+  m_Name: 6_FaceHair.
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2394,7 +2394,7 @@ GameObject:
   - component: {fileID: 1089713200068050674}
   - component: {fileID: 8003796920400787407}
   m_Layer: 0
-  m_Name: -20_R_Arm
+  m_Name: -20_R_Arm.
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2478,7 +2478,7 @@ GameObject:
   - component: {fileID: 6401524340176124625}
   - component: {fileID: 8019368790091168010}
   m_Layer: 0
-  m_Name: 5_Head
+  m_Name: 5_Head.
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2561,7 +2561,7 @@ GameObject:
   - component: {fileID: 5192116293770517733}
   - component: {fileID: 4344439266678682163}
   m_Layer: 0
-  m_Name: Back
+  m_Name: Back.
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2799,7 +2799,7 @@ GameObject:
   - component: {fileID: 3787451376432464099}
   - component: {fileID: 714580309093166291}
   m_Layer: 0
-  m_Name: Body
+  m_Name: Body.
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3200,7 +3200,7 @@ GameObject:
   - component: {fileID: 9062530181453833483}
   - component: {fileID: 3469845272243486167}
   m_Layer: 0
-  m_Name: Back
+  m_Name: Back.
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3294,7 +3294,7 @@ GameObject:
   - component: {fileID: 4992370115995783528}
   - component: {fileID: 2707289364366963509}
   m_Layer: 0
-  m_Name: 11_Helmet1
+  m_Name: 11_Helmet1.
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3377,7 +3377,7 @@ GameObject:
   - component: {fileID: 390371648185060495}
   - component: {fileID: 204346770847643956}
   m_Layer: 0
-  m_Name: Front
+  m_Name: Front.
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3534,7 +3534,7 @@ GameObject:
   - component: {fileID: 2425495514042003041}
   - component: {fileID: 7939594895611390024}
   m_Layer: 0
-  m_Name: 20_L_Arm
+  m_Name: 20_L_Arm.
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3713,7 +3713,7 @@ GameObject:
   - component: {fileID: 621032895100878486}
   - component: {fileID: 8944608087047005031}
   m_Layer: 0
-  m_Name: 7_Hair
+  m_Name: 7_Hair.
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

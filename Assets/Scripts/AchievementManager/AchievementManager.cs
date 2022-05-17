@@ -12,6 +12,10 @@ public class AchievementManager : SingleToneMaker<AchievementManager>
     public StringGameObject Achievements => mAchievements;
 
     [SerializeField]
+    private int mCompleteCount;
+    public int CompleteCount => mCompleteCount;
+
+    [SerializeField]
     private GameObject mNoneObject;
 
     [SerializeField]
@@ -115,7 +119,8 @@ public class AchievementManager : SingleToneMaker<AchievementManager>
 
     public  void UpdateState()
     {
-        foreach(string key in mAchievements.Keys)
+        int count = 0;
+        foreach (string key in mAchievements.Keys)
         {
             mAchievements[key].GetComponent<Achievement>().CheckComplete();
             mAchievementButtons[key].GetComponent<AchieveInfoButton>().mInactive.transform.GetChild(0).GetComponent<Text>().text =
@@ -134,10 +139,12 @@ public class AchievementManager : SingleToneMaker<AchievementManager>
                     mAchievementButtons[key].GetComponent<AchieveInfoButton>().WaitForComplete();
                     break;
                 case Achievement.AState.Complete:
+                    count++;
                     mAchievementButtons[key].GetComponent<AchieveInfoButton>().Complete();
                     break;
             }
         }
+        mCompleteCount = count;
     }
 
     public void ClickRewardButton(string _id)

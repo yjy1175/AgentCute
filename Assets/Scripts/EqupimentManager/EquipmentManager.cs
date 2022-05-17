@@ -308,6 +308,9 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                             break;
                     }
                 }
+                // 투명모자 초기화
+                if (!PlayerManager.Instance.Player.GetComponent<PlayerSprite>().ShowHelmet)
+                    PlayerManager.Instance.Player.GetComponent<PlayerSprite>().ClickShowHelmet();
             }
         }
     }
@@ -397,6 +400,10 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                     costumes[_name].GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerHP);
             GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.MoveSpeedRate +=
                 costumes[_name].GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerSPD) / 100f;
+
+            // 투명모자 초기화
+            if(!GameObject.Find("LobbyPlayer").GetComponent<PlayerSprite>().ShowHelmet)
+                GameObject.Find("LobbyPlayer").GetComponent<PlayerSprite>().ClickShowHelmet();
         }
     }
     public void ChangeCostumeShapeLobbyPlayer(string _name)
@@ -466,6 +473,9 @@ public class EquipmentManager : SingleToneMaker<EquipmentManager>
                     }
                 }
             }
+            // 투명모자 초기화
+            if (!GameObject.Find("LobbyPlayer").GetComponent<PlayerSprite>().ShowHelmet)
+                GameObject.Find("LobbyPlayer").GetComponent<PlayerSprite>().ClickShowHelmet();
         }
     }
 

@@ -28,7 +28,10 @@ public class GameManager : MonoBehaviour
 
     public void LoadTestLobbyScene()
     {
-        SceneManager.LoadScene("LobbyScene");
+        if(PlayerPrefs.HasKey("Info"))
+            SceneManager.LoadScene("LobbyScene");
+        else
+            SceneManager.LoadScene("CustomeScene");
     }
 
     public void QuitGame()

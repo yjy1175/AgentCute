@@ -521,6 +521,7 @@ GameObject:
   - component: {fileID: 1096120673402983979}
   - component: {fileID: 9210635812579958363}
   - component: {fileID: 1235026670686264744}
+  - component: {fileID: 4589404808215795619}
   m_Layer: 5
   m_Name: LobbyPlayer
   m_TagString: Untagged
@@ -722,6 +723,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a85567dc9bc6564c8e55baf344ff509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4589404808215795619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434678581755247551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dd417188c2dae84ea16ead3e4b7f318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mSkinSpriteRenderer: []
+  mEyesSpriteRenderer: []
+  mFaceHairSpriteRenderer: {fileID: 0}
+  mHairSpriteRenderer: {fileID: 0}
+  mHelmetSpriteRenderer: {fileID: 0}
+  mIsNoneHelmet: 0
+  mSaveInfo: 
+  mSaveColorInfo: []
 --- !u!1 &1575772847760213546
 GameObject:
   m_ObjectHideFlags: 0
