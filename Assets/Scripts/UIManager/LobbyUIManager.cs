@@ -123,17 +123,24 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
     }
+    private void ClickSound(LobbyMusicManager.AudioType _type)
+    {
+        LobbyMusicManager.Instance.ClickUISound(_type);
+    }
     public void OpenAlertEnterPannel(string _desc)
     {
+        ClickSound(LobbyMusicManager.AudioType.Error);
         mAlertEnterPannel.transform.GetChild(2).GetComponent<Text>().text = _desc;
         mAlertEnterPannel.SetActive(true);
     }
     public void CloseAlertEnterPannel()
     {
+        ClickSound(LobbyMusicManager.AudioType.Cancel);
         mAlertEnterPannel.SetActive(false);
     }
     public void OpenAlertEnterExitPannel(string _desc)
     {
+        ClickSound(LobbyMusicManager.AudioType.Error);
         mAlertEnterExitPannel.transform.GetChild(2).GetComponent<Text>().text = _desc;
         mAlertEnterExitPannel.SetActive(true);
     }
@@ -143,6 +150,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     }
     public void CloseAlertEnterExitPannel()
     {
+        ClickSound(LobbyMusicManager.AudioType.Cancel);
         mAlertEnterExitPannel.SetActive(false);
     }
     private void GamePause()
@@ -155,6 +163,10 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     public void ClickMenuButton()
     {
         mIsOpenMenuPannel = !mIsOpenMenuPannel;
+        if(mIsOpenMenuPannel)
+            ClickSound(LobbyMusicManager.AudioType.Choice);
+        else
+            ClickSound(LobbyMusicManager.AudioType.Cancel);
         mMenuPannel.SetActive(mIsOpenMenuPannel);
     }
     public void ClickSkillButton()
@@ -184,6 +196,10 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
                 }
             }
         }
+        if (mIsOpenSkillPannel)
+            ClickSound(LobbyMusicManager.AudioType.Choice);
+        else
+            ClickSound(LobbyMusicManager.AudioType.Cancel);
         mSkillPannel.SetActive(mIsOpenSkillPannel);
     }
     public void ClickAchiveButton()
@@ -193,25 +209,30 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         if (mIsOpenAchivePannel)
         {
             AchievementManager.Instance.UpdateState();
+            ClickSound(LobbyMusicManager.AudioType.Choice);
         }
+        else
+            ClickSound(LobbyMusicManager.AudioType.Cancel);
         mAchivePannel.SetActive(mIsOpenAchivePannel);
-    }
-    public void ClickDailyQuestButton()
-    {
-        GamePause();
-        mIsOpenDailyQuestPannel = !mIsOpenDailyQuestPannel;
-        mDailyQuestPannel.SetActive(mIsOpenDailyQuestPannel);
     }
     public void ClickOptionButton()
     {
         GamePause();
         mIsOpenOptionPannel = !mIsOpenOptionPannel;
+        if (mIsOpenOptionPannel)
+            ClickSound(LobbyMusicManager.AudioType.Choice);
+        else
+            ClickSound(LobbyMusicManager.AudioType.Cancel);
         mOptionPannel.SetActive(mIsOpenOptionPannel);
     }
     public void ClickGameExitButton()
     {
         GamePause();
         mIsOpenGameExitPannel = !mIsOpenGameExitPannel;
+        if (mIsOpenOptionPannel)
+            ClickSound(LobbyMusicManager.AudioType.Error);
+        else
+            ClickSound(LobbyMusicManager.AudioType.Cancel);
         mGameExitPannel.SetActive(mIsOpenGameExitPannel);
     }
     public void ClickInteractionButton()
@@ -223,6 +244,10 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         {
             GamePause();
             mIsOpenWareHousePannel = !mIsOpenWareHousePannel;
+            if (mIsOpenWareHousePannel)
+                ClickSound(LobbyMusicManager.AudioType.Choice);
+            else
+                ClickSound(LobbyMusicManager.AudioType.Cancel);
             mWareHousePannel.SetActive(mIsOpenWareHousePannel);
         }
         // 플레이어가 던전 입구와 상호작용 대기중 이라면
@@ -237,6 +262,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
                 GamePause();
                 mSupportItemPannel.transform.GetChild(8).GetChild(1).GetComponent<Text>().text =
                     info.DailyAddCount.ToString();
+                ClickSound(LobbyMusicManager.AudioType.Choice);
                 mSupportItemPannel.SetActive(true);
             }
         }
@@ -244,12 +270,14 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         if (player.IsTriggerInSupplyZone)
         {
             GamePause();
+            ClickSound(LobbyMusicManager.AudioType.Choice);
             mSupplyShopPannel.SetActive(true);
         }
         // 플레이어가 훈련교관과 상호작용 대기중 이라면
         if (player.IsTriggerInTrainingZone)
         {
             GamePause();
+            ClickSound(LobbyMusicManager.AudioType.Choice);
             SetTrainingPannel();
         }
     }
@@ -260,12 +288,13 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     }
     public void CloseTrainingPannel()
     {
+        ClickSound(LobbyMusicManager.AudioType.Cancel);
         mTrainingPannel.SetActive(false);
         GamePause();
     }
     public void ClickTrainingButton()
     {
-
+        
         TrainingManager.Training training = TrainingManager.Instance.TrainingSet[TrainingManager.Instance.CurrentSelectType];
         if(training.mMax == training.mCurrentValue)
         {
@@ -274,6 +303,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         }
         else
         {
+            ClickSound(LobbyMusicManager.AudioType.Choice);
             mSelectType = TrainingManager.Instance.CurrentSelectType;
             // 현재 수치
             mTrainingAlertPannel.transform.GetChild(2).GetChild(0).GetChild(1).GetComponent<Text>().text =
@@ -300,6 +330,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     }
     public void CloseTrainingAlertPannel()
     {
+        ClickSound(LobbyMusicManager.AudioType.Cancel);
         mTrainingAlertPannel.SetActive(false);
     }
     public void ClickTrainging()
@@ -307,6 +338,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         LobbyPlayerInfo playerInfo = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info;
         if (playerInfo.Gold >= mSelectCost)
         {
+            ClickSound(LobbyMusicManager.AudioType.Purchase);
             playerInfo.Gold -= mSelectCost;
             TrainingManager.Instance.LevelUpTraining(mSelectType);
             SetTrainingPannel();
@@ -325,9 +357,11 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         // 광고 보기 한 경우
         if (_ok)
         {
+            ClickSound(LobbyMusicManager.AudioType.Choice);
             // TODO : 광고 틀기, 던전 버프 랜덤 적용, 광고 횟수 차감
             // 일일 광고 제한 횟수 체크 하기
-            if(GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.DailyAddCount > 0)
+
+            if (GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.DailyAddCount > 0)
             {
                 AdmobManager.Instance.Show();
                 mDeongunStartPannel.transform.GetChild(2).GetChild(2).gameObject.SetActive(false);
@@ -346,7 +380,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     public void OpenDoengunPannel()
     {
         mSupportItemPannel.SetActive(false);
-
+        ClickSound(LobbyMusicManager.AudioType.Choice);
         // 던전 버프 UI
         switch (DeongunStartManager.Instance.CurrentBuffType)
         {
@@ -384,6 +418,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     public void CloseDeongunStartPannel()
     {
         GamePause();
+        ClickSound(LobbyMusicManager.AudioType.Cancel);
         mDeongunStartPannel.SetActive(false);
         // TODO : 적용되고있던 던전 버프 삭제
         DeongunStartManager.Instance.ResetBuff();
@@ -391,6 +426,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     public void CloseSupplyShopPannel()
     {
         GamePause();
+        ClickSound(LobbyMusicManager.AudioType.Cancel);
         mSupplyShopPannel.SetActive(false);
     }
     public void ClickBuyAlertButton(int _num)
@@ -398,11 +434,12 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         mBuyNum = _num;
         mBuyAlertPannel.transform.GetChild(4).GetChild(0).GetComponent<Image>().sprite =
             mGoodsImageList[_num].GetComponent<Image>().sprite;
-
+        ClickSound(LobbyMusicManager.AudioType.Error);
         mBuyAlertPannel.SetActive(true);
     }
     public void CloseBuyAlertButton()
     {
+        ClickSound(LobbyMusicManager.AudioType.Cancel);
         mBuyAlertPannel.SetActive(false);
     }
     public void ClickBuyButton()
@@ -411,6 +448,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         // 애니메이션 필요
         if (info.Diamond >= mPriceList[mBuyNum])
         {
+            ClickSound(LobbyMusicManager.AudioType.Purchase);
             info.Diamond -= mPriceList[mBuyNum];
             StartCoroutine(BoxAnimaion());
             CloseBuyAlertButton();
@@ -508,6 +546,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
     }
     public void CloseGachItemListPannel()
     {
+        ClickSound(LobbyMusicManager.AudioType.Cancel);
         mGachaItemListPannel.SetActive(false);
     }
     public void ClickPlayerInfoPannel()
@@ -516,6 +555,7 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         // 플레이어의 정보 받아오기
         if (mIsOpenPlayerInfoPannel)
         {
+            ClickSound(LobbyMusicManager.AudioType.Choice);
             LobbyPlayerInfo info = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info;
             // TODO : 업적정보 불러오기
             mPlayerInfoPannel.transform.GetChild(6).GetChild(0).GetComponent<Text>().text =
@@ -539,6 +579,8 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
                 mPlayerInfoPannel.transform.GetChild(10).GetChild(1).GetChild(0).GetComponent<Image>().sprite
                     = EquipmentManager.Instance.FindCostume(info.CurrentCostumeShapeName).GetComponent<SpriteRenderer>().sprite;
         }
+        else
+            ClickSound(LobbyMusicManager.AudioType.Cancel);
         mPlayerInfoPannel.SetActive(mIsOpenPlayerInfoPannel);
     }
     public void ClickSkillButton(string _type)
@@ -577,10 +619,12 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
             mSkillInfoPannel.transform.GetChild(5).GetChild(0).GetComponent<Text>().text 
                 = skill.Spec.EquipDesc + "\n" + "쿨타임 : " + coolTime;
         }
+        ClickSound(LobbyMusicManager.AudioType.Choice);
         mSkillInfoPannel.SetActive(true);
     }
     public void CloseSkillInfoPannel()
     {
+        ClickSound(LobbyMusicManager.AudioType.Cancel);
         mSkillInfoPannel.SetActive(false);
     }
     public void ClickBMButton()
@@ -588,18 +632,26 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
         mIsOpenBMPannel = !mIsOpenBMPannel;
         if (mIsOpenBMPannel)
         {
+            ClickSound(LobbyMusicManager.AudioType.Choice);
             mBMPannel.transform.GetChild(1).GetChild(1).GetComponent<Text>().text =
                 GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.Diamond.ToString();
         }
+        else
+            ClickSound(LobbyMusicManager.AudioType.Cancel);
         mBMPannel.SetActive(mIsOpenBMPannel);
     }
     public void ClickGuideButton()
     {
         mIsOpenGuidePannel = !mIsOpenGuidePannel;
+        if(mIsOpenGuidePannel)
+            ClickSound(LobbyMusicManager.AudioType.Choice);
+        else
+            ClickSound(LobbyMusicManager.AudioType.Cancel);
         mGuidePannel.SetActive(mIsOpenGuidePannel);
     }
     public void ClickNextGuide(bool _isNext)
     {
+        ClickSound(LobbyMusicManager.AudioType.Choice);
         mGuidePannel.transform.GetChild(1).gameObject.SetActive(!_isNext);
         mGuidePannel.transform.GetChild(2).gameObject.SetActive(_isNext);
         mGuidePannel.transform.GetChild(3).gameObject.SetActive(!_isNext);
@@ -613,12 +665,10 @@ public class LobbyUIManager : SingleToneMaker<LobbyUIManager>
          Application.Quit();
 #endif
     }
-
     public void ClickCustomizingScene()
     {
         SceneManager.LoadScene("CustomeScene");
     }
-
 
     // 테스트용
     public void ClickUnlock()

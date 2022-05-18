@@ -44,6 +44,7 @@ public class PlayerUI : IUI
     public void RegisterGoldObserver(int _gold)
     {
         mGoldText.text = _gold + "g";
+        MusicManager.Instance.ClickUISound(LobbyMusicManager.AudioType.Purchase);
     }
     private void RegisterLevelObserver(int _level)
     { 

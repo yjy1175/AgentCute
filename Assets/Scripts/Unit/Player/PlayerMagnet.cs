@@ -7,10 +7,17 @@ public class PlayerMagnet : MonoBehaviour
     [SerializeField]
     private float mMagnetPower;
     [SerializeField]
-    private float mMagenetSpeed = 4f;
+    private float mMagnetSpeed;
+    [SerializeField]
+    private float mDistanceStretch; // 거리에 따른 가속 효과
+    [SerializeField]
+    private int mMagnetDirection; // 인력 1 척력 -1
     void Start()
     {
         gameObject.GetComponent<PlayerEventHandler>().registerMagnetPowerbserver(RegisterMagentPowerObserver);
+        mMagnetSpeed = 1f;
+        mDistanceStretch = 4f;
+        mMagnetDirection = 1;
     }
 
     private void FixedUpdate()
@@ -19,9 +26,8 @@ public class PlayerMagnet : MonoBehaviour
             Collider2D[] colArray =  Physics2D.OverlapCircleAll(transform.position, mMagnetPower, LayerMask.GetMask("Item"));
             foreach(Collider2D obj in colArray)
             {
-                Vector3 dir = PlayerManager.Instance.Player.transform.position - obj.transform.position;
-
-                obj.GetComponent<Transform>().Translate(mMagenetSpeed * dir * Time.deltaTime);
+                obj.GetComponent<Item>().SetTarget(true, mMagnetSpeed, mDistanceStretch, mMagnetDirection);
+                //obj.GetComponent<Transform>().Translate(mMagnetSpeed * dir * Time.deltaTime);
             }
         }
         
@@ -31,6 +37,5 @@ public class PlayerMagnet : MonoBehaviour
     public void RegisterMagentPowerObserver(float _magnetPower)
     {
         mMagnetPower = _magnetPower + 1f;
-        Debug.Log("register는 정상작동");
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Reflection;
 using System;
+[CustomPropertyDrawer(typeof(UIAudoiData))]
 [CustomPropertyDrawer(typeof(IntInt))]
 [CustomPropertyDrawer(typeof(StringState))]
 [CustomPropertyDrawer(typeof(StringAchievement))]

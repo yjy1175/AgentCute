@@ -45,3 +45,6 @@ public class StringState : SerializableDictionary<string, Achievement.AState> { 
 [System.Serializable]
 public class IntInt : SerializableDictionary<int, int> { }
 
+[System.Serializable]
+public class UIAudoiData : SerializableDictionary<LobbyMusicManager.AudioType, AudioClip> { }
+

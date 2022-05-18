@@ -47,14 +47,12 @@ public class WareHouseManager : SingleToneMaker<WareHouseManager>
         initCostumeButtonList();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private void ClickSound(LobbyMusicManager.AudioType _type) =>
+        LobbyMusicManager.Instance.ClickUISound(_type);
 
     public void OpenWeaponPannel()
     {
+        ClickSound(LobbyMusicManager.AudioType.Choice);
         mWeaponPannel.SetActive(true);
         mWeaponButtonImage.SetActive(true);
         mCostumePannel.SetActive(false);
@@ -64,6 +62,7 @@ public class WareHouseManager : SingleToneMaker<WareHouseManager>
     }
     public void OpenCostumePannel()
     {
+        ClickSound(LobbyMusicManager.AudioType.Choice);
         mWeaponPannel.SetActive(false);
         mWeaponButtonImage.SetActive(false);
         mCostumePannel.SetActive(true);
@@ -108,6 +107,7 @@ public class WareHouseManager : SingleToneMaker<WareHouseManager>
     }
     private void ClickWeaponButton(string _type, Sprite _image, string _name, int _ATK, float _addSpeed, string _desc)
     {
+        ClickSound(LobbyMusicManager.AudioType.Choice);
         mClickedWeaponType = _type;
         mWeaponInfoPannel.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = _name;
         mWeaponInfoPannel.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = _image;
@@ -121,6 +121,7 @@ public class WareHouseManager : SingleToneMaker<WareHouseManager>
     }
     public void CloseWeaponInfoPannel()
     {
+        ClickSound(LobbyMusicManager.AudioType.Cancel);
         mWeaponInfoPannel.SetActive(false);
     }
     // 무기 장착
@@ -185,6 +186,7 @@ public class WareHouseManager : SingleToneMaker<WareHouseManager>
     }
     public void ChangeWeapon()
     {
+        ClickSound(LobbyMusicManager.AudioType.Equip);
         string currentWeapon = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentWeaponName;
         if (currentWeapon != "")
             mWeaponButtonList[currentWeapon].GetComponent<EquipButton>().EquipCheckImage.SetActive(false);
@@ -258,6 +260,7 @@ public class WareHouseManager : SingleToneMaker<WareHouseManager>
     }
     private void ClickCostumeButton(string _typeName, EquipmentManager.CostumeTpye _type, Sprite _image, string _name, int _hp, int _addSpeed, string _desc, string _rank, string _source)
     {
+        ClickSound(LobbyMusicManager.AudioType.Choice);
         mClickedCostumeType = _typeName;
         mCostumeInfoPannel.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = _name;
         mCostumeInfoPannel.transform.GetChild(2).GetChild(0).GetComponent<Image>().sprite = _image;
@@ -295,6 +298,7 @@ public class WareHouseManager : SingleToneMaker<WareHouseManager>
     }
     public void CloseCostumeInfoPannel()
     {
+        ClickSound(LobbyMusicManager.AudioType.Cancel);
         mCostumeInfoPannel.SetActive(false);
     }
 
@@ -372,6 +376,7 @@ public class WareHouseManager : SingleToneMaker<WareHouseManager>
     public void ChangeCostume()
     {
         // 새로운 코스튬 장착 시 외형 코스튬도 같이 변경해준다.
+        ClickSound(LobbyMusicManager.AudioType.Equip);
         string currentCostume = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentCostumeName;
         string currentShape = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentCostumeShapeName;
         if (currentCostume != "")
@@ -424,6 +429,7 @@ public class WareHouseManager : SingleToneMaker<WareHouseManager>
     public void ChangeShapeCostume()
     {
         // 새로운 코스튬 장착 시 외형 코스튬도 같이 변경해준다.
+        ClickSound(LobbyMusicManager.AudioType.Equip);
         string currentShape = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info.CurrentCostumeShapeName;
 
         if (currentShape != "")

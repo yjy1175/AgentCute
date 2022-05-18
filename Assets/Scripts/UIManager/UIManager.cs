@@ -147,6 +147,8 @@ public class UIManager : SingleToneMaker<UIManager>
     }
 
     #region method
+    private void ClickSound(LobbyMusicManager.AudioType _type) =>
+        MusicManager.Instance.ClickUISound(_type);
     /*
      *  Todo : 만들다보니 비슷한 기능들이여서 추후에 리팩토링필요
      */
@@ -156,6 +158,7 @@ public class UIManager : SingleToneMaker<UIManager>
         if (mIsPause)
         {
             // 진행
+            ClickSound(LobbyMusicManager.AudioType.Cancel);
             GameRestart();
             mPausePannel.SetActive(false);
         }
@@ -163,6 +166,7 @@ public class UIManager : SingleToneMaker<UIManager>
         else
         {
             // 일시정지
+            ClickSound(LobbyMusicManager.AudioType.Choice);
             GamePause();
             mPausePannel.SetActive(true);
         }
@@ -173,12 +177,14 @@ public class UIManager : SingleToneMaker<UIManager>
         // 옵션창이 켜진 상태
         if (mIsOption)
         {
+            ClickSound(LobbyMusicManager.AudioType.Cancel);
             mOptionPannel.SetActive(false);
             mExitBtn.SetActive(false);
         }
         // 옵션창이 꺼진 상태
         else
         {
+            ClickSound(LobbyMusicManager.AudioType.Choice);
             mOptionPannel.SetActive(true);
             mExitBtn.SetActive(true);
         }
@@ -189,11 +195,13 @@ public class UIManager : SingleToneMaker<UIManager>
         // 옵션창이 켜진 상태
         if (mIsGiveup)
         {
+            ClickSound(LobbyMusicManager.AudioType.Cancel);
             mGiveupPannel.SetActive(false);
         }
         // 옵션창이 꺼진 상태
         else
         {
+            ClickSound(LobbyMusicManager.AudioType.Choice);
             mGiveupPannel.SetActive(true);
         }
         mIsGiveup = !mIsGiveup;
@@ -202,6 +210,7 @@ public class UIManager : SingleToneMaker<UIManager>
     {
         // 일시 정지
         GamePause();
+        ClickSound(LobbyMusicManager.AudioType.LevelUp);
         // TO-DO : 각 선택 섹션 별로 능력치 저장 후 랜덤하게 등장하게 구현
         mFirstSelectText.text = LevelUpStatusManager.Instance.SelectStatus(1);
         mSecondSelectText.text = LevelUpStatusManager.Instance.SelectStatus(2);
@@ -217,7 +226,7 @@ public class UIManager : SingleToneMaker<UIManager>
     public void ClickedSelectStatus(int _num)
     {
         LevelUpStatusManager.Instance.SelectToStat(_num);
-
+        ClickSound(LobbyMusicManager.AudioType.Choice);
         // 게임 재개
         GameRestart();
         mStatusSelectPannel.SetActive(false);
@@ -392,6 +401,7 @@ public class UIManager : SingleToneMaker<UIManager>
     }
     public void ClickSkillSelectBtn(string _type)
     {
+        ClickSound(LobbyMusicManager.AudioType.Choice);
         string type = _type.Substring(0, 1);
         int num = int.Parse(_type.Substring(1, 1));
         string coolTime = "";

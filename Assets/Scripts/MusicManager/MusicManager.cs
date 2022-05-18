@@ -15,7 +15,9 @@ public class MusicManager : SingleToneMaker<MusicManager>
      */
 
     private AudioSource mAudioSource;
-
+    // UI 소리를 출력해주는 소스
+    [SerializeField]
+    private AudioSource mUISource;
     //projectile명을 통해 SoundData검색
     private Dictionary<string, SoundData> mAudioClipData;
     
@@ -34,6 +36,10 @@ public class MusicManager : SingleToneMaker<MusicManager>
     [SerializeField]
     private GameObject mEFMOff;
 
+    // UI Sound Data
+    [SerializeField]
+    private UIAudoiData mUISoundData;
+
     private void Awake()
     {
         mBackgroundMusic = GameObject.Find("BackgroundMusic");
@@ -49,7 +55,13 @@ public class MusicManager : SingleToneMaker<MusicManager>
         mAudioSource.reverbZoneMix = 0f;
         LoadSoundEffect();
     }
-
+    // UI Sound 출력해주는 API
+    public void ClickUISound(LobbyMusicManager.AudioType _type)
+    {
+        if (!mUISoundData.ContainsKey(_type))
+            return;
+        mUISource.PlayOneShot(mUISoundData[_type]);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -131,6 +143,7 @@ public class MusicManager : SingleToneMaker<MusicManager>
     public void MuteEFM(bool _mute)
     {
         mAudioSource.mute = _mute;
+        mUISource.mute = _mute;
         mEFMOn.transform.GetChild(0).gameObject.SetActive(!_mute);
         mEFMOff.transform.GetChild(0).gameObject.SetActive(_mute);
     }
