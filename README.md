@@ -40,7 +40,7 @@ uml 이미지
 
 * [데이터 관리방식](./Docs/data/data.md)
 
-* serialize
+* [serialize](./Docs/serialize/Serialize.md)
 
 * 로비구성
 
