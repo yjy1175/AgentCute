@@ -16,6 +16,9 @@
 
 ## 참고 소스
 [SaveLoadManager](../../Assets/Scripts/Util/SaveLoadManager/SaveLoadManager.cs) Save와 Load를 관리하는 Manager
+
 [LobbyPlayerAchievementData](../../Assets/Scripts/Unit/LobbyPlayer/LobbyPlayerAchievementData.cs) 유저의 업적 데이터 Class
+
 [LobbyPlayerInfo](../../Assets/Scripts/Unit/LobbyPlayer/Info/LobbyPlayerInfo.cs) 유저의 정보 데이터 Class
+
 [WarInfo](../../Assets/Scripts/Unit/LobbyPlayer/Info/WarInfo.cs) 유저의 전투 진입 시 필요한 정보 데이터 Class
