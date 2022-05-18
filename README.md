@@ -58,5 +58,5 @@ uml 이미지
 * [동일오브젝트 반환이슈](./Docs/objectpool/ObjectPool.md/#troubleshooting)
 
 
-* [구글 애드몹 보상형 광고 모바일 환경 앱 크래시 이슈](./Docs/addmob/addmob.md)
+* [구글 애드몹 보상형 광고 모바일 환경 앱 크래시 이슈](./Docs/GoogleAds/GoogleAds.md)
 ## 맺으며
