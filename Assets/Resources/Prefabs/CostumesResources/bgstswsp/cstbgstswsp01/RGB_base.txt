@@ -1,5 +1,0 @@
-    File name :  R   G   B
-
-Normal_Cloth1 : 180 180 180
-Foot_1        : 10  10  10
-New_Helmet_10 : 180 255 118

@@ -1,7 +1,0 @@
-File name :  R   G   B
-
-New_Helmet_10 : 201 0 8
-Cloth_2 : 255 255 255
-New_Armor_12 : 210 210 210
-Foot_1 : 210 210 210
-Back_3 : 172 0 88
