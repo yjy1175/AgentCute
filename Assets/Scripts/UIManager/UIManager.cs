@@ -327,10 +327,17 @@ public class UIManager : SingleToneMaker<UIManager>
     }
     public void ClickGameReload()
     {
-        if(SpawnManager.Instance.WaveCount >= 4)
+        if (MapManager.Instance.CurrentMapType != MapManager.MapType.BossRelay)
         {
-            // 첫번째 엔딩 출력
-            mFirstEndingPannel.SetActive(true);
+            if (SpawnManager.Instance.WaveCount >= 4)
+            {
+                // 첫번째 엔딩 출력
+                mFirstEndingPannel.SetActive(true);
+            }
+            else
+            {
+                ClickRealGameReload();
+            }
         }
         else
         {

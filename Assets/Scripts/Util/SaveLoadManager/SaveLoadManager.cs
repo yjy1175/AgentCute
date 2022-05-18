@@ -213,7 +213,15 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         newData.BossModeWaveClear.Add(0);
         newData.BossModeWaveClear.Add(0);
         newData.BossModeWaveClear.Add(0);
-
+        newData.BossModeWaveClear.Add(0);
+        newData.BossModeWaveClear.Add(0);
+        newData.BossModeWaveClear.Add(0);
+        newData.BossModeWaveClear.Add(0);
+        newData.BossModeWaveClear.Add(0);
+        newData.BossModeWaveClear.Add(0);
+        newData.BossModeWaveClear.Add(0);
+        newData.BossModeWaveClear.Add(0);
+        newData.BossModeWaveClear.Add(0);
         // 파일 저장
         string fileStream = JsonUtility.ToJson(newData, true);
         fileStream = AES.Encrypt(fileStream, AES.key);
@@ -292,40 +300,45 @@ public class SaveLoadManager : SingleToneMaker<SaveLoadManager>
         achieveInfo.KillToWeapon[(int)type] += SpawnManager.currentKillMosterCount;
         // 무기별 생존 시간 체크
         achieveInfo.TimeToWeapon[(int)type] += (int)UIManager.Instance.GamePlayerTime;
-        // 무기별 보스 킬 체크
-        for(int i = 0; i < SpawnManager.currentKillBossMonsterCount; i++)
-        {
-            achieveInfo.BossKillToWeapon[(int)type][i]++;
-        }
-        // 무기별 웨이브 클리어 체크
-        for(int i = 0; i < SpawnManager.Instance.WaveCount; i++)
-        {
-            achieveInfo.WaveClearToWeapon[(int)type][i]++;
-        }
-        // 스킬별 킬 체크
-        if (achieveInfo.KillToSkill.ContainsKey(PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentGeneralSkill.name))
-        {
-            achieveInfo.KillToSkill[PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentGeneralSkill.name] 
-                += SpawnManager.currentKillMosterCount;
-        }
         // 코스튬 생존 시간 체크(누적x)
         if ((EquipmentManager.CostumeTpye.swsp).ToString().Contains(weaponType))
             achieveInfo.TimeToCostume[0] = Mathf.Max(achieveInfo.TimeToCostume[0], (int)UIManager.Instance.GamePlayerTime);
         else
             achieveInfo.TimeToCostume[1] = Mathf.Max(achieveInfo.TimeToCostume[1], (int)UIManager.Instance.GamePlayerTime);
-        // 코스튬 보스 킬 체크
-        if ((EquipmentManager.CostumeTpye.swsp).ToString().Contains(weaponType))
+        // 웨이브 및 보스 킬체크는 생존모드에서만
+        if (MapManager.Instance.CurrentMapType != MapManager.MapType.BossRelay)
         {
+            // 무기별 보스 킬 체크
             for (int i = 0; i < SpawnManager.currentKillBossMonsterCount; i++)
             {
-                achieveInfo.BossKillToCostume[0][i]++;
+                achieveInfo.BossKillToWeapon[(int)type][i]++;
             }
-        }
-        else
-        {
-            for (int i = 0; i < SpawnManager.currentKillBossMonsterCount; i++)
+
+            // 무기별 웨이브 클리어 체크
+            for (int i = 0; i < SpawnManager.Instance.WaveCount; i++)
             {
-                achieveInfo.BossKillToCostume[1][i]++;
+                achieveInfo.WaveClearToWeapon[(int)type][i]++;
+            }
+            // 스킬별 킬 체크
+            if (achieveInfo.KillToSkill.ContainsKey(PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentGeneralSkill.name))
+            {
+                achieveInfo.KillToSkill[PlayerManager.Instance.Player.GetComponent<PlayerAttack>().CurrentGeneralSkill.name]
+                    += SpawnManager.currentKillMosterCount;
+            }
+            // 코스튬 보스 킬 체크
+            if ((EquipmentManager.CostumeTpye.swsp).ToString().Contains(weaponType))
+            {
+                for (int i = 0; i < SpawnManager.currentKillBossMonsterCount; i++)
+                {
+                    achieveInfo.BossKillToCostume[0][i]++;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < SpawnManager.currentKillBossMonsterCount; i++)
+                {
+                    achieveInfo.BossKillToCostume[1][i]++;
+                }
             }
         }
 
