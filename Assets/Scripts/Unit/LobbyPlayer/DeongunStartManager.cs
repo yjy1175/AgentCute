@@ -23,6 +23,9 @@ public class DeongunStartManager : SingleToneMaker<DeongunStartManager>
     private bool mIsCutePotionCheck;
 
     [SerializeField]
+    private GameObject mBossPrologPannel;
+
+    [SerializeField]
     private DeongunBuffType mCurrentBuffType = DeongunBuffType.None;
     public DeongunBuffType CurrentBuffType
     {
@@ -153,6 +156,8 @@ public class DeongunStartManager : SingleToneMaker<DeongunStartManager>
         else
         {
             LobbyUIManager.Instance.OpenAlertEnterPannel("생존 모드 선택 시에만 귀여워지는 물약을 사용가능합니다.");
+            mIsCutePotionCheck = false;
+            mCutePotionCheck.transform.GetChild(0).gameObject.SetActive(mIsCutePotionCheck);
         }
 
     }
@@ -162,57 +167,66 @@ public class DeongunStartManager : SingleToneMaker<DeongunStartManager>
         {
             LobbyUIManager.Instance.OpenAlertEnterPannel("모드 선택이 올바르지 않습니다.");
         }
-        else 
+        else if(mWarInfo.WarMode == GameMode.SurvivalMode)
         {
-            LobbyPlayerInfo playerData = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info;
-            if (mWarInfo.WarMode == GameMode.BossMode)
-                mWarInfo.IsBossRelay = true;
-            else
-                mWarInfo.IsBossRelay = false;
-
-            mWarInfo.WarDeongunBuffType = mCurrentBuffType;
-            mWarInfo.WarCostumeName = playerData.CurrentCostumeName;
-            mWarInfo.WarCostumeShapeName = playerData.CurrentCostumeShapeName;
-            string originCostumeName = playerData.CurrentCostumeName;
-            if (mCurrentBuffType != DeongunBuffType.None)
-            {
-                switch (mCurrentBuffType)
-                {
-                    case DeongunBuffType.PlayerBaseHP:
-                        mWarInfo.WarBuffHp = mCurrentBuffValue;
-                        break;
-                    case DeongunBuffType.PlayerBaseSPD:
-                        mWarInfo.WarBuffSpeedRate = mCurrentBuffValue;
-                        break;
-                    case DeongunBuffType.PlayerCostume:
-                        mWarInfo.WarCostumeName = mCostumeName;
-                        mWarInfo.WarCostumeShapeName = mCostumeName;
-                        break;
-                }
-            }
-            mWarInfo.WarHp = playerData.BaseHp + playerData.TrainingHp 
-                - EquipmentManager.Instance.FindCostume(originCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerHP)
-                + EquipmentManager.Instance.FindCostume(mWarInfo.WarCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerHP);
-            mWarInfo.WarDamage = (int)((playerData.BaseATK + playerData.TrainingATK) * playerData.TrainingAddDamage);
-            mWarInfo.WarMoveSpeed = playerData.BaseSPD * (playerData.MoveSpeedRate 
-                - EquipmentManager.Instance.FindCostume(originCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerSPD) / 100f
-                + EquipmentManager.Instance.FindCostume(mWarInfo.WarCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerSPD) / 100f);
-            mWarInfo.WarDiamond = playerData.Diamond;
-            mWarInfo.WarWeaponName = playerData.CurrentWeaponName;
-            mWarInfo.WarSkillLock = playerData.Skilllock;
-            mWarInfo.IsWarCutePotion = mIsCutePotionCheck;
-            mWarInfo.WarMagnetPower = playerData.TrainingMagnetPower;
-            mWarInfo.WarGoldRate = playerData.TrainingGoldPower;
-            mWarInfo.WarRevuveValue = playerData.TrainingRevive;
-            mWarInfo.WarStaffShieldTime = playerData.TrainingShieldTime;
-            mWarInfo.WarMeleeDodgeCount = playerData.TrainingDodgeTime;
-            SaveLoadManager.Instance.SavePlayerWarData(mWarInfo);
-            if (mIsCutePotionCheck)
-                playerData.CutePotionCount--;
-            // 커스터마이징 정보 저장
-            CustomizingManager.Instance.SaveShowHelmet();
-            // 전투 씬 로드
-            SceneManager.LoadScene("SampleScene");
+            LobbyPlayerDataSend();
         }
+        else
+        {
+            mBossPrologPannel.SetActive(true);
+        }
+    }
+
+    public void LobbyPlayerDataSend()
+    {
+        LobbyPlayerInfo playerData = GameObject.Find("LobbyPlayer").GetComponent<LobbyPlayerData>().Info;
+        if (mWarInfo.WarMode == GameMode.BossMode)
+            mWarInfo.IsBossRelay = true;
+        else
+            mWarInfo.IsBossRelay = false;
+
+        mWarInfo.WarDeongunBuffType = mCurrentBuffType;
+        mWarInfo.WarCostumeName = playerData.CurrentCostumeName;
+        mWarInfo.WarCostumeShapeName = playerData.CurrentCostumeShapeName;
+        string originCostumeName = playerData.CurrentCostumeName;
+        if (mCurrentBuffType != DeongunBuffType.None)
+        {
+            switch (mCurrentBuffType)
+            {
+                case DeongunBuffType.PlayerBaseHP:
+                    mWarInfo.WarBuffHp = mCurrentBuffValue;
+                    break;
+                case DeongunBuffType.PlayerBaseSPD:
+                    mWarInfo.WarBuffSpeedRate = mCurrentBuffValue;
+                    break;
+                case DeongunBuffType.PlayerCostume:
+                    mWarInfo.WarCostumeName = mCostumeName;
+                    mWarInfo.WarCostumeShapeName = mCostumeName;
+                    break;
+            }
+        }
+        mWarInfo.WarHp = playerData.BaseHp + playerData.TrainingHp
+            - EquipmentManager.Instance.FindCostume(originCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerHP)
+            + EquipmentManager.Instance.FindCostume(mWarInfo.WarCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerHP);
+        mWarInfo.WarDamage = (int)((playerData.BaseATK + playerData.TrainingATK) * playerData.TrainingAddDamage);
+        mWarInfo.WarMoveSpeed = playerData.BaseSPD * (playerData.MoveSpeedRate
+            - EquipmentManager.Instance.FindCostume(originCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerSPD) / 100f
+            + EquipmentManager.Instance.FindCostume(mWarInfo.WarCostumeName).GetComponent<Costume>().GetBuffValue(Costume.CostumeBuffType.PlayerSPD) / 100f);
+        mWarInfo.WarDiamond = playerData.Diamond;
+        mWarInfo.WarWeaponName = playerData.CurrentWeaponName;
+        mWarInfo.WarSkillLock = playerData.Skilllock;
+        mWarInfo.IsWarCutePotion = mIsCutePotionCheck;
+        mWarInfo.WarMagnetPower = playerData.TrainingMagnetPower;
+        mWarInfo.WarGoldRate = playerData.TrainingGoldPower;
+        mWarInfo.WarRevuveValue = playerData.TrainingRevive;
+        mWarInfo.WarStaffShieldTime = playerData.TrainingShieldTime;
+        mWarInfo.WarMeleeDodgeCount = playerData.TrainingDodgeTime;
+        SaveLoadManager.Instance.SavePlayerWarData(mWarInfo);
+        if (mIsCutePotionCheck)
+            playerData.CutePotionCount--;
+        // 커스터마이징 정보 저장
+        CustomizingManager.Instance.SaveShowHelmet();
+        // 전투 씬 로드
+        SceneManager.LoadScene("SampleScene");
     }
 }

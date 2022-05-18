@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     private List<Sprite> mBackImage = new List<Sprite>();
     [SerializeField]
     private GameObject mTitleImage;
+    [SerializeField]
+    private GameObject mPrologPannel;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,12 +30,17 @@ public class GameManager : MonoBehaviour
 
     public void LoadTestLobbyScene()
     {
-        if(PlayerPrefs.HasKey("Info"))
+        if (PlayerPrefs.HasKey("Info"))
             SceneManager.LoadScene("LobbyScene");
         else
-            SceneManager.LoadScene("CustomeScene");
+            mPrologPannel.SetActive(true);
+            
     }
 
+    public void LoadCreateCharacter()
+    {
+        SceneManager.LoadScene("CustomeScene");
+    }
     public void QuitGame()
     {
 #if UNITY_EDITOR
