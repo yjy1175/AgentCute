@@ -44,7 +44,7 @@ uml 이미지
 
 * 로비구성
 
-* Load & Save
+* [Load & Save](./Docs/load&save/load&save.md)
 
 * [구글 광고](./Docs/GoogleAds/GoogleAds.md)
 
