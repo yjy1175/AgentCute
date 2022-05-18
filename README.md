@@ -46,7 +46,7 @@ uml 이미지
 
 * Load & Save
 
-* 구글 광고
+* [구글 광고](./Docs/GoogleAds/GoogleAds.md)
 
 
 ## Trouble Shooting 처리내역
