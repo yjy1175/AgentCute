@@ -7,9 +7,7 @@
 
 ## 설치방법
 
-```sh
 [구글 플레이스토어 링크](https://play.google.com/store/apps/details?id=com.studioNNN.PixelWarrior)
-```
 
 ## 개발 기간
 * 2022.3.20~ 2022. 5.18
