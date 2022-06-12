@@ -3,12 +3,12 @@
 
 ## 게임 플레이 화면
 
-유튜브 링크로 대체 예정
+[트레일러 링크](https://play.google.com/store/apps/details?id=com.studioNNN.PixelWarrior)
 
 ## 설치방법
 
 ```sh
-구글스토어 업로드 완료시 링크 올릴예정
+[구글 플레이스토어 링크](https://play.google.com/store/apps/details?id=com.studioNNN.PixelWarrior)
 ```
 
 ## 개발 기간
@@ -34,13 +34,9 @@
 
 * [EventHandler](./Docs/EventHandler/EventHandler.md)
 
-* 무한맵 로직
-
 * [데이터 관리방식](./Docs/data/data.md)
 
 * [serialize](./Docs/serialize/Serialize.md)
-
-* 로비구성
 
 * [Load & Save](./Docs/load&save/load&save.md)
 
